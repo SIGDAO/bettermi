@@ -12,12 +12,13 @@ import ConnectWallet from './pages/connectWallet/connectWallet';
 import GenerateBMI from './pages/generateBMI/GenerateBMI';
 import TakeSelfie from './pages/takeSelfie/TakeSelfie';
 import { store } from './redux/reducer';
-
+import { appConfig } from './redux/useContext';
+import { AppContext } from './redux/useContext';
 
 function App() {
   return (
     // path
-    
+    <AppContext.Provider value={appConfig}>
     <ReduxProvider store={store}>
     <Routes>
       <Route path="/" element={<LogoPage/>} />
@@ -26,7 +27,7 @@ function App() {
       <Route path="/takeSelfie" element={<TakeSelfie/>} />
     </Routes>
     </ReduxProvider>  
-   
+   </AppContext.Provider>
   );
 }
 

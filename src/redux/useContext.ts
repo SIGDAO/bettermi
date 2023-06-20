@@ -16,7 +16,7 @@ export interface AppContextType {
   };
 }
 
-const appConfig: AppContextType = {
+export const appConfig: AppContextType = {
   appName: Config.appName,
   Wallet: {
     Extension: new GenericExtensionWallet(),

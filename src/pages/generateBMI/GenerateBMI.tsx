@@ -4,6 +4,7 @@ export interface IGenerateBMIProps {
 }
 
 function GenerateBMI (props: IGenerateBMIProps) {
+  
   return (
     <div>
       
