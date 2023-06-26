@@ -10,6 +10,7 @@ export function CenterLayout (props: ICenterLayoutProps) {
   const {bgImg, content} = props;
   const centerLayoutStyle : CSS.Properties = {
     'backgroundImage': `url(${bgImg})`,
+    'backgroundPosition': 'center',
     'height': '844px',
     'width': '390px',
     'margin': 'auto',

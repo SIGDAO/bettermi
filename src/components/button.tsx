@@ -4,6 +4,7 @@ import { styled } from '@mui/material/styles';
 import { Link } from "react-router-dom";
 import CSS from 'csstype';
 import exp from 'constants';
+import './button.css'
 
 
 interface IButtonProps {
@@ -19,6 +20,9 @@ interface IButtonProps {
 // DefaultButton css style
 // const defaultButtonStyle = makeStyles<Theme
 
+interface IBackButtonProps {
+
+}
 
 export const ButtonWithNavigation: React.FunctionComponent<IButtonProps> = (props) => {
   const {text, height, width, navigation} = props;
@@ -95,5 +99,15 @@ export const DisabledButton: React.FunctionComponent<IButtonProps> = (props) => 
     <CustomButton>
       {text}
     </CustomButton>
+  )
+}
+
+export const BackButton: React.FunctionComponent<IBackButtonProps> = (props) => {
+  return (
+    <a href="javascript:history.back()">
+      <div className="icon-arrow-left">
+        <img className="icon-arrow-left-1" src={`${process.env.PUBLIC_URL}/img/connectSuccess/icon-arrow-left-8@1x.png`} alt="icon-arrow-left" />
+      </div>
+    </a>
   )
 }

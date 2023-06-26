@@ -6,7 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Provider as ReduxProvider } from "react-redux";
 
 
-// components
+// local
+import './App.css';
 import LogoPage from './pages/logoPage/LogoPage';
 import ConnectWallet from './pages/connectWallet/connectWallet';
 import GenerateBMI from './pages/generateBMI/GenerateBMI';
@@ -14,6 +15,8 @@ import TakeSelfie from './pages/takeSelfie/TakeSelfie';
 import { store } from './redux/reducer';
 import { appConfig } from './redux/useContext';
 import { AppContext } from './redux/useContext';
+import ConnectSuccess from './pages/connectSuccess/connectSuccess';
+import GenerateFreeNFT from './pages/generateFreeNFT/generateFreeNFT';
 
 function App() {
   return (
@@ -25,6 +28,8 @@ function App() {
       <Route path="/connectWallet" element={<ConnectWallet/>} />
       <Route path="/generateBMI" element={<GenerateBMI/>} />
       <Route path="/takeSelfie" element={<TakeSelfie/>} />
+      <Route path="/connectSuccess" element={<ConnectSuccess/>} />
+      <Route path="/generateFreeNFT" element={<GenerateFreeNFT/>} />
     </Routes>
     </ReduxProvider>  
    </AppContext.Provider>

@@ -1,4 +1,3 @@
-import * as React from 'react';
 import './connectWallet.css'
 import { CenterLayout } from '../../components/layout';
 import { ButtonWithAction, ButtonWithNavigation, DisabledButton } from '../../components/button';
@@ -10,37 +9,38 @@ import { userAccount } from '../../redux/account';
 import { accountSlice } from '../../redux/account';
 import { useContext } from 'react';
 import { AppContext } from '../../redux/useContext';
+import { useNavigate } from 'react-router-dom';
 export interface IConnectWalletProps {
 }
 
-const connectWallet = (appName:any,Wallet:any,Ledger:any) => {
-
-  //const wallet = new GenericExtensionWallet();
-  let key:string;
-  Wallet.Extension.connect({appName,networkName:Ledger.Network})
-  .then((wallet:any) => {console.log(wallet);key = wallet.publicKey; console.log(key);
-    const import_account:Address =  Address.fromPublicKey(key, Ledger.AddressPrefix);
-    const accountinfo:userAccount = {
-      accountId:import_account.getNumericId(),
-      accountRS:import_account.getReedSolomonAddress(),
-      publicKey:import_account.getPublicKey(),
-      isWatchOnlyMode:true,
-    };
-    store.dispatch(accountSlice.actions.setAccount(accountinfo));
-  console.log(store.getState());
-  store.dispatch(walletSlice.actions.setWalletPublicKey(key));
-  store.dispatch(walletSlice.actions.setIsWalletConnected(true));
-  console.log(store.getState());
-})
-  .catch((error:any) => console.error(error));
-  // store.dispatch(walletSlice.actions.setIsWalletConnected(true));
-  // store.dispatch(walletSlice.actions.setWallet(wallet));
-  // store.dispatch(walletSlice.actions.setAddress(wallet.getAddress()));
-  // store.dispatch(wall
-}
 
 export default function ConnectWallet (props: IConnectWalletProps) {
+  const navigate = useNavigate();
   const {appName,Wallet,Ledger} = useContext(AppContext);
+
+  const connectWallet = (appName:any,Wallet:any,Ledger:any) => {
+    //const wallet = new GenericExtensionWallet();
+    let key:string;
+    Wallet.Extension.connect({appName,networkName:Ledger.Network})
+    .then((wallet:any) => {console.log(wallet);key = wallet.publicKey; console.log(key);
+      const import_account:Address =  Address.fromPublicKey(key, Ledger.AddressPrefix);
+      const accountinfo:userAccount = {
+        accountId:import_account.getNumericId(),
+        accountRS:import_account.getReedSolomonAddress(),
+        publicKey:import_account.getPublicKey(),
+        isWatchOnlyMode:true,
+      };
+      store.dispatch(accountSlice.actions.setAccount(accountinfo));
+    console.log(store.getState());
+    store.dispatch(walletSlice.actions.setWalletPublicKey(key));
+    store.dispatch(walletSlice.actions.setIsWalletConnected(true));
+    console.log(store.getState());
+    navigate('/connectSuccess')
+  })
+  // todo: add error handling, and show it to user
+    .catch((error:any) => console.error(error));
+  }
+  
   const content : JSX.Element = (
     <div id='connectWallet-container'>
       <h1 id='connectWalletTopic' className="default-font-setting">Connect Your Wallet</h1>

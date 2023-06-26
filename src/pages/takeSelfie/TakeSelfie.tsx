@@ -1,13 +1,15 @@
 import * as React from 'react';
 
-export interface ITakeSelfieProps {
+
+interface ITakeSelfieProps {
 }
 
-export default function TakeSelfie (props: ITakeSelfieProps) {
-
+const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   return (
-    <div>
-      
-    </div>
+    <>
+    </>
   );
-}
+};
+
+export default TakeSelfie;
+
