@@ -3,7 +3,7 @@ import CSS from 'csstype';
 
 export interface ICenterLayoutProps {
   bgImg ?: string;
-  content ?: JSX.Element;
+  content ?: any;
 }
 
 export function CenterLayout (props: ICenterLayoutProps) {
@@ -15,13 +15,18 @@ export function CenterLayout (props: ICenterLayoutProps) {
     'width': '390px',
     'margin': 'auto',
   }
+
+  const hihi = () => {
+    console.log(typeof content)
+    return content
+  }
   
 
   return (
     <div
       style={centerLayoutStyle} 
     >
-      {content}
+      {typeof content === 'function' ? content() : content}
     </div>
   );
 }

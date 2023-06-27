@@ -92,9 +92,28 @@ export const DisabledButton: React.FunctionComponent<IButtonProps> = (props) => 
     font-size: ${props.fontSize ||"var(--font-size-m)"};
     font-weight: ${props.fontWeight || "600" };
     color: #4136f1;
-    padding: 14.5px 21px;  
+    padding: 14.5px 21px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 14px;
+    min-height: 21px;
+    min-width: 108px;
+    text-align: center;
+    white-space: nowrap;
   `
 
+  // .continue {
+  //   color: var(--royal-blue);
+  //   font-family: var(--font-family-inter);
+  //   font-size: var(--font-size-m);
+  //   font-weight: 600;
+  //   letter-spacing: 0;
+  //   line-height: 14px;
+  //   min-height: 21px;
+  //   min-width: 108px;
+  //   text-align: center;
+  //   white-space: nowrap;
+  // }
   return (
     <CustomButton>
       {text}

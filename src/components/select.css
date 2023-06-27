@@ -1,0 +1,26 @@
+.select-outside {
+  border-radius: 10px;
+  height: 56px;
+  position: relative;
+  background-color: var(--eerie-black);
+  border: 1px solid;
+  background-color: var(--eerie-black);
+
+  width: 248px;
+}
+
+.x3308 {
+  align-items: flex-start;
+  background-color: var(--eerie-black);
+  border: 1px solid;
+  border-color: var(--royal-blue);
+  border-radius: 10px;
+  display: flex;
+  height: 48px;
+  justify-content: flex-end;
+  left: 0;
+  min-width: 136px;
+  padding: 21.1px 21px;
+  position: absolute;
+  top: 0;
+}

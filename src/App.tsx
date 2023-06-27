@@ -10,7 +10,7 @@ import { Provider as ReduxProvider } from "react-redux";
 import './App.css';
 import LogoPage from './pages/logoPage/LogoPage';
 import ConnectWallet from './pages/connectWallet/connectWallet';
-import GenerateBMI from './pages/generateBMI/GenerateBMI';
+import GenerateBMI from './pages/generateBMI/generateBMI';
 import TakeSelfie from './pages/takeSelfie/TakeSelfie';
 import { store } from './redux/reducer';
 import { appConfig } from './redux/useContext';
@@ -22,17 +22,17 @@ function App() {
   return (
     // path
     <AppContext.Provider value={appConfig}>
-    <ReduxProvider store={store}>
-    <Routes>
-      <Route path="/" element={<LogoPage/>} />
-      <Route path="/connectWallet" element={<ConnectWallet/>} />
-      <Route path="/generateBMI" element={<GenerateBMI/>} />
-      <Route path="/takeSelfie" element={<TakeSelfie/>} />
-      <Route path="/connectSuccess" element={<ConnectSuccess/>} />
-      <Route path="/generateFreeNFT" element={<GenerateFreeNFT/>} />
-    </Routes>
-    </ReduxProvider>  
-   </AppContext.Provider>
+      <ReduxProvider store={store}>
+      <Routes>
+        <Route path="/" element={<LogoPage/>} />
+        <Route path="/connectWallet" element={<ConnectWallet/>} />
+        <Route path="/generateBMI" element={<GenerateBMI/>} />
+        <Route path="/takeSelfie" element={<TakeSelfie/>} />
+        <Route path="/connectSuccess" element={<ConnectSuccess/>} />
+        <Route path="/generateFreeNFT" element={<GenerateFreeNFT/>} />
+      </Routes>
+      </ReduxProvider>  
+    </AppContext.Provider>
   );
 }
 
