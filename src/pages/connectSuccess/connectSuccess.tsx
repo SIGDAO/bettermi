@@ -30,7 +30,6 @@ const ConnectSuccess: React.FunctionComponent<IConnectSuccessProps> = (props) =>
         <img className="ic_selfie" src={`${process.env.PUBLIC_URL}/img/connectSuccess/ic-selfie@1x.png`} alt="ic_selfie" />
         <p className="continue inter-semi-bold-white-15px">Take a Selfie and Start!</p>
       </div>
-
     </div>
   )
 
