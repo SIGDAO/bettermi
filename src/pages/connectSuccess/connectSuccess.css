@@ -23,14 +23,15 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  left: 55px;
+  left: calc((100% - 282px) / 2);
   min-height: 242px;
-  position: relative;
+  /* position: relative; */
+  position: absolute;
   top: 228px;
   width: 282px;
 }
 
-.title {
+.success {
   letter-spacing: -0.67px;
   line-height: 41px;
   margin-bottom: -5px;

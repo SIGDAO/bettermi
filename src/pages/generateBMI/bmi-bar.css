@@ -1,3 +1,14 @@
+.x42 {
+  border: 1px solid;
+  border-color: #757575;
+  border-radius: 50px;
+  height: 312px;
+  left: 147px;
+  position: absolute;
+  top: -138px;
+  transform: rotate(-90deg);
+  width: 19px;
+}
 
 .x43 {
   background-color: #f51ee2;
@@ -534,13 +545,6 @@
   width: 1px;
 }
 
-.overlap-group {
-  height: 19px;
-  left: 0;
-  position: absolute;
-  top: 8px;
-  width: 43px;
-}
 
 .x48 {
   background-color: var(--royal-blue);
@@ -596,5 +600,32 @@
   object-fit: cover;
   position: absolute;
   top: 13px;
+  width: 1px;
+}
+
+.x612 {
+  height: 11px;
+  left: 35px;
+  object-fit: cover;
+  position: absolute;
+  top: 16px;
+  width: 2px;
+}
+
+.x611 {
+  height: 6px;
+  left: 41px;
+  object-fit: cover;
+  position: absolute;
+  top: 22px;
+  width: 1px;
+}
+
+.x621 {
+  height: 6px;
+  left: 7px;
+  object-fit: cover;
+  position: absolute;
+  top: 22px;
   width: 1px;
 }

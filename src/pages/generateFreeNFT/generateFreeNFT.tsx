@@ -28,7 +28,7 @@ const GenerateFreeNFT: React.FunctionComponent<GenerateFreeNFTProps> = (props) =
 
   return (
     <CenterLayout
-      bgImg={process.env.PUBLIC_URL + "/img/BG.png"}
+      bgImg={false}
       content={content}
     />
   );

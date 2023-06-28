@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { BackButton } from '../../components/button';
 import { GenderSelect } from '../../components/select';
+import { useNavigate } from 'react-router-dom';
 
 interface IAnimaGenContentProps {
   BMI: number;    // the BMI value, can be string or number
@@ -12,12 +13,20 @@ interface IAnimaGenContentProps {
 // just look at the IAnimaGenContentProps, thats all u need to know
 const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) => {
   const {BMI, selfie} = props;
+  const navigate = useNavigate();
+
+  const confirm = () => {
+    console.log('confirm')
+    navigate('/generateFreeNFT')
+  }
+
 
   return (
     <>
       <BackButton/>
-      <div className="bmi-result-bar">
-        <img className="bmi-goal" src={`${process.env.PUBLIC_URL}/img/generateBMI/bmi-goal-1@1x.png`} alt="BMI Goal" />
+      <img className="bmi-photo" src={selfie? selfie : `${process.env.PUBLIC_URL}/img/photo-2@1x.png`}  alt="dfd" />
+      <h1 className="bmi-result inter-semi-bold-white-28px">Your BMI Result :</h1>
+      <div className="bmi-display-container">
         <div className="flex-row">
           <div className="text-2">{BMI}</div>
           <div className="kgm2">
@@ -75,28 +84,16 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
           <img className="x611" src={`${process.env.PUBLIC_URL}/img/generateBMI/file---555@1x.png`} alt="611" />
           <img className="x621" src={`${process.env.PUBLIC_URL}/img/generateBMI/file---555@1x.png`} alt="621" />
         </div>
-        <img className="bmi-goal-1" src={`${process.env.PUBLIC_URL}/img/generateBMI/bmi-goal-1@1x.png`} alt="BMI Goal" />
       </div>
       <div className="select-your-biological-sex">SELECT YOUR BIOLOGICAL SEX:</div>
       {/* select - sex */}
-      {/* <div className="size">
-        <div className="overlap-group-1">
-          <div className="x3308"><img className="arrow-down" src={`${process.env.PUBLIC_URL}/img/generateBMI/arrow-down@1x.png`} alt="arrow-down" /></div>
-          <div className="female inter-normal-white-15px">Female</div>
-        </div>
-      </div> */}
-      <GenderSelect optionList={["Female", "Male"]} />
-      <div className="home-indicator">
-        <div className="home-indicator-1"></div>
-      </div>
-      <img className="bmi-photo" src={selfie? selfie : `${process.env.PUBLIC_URL}/img/photo-2@1x.png`} alt="dfd" />
-      <h1 className="title inter-semi-bold-white-28px">Your BMI Result :</h1>
+      <GenderSelect options={[{"label": "Female", "value": "1"}, {"label": "Male", "value": "2"}]} title="Female" onSelect={(e) => console.log(e)} />
       <div className="bottom-controls">
         <p className="your-selection-cannot-be-changed-later inter-normal-white-15px">
           Your selection cannot be changed later.
         </p>
         <div className="button_-confirm">
-          <div className="continue inter-semi-bold-white-15px">Confirm</div>
+          <div className="confirm-bmi inter-semi-bold-white-15px" onClick={confirm}>Confirm</div>
         </div>
       </div>
     </>

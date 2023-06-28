@@ -59,6 +59,7 @@
   margin-top: 12px;
   position: relative;
   width: 312px;
+  left: calc((100% - 312px) / 2);
 }
 
 .overlap-group {
@@ -77,6 +78,17 @@
   width: 312px;
 }
 
+/* bmi-display-container */
+.bmi-display-container {
+  position: absolute;
+  left: calc((100% - 390px) / 2);
+  top: 450px;
+  height: 121px; 
+  width: 390px;
+  border: 1px solid var(--royal-blue);
+  border-width: 1px 0 1px 0;
+}
+
 .bmi-goal-1 {
   height: 1px;
   margin-top: 18px;
@@ -87,16 +99,18 @@
 
 /* select - sex */
 .select-your-biological-sex {
+  position: absolute;
   color: var(--royal-blue);
   font-family: var(--font-family-inter);
   font-size: var(--font-size-m);
   font-weight: 700;
   letter-spacing: 0;
   line-height: 20px;
-  margin-left: calc((100% - 240px) / 2);
-  margin-top: 20px;
-  min-height: 21px;
-  min-width: 240px;
+  left: calc((100% - 240px) / 2);
+  /* margin-top: 20px; */
+  top: 591px;
+  height: 21px;
+  width: 240px;
   text-align: center;
   white-space: nowrap;
 }
@@ -158,29 +172,31 @@
 .bmi-photo {
   border-radius: 20px;
   height: 288px;
-  left: 64px;
+  left: calc((100% - 262px) / 2);
   object-fit: cover;
   position: absolute;
   top: 88px;
   width: 262px;
 }
 
-.title {
+.bmi-result {
   left: calc((100% - 282px) / 2);
   letter-spacing: 0;
   line-height: 40px;
   position: absolute;
   text-align: center;
-  top: 390px;
+  top: 396px;
   white-space: nowrap;
   width: 282px;
+  margin: 0;
 }
 
 .bottom-controls {
   display: flex;
   flex-direction: column;
   height: 96px;
-  justify-content: space-between;
+  /* justify-content: center; */
+  align-items: center;
   left: calc((100% - 282px) / 2);
   position: absolute;
   top: 696px;
@@ -206,21 +222,21 @@
   box-shadow: 0px 15px 30px #1466cc29;
   cursor: pointer;
   display: flex;
-  flex: 1;
   height: 56px;
-  justify-content: flex-end;
-  margin-left: calc((100% - (100% - 34px)) / 2);
-  margin-right: calc((100% - (100% - 34px)) / 2);
-  max-height: 56px;
-  min-width: calc(100.00% - 34px);
-  padding: 13.5px 93px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  /* margin-left: calc((100% - (100% - 34px)) / 2);
+  margin-right: calc((100% - (100% - 34px)) / 2); */
+  height: 56px;
+  width: 248px;
+  /* padding: 13.5px 93px; */
 }
 
-.continue {
+.confirm-bmi {
   letter-spacing: 0;
-  line-height: 14px;
+  /* line-height: 14px; */
   min-height: 21px;
   min-width: 60px;
   text-align: center;
-  white-space: nowrap;
 }

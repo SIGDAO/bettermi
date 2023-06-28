@@ -28,3 +28,6 @@
 1. mobile - can it be able to open the orignal camera app?
     eg. I add to home screen
 2. comfirm how to display error
+
+@reminder
+1. if we fork, pls remember del the comtributer
