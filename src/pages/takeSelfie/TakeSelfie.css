@@ -1,0 +1,43 @@
+.webcam-layout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.webcam-container {
+  z-index: 1;
+  display: inline-block;
+  position: absolute;
+  top: 230px;
+  /* border: 5px solid #fff; */
+}
+
+.selfie-shadow {
+  position: absolute;
+  width: 819px;
+  height: 461px;
+  box-shadow: 
+    inset 0px 30px 8px -30px var(--royal-blue),
+    inset 0px -30px 8px -30px var(--royal-blue); 
+  top: 0;
+  left: calc((100% - 819px) / 2);
+}
+
+/* .kyc_scanning {
+  background-image: url(../img/file---1@1x.png);
+  background-position: 50% 50%;
+  background-size: cover;
+  display: flex;
+  height: 583px;
+  left: 22px;
+  position: absolute;
+  top: 0;
+  width: 390px;
+} */
+
+video {
+  z-index: 3;
+}

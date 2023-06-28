@@ -1,38 +1,65 @@
-.App {
-  text-align: center;
+:root { 
+  --cadet-blue: #a6b3bb98;
+  --eerie-black: #171717;
+  --keppel: #39b3af;
+  --royal-blue: #4136f1;
+  --white: #ffffff;
+  --white-2: #ffffff00;
+  --white-3: #ffffff59;
+ 
+  --font-size-l: 16px;
+  --font-size-m: 15px;
+  --font-size-s: 14px;
+  --font-size-xl: 28px;
+  --font-size-xs: 12px;
+ 
+  --font-family-inter: "Inter", Helvetica;
+  --font-family-sfpro_text-semibold: "SFPro Text-Semibold", Helvetica;
+}
+.sfprotext-semi-bold-white-15px {
+  color: var(--white);
+  font-family: var(--font-family-sfpro_text-semibold);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 600;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.inter-normal-white-15px {
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 400;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.inter-normal-15px {
+  /* color: var(--white); */
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 400;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.inter-semi-bold-white-15px {
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 600;
 }
 
-.App-link {
-  color: #61dafb;
+.inter-semi-bold-white-28px {
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-xl);
+  font-style: normal;
+  font-weight: 600;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.inter-normal-cadet-blue-14px {
+  color: var(--cadet-blue);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-s);
+  font-style: normal;
+  font-weight: 400;
 }

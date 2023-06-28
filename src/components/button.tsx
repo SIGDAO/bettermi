@@ -4,6 +4,7 @@ import { styled } from '@mui/material/styles';
 import { Link } from "react-router-dom";
 import CSS from 'csstype';
 import exp from 'constants';
+import './button.css'
 
 
 interface IButtonProps {
@@ -19,6 +20,9 @@ interface IButtonProps {
 // DefaultButton css style
 // const defaultButtonStyle = makeStyles<Theme
 
+interface IBackButtonProps {
+
+}
 
 export const ButtonWithNavigation: React.FunctionComponent<IButtonProps> = (props) => {
   const {text, height, width, navigation} = props;
@@ -88,12 +92,41 @@ export const DisabledButton: React.FunctionComponent<IButtonProps> = (props) => 
     font-size: ${props.fontSize ||"var(--font-size-m)"};
     font-weight: ${props.fontWeight || "600" };
     color: #4136f1;
-    padding: 14.5px 21px;  
+    padding: 14.5px 21px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 14px;
+    min-height: 21px;
+    min-width: 108px;
+    text-align: center;
+    white-space: nowrap;
   `
 
+  // .continue {
+  //   color: var(--royal-blue);
+  //   font-family: var(--font-family-inter);
+  //   font-size: var(--font-size-m);
+  //   font-weight: 600;
+  //   letter-spacing: 0;
+  //   line-height: 14px;
+  //   min-height: 21px;
+  //   min-width: 108px;
+  //   text-align: center;
+  //   white-space: nowrap;
+  // }
   return (
     <CustomButton>
       {text}
     </CustomButton>
+  )
+}
+
+export const BackButton: React.FunctionComponent<IBackButtonProps> = (props) => {
+  return (
+    <a href="javascript:history.back()">
+      <div className="icon-arrow-left">
+        <img className="icon-arrow-left-1" src={`${process.env.PUBLIC_URL}/img/connectSuccess/icon-arrow-left-8@1x.png`} alt="icon-arrow-left" />
+      </div>
+    </a>
   )
 }
