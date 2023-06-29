@@ -63,7 +63,7 @@ export function CenterLayout (props: ICenterLayoutProps) {
     // style={bgStyle}
     // <div>
 
-    <div style={bgStyle}>
+    <div>
       <div style={centerLayoutStyle}>
         {typeof content === 'function' ? content() : content}
       </div>

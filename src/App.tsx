@@ -5,7 +5,6 @@ import {BrowserRouter, Routes, Route, Navigate, useLocation} from 'react-router-
 import { useDispatch, useSelector } from 'react-redux';
 import { Provider as ReduxProvider } from "react-redux";
 
-
 // local
 import './App.css';
 import LogoPage from './pages/logoPage/LogoPage';
@@ -17,6 +16,7 @@ import { appConfig } from './redux/useContext';
 import { AppContext } from './redux/useContext';
 import ConnectSuccess from './pages/connectSuccess/connectSuccess';
 import GenerateFreeNFT from './pages/generateFreeNFT/generateFreeNFT';
+import CustomizeYourProfile from './pages/customizeYourProfile/customizeYourProfile';
 
 function App() {
   return (
@@ -30,6 +30,7 @@ function App() {
         <Route path="/takeSelfie" element={<TakeSelfie/>} />
         <Route path="/connectSuccess" element={<ConnectSuccess/>} />
         <Route path="/generateFreeNFT" element={<GenerateFreeNFT/>} />
+        <Route path="/customizeYourProfile" element={<CustomizeYourProfile/>} />
       </Routes>
       </ReduxProvider>  
     </AppContext.Provider>

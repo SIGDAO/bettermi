@@ -3,11 +3,13 @@ import { ExtensionWalletError } from "@signumjs/wallets";
 import { clear } from "console";
 
 export interface SelfieState {
-  img: string;
+  selfiePath: string;
+  username: string;
 }
 
 const initialState: SelfieState = {
-  img: "",
+  selfiePath: "",
+  username: "",
 };
 
 export const selfieSlice = createSlice({
@@ -16,17 +18,17 @@ export const selfieSlice = createSlice({
   reducers: {
     setSelfieImage: (state, action: PayloadAction<string>) => {
       console.log("setSelfieImage", action.payload);
-      state.img = action.payload;
+      state.selfiePath = action.payload;
     },
     clearSelfieImage: (state) => {
-      state.img = "";
+      state.selfiePath = "";
     },
   },
 });
 
 export const { actions } = selfieSlice;
 
-// get img, state type need change
+// get selfiePath, state type need change
 
 
-export const selectCurrentImg = (state :any ) => state.selfieImage.img;
+export const selectCurrentImg = (state :any ) => state.selfieImage.selfiePath;
