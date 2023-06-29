@@ -8,7 +8,7 @@ import { BackButton } from '../../components/button';
 import CSS from 'csstype';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { selfieSlice } from '../../redux/selfieImage';
+import { selfieSlice } from '../../redux/profile';
 import { store } from '../../redux/reducer';
 
 

@@ -4,7 +4,7 @@ import AnimaGenContent from './animaGenContent';
 import './generateBMI.css';
 import './bmi-bar.css'
 import { useEffect } from 'react';
-import { selectCurrentImg } from '../../redux/selfieImage';
+import { selectCurrentImg } from '../../redux/profile';
 import { useSelector } from 'react-redux';
 
 export interface IGenerateBMIProps {
