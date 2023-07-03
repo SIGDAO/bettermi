@@ -21,7 +21,6 @@ function GenerateBMI (props: IGenerateBMIProps) {
       // can call action/get redux value in order to pass the BMI value to the Anima Generate Content
       content={<AnimaGenContent BMI={25.5} selfie={selfie}/>} // too massy for the Anima Generate Content, so I put it in a separate file XD
       bgImg={false}
-      mobile={false}
     />
   );
 }

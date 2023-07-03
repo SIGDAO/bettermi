@@ -63,7 +63,6 @@ const CustomizeYourProfile: React.FunctionComponent<ICustomizeYourProfileProps> 
     <CenterLayout
       bgImg={false}
       content={content}
-      mobile={true}
     />
   );
 };

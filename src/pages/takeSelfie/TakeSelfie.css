@@ -7,12 +7,8 @@
   position: absolute;
 }
 
-.webcam-container {
-  z-index: 1;
-  display: inline-block;
-  position: absolute;
-  top: 230px;
-  /* border: 5px solid #fff; */
+.selfie-content-container {
+
 }
 
 .selfie-shadow {
@@ -40,4 +36,6 @@
 
 video {
   z-index: 3;
+  position: absolute;
+  left: calc((100% - 819px) / 2);
 }

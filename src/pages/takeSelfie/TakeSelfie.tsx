@@ -54,6 +54,30 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
 
   }
 
+  const mobile = process.env.REACT_APP_MOBILE === 'true'
+  // const width = process.env.REACT_APP_MOBILE === 'true' ? '390' : '819'
+  const width = 819
+
+  // for mobile
+  const webcamContainerStyle : CSS.Properties = {
+    'zIndex': '1',
+    'display': 'inline-block',
+    'position': 'absolute',
+    'top': '230px',   }
+
+  if (mobile) {
+    webcamContainerStyle.position = 'absolute'
+    webcamContainerStyle.width = '390px'
+    webcamContainerStyle.left = 'calc((100% - 390px) / 2)'
+    webcamContainerStyle.height = 'calc(844px - 230px)'
+    webcamContainerStyle.overflow = 'hidden'
+  } else {
+    webcamContainerStyle.position = 'absolute'
+    webcamContainerStyle.width = '819px'
+    webcamContainerStyle.left = 'calc((100% - 819px) / 2)'
+  }
+  
+
   // capture the selfie image, and store it in the redux store
   const capture = React.useCallback(
     () => {
@@ -68,16 +92,17 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
     [webcamRef]
   );
 
+
   const content : JSX.Element = (
-    <div>
+    <div className='selfie-content-container'>
       <BackButton/>
-      <div className="webcam-container">
+      <div className="webcam-container" style={webcamContainerStyle}>
         <Webcam 
             audio={false}
             // height={720}
             screenshotFormat="image/jpeg"
             // width={1280}
-            width={819}
+            width={width}
             ref={webcamRef}
             videoConstraints={videoConstraints}        
         />
@@ -94,7 +119,6 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
     <CenterLayout
       content={content}
       bgImg={false}
-      mobile={false}
     />
   );
 };

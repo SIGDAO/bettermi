@@ -20,6 +20,7 @@ export default function ConnectWallet (props: IConnectWalletProps) {
 
   const connectWallet = (appName:any,Wallet:any,Ledger:any) => {
     //const wallet = new GenericExtensionWallet();
+    console.log(typeof process.env.REACT_APP_MOBILE)
     let key:string;
     Wallet.Extension.connect({appName,networkName:Ledger.Network})
     .then((wallet:any) => {console.log(wallet);key = wallet.publicKey; console.log(key);
