@@ -2,12 +2,12 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
 import { walletSlice } from "./wallet";
 import { accountSlice } from "./account";
-import { selfieSlice } from "./profile";
+import { profileSlice } from "./profile";
 
 const rootReducer = combineReducers({
   wallet: walletSlice.reducer,
   account: accountSlice.reducer,
-  selfieImage: selfieSlice.reducer,
+  selfieImage: profileSlice.reducer,
 });
 
 export const store = configureStore({
