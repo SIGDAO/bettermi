@@ -10,6 +10,8 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { profileSlice } from '../../redux/profile';
 import { store } from '../../redux/reducer';
+import { userBMISlice } from '../../redux/userBMI';
+import { useGetBMIMutation } from '../../redux/userBMIApi';
 
 
 // const WebcamComponent = () => <Webcam />;
@@ -40,18 +42,51 @@ const takeSelfieButton : CSS.Properties = {
   'top': '500px',
 }
 
+const convertBase64toJpg = (base64String: string): File => {
+  const byteCharacters = atob(base64String.split(',')[1]);
+
+  // Convert the byte string to a Uint8Array
+  const byteNumbers = new Array(byteCharacters.length);
+  for (let i = 0; i < byteCharacters.length; i++) {
+    byteNumbers[i] = byteCharacters.charCodeAt(i);
+  }
+  const byteArray = new Uint8Array(byteNumbers);
+
+  // Create a Blob object from the Uint8Array
+  const blob = new Blob([byteArray], { type: 'image/jpeg' });
+
+  // Create a File object from the Blob and set the name to be "image.jpg"
+  return new File([blob], 'image.jpg', { type: 'image/jpeg' });
+
+}
+
 
 
 const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   const webcamRef = useRef<Webcam>(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [ getBMI ] = useGetBMIMutation()
+
 
   // todo: 
   // 1. post the selfie image to the hugging face, and analyze the BMI result
   //    BMI result should be stored in the redux store
   // 2. trigger smart contract to send message to store the BMI result in the blockchain
   const action: Function = (imageSrc: string) => {
+    const formData = new FormData();
+    formData.append('file', convertBase64toJpg(imageSrc))
 
+    // get api
+    getBMI(formData)
+      .then((res) => {
+        console.log(res)
+        // if (res.data){
+        //   store.dispatch(userBMISlice.actions.setBMI(res?.data?.prediction?.bmi))
+        // }
+      })
+
+    
   }
 
   const mobile = process.env.REACT_APP_MOBILE === 'true'
