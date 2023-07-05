@@ -3,16 +3,17 @@
 #connectWallet-container {
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
+  justify-content: center;
   align-items: center;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
   height: 100%;
+  
   width: 100%;
 }
 
 
 #connectWalletTopic {
-  margin-top: 144px;
+  margin-top: 10px;
 }
 
 #connectWalletDisciption {

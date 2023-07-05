@@ -15,7 +15,6 @@ export interface IGenerateBMIProps {
 
 function GenerateBMI (props: IGenerateBMIProps) {
   const selfie = useSelector(selectCurrentImg)
-  const hi = 'hi'
   return (
     <CenterLayout
       // can call action/get redux value in order to pass the BMI value to the Anima Generate Content

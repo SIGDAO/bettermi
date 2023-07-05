@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './select.css';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
@@ -13,13 +13,27 @@ export const GenderSelect: React.FunctionComponent<IGenderSelectProps> = (props)
   const { options } = props;
   const [isOpen, setIsOpen] = useState(false);
   const [displayValue, setDisplayValue] = useState(options[0].label);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
 
   return (
-    <div className="dropdown-container">
+    <div className="dropdown-container" ref={dropdownRef}>
       <div className="dropdown-header" onClick={toggleDropdown}>
         <div className="selected-sex inter-normal-white-15px">{displayValue}</div>
         <img className="select-image" src={process.env.PUBLIC_URL + '/img/generateBMI/arrow-down@1x.png'} alt="arrow-down" />
@@ -27,7 +41,7 @@ export const GenderSelect: React.FunctionComponent<IGenderSelectProps> = (props)
       {isOpen && (
         <ul className="dropdown-options" onBlur={() => setIsOpen(!isOpen)}>
           {options.map((option: any) => (
-            <li className='inter-normal-15px' key={option.value}  
+            <li className='inter-normal-white-12px' key={option.value}  
               onClick={() => {
                 props.onSelect(setDisplayValue(option.label));
                 toggleDropdown();

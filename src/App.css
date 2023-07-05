@@ -6,6 +6,7 @@
   --white: #ffffff;
   --white-2: #ffffff00;
   --white-3: #ffffff59;
+  --woodsmoke: #0d0d0d;
  
   --font-size-l: 16px;
   --font-size-m: 15px;
@@ -22,6 +23,10 @@
   font-size: var(--font-size-m);
   font-style: normal;
   font-weight: 600;
+}
+
+html, body {
+  height: 100%;
 }
 
 .inter-normal-white-15px {
@@ -60,6 +65,14 @@
   color: var(--cadet-blue);
   font-family: var(--font-family-inter);
   font-size: var(--font-size-s);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.inter-normal-white-12px {
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-m);
   font-style: normal;
   font-weight: 400;
 }

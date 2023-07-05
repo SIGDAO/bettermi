@@ -7,9 +7,17 @@
   position: absolute;
 }
 
-.selfie-content-container {
+/* 'zIndex': '1',
+'display': 'inline-block',
+'position': 'absolute',
+'top': '230px',   
 
-}
+.webcam-container {
+  z-index: 1;
+  display: 'inline-block';
+  position: 'absolute';
+  top: '230px',
+} */
 
 .selfie-shadow {
   background: url("../../../public/img/takeSelfie/Scanning_layer.png");

@@ -8,9 +8,9 @@ import { Provider as ReduxProvider } from "react-redux";
 
 // local
 import './App.css';
-import LogoPage from './pages/logoPage/logoPage';
+import LogoPage from './pages/logoPage/LogoPage';
 import ConnectWallet from './pages/connectWallet/connectWallet';
-import GenerateBMI from './pages/generateBMI/generateBMI';
+import GenerateBMI from './pages/generateBMI/GenerateBMI';
 import TakeSelfie from './pages/takeSelfie/TakeSelfie';
 import { store } from './redux/reducer';
 import { appConfig } from './redux/useContext';
