@@ -5,9 +5,10 @@ import {BrowserRouter, Routes, Route, Navigate, useLocation} from 'react-router-
 import { useDispatch, useSelector } from 'react-redux';
 import { Provider as ReduxProvider } from "react-redux";
 
+
 // local
 import './App.css';
-import LogoPage from './pages/logoPage/LogoPage';
+import LogoPage from './pages/logoPage/logoPage';
 import ConnectWallet from './pages/connectWallet/connectWallet';
 import GenerateBMI from './pages/generateBMI/generateBMI';
 import TakeSelfie from './pages/takeSelfie/TakeSelfie';
@@ -31,6 +32,8 @@ function App() {
         <Route path="/connectSuccess" element={<ConnectSuccess/>} />
         <Route path="/generateFreeNFT" element={<GenerateFreeNFT/>} />
         <Route path="/customizeYourProfile" element={<CustomizeYourProfile/>} />
+        {/* todo: flow 2 */}
+        
       </Routes>
       </ReduxProvider>  
     </AppContext.Provider>

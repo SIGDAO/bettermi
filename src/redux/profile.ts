@@ -2,17 +2,17 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ExtensionWalletError } from "@signumjs/wallets";
 import { clear } from "console";
 
-export interface SelfieState {
+export interface ProfileState {
   selfiePath: string;
   username: string;
 }
 
-const initialState: SelfieState = {
+const initialState: ProfileState = {
   selfiePath: "",
   username: "",
 };
 
-export const selfieSlice = createSlice({
+export const profileSlice = createSlice({
   name: "selfieImage",
   initialState,
   reducers: {
@@ -23,12 +23,22 @@ export const selfieSlice = createSlice({
     clearSelfieImage: (state) => {
       state.selfiePath = "";
     },
+    setUsername: (state, action: PayloadAction<string>) => {
+      state.username = action.payload;
+    },
+    clearUsername: (state) => {
+      state.username = "";
+    },
+    clearAll: (state) => {
+      state.selfiePath = "";
+      state.username = "";
+    }
   },
 });
 
-export const { actions } = selfieSlice;
+export const { actions } = profileSlice;
 
 // get selfiePath, state type need change
 
 
-export const selectCurrentImg = (state :any ) => state.selfieImage.selfiePath;
+export const selectCurrentImg = (state: any) => state.selfieImage.selfiePath;

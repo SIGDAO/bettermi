@@ -8,8 +8,10 @@ import { BackButton } from '../../components/button';
 import CSS from 'csstype';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { selfieSlice } from '../../redux/profile';
+import { profileSlice } from '../../redux/profile';
 import { store } from '../../redux/reducer';
+import { userBMISlice } from '../../redux/userBMI';
+import { useGetBMIMutation } from '../../redux/userBMIApi';
 
 
 // const WebcamComponent = () => <Webcam />;
@@ -40,19 +42,76 @@ const takeSelfieButton : CSS.Properties = {
   'top': '500px',
 }
 
+const convertBase64toJpg = (base64String: string): File => {
+  const byteCharacters = atob(base64String.split(',')[1]);
+
+  // Convert the byte string to a Uint8Array
+  const byteNumbers = new Array(byteCharacters.length);
+  for (let i = 0; i < byteCharacters.length; i++) {
+    byteNumbers[i] = byteCharacters.charCodeAt(i);
+  }
+  const byteArray = new Uint8Array(byteNumbers);
+
+  // Create a Blob object from the Uint8Array
+  const blob = new Blob([byteArray], { type: 'image/jpeg' });
+
+  // Create a File object from the Blob and set the name to be "image.jpg"
+  return new File([blob], 'image.jpg', { type: 'image/jpeg' });
+
+}
+
 
 
 const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   const webcamRef = useRef<Webcam>(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [ getBMI ] = useGetBMIMutation()
+
 
   // todo: 
   // 1. post the selfie image to the hugging face, and analyze the BMI result
   //    BMI result should be stored in the redux store
   // 2. trigger smart contract to send message to store the BMI result in the blockchain
   const action: Function = (imageSrc: string) => {
+    const formData = new FormData();
+    formData.append('file', convertBase64toJpg(imageSrc))
 
+    // get api
+    getBMI(formData)
+      .then((res) => {
+        console.log(res)
+        // if (res.data){
+        //   store.dispatch(userBMISlice.actions.setBMI(res?.data?.prediction?.bmi))
+        // }
+      })
+
+    
   }
+
+  const mobile = process.env.REACT_APP_MOBILE === 'true'
+  // const width = process.env.REACT_APP_MOBILE === 'true' ? '390' : '819'
+  const width = 819
+
+  // for mobile
+  const webcamContainerStyle : CSS.Properties = {
+    'zIndex': '1',
+    'display': 'inline-block',
+    'position': 'absolute',
+    'top': '230px',   }
+
+  if (mobile) {
+    webcamContainerStyle.position = 'absolute'
+    webcamContainerStyle.width = '390px'
+    webcamContainerStyle.left = 'calc((100% - 390px) / 2)'
+    webcamContainerStyle.height = 'calc(844px - 230px)'
+    webcamContainerStyle.overflow = 'hidden'
+  } else {
+    webcamContainerStyle.position = 'absolute'
+    webcamContainerStyle.width = '819px'
+    webcamContainerStyle.left = 'calc((100% - 819px) / 2)'
+  }
+  
 
   // capture the selfie image, and store it in the redux store
   const capture = React.useCallback(
@@ -60,7 +119,7 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
       console.log(webcamRef)
       const imageSrc = webcamRef.current?.getScreenshot();
       if (imageSrc) {
-        store.dispatch(selfieSlice.actions.setSelfieImage(imageSrc))
+        store.dispatch(profileSlice.actions.setSelfieImage(imageSrc))
         action(imageSrc)
       }
       navigate('/generateBMI')
@@ -68,16 +127,17 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
     [webcamRef]
   );
 
+
   const content : JSX.Element = (
-    <div>
+    <div className='selfie-content-container'>
       <BackButton/>
-      <div className="webcam-container">
+      <div className="webcam-container" style={webcamContainerStyle}>
         <Webcam 
             audio={false}
             // height={720}
             screenshotFormat="image/jpeg"
             // width={1280}
-            width={819}
+            width={width}
             ref={webcamRef}
             videoConstraints={videoConstraints}        
         />
@@ -94,7 +154,6 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
     <CenterLayout
       content={content}
       bgImg={false}
-      mobile={false}
     />
   );
 };

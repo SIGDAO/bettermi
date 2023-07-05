@@ -43,7 +43,6 @@ const ConnectSuccess: React.FunctionComponent<IConnectSuccessProps> = (props) =>
     <CenterLayout
       content={content}
       bgImg={false}
-
     />
   );
 };
