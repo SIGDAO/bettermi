@@ -23,7 +23,7 @@ const Logo: React.FC = () => {
 
   return (
     <CenterLayout
-      bgImg={process.env.PUBLIC_URL + '/img/BGwithstar.png'}
+      bgImg={false}
       content={content}
     />
   );

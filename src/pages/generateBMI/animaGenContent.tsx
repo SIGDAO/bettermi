@@ -31,7 +31,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
           <div className="text-2">{BMI}</div>
           <div className="kgm2">
             <span className="inter-normal-cadet-blue-14px">kg/m</span>
-            <span className="inter-normal-cadet-blue-14px">2</span>
+            <span className="inter-normal-cadet-blue-14px">²</span>
           </div>
         </div>
         <div className="bmi-bar">

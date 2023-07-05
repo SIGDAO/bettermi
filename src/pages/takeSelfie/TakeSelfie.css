@@ -12,6 +12,9 @@
 }
 
 .selfie-shadow {
+  background: url("../../../public/img/takeSelfie/Scanning_layer.png");
+  background-repeat: no-repeat;
+  background-size: cover;
   position: absolute;
   width: 819px;
   height: 461px;
@@ -20,6 +23,7 @@
     inset 0px -30px 8px -30px var(--royal-blue); 
   top: 0;
   left: calc((100% - 819px) / 2);
+  z-index: 999;
 }
 
 /* .kyc_scanning {
