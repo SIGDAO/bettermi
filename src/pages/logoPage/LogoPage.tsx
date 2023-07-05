@@ -8,8 +8,8 @@ import { Link } from 'react-router-dom';
 // export default function Logo (props: ILogoProps) {
 const Logo: React.FC = () => {
   const content: JSX.Element = (
-    <Link to='/connectWallet'>
-      <div id='logoPage-container'>
+    <Link to='/connectWallet' >
+      <div id='logoPage-container' >
         <img 
           id='bettermiio_logo' 
           src={process.env.PUBLIC_URL + '/img/logoPage/bettermi-io-logo@1x.png'}

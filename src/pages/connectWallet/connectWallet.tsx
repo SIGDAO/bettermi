@@ -43,28 +43,30 @@ export default function ConnectWallet (props: IConnectWalletProps) {
   }
   
   const content : JSX.Element = (
-    <div id='connectWallet-container'>
-      <h1 id='connectWalletTopic' className="default-font-setting">Connect Your Wallet</h1>
-      <p id='connectWalletDisciption' className="default-font-setting">
-        Connect your crypto wallet <br />&amp; Start your Bettermi Journey!
-      </p>
-      <div id='img-slider'>
-        <img className='connect-profilePic-side' src={process.env.PUBLIC_URL + "/img/connectWallet/photo-6@1x.png" } alt="Photo" />
-        <img className='connect-profilePic' src={process.env.PUBLIC_URL + "/img/mimi.png"} alt="Photo" />
-        <img className='connect-profilePic-side' src={process.env.PUBLIC_URL + "/img/connectWallet/photo-7@1x.png"} alt="photo" />
-      </div>
-      <div id='collectWallet-button-container'>
-        <DisabledButton
-          text='Phoenix wallet'
-          height='56px'
-          width='150px'
-        />
-        <ButtonWithAction
-          text='XT wallet'
-          action={() => connectWallet(appName,Wallet,Ledger)} // TODO: add action to connect wallet
-          height='56px'
-          width='150px'
-        />
+    <div className="connectWallet-layout">
+      <div id='connectWallet-container'>
+        <h1 id='connectWalletTopic' className="default-font-setting">Connect Your Wallet</h1>
+        <p id='connectWalletDisciption' className="default-font-setting">
+          Connect your crypto wallet <br />&amp; Start your Bettermi Journey!
+        </p>
+        <div id='img-slider'>
+          <img className='connect-profilePic-side' src={process.env.PUBLIC_URL + "/img/connectWallet/photo-6@1x.png" } alt="Photo" />
+          <img className='connect-profilePic' src={process.env.PUBLIC_URL + "/img/mimi.png"} alt="Photo" />
+          <img className='connect-profilePic-side' src={process.env.PUBLIC_URL + "/img/connectWallet/photo-7@1x.png"} alt="photo" />
+        </div>
+        <div id='collectWallet-button-container'>
+          <DisabledButton
+            text='Phoenix wallet'
+            height='56px'
+            width='150px'
+          />
+          <ButtonWithAction
+            text='XT wallet'
+            action={() => connectWallet(appName,Wallet,Ledger)} // TODO: add action to connect wallet
+            height='56px'
+            width='150px'
+          />
+        </div>
       </div>
     </div>
   )
