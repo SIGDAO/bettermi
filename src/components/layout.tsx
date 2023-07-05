@@ -21,7 +21,7 @@ export function CenterLayout (props: ICenterLayoutProps) {
     width = "390px";
   // display in ipad air size
   } else {
-    height = "1180px";
+    height = "100vh";
     width = "820px";
   }
 
@@ -33,16 +33,21 @@ export function CenterLayout (props: ICenterLayoutProps) {
   }
   :
   {
+    'position': 'fixed',
     'background': `linear-gradient(to bottom right, #221D4B, #171717)`,
     'width': '100vw',
-    'height': '100vh',
-    'overflow': 'hidden',
+    'minHeight': '100vh',
+    'height': '100%',
+    'overflowY': 'auto',
+    'zIndex': '1',
+    'overflowX': 'hidden',
   }
 
   const centerLayoutStyle : CSS.Properties = {
     // 'backgroundPosition': 'center',
-    'height': `${height}`, // ipad size
+    'minHeight': `${height}`, // ipad size
     'width': `${width}`, // ipad size
+    'height': '100%',
     'margin': 'auto',
   }
 

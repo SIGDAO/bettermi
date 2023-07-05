@@ -14,12 +14,6 @@ import { userBMISlice } from '../../redux/userBMI';
 import { useGetBMIMutation } from '../../redux/userBMIApi';
 
 
-// const WebcamComponent = () => <Webcam />;
-// import Camera from 'react-html5-camera-photo';
-// import 'react-html5-camera-photo/build/css/index.css';
-
-
-
 interface ITakeSelfieProps {
 }
 
@@ -84,21 +78,20 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
         // if (res.data){
         //   store.dispatch(userBMISlice.actions.setBMI(res?.data?.prediction?.bmi))
         // }
-      })
-
-    
+      }) 
   }
-
-  const mobile = process.env.REACT_APP_MOBILE === 'true'
-  // const width = process.env.REACT_APP_MOBILE === 'true' ? '390' : '819'
-  const width = 819
 
   // for mobile
   const webcamContainerStyle : CSS.Properties = {
     'zIndex': '1',
     'display': 'inline-block',
     'position': 'absolute',
-    'top': '230px',   }
+    'top': '190px',   
+  }
+
+  const mobile = process.env.REACT_APP_MOBILE === 'true'
+  // const width = process.env.REACT_APP_MOBILE === 'true' ? '390' : '819'
+  const width = 819
 
   if (mobile) {
     webcamContainerStyle.position = 'absolute'
@@ -159,4 +152,7 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
 };
 
 export default TakeSelfie;
+
+
+
 
