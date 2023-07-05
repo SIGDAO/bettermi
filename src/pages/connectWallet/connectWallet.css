@@ -5,12 +5,17 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* overflow-x: hidden; */
+  margin: auto;
   height: 100%;
-  
   width: 100%;
 }
 
+.connectWallet-layout {
+  position: absolute;
+  left: calc((100% - 820px) / 2);
+  width: 820px;
+  height: 100%;
+}
 
 #connectWalletTopic {
   margin-top: 10px;

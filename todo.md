@@ -22,3 +22,5 @@ flow 2:
   reward - do it in final
   add a marketplace
   marketplace - when ppl click see all partnership, it will show all 
+  add a button - remind them to add to home screen
+  

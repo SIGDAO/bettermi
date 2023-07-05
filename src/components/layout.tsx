@@ -49,6 +49,9 @@ export function CenterLayout (props: ICenterLayoutProps) {
     'width': `${width}`, // ipad size
     'height': '100%',
     'margin': 'auto',
+    // 'display': 'flex',
+    // 'justifyContent': 'center',
+    // 'alignItems': 'center',
   }
 
   if (typeof bgImg === 'string') {
