@@ -166,7 +166,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
           Your selection cannot be changed later.
         </p>
         <div className="button_-confirm">
-          <div className="confirm-bmi inter-semi-bold-white-15px" onClick={confirm}>Confirm</div>
+          <div className="confirm-bmi inter-semi-bold-white-15px" onClick={confirm}>Mint your NFT</div>
         </div>
       </div>
     </>
