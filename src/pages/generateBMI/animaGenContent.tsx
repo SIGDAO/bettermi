@@ -2,6 +2,16 @@ import * as React from 'react';
 import { BackButton } from '../../components/button';
 import { GenderSelect } from '../../components/select';
 import { useNavigate } from 'react-router-dom';
+import { useLedger } from '../../redux/useLedger';
+import { Api } from '@reduxjs/toolkit/dist/query';
+import { UnsignedTransaction } from "@signumjs/core";
+import { useContext } from 'react';
+import { AppContext } from '../../redux/useContext';
+import { accountPublicKey } from '../../redux/account';
+import { useSelector } from 'react-redux';
+import { accountId } from '../../redux/account';
+import { TransferNFTOwnership } from './transferNFTOwnership';
+
 
 interface IAnimaGenContentProps {
   BMI: number;    // the BMI value, can be string or number
@@ -14,11 +24,74 @@ interface IAnimaGenContentProps {
 const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) => {
   const {BMI, selfie} = props;
   const navigate = useNavigate();
+  const ledger = useLedger();
+  const {appName,Wallet,Ledger} = useContext(AppContext);
+  const publicKey = useSelector(accountPublicKey);
+  const userAccountId = useSelector(accountId);
+  const codeHashId = "7457358473503628676";
+  const BMI_test = "25.2";
+  console.log(ledger);
+  const confirm = async () => {
+    if(ledger){
 
-  const confirm = () => {
-    console.log('confirm')
-    navigate('/generateFreeNFT')
+      let ourContract = await ledger.contract.getContractsByAccount({
+        accountId: userAccountId,
+        machineCodeHash: codeHashId,
+
+      });
+      console.log(ourContract);
+      console.log(ourContract.ats[0]);
+      
+      if(ourContract.ats[0] == null){
+        const initializeContract = await ledger.contract.publishContractByReference({
+          name: "BMI",
+          description: BMI_test,
+          referencedTransactionHash:"62502D4233CA88EB7896031ACF4D729F4C6A570187161CA00FF291ED382769FD",
+          feePlanck:"30000000",
+          senderPublicKey:publicKey,
+          deadline:1440,}) as UnsignedTransaction;
+          console.log(initializeContract);
+        await Wallet.Extension.confirm(initializeContract.unsignedTransactionBytes);
+        while(ourContract.ats[0] == null){
+        ourContract = await ledger.contract.getContractsByAccount({
+          accountId: userAccountId,
+          machineCodeHash: codeHashId,
+
+          });
+        console.log(ourContract);
+      }
+
+        const sendBMI = await ledger.message.sendMessage({
+          message: BMI_test,
+          messageIsText: true,
+          recipientId: ourContract.ats[0].at,
+          feePlanck: "1000000",
+          senderPublicKey: publicKey,
+          deadline: 1440,
+          }) as UnsignedTransaction;
+        await Wallet.Extension.confirm(sendBMI.unsignedTransactionBytes);
+          
+
+    } //check whether the user has registered an account
+    
+   
+    else{
+      const sendBMI = await ledger.message.sendMessage({
+        message: BMI_test,
+        messageIsText: true,
+        recipientId: ourContract.ats[0].at,
+        feePlanck: "1000000",
+        senderPublicKey: publicKey,
+        deadline: 1440,
+    }) as UnsignedTransaction;
+    await Wallet.Extension.confirm(sendBMI.unsignedTransactionBytes);
+    }
+    console.log('confirm');
+ 
+      await TransferNFTOwnership(ledger,userAccountId,Wallet);
+    navigate('/generateFreeNFT');
   }
+}
 
 
   return (

@@ -7,7 +7,7 @@ export interface UserBMIState {
 }
 
 const initialState: UserBMIState = {
-  userBMI: '',
+  userBMI: '25.4',
 };
 
 export const userBMISlice = createSlice({
@@ -27,4 +27,6 @@ export const { actions } = userBMISlice;
 // get selfiePath, state type need change
 
 
+
 export const selectCurrentImg = (state: any) => state.selfieImage.selfiePath;
+export const selectBMI = (state: any) => state.userBMI.userBMI;
