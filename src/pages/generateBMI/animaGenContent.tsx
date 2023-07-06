@@ -60,7 +60,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
           });
         console.log(ourContract);
       }
-
+/*
         const sendBMI = await ledger.message.sendMessage({
           message: BMI_test,
           messageIsText: true,
@@ -69,7 +69,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
           senderPublicKey: publicKey,
           deadline: 1440,
           }) as UnsignedTransaction;
-        await Wallet.Extension.confirm(sendBMI.unsignedTransactionBytes);
+        await Wallet.Extension.confirm(sendBMI.unsignedTransactionBytes);*/
           
 
     } //check whether the user has registered an account
