@@ -5,6 +5,9 @@ Flow 1:
   page 4:
   <!-- green detect layer -->
 
+  connect page:
+  pop up msg box to install
+
   genBMI:
   <!-- m^2 -->
   <!-- dropdown box size -->
@@ -19,6 +22,7 @@ Flow 1:
 finding UI lib for chat
 
 flow 2:
+  menuBar screen - do first
   reward - do it in final
   add a marketplace
   marketplace - when ppl click see all partnership, it will show all 
