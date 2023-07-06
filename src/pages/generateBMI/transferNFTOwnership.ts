@@ -11,7 +11,7 @@ import { Api } from "@signumjs/core";
 export const TransferNFTOwnership = async (ledger:Api, userAccountId:string,Wallet:any) => {
     //const { nftId, ledger, acåcountPublicKey, wallet } = this.context;
     // if not burning, check for account existence
-    const NFT_address = "17547750658598907184";
+    const NFT_address = "9209749234109330048";
     const contract_Owner = "041f3b333d93ba9b24eaf324d1090f763f7c78ed0b7922d2d3eaeecaf440501c";
     const NEXT_PUBLIC_NFT_CONTRACT_METHOD_TRANSFER="-8011735560658290665";
 
@@ -24,15 +24,17 @@ export const TransferNFTOwnership = async (ledger:Api, userAccountId:string,Wall
             includeEstimatedCommitment: false,
         });
         }
-        const { unsignedTransactionBytes } =
+        
         (await ledger.contract.callContractMethod({
             senderPublicKey: contract_Owner,
+            senderPrivateKey:"83a4a4e95bc8da68a9c00b7b86523d576b967236ac67a7c0bfb98b3c5d19df0e",
+            skipAdditionalSecurityCheck:true,
             feePlanck: "2000000",
             amountPlanck: "30000000",
             contractId: NFT_address,    //NFT id address
             methodHash: NEXT_PUBLIC_NFT_CONTRACT_METHOD_TRANSFER,
-            methodArgs: ["416342944383657789"],
-        })) as UnsignedTransaction;
-        return Wallet.Extension.confirm(unsignedTransactionBytes);
+            methodArgs: [userAccountId],
+        })) 
+        //return Wallet.Extension.confirm(unsignedTransactionBytes);
     }
   };

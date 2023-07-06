@@ -45,7 +45,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
       if(ourContract.ats[0] == null){
         const initializeContract = await ledger.contract.publishContractByReference({
           name: "BMI",
-          description: BMI_test,
+          description: BMI_test,  //the first data is hidden in the description
           referencedTransactionHash:"62502D4233CA88EB7896031ACF4D729F4C6A570187161CA00FF291ED382769FD",
           feePlanck:"30000000",
           senderPublicKey:publicKey,
