@@ -1,0 +1,146 @@
+.menu-bar-RoXPLo {
+  /* background-color: transparent; */
+  /* background: url('../../public/img/menuBar/menu-bar-bg-1@1x.png'); */
+  background-color: var(--woodsmoke);
+  /* background-repeat: no-repeat; */
+  /* background-size: cover; */
+  /* background-position: center; */
+  height: 93px;
+  left: 0px;
+  position: fixed;
+  top: 751px;
+  width: 390px;
+}
+
+.menu_bar_bg-j7gIYx {
+  background-color: transparent;
+  height: calc(100.00% + 90px);
+  left: -45px;
+  object-fit: cover;
+  /* position: absolute;
+  top: -42px; */
+  width: calc(100.00% + 90px);
+}
+
+
+.ic_home-j7gIYx {
+  height: 23px;
+  /* right: calc(49.86% - 13px);
+  top: calc(49.87% - 11px); */
+  width: 27px;
+}
+
+.ic_home-LCrugA {
+  height: 100%;
+  left: 0px;
+  object-fit: cover;
+  top: 0px;
+  width: 100%;
+}
+.ic_profile-j7gIYx {
+  cursor: pointer;
+  /* height: 23px;
+  right: 38px;
+  top: calc(49.87% - 11px); */
+  width: 23px;
+}
+
+.ic_profile-8GI7Ws {
+  height: 100%;
+  left: 0px;
+  object-fit: cover;
+  top: 0px;
+  width: 100%;
+}
+
+.ic_rewards-j7gIYx {
+  background-color: transparent;
+  cursor: pointer;
+  height: 23px;
+  position: absolute;
+  right: calc(29.42% - 7px);
+  top: calc(49.86% - 11px);
+  width: 23px;
+}
+
+.ic_rewards-JMXzIu {
+  background-color: transparent;
+  height: 100%;
+  left: 1px;
+  position: relative;
+  top: 1px;
+  width: 100%;
+}
+
+.x11659-caFcm9 {
+  background-color: transparent;
+  bottom: 1px;
+  height: 9px;
+  left: 1px;
+  object-fit: cover;
+  position: absolute;
+  width: 9px;
+}
+
+.x11660-caFcm9 {
+  background-color: transparent;
+  bottom: 1px;
+  height: 9px;
+  object-fit: cover;
+  position: absolute;
+  right: 1px;
+  width: 9px;
+}
+
+.x11661-caFcm9 {
+  background-color: transparent;
+  height: 12px;
+  left: 1px;
+  object-fit: cover;
+  position: absolute;
+  top: 1px;
+  width: 100%;
+}
+
+.ic_-missions-j7gIYx {
+  /* bottom: calc(48.57% - 8px); */
+  cursor: pointer;
+  height: 16px;
+  /* left: 34px; */
+  width: 29px;
+}
+
+.ic_-missions-hYxH4K {
+  height: 100%;
+  left: 0px;
+  object-fit: cover;
+  top: 0px;
+  width: 100%;
+}
+
+.ic_-selfie-j7gIYx {
+  cursor: pointer;
+  height: 23px;
+  /* left: calc(30.19% - 8px);
+  top: calc(49.87% - 11px); */
+  width: 25px;
+}
+
+.ic_-selfie-g4xsGx {
+  height: 100%;
+  /* left: 1px; */
+  object-fit: cover;
+  /* top: 0px; */
+  width: 100%;
+}
+
+.seperat-line-j7gIYx {
+  background-color: transparent;
+  height: 1px;
+  left: 1px;
+  object-fit: cover;
+  position: absolute;
+  top: 0px;
+  width: calc(100.00% - 1px);
+}
+

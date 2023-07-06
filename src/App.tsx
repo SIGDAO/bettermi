@@ -58,7 +58,6 @@ function App() {
         <Route path="/rewardDetail" element={<RewardDetail/>} />
         <Route path="/selfieToEarn" element={<SelfieToEarn/>} />
         <Route path="/profile" element={<Profile/>} />
-        
       </Routes>
       </ReduxProvider>  
     </AppContext.Provider>
