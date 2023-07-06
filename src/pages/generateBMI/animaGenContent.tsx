@@ -37,7 +37,6 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
       let ourContract = await ledger.contract.getContractsByAccount({
         accountId: userAccountId,
         machineCodeHash: codeHashId,
-
       });
       console.log(ourContract);
       console.log(ourContract.ats[0]);
@@ -53,14 +52,14 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
           console.log(initializeContract);
         await Wallet.Extension.confirm(initializeContract.unsignedTransactionBytes);
         while(ourContract.ats[0] == null){
-        ourContract = await ledger.contract.getContractsByAccount({
-          accountId: userAccountId,
-          machineCodeHash: codeHashId,
+          ourContract = await ledger.contract.getContractsByAccount({
+            accountId: userAccountId,
+            machineCodeHash: codeHashId,
 
-          });
-        console.log(ourContract);
-      }
-/*
+            });
+          console.log(ourContract);
+        }
+  /*
         const sendBMI = await ledger.message.sendMessage({
           message: BMI_test,
           messageIsText: true,
@@ -72,26 +71,22 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
         await Wallet.Extension.confirm(sendBMI.unsignedTransactionBytes);*/
           
 
-    } //check whether the user has registered an account
-    
-   
-    else{
-      const sendBMI = await ledger.message.sendMessage({
-        message: BMI_test,
-        messageIsText: true,
-        recipientId: ourContract.ats[0].at,
-        feePlanck: "1000000",
-        senderPublicKey: publicKey,
-        deadline: 1440,
-    }) as UnsignedTransaction;
-    await Wallet.Extension.confirm(sendBMI.unsignedTransactionBytes);
-    }
-    console.log('confirm');
- 
+      } else{ //check whether the user has registered an account
+        const sendBMI = await ledger.message.sendMessage({
+          message: BMI_test,
+          messageIsText: true,
+          recipientId: ourContract.ats[0].at,
+          feePlanck: "1000000",
+          senderPublicKey: publicKey,
+          deadline: 1440,
+      }) as UnsignedTransaction;
+      await Wallet.Extension.confirm(sendBMI.unsignedTransactionBytes);
+      }
+      console.log('confirm');
       await TransferNFTOwnership(ledger,userAccountId,Wallet);
-    navigate('/generateFreeNFT');
+      navigate('/generateFreeNFT');
+    }
   }
-}
 
 
   return (
