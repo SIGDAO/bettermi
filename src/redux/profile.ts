@@ -13,7 +13,7 @@ const initialState: ProfileState = {
 };
 
 export const profileSlice = createSlice({
-  name: "selfieImage",
+  name: "profile",
   initialState,
   reducers: {
     setSelfieImage: (state, action: PayloadAction<string>) => {
@@ -41,4 +41,4 @@ export const { actions } = profileSlice;
 // get selfiePath, state type need change
 
 
-export const selectCurrentImg = (state: any) => state.selfieImage.selfiePath;
+export const selectCurrentImg = (state: any) => state.profile.selfiePath;

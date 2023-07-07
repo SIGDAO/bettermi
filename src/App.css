@@ -95,7 +95,7 @@ html, body {
 .inter-normal-cadet-blue-12px {
   color: var(--cadet-blue);
   font-family: var(--font-family-inter);
-  font-size: var(--font-size-m);
+  font-size: 12px;
   font-style: normal;
   font-weight: 400;
 }
@@ -151,7 +151,7 @@ html, body {
 .sfprotext-semi-bold-white-15px {
   color: var(--white);
   font-family: var(--font-family-sfpro_text-semibold);
-  font-size: var(--font-size-xl);
+  font-size: 15px;
   font-style: normal;
   font-weight: 600;
 }
@@ -159,7 +159,7 @@ html, body {
 .inter-semi-bold-keppel-15px {
   color: var(--keppel);
   font-family: var(--font-family-inter);
-  font-size: var(--font-size-xl);
+  font-size: 15px;
   font-style: normal;
   font-weight: 600;
 }
@@ -183,7 +183,7 @@ html, body {
 .inter-medium-white-15px {
   color: var(--white);
   font-family: var(--font-family-inter);
-  font-size: var(--font-size-xl);
+  font-size: 15px;
   font-style: normal;
   font-weight: 500;
 }
@@ -199,7 +199,7 @@ html, body {
 .inter-semi-bold-keppel-12px {
   color: var(--keppel);
   font-family: var(--font-family-inter);
-  font-size: var(--font-size-m);
+  font-size: 12px;
   font-style: normal;
   font-weight: 600;
 }
@@ -207,7 +207,7 @@ html, body {
 .inter-normal-cadet-blue-12px-2 {
   color: var(--cadet-blue);
   font-family: var(--font-family-inter);
-  font-size: var(--font-size-m);
+  font-size: 12px;
 }
 
 .inter-normal-cadet-blue-14px {

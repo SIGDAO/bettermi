@@ -1,0 +1,556 @@
+/* screen - bettermidapp-rewards-1 */
+
+.bettermidapp-rewards-1 {
+  background: linear-gradient(180deg, #171717 0%, #291a49 41.22%, #171717 100%);
+  background-color: rgba(255,255,255,1.0);
+  height: 990px;
+  overflow: hidden;
+  overflow-x: hidden;
+  position: relative;
+  width: 390px;
+}
+
+.bettermidapp-rewards-1 .bg-HVHxMD {
+  height: 1082px;
+  top: -47px;
+  width: 480px;
+}
+
+.bettermidapp-rewards-1 .reward-progress-HVHxMD {
+  background-color: transparent;
+  height: auto;
+  left: 37px;
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  text-align: left;
+  top: 180px;
+  white-space: nowrap;
+  width: auto;
+}
+
+.bettermidapp-rewards-1 .rewards-cards-HVHxMD {
+  cursor: pointer;
+  top: 209px;
+}
+
+.bettermidapp-rewards-1 .master-collector-zqdyAN {
+  background-color: transparent;
+  height: 23px;
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  right: 30px;
+  text-align: left;
+  top: 20px;
+  white-space: nowrap;
+  width: 168px;
+}
+
+.bettermidapp-rewards-1 .acquire-3-nf-ts-from-our-collection-zqdyAN {
+  background-color: transparent;
+  height: 32px;
+  letter-spacing: 0.00px;
+  line-height: 12px;
+  position: absolute;
+  right: 46px;
+  text-align: left;
+  top: calc(44.69% - 14px);
+  width: 152px;
+}
+
+.bettermidapp-rewards-1 .goal-3P5hhI {
+  left: calc(49.25% - 16px);
+  width: 32px;
+}
+
+.bettermidapp-rewards-1 .x3-u0xYXl {
+  width: 20px;
+}
+
+.bettermidapp-rewards-1 .rewards-cards-8a6knR {
+  top: 374px;
+}
+
+.bettermidapp-rewards-1 .selfie-champion-gUg1fg {
+  background-color: transparent;
+  height: 23px;
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  right: 30px;
+  text-align: left;
+  top: 20px;
+  white-space: nowrap;
+  width: 168px;
+}
+
+.bettermidapp-rewards-1 .selfies-for-60-consecutive-days-gUg1fg {
+  background-color: transparent;
+  height: 32px;
+  letter-spacing: 0.00px;
+  line-height: 12px;
+  position: absolute;
+  right: 46px;
+  text-align: left;
+  top: calc(44.69% - 14px);
+  width: 152px;
+}
+
+.bettermidapp-rewards-1 .goal-0jQlr7 {
+  left: calc(50.00% - 20px);
+  width: 40px;
+}
+
+.bettermidapp-rewards-1 .x3-XO0mpH {
+  width: 29px;
+}
+
+.bettermidapp-rewards-1 .rewards-cards-xJ56qX {
+  top: 539px;
+}
+
+.bettermidapp-rewards-1 .social-butterfly-aDzTvn {
+  background-color: transparent;
+  height: 23px;
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  right: 30px;
+  text-align: left;
+  top: 20px;
+  white-space: nowrap;
+  width: 168px;
+}
+
+.bettermidapp-rewards-1 .build-a-thriving-network-of-75-friends-aDzTvn {
+  background-color: transparent;
+  height: 32px;
+  letter-spacing: 0.00px;
+  line-height: 12px;
+  position: absolute;
+  right: 46px;
+  text-align: left;
+  top: calc(44.69% - 14px);
+  width: 152px;
+}
+
+.bettermidapp-rewards-1 .goal-jxHOCk {
+  left: calc(50.00% - 20px);
+  width: 40px;
+}
+
+.bettermidapp-rewards-1 .x3-ZVz3DZ {
+  width: 28px;
+}
+
+.bettermidapp-rewards-1 .rewards-cards-YX29bt {
+  top: 704px;
+}
+
+.bettermidapp-rewards-1 .elite-challenger-xXGdpy {
+  background-color: transparent;
+  height: 23px;
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  right: 30px;
+  text-align: left;
+  top: 20px;
+  white-space: nowrap;
+  width: 168px;
+}
+
+.bettermidapp-rewards-1 .complete-50-challenges-xXGdpy {
+  background-color: transparent;
+  height: 17px;
+  letter-spacing: 0.00px;
+  line-height: 12px;
+  position: absolute;
+  right: 46px;
+  text-align: left;
+  top: calc(39.65% - 7px);
+  width: 152px;
+}
+
+.bettermidapp-rewards-1 .goal-DSShI6 {
+  left: calc(50.00% - 20px);
+  width: 40px;
+}
+
+.bettermidapp-rewards-1 .x3-wJCLx6 {
+  width: 29px;
+}
+
+.bettermidapp-rewards-1 .title-bar-HVHxMD {
+  background-color: transparent;
+  height: 160px;
+  left: 0px;
+  position: fixed;
+  top: -0px;
+  width: 390px;
+}
+
+.bettermidapp-rewards-1 .bg-uozlST {
+  height: calc(100.00% + 90px);
+  top: -45px;
+  width: calc(100.00% + 90px);
+}
+
+.bettermidapp-rewards-1 .icon-arrow-left-uozlST {
+  height: 44px;
+  left: 16px;
+  top: calc(38.34% - 17px);
+  width: 44px;
+}
+
+.bettermidapp-rewards-1 .icon-arrow-left-keF2zr {
+  height: 35.44%;
+  left: 31.82%;
+  object-fit: cover;
+  top: 31.82%;
+  width: 36.36%;
+}
+
+.bettermidapp-rewards-1 .bars-status-bar-i-phone-light-uozlST {
+  background-color: transparent;
+  height: 41px;
+  left: 0px;
+  position: absolute;
+  top: 1px;
+  width: 100%;
+}
+
+.bettermidapp-rewards-1 .frame-EwunIR {
+  background-color: var(--white);
+  height: 100%;
+  left: 0px;
+  opacity: 0.0;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.bettermidapp-rewards-1 .status-bar-EwunIR {
+  background-color: transparent;
+  bottom: calc(47.83% - 9px);
+  height: 18px;
+  left: 18px;
+  position: absolute;
+  width: calc(100.00% - 35px);
+}
+
+.bettermidapp-rewards-1 .battery-gOKoSC {
+  background-color: transparent;
+  height: 11px;
+  position: absolute;
+  right: 0px;
+  top: calc(42.50% - 5px);
+  width: 24px;
+}
+
+.bettermidapp-rewards-1 .border-G8e4Ab {
+  background-color: transparent;
+  border: 1px solid;
+  border-color: var(--white);
+  border-radius: 2.67px;
+  height: 100%;
+  left: 0px;
+  opacity: 0.35;
+  position: absolute;
+  top: 0px;
+  width: calc(100.00% - 2px);
+}
+
+.bettermidapp-rewards-1 .cap-G8e4Ab {
+  background-color: transparent;
+  bottom: calc(50.00% - 2px);
+  height: 4px;
+  object-fit: cover;
+  position: absolute;
+  right: 0px;
+  width: 1px;
+}
+
+.bettermidapp-rewards-1 .capacity-G8e4Ab {
+  background-color: var(--white);
+  border-radius: 1.33px;
+  height: calc(100.00% - 4px);
+  left: 2px;
+  position: absolute;
+  top: 2px;
+  width: 18px;
+}
+
+.bettermidapp-rewards-1 .wifi-gOKoSC {
+  background-color: transparent;
+  height: calc(100.00% - 7px);
+  object-fit: cover;
+  position: absolute;
+  right: 29px;
+  top: 3px;
+  width: 15px;
+}
+
+.bettermidapp-rewards-1 .cellular-connection-gOKoSC {
+  background-color: transparent;
+  height: calc(100.00% - 7px);
+  object-fit: cover;
+  position: absolute;
+  right: 50px;
+  top: 3px;
+  width: 17px;
+}
+
+.bettermidapp-rewards-1 .time-style-gOKoSC {
+  background-color: transparent;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 54px;
+}
+
+.bettermidapp-rewards-1 .time-QP1YXj {
+  background-color: transparent;
+  height: 20px;
+  left: 0px;
+  letter-spacing: -0.30px;
+  line-height: 15px;
+  position: absolute;
+  text-align: center;
+  top: 0px;
+  width: calc(100.00% + 2px);
+}
+
+.bettermidapp-rewards-1 .bettermi-rewards-uozlST {
+  background-color: transparent;
+  height: 23px;
+  left: calc(30.04% - 47px);
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  text-align: left;
+  top: calc(41.59% - 10px);
+  white-space: nowrap;
+  width: 157px;
+}
+
+.bettermidapp-rewards-1 .seperat-line-uozlST {
+  bottom: 0px;
+  height: 1px;
+  left: 1px;
+  width: calc(100.00% - 1px);
+}
+
+.bettermidapp-rewards-1 .rewards-uozlST {
+  bottom: 0px;
+  height: 39px;
+  left: 16px;
+  width: 100px;
+}
+
+.bettermidapp-rewards-1 .rewards-QtRMbm {
+  height: 21px;
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  right: calc(45.83% - 29px);
+  text-align: center;
+  top: 0px;
+  white-space: nowrap;
+  width: 64px;
+}
+
+.bettermidapp-rewards-1 .seperat-line-QtRMbm {
+  bottom: -2px;
+  height: 3px;
+  left: 0px;
+  width: 100%;
+}
+
+.bettermidapp-rewards-1 .history-uozlST {
+  bottom: 20px;
+  height: 19px;
+  left: calc(41.57% - 22px);
+  width: 52px;
+}
+
+.bettermidapp-rewards-1 .history-O0YEXQ {
+  height: calc(100.00% + 2px);
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  text-align: center;
+  top: 0px;
+  white-space: nowrap;
+  width: calc(100.00% + 2px);
+}
+
+.bettermidapp-rewards-1 .expiration-uozlST {
+  bottom: 20px;
+  height: 19px;
+  right: calc(27.69% - 20px);
+  width: 74px;
+}
+
+.bettermidapp-rewards-1 .expiration-hSRjm1 {
+  height: calc(100.00% + 2px);
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  text-align: center;
+  top: 0px;
+  white-space: nowrap;
+  width: calc(100.00% + 2px);
+}
+
+.bettermidapp-rewards-1 .ic_help_24px-uozlST {
+  height: 20px;
+  right: 29px;
+  top: calc(40.34% - 8px);
+  width: 20px;
+}
+
+.bettermidapp-rewards-1 .ic_help_24px-udK4Dx {
+  height: 100%;
+  left: 0px;
+  object-fit: cover;
+  top: 0px;
+  width: 100%;
+}
+
+.bettermidapp-rewards-1 .icon-arrow-left-UvRVvA {
+  cursor: pointer;
+  height: 44px;
+  left: 16px;
+  top: calc(38.34% - 17px);
+  width: 44px;
+}
+
+.bettermidapp-rewards-1 .icon-arrow-left-60xTVA {
+  height: 35.44%;
+  left: 31.82%;
+  object-fit: cover;
+  top: 31.82%;
+  width: 36.36%;
+}
+
+.bettermidapp-rewards-1 .ic_settings_24px-uozlST {
+  height: 20px;
+  right: calc(18.62% - 4px);
+  top: calc(40.34% - 8px);
+  width: 19px;
+}
+
+.bettermidapp-rewards-1 .ic_settings_24px-ijD1lb {
+  height: 100%;
+  left: 1px;
+  object-fit: cover;
+  top: 0px;
+  width: 100%;
+}
+
+
+.bettermidapp-rewards-1 .bg {
+  background-color: transparent;
+  left: -45px;
+  object-fit: cover;
+  position: absolute;
+}
+
+.bettermidapp-rewards-1 .card_bg {
+  background-color: transparent;
+  height: 100%;
+  left: 0px;
+  object-fit: cover;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.bettermidapp-rewards-1 .expiration {
+  background-color: transparent;
+  position: absolute;
+}
+
+.bettermidapp-rewards-1 .goal {
+  background-color: transparent;
+  height: 17px;
+  position: absolute;
+  top: calc(46.13% - 8px);
+}
+
+.bettermidapp-rewards-1 .goal-data {
+  background-color: transparent;
+  bottom: 22px;
+  height: 36px;
+  position: absolute;
+  right: calc(48.18% - 31px);
+  width: 65px;
+}
+
+.bettermidapp-rewards-1 .ic_next {
+  background-color: transparent;
+  bottom: 17px;
+  height: 44px;
+  position: absolute;
+  right: 22px;
+  width: 44px;
+}
+
+.bettermidapp-rewards-1 .nft_-avatar {
+  background-color: transparent;
+  border-radius: 10px;
+  height: calc(100.00% - 43px);
+  left: 20px;
+  object-fit: cover;
+  position: absolute;
+  top: 22px;
+  width: 107px;
+}
+
+.bettermidapp-rewards-1 .rewards {
+  background-color: transparent;
+  position: absolute;
+}
+
+.bettermidapp-rewards-1 .seperat-line {
+  background-color: transparent;
+  object-fit: cover;
+  position: absolute;
+}
+
+.bettermidapp-rewards-1 .x0 {
+  background-color: transparent;
+  height: calc(100.00% + 2px);
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 14px;
+  position: absolute;
+  text-align: left;
+  top: 2px;
+  white-space: nowrap;
+  width: 11px;
+}
+
+.bettermidapp-rewards-1 .x3 {
+  background-color: transparent;
+  height: calc(100.00% + 2px);
+  letter-spacing: 0.00px;
+  line-height: 14px;
+  position: absolute;
+  right: -2px;
+  text-align: left;
+  top: 2px;
+  white-space: nowrap;
+}
+
+.bettermidapp-rewards-1 .x893 {
+  background-color: var(--eerie-black);
+  border-radius: 5px;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
