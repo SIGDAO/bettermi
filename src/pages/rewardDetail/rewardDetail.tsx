@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Navigate } from 'react-router-dom';
 import './rewardDetail.css'
 import { CenterLayout } from '../../components/layout';
 import { ShortTitleBar } from '../../components/titleBar';
@@ -113,33 +113,30 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
   )
 
 
-  if (!pageExist) {
-    return (
-      <CenterLayout 
-        content={
-          <div 
-            style={
-              {
-                height: '100%',
-                width: '100%',
-                color: 'white', 
-                display: 'flex', 
-                justifyContent: 'center', 
-                alignItems: 'center',
-              }}>
-            Page not found
-          </div>} 
-        bgImg={false}/>
-    )
-  }
+  return !pageExist? <Navigate to={`/reward`} /> : <CenterLayout content={content} bgImg={false}/>
 
-  return (
-    <CenterLayout 
-      content={content} 
-      bgImg={false}
-    />
-  );
   
 };
 
 export default RewardDetail;
+
+
+  // if (!pageExist) {
+  //   return (
+  //     <CenterLayout 
+  //       content={
+  //         <div 
+  //           style={
+  //             {
+  //               height: '100%',
+  //               width: '100%',
+  //               color: 'white', 
+  //               display: 'flex', 
+  //               justifyContent: 'center', 
+  //               alignItems: 'center',
+  //             }}>
+  //           Page not found
+  //         </div>} 
+  //       bgImg={false}/>
+  //   )
+  // }
