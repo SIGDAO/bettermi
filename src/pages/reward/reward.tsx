@@ -91,25 +91,6 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
               alt="icon-arrow-left"
               />
         </div>
-        <div className="bars-status-bar-i-phone-light-uozlST">
-            <div className="frame-EwunIR"></div>
-            <div className="status-bar-EwunIR">
-              <div className="battery-gOKoSC">
-                  <div className="border-G8e4Ab"></div>
-                  <img className="cap-G8e4Ab" src="img/cap-10@1x.png" alt="Cap" />
-                  <div className="capacity-G8e4Ab"></div>
-              </div>
-              <img className="wifi-gOKoSC" src="img/wifi-10@1x.png" alt="Wifi" />
-              <img
-                  className="cellular-connection-gOKoSC"
-                  src="img/cellular-connection-10@1x.png"
-                  alt="Cellular Connection"
-                  />
-              <div className="time-style-gOKoSC">
-                  <div className="time-QP1YXj sfprotext-semi-bold-white-15px">9:41</div>
-              </div>
-            </div>
-        </div>
         <div className="bettermi-rewards-uozlST inter-semi-bold-white-18px">Bettermi Rewards</div>
         <img className="seperat-line-uozlST seperat-line" src="img/seperat-line-11@1x.png" alt="Seperat line" />
         <div className="rewards-uozlST rewards">

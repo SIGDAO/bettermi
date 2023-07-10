@@ -30,6 +30,7 @@ import Reward from './pages/reward/reward';
 import RewardDetail from './pages/rewardDetail/rewardDetail';
 import SelfieToEarn from './pages/selfieToEarn/selfieToEarn';
 import Profile from './pages/profile/profile';
+import Marketplace from './pages/marketplace/marketplace';
 
 
 
@@ -55,9 +56,12 @@ function App() {
         <Route path="/missionChallenge" element={<MissionChallenge/>} />
         <Route path="/myNftList" element={<MyNftList/>} />
         <Route path="/reward" element={<Reward/>} />
-        <Route path="/rewardDetail" element={<RewardDetail/>} />
+        <Route path="/rewardDetail" element={<RewardDetail/>}>
+          <Route path=":id" element={<RewardDetail/>} />
+        </Route>
         <Route path="/selfieToEarn" element={<SelfieToEarn/>} />
         <Route path="/profile" element={<Profile/>} />
+        <Route path="/marketplace" element={<Marketplace/>} />
       </Routes>
       </ReduxProvider>  
     </AppContext.Provider>

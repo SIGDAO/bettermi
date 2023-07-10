@@ -25,7 +25,7 @@ const MenuBar: React.FC<IMenuBarProps> = (props) => {
           <img className="ic_home-LCrugA ic_home" src={`${process.env.PUBLIC_URL}/img/menuBar/ic-home-1@1x.png`} alt="ic_home" />
         </div>
       </Link>
-      <Link to='/reward'>
+      <Link to='/marketplace'>
         {/* the reward icon */}
         <div className="ic_rewards-j7gIYx">
           <img className="x11659-caFcm9" src={`${process.env.PUBLIC_URL}/img/menuBar/file---11659@1x.png`} alt="11659" />

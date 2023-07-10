@@ -12,7 +12,6 @@ const root = ReactDOM.createRoot(
 root.render(
   <BrowserRouter basename='/'>
     <React.StrictMode>
-      {/* to do: bulid redux store */}
       <App />
     </React.StrictMode>
   </BrowserRouter>

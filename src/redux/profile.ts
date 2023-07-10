@@ -17,7 +17,6 @@ export const profileSlice = createSlice({
   initialState,
   reducers: {
     setSelfieImage: (state, action: PayloadAction<string>) => {
-      console.log("setSelfieImage", action.payload);
       state.selfiePath = action.payload;
     },
     clearSelfieImage: (state) => {
@@ -42,3 +41,9 @@ export const { actions } = profileSlice;
 
 
 export const selectCurrentImg = (state: any) => state.profile.selfiePath;
+export const selectCurrentUsername = (state: any) => {
+  if (state.profile.username === "") {
+    return localStorage.getItem("name") ? localStorage.getItem("name") : ''
+  }
+  return state.profile.username;
+};
