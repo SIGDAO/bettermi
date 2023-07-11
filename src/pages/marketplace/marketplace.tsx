@@ -32,9 +32,8 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
           </div>
         </div>
         <div className="redeem-rewards-oobbG1">REDEEM REWARDS</div>
-        <Link to="bettermidapp-rewards-2.html"
-          >
-        <div className="see-all-oobbG1 see-all inter-medium-royal-blue-14px">See all</div>
+        <Link to="/reward">
+          <div className="see-all-oobbG1 see-all inter-medium-royal-blue-14px">See all</div>
         </Link>
         <div className="x8-oobbG1">
           <Link to='/rewardDetail/1'>

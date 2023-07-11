@@ -40,7 +40,8 @@ pages check (OK mean still need to fix layout, Done mean really done)
     reward social butterfly - OK
     reward elite challenger - OK
   selfie to earn - OK
-  reward - tbc
+  reward - OK
+  
   challenage_countdown - tbc
   challenge - tbc
   challenge finished - tbc

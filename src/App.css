@@ -286,3 +286,32 @@ html, body {
 
 :root {
 }
+
+
+
+.goal-data {
+  background-color: transparent;
+  bottom: 22px;
+  height: 36px;
+  position: absolute;
+  right: calc(48.18% - 31px);
+  width: 65px;
+}
+
+.goal {
+  background-color: transparent;
+  height: 17px;
+  position: absolute;
+  top: calc(46.13% - 8px);
+}
+
+
+.ic_chevron_right_24px {
+  background-color: transparent;
+  height: 12px;
+  left: calc(49.19% - 4px);
+  object-fit: cover;
+  position: absolute;
+  top: calc(50.00% - 6px);
+  width: 7px;
+}
