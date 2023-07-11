@@ -30,29 +30,29 @@
 }
 
 
-.ic_home-j7gIYx {
+.ic_home-container {
   height: 23px;
   /* right: calc(49.86% - 13px);
   top: calc(49.87% - 11px); */
   width: 27px;
 }
 
-.ic_home-LCrugA {
+.ic_home-img {
   height: 100%;
   left: 0px;
   object-fit: cover;
   top: 0px;
   width: 100%;
 }
-.ic_profile-j7gIYx {
+.ic_profile-container {
   cursor: pointer;
-  /* height: 23px;
-  right: 38px;
+  height: 23px;
+  /* right: 38px;
   top: calc(49.87% - 11px); */
   width: 23px;
 }
 
-.ic_profile-8GI7Ws {
+.ic_profile-img {
   height: 100%;
   left: 0px;
   object-fit: cover;
@@ -60,7 +60,7 @@
   width: 100%;
 }
 
-.ic_rewards-j7gIYx {
+.ic_rewards-container {
   background-color: transparent;
   cursor: pointer;
   height: 23px;
@@ -79,37 +79,7 @@
   width: 100%;
 } */
 
-.x11659-caFcm9 {
-  background-color: transparent;
-  bottom: 1px;
-  height: 9px;
-  left: 1px;
-  object-fit: cover;
-  position: relative;
-  width: 9px;
-}
-
-.x11660-caFcm9 {
-  background-color: transparent;
-  bottom: 1px;
-  height: 9px;
-  object-fit: cover;
-  position: relative;
-  right: 1px;
-  width: 9px;
-}
-
-.x11661-caFcm9 {
-  background-color: transparent;
-  height: 12px;
-  left: 0px;
-  object-fit: cover;
-  position: relative;
-  top: 0px;
-  width: 100%;
-}
-
-.ic_-missions-j7gIYx {
+.ic_-missions-container {
   /* bottom: calc(48.57% - 8px); */
   cursor: pointer;
   height: 16px;
@@ -117,15 +87,15 @@
   width: 29px;
 }
 
-.ic_-missions-hYxH4K {
+.ic_-missions-img {
   height: 100%;
-  left: 0px;
-  object-fit: cover;
-  top: 0px;
+  /* left: 0px; */
+  /* object-fit: cover; */
+  /* top: 0px; */
   width: 100%;
 }
 
-.ic_-selfie-j7gIYx {
+.ic_-selfie-container {
   cursor: pointer;
   height: 23px;
   /* left: calc(30.19% - 8px);
@@ -133,10 +103,10 @@
   width: 25px;
 }
 
-.ic_-selfie-g4xsGx {
+.ic_-selfie-img {
   height: 100%;
   /* left: 1px; */
-  object-fit: cover;
+  /* object-fit: cover; */
   /* top: 0px; */
   width: 100%;
 }
@@ -151,3 +121,11 @@
   width: calc(100.00% - 1px);
 }
 
+.reward-icon {
+  height: 23px;
+  width: 23px;
+}
+
+a {
+  display: inline;
+}

@@ -27,4 +27,20 @@ flow 2:
   add a marketplace
   marketplace - when ppl click see all partnership, it will show all 
   add a button - remind them to add to home screen
-  
+
+pages check (OK mean still need to fix layout, Done mean really done)
+  profile - OK
+  marketplace - OK
+  home - OK
+  all mission - OK
+  my nft list - front end OK
+  reward detail - OK
+    reward master collector - OK
+    reward selfie champion - OK
+    reward social butterfly - OK
+    reward elite challenger - OK
+  selfie to earn - OK
+  reward - tbc
+  challenage_countdown - tbc
+  challenge - tbc
+  challenge finished - tbc
