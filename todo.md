@@ -17,7 +17,7 @@ Flow 1:
   all page:
   vh causing the content overflow
 
-
+https://stackoverflow.com/questions/68960754/redux-toolkit-rtk-query-mutation-not-getting-returning-data
 
 finding UI lib for chat
 
@@ -41,7 +41,11 @@ pages check (OK mean still need to fix layout, Done mean really done)
     reward elite challenger - OK
   selfie to earn - OK
   reward - OK
+  challenge finished - OK
   
   challenage_countdown - tbc
   challenge - tbc
-  challenge finished - tbc
+
+
+12/7/2023 - meeting
+todo: add the error handling in takeSelfie

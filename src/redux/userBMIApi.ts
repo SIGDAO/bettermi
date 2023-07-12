@@ -2,7 +2,10 @@
 
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-
+export interface BMI {
+  bmi: number;
+  category: string;
+}
 
 // 透過 createApi 可以建立 RTK query 的 API service，取名為 userBMIApi
 export const userBMIApi = createApi({
@@ -11,15 +14,16 @@ export const userBMIApi = createApi({
     baseUrl: 'http://127.0.0.1:8000/' 
   }),
   endpoints: (builder) => ({
-    getBMI: builder.mutation({
+    getBMI: builder.mutation<BMI, Object>({
       query: (imageForm) => ({
         url: 'getbmi/',
         method: 'POST',
         body: imageForm,
         header: {
           'content-type': 'multipart/form-data',
-        }
+        },
       }),
+      transformResponse: (response: BMI) => response,
     }),
   }),
 });

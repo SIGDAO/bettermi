@@ -5,11 +5,22 @@ import { clear } from "console";
 export interface ProfileState {
   selfiePath: string;
   username: string;
+  bmi: string;
+  gender: string;
 }
 
 const initialState: ProfileState = {
   selfiePath: "",
   username: "",
+  bmi: "",
+  gender: "",
+};
+
+const getLocalStorage = (key: string) => {
+  if (localStorage.getItem(key)) {
+    return localStorage.getItem(key);
+  }
+  return initialState;
 };
 
 export const profileSlice = createSlice({
@@ -18,6 +29,7 @@ export const profileSlice = createSlice({
   reducers: {
     setSelfieImage: (state, action: PayloadAction<string>) => {
       state.selfiePath = action.payload;
+      // localStorage.setItem("por", action.payload);
     },
     clearSelfieImage: (state) => {
       state.selfiePath = "";
@@ -28,9 +40,23 @@ export const profileSlice = createSlice({
     clearUsername: (state) => {
       state.username = "";
     },
+    setBMI: (state, action: PayloadAction<string>) => {
+      state.bmi = action.payload;
+    },
+    clearBMI: (state) => {
+      state.bmi = "";
+    },
+    setGender: (state, action: PayloadAction<string>) => {
+      state.gender = action.payload;
+    },
+    clearGender: (state) => {
+      state.gender = "";
+    },
     clearAll: (state) => {
       state.selfiePath = "";
       state.username = "";
+      state.bmi = "";
+      state.gender = "";
     }
   },
 });
@@ -47,3 +73,4 @@ export const selectCurrentUsername = (state: any) => {
   }
   return state.profile.username;
 };
+export const selectCurrentBMI = (state: any) => state.profile.bmi;
