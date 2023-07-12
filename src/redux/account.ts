@@ -26,3 +26,5 @@ export const accountSlice = createSlice({
     }   
 });
 export const { actions } = accountSlice;
+export const accountPublicKey = (state: any) => state.account.publicKey;
+export const accountId = (state: any) => state.account.accountId;

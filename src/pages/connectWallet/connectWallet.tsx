@@ -13,7 +13,6 @@ import { useNavigate } from 'react-router-dom';
 export interface IConnectWalletProps {
 }
 
-
 export default function ConnectWallet (props: IConnectWalletProps) {
   const navigate = useNavigate();
   const {appName,Wallet,Ledger} = useContext(AppContext);
@@ -35,6 +34,7 @@ export default function ConnectWallet (props: IConnectWalletProps) {
     console.log(store.getState());
     store.dispatch(walletSlice.actions.setWalletPublicKey(key));
     store.dispatch(walletSlice.actions.setIsWalletConnected(true));
+    store.dispatch(walletSlice.actions.setWalletNodeHost(wallet.currentNodeHost));
     console.log(store.getState());
     navigate('/connectSuccess')
   })
