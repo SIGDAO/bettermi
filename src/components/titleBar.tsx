@@ -44,13 +44,15 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
               />
         </div>
       </a>
-      <div className="ic_settings_24px-container ic_settings_24px">
-          <img
-            className="ic_settings_24px-img ic_settings_24px"
-            src={process.env.PUBLIC_URL + "/img/ic-settings-24px-1@1x.png"}
-            alt="ic_settings_24px"
-            />
-      </div>
+      {setting === false ? null : (
+        <div className="ic_settings_24px-container ic_settings_24px">
+            <img
+              className="ic_settings_24px-img ic_settings_24px"
+              src={process.env.PUBLIC_URL + "/img/ic-settings-24px-1@1x.png"}
+              alt="ic_settings_24px"
+              />
+        </div>
+      )}
       {/* <img className="bg-MY4xZJ" src={process.env.PUBLIC_URL + "/img/bg-11@1x.png"} alt="BG" /> */}
     </div>
   )
