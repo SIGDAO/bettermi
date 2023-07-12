@@ -37,7 +37,7 @@ const ChallengeCountdown: React.FunctionComponent<IChallengeCountdownProps> = (p
       <div className="challenge-content-oEaurv">
         <img className="layer-D6xMU2" src={`${process.env.PUBLIC_URL}/img/challengeCountdown/layer@1x.png`} alt="Layer" />
         <div className="countdown-D6xMU2">
-          <CircularWithValueLabel time={5} />
+          <CircularWithValueLabel time={32} />
           {/* <div className="t-countdown-YGwjuf">
             <div className="bg-C3TEa1"></div>
             <img className="process-circle-C3TEa1" src={`${process.env.PUBLIC_URL}/img/challengeCountdown/process-circle@1x.png`} alt="Process circle" />
