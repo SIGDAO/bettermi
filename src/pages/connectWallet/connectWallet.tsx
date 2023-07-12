@@ -29,6 +29,7 @@ export default function ConnectWallet (props: IConnectWalletProps) {
         accountRS:import_account.getReedSolomonAddress(),
         publicKey:import_account.getPublicKey(),
         isWatchOnlyMode:true,
+        token:0,
       };
       store.dispatch(accountSlice.actions.setAccount(accountinfo));
     console.log(store.getState());
