@@ -21,7 +21,7 @@ interface IButtonProps {
 // const defaultButtonStyle = makeStyles<Theme
 
 interface IBackButtonProps {
-
+  top?: string;
 }
 
 export const ButtonWithNavigation: React.FunctionComponent<IButtonProps> = (props) => {
@@ -122,9 +122,24 @@ export const DisabledButton: React.FunctionComponent<IButtonProps> = (props) => 
 }
 
 export const BackButton: React.FunctionComponent<IBackButtonProps> = (props) => {
+  const {top} = props;
+
+  const customStyle: CSS.Properties = {
+    'alignItems': 'flex-start',
+    'cursor': 'pointer',
+    'display': 'flex',
+    'height': '44px',
+    'left': '16px',
+    'minWidth': '44px',
+    'paddingLeft': '14px',
+    'position': 'relative',
+    'top': top || '44px',
+  }
+
+
   return (
     <a href="javascript:history.back()">
-      <div className="icon-arrow-left">
+      <div className="icon-arrow-left" style={customStyle} >
         <img className="icon-arrow-left-1" src={`${process.env.PUBLIC_URL}/img/connectSuccess/icon-arrow-left-8@1x.png`} alt="icon-arrow-left" />
       </div>
     </a>

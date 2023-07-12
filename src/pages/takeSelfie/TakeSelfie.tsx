@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { CenterLayout } from '../../components/layout';
-import { useRef, useState, useCallback } from "react";
+import { useRef, useState, useCallback, useEffect } from "react";
 
 import Webcam from "react-webcam";
 import './TakeSelfie.css';
@@ -12,6 +12,7 @@ import { profileSlice } from '../../redux/profile';
 import { store } from '../../redux/reducer';
 import { userBMISlice } from '../../redux/userBMI';
 import { useGetBMIMutation } from '../../redux/userBMIApi';
+import useEnhancedEffect from '@mui/material/utils/useEnhancedEffect';
 
 
 interface ITakeSelfieProps {
@@ -60,26 +61,27 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   const webcamRef = useRef<Webcam>(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [ getBMI ] = useGetBMIMutation()
+  const [ getBMI, {isLoading, data} ] = useGetBMIMutation()
+
+  useEffect(() => {
+    if (data) {
+      const { bmi } = data
+      console.log(bmi, 'difsjodifjiosdijfio')
+      dispatch(profileSlice.actions.setBMI(bmi.toFixed(2).toString()))
+      navigate('/generateBMI')
+    }
+  }
+  , [data])
 
 
   // todo: 
   // 1. post the selfie image to the hugging face, and analyze the BMI result
   //    BMI result should be stored in the redux store
   // 2. trigger smart contract to send message to store the BMI result in the blockchain
-  const action: Function = (imageSrc: string) => {
+  const action: Function = async (imageSrc: string) => {
     const formData = new FormData();
     formData.append('file', convertBase64toJpg(imageSrc))
-
-    // get api
-    getBMI(formData)
-      .then((res) => {
-        console.log(res)
-        
-        // if (res.data){
-        //   store.dispatch(userBMISlice.actions.setBMI(res?.data?.prediction?.bmi))
-        // }
-      }) 
+    await getBMI(formData)    
   }
 
   // for mobile
@@ -116,7 +118,6 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
         store.dispatch(profileSlice.actions.setSelfieImage(imageSrc))
         action(imageSrc)
       }
-      navigate('/generateBMI')
     },
     [webcamRef]
   );

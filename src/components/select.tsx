@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { profileSlice } from '../redux/profile'
+import { useDispatch } from 'react-redux';
 import './select.css';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
@@ -10,10 +12,20 @@ interface IGenderSelectProps {
 }
 
 export const GenderSelect: React.FunctionComponent<IGenderSelectProps> = (props) => {
+  const dispatch = useDispatch();
+
   const { options } = props;
   const [isOpen, setIsOpen] = useState(false);
   const [displayValue, setDisplayValue] = useState(options[0].label);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!isOpen) {
+      dispatch(profileSlice.actions.setGender(displayValue));
+    }
+  }, [isOpen, displayValue]);
+
+
 
 
   useEffect(() => {
