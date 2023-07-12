@@ -1,14 +1,31 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import './challengeCountdown.css';
 import { CenterLayout } from '../../components/layout';
+import { ShortTitleBar } from '../../components/titleBar';
+// import { CircularProgress } from '@mui/material';
+import CircularWithValueLabel from './circleProgressLoader';
 
 interface IChallengeCountdownProps {
+  taskName?: string;
 }
 
 
 const ChallengeCountdown: React.FunctionComponent<IChallengeCountdownProps> = (props) => {
+  const [time, setTime] = React.useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTime((prevTime) => (prevTime >= 100 ? 0 : prevTime + 10));
+    }, 800);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
+
   const content: JSX.Element = (
     <div className="bettermidapp-challenges-countdown-1 screen">
+      <ShortTitleBar title='1. Hello Bae!' setting={false} />
       <img className="bg-oEaurv" src={`${process.env.PUBLIC_URL}/img/challengeCountdown/bg-10@1x.png`} alt="BG" />
       <a href="bettermidapp-challenge-finished-1.html">
         <img
@@ -20,11 +37,12 @@ const ChallengeCountdown: React.FunctionComponent<IChallengeCountdownProps> = (p
       <div className="challenge-content-oEaurv">
         <img className="layer-D6xMU2" src={`${process.env.PUBLIC_URL}/img/challengeCountdown/layer@1x.png`} alt="Layer" />
         <div className="countdown-D6xMU2">
-          <div className="t-countdown-YGwjuf">
+          <CircularWithValueLabel time={5} />
+          {/* <div className="t-countdown-YGwjuf">
             <div className="bg-C3TEa1"></div>
             <img className="process-circle-C3TEa1" src={`${process.env.PUBLIC_URL}/img/challengeCountdown/process-circle@1x.png`} alt="Process circle" />
           </div>
-          <div className="x0023-YGwjuf inter-semi-bold-white-18px">00:23</div>
+          <div className="x0023-YGwjuf inter-semi-bold-white-18px">00:23</div> */}
         </div>
         <p className="straighten-your-arms-D6xMU2 inter-normal-white-14px">
           Straighten your arms &amp; Shake them outwardly.
