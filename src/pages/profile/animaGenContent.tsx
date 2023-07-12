@@ -1,6 +1,7 @@
 import * as React from 'react';
 import MenuBar from '../../components/menuBar';
 import { Link } from 'react-router-dom';
+import { ShortTitleBar } from '../../components/titleBar';
 
 interface IAnimaGenContentProps {
 }
@@ -8,6 +9,7 @@ interface IAnimaGenContentProps {
 const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) => {
   return (
     <div className="bettermidapp-profile-1">
+      <ShortTitleBar title='Profile' />
       <div className="x16212-mYAx6W">
           <div className="x888-ySqSNx"></div>
           <div className="my-friends-ySqSNx inter-semi-bold-white-18px">My Friends</div>
@@ -95,49 +97,6 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
           {/* </a> */}
           <img className="nft_-avatar-YwZqds nft_-avatar" src="img/profile/nft-avatar-12@1x.png" alt="NFT_Avatar" />
       </div>
-      {/* <div className="title-bar-mYAx6W">
-          <img className="bg-0EpALp bg" src="img/profile/bg-11@1x.png" alt="BG" />
-          <div className="bars-status-bar-i-phone-light-0EpALp">
-            <div className="frame-ELgvDX"></div>
-            <div className="status-bar-ELgvDX">
-                <div className="battery-8VVJW0">
-                  <div className="border-80KLki"></div>
-                  <img className="cap-80KLki" src="img/profile/cap-10@1x.png" alt="Cap" />
-                  <div className="capacity-80KLki"></div>
-                </div>
-                <img className="wifi-8VVJW0" src="img/profile/wifi-10@1x.png" alt="Wifi" />
-                <img
-                  className="cellular-connection-8VVJW0"
-                  src="img/profile/cellular-connection-10@1x.png"
-                  alt="Cellular Connection"
-                  />
-                <div className="time-style-8VVJW0">
-                  <div className="time-fwlZPE sfprotext-semi-bold-white-15px">9:41</div>
-                </div>
-            </div>
-          </div>
-          <div className="profile-0EpALp inter-semi-bold-white-18px">Profile</div>
-          <img className="seperat-line-0EpALp seperat-line" src="img/profile/seperat-line-11@1x.png" alt="Seperat line" />
-          <div className="ic_help_24px-0EpALp ic_help_24px">
-            <img className="ic_help_24px-nMLARC ic_help_24px" src="img/profile/ic-help-24px-1@1x.png" alt="ic_help_24px" />
-          </div>
-          <a href="javascript:history.back()">
-            <div className="icon-arrow-left-0EpALp icon-arrow-left">
-                <img
-                  className="icon-arrow-left-zSLdPY icon-arrow-left"
-                  src="img/profile/icon-arrow-left-12@1x.png"
-                  alt="icon-arrow-left"
-                  />
-            </div>
-          </a>
-          <div className="ic_settings_24px-0EpALp ic_settings_24px">
-            <img
-                className="ic_settings_24px-XnwTiC ic_settings_24px"
-                src="img/profile/ic-settings-24px-1@1x.png"
-                alt="ic_settings_24px"
-                />
-          </div>
-      </div> */}
       <MenuBar/>
     </div>
   )
