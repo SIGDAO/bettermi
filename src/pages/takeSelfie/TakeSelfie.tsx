@@ -75,6 +75,7 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
     getBMI(formData)
       .then((res) => {
         console.log(res)
+        
         // if (res.data){
         //   store.dispatch(userBMISlice.actions.setBMI(res?.data?.prediction?.bmi))
         // }
