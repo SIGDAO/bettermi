@@ -45,12 +45,12 @@
   width: calc(100.00% - 241px);
 }
 
-/* .bettermidapp-home-1 .missions-scroll-RoXPLo::-webkit-scrollbar {
+.bettermidapp-home-1 .missions-scroll-RoXPLo::-webkit-scrollbar {
   display: none;
   width: 0;
-} */
+}
 
-.bettermidapp-home-1 .missions-scroll-RoXPLo::-webkit-scrollbar {
+/* .bettermidapp-home-1 .missions-scroll-RoXPLo::-webkit-scrollbar {
 
   height: 6px;
 	background-color: #ccc;
@@ -59,7 +59,7 @@
 .bettermidapp-home-1 .missions-scroll-RoXPLo::-webkit-scrollbar-thumb {
 	background-color: #111;
 	border-radius: 20px;
-}
+} */
 
 
 .bettermidapp-home-1 .missions-scroll-RoXPLo {
@@ -87,6 +87,7 @@
 } */
 
 .bettermidapp-home-1 .challenges-x9-hacks-GEWAL1 {
+  cursor: pointer;
   background-color: transparent;
   height: 80px;
   left: 0px;
@@ -604,7 +605,10 @@
 }
 
 .bettermidapp-home-1 .button_-selfie-to-earn-RoXPLo {
-  background-color: transparent;
+  cursor: pointer;
+  background: linear-gradient(-90deg, #8743ff 0%, #4136f1 100%);
+  border-radius: 15px;
+  box-shadow: 0px 10px 30px #1466CC29;
   height: 56px;
   left: 30px;
   position: absolute;

@@ -2415,12 +2415,16 @@
 }
 
 .bettermidapp-selfie-to-earn-1 .button_-selfie-to-earn-MUU5YC {
-  background-color: transparent;
+  /* background-color: transparent; */
+  background: linear-gradient(270deg,  #8743ff 0%, #4136f1 100%);
+  border-radius: 15px;
+  box-shadow: 0px 10px 30px #1466CC29;
   height: 56px;
   left: 30px;
   position: absolute;
   top: 108px;
   width: 326px;
+  cursor: pointer;
 }
 
 .bettermidapp-selfie-to-earn-1 .button_bg-u8P1YH {

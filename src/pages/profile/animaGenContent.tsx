@@ -1,5 +1,6 @@
 import * as React from 'react';
 import MenuBar from '../../components/menuBar';
+import { Link } from 'react-router-dom';
 
 interface IAnimaGenContentProps {
 }
@@ -64,10 +65,12 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
       </div>
       <div className="profile-card-mYAx6W">
           <img className="layer-YwZqds" src="img/profile/layer-4@1x.png" alt="Layer" />
-          <div className="button_nft-collections-YwZqds">
-            <div className="button1-pUSHJN"></div>
-            <div className="continue-pUSHJN inter-semi-bold-white-15px">My NFTs Collections</div>
-          </div>
+          <Link to={'/myNftList'}>
+            <div className="button_nft-collections-YwZqds">
+              <div className="button1-pUSHJN"></div>
+              <div className="continue-pUSHJN inter-semi-bold-white-15px">My NFTs Collections</div>
+            </div>
+          </Link>
           <div className="ic_edit-YwZqds ic_edit">
             <img className="ic_edit-yzbpuj ic_edit" src="img/profile/ic-edit@1x.png" alt="ic_edit" />
           </div>
@@ -86,10 +89,10 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
                 ♉️&nbsp;&nbsp;|&nbsp;&nbsp;29&nbsp;&nbsp;|&nbsp;&nbsp;PERSONAL TRAINER
             </p>
           </div>
-          <a href="bettermidapp-mimi-nfts-1.html"
-            >
+          {/* <a href="bettermidapp-mimi-nfts-1.html"
+            > */}
             <div className="view-all-YwZqds inter-medium-royal-blue-14px">View all</div>
-          </a>
+          {/* </a> */}
           <img className="nft_-avatar-YwZqds nft_-avatar" src="img/profile/nft-avatar-12@1x.png" alt="NFT_Avatar" />
       </div>
       {/* <div className="title-bar-mYAx6W">
