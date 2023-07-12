@@ -11,7 +11,8 @@ import { accountPublicKey } from '../../redux/account';
 import { useSelector } from 'react-redux';
 import { accountId } from '../../redux/account';
 import { TransferNFTOwnership } from './transferNFTOwnership';
-
+import { accountSlice } from '../../redux/account';
+import { store } from '../../redux/reducer';
 
 interface IAnimaGenContentProps {
   BMI: number;    // the BMI value, can be string or number
@@ -33,7 +34,14 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   console.log(ledger);
   const confirm = async () => {
     if(ledger){
-
+      const asset = await ledger.asset.getAssetHolders({assetId:"3862155318820066741"});
+      asset.accountAssets.map((obj)=>{
+        if(obj.account == userAccountId){
+          store.dispatch(accountSlice.actions.setToken(Number(obj.quantityQNT)));
+            console.log(obj.quantityQNT);
+        }
+      });
+      console.log(store.getState());
       let ourContract = await ledger.contract.getContractsByAccount({
         accountId: userAccountId,
         machineCodeHash: codeHashId,
