@@ -1,8 +1,11 @@
 import React, { useRef, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { CenterLayout } from '../../components/layout';
 import { BackButton } from '../../components/button';
 import './customizeYourProfile.css'
 import generateName from './generateName';
+import { profileSlice } from '../../redux/profile';
+import {store} from '../../redux/reducer';
 
 interface ICustomizeYourProfileProps {
 }
@@ -11,12 +14,24 @@ const CustomizeYourProfile: React.FunctionComponent<ICustomizeYourProfileProps> 
   // todo: help it to change to nft image IFPS link
   // maybe store the path in redux as well
   const nftImage = '';
+  const defaultName = 'zoe_li'
+  const navigate = useNavigate();
 
   // when user press "Save", putting the generated name into local storage
   const [name, setName] = useState<string>('');
 
 
-  const handleSave = () => {}
+  const handleSave = () => {
+    if (!name) {
+      localStorage.setItem('name', defaultName);
+      store.dispatch(profileSlice.actions.setUsername(defaultName))
+    } else {
+      localStorage.setItem('name', name);
+      store.dispatch(profileSlice.actions.setUsername(name))
+    }
+
+    navigate('/home');
+  }
 
   const inputRef = useRef<HTMLInputElement>(null);
   const divRef = useRef<HTMLDivElement>(null);
@@ -28,8 +43,6 @@ const CustomizeYourProfile: React.FunctionComponent<ICustomizeYourProfileProps> 
       });
     }
   }, []);
-
-
 
 
   const handleRandomGenerateName = () => {
@@ -45,7 +58,7 @@ const CustomizeYourProfile: React.FunctionComponent<ICustomizeYourProfileProps> 
       <img className="photo-Gzrq3v" src={nftImage || `${process.env.PUBLIC_URL}/img/mimi.png`} alt="Photo" />
       <div className="search_bar-Gzrq3v">
         <div className="search-AToI7d" >
-          <input placeholder={name || 'zoe_li'} className="card-number-AToI7d card-number" value={name} onChange={(e) => setName(e.target.value)}/>
+          <input placeholder={name || defaultName} className="card-number-AToI7d card-number" value={name} onChange={(e) => setName(e.target.value)}/>
           <div className="random-dice-AToI7d" onClick={handleRandomGenerateName}>
             <div className="card-number-zhUTxv card-number">Random</div>
             <img className="ic_casino_24px-zhUTxv" src={`${process.env.PUBLIC_URL}/img/customizeYourProfile/ic-casino-24px@1x.png`} alt="ic_casino_24px" />

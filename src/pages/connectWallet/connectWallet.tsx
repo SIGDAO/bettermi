@@ -39,7 +39,13 @@ export default function ConnectWallet (props: IConnectWalletProps) {
     navigate('/connectSuccess')
   })
   // todo: add error handling, and show it to user
-    .catch((error:any) => console.error(error));
+    .catch((error:any) => {
+      console.log(error);
+      console.log(error.NotFoundWalletError);
+      if (error.name === 'NotFoundWalletError'){
+        window.location.href = 'https://chrome.google.com/webstore/detail/signum-xt-wallet/kdgponmicjmjiejhifbjgembdcaclcib/'
+      }
+    });
   }
   
   const content : JSX.Element = (

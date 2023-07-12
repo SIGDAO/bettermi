@@ -9,7 +9,7 @@ import { userBMISlice } from "./userBMI";
 const rootReducer = combineReducers({
   wallet: walletSlice.reducer,
   account: accountSlice.reducer,
-  selfieImage: profileSlice.reducer,
+  profile: profileSlice.reducer,
   userBMI: userBMISlice.reducer,
   [userBMIApi.reducerPath]: userBMIApi.reducer
 });
