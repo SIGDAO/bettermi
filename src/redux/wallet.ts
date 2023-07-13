@@ -45,3 +45,8 @@ export const walletSlice = createSlice({
 });
 
 export const { actions } = walletSlice;
+export const walletNodeHost = (state: any) => {
+  console.log(localStorage.getItem("nodeHost"));
+  return state.wallet.walletNodeHost?state.wallet.walletNodeHost:localStorage.getItem("walletNodeHost");
+ 
+}
