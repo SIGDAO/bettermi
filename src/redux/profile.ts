@@ -9,6 +9,11 @@ export interface ProfileState {
   gender: string;
 }
 
+export interface BMIState {
+  time: string;
+  bmi: string;
+}
+
 const initialState: ProfileState = {
   selfiePath: "",
   username: "",
@@ -74,3 +79,4 @@ export const selectCurrentUsername = (state: any) => {
   return state.profile.username;
 };
 export const selectCurrentBMI = (state: any) => state.profile.bmi;
+export const selectCurrentGender = (state: any) => state.profile.gender;

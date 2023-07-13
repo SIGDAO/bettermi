@@ -13,9 +13,10 @@ import { accountId } from '../../redux/account';
 import { TransferNFTOwnership } from './transferNFTOwnership';
 import { accountSlice } from '../../redux/account';
 import { store } from '../../redux/reducer';
+import { selectCurrentGender } from '../../redux/profile';
 
 interface IAnimaGenContentProps {
-  BMI: number;    // the BMI value, can be string or number
+  BMI: string;    // the BMI value, can be string or number
   selfie?: string; // the selfie image url
 }
 
@@ -30,7 +31,8 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   const publicKey = useSelector(accountPublicKey);
   const userAccountId = useSelector(accountId);
   const codeHashId = "7457358473503628676";
-  const BMI_test = "25.2";
+  const gender = useSelector(selectCurrentGender)
+
   console.log(ledger);
   const confirm = async () => {
     if(ledger){
@@ -52,7 +54,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
       if(ourContract.ats[0] == null){
         const initializeContract = await ledger.contract.publishContractByReference({
           name: "BMI",
-          description: BMI_test,  //the first data is hidden in the description
+          description: `{'bmi': ${BMI}, 'gender': ${gender}, 'time': ${new Date()}}`,  //the first data is hidden in the description
           referencedTransactionHash:"62502D4233CA88EB7896031ACF4D729F4C6A570187161CA00FF291ED382769FD",
           feePlanck:"30000000",
           senderPublicKey:publicKey,
@@ -81,7 +83,11 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
 
       } else{ //check whether the user has registered an account
         const sendBMI = await ledger.message.sendMessage({
-          message: BMI_test,
+          message: JSON.stringify({
+            'bmi': BMI,
+            'gender': gender,
+            'time': new Date(),
+          }) ,
           messageIsText: true,
           recipientId: ourContract.ats[0].at,
           feePlanck: "1000000",

@@ -19,6 +19,7 @@ const initialState: WalletState = {
   isOpenSignTransactionModal: false,
 };
 
+
 export const walletSlice = createSlice({
   name: "wallet",
   initialState,

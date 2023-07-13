@@ -1,14 +1,68 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import './selfieToEarn.css'
 import { CenterLayout } from '../../components/layout';
 import MenuBar from '../../components/menuBar';
 import { ShortTitleBar } from '../../components/titleBar';
 import { Link } from 'react-router-dom';
+import Calendar from 'react-calendar';
+import './calendar.css'
+
 
 interface ISelfieToEarnProps {
 }
 
 const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
+  const [value, setValue] = useState(new Date());
+  // demo data
+  const bmi_testing = 25.5;
+
+  function onChange(nextValue: any) {
+    setValue(nextValue);
+  }
+
+  useEffect(() => {
+    console.log(value);
+  }, [value]);
+
+  // const Custom..
+
+  // height: 360px;
+  const displaySelectedDateRecord = () => {
+
+    return (
+      <div className="rewards_card-tDsdhu rewards_card">
+        <div className="x889-zmcmFt"></div>
+        <div className="x16215-zmcmFt">
+            <div className="x300-1iHrN3 x300 inter-medium-white-15px">{value.toLocaleDateString('en-GB')}</div>
+            <div className="gems-1iHrN3 gems inter-normal-cadet-blue-12px-2">
+              <span className="span0-QduyxW inter-normal-cadet-blue-12px">{bmi_testing} kg/m²</span>
+            </div>
+        </div>
+        <div className="icon-arrow-left-zmcmFt icon-arrow-left-container">
+            <div className="selfie-to-earn-img-container">
+              <img
+                className="icon-arrow-left-XaN6DJ icon-arrow-left-img"
+                src="img/selfieToEarn/icon-arrow-left-6@1x.png"
+                alt="icon-arrow-left"
+                />
+            </div>
+            <div className="gems-XaN6DJ gems">
+              <span className="span0-TIYBsY inter-normal-keppel-12px">-1.0 kg/m²</span>
+            </div>
+        </div>
+        <div className="sigdao-score-zmcmFt sigdao-score">
+            <div className="x10-gfpjFx x10 inter-semi-bold-keppel-14px">+2.625</div>
+            <div className="signdao_tokengradient">
+              <div className="x441"></div>
+              <div className="x442"></div>
+              <img className="x880" src="img/selfieToEarn/file---880-1x-png-10@1x.png" alt="880" />
+            </div>
+        </div>
+      </div>
+  
+    )
+  }
+
   const content: JSX.Element = (
     <div className="screen">
       <div className="bettermidapp-selfie-to-earn-1">
@@ -89,143 +143,24 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
             </div>
         </div>
         <div className="calender-MUU5YC">
-            <div className="november-2020-isyuxj inter-normal-white-12px">November 2020</div>
-            <div className="x54-isyuxj"></div>
-            <div className="m-isyuxj inter-normal-white-14px">M</div>
-            <div className="x55-isyuxj"></div>
-            <div className="t-isyuxj t inter-normal-white-14px">T</div>
-            <div className="x56-isyuxj"></div>
-            <div className="w-isyuxj inter-normal-white-14px">W</div>
-            <div className="x57-isyuxj"></div>
-            <div className="t-CALwXo t inter-normal-white-14px">T</div>
-            <div className="x58-isyuxj"></div>
-            <div className="f-isyuxj inter-normal-white-14px">F</div>
-            <div className="x59-isyuxj"></div>
-            <div className="s-isyuxj s inter-normal-white-14px">S</div>
-            <div className="x60-isyuxj"></div>
-            <div className="s-CALwXo s inter-normal-white-14px">S</div>
-            <div className="x61-isyuxj"></div>
-            <div className="x26-isyuxj x26 inter-normal-cape-cod-12px">26</div>
-            <div className="x62-isyuxj"></div>
-            <div className="x27-isyuxj x27 inter-normal-cape-cod-12px">27</div>
-            <div className="x63-isyuxj"></div>
-            <div className="x28-isyuxj x28 inter-normal-cape-cod-12px">28</div>
-            <div className="x64-isyuxj"></div>
-            <div className="x29-isyuxj x29 inter-normal-cape-cod-12px">29</div>
-            <div className="x65-isyuxj"></div>
-            <div className="x30-isyuxj x30 inter-normal-cape-cod-12px">30</div>
-            <div className="x66-isyuxj"></div>
-            <div className="x31-isyuxj inter-normal-cape-cod-12px">31</div>
-            <div className="x67-isyuxj"></div>
-            <div className="x68-isyuxj"></div>
-            <div className="x2-isyuxj x2 inter-normal-white-12px">2</div>
-            <div className="x69-isyuxj"></div>
-            <div className="x3-isyuxj x3 inter-normal-white-12px">3</div>
-            <div className="x70-isyuxj"></div>
-            <div className="x71-isyuxj"></div>
-            <div className="x5-isyuxj x5 inter-normal-white-12px">5</div>
-            <div className="x72-isyuxj"></div>
-            <div className="x6-isyuxj x6 inter-normal-white-12px">6</div>
-            <div className="x73-isyuxj"></div>
-            <div className="x74-isyuxj"></div>
-            <div className="x8-isyuxj inter-normal-white-12px">8</div>
-            <div className="x75-isyuxj"></div>
-            <div className="x9-isyuxj inter-normal-white-12px">9</div>
-            <div className="x76-isyuxj"></div>
-            <div className="x10-isyuxj x10 inter-normal-white-12px">10</div>
-            <div className="x77-isyuxj"></div>
-            <div className="x11-isyuxj inter-normal-white-12px">11</div>
-            <div className="x78-isyuxj"></div>
-            <div className="x12-isyuxj inter-normal-white-12px">12</div>
-            <div className="x79-isyuxj"></div>
-            <div className="x13-isyuxj inter-normal-white-12px">13</div>
-            <div className="x80-isyuxj"></div>
-            <div className="x14-isyuxj inter-normal-white-12px">14</div>
-            <div className="x81-isyuxj"></div>
-            <div className="x15-isyuxj inter-normal-white-12px">15</div>
-            <div className="x82-isyuxj"></div>
-            <div className="x16-isyuxj inter-normal-white-12px">16</div>
-            <div className="x83-isyuxj"></div>
-            <div className="x17-isyuxj inter-normal-white-12px">17</div>
-            <div className="x84-isyuxj"></div>
-            <div className="x18-isyuxj inter-normal-white-12px">18</div>
-            <div className="x85-isyuxj"></div>
-            <div className="x19-isyuxj inter-normal-white-12px">19</div>
-            <div className="x86-isyuxj"></div>
-            <div className="x20-isyuxj inter-normal-white-12px">20</div>
-            <div className="x87-isyuxj"></div>
-            <div className="x21-isyuxj x21 inter-normal-white-12px">21</div>
-            <div className="x88-isyuxj"></div>
-            <div className="x22-isyuxj inter-normal-white-12px">22</div>
-            <div className="x89-isyuxj"></div>
-            <div className="x23-isyuxj inter-normal-electric-violet-12px">23</div>
-            <div className="x90-isyuxj"></div>
-            <div className="x24-isyuxj inter-normal-electric-violet-12px">24</div>
-            <div className="x91-isyuxj"></div>
-            <div className="x25-isyuxj inter-normal-electric-violet-12px">25</div>
-            <div className="x92-isyuxj"></div>
-            <div className="x26-CALwXo x26 inter-normal-electric-violet-12px">26</div>
-            <div className="x93-isyuxj"></div>
-            <div className="x27-CALwXo x27 inter-normal-white-12px">27</div>
-            <div className="x94-isyuxj"></div>
-            <div className="x28-CALwXo x28 inter-normal-white-12px">28</div>
-            <div className="x95-isyuxj"></div>
-            <div className="x29-CALwXo x29 inter-normal-white-12px">29</div>
-            <div className="x96-isyuxj"></div>
-            <div className="x30-CALwXo x30 inter-normal-white-12px">30</div>
-            <div className="x97-isyuxj"></div>
-            <div className="x98-isyuxj"></div>
-            <div className="x2-CALwXo x2 inter-normal-cape-cod-12px">2</div>
-            <div className="x99-isyuxj"></div>
-            <div className="x3-CALwXo x3 inter-normal-cape-cod-12px">3</div>
-            <div className="x100-isyuxj"></div>
-            <div className="x4-isyuxj x4 inter-normal-cape-cod-12px">4</div>
-            <div className="x101-isyuxj"></div>
-            <div className="x5-CALwXo x5 inter-normal-cape-cod-12px">5</div>
-            <div className="x102-isyuxj"></div>
-            <div className="x6-CALwXo x6 inter-normal-cape-cod-12px">6</div>
-            <div className="x4-CALwXo x4 inter-normal-white-12px">4</div>
-            <div className="x1-isyuxj x1 inter-normal-cape-cod-12px">1</div>
-            <div className="x1-CALwXo x1 inter-normal-cape-cod-12px">1</div>
-            <div className="x7-isyuxj inter-normal-white-12px">7</div>
-            <img className="arrow-down-isyuxj arrow-down" src="img/selfieToEarn/arrow-down@1x.png" alt="arrow-down" />
-            <img className="arrow-down-CALwXo arrow-down" src="img/selfieToEarn/arrow-down-1@1x.png" alt="arrow-down" />
-            <img className="bmi-goal-isyuxj bmi-goal" src="img/selfieToEarn/bmi-goal-2@1x.png" alt="BMI Goal" />
+          <Calendar
+            calendarType='Arabic'
+            onChange={onChange}
+            value={value}
+            locale='en-US'
+            minDetail='decade'
+            // allowPartialRange={true}
+            // selectRange={true}
+          />
         </div>
         <div className="x16212-MUU5YC">
             <div className="x888-tDsdhu"></div>
             <div className="records-tDsdhu inter-semi-bold-white-18px">Records</div>
             <div className="view-all-tDsdhu">View all</div>
-            <div className="rewards_card-tDsdhu rewards_card">
-              <div className="x889-zmcmFt"></div>
-              <div className="x16215-zmcmFt">
-                  <div className="x300-1iHrN3 x300 inter-medium-white-15px">27/11/2023</div>
-                  <div className="gems-1iHrN3 gems inter-normal-cadet-blue-12px-2">
-                    <span className="span0-QduyxW inter-normal-cadet-blue-12px">25.5 kg/m²</span>
-                  </div>
-              </div>
-              <div className="icon-arrow-left-zmcmFt icon-arrow-left-container">
-                  <div className="selfie-to-earn-img-container">
-                    <img
-                      className="icon-arrow-left-XaN6DJ icon-arrow-left-img"
-                      src="img/selfieToEarn/icon-arrow-left-6@1x.png"
-                      alt="icon-arrow-left"
-                      />
-                  </div>
-                  <div className="gems-XaN6DJ gems">
-                    <span className="span0-TIYBsY inter-normal-keppel-12px">-1.0 kg/m²</span>
-                  </div>
-              </div>
-              <div className="sigdao-score-zmcmFt sigdao-score">
-                  <div className="x10-gfpjFx x10 inter-semi-bold-keppel-14px">+2.625</div>
-                  <div className="signdao_tokengradient">
-                    <div className="x441"></div>
-                    <div className="x442"></div>
-                    <img className="x880" src="img/selfieToEarn/file---880-1x-png-10@1x.png" alt="880" />
-                  </div>
-              </div>
+            <div className="rewards_card-container">
+              {displaySelectedDateRecord()}
             </div>
-            <div className="rewards_card-nmlI20 rewards_card">
+            {/* <div className="rewards_card-nmlI20 rewards_card">
               <div className="x890-Mpkab1"></div>
               <div className="x16214-Mpkab1">
                   <div className="x300-KvHhju x300 inter-medium-white-15px">26/11/2023</div>
@@ -305,7 +240,7 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
                     <img className="x880" src="img/selfieToEarn/file---880-1x-png-10@1x.png" alt="880" />
                   </div>
               </div>
-            </div>
+            </div> */}
         </div>
         <Link to="/takeSelfie">
           <div className="button_-selfie-to-earn-MUU5YC">

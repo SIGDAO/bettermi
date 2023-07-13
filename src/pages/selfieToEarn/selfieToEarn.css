@@ -674,7 +674,7 @@
   height: 339px;
   left: 0px;
   position: absolute;
-  top: 684px;
+  top: calc(684px - 21.5px);
   width: 390px;
 }
 
@@ -1827,6 +1827,7 @@
   text-align: left;
   top: 2px;
   width: 50px;
+  margin: 0;
 }
 
 .bettermidapp-selfie-to-earn-1 .rewards_card-nmlI20 {
@@ -2540,7 +2541,7 @@
   height: 100%;
   left: 0px;
   position: absolute;
-  top: 1px;
+  /* top: 1px; */
   width: 17px;
 }
 
