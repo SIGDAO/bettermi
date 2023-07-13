@@ -17,16 +17,25 @@ Flow 1:
   all page:
   vh causing the content overflow
 
+  naming:
+  only
+
 https://stackoverflow.com/questions/68960754/redux-toolkit-rtk-query-mutation-not-getting-returning-data
 
 finding UI lib for chat
 
 flow 2:
+  home - spacing, the arrow, feature 
+    only hello!, name max 12
   menuBar screen - do first
   reward - do it in final
   add a marketplace
   marketplace - when ppl click see all partnership, it will show all 
   add a button - remind them to add to home screen
+
+
+  check if the title bar and menu bar in ipad size
+
 
 pages check (OK mean still need to fix layout, Done mean really done)
   profile - OK
@@ -49,3 +58,8 @@ pages check (OK mean still need to fix layout, Done mean really done)
 
 12/7/2023 - meeting
 todo: add the error handling in takeSelfie
+
+13/7/2023 - 
+confirm flow of selfie to earn
+
+custom tribe good punch famous civil snack cattle night make melody flower

@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Provider as ReduxProvider } from "react-redux";
 
 
+
 // setting
 import { store } from './redux/reducer';
 import { appConfig } from './redux/useContext';
@@ -13,6 +14,7 @@ import { AppContext } from './redux/useContext';
 
 // JSX element
 import './App.css';
+import 'react-calendar/dist/Calendar.css';
 import LogoPage from './pages/logoPage/LogoPage';
 import ConnectWallet from './pages/connectWallet/connectWallet';
 import GenerateBMI from './pages/generateBMI/GenerateBMI';
@@ -31,6 +33,7 @@ import RewardDetail from './pages/rewardDetail/rewardDetail';
 import SelfieToEarn from './pages/selfieToEarn/selfieToEarn';
 import Profile from './pages/profile/profile';
 import Marketplace from './pages/marketplace/marketplace';
+import Testing from './pages/testing/testing';
 
 
 
@@ -62,6 +65,7 @@ function App() {
           <Route path="/selfieToEarn" element={<SelfieToEarn/>} />
           <Route path="/profile" element={<Profile/>} />
           <Route path="/marketplace" element={<Marketplace/>} />
+          <Route path="/testing" element={<Testing/>} />
           <Route path="*" element={<Navigate to="/home" />} />
         </Routes>
       </ReduxProvider>  
