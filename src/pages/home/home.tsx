@@ -5,6 +5,7 @@ import { CenterLayout } from '../../components/layout';
 import MenuBar from '../../components/menuBar';
 import { useSelector } from 'react-redux';
 import { selectCurrentUsername } from '../../redux/profile';
+import { accountToken } from '../../redux/account';
 
 interface IHomeProps {
 }
@@ -34,7 +35,9 @@ const HorizontalScrollContainer = (props: any) => {
 
 const Home: React.FunctionComponent<IHomeProps> = (props) => {
   // info
-  const name = useSelector(selectCurrentUsername)
+  const name = useSelector(selectCurrentUsername);
+  const Token:string = useSelector(accountToken);
+  console.log("Token is  ",Token);
   // todo: map
   // const userSIGDAO = 
 
@@ -116,7 +119,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
           </a>
           <div className="score-bar_3-2ZgxSS">
             <div className="sigdao-score-iPTNDG sigdao-score">
-              <div className="x10-kxjIEt x10 inter-semi-bold-keppel-15px">2.625</div>
+              <div className="x10-kxjIEt x10 inter-semi-bold-keppel-15px">{Token}</div>
               <div className="signdao_tokengradient-kxjIEt signdao_tokengradient">
                 <div className="x441-e5x8kp x441"></div>
                 <div className="x442-e5x8kp x442"></div>
