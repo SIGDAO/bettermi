@@ -34,10 +34,12 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   console.log(ledger);
   const confirm = async () => {
     if(ledger){
+      
       const asset = await ledger.asset.getAssetHolders({assetId:"3862155318820066741"});
       asset.accountAssets.map((obj)=>{
         if(obj.account == userAccountId){
           store.dispatch(accountSlice.actions.setToken(Number(obj.quantityQNT)));
+          localStorage.setItem('Token',obj.quantityQNT);
             console.log(obj.quantityQNT);
         }
       });

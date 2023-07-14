@@ -36,4 +36,6 @@ export const accountSlice = createSlice({
 export const { actions } = accountSlice;
 export const accountPublicKey = (state: any) => state.account.publicKey;
 export const accountId = (state: any) => state.account.accountId;
-export const accountToken = (state: any) => state.account.token;
+export const accountToken = (state: any) => {
+    return state.account.token?state.account.Token:localStorage.getItem("Token");
+};
