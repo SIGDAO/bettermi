@@ -5,6 +5,7 @@ import MenuBar from '../../components/menuBar';
 import { ShortTitleBar } from '../../components/titleBar';
 import { Link } from 'react-router-dom';
 import Calendar from 'react-calendar';
+import CustomTradingViewChart from './customTradingViewChart';
 import './calendar.css'
 
 
@@ -80,67 +81,70 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
             <div className="x265-C5Ye0d">26.5</div>
             <img className="x598-C5Ye0d" src="img/selfieToEarn/file---598@1x.png" alt="598" />
         </div>
+
         <div className="x6-MUU5YC x6">
-            <div className="bmi-tracking-diagram-NWkD1c">
-              <img className="bmi-goal-FXAneT bmi-goal" src="img/selfieToEarn/bmi-goal-2@1x.png" alt="BMI Goal" />
-              <img className="bmi-goal-qhySjD bmi-goal" src="img/selfieToEarn/bmi-goal-2@1x.png" alt="BMI Goal" />
-              <img className="x11684-FXAneT" src="img/selfieToEarn/file---11684@1x.png" alt="11684" />
-              <div className="x16178-FXAneT">
-                  <div className="bmi-goal-oWOsEy bmi-goal">
-                    <div className="healthy-mgQn5v inter-normal-keppel-12px">Healthy</div>
-                    <div className="x876-mgQn5v"></div>
-                  </div>
-                  <div className="today-bmi-oWOsEy today-bmi">
-                    <div className="underweight-WRxJDX">Underweight</div>
-                    <div className="x877-WRxJDX x877"></div>
-                  </div>
-                  <div className="today-bmi-A4cSad today-bmi">
-                    <div className="overweight-ny26Tj inter-normal-neon-carrot-12px">Overweight</div>
-                    <div className="x877-ny26Tj x877"></div>
-                  </div>
-                  <div className="today-bmi-wSx6aj today-bmi">
-                    <div className="obese-VjCO7I">Obese</div>
-                    <div className="x877-VjCO7I x877"></div>
-                  </div>
-              </div>
-              <div className="x16179-FXAneT">
-                  <div className="x16177-0Ljt8o">
-                    <img className="x604-GfALGr" src="img/selfieToEarn/file---604@1x.png" alt="604" />
-                    <img className="x11674-GfALGr" src="img/selfieToEarn/file---11674@1x.png" alt="11674" />
-                    <img className="x11675-GfALGr" src="img/selfieToEarn/file---11675@1x.png" alt="11675" />
-                    <img className="x11676-GfALGr" src="img/selfieToEarn/file---11676@1x.png" alt="11676" />
-                    <div className="x21-GfALGr x21 inter-normal-white-12px">21</div>
-                    <div className="x27-GfALGr x27 inter-normal-white-12px">27</div>
-                    <div className="x33-GfALGr inter-normal-white-12px">33</div>
-                  </div>
-                  <div className="timeline-track-0Ljt8o">
-                    <div className="mean-bmi-kgm2-QHKlEy">
-                        <span className="span0-MSSTKa inter-normal-white-12px">Mean BMI (kg/m²)</span>
-                    </div>
-                    <div className="x1-w-QHKlEy">1W</div>
-                    <div className="x1-m-QHKlEy inter-normal-cadet-blue-12px-3">1M</div>
-                    <div className="x1-y-QHKlEy inter-normal-cadet-blue-12px-3">1Y</div>
-                    <div className="x5-y-QHKlEy inter-normal-cadet-blue-12px-3">5Y</div>
-                  </div>
-                  <img className="x11677-0Ljt8o" src="img/selfieToEarn/file---11677-1x-png@1x.png" alt="11677" />
-                  <div className="x16180-0Ljt8o">
-                    <div className="x447-VISwYj"></div>
-                    <div className="x448-VISwYj"></div>
-                    <div className="x449-VISwYj"></div>
-                    <div className="x450-VISwYj"></div>
-                    <div className="x451-VISwYj"></div>
-                    <div className="x452-VISwYj"></div>
-                    <div className="x453-VISwYj"></div>
-                    <div className="mon-VISwYj inter-normal-cadet-blue-14px">Mon</div>
-                  </div>
-                  <div className="tue-0Ljt8o inter-normal-cadet-blue-14px">Tue</div>
-                  <div className="wed-0Ljt8o inter-normal-cadet-blue-14px">Wed</div>
-                  <div className="sun-0Ljt8o">Sun</div>
-                  <div className="sat-0Ljt8o inter-normal-cadet-blue-14px">Sat</div>
-                  <div className="fri-0Ljt8o inter-normal-cadet-blue-14px">Fri</div>
-                  <div className="thu-0Ljt8o inter-normal-cadet-blue-14px">Thu</div>
-              </div>
+          {/* orignal chat */}  
+          <CustomTradingViewChart height={323} width={390}/>
+          {/* <div className="bmi-tracking-diagram-NWkD1c">
+            <img className="bmi-goal-FXAneT bmi-goal" src="img/selfieToEarn/bmi-goal-2@1x.png" alt="BMI Goal" />
+            <img className="bmi-goal-qhySjD bmi-goal" src="img/selfieToEarn/bmi-goal-2@1x.png" alt="BMI Goal" />
+            <img className="x11684-FXAneT" src="img/selfieToEarn/file---11684@1x.png" alt="11684" />
+            <div className="x16178-FXAneT">
+                <div className="bmi-goal-oWOsEy bmi-goal">
+                  <div className="healthy-mgQn5v inter-normal-keppel-12px">Healthy</div>
+                  <div className="x876-mgQn5v"></div>
+                </div>
+                <div className="today-bmi-oWOsEy today-bmi">
+                  <div className="underweight-WRxJDX">Underweight</div>
+                  <div className="x877-WRxJDX x877"></div>
+                </div>
+                <div className="today-bmi-A4cSad today-bmi">
+                  <div className="overweight-ny26Tj inter-normal-neon-carrot-12px">Overweight</div>
+                  <div className="x877-ny26Tj x877"></div>
+                </div>
+                <div className="today-bmi-wSx6aj today-bmi">
+                  <div className="obese-VjCO7I">Obese</div>
+                  <div className="x877-VjCO7I x877"></div>
+                </div>
             </div>
+            <div className="x16179-FXAneT">
+                <div className="x16177-0Ljt8o">
+                  <img className="x604-GfALGr" src="img/selfieToEarn/file---604@1x.png" alt="604" />
+                  <img className="x11674-GfALGr" src="img/selfieToEarn/file---11674@1x.png" alt="11674" />
+                  <img className="x11675-GfALGr" src="img/selfieToEarn/file---11675@1x.png" alt="11675" />
+                  <img className="x11676-GfALGr" src="img/selfieToEarn/file---11676@1x.png" alt="11676" />
+                  <div className="x21-GfALGr x21 inter-normal-white-12px">21</div>
+                  <div className="x27-GfALGr x27 inter-normal-white-12px">27</div>
+                  <div className="x33-GfALGr inter-normal-white-12px">33</div>
+                </div>
+                <div className="timeline-track-0Ljt8o">
+                  <div className="mean-bmi-kgm2-QHKlEy">
+                      <span className="span0-MSSTKa inter-normal-white-12px">Mean BMI (kg/m²)</span>
+                  </div>
+                  <div className="x1-w-QHKlEy">1W</div>
+                  <div className="x1-m-QHKlEy inter-normal-cadet-blue-12px-3">1M</div>
+                  <div className="x1-y-QHKlEy inter-normal-cadet-blue-12px-3">1Y</div>
+                  <div className="x5-y-QHKlEy inter-normal-cadet-blue-12px-3">5Y</div>
+                </div>
+                <img className="x11677-0Ljt8o" src="img/selfieToEarn/file---11677-1x-png@1x.png" alt="11677" />
+                <div className="x16180-0Ljt8o">
+                  <div className="x447-VISwYj"></div>
+                  <div className="x448-VISwYj"></div>
+                  <div className="x449-VISwYj"></div>
+                  <div className="x450-VISwYj"></div>
+                  <div className="x451-VISwYj"></div>
+                  <div className="x452-VISwYj"></div>
+                  <div className="x453-VISwYj"></div>
+                  <div className="mon-VISwYj inter-normal-cadet-blue-14px">Mon</div>
+                </div>
+                <div className="tue-0Ljt8o inter-normal-cadet-blue-14px">Tue</div>
+                <div className="wed-0Ljt8o inter-normal-cadet-blue-14px">Wed</div>
+                <div className="sun-0Ljt8o">Sun</div>
+                <div className="sat-0Ljt8o inter-normal-cadet-blue-14px">Sat</div>
+                <div className="fri-0Ljt8o inter-normal-cadet-blue-14px">Fri</div>
+                <div className="thu-0Ljt8o inter-normal-cadet-blue-14px">Thu</div>
+            </div>
+          </div> */}
         </div>
         <div className="calender-MUU5YC">
           <Calendar

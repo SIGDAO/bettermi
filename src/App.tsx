@@ -33,7 +33,7 @@ import RewardDetail from './pages/rewardDetail/rewardDetail';
 import SelfieToEarn from './pages/selfieToEarn/selfieToEarn';
 import Profile from './pages/profile/profile';
 import Marketplace from './pages/marketplace/marketplace';
-import Testing from './pages/testing/testing';
+// import Testing from './pages/selfieToEarn/testing';
 
 
 
@@ -65,7 +65,7 @@ function App() {
           <Route path="/selfieToEarn" element={<SelfieToEarn/>} />
           <Route path="/profile" element={<Profile/>} />
           <Route path="/marketplace" element={<Marketplace/>} />
-          <Route path="/testing" element={<Testing/>} />
+          {/* <Route path="/testing" element={<Testing/>} /> */}
           <Route path="*" element={<Navigate to="/home" />} />
         </Routes>
       </ReduxProvider>  
