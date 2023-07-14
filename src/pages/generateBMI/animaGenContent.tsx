@@ -41,7 +41,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
       asset.accountAssets.map((obj)=>{
         if(obj.account == userAccountId){
           store.dispatch(accountSlice.actions.setToken(Number(obj.quantityQNT)));
-          localStorage.setItem('Token',obj.quantityQNT);
+          localStorage.setItem('token',obj.quantityQNT);
             console.log(obj.quantityQNT);
         }
       });

@@ -145,10 +145,7 @@ const nodeHost = useSelector(walletNodeHost);
 
   );
   return (
-    <CenterLayout
-      content={content}
-      bgImg={false}
-    />
+<></>
   );
 };
 
