@@ -69,44 +69,46 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
 
   // todo: fin tune the style difference between the different reward detail page
   const content: JSX.Element = (
-    <div className="bettermidapp-rewards-redeem-master-collector-1">
-      <ShortTitleBar title={displayRewardDetail?.title} />
-      <img className="photo-P2i95W" src={`${process.env.PUBLIC_URL}/img/rewardDetail/${displayRewardDetail?.bgImagePath}`} alt="Photo" />
-      <img className="layer-P2i95W" src={`${process.env.PUBLIC_URL}/img/rewardDetail/layer-2@1x.png`} alt="Layer" />
-      <div className="button_-redeem-P2i95W">
-        <div className="button1-r8fHLz"></div>
-        <div className="continue-r8fHLz inter-semi-bold-white-15px">Redeem</div>
-      </div>
-      <div className="profile-content-P2i95W">
-        <div className="master-collector-tOBH5R master-collector">{displayRewardDetail?.title}</div>
-        <p className={isSigdaoReward? "unlocked-by-users-wh-tOBH5R inter-normal-white-14px" : "earned-by-users-who-B1MGte inter-normal-white-14px"}>
-          {displayRewardDetail?.description}
-        </p>
-        <p className="better-mi-reserves-t-tOBH5R inter-normal-cadet-blue-12px">
-          BetterMi reserves the right to the final decision <br />in case of any disputes.
-        </p>
-        {isSigdaoReward ? (
-          <>
-            <div className="score-bar_3-tOBH5R">
-              <div className="sigdao-score-oG1yRx">
-                <div className="x10-ZdA7kA inter-semi-bold-keppel-15px">+{displayRewardDetail?.reward}</div>
-                <div className="signdao_tokengradient-ZdA7kA">
-                  <div className="x441-hzgF5j"></div>
-                  <div className="x442-hzgF5j"></div>
-                  <img className="x880-hzgF5j" src={`${process.env.PUBLIC_URL}/img/rewardDetail/file---880@1x.png`} alt="880" />
+    <div className="screen">
+      <div className="bettermidapp-rewards-redeem-master-collector-1">
+        <ShortTitleBar title={displayRewardDetail?.title} />
+        <img className="photo-P2i95W" src={`${process.env.PUBLIC_URL}/img/rewardDetail/${displayRewardDetail?.bgImagePath}`} alt="Photo" />
+        <img className="layer-P2i95W" src={`${process.env.PUBLIC_URL}/img/rewardDetail/layer-2@1x.png`} alt="Layer" />
+        <div className="button_-redeem-P2i95W">
+          <div className="button1-r8fHLz"></div>
+          <div className="continue-r8fHLz inter-semi-bold-white-15px">Redeem</div>
+        </div>
+        <div className="profile-content-P2i95W">
+          <div className="master-collector-tOBH5R master-collector">{displayRewardDetail?.title}</div>
+          <p className={isSigdaoReward? "unlocked-by-users-wh-tOBH5R inter-normal-white-14px" : "earned-by-users-who-B1MGte inter-normal-white-14px"}>
+            {displayRewardDetail?.description}
+          </p>
+          <p className="better-mi-reserves-t-tOBH5R inter-normal-cadet-blue-12px">
+            BetterMi reserves the right to the final decision <br />in case of any disputes.
+          </p>
+          {isSigdaoReward ? (
+            <>
+              <div className="score-bar_3-tOBH5R">
+                <div className="sigdao-score-oG1yRx">
+                  <div className="x10-ZdA7kA inter-semi-bold-keppel-15px">+{displayRewardDetail?.reward}</div>
+                  <div className="signdao_tokengradient-ZdA7kA">
+                    <div className="x441-hzgF5j"></div>
+                    <div className="x442-hzgF5j"></div>
+                    <img className="x880-hzgF5j" src={`${process.env.PUBLIC_URL}/img/rewardDetail/file---880@1x.png`} alt="880" />
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="sigdao-tOBH5R inter-semi-bold-white-15px">SIGDAO:</div>
-          </>        
-        ) :
-        (<p className="x250-FtIem3">{displayRewardDetail?.reward}</p>)}
-      </div>
-      <div className="goal-data-P2i95W">
-        <div className="x893-LfPhsf"></div>
-        <div className="goal-LfPhsf">
-          <div className="x0-ucGgAD inter-semi-bold-keppel-14px">0</div>
-          <div className="x3-ucGgAD inter-semi-bold-white-14px">/ 3</div>
+              <div className="sigdao-tOBH5R inter-semi-bold-white-15px">SIGDAO:</div>
+            </>        
+          ) :
+          (<p className="x250-FtIem3">{displayRewardDetail?.reward}</p>)}
+        </div>
+        <div className="goal-data-P2i95W">
+          <div className="x893-LfPhsf"></div>
+          <div className="goal-LfPhsf">
+            <div className="x0-ucGgAD inter-semi-bold-keppel-14px">0</div>
+            <div className="x3-ucGgAD inter-semi-bold-white-14px">/ 3</div>
+          </div>
         </div>
       </div>
     </div>
@@ -114,8 +116,6 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
 
 
   return !pageExist? <Navigate to={`/reward`} /> : <CenterLayout content={content} bgImg={false}/>
-
-  
 };
 
 export default RewardDetail;

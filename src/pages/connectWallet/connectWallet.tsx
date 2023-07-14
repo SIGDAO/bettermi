@@ -29,12 +29,14 @@ export default function ConnectWallet (props: IConnectWalletProps) {
         accountRS:import_account.getReedSolomonAddress(),
         publicKey:import_account.getPublicKey(),
         isWatchOnlyMode:true,
+        token:0,
       };
       store.dispatch(accountSlice.actions.setAccount(accountinfo));
     console.log(store.getState());
     store.dispatch(walletSlice.actions.setWalletPublicKey(key));
     store.dispatch(walletSlice.actions.setIsWalletConnected(true));
     store.dispatch(walletSlice.actions.setWalletNodeHost(wallet.currentNodeHost));
+    localStorage.setItem('nodeHost',wallet.currentNodeHost);
     console.log(store.getState());
     navigate('/connectSuccess')
   })

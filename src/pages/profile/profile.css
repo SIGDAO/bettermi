@@ -1,8 +1,9 @@
 /* screen - bettermidapp-profile-1 */
 
 .bettermidapp-profile-1 {
-  background: linear-gradient(180deg, #171717 0%, #291a49 41.22%, #171717 100%);
-  background-color: rgba(255,255,255,1.0);
+  /* background: linear-gradient(180deg, #171717 0%, #291a49 41.22%, #171717 100%); */
+  /* background-color: rgba(255,255,255,1.0); */
+  background: transparent;
   height: 962px;
   overflow: hidden;
   overflow-x: hidden;
@@ -386,6 +387,7 @@
 }
 
 .bettermidapp-profile-1 .im-a-positive-person-JYIfVl {
+  margin: 0;
   background-color: transparent;
   bottom: 3px;
   height: 17px;
@@ -399,6 +401,7 @@
 }
 
 .bettermidapp-profile-1 .x29-personal-trainer-JYIfVl {
+  margin: 0;
   background-color: transparent;
   bottom: calc(33.64% - 8px);
   height: 25px;

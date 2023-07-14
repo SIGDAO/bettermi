@@ -10,7 +10,11 @@ const Profile: React.FunctionComponent<IProfileProps> = (props) => {
 
 
   return <CenterLayout
-    content={<AnimaGenContent />}
+    content={
+      <div className='screen'>
+        <AnimaGenContent />
+      </div>
+    }
     bgImg={false}
   />
 };

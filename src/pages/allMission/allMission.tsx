@@ -3,11 +3,22 @@ import './allMission.css';
 import { CenterLayout } from '../../components/layout';
 import { Link } from 'react-router-dom';
 import { BackButton } from '../../components/button';
-
+import { TransferToken } from '../../components/transferToken';
+import { useLedger } from '../../redux/useLedger';
+import { AppContext } from '../../redux/useContext';
+import { useContext } from 'react';
+import { accountId } from '../../redux/account';
+import { useSelector } from 'react-redux';
+import { walletNodeHost } from '../../redux/wallet';
 interface IAllMissionProps {
 }
 
 const AllMission: React.FunctionComponent<IAllMissionProps> = (props) => {
+const ledger = useLedger();
+const {appName,Wallet,Ledger} = useContext(AppContext);
+const userAccountId = useSelector(accountId);
+const nodeHost = useSelector(walletNodeHost);
+
   const content : JSX.Element = (
 
 <>
@@ -66,6 +77,7 @@ const AllMission: React.FunctionComponent<IAllMissionProps> = (props) => {
               </Link>
         </div>
         <div className="earning-rewards-zeeUeL">EARNING REWARDS</div>
+        
         <Link to="bettermidapp-challenges-1.html">
           <div className="rewards-cards-zeeUeL rewards-cards">
             <img className="card_bg" src={`${process.env.PUBLIC_URL}/img/allMission/card-bg-1@1x.png`} alt="Card_bg" />
@@ -100,7 +112,7 @@ const AllMission: React.FunctionComponent<IAllMissionProps> = (props) => {
             </div>
           </div>
         </div>
-        <div className="rewards-cards-CSqdLT rewards-cards">
+        <div  onClick={() => TransferToken(nodeHost,userAccountId)} className="rewards-cards-CSqdLT rewards-cards">
           <img className="card_bg" src={`${process.env.PUBLIC_URL}/img/allMission/card-bg-1@1x.png`} alt="Card_bg" />
           <div className="daily-walking-mission-0SP1ID inter-semi-bold-white-18px">Daily Walking Mission</div>
           <img className="nft_-avatar" src={`${process.env.PUBLIC_URL}/img/allMission/nft-avatar-3@1x.png`} alt="NFT_Avatar" />
@@ -126,7 +138,7 @@ const AllMission: React.FunctionComponent<IAllMissionProps> = (props) => {
       </div>
     </div>
     </div>
-    </div>
+    </div><button  onClick={() => TransferToken(nodeHost,userAccountId)}>ghhihihihisdfisd</button>
   </body>
   </>
 

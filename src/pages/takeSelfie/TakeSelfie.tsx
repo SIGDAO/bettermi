@@ -68,7 +68,6 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
       const { bmi } = data
       console.log(bmi, 'difsjodifjiosdijfio')
       dispatch(profileSlice.actions.setBMI(bmi.toFixed(2).toString()))
-      navigate('/generateBMI')
     }
   }
   , [data])
@@ -118,6 +117,7 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
         store.dispatch(profileSlice.actions.setSelfieImage(imageSrc))
         action(imageSrc)
       }
+      navigate('/generateBMI')
     },
     [webcamRef]
   );

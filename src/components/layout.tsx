@@ -61,6 +61,11 @@ export function CenterLayout (props: ICenterLayoutProps) {
     // centerLayoutStyle.backgroundImage = `url(${process.env.PUBLIC_URL}/img/bg.png)`
     // centerLayoutStyle.backgroundPosition = 'center'
     centerLayoutStyle.background = `linear-gradient(to bottom right, #221D4B, #171717)`
+  } else {
+    // centerLayoutStyle.display = `flex`
+    // centerLayoutStyle.justifyContent = `center`
+    // centerLayoutStyle.alignItems = `center`
+    // centerLayoutStyle.margin = `auto`
   }
 
 
