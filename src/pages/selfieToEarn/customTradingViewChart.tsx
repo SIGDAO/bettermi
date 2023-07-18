@@ -6,10 +6,10 @@
 import { Chart, AreaSeries, PriceLine, PriceScale } from "lightweight-charts-react-wrapper";
 import { IChartApi, LineStyle, ColorType, LineWidth, PriceScaleMode } from "lightweight-charts";
 // PriceScaleModem, 
-import React, { useEffect, useRef, useCallback } from 'react';
+import React, { useEffect, useRef, useCallback, useState } from 'react';
 
 interface ChartProps {
-  data?: { time: string; value: number }[];
+  data?: { time: any; value: number }[];
   height?: number;
   width?: number;
 }
@@ -21,6 +21,7 @@ const initialColors = {
   areaTopColor: '#2962FF',
   areaBottomColor: 'rgba(41, 98, 255, 0.28)',
 }
+
 
 
 const initialData = [
@@ -55,10 +56,18 @@ const areaSeriesInitialOptions = {
 
 
 const CustomTradingViewChart: React.FC<ChartProps> = (prop) => {
+  const [bmilist, setBMIlist] = useState([])
   const { data, height, width } = prop;
   const handleReference = useCallback((ref: IChartApi) => {
     ref?.timeScale().fitContent();
   }, []);
+
+  // const genBMIlist 
+
+  useEffect(() => {
+    console.log('data', data)
+    console.log('data', initialData)
+  }, [data])
 
 
   const options = {
@@ -107,7 +116,7 @@ const CustomTradingViewChart: React.FC<ChartProps> = (prop) => {
           return {
             time: item.time,
             position: 'inBar',
-            color: initialData.length - 1 === index ? '#39b3af' : '#ff9f3e',
+            color: initialData.length - 1 === index ? '#39b3af' : '#687074',
             shape: 'circle',
             // text: item.value,
             // size: 1,

@@ -9,18 +9,54 @@ import CustomTradingViewChart from './customTradingViewChart';
 import './calendar.css'
 import { useSelector } from 'react-redux';
 import { selectBMI } from '../../redux/userBMI';
+import { forEach } from 'lodash';
 
 
 interface ISelfieToEarnProps {
 }
 
+const genBMIlist = (option: string) => {
+  let returnList = []
+  let today = new Date()
+  console.log(today, "today")
+  let totalDays = 0
+  switch (option) {
+    case '1W':
+      totalDays = 7
+      break
+    case '1M':
+      totalDays = 30
+      break
+    case '1Y':
+      totalDays = 365
+      break
+    case '5Y':
+      totalDays = 365 * 5
+      break
+    default:
+      return []
+  }
+  for (let i = 0; i < totalDays; i++) {
+    let tempDate = new Date(today.setDate(today.getDate() - 1))
+    let dateFormat = tempDate.getFullYear() + "-" + (tempDate.getMonth()+1) + "-" + tempDate.getDate()
+
+    console.log()
+    returnList.push({time: dateFormat, value: Math.floor(Math.random() * 10) + 20.1})
+  }
+  return returnList
+
+}
+
 
 const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
+  const [data, setData] = useState<any>([]);
   const [value, setValue] = useState(new Date());
   const [weekOption, setweekOption] = useState(true);
   const [monthOption, setmonthOption] = useState(false);
   const [yearOption, setyearOption] = useState(false);
   const [fiveYearOption, setFiveYearOption] = useState(false);
+
+
 
   const optionList = [
     {
@@ -76,7 +112,15 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
   }, [value]);
   
   useEffect(() => {
-    console.log("sdofjisdofojio")
+    // console.log(item)
+    forEach(optionList, (item) => {
+      if (item.option) {
+        console.log(item.text)
+        let bmiList = genBMIlist(item.text)
+        console.log(bmiList)
+        setData(bmiList)
+      }
+    })
   }, [ weekOption, monthOption, yearOption, fiveYearOption ])
 
   // const Custom..
@@ -127,7 +171,6 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
             </div>
         </div>
       </div>
-  
     )
   }
 
@@ -163,7 +206,7 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
               })}
             </ul>
           </div>
-          <CustomTradingViewChart height={323} width={390}/>
+          <CustomTradingViewChart data={data} height={323} width={390}/>
           {/* <div className="bmi-tracking-diagram-NWkD1c">
             <img className="bmi-goal-FXAneT bmi-goal" src="img/selfieToEarn/bmi-goal-2@1x.png" alt="BMI Goal" />
             <img className="bmi-goal-qhySjD bmi-goal" src="img/selfieToEarn/bmi-goal-2@1x.png" alt="BMI Goal" />
