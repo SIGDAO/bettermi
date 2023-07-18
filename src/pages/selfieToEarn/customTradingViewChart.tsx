@@ -24,14 +24,14 @@ const initialColors = {
 
 
 const initialData = [
-  { time: '2018-12-22', value: 26.5 },
-  { time: '2018-12-23', value: 27.5 },
-  { time: '2018-12-24', value: 25.5 },
-  { time: '2018-12-25', value: 25.5 },
-  { time: '2018-12-26', value: 25.17 },
-  { time: '2018-12-27', value: 28.89 },
-  { time: '2018-12-28', value: 25.46 },
-  { time: '2018-12-29', value: 23.92 },
+  // { time: '2018-12-22', value: 26.5 },
+  // { time: '2018-12-23', value: 27.5 },
+  // { time: '2018-12-24', value: 25.5 },
+  // { time: '2018-12-25', value: 25.5 },
+  // { time: '2018-12-26', value: 25.17 },
+  // { time: '2018-12-27', value: 28.89 },
+  // { time: '2018-12-28', value: 25.46 },
+  // { time: '2018-12-29', value: 23.92 },
   { time: '2018-12-30', value: 22.68 },
   { time: '2018-12-31', value: 22.67 },
 ];
@@ -110,7 +110,7 @@ const CustomTradingViewChart: React.FC<ChartProps> = (prop) => {
             color: initialData.length - 1 === index ? '#39b3af' : '#ff9f3e',
             shape: 'circle',
             // text: item.value,
-            size: 1,
+            // size: 1,
             // shape: 'arrowDown',
             // text: 'test',
           }})

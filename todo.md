@@ -66,3 +66,9 @@ after taking the photo, then
 custom tribe good punch famous civil snack cattle night make melody flower
 
 tune the ball size
+
+display trend:
+  1 week  - tue 
+  1 month - day (maybe)
+  1 year  - month
+  5 year  - 

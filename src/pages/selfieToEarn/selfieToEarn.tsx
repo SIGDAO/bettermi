@@ -14,8 +14,47 @@ import { selectBMI } from '../../redux/userBMI';
 interface ISelfieToEarnProps {
 }
 
+
 const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
   const [value, setValue] = useState(new Date());
+  const [weekOption, setweekOption] = useState(true);
+  const [monthOption, setmonthOption] = useState(false);
+  const [yearOption, setyearOption] = useState(false);
+  const [fiveYearOption, setFiveYearOption] = useState(false);
+
+  const optionList = [
+    {
+      text: '1W',
+      option: weekOption,
+      setOption: setweekOption,
+    },
+    {
+      text: '1M',
+      option: monthOption,
+      setOption: setmonthOption,
+    },
+    {
+      text: '1Y',
+      option: yearOption,
+      setOption: setyearOption,
+    },
+    {
+      text: '5Y',
+      option: fiveYearOption,
+      setOption: setFiveYearOption,
+    },
+  ]
+  
+  const handleOptionClick = (option: any) => {
+    option.setOption(true)
+
+    optionList.forEach((item) => {
+      if (item.text != option.text) {
+        item.setOption(false)
+      }
+    })
+  }
+
   const navigate = useNavigate();
   // demo data
   const bmi_testing = useSelector(selectBMI) || 35;
@@ -35,6 +74,10 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
   useEffect(() => {
     console.log(value);
   }, [value]);
+  
+  useEffect(() => {
+    console.log("sdofjisdofojio")
+  }, [ weekOption, monthOption, yearOption, fiveYearOption ])
 
   // const Custom..
 
@@ -108,6 +151,18 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
 
         <div className="x6-MUU5YC x6">
           {/* orignal chat */}  
+          <div className="mean-bmi-discription-container">
+            <div className="mean-bmi-discription inter-normal-white-12px">
+              Mean BMI (kg/m²)
+            </div>
+            <ul className="mean-bmi-setting">
+              {optionList.map((option) =>{
+                return (
+                  <li className={option.option ? "mean-bmi-setting-item-selected inter-normal-cadet-blue-12px-3" :"mean-bmi-setting-item inter-normal-cadet-blue-12px-3" } key={option.text} onClick={() => handleOptionClick(option)}>{option.text}</li>
+                )
+              })}
+            </ul>
+          </div>
           <CustomTradingViewChart height={323} width={390}/>
           {/* <div className="bmi-tracking-diagram-NWkD1c">
             <img className="bmi-goal-FXAneT bmi-goal" src="img/selfieToEarn/bmi-goal-2@1x.png" alt="BMI Goal" />
