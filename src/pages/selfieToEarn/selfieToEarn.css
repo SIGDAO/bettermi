@@ -134,6 +134,7 @@
 .bettermidapp-selfie-to-earn-1 .x6-MUU5YC::-webkit-scrollbar {
   display: none;
   width: 0;
+  margin: 0;
 }
 
 .bettermidapp-selfie-to-earn-1 .x6-MUU5YC {
@@ -143,6 +144,8 @@
   overflow-x: scroll;
   top: 260px;
   width: 390px;
+  margin: 0;
+  border-bottom: 2px solid rgba(61, 69, 75, 0.5);
 }
 
 .bettermidapp-selfie-to-earn-1 .bmi-tracking-diagram-NWkD1c {
@@ -1780,32 +1783,42 @@
   left: 29px;
   transform: rotate(-90deg);
   width: 38px;
-  
+  margin: 0;
 }
 .selfie-to-earn-img-container{
   height: 16px;
   width: 16px;
+  margin: 0;
+  position: absolute;
+  top: 21.5px;
+  left: 40.7px;
 }
 .bettermidapp-selfie-to-earn-1 .icon-arrow-left-XaN6DJ {
-  /* height: 16px; */
-  left: 57.87%;
+  height: 16px;
   object-fit: cover;
-  top: 36.61%;
-  transform: rotate(90deg);
   width: 16px;
 }
 
 .bettermidapp-selfie-to-earn-1 .gems-XaN6DJ {
   color: var(--keppel);
+  display: inline;
   font-family: var(--font-family-inter);
   font-size: var(--font-size-m);
   font-weight: 400;
-  height: 30.36%;
-  left: -54.67%;
+  /* position: relative; */
+  top: 45px;
+  left: 20px;
+  /* right: 0px; */
+  /* left: -54.67%; */
   text-align: center;
-  top: 39.29%;
-  transform: rotate(90deg);
-  width: 154.67%;
+  /* top: 39.29%; */
+  /* transform: rotate(90deg); */
+  /* height: ; */
+  /* width: 154.67%; */
+}
+
+.change-trend-container {
+  display: inline
 }
 
 .bettermidapp-selfie-to-earn-1 .span0-TIYBsY {
@@ -2748,3 +2761,35 @@
   width: 47.30%;
 }
 
+.mean-bmi-discription-container {
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  width: calc(100% - 25px * 2);
+  align-items: center;
+  /* margin: 0 10px; */
+  padding: 0 25px;
+}
+
+.mean-bmi-setting {
+  display: flex;
+  gap: 29px;
+  padding: 0;
+}
+
+.mean-bmi-setting-item-selected, .mean-bmi-setting-item {
+  color: white;
+  list-style: none;
+  cursor: pointer;
+}
+
+.mean-bmi-setting-item-selected {
+  text-decoration: underline;
+  font-weight: 700;
+}
+
+.mean-bmi-discription {
+  color: white;
+  /* font-size: 12px;
+  margin-top: 10px; */
+}

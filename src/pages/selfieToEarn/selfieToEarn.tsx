@@ -3,27 +3,81 @@ import './selfieToEarn.css'
 import { CenterLayout } from '../../components/layout';
 import MenuBar from '../../components/menuBar';
 import { ShortTitleBar } from '../../components/titleBar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Calendar from 'react-calendar';
 import CustomTradingViewChart from './customTradingViewChart';
 import './calendar.css'
+import { useSelector } from 'react-redux';
+import { selectBMI } from '../../redux/userBMI';
 
 
 interface ISelfieToEarnProps {
 }
 
+
 const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
   const [value, setValue] = useState(new Date());
+  const [weekOption, setweekOption] = useState(true);
+  const [monthOption, setmonthOption] = useState(false);
+  const [yearOption, setyearOption] = useState(false);
+  const [fiveYearOption, setFiveYearOption] = useState(false);
+
+  const optionList = [
+    {
+      text: '1W',
+      option: weekOption,
+      setOption: setweekOption,
+    },
+    {
+      text: '1M',
+      option: monthOption,
+      setOption: setmonthOption,
+    },
+    {
+      text: '1Y',
+      option: yearOption,
+      setOption: setyearOption,
+    },
+    {
+      text: '5Y',
+      option: fiveYearOption,
+      setOption: setFiveYearOption,
+    },
+  ]
+  
+  const handleOptionClick = (option: any) => {
+    option.setOption(true)
+
+    optionList.forEach((item) => {
+      if (item.text != option.text) {
+        item.setOption(false)
+      }
+    })
+  }
+
+  const navigate = useNavigate();
   // demo data
-  const bmi_testing = 25.5;
+  const bmi_testing = useSelector(selectBMI) || 35;
 
   function onChange(nextValue: any) {
     setValue(nextValue);
   }
 
+  function handleTakeASelfie() {
+    if (bmi_testing != 35 ){
+
+      console.log('already taken a selfie')
+
+    }
+  }
+
   useEffect(() => {
     console.log(value);
   }, [value]);
+  
+  useEffect(() => {
+    console.log("sdofjisdofojio")
+  }, [ weekOption, monthOption, yearOption, fiveYearOption ])
 
   // const Custom..
 
@@ -39,7 +93,7 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
               <span className="span0-QduyxW inter-normal-cadet-blue-12px">{bmi_testing} kg/m²</span>
             </div>
         </div>
-        <div className="icon-arrow-left-zmcmFt icon-arrow-left-container">
+        {/* <div className="icon-arrow-left-zmcmFt icon-arrow-left-container">
             <div className="selfie-to-earn-img-container">
               <img
                 className="icon-arrow-left-XaN6DJ icon-arrow-left-img"
@@ -50,6 +104,19 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
             <div className="gems-XaN6DJ gems">
               <span className="span0-TIYBsY inter-normal-keppel-12px">-1.0 kg/m²</span>
             </div>
+        </div> */}
+        <div className="change-trend-container">
+          <div className="selfie-to-earn-img-container">
+            <img
+              className="icon-arrow-left-XaN6DJ icon-arrow-left-img"
+              src="img/selfieToEarn/icon-arrow-left-6@1x.png"
+              alt="icon-arrow-left"
+              />
+          </div>
+          <div className="gems-XaN6DJ gems">
+            <span className="span0-TIYBsY inter-normal-keppel-12px">-1.0 kg/m²</span>
+          </div>
+
         </div>
         <div className="sigdao-score-zmcmFt sigdao-score">
             <div className="x10-gfpjFx x10 inter-semi-bold-keppel-14px">+2.625</div>
@@ -84,6 +151,18 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
 
         <div className="x6-MUU5YC x6">
           {/* orignal chat */}  
+          <div className="mean-bmi-discription-container">
+            <div className="mean-bmi-discription inter-normal-white-12px">
+              Mean BMI (kg/m²)
+            </div>
+            <ul className="mean-bmi-setting">
+              {optionList.map((option) =>{
+                return (
+                  <li className={option.option ? "mean-bmi-setting-item-selected inter-normal-cadet-blue-12px-3" :"mean-bmi-setting-item inter-normal-cadet-blue-12px-3" } key={option.text} onClick={() => handleOptionClick(option)}>{option.text}</li>
+                )
+              })}
+            </ul>
+          </div>
           <CustomTradingViewChart height={323} width={390}/>
           {/* <div className="bmi-tracking-diagram-NWkD1c">
             <img className="bmi-goal-FXAneT bmi-goal" src="img/selfieToEarn/bmi-goal-2@1x.png" alt="BMI Goal" />
@@ -160,7 +239,7 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
         <div className="x16212-MUU5YC">
             <div className="x888-tDsdhu"></div>
             <div className="records-tDsdhu inter-semi-bold-white-18px">Records</div>
-            <div className="view-all-tDsdhu">View all</div>
+            {/* <div className="view-all-tDsdhu">View all</div> */}
             <div className="rewards_card-container">
               {displaySelectedDateRecord()}
             </div>
@@ -246,13 +325,11 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
               </div>
             </div> */}
         </div>
-        <Link to="/takeSelfie">
-          <div className="button_-selfie-to-earn-MUU5YC">
-              <p className="take-a-selfie-to-earn-u8P1YH inter-semi-bold-white-15px">Take a Selfie to Earn!</p>
-              <img className="ic_selfie-u8P1YH" src="img/selfieToEarn/ic-selfie-1@1x.png" alt="ic_selfie" />
-              <img className="ic_arrow_forward-u8P1YH" src="img/selfieToEarn/ic-arrow-forward-1@1x.png" alt="ic_arrow_forward" />
-          </div>
-        </Link>
+        <div className="button_-selfie-to-earn-MUU5YC" onClick={handleTakeASelfie}>
+            <p className="take-a-selfie-to-earn-u8P1YH inter-semi-bold-white-15px">Take a Selfie to Earn!</p>
+            <img className="ic_selfie-u8P1YH" src="img/selfieToEarn/ic-selfie-1@1x.png" alt="ic_selfie" />
+            <img className="ic_arrow_forward-u8P1YH" src="img/selfieToEarn/ic-arrow-forward-1@1x.png" alt="ic_arrow_forward" />
+        </div>
         <MenuBar/>
       </div>
     </div>

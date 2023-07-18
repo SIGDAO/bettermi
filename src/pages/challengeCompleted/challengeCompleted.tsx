@@ -41,7 +41,7 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
   )
 
   return (
-<></>
+    <CenterLayout content={content} bgImg={false} />
   );
 }
 

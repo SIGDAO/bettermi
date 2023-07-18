@@ -91,7 +91,7 @@ html, body {
 .inter-normal-white-12px {
   color: var(--white);
   font-family: var(--font-family-inter);
-  font-size: var(--font-size-m);
+  font-size: 12px;
   font-style: normal;
   font-weight: 400;
 }
@@ -147,7 +147,7 @@ html, body {
 .inter-normal-cape-cod-12px {
   color: var(--cape-cod);
   font-family: var(--font-family-inter);
-  font-size: var(--font-size-m);
+  font-size: 12px;
   font-style: normal;
   font-weight: 400;
 }
@@ -171,7 +171,7 @@ html, body {
 .inter-semi-bold-white-12px {
   color: var(--white);
   font-family: var(--font-family-inter);
-  font-size: var(--font-size-m);
+  font-size: 12px;
   font-style: normal;
   font-weight: 600;
 }
@@ -179,7 +179,7 @@ html, body {
 .inter-normal-neon-carrot-12px {
   color: var(--neon-carrot);
   font-family: var(--font-family-inter);
-  font-size: var(--font-size-m);
+  font-size: 12px;
   font-style: normal;
   font-weight: 400;
 }
@@ -233,7 +233,7 @@ html, body {
 .inter-normal-electric-violet-12px {
   color: var(--electric-violet);
   font-family: var(--font-family-inter);
-  font-size: var(--font-size-m);
+  font-size: 12px;
   font-style: normal;
   font-weight: 400;
 }
@@ -257,7 +257,7 @@ html, body {
 .inter-normal-keppel-12px {
   color: var(--keppel);
   font-family: var(--font-family-inter);
-  font-size: var(--font-size-m);
+  font-size: 12px;
   font-style: normal;
   font-weight: 400;
 }
@@ -265,7 +265,7 @@ html, body {
 .inter-normal-cadet-blue-12px-3 {
   color: var(--cadet-blue-2);
   font-family: var(--font-family-inter);
-  font-size: var(--font-size-m);
+  font-size: 12px;
   font-style: normal;
   font-weight: 400;
 }
@@ -273,7 +273,7 @@ html, body {
 .inter-normal-neon-carrot-12px-2 {
   color: var(--neon-carrot);
   font-family: var(--font-family-inter);
-  font-size: var(--font-size-m);
+  font-size: 12px;
 }
 
 .inter-semi-bold-white-21px {
