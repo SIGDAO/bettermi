@@ -257,7 +257,7 @@ html, body {
 .inter-normal-keppel-12px {
   color: var(--keppel);
   font-family: var(--font-family-inter);
-  font-size: var(--font-size-m);
+  font-size: 12px;
   font-style: normal;
   font-weight: 400;
 }

@@ -15,6 +15,7 @@ abbr[title] {
   padding: 0;
   display: inline;
   font-size: 0;
+  /* border-left: ; */
 }
 
 .react-calendar__month-view__weekdays__weekday::first-letter {
