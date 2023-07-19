@@ -23,37 +23,39 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
   const { title, setting, help } = props;
 
   return (
-    <div className="title-bar-container" 
-      style={{
-        // background: `url(${process.env.PUBLIC_URL}/img/bg-11@1x.png)`,
-        // backgroundPosition: 'center',
-        // backgroundSize: 'cover',
-      }}
-    >
-      <div className="title-bar-title inter-semi-bold-white-18px">{title}</div>
-      <img className="title-bar-seperat-line seperat-line" src={process.env.PUBLIC_URL + "/img/seperat-line-11@1x.png"} alt="Seperat line" />
-      <div className="title-bar-ic_help_24px ic_help_24px">
-          <img className="title-bar-ic_help_24px-img ic_help_24px" src={process.env.PUBLIC_URL + "/img/ic-help-24px-1@1x.png"} alt="ic_help_24px" />
+    <div className="title-bar-layout">
+      <div className="title-bar-container" 
+        style={{
+          // background: `url(${process.env.PUBLIC_URL}/img/bg-11@1x.png)`,
+          // backgroundPosition: 'center',
+          // backgroundSize: 'cover',
+        }}
+      >
+        <div className="title-bar-title inter-semi-bold-white-18px">{title}</div>
+        {/* <img className="title-bar-seperat-line seperat-line" src={process.env.PUBLIC_URL + "/img/seperat-line-11@1x.png"} alt="Seperat line" /> */}
+        <div className="title-bar-ic_help_24px ic_help_24px">
+            <img className="title-bar-ic_help_24px-img ic_help_24px" src={process.env.PUBLIC_URL + "/img/ic-help-24px-1@1x.png"} alt="ic_help_24px" />
+        </div>
+        <a href="javascript:history.back()">
+          <div className="icon-arrow-left-container icon-arrow-left">
+              <img
+                className="icon-arrow-left-img icon-arrow-left"
+                src={process.env.PUBLIC_URL + "/img/icon-arrow-left-12@1x.png"}
+                alt="icon-arrow-left"
+                />
+          </div>
+        </a>
+        {setting === false ? null : (
+          <div className="ic_settings_24px-container ic_settings_24px">
+              <img
+                className="ic_settings_24px-img ic_settings_24px"
+                src={process.env.PUBLIC_URL + "/img/ic-settings-24px-1@1x.png"}
+                alt="ic_settings_24px"
+                />
+          </div>
+        )}
+        {/* <img className="bg-MY4xZJ" src={process.env.PUBLIC_URL + "/img/bg-11@1x.png"} alt="BG" /> */}
       </div>
-      <a href="javascript:history.back()">
-        <div className="icon-arrow-left-container icon-arrow-left">
-            <img
-              className="icon-arrow-left-img icon-arrow-left"
-              src={process.env.PUBLIC_URL + "/img/icon-arrow-left-12@1x.png"}
-              alt="icon-arrow-left"
-              />
-        </div>
-      </a>
-      {setting === false ? null : (
-        <div className="ic_settings_24px-container ic_settings_24px">
-            <img
-              className="ic_settings_24px-img ic_settings_24px"
-              src={process.env.PUBLIC_URL + "/img/ic-settings-24px-1@1x.png"}
-              alt="ic_settings_24px"
-              />
-        </div>
-      )}
-      {/* <img className="bg-MY4xZJ" src={process.env.PUBLIC_URL + "/img/bg-11@1x.png"} alt="BG" /> */}
     </div>
   )
 };
