@@ -121,14 +121,14 @@ width: 392px;
     border-width: 3px;
     background-color: aquamarine;
   }
-  .button2:hover{
+  /* .button2:hover{
     border-color: inherit;
     border-top:inherit;
     border-left: inherit;
     border-right: inherit;
     border-width: 3px;
     
-  }
+  } */
   .button2{
     border-top:inherit;
     border-left: inherit;
