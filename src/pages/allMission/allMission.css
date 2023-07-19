@@ -86,10 +86,8 @@ width: 392px;
     border-top:inherit;
     border-left: inherit;
     border-right: inherit;
-    border-width: 3px solid transparent;
     color:#FFFFFF;
     margin-left: 15px;
-    border: hidden;
     /* border-color: #39B3AF; */
     /* font-family: 'Inter';
     font-weight: 600; /*semiBold*/
@@ -100,11 +98,15 @@ width: 392px;
     font-style: normal;
     font-weight: 600;
     width:100px;
+    border-color: #39B3AF;
+    border-top:inherit;
+    border-left: inherit;
+    border-right: inherit;
+    border-width: 3px;
     
   }
   .button1:hover{
-    border-width: 3px solid #39B3AF;
-    border-color: #39B3AF;
+    border-color: #18efe8;
     border-top:inherit;
     border-left: inherit;
     border-right: inherit;
@@ -203,8 +205,11 @@ align-self: flex-start;
     width:392px;
     /* height:calc(100% - 159px); */
     background:  linear-gradient(112deg, #221D4B 0%, #171717 100%);
-    overflow: scroll;
+    overflow: auto;
     margin-top: 20px;
+}
+.body2::-webkit-scrollbar {
+  display: none;
 }
 .body3{
     width:calc(50% - 196px);
@@ -225,7 +230,7 @@ align-self: flex-start;
     border: 1px solid #4136F1;
     flex-grow: 0;
     flex-shrink: 0;
-    overflow: scroll;
+    overflow: auto;
 }
 .challengeCompletedLink:hover{
     cursor: pointer;
