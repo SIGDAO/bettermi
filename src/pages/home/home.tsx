@@ -6,6 +6,7 @@ import MenuBar from '../../components/menuBar';
 import { useSelector } from 'react-redux';
 import { selectCurrentUsername } from '../../redux/profile';
 import { accountToken } from '../../redux/account';
+import { store } from '../../redux/reducer';
 
 interface IHomeProps {
 }
@@ -37,6 +38,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   // info
   const name = useSelector(selectCurrentUsername);
   const Token:string = useSelector(accountToken);
+  console.log(store.getState());
   console.log("Token is  ",Token);
   // todo: map
   // const userSIGDAO = 
