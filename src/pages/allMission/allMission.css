@@ -23,15 +23,16 @@ width: 392px;
     width:100%;
   }
   
-  .container1{
+  /* .container1{
   width:calc(50% - 196px);
-  background-color: inherit;
+  background-color: aqua;
   height:159px;
-  }
+  } */
   .container2{
     display:flex;
     flex-direction:column;
     flex-wrap: wrap;
+    /* width:min(95vw,820px); */
     width:392px;
     background-color: inherit;
     height:159px;
@@ -39,11 +40,26 @@ width: 392px;
     justify-content: space-between;
     box-shadow: 0px 3px 30px var(--royal-blue);
   }
-  .container3{
-    width:calc(50% - 196px);
-    background-color: inherit;
-    height:159px;
+  /* @media all and (max-width: 392px) {
+    .container2{
+      width:100% !important;
     }
+  }
+  @media all and (min-width:392px) and (max-width: 394px) {
+    .container2{
+      width:98% !important;
+    }
+  }
+  @media all and (min-width:394px) and (max-width: 396px) {
+    .container2{
+      width:96% !important;
+    }
+  } */
+  /* .container3{
+    width:calc(50% - 196px);
+    background-color: blue;
+    height:159px;
+    } */
   .banner{
     color:aquamarine;
     display:flex;
@@ -72,7 +88,7 @@ width: 392px;
     font-weight: 600;
     font-size: 18px;
     color: #FFFFFF;
-    margin-left:50px;
+    padding-right: 85px;
   }
   @media screen and (min-width: 392px) {
     global {
@@ -167,12 +183,18 @@ width: 392px;
     width:100px;
     align-items: start;
   }
+  .iconChallengeCompleted{
+    height:100%;
+    width:14px;
+    display: flex;
+    align-items: center;
+  }
   .titleBar{
     display:flex;
     flex-direction:row;
     justify-content: space-between;
     width:392px;
-    align-self: flex-end;
+    align-self: center;
     height:50px;
   }
   .iconBar{
@@ -225,15 +247,31 @@ align-self: flex-start;
     align-self: center;
     border-radius: 20px;
     margin-bottom: 20px;
-    overflow: auto;
+    overflow-x: auto;
+    overflow-y:hidden;
     background-color: #0D0D0D;
     border: 1px solid #4136F1;
     flex-grow: 0;
     flex-shrink: 0;
-    overflow: auto;
+}
+.challengeCompletedLinkDisabled{
+  display:flex;
+  flex-direction:row;
+  height:150px;
+  width:calc(100% - 50px);
+  align-self: center;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  overflow-x: auto;
+  overflow-y:hidden;
+  background-color: #0D0D0D;
+  border: 1px solid #4136F1;
+  flex-grow: 0;
+  flex-shrink: 0;
 }
 .challengeCompletedLink:hover{
     cursor: pointer;
+   background-color: #123456;
 
 }
 
@@ -245,7 +283,6 @@ align-self: flex-start;
     font-family: var(--font-family-inter);
     font-size: var(--font-size-xxxl);
     font-style: normal;
-    margin-bottom:20px;
     margin-left:30px;
 }
 
@@ -275,6 +312,7 @@ align-self: flex-start;
     font-size: var(--font-size-xxxl);
     font-style: normal;
     font-weight: 600;
+    text-align: left;
 }
 .descriptionBodyChallengeCompleted{
     text-align: left;
@@ -286,7 +324,7 @@ align-self: flex-start;
     justify-content: space-between;
     width:calc(100% );
     align-self: center;
-    height:44px;
+    height:14px;
     background-color: inherit;
     align-items: center;
 }
@@ -301,6 +339,26 @@ align-self: flex-start;
 .descriptionBottomCountChallengeComplete:hover{
     cursor: pointer;
     background-color: #123456;
+}
+
+.sigdaoChallengeCompleted{
+  padding-right: 40px;
+  color: var(--keppel);
+  font-family: var(--font-family-inter);
+    font-size: var(--font-size-s);
+    font-style: normal;
+    font-weight: 600;
+}
+.sigdaoIconChallengeCompleted{
+  background: linear-gradient(224.44deg, #00ffa3 5.74%, #ff00ff 87.84%);
+  border-radius: 8px;
+  height:17px;
+
+}
+.arrowChallengeCompleted{
+  padding-bottom: 25px;
+  width:7px;
+  height:12px;
 }
   /*Anderson's code stops here*/
 
