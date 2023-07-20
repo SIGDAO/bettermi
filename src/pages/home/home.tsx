@@ -108,7 +108,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
             <img className="seperate-line-b5x63m" src={`${process.env.PUBLIC_URL}/img/seperate-line-1@1x.png`} alt="seperate line" />
           </div>
           <img className="nft_-avatar-2ZgxSS" src={`${process.env.PUBLIC_URL}/img/home/nft-avatar-13@1x.png`} alt="NFT_Avatar" />
-          <a href="bettermidapp-profile-1.html">
+          <Link to="/profile">
             <div className="ic_next-2ZgxSS">
               <img
                 className="ic_chevron_right_24px-LRB8nH"
@@ -116,7 +116,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
                 alt="ic_chevron_right_24px"
                 />
             </div>
-          </a>
+          </Link>
           <div className="score-bar_3-2ZgxSS">
             <div className="sigdao-score-iPTNDG sigdao-score">
               <div className="x10-kxjIEt x10 inter-semi-bold-keppel-15px">{Token}</div>
