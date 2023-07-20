@@ -10,14 +10,19 @@
   justify-content: space-between;
   border-top: 1px solid var(--royal-blue);
   padding: 0 38px;
-  height: 93px;
-  left: calc((100% - 390px) / 2);
+  height: 94px;
+  left: calc((100% - 820px) / 2);
   box-shadow: 0px 3px 30px var(--royal-blue);
   position: fixed;
   top: calc(100% - 94px);
-  width: 314px;
+  width: 744px;
+  /* width: 314px; */
+  /* left: calc((100% - 390px) / 2); */
+  background-color: var(--woodsmoke);
+  border-top: 1px solid var(--royal-blue);
   /* z-index: 0; */
 }
+
 
 .menu_bar_bg-j7gIYx {
   background-color: transparent;
