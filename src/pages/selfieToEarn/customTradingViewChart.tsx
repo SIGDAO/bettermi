@@ -4,12 +4,12 @@
 // import { createChart, ColorType } from 'lightweight-charts';
 
 import { Chart, AreaSeries, PriceLine, PriceScale } from "lightweight-charts-react-wrapper";
-import { IChartApi, LineStyle, ColorType, LineWidth, PriceScaleMode } from "lightweight-charts";
+import { IChartApi, LineStyle, ColorType, LineWidth, PriceScaleMode, AreaData } from "lightweight-charts";
 // PriceScaleModem, 
-import React, { useEffect, useRef, useCallback } from 'react';
+import React, { useEffect, useRef, useCallback, useState } from 'react';
 
 interface ChartProps {
-  data?: { time: string; value: number }[];
+  data?: { time: any; value: number }[];
   height?: number;
   width?: number;
 }
@@ -22,18 +22,51 @@ const initialColors = {
   areaBottomColor: 'rgba(41, 98, 255, 0.28)',
 }
 
+const genBMIlist = (option: string) => {
+  let returnList = []
+  let today = new Date()
+  console.log(today, "today")
+  let totalDays = 0
+  switch (option) {
+    case '1W':
+      totalDays = 7
+      break
+    case '1M':
+      totalDays = 30
+      break
+    case '1Y':
+      totalDays = 365
+      break
+    case '5Y':
+      totalDays = 365 * 5
+      break
+    default:
+      return []
+  }
+  for (let i = 0; i < totalDays; i++) {
+    let tempDate = new Date(today.setDate(today.getDate() - 1))
+    let dateFormat = tempDate.getFullYear() + "-" + (tempDate.getMonth()+1) + "-" + tempDate.getDate()
+
+    console.log()
+    returnList.push({time: dateFormat, value: Math.floor(Math.random() * 10) + 20.1})
+  }
+  return returnList
+
+}
+
+
 
 const initialData = [
   // { time: '2018-12-22', value: 26.5 },
   // { time: '2018-12-23', value: 27.5 },
   // { time: '2018-12-24', value: 25.5 },
-  // { time: '2018-12-25', value: 25.5 },
-  // { time: '2018-12-26', value: 25.17 },
-  // { time: '2018-12-27', value: 28.89 },
-  // { time: '2018-12-28', value: 25.46 },
-  // { time: '2018-12-29', value: 23.92 },
-  { time: '2018-12-30', value: 22.68 },
-  { time: '2018-12-31', value: 22.67 },
+  { time: '2018-12-25', value: 25.5 },
+  { time: '2018-12-26', value: 25.17 },
+  { time: '2018-12-27', value: 28.89 },
+  { time: '2018-12-28', value: 25.46 },
+  { time: '2018-12-29', value: 23.92 },
+  { time: '2023-12-30', value: 22.68 },
+  { time: '2023-12-31', value: 22.67 },
 ];
 
 const testing:LineWidth = 1
@@ -55,10 +88,22 @@ const areaSeriesInitialOptions = {
 
 
 const CustomTradingViewChart: React.FC<ChartProps> = (prop) => {
+  const [bmilist, setBMIlist] = useState([])
   const { data, height, width } = prop;
+  const displayData: AreaData[] = []
   const handleReference = useCallback((ref: IChartApi) => {
     ref?.timeScale().fitContent();
   }, []);
+
+  // const genBMIlist 
+
+  useEffect(() => {
+    console.log('data', data)
+    if (data) {
+      displayData.push(...data)
+    }
+    console.log('data', initialData)
+  }, [data])
 
 
   const options = {
@@ -102,12 +147,12 @@ const CustomTradingViewChart: React.FC<ChartProps> = (prop) => {
     <Chart {...options} ref={handleReference}>
       <AreaSeries 
         {...areaSeriesInitialOptions} 
-        data={data || initialData}
+        data={initialData}
         markers={initialData.map((item, index) => {
           return {
             time: item.time,
             position: 'inBar',
-            color: initialData.length - 1 === index ? '#39b3af' : '#ff9f3e',
+            color: initialData.length - 1 === index ? '#39b3af' : '#687074',
             shape: 'circle',
             // text: item.value,
             // size: 1,
