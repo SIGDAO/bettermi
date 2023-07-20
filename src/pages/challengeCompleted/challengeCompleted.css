@@ -83,6 +83,10 @@
   width: 100%;
 }
 
+.button1 {
+  margin: 0;
+}
+
 .bettermidapp-challenge-finished-1 .button1-vX3ONf {
   background: linear-gradient(135deg, #4136f1 0%, #8643ff 100%);
   border-radius: 12px;

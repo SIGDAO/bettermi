@@ -7,9 +7,13 @@ import { Chart, AreaSeries, PriceLine, PriceScale } from "lightweight-charts-rea
 import { IChartApi, LineStyle, ColorType, LineWidth, PriceScaleMode, AreaData } from "lightweight-charts";
 // PriceScaleModem, 
 import React, { useEffect, useRef, useCallback, useState } from 'react';
+import { findBMI } from "../../components/findBMI";
+import { useSelector, useDispatch } from "react-redux";
+import { accountId } from "../../redux/account";
+import { useLedger } from "../../redux/useLedger";
 
 interface ChartProps {
-  data?: { time: any; value: number }[];
+  data?: { time: string; value: number }[];
   height?: number;
   width?: number;
 }
@@ -57,11 +61,11 @@ const genBMIlist = (option: string) => {
 
 
 const initialData = [
-  // { time: '2018-12-22', value: 26.5 },
-  // { time: '2018-12-23', value: 27.5 },
-  // { time: '2018-12-24', value: 25.5 },
-  { time: '2018-12-25', value: 25.5 },
-  { time: '2018-12-26', value: 25.17 },
+  { time: '2018-12-22', value: 26.5 },
+  { time: '2018-12-23', value: 27.5 },
+  { time: '2018-12-24', value: 25.5 },
+  // { time: '2018-07-25', value: 25.5 },
+  // { time: '2018-07-25', value: 25.17 },
   { time: '2018-12-27', value: 28.89 },
   { time: '2018-12-28', value: 25.46 },
   { time: '2018-12-29', value: 23.92 },
@@ -88,22 +92,43 @@ const areaSeriesInitialOptions = {
 
 
 const CustomTradingViewChart: React.FC<ChartProps> = (prop) => {
-  const [bmilist, setBMIlist] = useState([])
-  const { data, height, width } = prop;
+  // const [bmilist, setBMIlist] = useState([])
+  const [data, setData] = useState<any>([])
+  const { height, width } = prop;
   const displayData: AreaData[] = []
   const handleReference = useCallback((ref: IChartApi) => {
     ref?.timeScale().fitContent();
+  }, []);
+  const dispatch = useDispatch();
+  const tempAccountId = useSelector(accountId);
+  const Ledger2 = useLedger();
+
+  useEffect(() => {
+    findBMI(tempAccountId, Ledger2)
+      .then((res) => {
+        // data = res
+        setData(res)
+        console.log("data", typeof res)
+        console.log("data", initialData)
+      })
+
   }, []);
 
   // const genBMIlist 
 
   useEffect(() => {
     console.log('data', data)
+    // console.log('data', typeof data[0].time)
+    // console.log('data', typeof initialData)
+    console.log('data', typeof initialData[0].time)
     if (data) {
       displayData.push(...data)
     }
-    console.log('data', initialData)
+    console.log('displayData', displayData)
+
   }, [data])
+
+  
 
 
   const options = {
@@ -145,29 +170,31 @@ const CustomTradingViewChart: React.FC<ChartProps> = (prop) => {
 
   return (
     <Chart {...options} ref={handleReference}>
-      <AreaSeries 
-        {...areaSeriesInitialOptions} 
-        data={initialData}
-        markers={initialData.map((item, index) => {
-          return {
-            time: item.time,
-            position: 'inBar',
-            color: initialData.length - 1 === index ? '#39b3af' : '#687074',
-            shape: 'circle',
-            // text: item.value,
-            // size: 1,
-            // shape: 'arrowDown',
-            // text: 'test',
-          }})
-        }
-      >
-        <PriceLine 
-          price={26.5} 
-          color={'#39b3af'} 
-          lineWidth={2} 
-          lineStyle={LineStyle.LargeDashed} 
-        />
-      </AreaSeries>
+      {data && (
+        <AreaSeries 
+          {...areaSeriesInitialOptions} 
+          data={data}
+          markers={data.map((item: any, index: any) => {
+            return {
+              time: item.time,
+              position: 'inBar',
+              color: data.length - 1 === index ? '#39b3af' : '#687074',
+              shape: 'circle',
+              // text: item.value,
+              // size: 1,
+              // shape: 'arrowDown',
+              // text: 'test',
+            }})
+          }
+        >
+          <PriceLine 
+            price={26.5} 
+            color={'#39b3af'} 
+            lineWidth={2} 
+            lineStyle={LineStyle.LargeDashed} 
+          />
+        </AreaSeries>
+      )}
     </Chart>
   )
 }

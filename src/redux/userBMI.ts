@@ -6,17 +6,17 @@ import { accountId } from './account';
 import { useSelector } from "react-redux";
 
 export interface BMI_Day {
-  timeStamp: number;
-  BMI: number;
+  time: string;
+  value: number;
 }
 
 
 export interface UserBMIState {
-  userBMI: string;
+  userBMI: BMI_Day[];
 }
 
 const initialState: UserBMIState = {
-  userBMI: '',
+  userBMI:[],
 };
 
 
@@ -28,8 +28,8 @@ export const userBMISlice = createSlice({
   name: "selfieImage",
   initialState,
   reducers: {
-    // setBMI: (state, action: PayloadAction<BMI_Day[]>) => {
-    setBMI: (state, action: PayloadAction<string>) => {
+    setBMI: (state, action: PayloadAction<BMI_Day[]>) => {
+    // setBMI: (state, action: PayloadAction<string>) => {
       // state is imagePath
       state.userBMI = action.payload;
     },

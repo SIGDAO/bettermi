@@ -70,7 +70,7 @@ return(
     <div style={bgStyle}>
     <div style={centerLayoutStyle}>
     <div className="container-center-horizontal">
-    <ShortTitleBar title="Marketplace" />
+    <ShortTitleBar title="My NFTs" />
       <div className="bettermidapp-mimi-nfts-1 screen">
         <img className="bg-ipEwgj bg" src={`${process.env.PUBLIC_URL}/img/challengeCompleted/bg-10@1x.png`} alt="BG" />
         <div className="bars-status-bar-i-phone-light-ipEwgj bars-status-bar-i-phone-light">

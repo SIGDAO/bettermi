@@ -123,7 +123,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
               <div className="signdao_tokengradient-kxjIEt signdao_tokengradient">
                 <div className="x441-e5x8kp x441"></div>
                 <div className="x442-e5x8kp x442"></div>
-                <img className="x880-e5x8kp x880" src={`${process.env.PUBLIC_URL}/img/home/file---880@1x.png`} alt="880" />
+                <img className="x880-e5x8kp x880" src={`${process.env.PUBLIC_URL}/img/file---880-1x-png-10@1x.png`} alt="880" />
               </div>
             </div>
           </div>
