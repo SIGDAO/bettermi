@@ -1,152 +1,193 @@
 import * as React from 'react';
-import './allMission.css';
-import { CenterLayout } from '../../components/layout';
-import { Link } from 'react-router-dom';
+import './allMission.css'
+import CSS from 'csstype';
 import { BackButton } from '../../components/button';
-import { TransferToken } from '../../components/transferToken';
-import { useLedger } from '../../redux/useLedger';
-import { AppContext } from '../../redux/useContext';
-import { useContext } from 'react';
-import { accountId } from '../../redux/account';
-import { useSelector } from 'react-redux';
-import { walletNodeHost } from '../../redux/wallet';
-interface IAllMissionProps {
+
+interface IChallengeCompletedProps {
 }
 
-const AllMission: React.FunctionComponent<IAllMissionProps> = (props) => {
-const ledger = useLedger();
-const {appName,Wallet,Ledger} = useContext(AppContext);
-const userAccountId = useSelector(accountId);
-const nodeHost = useSelector(walletNodeHost);
+const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (props) => {
+  const mobile = process.env.REACT_APP_MOBILE === 'true';
+  let height : string | number
+  let width : string | number;
+  if (mobile) { 
+    height = "844px";
+    width = "390px";
+  // display in ipad air size
+  } else {
+    height = "100vh";
+    width = "820px";
+  }
+  const bgStyle : CSS.Properties = mobile ? 
+  {
+    'background': `transparent`,
+  }
+  :
+  {
+    'position': 'fixed',
+    'background': `linear-gradient(112deg, #221D4B 0%, #171717 100%)`,
+    'boxShadow': '0px 3px 30px var(--royal-blue)',
+    'width': '100vw',
+    'minHeight': '100vh',
+    'height': '100%',
+    'overflowY': 'auto',
+    'zIndex': '1',
+    'overflowX': 'hidden',
+    'display':'flex!important',
+  }
+  const centerLayoutStyle : CSS.Properties = {
+    // 'backgroundPosition': 'center',
+    'minHeight': `${height}`, // ipad size
+    'width': `min(100vw,${width})`, // ipad size
+    'height': '100%',
+    'margin': 'auto',
+     'display': 'flex',
+     //'justifyContent': 'center',
+     //'alignItems': 'center',
+    //'backgroundColor': 'green',
+    'flexDirection' : 'column',
+  }
+  const customStyle: CSS.Properties = {
+    'alignItems': 'flex-start',
+    'cursor': 'pointer',
+    'display': 'flex',
+    'height': '44px',
+    'left': '16px',
+    'minWidth': '44px',
+    'paddingLeft': '14px',
+    'position': 'relative',
+    'top': '44px',
+  }
 
-  const content : JSX.Element = (
-
-<>
-<BackButton/>
-  <body style={{ marginTop: 0, top:-10 }}>
-    <div className="connectWallet-layout">
-      <div id='connectWallet-container'>
-      
-    <input type="hidden" id="anPageName" name="page" value="bettermidapp-all-missions-1" />
-    <div className="container-center-horizontal">
-      <div className="bettermidapp-all-missions-1 screen">
-        <img className="bg-zeeUeL bg" src={`${process.env.PUBLIC_URL}/img/allMission/bg-10@1x.png`} alt="BG" />
-        <div className="title-bar-zeeUeL">
-          <img className="bg-hE0gWG bg" src={`${process.env.PUBLIC_URL}/img/allMission/bg-15@1x.png"`} alt="BG" />
-          <div className="bars-status-bar-i-phone-light-hE0gWG">
-            <div className="frame-Q1ECYx"></div>
-            <div className="status-bar-Q1ECYx">
-              <div className="battery-wcUMjJ">
-                <div className="border-xbcVxx"></div>
-                <img className="cap-xbcVxx" src={`${process.env.PUBLIC_URL}/img/allMission/cap-10@1x.png`} alt="Cap" />
-                <div className="capacity-xbcVxx"></div>
-              </div>
-              <img className="wifi-wcUMjJ" src={`${process.env.PUBLIC_URL}/img/allMission/wifi-10@1x.png`} alt="Wifi" />
-              <img
-                className="cellular-connection-wcUMjJ"
-                src={`${process.env.PUBLIC_URL}/img/allMission/cellular-connection-10@1x.png`}
-                alt="Cellular Connection"
-              />
-              <div className="time-style-wcUMjJ"><div className="time-JkFqIF">9:41</div></div>
-            </div>
+  return (
+    <div style={bgStyle}>
+      <div style={centerLayoutStyle}>
+      <div className = "navbarChallengeComplete">
+        <div className = "container1">
+        <a href="javascript:history.back()">
+          <div className="icon-arrow-left" style={customStyle} >
+            <img className="icon-arrow-left-1" src={`${process.env.PUBLIC_URL}/img/connectSuccess/icon-arrow-left-8@1x.png`} alt="icon-arrow-left" />
           </div>
-          <div className="feature-missions-hE0gWG inter-semi-bold-white-18px">Feature Missions</div>
-          <img className="seperat-line-hE0gWG seperat-line" src={`${process.env.PUBLIC_URL}/img/allMission/seperat-line-11@1x.png`} alt="Seperat line" />
-          <div className="al-hE0gWG">
-            <div className="all-NazKCe inter-semi-bold-white-15px">All</div>
-            <img className="seperat-line-NazKCe seperat-line" src={`${process.env.PUBLIC_URL}/img/allMission/seperat-line-14@1x.png`} alt="Seperat line" />
-          </div>
-          <div className="ongoing-hE0gWG ongoing">
-            <div className="ongoing-J9Iiuh ongoing inter-semi-bold-white-15px">Ongoing</div>
-          </div>
-          <div className="history-hE0gWG history">
-            <div className="history-5DHFLO history inter-semi-bold-white-15px">History</div>
-          </div>
-          <div className="ic_help_24px-hE0gWG ic_help_24px">
-            <img className="ic_help_24px-WqWzGy ic_help_24px" src={`${process.env.PUBLIC_URL}/img/allMission/ic-help-24px-1@1x.png`} alt="ic_help_24px" />
-          </div>
-          <Link to="javascript:history.back()">
-            <div className="icon-arrow-left-hE0gWG icon-arrow-left"> 
-            
-              {/* <img
-                className="icon-arrow-left-e8egrl icon-arrow-left"
-                src={`${process.env.PUBLIC_URL}/img/allMission/icon-arrow-left-10@1x.png`}
-                alt="icon-arrow-left"
-  /> */}
-              </div>
-              </Link>
+        </a>
         </div>
-        <div className="earning-rewards-zeeUeL">EARNING REWARDS</div>
-        
-        <Link to="bettermidapp-challenges-1.html">
-          <div className="rewards-cards-zeeUeL rewards-cards">
-            <img className="card_bg" src={`${process.env.PUBLIC_URL}/img/allMission/card-bg-1@1x.png`} alt="Card_bg" />
-            <div className="challenges-x-9-hacks-XlExkZ inter-semi-bold-white-18px">Challenges X 9 Hacks</div>
-            <img className="nft_-avatar" src={`${process.env.PUBLIC_URL}/img/allMission/nft-avatar-1@1x.png`} alt="NFT_Avatar" />
-            <div className="x1-3mins-each-XlExkZ inter-normal-cadet-blue-12px">1-3mins/ Each</div>
-            <div className="ic_next">
-              <img className="ic_chevron_right_24px" src={`${process.env.PUBLIC_URL}/img/allMission/ic-chevron-right-24px-1@1x.png`} alt="ic_chevron_right_24px" />
-            </div>
-            <div className="sigdao-score-XlExkZ sigdao-score">
-              <div className="x10-cQkx9w x10 inter-semi-bold-keppel-14px">+5.25 - 15.75</div>
-              <div className="signdao_tokengradient">
-                <div className="x441"></div>
-                <div className="x442"></div>
-                <img className="x880" src={`${process.env.PUBLIC_URL}/img/allMission/file---880-1x-png-10@1x.png`} alt="880" />
+        <div className = "container2">
+          <div></div>
+          <div className = "banner">
+
+            <div className = "title">Feature Mission</div>
+              <div className = "iconBar">
+                <img style = {{height:"20px", alignSelf:"center"}} src = {`${process.env.PUBLIC_URL}/img/allMission/ic-help-24px-1@1x.png`}></img>
               </div>
-            </div></div></Link>
-        <div className="rewards-cards-w5iKeM rewards-cards">
-          <img className="card_bg" src={`${process.env.PUBLIC_URL}/img/allMission/card-bg-1@1x.png`} alt="Card_bg" />
-          <div className="weekly-meditation-section-7tRurY inter-semi-bold-white-18px">Weekly Meditation Section</div>
-          <img className="nft_-avatar" src="img/allMission/nft-avatar-2@1x.png" alt="NFT_Avatar" />
-          <div className="saturday-only-7tRurY inter-normal-cadet-blue-12px">Saturday Only</div>
-          <div className="ic_next">
-            <img className="ic_chevron_right_24px" src={`${process.env.PUBLIC_URL}/img/allMission/ic-chevron-right-24px-1@1x.png`} alt="ic_chevron_right_24px" />
           </div>
-          <div className="sigdao-score-7tRurY sigdao-score">
-            <div className="x10-IZA9fL x10 inter-semi-bold-keppel-14px">+5.25 - 5.00</div>
-            <div className="signdao_tokengradient">
-              <div className="x441"></div>
-              <div className="x442"></div>
-              <img className="x880" src={`${process.env.PUBLIC_URL}/img/allMission/file---880-1x-png-10@1x.png`} alt="880" />
-            </div>
+          <div className = "titleBar">
+            <button className = "button1">All</button>
+            <button className = "button2">Ongoing</button>
+            <button className = "button3">History</button>
           </div>
         </div>
-        <div  onClick={() => TransferToken(nodeHost,userAccountId)} className="rewards-cards-CSqdLT rewards-cards">
-          <img className="card_bg" src={`${process.env.PUBLIC_URL}/img/allMission/card-bg-1@1x.png`} alt="Card_bg" />
-          <div className="daily-walking-mission-0SP1ID inter-semi-bold-white-18px">Daily Walking Mission</div>
-          <img className="nft_-avatar" src={`${process.env.PUBLIC_URL}/img/allMission/nft-avatar-3@1x.png`} alt="NFT_Avatar" />
-          <div className="step-count-0SP1ID inter-normal-cadet-blue-12px">Step Count</div>
-          <div className="ic_next">
-            <img className="ic_chevron_right_24px" src={`${process.env.PUBLIC_URL}/img/allMission/ic-chevron-right-24px-1@1x.png`} alt="ic_chevron_right_24px" />
-          </div>
-          <div className="sigdao-score-0SP1ID sigdao-score">
-            <div className="x10-FlWcuP x10 inter-semi-bold-keppel-14px">+5.25 - 15.75</div>
-            <div className="signdao_tokengradient">
-              <div className="x441"></div>
-              <div className="x442"></div>
-              <img className="x880" src={`${process.env.PUBLIC_URL}/img/allMission/file---880-1x-png-10@1x.png`} alt="880" />
-            </div>
-          </div>
-          <div className="coming-soon-0SP1ID">
-            <img className="layer-EvrnxJ" src={`${process.env.PUBLIC_URL}/img/allMission/layer-3@1x.png`} alt="Layer" />
-            <div className="ic_locked-EvrnxJ ic_locked">
-              <img className="ic_locked-YzvI48 ic_locked" src={`${process.env.PUBLIC_URL}/img/allMission/ic-locked-1@1x.png`} alt="ic_locked" />
-            </div>
-          </div>
+        <div className = "container3" >
+
         </div>
       </div>
+{/* The body part, which are the buttons */}
+    <div className  = "body">
+        <div className = "body1">
+        </div>
+        <div className = "body2">
+          <div className = "rewardTitle">Reward Progress</div>
+          <button className = "challengeCompletedLink">
+            <img className = "buttonIconChallengeCompleted" src={`${process.env.PUBLIC_URL}/img/allMission/nft-avatar-1@1x.png`} alt="Card_bg"></img>
+            <div className = "descriptionChallengeCompleted">
+              <div className = "descriptionTitleChallengeCompleted">
+                Master Collector
+                </div>
+                <div className = "descriptionBodyChallengeCompleted">
+                  Acquire 3 NFTs from our collection
+                </div>
+                <div className = "descriptionBottomBodyChallengeCompleted">
+                  <button className = "descriptionBottomCountChallengeComplete">
+                    0 / 3
+                  </button>
+                  <img src={`${process.env.PUBLIC_URL}/img/allMission/ic-chevron-right-24px-1@1x.png`}></img>
+                </div>
+            </div>
+          </button>
+          <button className = "challengeCompletedLink">
+          <img className = "buttonIconChallengeCompleted" src={`${process.env.PUBLIC_URL}/img/allMission/nft-avatar-1@1x.png`} alt="Card_bg"></img>
+          <div className = "descriptionChallengeCompleted">
+              <div className = "descriptionTitleChallengeCompleted">
+                Master Collector
+                </div>
+                <div className = "descriptionBodyChallengeCompleted">
+                  Acquire 3 NFTs from our collection
+                </div>
+                <div className = "descriptionBottomBodyChallengeCompleted">
+                  <button className = "descriptionBottomCountChallengeComplete">
+                    0 / 3
+                  </button>
+                  <img src={`${process.env.PUBLIC_URL}/img/allMission/ic-chevron-right-24px-1@1x.png`}></img>
+                </div>
+            </div>
+          </button>
+          <button className = "challengeCompletedLink">
+          <img className = "buttonIconChallengeCompleted" src={`${process.env.PUBLIC_URL}/img/allMission/nft-avatar-1@1x.png`} alt="Card_bg"></img>
+          <div className = "descriptionChallengeCompleted">
+              <div className = "descriptionTitleChallengeCompleted">
+                Master Collector
+                </div>
+                <div className = "descriptionBodyChallengeCompleted">
+                  Acquire 3 NFTs from our collection
+                </div>
+                <div className = "descriptionBottomBodyChallengeCompleted">
+                  <button className = "descriptionBottomCountChallengeComplete">
+                    0 / 3
+                  </button>
+                  <img src={`${process.env.PUBLIC_URL}/img/allMission/ic-chevron-right-24px-1@1x.png`}></img>
+                </div>
+            </div>
+          </button>
+          <button className = "challengeCompletedLink">
+          <img className = "buttonIconChallengeCompleted" src={`${process.env.PUBLIC_URL}/img/allMission/nft-avatar-1@1x.png`} alt="Card_bg"></img>
+          <div className = "descriptionChallengeCompleted">
+              <div className = "descriptionTitleChallengeCompleted">
+                Master Collector
+                </div>
+                <div className = "descriptionBodyChallengeCompleted">
+                  Acquire 3 NFTs from our collection
+                </div>
+                <div className = "descriptionBottomBodyChallengeCompleted">
+                  <button className = "descriptionBottomCountChallengeComplete">
+                    0 / 3
+                  </button>
+                  <img src={`${process.env.PUBLIC_URL}/img/allMission/ic-chevron-right-24px-1@1x.png`}></img>
+                </div>
+            </div>
+          </button>
+          <button className = "challengeCompletedLink">
+          <img className = "buttonIconChallengeCompleted" src={`${process.env.PUBLIC_URL}/img/allMission/nft-avatar-1@1x.png`} alt="Card_bg"></img>
+          <div className = "descriptionChallengeCompleted">
+              <div className = "descriptionTitleChallengeCompleted">
+                Master Collector
+                </div>
+                <div className = "descriptionBodyChallengeCompleted">
+                  Acquire 3 NFTs from our collection
+                </div>
+                <div className = "descriptionBottomBodyChallengeCompleted">
+                  <button className = "descriptionBottomCountChallengeComplete">
+                    0 / 3
+                  </button>
+                  <img src={`${process.env.PUBLIC_URL}/img/allMission/ic-chevron-right-24px-1@1x.png`}></img>
+                </div>
+            </div>
+          </button>
+        </div>
+        <div className = "body3">
+        </div>
+      </div>
+
+      </div>
     </div>
-    </div>
-    </div><button  onClick={() => TransferToken(nodeHost,userAccountId)}>ghhihihihisdfisd</button>
-  </body>
-  </>
-
-
   );
-  return (
-<></>
-  );
-};
+}
 
-export default AllMission;
+export default ChallengeCompleted;

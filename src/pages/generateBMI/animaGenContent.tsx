@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { BackButton } from '../../components/button';
+import { BackButton, DisabledButton } from '../../components/button';
 import { GenderSelect } from '../../components/select';
 import { useNavigate } from 'react-router-dom';
 import { useLedger } from '../../redux/useLedger';
@@ -25,6 +25,7 @@ interface IAnimaGenContentProps {
 // just look at the IAnimaGenContentProps, thats all u need to know
 const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) => {
   const {BMI, selfie} = props;
+  const [minted, setMinted] = React.useState(false); // whether the user has minted the NFT
   const navigate = useNavigate();
   const ledger = useLedger();
   const {appName,Wallet,Ledger} = useContext(AppContext);
@@ -33,9 +34,18 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   const codeHashId = "7457358473503628676";
   const gender = useSelector(selectCurrentGender)
 
+  const handleMint = async () => {
+  }
+
   console.log(ledger);
   const confirm = async () => {
+    if (minted){
+      console.log('not minted');
+      return
+    }
+
     if(ledger){
+      setMinted(true);
       
       const asset = await ledger.asset.getAssetHolders({assetId:"3862155318820066741"});
       asset.accountAssets.map((obj)=>{
@@ -53,54 +63,59 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
       console.log(ourContract);
       console.log(ourContract.ats[0]);
       
-      if(ourContract.ats[0] == null){
-        const initializeContract = await ledger.contract.publishContractByReference({
-          name: "BMI",
-          description: `{'bmi': ${BMI}, 'gender': ${gender}, 'time': ${new Date()}}`,  //the first data is hidden in the description
-          referencedTransactionHash:"62502D4233CA88EB7896031ACF4D729F4C6A570187161CA00FF291ED382769FD",
-          feePlanck:"30000000",
-          senderPublicKey:publicKey,
-          deadline:1440,}) as UnsignedTransaction;
-          console.log(initializeContract);
-        await Wallet.Extension.confirm(initializeContract.unsignedTransactionBytes);
-        while(ourContract.ats[0] == null){
-          ourContract = await ledger.contract.getContractsByAccount({
-            accountId: userAccountId,
-            machineCodeHash: codeHashId,
-
-            });
-          console.log(ourContract);
+      try {
+        if(ourContract.ats[0] == null){
+          const initializeContract = await ledger.contract.publishContractByReference({
+            name: "BMI",
+            description: `{'bmi': ${BMI}, 'gender': ${gender}, 'time': ${new Date()}}`,  //the first data is hidden in the description
+            referencedTransactionHash:"62502D4233CA88EB7896031ACF4D729F4C6A570187161CA00FF291ED382769FD",
+            feePlanck:"30000000",
+            senderPublicKey:publicKey,
+            deadline:1440,}) as UnsignedTransaction;
+            console.log(initializeContract);
+          await Wallet.Extension.confirm(initializeContract.unsignedTransactionBytes);
+          while(ourContract.ats[0] == null){
+            ourContract = await ledger.contract.getContractsByAccount({
+              accountId: userAccountId,
+              machineCodeHash: codeHashId,
+  
+              });
+            console.log(ourContract);
+          }
+    /*
+          const sendBMI = await ledger.message.sendMessage({
+            message: BMI_test,
+            messageIsText: true,
+            recipientId: ourContract.ats[0].at,
+            feePlanck: "1000000",
+            senderPublicKey: publicKey,
+            deadline: 1440,
+            }) as UnsignedTransaction;
+          await Wallet.Extension.confirm(sendBMI.unsignedTransactionBytes);*/
+            
+  
+        } else{ //check whether the user has registered an account
+          const sendBMI = await ledger.message.sendMessage({
+            message: JSON.stringify({
+              'bmi': BMI,
+              'gender': gender,
+              'time': new Date(),
+            }) ,
+            messageIsText: true,
+            recipientId: ourContract.ats[0].at,
+            feePlanck: "1000000",
+            senderPublicKey: publicKey,
+            deadline: 1440,
+        }) as UnsignedTransaction;
+        await Wallet.Extension.confirm(sendBMI.unsignedTransactionBytes);
         }
-  /*
-        const sendBMI = await ledger.message.sendMessage({
-          message: BMI_test,
-          messageIsText: true,
-          recipientId: ourContract.ats[0].at,
-          feePlanck: "1000000",
-          senderPublicKey: publicKey,
-          deadline: 1440,
-          }) as UnsignedTransaction;
-        await Wallet.Extension.confirm(sendBMI.unsignedTransactionBytes);*/
-          
-
-      } else{ //check whether the user has registered an account
-        const sendBMI = await ledger.message.sendMessage({
-          message: JSON.stringify({
-            'bmi': BMI,
-            'gender': gender,
-            'time': new Date(),
-          }) ,
-          messageIsText: true,
-          recipientId: ourContract.ats[0].at,
-          feePlanck: "1000000",
-          senderPublicKey: publicKey,
-          deadline: 1440,
-      }) as UnsignedTransaction;
-      await Wallet.Extension.confirm(sendBMI.unsignedTransactionBytes);
+        console.log('confirm');
+        await TransferNFTOwnership(ledger,userAccountId,Wallet);
+        navigate('/generateFreeNFT');
+      } catch (error) {
+        console.log(error);
+        setMinted(false);
       }
-      console.log('confirm');
-      await TransferNFTOwnership(ledger,userAccountId,Wallet);
-      navigate('/generateFreeNFT');
     }
   }
 
@@ -176,9 +191,14 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
         <p className="your-selection-cannot-be-changed-later inter-normal-white-15px">
           Your selection cannot be changed later.
         </p>
-        <div className="button_-confirm" onClick={confirm}>
-          <div className="confirm-bmi inter-semi-bold-white-15px" >Confirm</div>
-        </div>
+        {minted ? 
+          <DisabledButton text="connecting..." height='56px' width='248px' />
+        :
+          <div className="button_-confirm" onClick={confirm}>
+            <div className="confirm-bmi inter-semi-bold-white-15px" >Mint</div>
+          </div>
+        }
+        
       </div>
     </>
   );

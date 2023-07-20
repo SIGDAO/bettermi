@@ -104,7 +104,7 @@ tune title bar
   /* box-shadow: 0px 3px 30px var(--royal-blue); */
   position: fixed;
   top: calc(100% - 94px);
-  width: 820px;  
+  width: 744px;  
   height: 93px;
   display: flex;
   justify-content: center;
