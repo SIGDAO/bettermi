@@ -1,6 +1,6 @@
 .title-bar-container {
-  /* background: linear-gradient(112deg, #221D4B 0%, #171717 100%);
-  box-shadow: 0px 3px 30px var(--royal-blue); */
+  background: linear-gradient(112deg, #221D4B 0%, #171717 100%);
+  box-shadow: 0px 3px 30px var(--royal-blue);
   height: 88px;
   left: calc(50.00% - 195px);
   position: fixed;
