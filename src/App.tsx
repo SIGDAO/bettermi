@@ -33,8 +33,12 @@ import RewardDetail from './pages/rewardDetail/rewardDetail';
 import SelfieToEarn from './pages/selfieToEarn/selfieToEarn';
 import Profile from './pages/profile/profile';
 import Marketplace from './pages/marketplace/marketplace';
+import { loadState, saveState } from './redux/sessionStorage';
 // import Testing from './pages/selfieToEarn/testing';
 
+store.subscribe(() => {
+  saveState(store.getState());
+});
 
 
 
