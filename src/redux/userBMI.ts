@@ -4,9 +4,11 @@ import { clear } from "console";
 import { useLedger } from './useLedger';
 import { accountId } from './account';
 import { useSelector } from "react-redux";
+import { UTCTimestamp } from "lightweight-charts";
+import { findBMI } from "../components/findBMI";
 
 export interface BMI_Day {
-  time: string;
+  time: string | UTCTimestamp | number;
   value: number;
 }
 
@@ -19,6 +21,11 @@ const initialState: UserBMIState = {
   userBMI:[],
 };
 
+
+export interface GetblockchainBMIProps {
+  tempAccountId: string,
+  Ledger2: any,
+}
 
 
 
@@ -33,10 +40,14 @@ export const userBMISlice = createSlice({
       // state is imagePath
       state.userBMI = action.payload;
     },
-    // getblockchainBMI: async (state, action: PayloadAction<BMI_Day[]>) => {
-      
-    //   state.userBMI = await FindBMI();
-    // }, 
+    getblockchainBMI: (state, action: PayloadAction<GetblockchainBMIProps>) => {
+      findBMI(action.payload.tempAccountId, action.payload.Ledger2)
+        .then((res) => {
+          console.log("res", res);
+          state.userBMI = res;
+        })
+      // state.userBMI = 
+    }, 
   },
 });
 

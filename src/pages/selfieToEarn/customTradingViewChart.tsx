@@ -11,6 +11,7 @@ import { findBMI } from "../../components/findBMI";
 import { useSelector, useDispatch } from "react-redux";
 import { accountId } from "../../redux/account";
 import { useLedger } from "../../redux/useLedger";
+import { userBMISlice } from "../../redux/userBMI";
 
 interface ChartProps {
   data?: { time: string; value: number }[];
@@ -104,14 +105,16 @@ const CustomTradingViewChart: React.FC<ChartProps> = (prop) => {
   const Ledger2 = useLedger();
 
   useEffect(() => {
+    // dispatch(userBMISlice.actions.getblockchainBMI({tempAccountId: tempAccountId, Ledger2: Ledger2}))
     findBMI(tempAccountId, Ledger2)
       .then((res) => {
         // data = res
+        // const displayData = [res]
         setData(res)
         console.log("data", typeof res)
         console.log("data", initialData)
+        dispatch(userBMISlice.actions.setBMI(res))
       })
-
   }, []);
 
   // const genBMIlist 
@@ -174,18 +177,18 @@ const CustomTradingViewChart: React.FC<ChartProps> = (prop) => {
         <AreaSeries 
           {...areaSeriesInitialOptions} 
           data={data}
-          markers={data.map((item: any, index: any) => {
-            return {
-              time: item.time,
-              position: 'inBar',
-              color: data.length - 1 === index ? '#39b3af' : '#687074',
-              shape: 'circle',
-              // text: item.value,
-              // size: 1,
-              // shape: 'arrowDown',
-              // text: 'test',
-            }})
-          }
+          // markers={data.map((item: any, index: any) => {
+          //   return {
+          //     time: item.time,
+          //     position: 'inBar',
+          //     color: data.length - 1 === index ? '#39b3af' : '#687074',
+          //     shape: 'circle',
+          //     // text: item.value,
+          //     // size: 1,
+          //     // shape: 'arrowDown',
+          //     // text: 'test',
+          //   }})
+          // }
         >
           <PriceLine 
             price={26.5} 

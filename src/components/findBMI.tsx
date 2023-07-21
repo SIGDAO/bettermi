@@ -2,6 +2,7 @@ import { useLedger } from '../redux/useLedger';
 import { accountId } from '../redux/account';
 import { useSelector } from "react-redux";
 import { BMI_Day } from '../redux/userBMI';
+import { UTCTimestamp } from 'lightweight-charts';
 
 // const options = { 
 //   year: 'numeric', 
@@ -48,7 +49,7 @@ export const findBMI = async (tempAccountId: string, Ledger2: any) => {
       // const minutes = ('0' + tempDate.getMinutes()).slice(-2);
       // let dateFormat: string = `${tempDate.getFullYear()}-${month}-${day} ${hours}:${minutes}`;
 
-      let dateFormat = Math.floor((tempDate.getTime() / 1000)).toString();
+      let dateFormat:number = Math.floor((tempDate.getTime() / 1000));
       // let dateFormat = tempDate.getTime()
       console.log(dateFormat);
 
@@ -64,7 +65,7 @@ export const findBMI = async (tempAccountId: string, Ledger2: any) => {
 
     console.log(BMI);
 
-    return [BMI];
+    return BMI;
   }
-  return "fidfjosifjs";
+  return [];
 }
