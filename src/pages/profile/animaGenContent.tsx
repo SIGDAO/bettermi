@@ -91,10 +91,9 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
                 ♉️&nbsp;&nbsp;|&nbsp;&nbsp;29&nbsp;&nbsp;|&nbsp;&nbsp;PERSONAL TRAINER
             </p>
           </div>
-          {/* <a href="bettermidapp-mimi-nfts-1.html"
-            > */}
+          <Link to={'/myNftList'}>
             <div className="view-all-YwZqds inter-medium-royal-blue-14px">View all</div>
-          {/* </a> */}
+          </Link>
           <img className="nft_-avatar-YwZqds nft_-avatar" src="img/profile/nft-avatar-12@1x.png" alt="NFT_Avatar" />
       </div>
       <MenuBar/>

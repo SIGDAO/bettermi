@@ -96,6 +96,8 @@ css
 <!-- making issue -->
 1. the loading time of BMI service may take 30 second, do we need a loading screen for that
 
+where we can found the goal of the BMI goal
+
 tune title bar
   
 .menu-bar-layout {

@@ -60,10 +60,12 @@
   top: 0px;
   white-space: nowrap;
   width: 252px;
+  margin: 0;
 }
 
 .bettermidapp-marketplace-1 .see-all-vbUx2m {
   top: 4px;
+  margin: 0;
 }
 
 .bettermidapp-marketplace-1 .discover-thousands-o-vbUx2m {
@@ -82,6 +84,7 @@
   top: calc(36.45% - 6px);
   white-space: nowrap;
   width: 291px;
+  margin: 0;
 }
 
 .bettermidapp-marketplace-1 .x7-vbUx2m::-webkit-scrollbar {
@@ -92,7 +95,7 @@
 .bettermidapp-marketplace-1 .x7-vbUx2m {
   background-color: transparent;
   bottom: 0px;
-  height: 40px;
+  height: 42px;
   left: 0px;
   mix-blend-mode: normal;
   overflow-x: scroll;
@@ -232,6 +235,7 @@
   text-align: left;
   top: calc(44.69% - 14px);
   width: 152px;
+  margin: 0;
 }
 
 .bettermidapp-marketplace-1 .goal-xzndZB {

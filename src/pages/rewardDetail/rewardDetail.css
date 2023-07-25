@@ -102,6 +102,7 @@
   text-align: left;
   top: calc(23.71% - 24px);
   width: calc(100.00% + 2px);
+  margin: 0;
 }
 
 .bettermidapp-rewards-redeem-master-collector-1 .better-mi-reserves-t-tOBH5R {
@@ -114,6 +115,7 @@
   position: absolute;
   text-align: left;
   width: 100%;
+  margin: 0;
 }
 
 .bettermidapp-rewards-redeem-master-collector-1 .score-bar_3-tOBH5R {
@@ -194,7 +196,7 @@
   letter-spacing: 0.00px;
   line-height: 15px;
   position: absolute;
-  text-align: center;
+  text-align: left;
   top: 49px;
   white-space: nowrap;
   width: 64px;
@@ -306,4 +308,5 @@
   text-align: left;
   top: 62px;
   width: calc(100% + 2px);
+  margin: 0;
 }

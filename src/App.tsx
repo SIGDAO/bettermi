@@ -34,7 +34,7 @@ import SelfieToEarn from './pages/selfieToEarn/selfieToEarn';
 import Profile from './pages/profile/profile';
 import Marketplace from './pages/marketplace/marketplace';
 import { loadState, saveState } from './redux/sessionStorage';
-// import Testing from './pages/selfieToEarn/testing';
+import Testing from './pages/testing/testing';
 
 store.subscribe(() => {
   saveState(store.getState());
@@ -69,7 +69,7 @@ function App() {
           <Route path="/selfieToEarn" element={<SelfieToEarn/>} />
           <Route path="/profile" element={<Profile/>} />
           <Route path="/marketplace" element={<Marketplace/>} />
-          {/* <Route path="/testing" element={<Testing/>} /> */}
+          <Route path="/testing" element={<Testing/>} />
           <Route path="*" element={<Navigate to="/home" />} />
         </Routes>
       </ReduxProvider>  

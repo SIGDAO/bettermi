@@ -4,22 +4,29 @@
 // import { createChart, ColorType } from 'lightweight-charts';
 
 import { Chart, AreaSeries, PriceLine, PriceScale } from "lightweight-charts-react-wrapper";
-import { IChartApi, LineStyle, ColorType, LineWidth, PriceScaleMode, AreaData } from "lightweight-charts";
+import { IChartApi, LineStyle, ColorType, LineWidth, PriceScaleMode, AreaData, SeriesDataItemTypeMap } from "lightweight-charts";
 // PriceScaleModem, 
 import React, { useEffect, useRef, useCallback, useState } from 'react';
+import { findBMI } from "../../components/findBMI";
+import { useSelector, useDispatch } from "react-redux";
+import { accountId } from "../../redux/account";
+import { useLedger } from "../../redux/useLedger";
+import { userBMISlice } from "../../redux/userBMI";
 
 interface ChartProps {
-  data?: { time: any; value: number }[];
+  data?: { time: string; value: number }[];
   height?: number;
   width?: number;
 }
 
 const initialColors = {
-  backgroundColor: 'transparent',
+  backgroundColor: '#0D0D0D',
   lineColor: '#2962FF',
   textColor: 'white',
-  areaTopColor: '#2962FF',
-  areaBottomColor: 'rgba(41, 98, 255, 0.28)',
+  // areaTopColor: '#2962FF',
+  // areaBottomColor: 'rgba(41, 98, 255, 0.28)',
+  areaTopColor: '#4136F1',
+  areaBottomColor: '#8643FF',
 }
 
 const genBMIlist = (option: string) => {
@@ -57,11 +64,11 @@ const genBMIlist = (option: string) => {
 
 
 const initialData = [
-  // { time: '2018-12-22', value: 26.5 },
-  // { time: '2018-12-23', value: 27.5 },
-  // { time: '2018-12-24', value: 25.5 },
-  { time: '2018-12-25', value: 25.5 },
-  { time: '2018-12-26', value: 25.17 },
+  { time: '2018-12-22', value: 26.5 },
+  { time: '2018-12-23', value: 27.5 },
+  { time: '2018-12-24', value: 25.5 },
+  // { time: '2018-07-25', value: 25.5 },
+  // { time: '2018-07-25', value: 25.17 },
   { time: '2018-12-27', value: 28.89 },
   { time: '2018-12-28', value: 25.46 },
   { time: '2018-12-29', value: 23.92 },
@@ -88,22 +95,14 @@ const areaSeriesInitialOptions = {
 
 
 const CustomTradingViewChart: React.FC<ChartProps> = (prop) => {
-  const [bmilist, setBMIlist] = useState([])
-  const { data, height, width } = prop;
+  // const [bmilist, setBMIlist] = useState([])
+  // const [data, setData] = useState<SeriesDataItemTypeMap['Area'][]>()
+  const { height, width, data } = prop;
   const displayData: AreaData[] = []
   const handleReference = useCallback((ref: IChartApi) => {
     ref?.timeScale().fitContent();
   }, []);
-
-  // const genBMIlist 
-
-  useEffect(() => {
-    console.log('data', data)
-    if (data) {
-      displayData.push(...data)
-    }
-    console.log('data', initialData)
-  }, [data])
+  const dispatch = useDispatch();  
 
 
   const options = {
@@ -145,29 +144,31 @@ const CustomTradingViewChart: React.FC<ChartProps> = (prop) => {
 
   return (
     <Chart {...options} ref={handleReference}>
-      <AreaSeries 
-        {...areaSeriesInitialOptions} 
-        data={initialData}
-        markers={initialData.map((item, index) => {
-          return {
-            time: item.time,
-            position: 'inBar',
-            color: initialData.length - 1 === index ? '#39b3af' : '#687074',
-            shape: 'circle',
-            // text: item.value,
-            // size: 1,
-            // shape: 'arrowDown',
-            // text: 'test',
-          }})
-        }
-      >
-        <PriceLine 
-          price={26.5} 
-          color={'#39b3af'} 
-          lineWidth={2} 
-          lineStyle={LineStyle.LargeDashed} 
-        />
-      </AreaSeries>
+      {data && (
+        <AreaSeries 
+          {...areaSeriesInitialOptions} 
+          data={data}
+          markers={data.map((item: any, index: any) => {
+            return {
+              time: item.time,
+              position: 'inBar',
+              color: data.length - 1 === index ? '#39B3AF' : '#4136F1',
+              shape: 'circle',
+              // text: item.value,
+              // size: 1,
+              // shape: 'arrowDown',
+              // text: 'test',
+            }})
+          }
+        >
+          <PriceLine 
+            price={26.5} 
+            color={'#39b3af'} 
+            lineWidth={2} 
+            lineStyle={LineStyle.LargeDashed} 
+          />
+        </AreaSeries>
+      )}
     </Chart>
   )
 }
