@@ -15,6 +15,7 @@ import { useLedger } from '../../redux/useLedger';
 import { findBMI } from '../../components/findBMI';
 import { BMI_Day } from '../../redux/userBMI';
 import { SeriesDataItemTypeMap } from 'lightweight-charts';
+import moment from 'moment';
 // import { useFindBMI } from '../../components/findBMI';
 
 
@@ -158,13 +159,16 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
   
   useEffect(() => {
     // console.log(item)
+
     // forEach(optionList, (item) => {
     //   if (item.option) {
     //     console.log(item.text)
-    //     let bmiList: BMI_Day[] = genBMIlist(item.text)
+    //     let startIndex = data?.length() 
+
+    //     // filtering
     //     console.log(bmiList)
     //     setData(bmiList)
-    //     dispatch(userBMISlice.actions.setBMI(bmiList))
+    //     // dispatch(userBMISlice.actions.setBMI(bmiList))
     //   }
     // })
   }, [ weekOption, monthOption, yearOption, fiveYearOption ])
