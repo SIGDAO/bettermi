@@ -132,15 +132,18 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
   }
 
   useEffect(() => {
-    let res = genBMIlist("5Y")
-    setData(res)
-    // findBMI(tempAccountId, Ledger2)
-    //   .then((res) => {
-    //     // data = res
-    //     // const displayData = [res]
-    //     setData(res)
-    //     // dispatch(userBMISlice.actions.setBMI(res))
-    //   })
+    // testing data
+    // let res = genBMIlist("5Y")
+    // setData(res)
+
+    // real data
+    findBMI(tempAccountId, Ledger2)
+      .then((res) => {
+        // data = res
+        // const displayData = [res]
+        setData(res)
+        // dispatch(userBMISlice.actions.setBMI(res))
+      })
   }, []);
 
   // const genBMIlist 
