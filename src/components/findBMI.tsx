@@ -2,7 +2,8 @@ import { useLedger } from '../redux/useLedger';
 import { accountId } from '../redux/account';
 import { useSelector } from "react-redux";
 import { BMI_Day } from '../redux/userBMI';
-import { UTCTimestamp } from 'lightweight-charts';
+import { UTCTimestamp, SeriesDataItemTypeMap, Time } from 'lightweight-charts';
+// import { SeriesDataItemTypeMap } from 'lightweight-charts/dist/typings/series-options';
 
 // const options = { 
 //   year: 'numeric', 
@@ -30,7 +31,7 @@ export const findBMI = async (tempAccountId: string, Ledger2: any) => {
     const contractId = await Ledger2.contract.getContractsByAccount({ accountId :tempAccountId});
     console.log(contractId);
 
-    for(var i = 0;i < contractId.ats.length;i++){
+    for(let i = 0;i < contractId.ats.length;i++){
         if(contractId.ats[i].machineCodeHashId == "7457358473503628676"){
             contractAddress = contractId.ats[i].at;
             console.log(contractAddress);
@@ -39,9 +40,9 @@ export const findBMI = async (tempAccountId: string, Ledger2: any) => {
     }
     const message = await Ledger2.account.getAccountTransactions({accountId:contractAddress}); //Contract Id
     console.log(message);
-    let BMI:BMI_Day[] = [];
-    message.transactions.map((obj: any)=>{
-      let content = JSON.parse(obj.attachment.message);
+    let BMI:SeriesDataItemTypeMap['Area'][]= [];
+    for(let i = message.transactions.length - 1; i >= 0 ;i--){
+      let content = JSON.parse(message.transactions[i].attachment.message);
       let tempDate = new Date(content.time)
       // const month = ('0' + (tempDate.getMonth() + 1)).slice(-2);
       // const day = ('0' + tempDate.getDate()).slice(-2);
@@ -49,7 +50,7 @@ export const findBMI = async (tempAccountId: string, Ledger2: any) => {
       // const minutes = ('0' + tempDate.getMinutes()).slice(-2);
       // let dateFormat: string = `${tempDate.getFullYear()}-${month}-${day} ${hours}:${minutes}`;
 
-      let dateFormat:number = Math.floor((tempDate.getTime() / 1000));
+      let dateFormat:UTCTimestamp  = Math.floor((tempDate.getTime() / 1000)) as UTCTimestamp;
       // let dateFormat = tempDate.getTime()
       console.log(dateFormat);
 
@@ -59,7 +60,27 @@ export const findBMI = async (tempAccountId: string, Ledger2: any) => {
       // let dateFormat: string = tempDate.getFullYear() + "-" + (tempDate.getMonth()+1) + "-" + tempDate.getDate()
       BMI.push({time: dateFormat, value: Number(content.bmi)});
       // return_Date(Number(obj.timestamp));
-    }); 
+    }
+    // message.transactions.map((obj: any)=>{
+    //   let content = JSON.parse(obj.attachment.message);
+    //   let tempDate = new Date(content.time)
+    //   // const month = ('0' + (tempDate.getMonth() + 1)).slice(-2);
+    //   // const day = ('0' + tempDate.getDate()).slice(-2);
+    //   // const hours = ('0' + tempDate.getHours()).slice(-2);
+    //   // const minutes = ('0' + tempDate.getMinutes()).slice(-2);
+    //   // let dateFormat: string = `${tempDate.getFullYear()}-${month}-${day} ${hours}:${minutes}`;
+
+    //   let dateFormat:UTCTimestamp  = Math.floor((tempDate.getTime() / 1000)) as UTCTimestamp;
+    //   // let dateFormat = tempDate.getTime()
+    //   console.log(dateFormat);
+
+
+    //   // let tempDate = content.time.toLocaleString('en-US', options);
+    //   // console.log(tempDate); // output: "2023-07-20 15:30"
+    //   // let dateFormat: string = tempDate.getFullYear() + "-" + (tempDate.getMonth()+1) + "-" + tempDate.getDate()
+    //   BMI.push({time: dateFormat, value: Number(content.bmi)});
+    //   // return_Date(Number(obj.timestamp));
+    // }); 
 
 
 

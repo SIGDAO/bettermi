@@ -3,9 +3,10 @@
 .bettermidapp-selfie-to-earn-1 {
   background: linear-gradient(180deg, #171717 0%, #291a49 41.22%, #171717 100%);
   background-color: rgba(255,255,255,1.0);
+  /* height: calc(1553px - 350px); */
   height: 1553px;
-  overflow: hidden;
-  overflow-x: hidden;
+  /* overflow: hidden;
+  overflow-x: hidden; */
   position: relative;
   width: 390px;
 }
@@ -674,7 +675,7 @@
 
 .bettermidapp-selfie-to-earn-1 .calender-MUU5YC {
   background-color: transparent;
-  height: 339px;
+  min-height: 339px;
   left: 0px;
   position: absolute;
   top: calc(684px - 21.5px);
@@ -1685,11 +1686,15 @@
 
 .bettermidapp-selfie-to-earn-1 .x16212-MUU5YC {
   background-color: transparent;
-  height: 434px;
+  /* max-height: calc(434px + 95px); */
+  max-height: 434px;
   left: 0px;
   position: absolute;
-  top: 1023px;
+  /* top: calc(1023px + 86px - 21.5px); */
+  top: calc(1023px + 7px );
   width: 390px;
+  border-top: 1px solid var(--cape-cod);
+  background-color: var(--eerie-black);
 }
 
 .bettermidapp-selfie-to-earn-1 .x888-tDsdhu {
@@ -1701,15 +1706,79 @@
   width: 100%;
 }
 
+.record-title-container {
+  display: flex;
+  width: calc(390px - 26px);
+  height: 60px;
+  padding-left: 26px;
+  align-items: center;
+}
+
+.rewards_card-container {
+  width: calc(100% - 16px * 2);
+  height: calc(434px - 60px);
+  overflow: auto;
+  padding: 0 16px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+.display-selected-data-record-container {
+  min-height: 80px;
+  width: 100%;
+  background: var(--woodsmoke);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+}
+
+.trending-container {
+  width: 97px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6.5px;
+}
+
+.trending-text-container {
+  width: 100%;
+  text-align: center;
+}
+
+.day-and-bmi-data-container {
+  width: 188px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6.5px;
+}
+
+.sigdao-reward-container {
+  width: calc(100% - 97px - 188px);
+  height: 100%;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+
 .bettermidapp-selfie-to-earn-1 .records-tDsdhu {
   background-color: transparent;
   height: 23px;
-  left: 26px;
+  /* left: 26px; */
   letter-spacing: 0.00px;
   line-height: 20px;
-  position: absolute;
+  /* position: absolute; */
   text-align: left;
-  top: 20px;
+  /* top: 20px; */
   white-space: nowrap;
   width: 74px;
 }
@@ -1754,10 +1823,6 @@
   position: absolute;
   top: calc(49.93% - 20px);
   width: 81px;
-}
-
-.bettermidapp-selfie-to-earn-1 .x300-1iHrN3 {
-  width: 102.47%;
 }
 
 .bettermidapp-selfie-to-earn-1 .gems-1iHrN3 {
@@ -2428,17 +2493,31 @@
   top: 0px;
 }
 
+.take-a-selfie-button-container {
+  height: calc(185.5px - 21px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 21px;
+}
+
 .bettermidapp-selfie-to-earn-1 .button_-selfie-to-earn-MUU5YC {
   /* background-color: transparent; */
   background: linear-gradient(270deg,  #8743ff 0%, #4136f1 100%);
   border-radius: 15px;
   box-shadow: 0px 10px 30px #1466CC29;
   height: 56px;
-  left: 30px;
-  position: absolute;
-  top: 108px;
+  /* left: 30px; */
+  /* position: absolute; */
+  /* top: 108px; */
   width: 326px;
   cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(326px - 37.25px - 33.04px);
+  padding-left: 37.25px;
+  padding-right: 33.04px;
 }
 
 .bettermidapp-selfie-to-earn-1 .button_bg-u8P1YH {
@@ -2454,24 +2533,23 @@
 .bettermidapp-selfie-to-earn-1 .take-a-selfie-to-earn-u8P1YH {
   background-color: transparent;
   margin: 0;
-  bottom: calc(38.57% - 8px);
-  height: 21px;
+  /* bottom: calc(38.57% - 8px); */
+  /* height: 21px; */
   letter-spacing: 0.00px;
-  line-height: 14px;
-  position: absolute;
-  right: calc(46.02% - 70px);
-  text-align: left;
+  line-height: 16px;
+  /* position: relative; */
+  /* right: calc(46.02% - 70px); */
+  text-align: center;
   white-space: nowrap;
-  width: 153px;
 }
 
 .bettermidapp-selfie-to-earn-1 .ic_selfie-u8P1YH {
   background-color: transparent;
-  bottom: 18px;
+  /* top: 0; */
   height: 23px;
-  left: calc(12.39% - 3px);
+  /* left: calc(12.39% - 3px); */
   object-fit: cover;
-  position: absolute;
+  /* position: relative; */
   width: 25px;
 }
 
@@ -2479,9 +2557,9 @@
   background-color: transparent;
   height: 16px;
   object-fit: cover;
-  position: absolute;
-  right: calc(10.66% - 2px);
-  top: calc(50.00% - 8px);
+  /* position: relative;
+  right: 0;
+  top: calc(50.00% - 8px); */
   width: 16px;
 }
 
@@ -2551,9 +2629,9 @@
 
 .bettermidapp-selfie-to-earn-1 .signdao_tokengradient {
   background-color: transparent;
-  height: 100%;
-  left: 0px;
-  position: absolute;
+  /* height: 100%; */
+  /* left: 0px; */
+  /* position: ; */
   /* top: 1px; */
   width: 17px;
 }
@@ -2793,3 +2871,14 @@
   /* font-size: 12px;
   margin-top: 10px; */
 }
+
+
+.rewards_card-container::-webkit-scrollbar {
+
+  display: none;
+  width: 0;
+}
+/* .rewards_card-container::-webkit-scrollbar-thumb {
+	background-color: #111;
+	border-radius: 20px;
+} */

@@ -14,6 +14,7 @@ import { accountId } from '../../redux/account';
 import { useLedger } from '../../redux/useLedger';
 import { findBMI } from '../../components/findBMI';
 import { BMI_Day } from '../../redux/userBMI';
+import { SeriesDataItemTypeMap } from 'lightweight-charts';
 // import { useFindBMI } from '../../components/findBMI';
 
 
@@ -24,30 +25,40 @@ export type ISelfieToEarnProps = {
 const genBMIlist = (option: string) => {
   let returnList: BMI_Day [] = []
   let today = new Date()
-  console.log(today, "today")
+  // console.log(today, "today")
   let totalDays = 0
   switch (option) {
     case '1W':
       totalDays = 7
+      today = new Date(today.getDate() - totalDays)
       break
     case '1M':
       totalDays = 30
+      today = new Date(today.getDate() - totalDays)
       break
     case '1Y':
       totalDays = 365
+      today = new Date(today.getDate() - totalDays)
       break
     case '5Y':
       totalDays = 365 * 5
+      today = new Date(today.getDate() - totalDays)
       break
     default:
       return []
   }
   for (let i = 0; i < totalDays; i++) {
-    let tempDate = new Date(today.setDate(today.getDate() - 1))
-    let dateFormat: string = tempDate.getFullYear() + "-" + (tempDate.getMonth()+1) + "-" + tempDate.getDate()
+    let tempDate = new Date(today.setDate(today.getDate() + 1))
+    const year = tempDate.getFullYear();
+    const month = ('0' + (tempDate.getMonth() + 1)).slice(-2);
+    const day = ('0' + tempDate.getDate()).slice(-2);
+    const hours = ('0' + tempDate.getHours()).slice(-2);
+    const minutes = ('0' + tempDate.getMinutes()).slice(-2);
+    const formattedDate = `${year}-${month}-${day}`;
 
-    console.log()
-    returnList.push({time: dateFormat, value: Math.floor(Math.random() * 10) + 20.1})
+    // let dateFormat: string = tempDate.getFullYear() + "-" + (tempDate.getMonth()+1) + "-" + tempDate.getDate()
+    // console.log()
+    returnList.push({time: formattedDate, value: Math.floor(Math.random() * 10) + 20.1})
   }
   return returnList
 
@@ -55,16 +66,24 @@ const genBMIlist = (option: string) => {
 
 
 const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
-  const [value, setValue] = useState(new Date());
+  const [value, setValue] = useState(new Date()); // selected day on calendar
+  // const [data, setData] = useState<SeriesDataItemTypeMap['Area'][]>()
+  const [data, setData] = useState<any>()
+  const [daySelectedData, setDaySelectedData] = useState<any>()
   const [weekOption, setweekOption] = useState(true);
   const [monthOption, setmonthOption] = useState(false);
   const [yearOption, setyearOption] = useState(false);
   const [fiveYearOption, setFiveYearOption] = useState(false);
 
-  let bmi:any;
+  const tempAccountId = useSelector(accountId);
+  const Ledger2 = useLedger();
+  
+  const navigate = useNavigate();
+  // demo data
+  const bmi_testing = useSelector(selectBMI) || 35;
+
+
   // var data: BMI_Day[];
-
-
 
   const optionList = [
     {
@@ -99,9 +118,6 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
     })
   }
 
-  const navigate = useNavigate();
-  // demo data
-  const bmi_testing = useSelector(selectBMI) || 35;
 
   function onChange(nextValue: any) {
     setValue(nextValue);
@@ -109,15 +125,36 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
 
   function handleTakeASelfie() {
     if (bmi_testing != 35 ){
-
       console.log('already taken a selfie')
 
     }
   }
 
   useEffect(() => {
-    console.log(value);
-  }, [value]);
+    let res = genBMIlist("5Y")
+    setData(res)
+    // findBMI(tempAccountId, Ledger2)
+    //   .then((res) => {
+    //     // data = res
+    //     // const displayData = [res]
+    //     setData(res)
+    //     // dispatch(userBMISlice.actions.setBMI(res))
+    //   })
+  }, []);
+
+  // const genBMIlist 
+
+  useEffect(() => {
+    // console.log('data', data)
+    // console.log('data', typeof data[0].time)
+    // console.log('data', typeof initialData)
+    // console.log('data', typeof initialData[0].time)
+    // if (data) {
+    //   // displayData.push(...data)
+    // }
+    // console.log('displayData', displayData)
+  }, [data])
+
   
   useEffect(() => {
     // console.log(item)
@@ -132,61 +169,69 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
     // })
   }, [ weekOption, monthOption, yearOption, fiveYearOption ])
 
+  useEffect(() => {
+    console.log('daySelectedData', value)
+    let todayTimestamp = Math.floor((value.getTime() / 1000))
+    let tmrTimestamp = todayTimestamp + 86400
+    setDaySelectedData(data?.filter((item: any) => {
+      // console.log('item', item)
+      // console.log('todayTimestamp', todayTimestamp)
+      // console.log('yesterdayTimestamp', yesterdayTimestamp)
+      // console.log('today', new Date(todayTimestamp * 1000 ))
+      // console.log('yesterday', new Date(yesterdayTimestamp * 1000 ))
+      return item.time >= todayTimestamp && item.time < tmrTimestamp
+    }))
+    console.log('daySelectedData', daySelectedData)
+  }, [value])
+
   // const Custom..
 
-  // height: 360px;
-  const displaySelectedDateRecord = () => {
-
+  const displaySelectedDateRecord:JSX.Element = daySelectedData?.map((item: any) => {
+    const date = new Date(item.time * 1000)
+    const dateFormat = date.toLocaleDateString('en-GB')
     return (
-      <div className="rewards_card-tDsdhu rewards_card">
-        <div className="x889-zmcmFt"></div>
-        <div className="x16215-zmcmFt">
-            <div className="x300-1iHrN3 x300 inter-medium-white-15px">{value.toLocaleDateString('en-GB')}</div>
-            <div className="gems-1iHrN3 gems inter-normal-cadet-blue-12px-2">
-              <span className="span0-QduyxW inter-normal-cadet-blue-12px">{bmi_testing} kg/m²</span>
-            </div>
+      <div className="display-selected-data-record-container">
+        <div className="trending-container">
+          {/*  */}
+          <img
+            className="icon-arrow-left-XaN6DJ icon-arrow-left-img"
+            src="img/selfieToEarn/icon-arrow-left-6@1x.png"
+            alt="icon-arrow-left"
+          />
+          <div className="trending-text-container inter-normal-keppel-12px">-1.0 kg/m²</div>
         </div>
-        {/* <div className="icon-arrow-left-zmcmFt icon-arrow-left-container">
-            <div className="selfie-to-earn-img-container">
-              <img
-                className="icon-arrow-left-XaN6DJ icon-arrow-left-img"
-                src="img/selfieToEarn/icon-arrow-left-6@1x.png"
-                alt="icon-arrow-left"
-                />
-            </div>
-            <div className="gems-XaN6DJ gems">
-              <span className="span0-TIYBsY inter-normal-keppel-12px">-1.0 kg/m²</span>
-            </div>
-        </div> */}
-        <div className="change-trend-container">
-          <div className="selfie-to-earn-img-container">
-            <img
-              className="icon-arrow-left-XaN6DJ icon-arrow-left-img"
-              src="img/selfieToEarn/icon-arrow-left-6@1x.png"
-              alt="icon-arrow-left"
-              />
+        <div className="day-and-bmi-data-container">
+          <div className="inter-medium-white-15px">
+            {dateFormat}
           </div>
-          <div className="gems-XaN6DJ gems">
-            <span className="span0-TIYBsY inter-normal-keppel-12px">-1.0 kg/m²</span>
+          <div className="inter-normal-cadet-blue-12px">
+            {item.value} kg/m²
           </div>
-
         </div>
-        <div className="sigdao-score-zmcmFt sigdao-score">
-            <div className="x10-gfpjFx x10 inter-semi-bold-keppel-14px">+2.625</div>
-            <div className="signdao_tokengradient">
-              <div className="x441"></div>
-              <div className="x442"></div>
-              <img className="x880" src="img/selfieToEarn/file---880-1x-png-10@1x.png" alt="880" />
-            </div>
+        <div className="sigdao-reward-container">
+          {/* <div className="signdao_tokengradient">
+            <div className="x441"></div>
+            <div className="x442"></div>
+            <img className="x880" src="img/selfieToEarn/file---880-1x-png-10@1x.png" alt="880" />
+          </div> */}
+          <div className="sigdao-reward-text-container inter-semi-bold-keppel-14px">+2.625</div>
         </div>
       </div>
     )
-  }
+  })
+
 
   const content: JSX.Element = (
     <div className="screen">
       <div className="bettermidapp-selfie-to-earn-1">
         <ShortTitleBar title='Selfie to Earn'/>
+        <div className="take-a-selfie-button-container">
+          <div className="button_-selfie-to-earn-MUU5YC" onClick={handleTakeASelfie}>
+              <img className="ic_selfie-u8P1YH" src="img/selfieToEarn/ic-selfie-1@1x.png" alt="ic_selfie" />
+              <p className="take-a-selfie-to-earn-u8P1YH inter-semi-bold-white-15px">Take a Selfie to Earn!</p>
+              <img className="ic_arrow_forward-u8P1YH" src="img/selfieToEarn/ic-arrow-forward-1@1x.png" alt="ic_arrow_forward" />
+          </div>
+        </div>
         <div className="bmi_-status-MUU5YC">
             <div className="current-kgm2-C5Ye0d inter-normal-cadet-blue-12px-2">
               <span className="span0-b6eiBJ inter-normal-cadet-blue-12px">CURRENT (KG/M²)</span>
@@ -196,11 +241,10 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
             </div>
             <img className="bmi-goal-C5Ye0d bmi-goal" src="img/selfieToEarn/bmi-goal-1@1x.png" alt="BMI Goal" />
             <img className="bmi-goal-HuKS2x bmi-goal" src="img/selfieToEarn/bmi-goal-1@1x.png" alt="BMI Goal" />
-            <div className="x255-C5Ye0d">25.5</div>
-            <div className="x265-C5Ye0d">26.5</div>
+            <div className="x255-C5Ye0d">{data && data[0]?.value}</div>
+            <div className="x265-C5Ye0d">{data && data[data?.length -1]?.value}</div>
             <img className="x598-C5Ye0d" src="img/selfieToEarn/file---598@1x.png" alt="598" />
         </div>
-
         <div className="x6-MUU5YC x6">
           {/* orignal chat */}  
           <div className="mean-bmi-discription-container">
@@ -215,7 +259,7 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
               })}
             </ul>
           </div>
-          <CustomTradingViewChart  height={323} width={390}/>
+          <CustomTradingViewChart data={data} height={323} width={390}/>
           {/* <div className="bmi-tracking-diagram-NWkD1c">
             <img className="bmi-goal-FXAneT bmi-goal" src="img/selfieToEarn/bmi-goal-2@1x.png" alt="BMI Goal" />
             <img className="bmi-goal-qhySjD bmi-goal" src="img/selfieToEarn/bmi-goal-2@1x.png" alt="BMI Goal" />
@@ -289,98 +333,13 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
           />
         </div>
         <div className="x16212-MUU5YC">
-            <div className="x888-tDsdhu"></div>
-            <div className="records-tDsdhu inter-semi-bold-white-18px">Records</div>
+            <div className="record-title-container">
+              <div className="records-tDsdhu inter-semi-bold-white-18px">Records</div>
+            </div>
             {/* <div className="view-all-tDsdhu">View all</div> */}
             <div className="rewards_card-container">
-              {displaySelectedDateRecord()}
+              {displaySelectedDateRecord}
             </div>
-            {/* <div className="rewards_card-nmlI20 rewards_card">
-              <div className="x890-Mpkab1"></div>
-              <div className="x16214-Mpkab1">
-                  <div className="x300-KvHhju x300 inter-medium-white-15px">26/11/2023</div>
-                  <div className="gems-KvHhju gems inter-normal-cadet-blue-12px-2">
-                    <span className="span0-qBnOdc inter-normal-cadet-blue-12px">26.5 kg/m²</span>
-                  </div>
-              </div>
-              <div className="sigdao-score-Mpkab1 sigdao-score">
-                  <div className="x10-yKXlxp x10 inter-semi-bold-keppel-14px">+5.25</div>
-                  <div className="signdao_tokengradient">
-                    <div className="x441"></div>
-                    <div className="x442"></div>
-                    <img className="x880" src="img/selfieToEarn/file---880-1x-png-10@1x.png" alt="880" />
-                  </div>
-              </div>
-              <div className="icon-arrow-left-Mpkab1 icon-arrow-left-container">
-                  <img
-                    className="icon-arrow-left-asZgGJ icon-arrow-left-img"
-                    src="img/selfieToEarn/icon-arrow-left-7@1x.png"
-                    alt="icon-arrow-left"
-                    />
-                  <div className="gems-asZgGJ gems inter-normal-neon-carrot-12px-2">
-                    <span className="span0-3MEdcV inter-normal-neon-carrot-12px">+0.1 kg/m²</span>
-                  </div>
-              </div>
-            </div>
-            <div className="rewards_card-e93Hp2 rewards_card">
-              <div className="x891-fZ4snx"></div>
-              <div className="x16216">
-                  <div className="x300-JpIuV4 x300 inter-medium-white-15px">25/11/2023</div>
-                  <div className="gems-JpIuV4 gems inter-normal-cadet-blue-12px-2">
-                    <span className="span0-DlW6Hx inter-normal-cadet-blue-12px">26.5 kg/m²</span>
-                  </div>
-              </div>
-              <div className="sigdao-score-fZ4snx sigdao-score">
-                  <div className="x10-Fxih9v x10 inter-semi-bold-keppel-14px">+5.25</div>
-                  <div className="signdao_tokengradient">
-                    <div className="x441"></div>
-                    <div className="x442"></div>
-                    <img className="x880" src="img/selfieToEarn/file---880-1x-png-10@1x.png" alt="880" />
-                  </div>
-              </div>
-              <div className="icon-arrow-left-fZ4snx icon-arrow-left-container">
-                  <img
-                    className="icon-arrow-left-mIHqmY icon-arrow-left-img"
-                    src="img/selfieToEarn/icon-arrow-left-7@1x.png"
-                    alt="icon-arrow-left"
-                    />
-                  <div className="gems-mIHqmY gems inter-normal-neon-carrot-12px-2">
-                    <span className="span0-Jw0rRx inter-normal-neon-carrot-12px">+0.1 kg/m²</span>
-                  </div>
-              </div>
-            </div>
-            <div className="rewards_card-eHSbp5 rewards_card">
-              <img className="x11686-PPXLJ6" src="img/selfieToEarn/file---11686@1x.png" alt="11686" />
-              <div className="x16216">
-                  <div className="x300-oZpTdt x300 inter-medium-white-15px">25/11/2023</div>
-                  <div className="gems-oZpTdt gems inter-normal-cadet-blue-12px-2">
-                    <span className="span0-cxh0Oo inter-normal-cadet-blue-12px">26.5 kg/m²</span>
-                  </div>
-              </div>
-              <div className="icon-arrow-left-PPXLJ6 icon-arrow-left-container">
-                  <img
-                    className="icon-arrow-left-oQDfpq icon-arrow-left-img"
-                    src="img/selfieToEarn/icon-arrow-left-7@1x.png"
-                    alt="icon-arrow-left"
-                    />
-                  <div className="gems-oQDfpq gems inter-normal-neon-carrot-12px-2">
-                    <span className="span0-xYigu8 inter-normal-neon-carrot-12px">+0.1 kg/m²</span>
-                  </div>
-              </div>
-              <div className="sigdao-score-PPXLJ6 sigdao-score">
-                  <div className="x10-lqjDaA x10 inter-semi-bold-keppel-14px">+5.25</div>
-                  <div className="signdao_tokengradient">
-                    <div className="x441"></div>
-                    <div className="x442"></div>
-                    <img className="x880" src="img/selfieToEarn/file---880-1x-png-10@1x.png" alt="880" />
-                  </div>
-              </div>
-            </div> */}
-        </div>
-        <div className="button_-selfie-to-earn-MUU5YC" onClick={handleTakeASelfie}>
-            <p className="take-a-selfie-to-earn-u8P1YH inter-semi-bold-white-15px">Take a Selfie to Earn!</p>
-            <img className="ic_selfie-u8P1YH" src="img/selfieToEarn/ic-selfie-1@1x.png" alt="ic_selfie" />
-            <img className="ic_arrow_forward-u8P1YH" src="img/selfieToEarn/ic-arrow-forward-1@1x.png" alt="ic_arrow_forward" />
         </div>
         <MenuBar/>
       </div>

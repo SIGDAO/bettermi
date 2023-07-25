@@ -40,14 +40,14 @@ export const userBMISlice = createSlice({
       // state is imagePath
       state.userBMI = action.payload;
     },
-    getblockchainBMI: (state, action: PayloadAction<GetblockchainBMIProps>) => {
-      findBMI(action.payload.tempAccountId, action.payload.Ledger2)
-        .then((res) => {
-          console.log("res", res);
-          state.userBMI = res;
-        })
-      // state.userBMI = 
-    }, 
+    // getblockchainBMI: (state, action: PayloadAction<GetblockchainBMIProps>) => {
+    //   findBMI(action.payload.tempAccountId, action.payload.Ledger2)
+    //     .then((res) => {
+    //       console.log("res", res);
+    //       state.userBMI = res;
+    //     })
+    //   // state.userBMI = 
+    // }, 
   },
 });
 

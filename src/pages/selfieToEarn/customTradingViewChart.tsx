@@ -4,7 +4,7 @@
 // import { createChart, ColorType } from 'lightweight-charts';
 
 import { Chart, AreaSeries, PriceLine, PriceScale } from "lightweight-charts-react-wrapper";
-import { IChartApi, LineStyle, ColorType, LineWidth, PriceScaleMode, AreaData } from "lightweight-charts";
+import { IChartApi, LineStyle, ColorType, LineWidth, PriceScaleMode, AreaData, SeriesDataItemTypeMap } from "lightweight-charts";
 // PriceScaleModem, 
 import React, { useEffect, useRef, useCallback, useState } from 'react';
 import { findBMI } from "../../components/findBMI";
@@ -20,11 +20,13 @@ interface ChartProps {
 }
 
 const initialColors = {
-  backgroundColor: 'transparent',
+  backgroundColor: '#0D0D0D',
   lineColor: '#2962FF',
   textColor: 'white',
-  areaTopColor: '#2962FF',
-  areaBottomColor: 'rgba(41, 98, 255, 0.28)',
+  // areaTopColor: '#2962FF',
+  // areaBottomColor: 'rgba(41, 98, 255, 0.28)',
+  areaTopColor: '#4136F1',
+  areaBottomColor: '#8643FF',
 }
 
 const genBMIlist = (option: string) => {
@@ -94,44 +96,13 @@ const areaSeriesInitialOptions = {
 
 const CustomTradingViewChart: React.FC<ChartProps> = (prop) => {
   // const [bmilist, setBMIlist] = useState([])
-  const [data, setData] = useState<any>([])
-  const { height, width } = prop;
+  // const [data, setData] = useState<SeriesDataItemTypeMap['Area'][]>()
+  const { height, width, data } = prop;
   const displayData: AreaData[] = []
   const handleReference = useCallback((ref: IChartApi) => {
     ref?.timeScale().fitContent();
   }, []);
-  const dispatch = useDispatch();
-  const tempAccountId = useSelector(accountId);
-  const Ledger2 = useLedger();
-
-  useEffect(() => {
-    // dispatch(userBMISlice.actions.getblockchainBMI({tempAccountId: tempAccountId, Ledger2: Ledger2}))
-    findBMI(tempAccountId, Ledger2)
-      .then((res) => {
-        // data = res
-        // const displayData = [res]
-        setData(res)
-        console.log("data", typeof res)
-        console.log("data", initialData)
-        dispatch(userBMISlice.actions.setBMI(res))
-      })
-  }, []);
-
-  // const genBMIlist 
-
-  useEffect(() => {
-    console.log('data', data)
-    // console.log('data', typeof data[0].time)
-    // console.log('data', typeof initialData)
-    console.log('data', typeof initialData[0].time)
-    if (data) {
-      displayData.push(...data)
-    }
-    console.log('displayData', displayData)
-
-  }, [data])
-
-  
+  const dispatch = useDispatch();  
 
 
   const options = {
@@ -177,18 +148,18 @@ const CustomTradingViewChart: React.FC<ChartProps> = (prop) => {
         <AreaSeries 
           {...areaSeriesInitialOptions} 
           data={data}
-          // markers={data.map((item: any, index: any) => {
-          //   return {
-          //     time: item.time,
-          //     position: 'inBar',
-          //     color: data.length - 1 === index ? '#39b3af' : '#687074',
-          //     shape: 'circle',
-          //     // text: item.value,
-          //     // size: 1,
-          //     // shape: 'arrowDown',
-          //     // text: 'test',
-          //   }})
-          // }
+          markers={data.map((item: any, index: any) => {
+            return {
+              time: item.time,
+              position: 'inBar',
+              color: data.length - 1 === index ? '#39B3AF' : '#4136F1',
+              shape: 'circle',
+              // text: item.value,
+              // size: 1,
+              // shape: 'arrowDown',
+              // text: 'test',
+            }})
+          }
         >
           <PriceLine 
             price={26.5} 
