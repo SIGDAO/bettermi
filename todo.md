@@ -139,3 +139,6 @@ gray - param
 
 default question - will have ans, which store in miro
 .io .mimi coach will have a random gen question
+
+dome data
+size of company screen
