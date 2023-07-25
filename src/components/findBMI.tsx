@@ -43,6 +43,9 @@ export const findBMI = async (tempAccountId: string, Ledger2: any) => {
     let BMI:SeriesDataItemTypeMap['Area'][]= [];
     for(let i = message.transactions.length - 1; i >= 0 ;i--){
       let content = JSON.parse(message.transactions[i].attachment.message);
+      console.log(content);
+
+      if (typeof content === 'number') continue;
       let tempDate = new Date(content.time)
       // const month = ('0' + (tempDate.getMonth() + 1)).slice(-2);
       // const day = ('0' + tempDate.getDate()).slice(-2);
