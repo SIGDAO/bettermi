@@ -29,9 +29,4 @@ Overall: Title bar + Home Menu container should be widert responsively (with act
 5. [Marketplace]
 <!-- - “WERE CAN I PAY WITH SIGDAO“ need to aline with “See all” and match with the spacing in anima -->
 <!-- - The scroll partner company icon roll has been cut, please adjust. -->
-- Redeem Rewards : Titile and desccription spacing should follow anima > Each awrd detials page: fine tune all the spacing
-
-
-
-
-
+<!-- - Redeem Rewards : Titile and desccription spacing should follow anima > Each awrd detials page: fine tune all the spacing -->

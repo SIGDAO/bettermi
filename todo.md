@@ -129,3 +129,13 @@ tune title bar
   justify-content: center; */
 }
 
+
+<!-- flow 3: todo and logic -->
+https://miro.com/app/board/uXjVMFXxzqE=/
+
+struct of miro
+pink - negative param
+gray - param
+
+default question - will have ans, which store in miro
+.io .mimi coach will have a random gen question
