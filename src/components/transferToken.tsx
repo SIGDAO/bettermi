@@ -8,11 +8,13 @@ import { accountId } from "../redux/account";
 import { useSelector } from "react-redux";
 import { Api } from "@signumjs/core";
 import { walletNodeHost } from "../redux/wallet";
+import { useNavigate } from "react-router-dom";
 
 
 export async function TransferToken(nodeHost:any,accountId:any){
   const walletNodeHost:string = nodeHost?nodeHost:window.localStorage.getItem('nodeHost');
     const ledger2 =LedgerClientFactory.createClient({nodeHost:walletNodeHost});
+    const navigate = useNavigate();
     
     const assetId = "3862155318820066741";
   console.log(ledger2);
@@ -30,5 +32,4 @@ export async function TransferToken(nodeHost:any,accountId:any){
 
 
     }
-
 }

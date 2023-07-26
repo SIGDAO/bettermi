@@ -250,7 +250,7 @@ html, body {
 .inter-semi-bold-royal-blue-15px {
   color: var(--royal-blue);
   font-family: var(--font-family-inter);
-  font-size: var(--font-size-xl);
+  font-size: 15px;
   font-style: normal;
   font-weight: 600;
 }

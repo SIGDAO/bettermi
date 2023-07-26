@@ -228,7 +228,7 @@ align-self: flex-start;
     /* height:calc(100% - 159px); */
     background:  linear-gradient(112deg, #221D4B 0%, #171717 100%);
     overflow: auto;
-    margin-top: 20px;
+    /* margin-top: 20px; */
 }
 .body2::-webkit-scrollbar {
   display: none;
@@ -276,14 +276,17 @@ align-self: flex-start;
 }
 
 .rewardTitle{
-    width:calc(100% - 50px);
+  margin: 20.48px 0;
+  margin-left: 37px;
+
+    /* width:calc(100% - 50px);
     align-self: center;
     height:50px;
     color:#4136F1;
     font-family: var(--font-family-inter);
     font-size: var(--font-size-xxxl);
     font-style: normal;
-    margin-left:30px;
+    margin-left:30px; */
 }
 
 .buttonIconChallengeCompleted{

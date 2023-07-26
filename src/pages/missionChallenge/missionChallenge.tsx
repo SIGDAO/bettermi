@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { TransferToken } from '../../components/transferToken';
 import { Button } from '@mui/material';
 import { walletNodeHost } from '../../redux/wallet';
+import { useNavigate } from 'react-router-dom';
 
 interface IMissionChallengeProps {
 }
@@ -44,6 +45,8 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
   const title = 'Challenges X 9 Hacks'
   const userAccountId = useSelector(accountId);
   const userWalletNodeHost = useSelector(walletNodeHost);
+  const navigate = useNavigate();
+
   const content: JSX.Element = (
     <div className="screen">
       <div className="bettermidapp-challenges-1">
@@ -53,7 +56,7 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
           <img className="layer-nLfc9z" src="img/missionChallenge/layer-1@1x.png" alt="Layer" />
           <div className="scroll-group-nLfc9z">
             <div className="challenge-cards-QuyfDF">
-            <Button onClick={() =>TransferToken(userWalletNodeHost,userAccountId)} className="challenge-cards-Ic1qil">
+            <Button onClick={() => navigate('/challengeCountdown')} className="challenge-cards-Ic1qil">
                 <img className="card_bg" src="img/missionChallenge/card-bg-1@1x.png" alt="Card_bg" />
                 <div className="x1-hello-bae inter-semi-bold-white-18px">1. Hello Bae !</div>
                 <Link to="/challengeCountdown">
