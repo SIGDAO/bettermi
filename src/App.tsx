@@ -35,45 +35,58 @@ import Profile from './pages/profile/profile';
 import Marketplace from './pages/marketplace/marketplace';
 import { loadState, saveState } from './redux/sessionStorage';
 import Testing from './pages/testing/testing';
+import { createTheme , ThemeProvider } from "@mui/material"
+
+// import { ThemeProvider , createTheme } from '@mui/material/styles';
 
 store.subscribe(() => {
   saveState(store.getState());
 });
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#4136F1',
+    },
+  }
+})
 
 
 
 function App() {
   return (
     // path
-    <AppContext.Provider value={appConfig}>
-      <ReduxProvider store={store}>
-        <Routes>
-          <Route path="/" element={<LogoPage/>} />
-          <Route path="/connectWallet" element={<ConnectWallet/>} />
-          <Route path="/generateBMI" element={<GenerateBMI/>} />
-          <Route path="/takeSelfie" element={<TakeSelfie/>} />
-          <Route path="/connectSuccess" element={<ConnectSuccess/>} />
-          <Route path="/generateFreeNFT" element={<GenerateFreeNFT/>} />
-          <Route path="/customizeYourProfile" element={<CustomizeYourProfile/>} />
-          {/* todo: flow 2 */}
-          <Route path="/home" element={<Home/>} />
-          <Route path="/allMission" element={<AllMission/>} />
-          <Route path="/challengeCompleted" element={<ChallengeCompleted/>} />
-          <Route path="/challengeCountdown" element={<ChallengeCountdown/>} />
-          <Route path="/missionChallenge" element={<MissionChallenge/>} />
-          <Route path="/myNftList" element={<MyNftList/>} />
-          <Route path="/reward" element={<Reward/>} />
-          <Route path="/rewardDetail">
-            <Route path=":id" element={<RewardDetail/>} />
-          </Route>
-          <Route path="/selfieToEarn" element={<SelfieToEarn/>} />
-          <Route path="/profile" element={<Profile/>} />
-          <Route path="/marketplace" element={<Marketplace/>} />
-          <Route path="/testing" element={<Testing/>} />
-          <Route path="*" element={<Navigate to="/home" />} />
-        </Routes>
-      </ReduxProvider>  
-    </AppContext.Provider>
+    <ThemeProvider theme={theme}>
+      <AppContext.Provider value={appConfig}>
+        <ReduxProvider store={store}>
+          <Routes>
+            <Route path="/" element={<LogoPage/>} />
+            <Route path="/connectWallet" element={<ConnectWallet/>} />
+            <Route path="/generateBMI" element={<GenerateBMI/>} />
+            <Route path="/takeSelfie" element={<TakeSelfie/>} />
+            <Route path="/connectSuccess" element={<ConnectSuccess/>} />
+            <Route path="/generateFreeNFT" element={<GenerateFreeNFT/>} />
+            <Route path="/customizeYourProfile" element={<CustomizeYourProfile/>} />
+            {/* todo: flow 2 */}
+            <Route path="/home" element={<Home/>} />
+            <Route path="/allMission" element={<AllMission/>} />
+            <Route path="/challengeCompleted" element={<ChallengeCompleted/>} />
+            <Route path="/challengeCountdown" element={<ChallengeCountdown/>} />
+            <Route path="/missionChallenge" element={<MissionChallenge/>} />
+            <Route path="/myNftList" element={<MyNftList/>} />
+            <Route path="/reward" element={<Reward/>} />
+            <Route path="/rewardDetail">
+              <Route path=":id" element={<RewardDetail/>} />
+            </Route>
+            <Route path="/selfieToEarn" element={<SelfieToEarn/>} />
+            <Route path="/profile" element={<Profile/>} />
+            <Route path="/marketplace" element={<Marketplace/>} />
+            <Route path="/testing" element={<Testing/>} />
+            <Route path="*" element={<Navigate to="/home" />} />
+          </Routes>
+        </ReduxProvider>  
+      </AppContext.Provider>
+    </ThemeProvider>
   );
 }
 
