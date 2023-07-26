@@ -92,7 +92,9 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
             </div>
           </div>
         </div>
-        <div className="discord-RoXPLo inter-medium-royal-blue-14px">Discord</div>
+        <Link to="https://discord.gg/8tpu5SrX">
+          <div className="discord-RoXPLo inter-medium-royal-blue-14px">Discord</div>
+        </Link>
         <div className="our-community-RoXPLo inter-semi-bold-white-21px">Our Community</div>
         <Link to="/selfieToEarn">
           <div className="button_-selfie-to-earn-RoXPLo">
