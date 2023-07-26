@@ -10,19 +10,23 @@ import { accountSlice } from '../../redux/account';
 import { useContext } from 'react';
 import { AppContext } from '../../redux/useContext';
 import { useNavigate } from 'react-router-dom';
+import { LedgerClientFactory } from '@signumjs/core';
 export interface IConnectWalletProps {
 }
 
 export default function ConnectWallet (props: IConnectWalletProps) {
   const navigate = useNavigate();
   const {appName,Wallet,Ledger} = useContext(AppContext);
-
+  const codeHashId = "7457358473503628676";
   const connectWallet = (appName:any,Wallet:any,Ledger:any) => {
     //const wallet = new GenericExtensionWallet();
     console.log(typeof process.env.REACT_APP_MOBILE)
     let key:string;
     Wallet.Extension.connect({appName,networkName:Ledger.Network})
-    .then((wallet:any) => {console.log(wallet);key = wallet.publicKey; console.log(key);
+    .then(async (wallet:any) => {
+      console.log(wallet);
+      key = wallet.publicKey; 
+      console.log(key);
       const import_account:Address =  Address.fromPublicKey(key, Ledger.AddressPrefix);
       const accountinfo:userAccount = {
         accountId:import_account.getNumericId(),
@@ -31,15 +35,30 @@ export default function ConnectWallet (props: IConnectWalletProps) {
         isWatchOnlyMode:true,
         token:0,
       };
-      store.dispatch(accountSlice.actions.setAccount(accountinfo));
+    store.dispatch(accountSlice.actions.setAccount(accountinfo));
     console.log(store.getState());
     store.dispatch(walletSlice.actions.setWalletPublicKey(key));
     store.dispatch(walletSlice.actions.setIsWalletConnected(true));
     store.dispatch(walletSlice.actions.setWalletNodeHost(wallet.currentNodeHost));
     localStorage.setItem('accountId',import_account.getNumericId());
     localStorage.setItem('nodeHost',wallet.currentNodeHost);
+    const ledger = LedgerClientFactory.createClient({nodeHost:wallet.currentNodeHost});
+    let ourContract = await ledger.contract.getContractsByAccount({
+        accountId: accountinfo.accountId,
+        machineCodeHash: codeHashId,
+      });
+      console.log(ourContract);
+      console.log(ourContract.ats[0]);
+      console.log(typeof(ourContract.ats[0]));
+      console.log(typeof(ourContract));
+    if(ourContract.ats[0] != null){
+      console.log("called the if statement");
+      navigate("/home");
+    }
+    else{
     console.log(store.getState());
     navigate('/connectSuccess')
+    }
   })
   // todo: add error handling, and show it to user
     .catch((error:any) => {
