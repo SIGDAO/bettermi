@@ -135,13 +135,19 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
     // testing data
     let res = genBMIlist("1W")
     setData([
-      { time: '2023-07-19', value: 19.1 },
-      { time: '2023-07-20', value: 20.1 },
-      { time: '2023-07-21', value: 21.1 },
-      { time: '2023-07-22', value: 26.5 },
-      { time: '2023-07-23', value: 27.5 },
-      { time: '2023-07-25', value: 22.68 },
-      { time: '2023-07-26', value: 22.67 },
+      { time: Math.floor(new Date('2023-07-19').getTime() / 1000), value: 19.1 },
+      { time: Math.floor(new Date('2023-07-20').getTime() / 1000), value: 20.1 },
+      { time: Math.floor(new Date('2023-07-21').getTime() / 1000), value: 21.1 },
+      { time: Math.floor(new Date('2023-07-22').getTime() / 1000), value: 26.5 },
+      { time: Math.floor(new Date('2023-07-23').getTime() / 1000), value: 27.5 },
+      { time: Math.floor(new Date('2023-07-25').getTime() / 1000), value: 22.68 },
+      { time: Math.floor(new Date('2023-07-26').getTime() / 1000), value: 22.67 },      
+      // { time: '2023-07-20', value: 20.1 },
+      // { time: '2023-07-21', value: 21.1 },
+      // { time: '2023-07-22', value: 26.5 },
+      // { time: '2023-07-23', value: 27.5 },
+      // { time: '2023-07-25', value: 22.68 },
+      // { time: '2023-07-26', value: 22.67 },
     ]
     )
 
@@ -348,7 +354,7 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
             // selectRange={true}
           />
         </div>
-        <div className="x16207-MUU5YC">
+        <div className="x16212-MUU5YC">
             <div className="record-title-container">
               <div className="records-tDsdhu inter-semi-bold-white-18px">Records</div>
             </div>
