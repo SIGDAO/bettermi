@@ -67,7 +67,7 @@ const genBMIlist = (option: string) => {
 
 
 const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
-  const [value, setValue] = useState(new Date()); // selected day on calendar
+  const [value, setValue] = useState(new Date('2023-07-26')); // selected day on calendar
   // const [data, setData] = useState<SeriesDataItemTypeMap['Area'][]>()
   const [data, setData] = useState<any>()
   const [daySelectedData, setDaySelectedData] = useState<any>()
