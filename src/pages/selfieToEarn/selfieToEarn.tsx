@@ -133,17 +133,26 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
 
   useEffect(() => {
     // testing data
-    // let res = genBMIlist("5Y")
-    // setData(res)
+    let res = genBMIlist("1W")
+    setData([
+      { time: '2023-07-19', value: 19.1 },
+      { time: '2023-07-20', value: 20.1 },
+      { time: '2023-07-21', value: 21.1 },
+      { time: '2023-07-22', value: 26.5 },
+      { time: '2023-07-23', value: 27.5 },
+      { time: '2023-07-25', value: 22.68 },
+      { time: '2023-07-26', value: 22.67 },
+    ]
+    )
 
     // real data
-    findBMI(tempAccountId, Ledger2)
-      .then((res) => {
-        // data = res
-        // const displayData = [res]
-        setData(res)
-        // dispatch(userBMISlice.actions.setBMI(res))
-      })
+    // findBMI(tempAccountId, Ledger2)
+    //   .then((res) => {
+    //     // data = res
+    //     // const displayData = [res]
+    //     setData(res)
+    //     // dispatch(userBMISlice.actions.setBMI(res))
+    //   })
   }, []);
 
   // const genBMIlist 
@@ -339,7 +348,7 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
             // selectRange={true}
           />
         </div>
-        <div className="x16212-MUU5YC">
+        <div className="x16207-MUU5YC">
             <div className="record-title-container">
               <div className="records-tDsdhu inter-semi-bold-white-18px">Records</div>
             </div>

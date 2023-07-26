@@ -51,3 +51,10 @@ video {
   position: absolute;
   left: calc((100% - 819px) / 2);
 }
+
+.disclaimer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
