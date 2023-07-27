@@ -39,5 +39,5 @@ export const accountId = (state: any) => {
     return state.account.accountId? state.account.accountId:localStorage.getItem("accountId");
 };
 export const accountToken = (state: any) => {
-    return state.account.token?state.account.Token:localStorage.getItem("token");
+    return state.account.token?state.account.token:localStorage.getItem("token");
 };
