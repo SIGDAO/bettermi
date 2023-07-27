@@ -30,7 +30,8 @@ const ChallengeCountdown: React.FunctionComponent<IChallengeCountdownProps> = (p
         {/* <img className="bg-oEaurv" src={`${process.env.PUBLIC_URL}/img/challengeCountdown/bg-10@1x.png`} alt="BG" /> */}
         <img
         className="x1-hello-bae-gradient-bg-oEaurv"
-        src={`${process.env.PUBLIC_URL}/img/challengeCountdown/1hellobae-gradientbg@1x.png`}
+        // src={`${process.env.PUBLIC_URL}/img/challengeCountdown/1hellobae-gradientbg@1x.png`}
+        src={`${process.env.PUBLIC_URL}/img/missionChallenge/1HelloBae-BetterMiWithUniform.gif`}
         alt="1HelloBae-GradientBg"
         />
         <div className="challenge-content-oEaurv">
