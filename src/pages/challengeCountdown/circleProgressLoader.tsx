@@ -68,7 +68,10 @@ const CircularWithValueLabel: React.FunctionComponent<ICircularWithValueLabelPro
   const userAccountId = useSelector(accountId);
   const userWalletNodeHost = useSelector(walletNodeHost);
 
-
+  const handleTransfer = () => {
+    TransferToken(userWalletNodeHost,userAccountId)
+    navigate('/challengeCompleted')
+  }
 
   React.useEffect(() => {
     let timer: any = null;
@@ -77,8 +80,7 @@ const CircularWithValueLabel: React.FunctionComponent<ICircularWithValueLabelPro
         setProgress((prevProgress) => (prevProgress - 1));
       }, 1000);
     } else if (progress === 0) {
-      TransferToken(userWalletNodeHost,userAccountId)
-      navigate('/challengeCompleted')
+      handleTransfer()
     }
     return () => {
       clearInterval(timer);

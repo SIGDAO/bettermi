@@ -240,7 +240,11 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
         </div>
       </div>
     )
-  })
+  }) || (
+    <div className="testing">
+      No record today
+    </div>
+  )
 
 
   const content: JSX.Element = (
@@ -355,9 +359,9 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
           />
         </div>
         <div className="x16212-MUU5YC">
-            <div className="record-title-container">
+            {/* <div className="record-title-container">
               <div className="records-tDsdhu inter-semi-bold-white-18px">Records</div>
-            </div>
+            </div> */}
             {/* <div className="view-all-tDsdhu">View all</div> */}
             <div className="rewards_card-container">
               {displaySelectedDateRecord}
