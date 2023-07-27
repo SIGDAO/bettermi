@@ -30,6 +30,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> =  (props) => {
   let width : string | number;
   const [loading, setLoading] = useState(true);
   const [myNfts, setMyNfts] = useState<myNftList[]>([]);
+  const [onDuty,setOnDuty] = useState<string>("");
   //var myNft:myNftList[] = [];
   var nft:myNftList;
   const nodeHost = useAppSelector(selectWalletNodeHost);
@@ -56,6 +57,42 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> =  (props) => {
   // console.log(myNfts);
 
   useEffect(() => {
+    ledger2.account.getAccount({accountId:userAccountId}).then((account)=>{
+      const description = JSON.parse(account.description);
+      console.log(description);
+      console.log(Object.keys(description.av));
+      console.log(typeof(Object.keys(description.av)[0]));
+      setOnDuty(Object.keys(description.av)[0]);
+      console.log(onDuty);
+    });
+    // Function to fetch data from the API
+    ledger2.account.getAccountTransactions({accountId:"2826449997764829726"}).then(
+      async(transactions) => {
+      //console.log(transactions);
+      //console.log(transactions.transactions.length);
+      for(var i=0;i<transactions.transactions.length;i++){
+        if(transactions.transactions[i].sender == trialAccountId){
+         // console.log(transactions.transactions[i].sender);
+          nftAddressList = transactions.transactions[i].attachment.message.split(",");
+          //console.log(nftAddressList);
+          break;
+        }
+      }
+      nftAddressList.map(async(nftAddress)=>{
+        const hi = await ledger2.contract.getContract(nftAddress);
+        //console.log("array is ",nftAddress,"  ",hi);
+        const trial = JSON.parse(hi.description);
+        //console.log(trial);
+        //console.log(trial.descriptor);
+        nft = {level:trial.version,image:trial.descriptor};
+        setMyNfts([...myNfts,nft]);
+        console.log("appended list is ",[...myNfts,nft]);
+        userNftList.push(nft);
+      });
+      console.log("userNftList is",userNftList);
+      console.log("myNft is",myNfts);
+      setLoading(false);
+    });
     // // Function to fetch data from the API
     // ledger2.account.getAccountTransactions({accountId:"2826449997764829726"}).then(
     //   async(transactions) => {
@@ -172,6 +209,31 @@ return(
               <ShortTitleBar title='My NFTs' />
       <div className = "containerMyNftList">
         <div className = "containerMyNftList2">
+        {loading?(<div>set sth on duty</div>):(
+             <div className = "myNftList">
+             <img className = "myNftImage" src = {`https://ipfs.io/ipfs/${onDuty}`}></img>
+             <div className = "myNftDescription">
+             <div className = "myNftNumber">#0000000001</div>
+               <div>
+                 <span  className = "myNftLevel">
+                   Lv{1}       
+                   </span>   
+                   <span  className = "myNftReward">
+                     reward + 1000%
+                     </span>
+               </div>
+               <div className = "myNftPrice">
+                 $0 signa
+               </div>
+             </div>
+             <div className = "myNftBottom">
+             <button className = "myNftButtonOnDuty" style = {{backgroundColor:"#39B3AF!important"}}>On Duty</button>
+             <img className = "myNftButtomArrow" src  = {`${process.env.PUBLIC_URL}/img/NftList/ic-send@1x.png`}></img>
+             </div>
+           </div>
+               )
+
+               }
             {tempDisplayMyNft}
         </div>
       </div>
