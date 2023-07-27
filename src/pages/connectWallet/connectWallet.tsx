@@ -47,6 +47,17 @@ export default function ConnectWallet (props: IConnectWalletProps) {
         accountId: accountinfo.accountId,
         machineCodeHash: codeHashId,
       });
+            ledger.asset.getAssetHolders({assetId:"3862155318820066741"}).then((asset)=>{
+        asset.accountAssets.map((obj)=>{
+          console.log(asset);
+          console.log(import_account.getNumericId());
+          if(obj.account == import_account.getNumericId()){
+            store.dispatch(accountSlice.actions.setToken(Number(obj.quantityQNT)));
+            localStorage.setItem('token',obj.quantityQNT);
+              console.log(obj.quantityQNT);
+          }
+        })
+        });
       console.log(ourContract);
       console.log(ourContract.ats[0]);
       console.log(typeof(ourContract.ats[0]));

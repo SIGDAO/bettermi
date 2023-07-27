@@ -13,6 +13,7 @@ import { useState } from 'react';
  import { selectWalletNodeHost } from '../../redux/useLedger';
  import { accountId } from '../../redux/account';
  import { useEffect } from 'react';
+ import { accountSlice } from '../../redux/account';
 
 interface IHomeProps {
 }
@@ -44,6 +45,8 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   // info
   const name = useSelector(selectCurrentUsername);
   const Token:string = useSelector(accountToken);
+  const userAccountId = useSelector(accountId);
+  console.log(Token);
   console.log(store.getState());
   console.log("Token is  ",Token);
   const [loading, setLoading] = useState<boolean>(true);
@@ -66,6 +69,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
         console.log("need to equip nft");
       }
     });
+
   }, []);
   // todo: map
   // const userSIGDAO = 
@@ -155,7 +159,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
           </Link>
           <div className="score-bar_3-2ZgxSS">
             <div className="sigdao-score-iPTNDG sigdao-score">
-              <div className="x10-kxjIEt x10 inter-semi-bold-keppel-15px">{Token}</div>
+              <div className="x10-kxjIEt x10 inter-semi-bold-keppel-15px">{loading?<div>loading...</div>:Token}</div>
               <div className="signdao_tokengradient-kxjIEt signdao_tokengradient">
                 <div className="x441-e5x8kp x441"></div>
                 <div className="x442-e5x8kp x442"></div>
