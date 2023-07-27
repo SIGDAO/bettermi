@@ -76,7 +76,7 @@ const CircularWithValueLabel: React.FunctionComponent<ICircularWithValueLabelPro
       timer = setInterval(() => {
         setProgress((prevProgress) => (prevProgress - 1));
       }, 1000);
-    } else {
+    } else if (progress === 0) {
       TransferToken(userWalletNodeHost,userAccountId)
       navigate('/challengeCompleted')
     }

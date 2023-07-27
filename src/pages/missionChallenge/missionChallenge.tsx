@@ -56,9 +56,9 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
           <img className="layer-nLfc9z" src="img/missionChallenge/layer-1@1x.png" alt="Layer" />
           <div className="scroll-group-nLfc9z">
             <div className="challenge-cards-QuyfDF">
-            <Button onClick={() => navigate('/challengeCountdown')} className="challenge-cards-Ic1qil">
+            <Button onClick={() => navigate('/challengeCountdown/1')} className="challenge-cards-Ic1qil">
                 <img className="card_bg" src="img/missionChallenge/card-bg-1@1x.png" alt="Card_bg" />
-                <div className="x1-hello-bae inter-semi-bold-white-18px">2. Swiping Left & Right</div>
+                <div className="x1-hello-bae inter-semi-bold-white-18px">1. Hello Bae !</div>
                 <Link to="/challengeCountdown">
                   <div className="ic_next">
                     <img
@@ -94,7 +94,7 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
               </Button>
               <div className="challenge-cards-VYwpDS">
                 <img className="card_bg" src="img/missionChallenge/card-bg-1@1x.png" alt="Card_bg" />
-                <div className="x1-hello-bae inter-semi-bold-white-18px">3. Into Your Dm</div>
+                <div className="x1-hello-bae inter-semi-bold-white-18px">2. Swiping Left & Right</div>
                 <Link to="/challengeCountdown">
                   <div className="ic_next">
                     <img
@@ -130,7 +130,7 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
               </div>
               <div className="challenge-cards-Iosh5Y">
                 <img className="card_bg" src="img/missionChallenge/card-bg-1@1x.png" alt="Card_bg" />
-                <div className="x1-hello-bae inter-semi-bold-white-18px">4. Getting Butterflies</div>
+                <div className="x1-hello-bae inter-semi-bold-white-18px">3. Into Your Dm</div>
                 <Link to="/challengeCountdown">
                   <div className="ic_next">
                     <img
@@ -166,7 +166,7 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
               </div>
               <div className="challenge-cards-v4gmYN">
                 <img className="card_bg" src="img/missionChallenge/card-bg-1@1x.png" alt="Card_bg" />
-                <div className="x1-hello-bae inter-semi-bold-white-18px">5. Let's Cuddle</div>
+                <div className="x1-hello-bae inter-semi-bold-white-18px">4. Getting Butterflies</div>
                 <Link to="/challengeCountdown">
                   <div className="ic_next">
                     <img
@@ -202,7 +202,7 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
               </div>
               <div className="challenge-cards-5BboFx">
                 <img className="card_bg" src="img/missionChallenge/card-bg-1@1x.png" alt="Card_bg" />
-                <div className="x1-hello-bae inter-semi-bold-white-18px">6. Glow Up</div>
+                <div className="x1-hello-bae inter-semi-bold-white-18px">5. Let's Cuddle</div>
                 <Link to="/challengeCountdown">
                   <div className="ic_next">
                     <img
@@ -238,7 +238,7 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
               </div>
               <div className="challenge-cards-xcQXac">
                 <img className="card_bg" src="img/missionChallenge/card-bg-1@1x.png" alt="Card_bg" />
-                <div className="x1-hello-bae inter-semi-bold-white-18px">7. Glow Up Together</div>
+                <div className="x1-hello-bae inter-semi-bold-white-18px">6. Glow Up</div>
                 <Link to="/challengeCountdown">
                   <div className="ic_next">
                     <img
@@ -274,7 +274,7 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
               </div>
               <div className="challenge-cards-VQtE8g">
                 <img className="card_bg" src="img/missionChallenge/card-bg-1@1x.png" alt="Card_bg" />
-                <div className="x1-hello-bae inter-semi-bold-white-18px">8. Love Bird</div>
+                <div className="x1-hello-bae inter-semi-bold-white-18px">7. Glow Up Together</div>
                 <Link to="/challengeCountdown">
                   <div className="ic_next">
                     <img
@@ -310,7 +310,7 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
               </div>
               <div className="challenge-cards-Jaqnoy">
                 <img className="card_bg" src="img/missionChallenge/card-bg-1@1x.png" alt="Card_bg" />
-                <div className="x1-hello-bae inter-semi-bold-white-18px">9. Hold Onto You</div>
+                <div className="x1-hello-bae inter-semi-bold-white-18px">8. Love Bird</div>
                 <Link to="/challengeCountdown">
                   <div className="ic_next">
                     <img
@@ -346,7 +346,7 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
               </div>
               <div className="challenge-cards-qjZztr">
                 <img className="card_bg" src="img/missionChallenge/card-bg-1@1x.png" alt="Card_bg" />
-                <div className="x1-hello-bae inter-semi-bold-white-18px">1. Hello Bae !</div>
+                <div className="x1-hello-bae inter-semi-bold-white-18px">9. Hold Onto You</div>
                 <Link to="/challengeCountdown">
                   <div className="ic_next">
                     <img

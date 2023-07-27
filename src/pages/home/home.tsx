@@ -56,19 +56,19 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const userId = useAppSelector(accountId);
   useEffect(() => {
     // Function to fetch data from the APIc
-    ledger2.account.getAccount({accountId:userId}).then((account)=>{
-      try {
+    ledger2.account.getAccount({accountId:userId})
+      .then((account)=>{
         const description = JSON.parse(account.description);
         console.log(description);
         console.log(Object.keys(description.av));
         console.log(typeof(Object.keys(description.av)[0]));
         setImgAddress(Object.keys(description.av)[0]);
         setLoading(false);  
-      } catch (error) {
-        console.log(error);
+      })
+      .catch((error)=>{ 
         console.log("need to equip nft");
-      }
-    });
+        setLoading(false);
+      });
 
   }, []);
   // todo: map

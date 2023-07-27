@@ -490,8 +490,12 @@
   position: absolute;
   text-align: left;
   top: 57px;
-  white-space: nowrap;
-  width: 168px;
+  /* white-space: nowrap; */
+  width: 166px;
+  text-transform: none;
+  white-space: nowrap; /* Prevents text from wrapping */
+  overflow: hidden; /* Hides overflowing text */
+  text-overflow: ellipsis; /* Displays ... when text overflows */
 }
 
 .bettermidapp-challenges-1 .x10 {
