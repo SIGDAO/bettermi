@@ -1036,3 +1036,59 @@
   top: 22.14%;
   width: 47.30%;
 }
+
+
+
+
+
+
+ /*Anderson's Code */
+ .featureMissionHome{
+  height:100px;
+  top:631px;
+  left:38px;
+  background-color: transparent;
+  width:390px;
+  position:absolute;
+  overflow-x: scroll;
+
+}
+.featureMissionHome::-webkit-scrollbar {
+  background:  #221D4B;
+  width: 2px;
+  height:10px;
+  border-radius: 12px;
+}
+.featureMissionHome::-webkit-scrollbar-track {
+
+  border-radius: 20px;
+  background: transparent;
+}
+.featureMissionHome::-webkit-scrollbar-thumb {
+  background:  #3125b8; 
+  border-radius: 20px;
+}
+
+.buttonHome1{
+  cursor: pointer;
+  height: 80px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 202px;
+}
+.buttonHome2{
+  height: 80px;
+  left: 217px;
+  position: absolute;
+  top: 0px;
+  width: 187px;
+}
+.buttonHome3{
+  background-color: transparent;
+  height: 80px;
+  left: 417px;
+  position: absolute;
+  top: 0px;
+  width: 187px;
+}

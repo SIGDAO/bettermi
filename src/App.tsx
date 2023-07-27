@@ -1,10 +1,10 @@
 // package
 import React from 'react';
 import { useEffect, useState } from 'react';
-import {BrowserRouter, Routes, Route, Navigate, useLocation} from 'react-router-dom';
+import {BrowserRouter, Routes, Route, Navigate, useLocation,Outlet} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Provider as ReduxProvider } from "react-redux";
-
+import  { Fragment } from 'react';
 
 
 // setting
@@ -35,6 +35,7 @@ import Profile from './pages/profile/profile';
 import Marketplace from './pages/marketplace/marketplace';
 import { loadState, saveState } from './redux/sessionStorage';
 import Testing from './pages/testing/testing';
+import { Analytics } from '@vercel/analytics/react';
 
 store.subscribe(() => {
   saveState(store.getState());
@@ -48,7 +49,13 @@ function App() {
     <AppContext.Provider value={appConfig}>
       <ReduxProvider store={store}>
         <Routes>
-          <Route path="/" element={<LogoPage/>} />
+        <Route element = {
+             <Fragment>
+               <Analytics/>
+               <Outlet/>
+             </Fragment>
+           }>
+                       <Route path="/" element={<LogoPage/>} />
           <Route path="/connectWallet" element={<ConnectWallet/>} />
           <Route path="/generateBMI" element={<GenerateBMI/>} />
           <Route path="/takeSelfie" element={<TakeSelfie/>} />
@@ -71,6 +78,7 @@ function App() {
           <Route path="/marketplace" element={<Marketplace/>} />
           <Route path="/testing" element={<Testing/>} />
           <Route path="*" element={<Navigate to="/home" />} />
+          </Route>
         </Routes>
       </ReduxProvider>  
     </AppContext.Provider>

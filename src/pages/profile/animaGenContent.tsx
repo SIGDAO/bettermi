@@ -2,11 +2,34 @@ import * as React from 'react';
 import MenuBar from '../../components/menuBar';
 import { Link } from 'react-router-dom';
 import { ShortTitleBar } from '../../components/titleBar';
+import { useState } from 'react';
+ import { useAppSelector } from '../../redux/useLedger';
+ import { selectWalletNodeHost } from '../../redux/useLedger';
+ import { LedgerClientFactory } from '@signumjs/core';
+ import { useEffect } from 'react';
+ import { accountId } from '../../redux/account';
 
 interface IAnimaGenContentProps {
 }
 
 const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) => {
+  const [loading, setLoading] = useState<boolean>(true);
+  const [imgAddress, setImgAddress] = useState<string>("");
+  const nodeHost = useAppSelector(selectWalletNodeHost);
+  const ledger2 = LedgerClientFactory.createClient({nodeHost});
+  const userId = useAppSelector(accountId);
+  useEffect(() => {
+    // Function to fetch data from the APIc
+    ledger2.account.getAccount({accountId:userId}).then((account)=>{
+      const description = JSON.parse(account.description);
+      console.log(description);
+      console.log(Object.keys(description.av));
+      console.log(typeof(Object.keys(description.av)[0]));
+      setImgAddress(Object.keys(description.av)[0]);
+      setLoading(false);
+    });
+
+  }, []);
   return (
     <div className="bettermidapp-profile-1">
       <ShortTitleBar title='Profile' />
@@ -94,8 +117,14 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
           <Link to={'/myNftList'}>
             <div className="view-all-YwZqds inter-medium-royal-blue-14px">View all</div>
           </Link>
+          {loading ?
           <img className="nft_-avatar-YwZqds nft_-avatar" src="img/profile/nft-avatar-12@1x.png" alt="NFT_Avatar" />
-      </div>
+          :
+          (
+            <img className = "nft_-avatar-YwZqds nft_-avatar" src = {`https://ipfs.io/ipfs/${imgAddress}`}></img>
+          )
+}
+        </div>
       <MenuBar/>
     </div>
   )

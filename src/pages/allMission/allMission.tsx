@@ -3,6 +3,7 @@ import './allMission.css'
 import CSS from 'csstype';
 import { BackButton } from '../../components/button';
 import { useNavigate } from 'react-router-dom';
+import MenuBar from '../../components/menuBar';
 
 interface IChallengeCompletedProps {
 }
@@ -213,6 +214,7 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
         </div>
         <div className = "body3">
         </div>
+        <MenuBar/>
       </div>
 
       </div>

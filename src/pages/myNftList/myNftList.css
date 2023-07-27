@@ -689,3 +689,139 @@
   position: absolute;
   width: 162px;
 }
+
+/* Anderson's Code*/
+.containerMyNftList{
+  position: absolute;
+  left:calc((100vw - 390px) / 2);
+  /* background-color: #4136f1; */
+  background-color: inherit;
+  width:390px;
+  top:88px;
+  display: flex;
+  flex-direction: row;
+justify-content: center;
+}
+.containerMyNftList2{
+  margin-top: 10px;
+  width:340px;
+  flex-wrap: wrap;
+  display: flex;
+  background-color: inherit;
+  /* background-color: aquamarine; */
+  align-self: center;
+  justify-content: space-between;
+}
+.myNftList{
+  height:322px;
+  width:162px;
+  background-color: inherit;
+  /* background-color: #8643ff; */
+  align-self: center;
+  gap:8px;
+  margin-top: 10px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  border:#4136F1 solid 1px;
+  border-radius: 5px;
+}
+.myNftList1{
+  height:322px;
+  width:152px;
+  background-color: #8643ff;
+  align-self: center;
+  margin-left: 31px;
+  margin-bottom: 14px;
+}
+.myNftList2{
+  height:322px;
+  width:152px;
+  background-color: #8643ff;
+  align-self: center;
+  margin-right: 31px;
+  margin-bottom: 14px;
+}
+.myNftImage{
+  height:217px;
+  width: 137px;
+  border-radius: 5px;
+  margin-top: 15px;
+}
+.myNftDescription{
+  background-color: inherit;
+  /* background-color: rgb(0, 255, 60); */
+  width:137px;
+  display: flex;
+  flex-direction: column;
+}
+.myNftNumber{
+  color:#4136F1;
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-xxl);
+  font-style: normal;
+  font-weight: 600;
+}
+.myNftLevel{
+  font-family: var(--font-family-inter);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  color:#39B3AF;
+}
+
+.myNftReward{
+  font-family: var(--font-family-inter);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  color:#FFFFFF;
+  padding-left: 20px;
+}
+
+.myNftPrice{
+  font-family: var(--font-family-inter);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  color:#FFFFFF;
+  opacity: 0.6;
+}
+.myNftButton{
+  width:100px;
+  height:31px;
+  background:  linear-gradient(90deg, #4136F1 0%, #8643FF 100%);
+  border-radius: 3px;
+  border: 0px;
+  color:#FFFFFF;
+  font-family: var(--font-family-inter);
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+}
+.myNftButton:hover{
+opacity: 0.5;
+}
+.myNftBottom{
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width:100%;
+}
+.myNftButtomArrow{
+  width:21px;
+  height:18px;
+  margin-right: 20px;
+}
+.myNftButtonOnDuty{
+  width:100px;
+  height:31px;
+  background:  #39B3AF;
+  border-radius: 3px;
+  border: 0px;
+  font-family: var(--font-family-inter);
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  color:#FFFFFF
+}
