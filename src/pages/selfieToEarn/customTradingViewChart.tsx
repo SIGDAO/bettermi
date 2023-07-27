@@ -20,7 +20,7 @@ interface ChartProps {
 }
 
 const initialColors = {
-  backgroundColor: '#0D0D0D',
+  backgroundColor: '#171717',
   lineColor: '#2962FF',
   textColor: 'white',
   // areaTopColor: '#2962FF',
