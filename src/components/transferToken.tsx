@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 export async function TransferToken(nodeHost:any,accountId:any){
   const walletNodeHost:string = nodeHost?nodeHost:window.localStorage.getItem('nodeHost');
 
-    const ledger2 =LedgerClientFactory.createClient({nodeHost:nodeHost});
+    const ledger2 =LedgerClientFactory.createClient({nodeHost:nodeHost || walletNodeHost});
     
     const assetId = "3862155318820066741";
     console.log(ledger2, "ledger2");
@@ -31,7 +31,8 @@ export async function TransferToken(nodeHost:any,accountId:any){
           skipAdditionalSecurityCheck:true,
           feePlanck:"1000000",
           senderPublicKey:"041f3b333d93ba9b24eaf324d1090f763f7c78ed0b7922d2d3eaeecaf440501c",
-        });  
+        })
+
       } catch (error) {
         console.log(error);
       }

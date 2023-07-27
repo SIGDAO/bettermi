@@ -1,7 +1,7 @@
 // package
 import React from 'react';
 import { useEffect, useState } from 'react';
-import {BrowserRouter, Routes, Route, Navigate, useLocation,Outlet} from 'react-router-dom';
+import {BrowserRouter, Routes, Route, Navigate, useLocation, Outlet} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Provider as ReduxProvider } from "react-redux";
 import  { Fragment } from 'react';
@@ -51,6 +51,19 @@ const theme = createTheme({
   }
 })
 
+const CheckStore: React.FC = () => {
+  const location = useLocation();
+  const currentPath: string = location.pathname;
+  console.log('Current URL:', currentPath);
+  let content = <Outlet/>;
+
+  if (currentPath !== '/' && currentPath !== '/connectWallet'){
+    content = sessionStorage.getItem('store') !== null ? <Outlet/> : <Navigate to="/" />;
+  }
+  return content;
+}
+
+
 
 
 function App() {
@@ -62,6 +75,7 @@ function App() {
           <Routes>
             <Route element = {
               <Fragment>
+                <CheckStore/>
                 <Analytics/>
                 <Outlet/>
               </Fragment>
