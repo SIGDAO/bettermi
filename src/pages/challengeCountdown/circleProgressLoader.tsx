@@ -18,6 +18,7 @@ interface ICircularWithValueLabelProps {
 function CircularProgressWithLabel(
   props: CircularProgressProps & { value: number, displayNum: number},
 ) {
+  const monNum = Math.floor(props.displayNum );
   return (
     <Box sx={{ position: 'relative', display: 'inline-flex' }}>
       <CircularProgress variant="determinate" size={92} {...props} />
@@ -54,7 +55,7 @@ function CircularProgressWithLabel(
             fontStyle: 'normal',
             fontWeight: '600',
           }}
-        >{`00:${Math.round(props.displayNum)}`}</Typography>
+        >{`00:${monNum.toString().length !== 2? `0${monNum}` : monNum.toString()}`}</Typography>
       </Box>
     </Box>
   );
@@ -90,7 +91,7 @@ const CircularWithValueLabel: React.FunctionComponent<ICircularWithValueLabelPro
   
   // const progressInPercent = ((time - progress) / time) * 100;
   
-  return <CircularProgressWithLabel value={(progress / time) * 100} displayNum={progress} />;
+  return <CircularProgressWithLabel value={(progress / time) * 100} displayNum={progress}  />;
 }
 
 export default CircularWithValueLabel;

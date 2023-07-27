@@ -34,7 +34,7 @@ const takeSelfieButton : CSS.Properties = {
   'border': 'none',
   'outline': 'none',
   'cursor': 'pointer',
-  'top': '500px',
+  'top': '550px',
 }
 
 const convertBase64toJpg = (base64String: string): File => {
@@ -126,7 +126,7 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   const content : JSX.Element = (
     <div className='selfie-content-container'>
       <BackButton/>
-      <div className="disclaimer inter-semi-bold-white-28px">
+      <div className="disclaimer inter-normal-white-15px">
           Your selfie will be deleted after the BMI calculation!
         </div>
       <div className="webcam-container" style={webcamContainerStyle}>
@@ -137,7 +137,7 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
             // width={1280}
             width={width}
             ref={webcamRef}
-            videoConstraints={videoConstraints}        
+            videoConstraints={videoConstraints}
         />
         <div className="selfie-shadow"></div>
         <button 

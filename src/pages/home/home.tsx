@@ -54,14 +54,18 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   useEffect(() => {
     // Function to fetch data from the APIc
     ledger2.account.getAccount({accountId:userId}).then((account)=>{
-      const description = JSON.parse(account.description);
-      console.log(description);
-      console.log(Object.keys(description.av));
-      console.log(typeof(Object.keys(description.av)[0]));
-      setImgAddress(Object.keys(description.av)[0]);
-      setLoading(false);
+      try {
+        const description = JSON.parse(account.description);
+        console.log(description);
+        console.log(Object.keys(description.av));
+        console.log(typeof(Object.keys(description.av)[0]));
+        setImgAddress(Object.keys(description.av)[0]);
+        setLoading(false);  
+      } catch (error) {
+        console.log(error);
+        console.log("need to equip nft");
+      }
     });
-
   }, []);
   // todo: map
   // const userSIGDAO = 
