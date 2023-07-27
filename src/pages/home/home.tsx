@@ -7,6 +7,12 @@ import { useSelector } from 'react-redux';
 import { selectCurrentUsername } from '../../redux/profile';
 import { accountToken } from '../../redux/account';
 import { store } from '../../redux/reducer';
+import { useState } from 'react';
+ import { useAppSelector } from '../../redux/useLedger';
+ import { LedgerClientFactory } from '@signumjs/core';
+ import { selectWalletNodeHost } from '../../redux/useLedger';
+ import { accountId } from '../../redux/account';
+ import { useEffect } from 'react';
 
 interface IHomeProps {
 }
@@ -40,6 +46,23 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const Token:string = useSelector(accountToken);
   console.log(store.getState());
   console.log("Token is  ",Token);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [imgAddress, setImgAddress] = useState<string>("");
+  const nodeHost = useAppSelector(selectWalletNodeHost);
+  const ledger2 = LedgerClientFactory.createClient({nodeHost});
+  const userId = useAppSelector(accountId);
+  useEffect(() => {
+    // Function to fetch data from the APIc
+    ledger2.account.getAccount({accountId:userId}).then((account)=>{
+      const description = JSON.parse(account.description);
+      console.log(description);
+      console.log(Object.keys(description.av));
+      console.log(typeof(Object.keys(description.av)[0]));
+      setImgAddress(Object.keys(description.av)[0]);
+      setLoading(false);
+    });
+
+  }, []);
   // todo: map
   // const userSIGDAO = 
 
@@ -111,7 +134,12 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
             <div className="nft-reward-10-b5x63m inter-semi-bold-white-15px">NFT REWARD +10%</div>
             <img className="seperate-line-b5x63m" src={`${process.env.PUBLIC_URL}/img/seperate-line-1@1x.png`} alt="seperate line" />
           </div>
+          {loading?
           <img className="nft_-avatar-2ZgxSS" src={`${process.env.PUBLIC_URL}/img/home/nft-avatar-13@1x.png`} alt="NFT_Avatar" />
+          :(
+            <img className = "nft_-avatar-2ZgxSS" src = {`https://ipfs.io/ipfs/${imgAddress}`}></img>
+          )
+          }
           <Link to="/profile">
             <div className="ic_next-2ZgxSS">
               <img
