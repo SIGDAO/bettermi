@@ -2884,3 +2884,11 @@
 	background-color: #111;
 	border-radius: 20px;
 } */
+
+.no-record-container {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
