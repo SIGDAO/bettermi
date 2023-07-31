@@ -18,8 +18,10 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
           <img className="bg-oobbG1" src={`${process.env.PUBLIC_URL}/img/marketplace/bg-23@1x.png`} alt="bg" />
           <div className="partner-company-oobbG1 partner-company">
             <p className="where-can-i-pay-with-sigdao-vbUx2m">WHERE CAN I PAY WITH SIGDAO?</p>
-            <div className="see-all-vbUx2m see-all inter-medium-royal-blue-14px">See all</div>
-            <p className="discover-thousands-o-vbUx2m">Discover thousands of outlets that accept SIGDAO!</p>
+            <Link to="https://www.bettermi.io/">
+              <div className="see-all-vbUx2m see-all inter-medium-royal-blue-14px">See all</div>
+            </Link>
+            <p className="discover-thousands-o-vbUx2m">Discover thousands of products that accept SIGDAO!</p>
             <div className="x7-vbUx2m">
               <img className="zoe-fitness-8cjGPE zoe-fitness" src={`${process.env.PUBLIC_URL}/img/marketplace/zoe-fitness@1x.png`} alt="Zoe Fitness" />
               <img className="vitev-8cjGPE" src={`${process.env.PUBLIC_URL}/img/marketplace/vitev@1x.png`} alt="Vitev" />
@@ -136,7 +138,9 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
         <div className="partner-company-Rea9Nd partner-company">
           <div className="bg-AStx0d"></div>
           <div className="hot-deals-AStx0d">HOT DEALS</div>
-          <div className="see-all-AStx0d see-all inter-medium-royal-blue-14px">See all</div>
+          <Link to="https://www.bettermi.io/" >
+            <div className="see-all-AStx0d see-all inter-medium-royal-blue-14px">See all</div>
+          </Link>
           <div className="special-scroll-AStx0d">
             <div className="x25-Wx9nPx">
               <div className="x0-Y63lEW x0"><img className="x1-z2FCJz x1" src={`${process.env.PUBLIC_URL}/img/marketplace/1@1x.png`} alt="1" /></div>

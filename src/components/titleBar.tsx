@@ -34,7 +34,7 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
         <div className="title-bar-title inter-semi-bold-white-18px">{title}</div>
         {/* <img className="title-bar-seperat-line seperat-line" src={process.env.PUBLIC_URL + "/img/seperat-line-11@1x.png"} alt="Seperat line" /> */}
         <div className="title-bar-ic_help_24px ic_help_24px">
-            <img className="title-bar-ic_help_24px-img ic_help_24px" src={process.env.PUBLIC_URL + "/img/ic-help-24px-1@1x.png"} alt="ic_help_24px" />
+            <img className="title-bar-ic_help_24px-img ic_help_24px" src={process.env.PUBLIC_URL + "/img/ic-settings-24px-1@1x.png"} alt="ic_help_24px" />
         </div>
         <a href="javascript:history.back()">
           <div className="icon-arrow-left-container icon-arrow-left">
@@ -49,7 +49,7 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
           <div className="ic_settings_24px-container ic_settings_24px">
               <img
                 className="ic_settings_24px-img ic_settings_24px"
-                src={process.env.PUBLIC_URL + "/img/ic-settings-24px-1@1x.png"}
+                src={process.env.PUBLIC_URL + "/img/ic-sentiment-very-satisfied-24px-1@1x.png"}
                 alt="ic_settings_24px"
                 />
           </div>

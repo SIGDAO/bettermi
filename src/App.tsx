@@ -38,6 +38,13 @@ import Testing from './pages/testing/testing';
 import { createTheme , ThemeProvider } from "@mui/material"
 // import { ThemeProvider , createTheme } from '@mui/material/styles';
 import { Analytics } from '@vercel/analytics/react';
+import GenerateBMIDaily from './pages/generateBMIDaily/generateBMIDaily';
+import GenerateBMINFTImport from './pages/generateBMINFTImport/generateBMINFTImport';
+import AiCoachSelect from './pages/aiCoachSelect/aiCoachSelect';
+import AiCoachDetail from './pages/aiCoachDetail/aiCoachDetail';
+import ErrorGenerateNFT from './pages/errorGenerateNFT/errorGenerateNFT';
+import LoadingMinting from './pages/loadingMinting/loadingMinting';
+import Setting from './pages/setting/setting';
 
 store.subscribe(() => {
   saveState(store.getState());
@@ -78,7 +85,6 @@ function App() {
               <Fragment>
                 <CheckStore/>
                 <Analytics/>
-                {/* <Outlet/> */}
               </Fragment>
             }>
               <Route path="/" element={<LogoPage/>} />
@@ -105,6 +111,16 @@ function App() {
               <Route path="/profile" element={<Profile/>} />
               <Route path="/marketplace" element={<Marketplace/>} />
               <Route path="/testing" element={<Testing/>} />
+              {/* todo: flow 3 */}
+              <Route path='/generateBMIDaily' element={<GenerateBMIDaily />} />
+              <Route path='/GenerateBMINFTImport' element={<GenerateBMINFTImport />} />
+              <Route path='/aiCoachSelect' element={<AiCoachSelect />} />
+              <Route path='/aiCoachDetail' >
+                <Route path=':id' element={<AiCoachDetail />} />
+              </Route>
+              <Route path='/errorGenerateNFT' element={<ErrorGenerateNFT />} />
+              <Route path='/loadingMinting' element={<LoadingMinting />} />
+              <Route path='/setting' element={<Setting />} />
               <Route path="*" element={<Navigate to="/home" />} />
             </Route>
           </Routes>
