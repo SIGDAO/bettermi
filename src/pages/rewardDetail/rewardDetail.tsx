@@ -151,6 +151,7 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
           ) :
           (<p className="x250-FtIem3">{displayRewardDetail?.reward}</p>)}
         </div>
+        
         <div className={classNameList[0] || "goal-data-P2i95W"}>
           {/* <div className="x893-LfPhsf"></div> */}
           <div className={classNameList[1] || "goal-LfPhsf"}>

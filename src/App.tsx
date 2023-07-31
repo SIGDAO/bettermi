@@ -57,8 +57,9 @@ const CheckStore: React.FC = () => {
   console.log('Current URL:', currentPath);
   let content = <Outlet/>;
 
-  if (currentPath !== '/' && currentPath !== '/connectWallet'){
-    content = sessionStorage.getItem('store') !== null ? <Outlet/> : <Navigate to="/" />;
+  if (currentPath !== '/' && currentPath !== '/connectWallet' ){
+    console.log(sessionStorage.getItem('state') == null, 'state');
+    content = sessionStorage.getItem('state') === null ? <Navigate to="/" /> : <Outlet/>;
   }
   return content;
 }
@@ -77,7 +78,7 @@ function App() {
               <Fragment>
                 <CheckStore/>
                 <Analytics/>
-                <Outlet/>
+                {/* <Outlet/> */}
               </Fragment>
             }>
               <Route path="/" element={<LogoPage/>} />
