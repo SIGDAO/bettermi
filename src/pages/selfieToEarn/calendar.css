@@ -1,8 +1,9 @@
 .react-calendar {
-  background: #221D4B;
+  background: var(--eerie-black);
   width: 100%;
   border: none;
   line-height: 35px;
+  border-top: 1px solid var(--cape-cod);
 }
 
 abbr[title] {

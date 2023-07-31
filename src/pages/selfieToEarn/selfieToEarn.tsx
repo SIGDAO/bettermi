@@ -208,7 +208,7 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
 
   // const Custom..
 
-  const displaySelectedDateRecord:JSX.Element = daySelectedData?.map((item: any) => {
+  const displaySelectedDateRecord:JSX.Element = daySelectedData && daySelectedData.length() !== 0 ? daySelectedData?.map((item: any) => {
     const date = new Date(item.time * 1000)
     const dateFormat = date.toLocaleDateString('en-GB')
     return (
@@ -240,7 +240,12 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
         </div>
       </div>
     )
-  })
+  }):
+  (
+    <div className="no-record-container inter-medium-white-15px">
+      No record today
+    </div>
+  )
 
 
   const content: JSX.Element = (
@@ -355,9 +360,9 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
           />
         </div>
         <div className="x16212-MUU5YC">
-            <div className="record-title-container">
+            {/* <div className="record-title-container">
               <div className="records-tDsdhu inter-semi-bold-white-18px">Records</div>
-            </div>
+            </div> */}
             {/* <div className="view-all-tDsdhu">View all</div> */}
             <div className="rewards_card-container">
               {displaySelectedDateRecord}

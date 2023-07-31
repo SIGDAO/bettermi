@@ -144,3 +144,19 @@ demo data
 size of company screen
 
 how to make sure that the task allow to do once 
+
+no record for today (text abjust by Records)
+
+selfieToEarn
+  - task:
+    display "no record today"
+    no Re
+
+missionChallenge
+  - task: 
+    change to gif and it's name
+    top of the list need to be
+
+signumart 
+  signum_art_storage/signum_art/persist:tx
+    use this to check if login

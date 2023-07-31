@@ -4,6 +4,10 @@ import { CenterLayout } from '../../components/layout';
 import { ShortTitleBar } from '../../components/titleBar';
 // import { CircularProgress } from '@mui/material';
 import CircularWithValueLabel from './circleProgressLoader';
+import { useSelector } from 'react-redux';
+import { accountId } from '../../redux/account';
+import { walletNodeHost } from '../../redux/wallet';
+import { TransferToken } from '../../components/transferToken';
 
 interface IChallengeCountdownProps {
   taskName?: string;
@@ -11,17 +15,10 @@ interface IChallengeCountdownProps {
 
 
 const ChallengeCountdown: React.FunctionComponent<IChallengeCountdownProps> = (props) => {
-  const [time, setTime] = React.useState(0);
+  const [time, setTime] = React.useState(32);
+  const userAccountId = useSelector(accountId);
+  const userWalletNodeHost = useSelector(walletNodeHost);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTime((prevTime) => (prevTime >= 100 ? 0 : prevTime + 10));
-    }, 800);
-
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
 
   const content: JSX.Element = (
     <div className="screen">
@@ -37,7 +34,7 @@ const ChallengeCountdown: React.FunctionComponent<IChallengeCountdownProps> = (p
         <div className="challenge-content-oEaurv">
           <img className="layer-D6xMU2" src={`${process.env.PUBLIC_URL}/img/challengeCountdown/layer@1x.png`} alt="Layer" />
           <div className="countdown-D6xMU2">
-            <CircularWithValueLabel time={32} />
+            <CircularWithValueLabel time={3} />
             {/* <div className="t-countdown-YGwjuf">
               <div className="bg-C3TEa1"></div>
               <img className="process-circle-C3TEa1" src={`${process.env.PUBLIC_URL}/img/challengeCountdown/process-circle@1x.png`} alt="Process circle" />

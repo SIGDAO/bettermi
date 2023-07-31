@@ -34,7 +34,8 @@ const takeSelfieButton : CSS.Properties = {
   'border': 'none',
   'outline': 'none',
   'cursor': 'pointer',
-  'top': '550px',
+  // 'top': 'calc(529px - 50px)',
+  'top': '529px',
 }
 
 const convertBase64toJpg = (base64String: string): File => {
@@ -88,7 +89,7 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
     'zIndex': '1',
     'display': 'inline-block',
     'position': 'absolute',
-    'top': '190px',   
+    'top': 'calc(190px - 50px)',   
   }
 
   const mobile = process.env.REACT_APP_MOBILE === 'true'

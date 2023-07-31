@@ -1,7 +1,7 @@
 // package
 import React from 'react';
 import { useEffect, useState } from 'react';
-import {BrowserRouter, Routes, Route, Navigate, useLocation,Outlet} from 'react-router-dom';
+import {BrowserRouter, Routes, Route, Navigate, useLocation, Outlet} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Provider as ReduxProvider } from "react-redux";
 import  { Fragment } from 'react';
@@ -51,6 +51,19 @@ const theme = createTheme({
   }
 })
 
+const CheckStore: React.FC = () => {
+  const location = useLocation();
+  const currentPath: string = location.pathname;
+  console.log('Current URL:', currentPath);
+  let content = <Outlet/>;
+
+  if (currentPath !== '/' && currentPath !== '/connectWallet'){
+    content = sessionStorage.getItem('store') !== null ? <Outlet/> : <Navigate to="/" />;
+  }
+  return content;
+}
+
+
 
 
 function App() {
@@ -60,35 +73,38 @@ function App() {
       <AppContext.Provider value={appConfig}>
         <ReduxProvider store={store}>
           <Routes>
-          <Route element = {
+            <Route element = {
               <Fragment>
+                <CheckStore/>
                 <Analytics/>
                 <Outlet/>
               </Fragment>
             }>
-                        <Route path="/" element={<LogoPage/>} />
-            <Route path="/connectWallet" element={<ConnectWallet/>} />
-            <Route path="/generateBMI" element={<GenerateBMI/>} />
-            <Route path="/takeSelfie" element={<TakeSelfie/>} />
-            <Route path="/connectSuccess" element={<ConnectSuccess/>} />
-            <Route path="/generateFreeNFT" element={<GenerateFreeNFT/>} />
-            <Route path="/customizeYourProfile" element={<CustomizeYourProfile/>} />
-            {/* todo: flow 2 */}
-            <Route path="/home" element={<Home/>} />
-            <Route path="/allMission" element={<AllMission/>} />
-            <Route path="/challengeCompleted" element={<ChallengeCompleted/>} />
-            <Route path="/challengeCountdown" element={<ChallengeCountdown/>} />
-            <Route path="/missionChallenge" element={<MissionChallenge/>} />
-            <Route path="/myNftList" element={<MyNftList/>} />
-            <Route path="/reward" element={<Reward/>} />
-            <Route path="/rewardDetail">
-              <Route path=":id" element={<RewardDetail/>} />
-            </Route>
-            <Route path="/selfieToEarn" element={<SelfieToEarn/>} />
-            <Route path="/profile" element={<Profile/>} />
-            <Route path="/marketplace" element={<Marketplace/>} />
-            <Route path="/testing" element={<Testing/>} />
-            <Route path="*" element={<Navigate to="/home" />} />
+              <Route path="/" element={<LogoPage/>} />
+              <Route path="/connectWallet" element={<ConnectWallet/>} />
+              <Route path="/generateBMI" element={<GenerateBMI/>} />
+              <Route path="/takeSelfie" element={<TakeSelfie/>} />
+              <Route path="/connectSuccess" element={<ConnectSuccess/>} />
+              <Route path="/generateFreeNFT" element={<GenerateFreeNFT/>} />
+              <Route path="/customizeYourProfile" element={<CustomizeYourProfile/>} />
+              {/* todo: flow 2 */}
+              <Route path="/home" element={<Home/>} />
+              <Route path="/allMission" element={<AllMission/>} />
+              <Route path="/challengeCompleted" element={<ChallengeCompleted/>} />
+              <Route path="/challengeCountdown">
+                <Route path=":id" element={<ChallengeCountdown/>} />
+              </Route>
+              <Route path="/missionChallenge" element={<MissionChallenge/>} />
+              <Route path="/myNftList" element={<MyNftList/>} />
+              <Route path="/reward" element={<Reward/>} />
+              <Route path="/rewardDetail">
+                <Route path=":id" element={<RewardDetail/>} />
+              </Route>
+              <Route path="/selfieToEarn" element={<SelfieToEarn/>} />
+              <Route path="/profile" element={<Profile/>} />
+              <Route path="/marketplace" element={<Marketplace/>} />
+              <Route path="/testing" element={<Testing/>} />
+              <Route path="*" element={<Navigate to="/home" />} />
             </Route>
           </Routes>
         </ReduxProvider>  

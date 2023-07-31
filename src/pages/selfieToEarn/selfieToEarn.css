@@ -3,7 +3,7 @@
 .bettermidapp-selfie-to-earn-1 {
   background: linear-gradient(180deg, #171717 0%, #291a49 41.22%, #171717 100%);
   background-color: rgba(255,255,255,1.0);
-  height: calc(1553px - 280px);
+  height: calc(1553px - 280px - 60px);
   /* height: 1553px; */
   /* overflow: hidden;
   overflow-x: hidden; */
@@ -2848,6 +2848,7 @@
   align-items: center;
   /* margin: 0 10px; */
   padding: 0 25px;
+  background: var(--eerie-black);
 }
 
 .mean-bmi-setting {
@@ -2883,3 +2884,11 @@
 	background-color: #111;
 	border-radius: 20px;
 } */
+
+.no-record-container {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}

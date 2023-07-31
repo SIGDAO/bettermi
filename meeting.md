@@ -7,7 +7,7 @@ Overall: Title bar + Home Menu container should be widert responsively (with act
 1. Generate BMI → confirmed → Loading page (animation & % minting)
 2. [Home]
 <!-- - SIGDAO token Icon damaged. -->
-- Discord link to Sigdao discord channel
+<!-- - Discord link to Sigdao discord channel -->
 - Feature mission blockec cannot scroll horizontally.
 
 3. [Feature missions]
@@ -30,3 +30,55 @@ Overall: Title bar + Home Menu container should be widert responsively (with act
 <!-- - “WERE CAN I PAY WITH SIGDAO“ need to aline with “See all” and match with the spacing in anima -->
 <!-- - The scroll partner company icon roll has been cut, please adjust. -->
 <!-- - Redeem Rewards : Titile and desccription spacing should follow anima > Each awrd detials page: fine tune all the spacing -->
+
+Bettermi.io dAPP - Adjustent & Fine tune
+
+|| Overall: Title bar + Home Menu container should be widert responsively (with actual spacing) to ipad version
+
+/ Selfie to earn - camera /
+
+Camera frame need to fit as mobile (in order to capture selfie)
+
+Add alert sentence; “Your selfie will be deleted after the BMI calculation?” same as anima (take selfie & Scanning bar layer
+
+/ Generate BMI (First login) /
+
+Updated to amina (input sex & date of birth)
+
+/ Generate BMI (Daily) /
+
+Result with color bar (refer to BMI mean for each user according to age & sex)
+
+/ Feature Missions /
+
+Capital ”Earning Rewards” → “EARNING REWARDS“
+
+/ Selfie To Earn - Records /
+
+Add seperate lines between Data chart and Records
+
+Calender BG color should be in #171717
+
+Records bar: If X → “No records today.“ (Font type: Inter Medium/ size: 15/ Allign to left)
+
+/ Marketplace /
+
+Change description → “Discover thousands of products that accept SIGDAO!”
+
+The last two“See all” button link to Bettermi.io website
+
+/ Profile /
+
+Update the newest versiion to anima: Delete friends colume and add editable Discord usrename in profile details. (please follow the newest version with edit page)
+
+
+/ My NFTs /
+
+Please allign the “send“ button to “equip“ button
+
+Follow .xd/ Anima: Add a seperate line between “Lv1“ & “Reward +10%“
+
+Add back the two icon → “Filter” & “Plus“ button on the right top corner
+
+Missing screen for input wallet address in order to send NFT @rowenalee
+
