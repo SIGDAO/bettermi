@@ -14,6 +14,7 @@ import MyNft from './myNft';
 import { selectWalletNodeHost } from '../../redux/useLedger';
 import { LedgerClientFactory } from '@signumjs/core';
 import { useState,useEffect } from 'react';
+import { useRef } from 'react';
 
 interface IMyNftListProps {
 }
@@ -31,6 +32,8 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> =  (props) => {
   const [loading, setLoading] = useState(true);
   const [myNfts, setMyNfts] = useState<myNftList[]>([]);
   const [onDuty,setOnDuty] = useState<string>("");
+  const [array,setArray] = useState<string[]>([]);
+  const dataFetchedRef = useRef(false);
   //var myNft:myNftList[] = [];
   var nft:myNftList;
   const nodeHost = useAppSelector(selectWalletNodeHost);
@@ -57,18 +60,20 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> =  (props) => {
   // console.log(myNfts);
 
   useEffect(() => {
+    if (dataFetchedRef.current) {console.log("called");return;}
+      dataFetchedRef.current = true;
     ledger2.account.getAccount({accountId:userAccountId}).then((account)=>{
       const description = JSON.parse(account.description);
-      console.log(description);
-      console.log(Object.keys(description.av));
-      console.log(typeof(Object.keys(description.av)[0]));
+      //console.log(description);
+      //console.log(Object.keys(description.av));
+      //console.log(typeof(Object.keys(description.av)[0]));
       setOnDuty(Object.keys(description.av)[0]);
-      console.log(onDuty);
-    });
+      //console.log(onDuty);
+    }).catch((error)=>{console.log(error)});
     // Function to fetch data from the API
     ledger2.account.getAccountTransactions({accountId:"2826449997764829726"}).then(
       async(transactions) => {
-      //console.log(transactions);
+      //console.log("transaction is ",transactions);
       //console.log(transactions.transactions.length);
       for(var i=0;i<transactions.transactions.length;i++){
         if(transactions.transactions[i].sender == trialAccountId){
@@ -78,55 +83,30 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> =  (props) => {
           break;
         }
       }
-      nftAddressList.map(async(nftAddress)=>{
-        const hi = await ledger2.contract.getContract(nftAddress);
-        //console.log("array is ",nftAddress,"  ",hi);
-        const trial = JSON.parse(hi.description);
-        //console.log(trial);
-        //console.log(trial.descriptor);
-        nft = {level:trial.version,image:trial.descriptor};
-        setMyNfts([...myNfts,nft]);
-        console.log("appended list is ",[...myNfts,nft]);
-        userNftList.push(nft);
+      console.log("nftAddress is  ",nftAddressList);
+      nftAddressList.map((nftAddress)=>{
+        ledger2.contract.getContract(nftAddress).then((hi)=>{
+            //console.log("array is ",nftAddress,"  ",hi);
+            const trial = JSON.parse(hi.description);
+            //console.log(trial);
+            //console.log(trial.descriptor);
+            nft = {level:trial.version,image:trial.descriptor};
+            console.log([...myNfts,nft]);
+            console.log(myNfts);
+            setMyNfts([...myNfts,nft]);
+            setArray([...array,"123"]);
+            console.log("testing array is ",array);
+            console.log("appended list is ",[...myNfts,nft]);
+            userNftList.push(nft);
+            setMyNfts(userNftList);
+            setLoading(false);
+        });
       });
-      console.log("userNftList is",userNftList);
-      console.log("myNft is",myNfts);
-      setLoading(false);
+      //console.log("userNftList is",userNftList);
+      //console.log("myNft is",myNfts);
     });
-    // // Function to fetch data from the API
-    // ledger2.account.getAccountTransactions({accountId:"2826449997764829726"}).then(
-    //   async(transactions) => {
-    //   //console.log(transactions);
-    //   //console.log(transactions.transactions.length);
-    //   for(var i=0;i<transactions.transactions.length;i++){
-    //     if(transactions.transactions[i].sender == trialAccountId){
-    //      // console.log(transactions.transactions[i].sender);
-    //       nftAddressList = transactions.transactions[i].attachment.message.split(",");
-    //       //console.log(nftAddressList);
-    //       break;
-    //     }
-    //   }
-    //   nftAddressList.map(async(nftAddress)=>{
-    //     const hi = await ledger2.contract.getContract(nftAddress);
-    //     //console.log("array is ",nftAddress,"  ",hi);
-    //     const trial = JSON.parse(hi.description);
-    //     //console.log(trial);
-    //     //console.log(trial.descriptor);
-    //     nft = {level:trial.version,image:trial.descriptor};
-    //     userNftList.push(nft);
-    //   });
-    //   console.log(userNftList);
-    //   //setMyNfts(userNftList);
-    //   console.log(myNfts);
-    //   setLoading(false);
-    // });
 
-    // Call the fetchData function
-
-    // Optional cleanup function (not needed in this case)
-    // If you had any subscription or timers, you'd clean them up here
-
-    // Since we want the effect to run only once (on mount), we pass an empty dependency array
+  
   }, []);
 
 
@@ -190,13 +170,16 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> =  (props) => {
     'position': 'relative',
     'top': '44px',
   }
-  const displayMyNft = userNftList.map((nft) => {//Contract Id
+  const displayMyNft = myNfts.map((nft) => {//Contract Id
+    console.log("userNftList is  ",userNftList);
     return(
       <MyNft  image={nft.image} level = {nft.level}></MyNft>
     );
     }
   );
   const tempDisplayMyNft = tempNftList.map((nft) => {//Contract Id
+    console.log("myNftList is  ",myNfts);
+    console.log("loading is  ",loading);
     return(
       <MyNft  image={nft.image} level = {nft.level}></MyNft>
     );
@@ -234,13 +217,13 @@ return(
                )
 
                }
-            {tempDisplayMyNft}
+              {displayMyNft}
         </div>
       </div>
-      {loading?(<p>loading...</p>):(
+      {/* {loading?(<p>loading...</p>):(
         <>
               <ShortTitleBar title='My NFTs' />
-              {console.log(userNftList)}
+              {console.log(userNftList)}{console.log(array)}
       <div className = "containerMyNftList">
         <div className = "containerMyNftList2">
             {displayMyNft}
@@ -248,7 +231,7 @@ return(
       </div>
       </>
       )
-}
+} */}
     </div>
     </div>
     

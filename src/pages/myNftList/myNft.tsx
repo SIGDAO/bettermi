@@ -36,19 +36,19 @@ import * as React from 'react';
      var addressSuffix:string ="https://ipfs.io/ipfs/"; 
      useEffect(() => {
          // Function to fetch data from the APIc
-         console.log(`ipfs.io/ipfs/${image}`);
+         //console.log(`ipfs.io/ipfs/${image}`);
          fetch(`https://ipfs.io/ipfs/${image}`).then((res)=>{
              res.text().then((text)=>{
-                 console.log(text); 
+                 //console.log(text); 
                  var nftInfo = JSON.parse(text);
-                 console.log(nftInfo); 
-                 console.log(typeof(nftInfo.media[0].social));
+                 //console.log(nftInfo); 
+                 //console.log(typeof(nftInfo.media[0].social));
                  setImgAddress(nftInfo.media[0].social);
                  nftImgAddress = nftInfo.media[0].social; 
-                 console.log(nftImgAddress);
-                 console.log(imgAddress);
+                 //console.log(nftImgAddress);
+                 //console.log(imgAddress);
                  nftImgAddress = addressSuffix.concat(nftImgAddress);
-                 console.log(nftImgAddress);
+                 //console.log(nftImgAddress);
                  setLoading(false);
              });
 
@@ -75,7 +75,7 @@ import * as React from 'react';
          feePlanck:"1000000",
          senderPublicKey:userAccountpublicKey,
        })
-       console.log(setAccountInfo);
+       //console.log(setAccountInfo);
        Wallet.Extension.confirm(setAccountInfo.unsignedTransactionBytes);
      };
    return(
