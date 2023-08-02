@@ -1,11 +1,13 @@
 import * as React from 'react';
 import './titleBar.css';
 import { BackButton } from './button';
+import { Link } from 'react-router-dom';
 
 interface IShortTitleBarProps {
   title: string | undefined;
   setting?: boolean;
   help?: boolean;
+  transparent?: boolean | undefined;
 }
 
 
@@ -20,11 +22,11 @@ const settingIcon: JSX.Element = (
 )
 
 export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (props) => {
-  const { title, setting, help } = props;
+  const { title, setting, help, transparent } = props;
 
   return (
     <div className="title-bar-layout">
-      <div className="title-bar-container" 
+      <div className={transparent ? "transparent-title-bar-container" : "title-bar-container"}
         style={{
           // background: `url(${process.env.PUBLIC_URL}/img/bg-11@1x.png)`,
           // backgroundPosition: 'center',
@@ -33,9 +35,12 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
       >
         <div className="title-bar-title inter-semi-bold-white-18px">{title}</div>
         {/* <img className="title-bar-seperat-line seperat-line" src={process.env.PUBLIC_URL + "/img/seperat-line-11@1x.png"} alt="Seperat line" /> */}
-        <div className="title-bar-ic_help_24px ic_help_24px">
-            <img className="title-bar-ic_help_24px-img ic_help_24px" src={process.env.PUBLIC_URL + "/img/ic-settings-24px-1@1x.png"} alt="ic_help_24px" />
-        </div>
+        {/* setting */}
+        <Link to="/setting">
+          <div className="title-bar-ic_help_24px ic_help_24px">
+              <img className="title-bar-ic_help_24px-img ic_help_24px" src={process.env.PUBLIC_URL + "/img/ic-settings-24px-1@1x.png"} alt="ic_help_24px" />
+          </div>
+        </Link>
         <a href="javascript:history.back()">
           <div className="icon-arrow-left-container icon-arrow-left">
               <img
@@ -46,13 +51,15 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
           </div>
         </a>
         {setting === false ? null : (
-          <div className="ic_settings_24px-container ic_settings_24px">
+          <Link to="/aiCoachSelect">
+            <div className="ic_settings_24px-container ic_settings_24px">
               <img
                 className="ic_settings_24px-img ic_settings_24px"
                 src={process.env.PUBLIC_URL + "/img/ic-sentiment-very-satisfied-24px-1@1x.png"}
                 alt="ic_settings_24px"
                 />
-          </div>
+            </div>
+          </Link>
         )}
         {/* <img className="bg-MY4xZJ" src={process.env.PUBLIC_URL + "/img/bg-11@1x.png"} alt="BG" /> */}
       </div>

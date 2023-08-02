@@ -113,7 +113,7 @@ function App() {
               <Route path="/testing" element={<Testing/>} />
               {/* todo: flow 3 */}
               <Route path='/generateBMIDaily' element={<GenerateBMIDaily />} />
-              <Route path='/GenerateBMINFTImport' element={<GenerateBMINFTImport />} />
+              <Route path='/generateBMINFTImport' element={<GenerateBMINFTImport />} />
               <Route path='/aiCoachSelect' element={<AiCoachSelect />} />
               <Route path='/aiCoachDetail' >
                 <Route path=':id' element={<AiCoachDetail />} />

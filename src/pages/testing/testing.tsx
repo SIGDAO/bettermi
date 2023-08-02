@@ -12,6 +12,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { accountId } from "../../redux/account";
 import { useLedger } from "../../redux/useLedger";
 import { userBMISlice } from "../../redux/userBMI";
+import './testing.css'
 
 interface ChartProps {
   data?: { time: string; value: number }[];
@@ -119,34 +120,40 @@ const CustomTradingViewChart: React.FC = () => {
   }
   
 
+  // return (
+  //   <Chart {...options}>
+  //     {data && (
+  //       <AreaSeries 
+  //         {...areaSeriesInitialOptions} 
+  //         data={data}
+  //         // markers={data.map((item: any, index: any) => {
+  //         //   return {
+  //         //     time: item.time,
+  //         //     position: 'inBar',
+  //         //     color: data.length - 1 === index ? '#39b3af' : '#687074',
+  //         //     shape: 'circle',
+  //         //     // text: item.value,
+  //         //     // size: 1,
+  //         //     // shape: 'arrowDown',
+  //         //     // text: 'test',
+  //         //   }})
+  //         // }
+  //       >
+  //         <PriceLine 
+  //           price={26.5} 
+  //           color={'#39b3af'} 
+  //           lineWidth={2} 
+  //           lineStyle={LineStyle.LargeDashed} 
+  //         />
+  //       </AreaSeries>
+  //     )}
+  //   </Chart>
+  // )
+
   return (
-    <Chart {...options}>
-      {data && (
-        <AreaSeries 
-          {...areaSeriesInitialOptions} 
-          data={data}
-          // markers={data.map((item: any, index: any) => {
-          //   return {
-          //     time: item.time,
-          //     position: 'inBar',
-          //     color: data.length - 1 === index ? '#39b3af' : '#687074',
-          //     shape: 'circle',
-          //     // text: item.value,
-          //     // size: 1,
-          //     // shape: 'arrowDown',
-          //     // text: 'test',
-          //   }})
-          // }
-        >
-          <PriceLine 
-            price={26.5} 
-            color={'#39b3af'} 
-            lineWidth={2} 
-            lineStyle={LineStyle.LargeDashed} 
-          />
-        </AreaSeries>
-      )}
-    </Chart>
+    <>
+      <div className="loader"></div>
+    </>
   )
 }
 

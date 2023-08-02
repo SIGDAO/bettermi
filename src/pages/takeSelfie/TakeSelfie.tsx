@@ -128,7 +128,7 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
     <div className='selfie-content-container'>
       <BackButton/>
       <div className="disclaimer inter-normal-white-15px">
-        Your selfie will be deleted after the BMI calculation
+      We super care your privacy, your selfie will not be stored
       </div>
       <div className="webcam-container" style={webcamContainerStyle}>
         <Webcam 

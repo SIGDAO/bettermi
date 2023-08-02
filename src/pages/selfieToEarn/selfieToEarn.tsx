@@ -6,7 +6,7 @@ import { ShortTitleBar } from '../../components/titleBar';
 import { Link, useNavigate } from 'react-router-dom';
 import Calendar from 'react-calendar';
 import CustomTradingViewChart from './customTradingViewChart';
-import './calendar.css'
+import '../../components/calendar.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { selectBMI, userBMISlice } from '../../redux/userBMI';
 import { forEach } from 'lodash';

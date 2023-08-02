@@ -194,7 +194,7 @@ Result with color bar (refer to BMI mean for each user according to age & sex)
 
 <!-- Change description → “Discover thousands of products that accept SIGDAO!” -->
 
-<!-- The last two“See all” button link to Bettermi.io website -->
+<!-- The last two “See all” button link to Bettermi.io website -->
 
 / Profile /
 
@@ -221,3 +221,46 @@ flow 3:
   BettermidAPP_AI coach_.io
   BettermidAPP_AI coach
   BettermidAPP_Profile_edit  1
+
+
+
+
+
+selfieToEarn 
+change to sentence from "Your selfie will be deleted after the BMI calculation" to "We super care your prilagey, your selfie will not be stored"
+
+home
+  Hello! -> Hi!
+  
+reward
+maybe change reward - delete social Social Butterfly
+
+
+error page
+may change error icon and "Oops" on error - by andy
+for error icon, make it be more positive
+
+profile
+   add discord - username
+
+put the improvment to github issue - 
+
+general
+  domain: app.bettermi.io
+
+demo stage
+base on
+
+
+selfie to earn
+  Roadmap - Ask if user want to public the BMI record
+
+loading - later change
+
+change daily import
+
+
+
+selfie to earn
+  u own your data
+  maybe can sell the data to other company
