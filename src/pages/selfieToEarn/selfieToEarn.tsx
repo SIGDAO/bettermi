@@ -127,6 +127,7 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
   function handleTakeASelfie() {
     if (bmi_testing != 35 ){
       alert('already taken a selfie, since we are in demo mode, take comfirm for another selfie')
+      navigate('/takeSelfie')
     }
   }
 

@@ -3,16 +3,20 @@ import './generateBMIDaily.css';
 import { CenterLayout } from '../../components/layout';
 import { BackButton } from '../../components/button';
 import { Link } from 'react-router-dom';
+import { selectCurrentGender, selectCurrentImg } from '../../redux/profile';
+import { useSelector } from 'react-redux';
+
 
 interface IGenerateBMIDailyProps {
 }
 
 
 const GenerateBMIDaily: React.FunctionComponent<IGenerateBMIDailyProps> = (props) => {
+  const selfie = useSelector(selectCurrentImg)
   const content: JSX.Element = (
     <div className="bettermidapp-generate-bmi-daily">
       <div className="bg_2-Fd1por"><img className="bg-8YXhC4" src={`${process.env.PUBLIC_URL}/img/generateBMIDaily/bg-11@1x.png`} alt="BG" /></div>
-      <img className="photo-Fd1por" src={`${process.env.PUBLIC_URL}/img/generateBMIDaily/photo-1@1x.png`} alt="Photo" />
+      <img className="photo-Fd1por" src={selfie ? selfie : `${process.env.PUBLIC_URL}/img/generateBMIDaily/photo-1@1x.png`} alt="Photo" />
       <BackButton />
       <Link to="/selfieToEarn">
         <div className="bottom-controls-Fd1por">

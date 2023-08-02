@@ -7,12 +7,17 @@ import './TakeSelfie.css';
 import { BackButton } from '../../components/button';
 import CSS from 'csstype';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { profileSlice } from '../../redux/profile';
 import { store } from '../../redux/reducer';
 import { userBMISlice } from '../../redux/userBMI';
 import { useGetBMIMutation } from '../../redux/userBMIApi';
 import useEnhancedEffect from '@mui/material/utils/useEnhancedEffect';
+import { findBMI } from '../../components/findBMI';
+import { accountId } from '../../redux/account';
+import { useLedger } from '../../redux/useLedger';
+
+
 
 
 interface ITakeSelfieProps {
@@ -62,7 +67,11 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   const webcamRef = useRef<Webcam>(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [data, setData] = useState<any>();
+  const [bmidata, setbmidata] = useState<any>();
+  var navigatePath: string = '/generateBMINFTImport'
+  const tempAccountId = useSelector(accountId);
+  const Ledger2 = useLedger();
+
 
   const [ getBMI, {isLoading, data} ] = useGetBMIMutation()
 
@@ -74,6 +83,20 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
     }
   }
   , [data])
+
+  useEffect(() => {
+    // real data
+    findBMI(tempAccountId, Ledger2)
+      .then((res) => {
+        // data = res
+        // const displayData = [res]
+        console.log('res', res)
+        setbmidata(res)
+        navigatePath = '/generateBMIDaily'
+        // dispatch(userBMISlice.actions.setBMI(res))
+      })
+  }, []);
+
 
 
   // todo: 
@@ -120,7 +143,7 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
         store.dispatch(profileSlice.actions.setSelfieImage(imageSrc))
         action(imageSrc)
       }
-      navigate('/generateBMI')
+      navigate(navigatePath)
     },
     [webcamRef]
   );
