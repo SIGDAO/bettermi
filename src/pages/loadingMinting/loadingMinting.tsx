@@ -10,7 +10,7 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
     <div className="bettermidapp-generate-free-nft-minting">
       <div className="bg_2-JdJl2l">
           <img className="bg-7ckAMs" src="img/loadingMinting/bg-11@1x.png" alt="BG" />
-          <div className="loader-7ckAMs">
+          {/* <div className="loader-7ckAMs">
             <div className="x001-loading-u5QZHJ">
                 <div className="x107-MxmV9X"></div>
                 <div className="x108-MxmV9X"></div>
@@ -22,7 +22,8 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
                 <div className="x114-MxmV9X"></div>
                 <div className="x115-MxmV9X"></div>
             </div>
-          </div>
+          </div> */}
+          <div className="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
           <div className="x50-7ckAMs">50%</div>
           <a href="bettermidapp-settings-1.html">
             <div className="ic_settings_24px-7ckAMs ic_settings_24px">

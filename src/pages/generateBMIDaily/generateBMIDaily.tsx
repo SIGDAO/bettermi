@@ -2,6 +2,7 @@ import * as React from 'react';
 import './generateBMIDaily.css';
 import { CenterLayout } from '../../components/layout';
 import { BackButton } from '../../components/button';
+import { Link } from 'react-router-dom';
 
 interface IGenerateBMIDailyProps {
 }
@@ -11,34 +12,16 @@ const GenerateBMIDaily: React.FunctionComponent<IGenerateBMIDailyProps> = (props
   const content: JSX.Element = (
     <div className="bettermidapp-generate-bmi-daily">
       <div className="bg_2-Fd1por"><img className="bg-8YXhC4" src={`${process.env.PUBLIC_URL}/img/generateBMIDaily/bg-11@1x.png`} alt="BG" /></div>
-      <div className="home-indicator-Fd1por">
-        <div className="home-indicator-96Qeho"></div>
-      </div>
       <img className="photo-Fd1por" src={`${process.env.PUBLIC_URL}/img/generateBMIDaily/photo-1@1x.png`} alt="Photo" />
       <BackButton />
-      <div className="bars-status-bar-i-phone-light-Fd1por">
-        <div className="frame-QzAZ9H"></div>
-        <div className="status-bar-QzAZ9H">
-          <div className="battery-xaNOTb">
-            <div className="border-6ExhPn"></div>
-            <img className="cap-6ExhPn" src={`${process.env.PUBLIC_URL}/img/generateBMIDaily/cap-1@1x.png`} alt="Cap" />
-            <div className="capacity-6ExhPn"></div>
-          </div>
-          <img className="wifi-xaNOTb" src={`${process.env.PUBLIC_URL}/img/generateBMIDaily/wifi-1@1x.png`} alt="Wifi" />
-          <img className="cellular-connection-xaNOTb" src={`${process.env.PUBLIC_URL}/img/generateBMIDaily/cellular-connection-1@1x.png`} alt="Cellular Connection" />
-          <div className="time-style-xaNOTb">
-            <div className="time-NPVfvp sfprotext-semi-bold-white-15px">9:41</div>
-          </div>
-        </div>
-      </div>
-      <a href="bettermidapp-generate-free-nft-minting.html">
+      <Link to="/selfieToEarn">
         <div className="bottom-controls-Fd1por">
           <div className="button_-mint-FZh05Y">
             <div className="button1-WZiHbv"></div>
             <div className="mint-WZiHbv inter-semi-bold-white-15px">Import</div>
           </div>
         </div>
-      </a>
+      </Link>
       <div className="bmi-bar-Fd1por">
         <div className="x42-W9pEKc"></div>
         <div className="x43-W9pEKc"></div>

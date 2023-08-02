@@ -85,9 +85,11 @@ export const BirthSelect: React.FunctionComponent<IBirthSelectProps> = (props) =
   // todo: reduce the code duplication
   const dispatch = useDispatch();
 
+  const [value, setValue] = useState(new Date('2023-07-26')); // selected day on calendar
   const [isOpen, setIsOpen] = useState(false);
   const [displayValue, setDisplayValue] = useState();
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const [isFirstClick, setIsFirstClick] = useState(true);
 
   useEffect(() => {
     if (!isOpen) {
@@ -108,20 +110,22 @@ export const BirthSelect: React.FunctionComponent<IBirthSelectProps> = (props) =
     };
   }, []);
 
-  const toggleDropdown = () => {
-    ;
+  const handleCalender = (e: any) => {
+    setValue(e);
+    setIsFirstClick(false);
   };
 
 
   return (
     <div className="birthday-select-container">
-      <div className="birth-pqhvJT" onClick={(e) => setIsOpen(!isOpen)}>
+      <div className="birth-pqhvJT" onClick={(e) => setIsOpen(!isOpen)} ref={dropdownRef}>
         <div className="talking-container">
           <div className="x425-hrEXXf x425"></div>
           <img className="arrow-down-hrEXXf arrow-down" src="img/generateBMINFTImport/arrow-down-1@1x.png" alt="arrow-down" />
         </div>
-        <div className="ddmmyyyy-Guzcj1 inter-normal-white-15px">{"DD/MM/YYYY"}</div>
-        {isOpen && (
+        <div className="ddmmyyyy-Guzcj1 inter-normal-white-15px">{isFirstClick ? "DD/MM/YYYY" :  value.toLocaleDateString('en-GB', { day: 'numeric', month: 'numeric', year: 'numeric' })}</div>
+      </div>
+      {isOpen && (
         // <ul className="dropdown-options" onBlur={() => setIsOpen(!isOpen)}>
         //   <li>hi</li>
         //   {/* {options.map((option: any) => (
@@ -136,8 +140,9 @@ export const BirthSelect: React.FunctionComponent<IBirthSelectProps> = (props) =
         // </ul>
         <Calendar
           calendarType='Arabic'
-          // onChange={onChange}
-          // value={value}
+          onChange={(e: any) => handleCalender(e)}
+          value={value}
+          // onChange={}
           locale='en-US'
           minDetail='decade'
           // allowPartialRange={true}
@@ -146,7 +151,6 @@ export const BirthSelect: React.FunctionComponent<IBirthSelectProps> = (props) =
 
       )}
 
-      </div>
     </div>
   )
 }

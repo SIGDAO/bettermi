@@ -220,17 +220,24 @@
   width: 104px;
 }
 
+/* .birthday-select-container {
+  width: 164px;
+  top: 580px;
+  left: 68px;
+  position: absolute;
+} */
+
 .bettermidapp-generate-bmidata-import .import-biological-sex-birth-pqhvJT {
   background-color: transparent;
   height: auto;
-  left: 68px;
+  /* left: 68px; */
   letter-spacing: 0.00px;
   line-height: 20px;
   position: absolute;
   text-align: center;
   top: 580px;
   white-space: nowrap;
-  width: auto;
+  width: 100%;
   margin: 0;
 }
 
@@ -417,8 +424,3 @@
   top: 0px;
 }
 
-.react-calendar {
-  position: absolute;
-  top: 0px;
-  width: 390px;
-}
