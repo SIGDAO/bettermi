@@ -62,6 +62,8 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   const webcamRef = useRef<Webcam>(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [data, setData] = useState<any>();
+
   const [ getBMI, {isLoading, data} ] = useGetBMIMutation()
 
   useEffect(() => {
