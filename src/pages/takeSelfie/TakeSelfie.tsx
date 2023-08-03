@@ -13,12 +13,9 @@ import { store } from '../../redux/reducer';
 import { userBMISlice } from '../../redux/userBMI';
 import { useGetBMIMutation } from '../../redux/userBMIApi';
 import useEnhancedEffect from '@mui/material/utils/useEnhancedEffect';
-import { findBMI } from '../../components/findBMI';
+import { isSelfieRecord, isTodayHaveSelfieRecord } from '../../components/bmiCalculate';
 import { accountId } from '../../redux/account';
 import { useLedger } from '../../redux/useLedger';
-
-
-
 
 interface ITakeSelfieProps {
 }
@@ -68,7 +65,7 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [bmidata, setbmidata] = useState<any>();
-  var navigatePath: string = '/generateBMINFTImport'
+  var navigatePath: string = '/generateBMIDaily'
   const tempAccountId = useSelector(accountId);
   const Ledger2 = useLedger();
 
@@ -86,14 +83,11 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
 
   useEffect(() => {
     // real data
-    findBMI(tempAccountId, Ledger2)
-      .then((res) => {
-        // data = res
-        // const displayData = [res]
-        console.log('res', res)
-        setbmidata(res)
-        navigatePath = '/generateBMIDaily'
-        // dispatch(userBMISlice.actions.setBMI(res))
+    isSelfieRecord(tempAccountId, Ledger2)
+      .then((result) => {
+        if (!result) {
+          navigatePath = '/generateBMINFTImport'
+        }
       })
   }, []);
 

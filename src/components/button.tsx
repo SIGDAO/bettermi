@@ -36,7 +36,6 @@ export const ButtonWithNavigation: React.FunctionComponent<IButtonProps> = (prop
     'background': 'linear-gradient(-90deg, #8743ff 0%, #4136f1 100%)',
     'borderRadius': '10px',
     'boxShadow': '0px 15px 30px #1466cc29',
-
   }
 
   return (

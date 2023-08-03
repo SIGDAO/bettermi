@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { profileSlice } from '../redux/profile'
 import { useDispatch } from 'react-redux';
-import './select.css';
 import Calendar from 'react-calendar';
+import './select.css';
+
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
@@ -117,8 +118,8 @@ export const BirthSelect: React.FunctionComponent<IBirthSelectProps> = (props) =
 
 
   return (
-    <div className="birthday-select-container">
-      <div className="birth-pqhvJT" onClick={(e) => setIsOpen(!isOpen)} ref={dropdownRef}>
+    <div className="birthday-select-container" ref={dropdownRef}>
+      <div className="birth-pqhvJT" onClick={(e) => setIsOpen(!isOpen)}>
         <div className="talking-container">
           <div className="x425-hrEXXf x425"></div>
           <img className="arrow-down-hrEXXf arrow-down" src="img/generateBMINFTImport/arrow-down-1@1x.png" alt="arrow-down" />
@@ -138,17 +139,20 @@ export const BirthSelect: React.FunctionComponent<IBirthSelectProps> = (props) =
         //     </li>
         //   ))} */}
         // </ul>
-        <Calendar
-          calendarType='Arabic'
-          onChange={(e: any) => handleCalender(e)}
-          value={value}
-          // onChange={}
-          locale='en-US'
-          minDetail='decade'
-          // allowPartialRange={true}
-          // selectRange={true}
-        />
+        <div className="calendar-container">
+          <Calendar
+            calendarType='Arabic'
+            onChange={(e: any) => handleCalender(e)}
+            value={value}
+            // onChange={}
+            
+            locale='en-US'
+            minDetail='decade'
+            // allowPartialRange={true}
+            // selectRange={true}
+          />
 
+        </div>
       )}
 
     </div>

@@ -12,7 +12,7 @@ import { selectBMI, userBMISlice } from '../../redux/userBMI';
 import { forEach } from 'lodash';
 import { accountId } from '../../redux/account';
 import { useLedger } from '../../redux/useLedger';
-import { findBMI } from '../../components/findBMI';
+import { findBMI } from '../../components/bmiCalculate';
 import { BMI_Day } from '../../redux/userBMI';
 import { SeriesDataItemTypeMap } from 'lightweight-charts';
 import moment from 'moment';

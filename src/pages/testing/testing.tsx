@@ -7,7 +7,7 @@ import { Chart, AreaSeries, PriceLine, PriceScale } from "lightweight-charts-rea
 import { IChartApi, LineStyle, ColorType, LineWidth, PriceScaleMode, AreaData, SeriesDataItemTypeMap, UTCTimestamp } from "lightweight-charts";
 // PriceScaleModem, 
 import React, { useEffect, useRef, useCallback, useState } from 'react';
-import { findBMI } from "../../components/findBMI";
+import { findBMI } from "../../components/bmiCalculate";
 import { useSelector, useDispatch } from "react-redux";
 import { accountId } from "../../redux/account";
 import { useLedger } from "../../redux/useLedger";

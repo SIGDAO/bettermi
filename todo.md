@@ -256,6 +256,7 @@ selfie to earn
   Roadmap - Ask if user want to public the BMI record
 
 loading - later change
+  pls do not refresh the page
 
 change daily import
 

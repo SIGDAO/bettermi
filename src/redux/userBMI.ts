@@ -5,7 +5,7 @@ import { useLedger } from './useLedger';
 import { accountId } from './account';
 import { useSelector } from "react-redux";
 import { UTCTimestamp } from "lightweight-charts";
-import { findBMI } from "../components/findBMI";
+import { findBMI } from "../components/bmiCalculate";
 
 export interface BMI_Day {
   time: string | UTCTimestamp | number;
