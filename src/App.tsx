@@ -62,13 +62,12 @@ const CheckStore: React.FC = () => {
   const location = useLocation();
   const currentPath: string = location.pathname;
   console.log('Current URL:', currentPath);
-  let content = <Outlet/>;
 
-  if (currentPath !== '/' && currentPath !== '/connectWallet' ){
-    console.log(sessionStorage.getItem('state') == null, 'state');
-    content = sessionStorage.getItem('state') === null ? <Navigate to="/" /> : <Outlet/>;
+  if (currentPath === '/' || currentPath === '/connectWallet' ){
+    return <Outlet/>
   }
-  return content;
+
+  return sessionStorage.getItem('state') === null ? <Navigate to="/" /> : <Outlet/>;
 }
 
 
@@ -94,7 +93,7 @@ function App() {
               <Route path="/connectSuccess" element={<ConnectSuccess/>} />
               <Route path="/generateFreeNFT" element={<GenerateFreeNFT/>} />
               <Route path="/customizeYourProfile" element={<CustomizeYourProfile/>} />
-              {/* todo: flow 2 */}
+              {/* flow 2 */}
               <Route path="/home" element={<Home/>} />
               <Route path="/allMission" element={<AllMission/>} />
               <Route path="/challengeCompleted" element={<ChallengeCompleted/>} />
@@ -111,7 +110,7 @@ function App() {
               <Route path="/profile" element={<Profile/>} />
               <Route path="/marketplace" element={<Marketplace/>} />
               <Route path="/testing" element={<Testing/>} />
-              {/* todo: flow 3 */}
+              {/* flow 3 */}
               <Route path='/generateBMIDaily' element={<GenerateBMIDaily />} />
               <Route path='/generateBMINFTImport' element={<GenerateBMINFTImport />} />
               <Route path='/aiCoachSelect' element={<AiCoachSelect />} />
@@ -127,8 +126,6 @@ function App() {
         </ReduxProvider>  
       </AppContext.Provider>
     </ThemeProvider>
-
-
   );
 }
 

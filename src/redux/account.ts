@@ -2,12 +2,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface userAccount 
-{accountId: string,
-accountRS: string,
-publicKey: string,
-isWatchOnlyMode: boolean,
-token:number,
-}
+{
+    accountId: string,
+    accountRS: string,
+    publicKey: string,
+    isWatchOnlyMode: boolean,
+    token:number,
+}   
 
 const initialState: userAccount = {
     accountId: "",

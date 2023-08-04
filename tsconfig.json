@@ -21,7 +21,6 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "src", 
-    "globals.d.ts"  
+    "src/Globals.d.ts"  
   ]
 }

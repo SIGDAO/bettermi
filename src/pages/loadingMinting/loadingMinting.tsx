@@ -18,6 +18,8 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
 
   const checkIfNFTMinted = async () => {
     if (!ledger) return;
+    // const startTime: number = Date.now(); // get the current time in milliseconds
+
 
     let ourContract = await ledger.contract.getContractsByAccount({
       accountId: userAccountId,

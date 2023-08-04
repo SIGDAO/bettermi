@@ -2,9 +2,19 @@ import * as React from 'react';
 import './generateBMIDaily.css';
 import { CenterLayout } from '../../components/layout';
 import { BackButton } from '../../components/button';
-import { Link } from 'react-router-dom';
-import { selectCurrentGender, selectCurrentImg } from '../../redux/profile';
+import { Link, useNavigate } from 'react-router-dom';
+import { selectCurrentGender, selectCurrentImg, selectCurrentBMI } from '../../redux/profile';
 import { useSelector } from 'react-redux';
+import { useContext } from 'react';
+import { useLedger } from '../../redux/useLedger';
+import { accountId } from '../../redux/account';
+import { accountPublicKey } from '../../redux/account';
+import { AppContext } from '../../redux/useContext';
+import { UnsignedTransaction } from "@signumjs/core";
+
+
+
+
 
 
 interface IGenerateBMIDailyProps {
@@ -13,19 +23,58 @@ interface IGenerateBMIDailyProps {
 
 const GenerateBMIDaily: React.FunctionComponent<IGenerateBMIDailyProps> = (props) => {
   const selfie = useSelector(selectCurrentImg)
+  const bmi = useSelector(selectCurrentBMI)
+  const publicKey = useSelector(accountPublicKey);
+  const userAccountId = useSelector(accountId);
+  const {appName, Wallet, Ledger} = useContext(AppContext);
+
+
+
+
+  const navigate = useNavigate();
+  const ledger = useLedger();
+  const codeHashId = "7457358473503628676"; // the code hash of the BMI contract 
+  
+  
+
+  const handleImport = async () => {
+    if (!ledger) return;
+    // const startTime: number = Date.now(); // get the current time in milliseconds
+
+
+    let ourContract = await ledger.contract.getContractsByAccount({
+      accountId: userAccountId,
+      machineCodeHash: codeHashId,
+    });
+
+
+    const sendBMI = await ledger.message.sendMessage({
+      message: JSON.stringify({
+        'bmi': bmi,
+        'time': new Date(),
+      }) ,
+      messageIsText: true,
+      recipientId: ourContract.ats[0].at,
+      feePlanck: "1000000",
+      senderPublicKey: publicKey,
+      deadline: 1440,
+    }) as UnsignedTransaction;
+    await Wallet.Extension.confirm(sendBMI.unsignedTransactionBytes);
+
+    navigate('/selfieToEarn');
+}
+
   const content: JSX.Element = (
     <div className="bettermidapp-generate-bmi-daily">
       <div className="bg_2-Fd1por"><img className="bg-8YXhC4" src={`${process.env.PUBLIC_URL}/img/generateBMIDaily/bg-11@1x.png`} alt="BG" /></div>
       <img className="photo-Fd1por" src={selfie ? selfie : `${process.env.PUBLIC_URL}/img/generateBMIDaily/photo-1@1x.png`} alt="Photo" />
       <BackButton />
-      <Link to="/selfieToEarn">
-        <div className="bottom-controls-Fd1por">
-          <div className="button_-mint-FZh05Y">
-            <div className="button1-WZiHbv"></div>
-            <div className="mint-WZiHbv inter-semi-bold-white-15px">Import</div>
-          </div>
+      <div className="bottom-controls-Fd1por" onClick={handleImport}>
+        <div className="button_-mint-FZh05Y">
+          <div className="button1-WZiHbv"></div>
+          <div className="mint-WZiHbv inter-semi-bold-white-15px">Import</div>
         </div>
-      </Link>
+      </div>
       <div className="bmi-bar-Fd1por">
         <div className="x42-W9pEKc"></div>
         <div className="x43-W9pEKc"></div>

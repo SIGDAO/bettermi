@@ -71,7 +71,7 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
             console.log(obj.quantityQNT);
         }
       });
-      console.log(store.getState());
+
       let ourContract = await ledger.contract.getContractsByAccount({
         accountId: userAccountId,
         machineCodeHash: codeHashId,
@@ -111,19 +111,10 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
             deadline:1440,}) as UnsignedTransaction;
             console.log(initializeContract);
           await Wallet.Extension.confirm(initializeContract.unsignedTransactionBytes);
-          while(ourContract.ats[0] == null){
-            ourContract = await ledger.contract.getContractsByAccount({
-              accountId: userAccountId,
-              machineCodeHash: codeHashId,
-  
-              });
-            console.log(ourContract);
-          }
         } else{ //check whether the user has registered an account
           const sendBMI = await ledger.message.sendMessage({
             message: JSON.stringify({
               'bmi': BMI,
-              'gender': gender,
               'time': new Date(),
             }) ,
             messageIsText: true,
@@ -131,12 +122,12 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
             feePlanck: "1000000",
             senderPublicKey: publicKey,
             deadline: 1440,
-        }) as UnsignedTransaction;
-        await Wallet.Extension.confirm(sendBMI.unsignedTransactionBytes);
+          }) as UnsignedTransaction;
+          await Wallet.Extension.confirm(sendBMI.unsignedTransactionBytes);
         }
         console.log('confirm');
         //await TransferNFTOwnership(ledger,userAccountId,Wallet);
-        navigate('/generateFreeNFT');
+        navigate('/loadingMinting');
       } catch (error) {
         console.log(error);
         setMinted(false);
