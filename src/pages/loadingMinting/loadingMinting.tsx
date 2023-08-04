@@ -1,11 +1,50 @@
-import * as React from 'react';
 import './loadingMinting.css';
 import { CenterLayout } from '../../components/layout';
+import { useLedger } from '../../redux/useLedger';
+import { useSelector } from 'react-redux';
+import { accountId } from '../../redux/account';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 interface ILoadingMintingProps {
 }
 
 const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) => {
+  const navigate = useNavigate();
+  const ledger = useLedger();
+  const userAccountId = useSelector(accountId);
+  const codeHashId = "7457358473503628676"; // the code hash of the BMI contract 
+
+
+  const checkIfNFTMinted = async () => {
+    if (!ledger) return;
+
+    let ourContract = await ledger.contract.getContractsByAccount({
+      accountId: userAccountId,
+      machineCodeHash: codeHashId,
+    });
+
+    while(ourContract.ats[0] == null){
+      ourContract = await ledger.contract.getContractsByAccount({
+        accountId: userAccountId,
+        machineCodeHash: codeHashId,
+
+        });
+      console.log(ourContract);
+    }
+    navigate('/generateFreeNFT');
+  }
+
+
+  useEffect(() => {
+    checkIfNFTMinted()
+      .catch((err) => {
+        console.error(err);
+      })
+  }, [])
+
+
+
   const content: JSX.Element = (
     <div className="bettermidapp-generate-free-nft-minting">
       <div className="bg_2-JdJl2l">

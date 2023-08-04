@@ -62,15 +62,15 @@ export default function ConnectWallet (props: IConnectWalletProps) {
       console.log(ourContract.ats[0]);
       console.log(typeof(ourContract.ats[0]));
       console.log(typeof(ourContract));
-    navigate('/connectSuccess');
-    // if(ourContract.ats[0] != null){
-    //   console.log("called the if statement");
-    //   navigate("/home");
-    // }
-    // else{
-    // console.log(store.getState());
-    // navigate('/connectSuccess')
-    // }
+    // navigate('/connectSuccess');
+    if(ourContract.ats[0] != null){
+      console.log("called the if statement");
+      navigate("/home");
+    }
+    else{
+    console.log(store.getState());
+    navigate('/connectSuccess')
+    }
   })
   // todo: add error handling, and show it to user
     .catch((error:any) => {

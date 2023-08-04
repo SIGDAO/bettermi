@@ -265,3 +265,6 @@ change daily import
 selfie to earn
   u own your data
   maybe can sell the data to other company
+
+Roadmap
+  if user type in url, wallet not collected error

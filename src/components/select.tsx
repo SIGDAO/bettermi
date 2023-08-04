@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import Calendar from 'react-calendar';
 import './select.css';
 
+
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
@@ -88,15 +89,15 @@ export const BirthSelect: React.FunctionComponent<IBirthSelectProps> = (props) =
 
   const [value, setValue] = useState(new Date('2023-07-26')); // selected day on calendar
   const [isOpen, setIsOpen] = useState(false);
-  const [displayValue, setDisplayValue] = useState();
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [isFirstClick, setIsFirstClick] = useState(true);
 
   useEffect(() => {
-    if (!isOpen) {
-      // dispatch(profileSlice.actions.setGender(displayValue));
+    if (value && !isFirstClick){
+      // console.log(value)
+      dispatch(profileSlice.actions.setBirthday(value))
     }
-  }, [isOpen, displayValue]);
+  }, [value])
 
 
   useEffect(() => {
@@ -113,12 +114,13 @@ export const BirthSelect: React.FunctionComponent<IBirthSelectProps> = (props) =
 
   const handleCalender = (e: any) => {
     setValue(e);
+    setIsOpen(false);
     setIsFirstClick(false);
   };
 
 
   return (
-    <div className="birthday-select-container" ref={dropdownRef}>
+    <div className="birthday-select-container" >
       <div className="birth-pqhvJT" onClick={(e) => setIsOpen(!isOpen)}>
         <div className="talking-container">
           <div className="x425-hrEXXf x425"></div>
@@ -127,18 +129,6 @@ export const BirthSelect: React.FunctionComponent<IBirthSelectProps> = (props) =
         <div className="ddmmyyyy-Guzcj1 inter-normal-white-15px">{isFirstClick ? "DD/MM/YYYY" :  value.toLocaleDateString('en-GB', { day: 'numeric', month: 'numeric', year: 'numeric' })}</div>
       </div>
       {isOpen && (
-        // <ul className="dropdown-options" onBlur={() => setIsOpen(!isOpen)}>
-        //   <li>hi</li>
-        //   {/* {options.map((option: any) => (
-        //     <li className='inter-normal-white-12px' key={option.value}  
-        //       onClick={() => {
-        //         props.onSelect(setDisplayValue(option.label));
-        //         toggleDropdown();
-        //       }}>
-        //       {option.label}
-        //     </li>
-        //   ))} */}
-        // </ul>
         <div className="calendar-container">
           <Calendar
             calendarType='Arabic'

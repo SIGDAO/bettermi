@@ -7,6 +7,7 @@ export interface ProfileState {
   username: string;
   bmi: string;
   gender: string;
+  birthday: Date | null;
 }
 
 export interface BMIState {
@@ -19,14 +20,9 @@ const initialState: ProfileState = {
   username: "",
   bmi: "",
   gender: "",
+  birthday: null,
 };
 
-const getLocalStorage = (key: string) => {
-  if (localStorage.getItem(key)) {
-    return localStorage.getItem(key);
-  }
-  return initialState;
-};
 
 export const profileSlice = createSlice({
   name: "profile",
@@ -57,11 +53,18 @@ export const profileSlice = createSlice({
     clearGender: (state) => {
       state.gender = "";
     },
+    setBirthday: (state, action: PayloadAction<Date>) => {
+      state.birthday = action.payload;
+    },
+    clearBirthday: (state) => {
+      state.birthday = null;
+    },
     clearAll: (state) => {
       state.selfiePath = "";
       state.username = "";
       state.bmi = "";
       state.gender = "";
+      state.birthday = null;
     }
   },
 });
@@ -80,3 +83,4 @@ export const selectCurrentUsername = (state: any) => {
 };
 export const selectCurrentBMI = (state: any) => state.profile.bmi;
 export const selectCurrentGender = (state: any) => state.profile.gender;
+export const selectCurrentBirthday = (state: any) => state.profile.birthday;

@@ -4,9 +4,9 @@ import './generateBMINFTImport.css';
 
 
 import { CenterLayout } from '../../components/layout';
-import { BackButton } from '../../components/button';
+import { BackButton, DisabledButton } from '../../components/button';
 import { BirthSelect, GenderSelect } from '../../components/select';
-import { selectCurrentGender, selectCurrentImg, selectCurrentBMI } from '../../redux/profile';
+import { selectCurrentGender, selectCurrentImg, selectCurrentBMI, selectCurrentBirthday } from '../../redux/profile';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -33,6 +33,7 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
   const gender = useSelector(selectCurrentGender)
   const selfie = useSelector(selectCurrentImg)
   const BMI = useSelector(selectCurrentBMI)
+  const birthday = useSelector(selectCurrentBirthday)
 
   const [minted, setMinted] = React.useState(false); // whether the user has minted the NFT
   const navigate = useNavigate();
@@ -41,8 +42,18 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
   const publicKey = useSelector(accountPublicKey);
   const userAccountId = useSelector(accountId);
   const codeHashId = "7457358473503628676";
+  const storeNftCodeHashId = "4589039375104983465";
+  console.log(process.env.REACT_APP_NFT_STORAGE);
+  console.log(process.env.REACT_APP_NFT_STORAGE?.split(","));
+  const nftStorageAccounts = process.env.REACT_APP_NFT_STORAGE?.split(",");
+  const nftStorageAccount = nftStorageAccounts![Math.floor(Math.random() * nftStorageAccounts!.length)];
+  const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR;
+  const NEXT_PUBLIC_NFT_CONTRACT_METHOD_TRANSFER:string= "-8011735560658290665";
+  console.log(nftStorageAccount);
+  var nftsWaitedToBeDistributed:string[] = [];
+  var nftsToBeDistributed:string;
 
-
+  console.log(ledger);
   const confirm = async () => {
     if (minted){
       console.log('not minted');
@@ -65,14 +76,35 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
         accountId: userAccountId,
         machineCodeHash: codeHashId,
       });
-      console.log(ourContract);
-      console.log(ourContract.ats[0]);
-      
+      // console.log(ourContract);
+      // console.log(ourContract.ats[0]);
+      let storeNftContract = await ledger.contract.getContractsByAccount({
+        accountId: userAccountId,
+        machineCodeHash: process.env.REACT_APP_NFT_MACHINE_CODE_HASH!,
+      });
+      // console.log(storeNftContract);
+      // console.log(storeNftContract.ats[0]);
+      // console.log(typeof(storeNftContract.ats[0]));
+      console.log(Wallet);
       try {
+        // todo: check if user has finished all smart contract build up
+        if(storeNftContract.ats[0] == null){
+          //console.log("called storeNftContract.ats.length",typeof(process.env.REACT_APP_NFT_CONTRACT_REFERENCED_TRANSACTION_HASH));
+          const initializeNftContract = await ledger.contract.publishContractByReference({
+            name: "NFT",
+            description:"storage_space_for_your_nft",
+            referencedTransactionHash:process.env.REACT_APP_NFT_CONTRACT_REFERENCED_TRANSACTION_HASH!,
+            feePlanck:"30000000",
+            senderPublicKey:publicKey,
+            deadline:1440,}) as UnsignedTransaction;
+            console.log(initializeNftContract);
+          await Wallet.Extension.confirm(initializeNftContract.unsignedTransactionBytes);
+        }
         if(ourContract.ats[0] == null){
+          //console.log("called ourContract.ats[0] == null");
           const initializeContract = await ledger.contract.publishContractByReference({
             name: "BMI",
-            description: `{'bmi': ${BMI}, 'gender': ${gender}, 'time': ${new Date()}}`,  //the first data is hidden in the description
+            description: `{'bmi': ${BMI}, 'gender': ${gender}, 'birthday': ${birthday}, 'time': ${new Date()}}`,  //the first data is hidden in the description
             referencedTransactionHash:"62502D4233CA88EB7896031ACF4D729F4C6A570187161CA00FF291ED382769FD",
             feePlanck:"30000000",
             senderPublicKey:publicKey,
@@ -87,18 +119,6 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
               });
             console.log(ourContract);
           }
-    /*
-          const sendBMI = await ledger.message.sendMessage({
-            message: BMI_test,
-            messageIsText: true,
-            recipientId: ourContract.ats[0].at,
-            feePlanck: "1000000",
-            senderPublicKey: publicKey,
-            deadline: 1440,
-            }) as UnsignedTransaction;
-          await Wallet.Extension.confirm(sendBMI.unsignedTransactionBytes);*/
-            
-  
         } else{ //check whether the user has registered an account
           const sendBMI = await ledger.message.sendMessage({
             message: JSON.stringify({
@@ -115,7 +135,7 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
         await Wallet.Extension.confirm(sendBMI.unsignedTransactionBytes);
         }
         console.log('confirm');
-        await TransferNFTOwnership(ledger,userAccountId,Wallet);
+        //await TransferNFTOwnership(ledger,userAccountId,Wallet);
         navigate('/generateFreeNFT');
       } catch (error) {
         console.log(error);
@@ -131,17 +151,6 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
       // onclick="window.open('bettermidapp-generate-bmi-daily.html', '_self');"
     >
       <BackButton/>
-      <Link 
-        to="/generateFreeNFT" 
-        // onclick="window.event.stopPropagation()"
-      >
-        <div className="bottom-controls-pqhvJT">
-          <div className="button_-mint-RUzxTX">
-            <div className="button1-T8l3Om"></div>
-            <div className="mint-T8l3Om inter-semi-bold-white-15px">Mint your NFT</div>
-          </div>
-        </div>
-      </Link>
       <p className="import-biological-sex-birth-pqhvJT inter-bold-royal-blue-15px">IMPORT BIOLOGICAL SEX &amp; BIRTH:</p>
       <p className="your-selection-cannot-be-changed-later-pqhvJT">Your selection cannot be changed later.</p>
       <GenderSelect options={[{"label": "Female", "value": "1"}, {"label": "Male", "value": "2"}]} title='False' newPage={true} onSelect={(e) => console.log(e)}/>
@@ -160,6 +169,17 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
         </div>
         <h1 className="title-bL0gm3 inter-semi-bold-white-28px">Your BMI Result :</h1>
       </div>
+      <div className="bottom-controls-pqhvJT" onClick={confirm}>
+        {minted ?
+          <DisabledButton text="connecting..." height='56px' width='248px' />
+          :
+          <div className="button_-mint-RUzxTX">
+            <div className="button1-T8l3Om"></div>
+            <div className="mint-T8l3Om inter-semi-bold-white-15px">Mint your NFT</div>
+          </div>
+        }
+      </div>
+
       <img className="photo-pqhvJT" src={selfie? selfie : "img/generateBMINFTImport/photo-1@1x.png"} alt="Photo" />
     </div>
   )

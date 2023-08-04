@@ -63,10 +63,10 @@ export const findBMI = async (tempAccountId: string, Ledger2: any, today?: boole
 
 export const isTodayHaveSelfieRecord = async (tempAccountId: string, Ledger2: any) => {
   // if no ledger, return false
-  if(Ledger2 == null) return [];
+  if(Ledger2 == null) return false;
 
   const message = await findBMIblockchainContract(tempAccountId, Ledger2);
-  if (!message) return [];
+  if (!message) return false;
 
   let BMI: SeriesDataItemTypeMap['Area'][]= [];
 

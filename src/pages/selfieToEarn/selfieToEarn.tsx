@@ -12,7 +12,7 @@ import { selectBMI, userBMISlice } from '../../redux/userBMI';
 import { forEach } from 'lodash';
 import { accountId } from '../../redux/account';
 import { useLedger } from '../../redux/useLedger';
-import { findBMI } from '../../components/bmiCalculate';
+import { findBMI, isTodayHaveSelfieRecord } from '../../components/bmiCalculate';
 import { BMI_Day } from '../../redux/userBMI';
 import { SeriesDataItemTypeMap } from 'lightweight-charts';
 import moment from 'moment';
@@ -124,11 +124,12 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
     setValue(nextValue);
   }
 
-  function handleTakeASelfie() {
-    if (bmi_testing != 35 ){
-      alert('already taken a selfie, since we are in demo mode, take comfirm for another selfie')
+  async function handleTakeASelfie() {
+    if (await isTodayHaveSelfieRecord(tempAccountId, Ledger2)) {
+      alert('already taken a selfie, since we are in demo mode, click comfirm for another selfie')
       navigate('/takeSelfie')
     }
+    navigate('/takeSelfie')
   }
 
   useEffect(() => {

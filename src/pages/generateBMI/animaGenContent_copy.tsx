@@ -56,8 +56,14 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
     }
 
     if(ledger){
+
+
+      /*Get the particular NFT*/  
+
+
+
+
       setMinted(true);
-      
       const asset = await ledger.asset.getAssetHolders({assetId:"3862155318820066741"});
       asset.accountAssets.map((obj)=>{
         if(obj.account == userAccountId){
@@ -80,7 +86,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
       // console.log(storeNftContract);
       // console.log(storeNftContract.ats[0]);
       // console.log(typeof(storeNftContract.ats[0]));
-      console.log(Wallet);
+
       try {
         if(storeNftContract.ats[0] == null){
           //console.log("called storeNftContract.ats.length",typeof(process.env.REACT_APP_NFT_CONTRACT_REFERENCED_TRANSACTION_HASH));
@@ -237,4 +243,3 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
 };
 
 export default AnimaGenContent;
- 
