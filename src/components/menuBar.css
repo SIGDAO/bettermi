@@ -14,7 +14,7 @@
   position: fixed;
   top: calc(100% - 94px);
   /* width: 744px; */
-  width: 314px;
+  width: 390px;
   left: calc((100% - 390px) / 2);
   background-color: var(--woodsmoke);
   border-top: 1px solid var(--royal-blue);

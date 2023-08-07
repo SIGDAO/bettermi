@@ -5,6 +5,9 @@ import { clear } from "console";
 export interface ProfileState {
   selfiePath: string;
   username: string;
+  discordUsername: string;
+  description: string;
+  aboutYourself: string;
   bmi: string;
   gender: string;
   birthday: Date | null;
@@ -18,6 +21,9 @@ export interface BMIState {
 const initialState: ProfileState = {
   selfiePath: "",
   username: "",
+  discordUsername: "",
+  description: "",
+  aboutYourself: "",
   bmi: "",
   gender: "",
   birthday: null,
@@ -58,6 +64,24 @@ export const profileSlice = createSlice({
     },
     clearBirthday: (state) => {
       state.birthday = null;
+    },
+    setDiscordUsername: (state, action: PayloadAction<string>) => {
+      state.discordUsername = action.payload;
+    },
+    clearDiscordUsername: (state) => {
+      state.discordUsername = "";
+    },
+    setDescription: (state, action: PayloadAction<string>) => {
+      state.description = action.payload;
+    },
+    clearDescription: (state) => {
+      state.description = "";
+    },
+    setAboutYourself: (state, action: PayloadAction<string>) => {
+      state.aboutYourself = action.payload;
+    },
+    clearAboutYourself: (state) => {
+      state.aboutYourself = "";
     },
     clearAll: (state) => {
       state.selfiePath = "";
