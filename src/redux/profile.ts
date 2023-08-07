@@ -22,8 +22,8 @@ const initialState: ProfileState = {
   selfiePath: "",
   username: "",
   discordUsername: "",
-  description: "",
-  aboutYourself: "",
+  description: "I'm a positive person. I love to travel and eat.",
+  aboutYourself: "♉️  |  29  |  PERSONAL TRAINER",
   bmi: "",
   gender: "",
   birthday: null,
@@ -108,3 +108,6 @@ export const selectCurrentUsername = (state: any) => {
 export const selectCurrentBMI = (state: any) => state.profile.bmi;
 export const selectCurrentGender = (state: any) => state.profile.gender;
 export const selectCurrentBirthday = (state: any) => state.profile.birthday;
+export const selectCurrentDiscordUsername = (state: any) => state.profile.discordUsername;
+export const selectCurrentDescription = (state: any) => state.profile.description;
+export const selectCurrentAboutYourself = (state: any) => state.profile.aboutYourself;

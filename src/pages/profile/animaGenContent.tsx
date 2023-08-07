@@ -9,13 +9,13 @@ import { LedgerClientFactory } from '@signumjs/core';
 import { useEffect } from 'react';
 import { accountId } from '../../redux/account';
 import { useSelector } from 'react-redux';
-import { selectCurrentUsername } from '../../redux/profile';
+import { selectCurrentAboutYourself, selectCurrentDescription, selectCurrentDiscordUsername, selectCurrentUsername } from '../../redux/profile';
 
 interface IAnimaGenContentProps {
 }
 
-const handleCopyDiscordUsername = () => {
-  navigator.clipboard.writeText("zoeeeee#1234");
+const handleCopyDiscordUsername = (discordUsername) => {
+  navigator.clipboard.writeText(discordUsername);
   // todo: display a message to tell the user that the username has been copied to clipboard
   // alert("Copied to clipboard!");
 }
@@ -29,6 +29,9 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   const ledger2 = LedgerClientFactory.createClient({nodeHost});
   const userId = useAppSelector(accountId);
   const username = useSelector(selectCurrentUsername)
+  const discordUsername = useSelector(selectCurrentDiscordUsername)
+  const description = useSelector(selectCurrentDescription)
+  const aboutYourself = useSelector(selectCurrentAboutYourself)
 
   const handleSave = () => {
     setIsOpen((prev) => !prev)
@@ -67,17 +70,17 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
             <img className='ic_edit-content' src="img/profile/ic-edit-1@1x.png" alt="" />
           </div>
           <div className="profile-content">
-            <div className="zoe_li">zoe_li</div>
+            <div className="zoe_li">{username}</div>
             <div className="perso-container">
-              <p className="im-a-positive-perso">I'm a positive person. I love to travel and eat.</p>
+              <p className="im-a-positive-perso">{description || "I'm a positive person. I love to travel and eat."}</p>
               <p className="x29-personal-trainer inter-semi-bold-keppel-15px">
-                ♉️&nbsp;&nbsp;|&nbsp;&nbsp;29&nbsp;&nbsp;|&nbsp;&nbsp;PERSONAL TRAINER
+                {aboutYourself || `♉️  |  29  |  PERSONAL TRAINER`}
               </p>
             </div>
           </div>
           <img className="nft_-avatar" src="img/profile/nft-avatar-1@1x.png" alt="NFT_Avatar" />
           <div className="card-number inter-normal-white-15px">zoeeeee#1234</div>
-          <div className="copy-icon" onClick={() => handleCopyDiscordUsername()}>
+          <div className="copy-icon" onClick={() => handleCopyDiscordUsername(discordUsername)}>
             <img src="img/profile/file---11690@1x.png" alt="" />
           </div>
           <div className="x16227">

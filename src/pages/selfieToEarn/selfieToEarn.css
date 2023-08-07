@@ -2849,6 +2849,7 @@
   /* margin: 0 10px; */
   padding: 0 25px;
   background: var(--eerie-black);
+  width: 100%;
 }
 
 .mean-bmi-setting {

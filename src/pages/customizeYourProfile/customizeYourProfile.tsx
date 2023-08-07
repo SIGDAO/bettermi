@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { CenterLayout } from '../../components/layout';
 import { BackButton } from '../../components/button';
 import './customizeYourProfile.css'
-import generateName from './generateName';
+import generateName from '../../components/generateName';
 import { profileSlice } from '../../redux/profile';
 import {store} from '../../redux/reducer';
 

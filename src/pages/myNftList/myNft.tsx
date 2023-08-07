@@ -19,13 +19,15 @@ import * as React from 'react';
  import { AppContext } from '../../redux/useContext';
 
  interface MyNftProps {
-     image:string;
-     level:number;
+    image:string;
+    level:number;
+    isOpenPopup: boolean;
+    setIsOpenPopup: (isOpenPopup: boolean) => void;
  }
 
 
  const MyNft: React.FunctionComponent<MyNftProps> =  (props) => {
-     const {image,level} = props;
+     const {image, level, isOpenPopup, setIsOpenPopup} = props;
      const [loading, setLoading] = useState<boolean>(true);
      const [imgAddress, setImgAddress] = useState<string>("");
      const nodeHost = useAppSelector(selectWalletNodeHost);
@@ -79,35 +81,35 @@ import * as React from 'react';
        Wallet.Extension.confirm(setAccountInfo.unsignedTransactionBytes);
      };
    return(
- <>
- {loading?(<div>loading</div>):(
-     imgAddress === ""?(<div>loading</div>):(
+      <>
+      {loading?(<div>loading</div>):(
+          imgAddress === ""?(<div>loading</div>):(
 
-             <div className = "myNftList">
-               <img className = "myNftImage" src = {`https://ipfs.io/ipfs/${imgAddress}`}></img>
-               <div className = "myNftDescription">
-               <div className = "myNftNumber">#0000000001</div>
-                 <div>
-                   <span  className = "myNftLevel">
-                     Lv{level}       
-                     </span>   
-                     <span  className = "myNftReward">
-                       reward + 1000%
-                       </span>
-                 </div>
-                 <div className = "myNftPrice">
-                   $0 signa
-                 </div>
-               </div>
-               <div className = "myNftBottom">
-               <button className = "myNftButton" onClick = {equipNft}>equip</button>
-               <img className = "myNftButtomArrow" src  = {`${process.env.PUBLIC_URL}/img/NftList/ic-send@1x.png`}></img>
-               </div>
-             </div>
-     )
-   )
+                  <div className = "myNftList">
+                    <img className = "myNftImage" src = {`https://ipfs.io/ipfs/${imgAddress}`}></img>
+                    <div className = "myNftDescription">
+                    <div className = "myNftNumber">#0000000001</div>
+                      <div>
+                        <span  className = "myNftLevel">
+                          Lv{level}       
+                          </span>   
+                          <span  className = "myNftReward">
+                            reward + 1000%
+                            </span>
+                      </div>
+                      <div className = "myNftPrice">
+                        $0 signa
+                      </div>
+                    </div>
+                    <div className = "myNftBottom">
+                    <button className = "myNftButton" onClick = {equipNft}>equip</button>
+                    <img onClick={() => setIsOpenPopup((prev) => !prev)} className = "myNftButtomArrow" src  = {`${process.env.PUBLIC_URL}/img/NftList/ic-send@1x.png`}></img>
+                    </div>
+                  </div>
+          )
+        )
 
- }
+      }
        </>
          );
 

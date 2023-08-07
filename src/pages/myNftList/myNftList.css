@@ -533,7 +533,7 @@
   position: absolute;
 }
 
-.bettermidapp-mimi-nfts-1 .icon-arrow-left {
+.bettermidapp-mimi-nfts-1 .icon-arrow-left-popup {
   background-color: transparent;
   position: absolute;
 }
@@ -616,7 +616,7 @@
   background-color: transparent;
   color: var(--white);
   font-family: var(--font-family-sfpro_text-semibold);
-  font-size: var(--font-size-xl);
+  font-size: 15px;
   font-style: normal;
   font-weight: 600;
   height: 20px;
@@ -808,11 +808,14 @@ opacity: 0.5;
   justify-content: space-between;
   width:100%;
 }
+
 .myNftButtomArrow{
   width:21px;
   height:18px;
   margin-right: 20px;
+  cursor: pointer;
 }
+
 .myNftButtonOnDuty{
   width:100px;
   height:31px;
@@ -824,4 +827,329 @@ opacity: 0.5;
   font-style: normal;
   font-weight: 600;
   color:#FFFFFF
+}
+
+.bettermidapp-mimi-nfts-send-address-1 .edit-profile-layer {
+  background-color: #0d0d0dcb;
+  display: flex;
+  flex-direction: column;
+  gap: 9.5px;
+  height: 844px;
+  left: calc((100vw - 390px) / 2);
+  position: absolute;
+  top: 45px;
+  width: 390px;
+}
+
+.bettermidapp-mimi-nfts-send-address-1 .icon-arrow-left-1-popup {
+  margin-left: 16px;
+  margin-top: 44px;
+}
+
+.bettermidapp-mimi-nfts-send-address-1 .icon-arrow-left-popup {
+  height: 16px;
+  object-fit: cover;
+  width: 16px;
+}
+
+.bettermidapp-mimi-nfts-send-address-1 .edit-profile {
+  align-items: flex-start;
+  display: flex;
+  flex: 1;
+  margin-bottom: 58.5px;
+  margin-left: 28.8px;
+  margin-right: 28.8px;
+  min-width: calc(100.00% - 58px);
+}
+
+.bettermidapp-mimi-nfts-send-address-1 .overlap-group-1 {
+  height: 720px;
+  margin-left: -45px;
+  margin-top: -27.0px;
+  position: relative;
+  width: 422px;
+}
+
+.bettermidapp-mimi-nfts-send-address-1 .seperate-line-1 {
+  height: 90px;
+  left: 0;
+  object-fit: cover;
+  position: absolute;
+  top: 48px;
+  width: 422px;
+}
+
+.bettermidapp-mimi-nfts-send-address-1 .bg {
+  height: 720px;
+  left: 15px;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  width: 392px;
+}
+
+.bettermidapp-mimi-nfts-send-address-1 .seperat-line-1 {
+  top: 92px;
+  width: 332px;
+}
+
+.bettermidapp-mimi-nfts-send-address-1 .transfer-n-ft {
+  left: 61px;
+  letter-spacing: 0;
+  line-height: 20px;
+  position: absolute;
+  top: 112px;
+  white-space: nowrap;
+}
+
+.bettermidapp-mimi-nfts-send-address-1 .recipient {
+  left: 61px;
+  letter-spacing: 0;
+  line-height: 20px;
+  position: absolute;
+  top: 333px;
+  white-space: nowrap;
+}
+
+.bettermidapp-mimi-nfts-send-address-1 .nft-details {
+  left: 61px;
+  letter-spacing: 0;
+  line-height: 20px;
+  position: absolute;
+  top: 223px;
+  white-space: nowrap;
+}
+
+.bettermidapp-mimi-nfts-send-address-1 .rewards {
+  display: flex;
+  height: 21px;
+  justify-content: space-between;
+  left: 168px;
+  position: absolute;
+  top: 52px;
+  width: 87px;
+}
+
+.bettermidapp-mimi-nfts-send-address-1 .ic_send-1 {
+  /* background-image: url(../img/ic-send-1@1x.png); */
+  background-position: 50% 50%;
+  background-size: cover;
+  margin-bottom: 1.5px;
+  margin-top: 1.5px;
+  width: 21px;
+}
+
+.bettermidapp-mimi-nfts-send-address-1 .place {
+  letter-spacing: 0;
+  line-height: 20px;
+  margin-bottom: -2.5px;
+  margin-right: -2px;
+  margin-top: 0.5px;
+  text-align: center;
+  white-space: nowrap;
+  width: 46px;
+}
+
+.bettermidapp-mimi-nfts-send-address-1 .search_bar {
+  background-color: var(--royal-blue);
+  border-radius: 10px;
+  height: 56px;
+  left: 61px;
+  position: absolute;
+  top: 147px;
+  width: 300px;
+}
+
+.bettermidapp-mimi-nfts-send-address-1 .search_bar-1 {
+  align-items: flex-end;
+  display: flex;
+  height: 56px;
+  min-width: 300px;
+  padding: 16.5px 15px;
+  top: 390px;
+}
+
+.bettermidapp-mimi-nfts-send-address-1 .card-number {
+  color: var(--cadet-blue);
+  font-family: var(--font-family-inter);
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 14px;
+  min-height: 21px;
+  width: 266px;
+  margin: 0;
+}
+
+.bettermidapp-mimi-nfts-send-address-1 .search_bar-2 {
+  height: 56px;
+  top: 258px;
+  width: 300px;
+}
+
+.bettermidapp-mimi-nfts-send-address-1 .button_save {
+  align-items: flex-end;
+  background: linear-gradient(-90deg, #8743ff 0%, #4136f1 100%);
+  border-radius: 10px;
+  box-shadow: 0px 15px 30px #1466cc29;
+  cursor: pointer;
+  display: flex;
+  height: 56px;
+  justify-content: flex-end;
+  left: 87px;
+  min-width: 248px;
+  padding: 13.5px 91px;
+  position: absolute;
+  top: 659px;
+}
+
+.bettermidapp-mimi-nfts-send-address-1 .continue {
+  letter-spacing: 0;
+  line-height: 14px;
+  min-height: 21px;
+  min-width: 64px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.bettermidapp-mimi-nfts-send-address-1 .address-id-to-send-nft-to {
+  color: var(--cadet-blue);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-l);
+  font-weight: 400;
+  left: 61px;
+  letter-spacing: 0;
+  line-height: 20px;
+  position: absolute;
+  top: 357px;
+  white-space: nowrap;
+  margin: 0;
+}
+
+.bettermidapp-mimi-nfts-send-address-1 .text-7 {
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-xxxxxl);
+  font-weight: 700;
+  left: 128px;
+  letter-spacing: 0;
+  line-height: 28px;
+  position: absolute;
+  text-align: center;
+  top: 161px;
+  white-space: nowrap;
+  margin: 0;
+}
+
+.bettermidapp-mimi-nfts-send-address-1 .x0-signa-1 {
+  color: var(--cadet-blue);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-xxl);
+  font-weight: 500;
+  left: 287px;
+  letter-spacing: 0;
+  line-height: 16px;
+  position: absolute;
+  text-align: center;
+  top: 225px;
+  white-space: nowrap;
+}
+
+.bettermidapp-mimi-nfts-send-address-1 .x16228 {
+  align-items: flex-end;
+  display: flex;
+  height: 17px;
+  left: 76px;
+  min-width: 150px;
+  position: absolute;
+  top: 278px;
+}
+
+.bettermidapp-mimi-nfts-send-address-1 .lv-1-1 {
+  color: var(--keppel);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-l);
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 14px;
+  margin-bottom: -3.5px;
+  min-height: 19px;
+  min-width: 30px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.bettermidapp-mimi-nfts-send-address-1 .x6 {
+  align-self: flex-start;
+  height: 15px;
+  margin-left: 8px;
+  margin-top: 0.5px;
+  object-fit: cover;
+  width: 1px;
+}
+
+.bettermidapp-mimi-nfts-send-address-1 .reward-10-1 {
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-l);
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 14px;
+  margin-bottom: -3.5px;
+  margin-left: 10px;
+  min-height: 19px;
+  min-width: 102px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.bettermidapp-mimi-nfts-send-address-1 .search_bar-3 {
+  align-items: flex-start;
+  display: flex;
+  height: 121px;
+  min-width: 300px;
+  padding: 14.5px 15px;
+  top: 500px;
+}
+
+.bettermidapp-mimi-nfts-send-address-1 .card-number-1 {
+  color: var(--cadet-blue);
+  font-family: var(--font-family-inter);
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 22px;
+  min-height: 87px;
+  width: 262px;
+  margin: 0;
+}
+
+.bettermidapp-mimi-nfts-send-address-1 .additional-text {
+  left: 60px;
+  letter-spacing: 0;
+  line-height: 20px;
+  position: absolute;
+  top: 466px;
+  white-space: nowrap;
+}
+
+
+.bettermidapp-mimi-nfts-send-address-1 .search_bar-4 {
+  background-color: #FFFFFF08;
+  border-radius: 10px;
+  left: 61px;
+  position: absolute;
+}
+
+.bettermidapp-mimi-nfts-send-address-1 .seperat-line-3 {
+  height: 1px;
+  left: 46px;
+  object-fit: cover;
+  position: absolute;
+}
+
+.bettermidapp-mimi-nfts-send-address-1 .ic_send-1-content {
+  /* object-fit: cover; */
+  height: 18px;
+  width: 21px;
 }

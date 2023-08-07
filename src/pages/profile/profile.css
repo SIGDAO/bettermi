@@ -919,8 +919,13 @@
 }
 
 .bettermidapp-profile-3 .search_bar-4 {
+  align-items: flex-start;
+  background-color: #FFFFFF08;
+  border-radius: 10px;
+  display: flex;
+  left: 61px;
+  min-width: 300px;
   position: absolute;
-  left: 60px
 }
 
 .bettermidapp-profile-3 .seperat-line {
@@ -990,19 +995,25 @@
 }
 
 .bettermidapp-profile-3 .search_bar {
-  background-color: var(--white-2);
+  background-color: #FFFFFF08;
   border-radius: 10px;
   display: flex;
   height: 56px;
   justify-content: space-between;
+  align-items: center;
   left: 61px;
   position: absolute;
   top: 147px;
   width: 300px;
+  margin: 0;
+}
+
+.bettermidapp-profile-3 .card-number-3 {
+  margin: 0;
 }
 
 .bettermidapp-profile-3 .card-number-1 {
-  align-self: flex-end;
+  /* align-self: flex-end; */
   height: 21px;
   letter-spacing: 0;
   line-height: 14px;
