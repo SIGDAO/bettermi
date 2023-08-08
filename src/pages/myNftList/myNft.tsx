@@ -17,17 +17,19 @@ import * as React from 'react';
  import { LedgerClientFactory } from '@signumjs/core';
  import { useContext } from 'react';
  import { AppContext } from '../../redux/useContext';
+ import { P2PTransferNftToken } from '../../components/p2pTransferNftToken';
 
  interface MyNftProps {
     image:string;
     level:number;
     isOpenPopup: boolean;
     setIsOpenPopup: (isOpenPopup: boolean) => void;
+     assetId:string;
  }
 
 
  const MyNft: React.FunctionComponent<MyNftProps> =  (props) => {
-     const {image, level, isOpenPopup, setIsOpenPopup} = props;
+     const {image, level, isOpenPopup, setIsOpenPopup,assetId} = props;
      const [loading, setLoading] = useState<boolean>(true);
      const [imgAddress, setImgAddress] = useState<string>("");
      const nodeHost = useAppSelector(selectWalletNodeHost);
@@ -70,7 +72,6 @@ import * as React from 'react';
      const equipNft = async() => {
        console.log("123");
        const accountInfo = `{"av":{"${imgAddress}":"image/png"}}`;
-
        const setAccountInfo = await ledger2.account.setAccountInfo({
          name:"1234",
          description:accountInfo,
@@ -79,6 +80,9 @@ import * as React from 'react';
        })
        //console.log(setAccountInfo);
        Wallet.Extension.confirm(setAccountInfo.unsignedTransactionBytes);
+     };
+     const transferToken = async() => {
+      P2PTransferNftToken(Wallet,nodeHost,"4572964086056463895",assetId,userAccountpublicKey);
      };
    return(
       <>

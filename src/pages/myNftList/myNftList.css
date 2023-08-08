@@ -793,7 +793,7 @@
   font-style: normal;
   font-weight: 600;
   color:#FFFFFF;
-  padding-left: 20px;
+  text-align:left;
 }
 
 .myNftPrice{
@@ -827,6 +827,7 @@ opacity: 0.5;
 }
 
 .myNftButtomArrow{
+  align-self: center;
   width:21px;
   height:18px;
   margin-right: 20px;
@@ -1176,4 +1177,22 @@ opacity: 0.5;
   /* object-fit: cover; */
   height: 18px;
   width: 21px;
+}
+
+.myNftVerticalLine{
+  width:1px;
+  background-color: #ffffff;
+}
+.myNftBar{
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.myNftSend{
+  background-color: inherit;
+  border:hidden;
+}
+.myNftSend:hover{
+  opacity: 0.5;
+  cursor: pointer;
 }

@@ -16,7 +16,9 @@ import { store } from '../../redux/reducer';
 import { selectCurrentGender } from '../../redux/profile';
 import { error } from 'console';
 import { Contract,ContractDataView } from '@signumjs/contracts';
-
+import { TransferNftTokenOwnership } from '../../components/transferNftTokenOwnership';
+import { selectWalletNodeHost } from '../../redux/useLedger';
+import { TransferNftTokenOwnershipFinale } from '../../components/transferNftTokenFinale';
 interface IAnimaGenContentProps {
   BMI: string;    // the BMI value, can be string or number
   selfie?: string; // the selfie image url
@@ -36,6 +38,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   const codeHashId = "7457358473503628676";
   const gender = useSelector(selectCurrentGender);
   const storeNftCodeHashId = "4589039375104983465";
+  const nodeHost = useSelector(selectWalletNodeHost);
   console.log(process.env.REACT_APP_NFT_STORAGE);
   console.log(process.env.REACT_APP_NFT_STORAGE?.split(","));
   const nftStorageAccounts = process.env.REACT_APP_NFT_STORAGE?.split(",");
@@ -56,8 +59,14 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
     }
 
     if(ledger){
+
+
+      /*Get the particular NFT*/  
+
+      TransferNftTokenOwnershipFinale(nodeHost,userAccountId);   
+
+
       setMinted(true);
-      
       const asset = await ledger.asset.getAssetHolders({assetId:"3862155318820066741"});
       asset.accountAssets.map((obj)=>{
         if(obj.account == userAccountId){
@@ -80,7 +89,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
       // console.log(storeNftContract);
       // console.log(storeNftContract.ats[0]);
       // console.log(typeof(storeNftContract.ats[0]));
-      console.log(Wallet);
+
       try {
         if(storeNftContract.ats[0] == null){
           //console.log("called storeNftContract.ats.length",typeof(process.env.REACT_APP_NFT_CONTRACT_REFERENCED_TRANSACTION_HASH));

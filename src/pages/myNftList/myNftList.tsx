@@ -15,13 +15,15 @@ import { selectWalletNodeHost } from '../../redux/useLedger';
 import { LedgerClientFactory } from '@signumjs/core';
 import { useState, useEffect } from 'react';
 import { useRef } from 'react';
+import {generateMasterKeys} from "@signumjs/crypto";
 
 interface IMyNftListProps {
 }
 
-interface myNftList {
-  image: string;
-  level: number;
+interface myNftList{
+  image:string;
+  level:number;
+  assetId:string;
 }
 
 const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
@@ -34,25 +36,24 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
   const [onDuty, setOnDuty] = useState<string>("");
   const [array, setArray] = useState<string[]>([]);
   const [isOpenPopup, setIsOpenPopup] = useState<boolean>(false);
+  const [userNftTokenList,setNftTokenList] = useState<myNftList[]>([]);
   const dataFetchedRef = useRef(false);
+  const nftTokenIssuer:string = process.env.REACT_APP_NFT_TOKEN_ISSUER!;
+  console.log(typeof(nftTokenIssuer));
+  console.log(nftTokenIssuer);
+  console.log(nftTokenIssuer=="4572964086056463895");
+  const {publicKey, signPrivateKey} = generateMasterKeys("smoke term keen design mirror skull mom humble twin welcome speak gloom");
+  console.log("publicKey", publicKey);  
+  console.log("signPrivateKey", signPrivateKey);
   //var myNft:myNftList[] = [];
   var nft: myNftList;
   const nodeHost = useAppSelector(selectWalletNodeHost);
   const ledger2 = LedgerClientFactory.createClient({ nodeHost });
+  console.log(nodeHost);
   const trialAccountId = "416342944383657789";
-  var nftAddressList: string[] = [];
-  var userNftList: myNftList[] = [];
-  var tempNftList: myNftList[] =
-    [
-      { image: "QmRVXt88C6pELpCCXmTvLLLea4AgfoPFf9AnWAU7NMaQxP", level: 1 },
-      { image: "QmNhdiqCRXzoVm3pn5eaqvudAjbWsavwqi6a6Bs7ZL5WeE", level: 1 },
-      { image: "QmUmcKm3LNdw9fZHdXn3x15GhBhANbX6RmtMwUxmAvuQQK", level: 1 },
-      { image: "QmTeKUcGh2QG8kWxUSBxVE6fHhb55mxzmu3A9cJJQbNSFw", level: 1 },
-      { image: "QmPpnv2XXoDyKC15XT7Sd746Z7QXQxiY5zwE5jjtLVGi3P", level: 1 },
-      { image: "QmPpnv2XXoDyKC15XT7Sd746Z7QXQxiY5zwE5jjtLVGi3P", level: 1 },
-      { image: "QmTeKUcGh2QG8kWxUSBxVE6fHhb55mxzmu3A9cJJQbNSFw", level: 1 },
-    ];
-
+  var nftAddressList:string[] = [];
+  var userNftList:myNftList[] = [];
+  var userNftToken:myNftList[] = [];
   // for(var i = 0;i<6;i++){
   //   nft = {
   //     image:`${process.env.PUBLIC_URL}/img/NftList/nft-1@1x.png`,
@@ -74,40 +75,86 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
       //console.log(onDuty);
     }).catch((error) => { console.log(error) });
     // Function to fetch data from the API
-    ledger2.account.getAccountTransactions({ accountId: "2826449997764829726" }).then(
-      async (transactions) => {
-        //console.log("transaction is ",transactions);
-        //console.log(transactions.transactions.length);
-        for (var i = 0; i < transactions.transactions.length; i++) {
-          if (transactions.transactions[i].sender == trialAccountId) {
-            // console.log(transactions.transactions[i].sender);
-            nftAddressList = transactions.transactions[i].attachment.message.split(",");
-            //console.log(nftAddressList);
-            break;
-          }
+
+    ledger2.account.getAccount({accountId:userAccountId}).then(async(account) => {
+      console.log(account);
+      for (var i = 0;i<account.assetBalances.length;i++){
+        const token = await ledger2.asset.getAsset({assetId:account.assetBalances[i].asset});
+        console.log(token);
+        if(token.issuer === process.env.REACT_APP_NFT_TOKEN_ISSUER && token.name === "BetterMi"){
+          console.log(JSON.parse(token.description));
+          console.log(JSON.parse(token.description).descriptor);
+          console.log(typeof(JSON.parse(token.description).descriptor));
+          userNftToken.push({level:1,image:JSON.parse(token.description).descriptor,assetId:token.asset});
+          setNftTokenList(userNftToken);
         }
-        console.log("nftAddress is  ", nftAddressList);
-        nftAddressList.map((nftAddress) => {
-          ledger2.contract.getContract(nftAddress).then((hi) => {
-            //console.log("array is ",nftAddress,"  ",hi);
-            const trial = JSON.parse(hi.description);
-            //console.log(trial);
-            //console.log(trial.descriptor);
-            nft = { level: trial.version, image: trial.descriptor };
-            console.log([...myNfts, nft]);
-            console.log(myNfts);
-            setMyNfts([...myNfts, nft]);
-            setArray([...array, "123"]);
-            console.log("testing array is ", array);
-            console.log("appended list is ", [...myNfts, nft]);
-            userNftList.push(nft);
-            setMyNfts(userNftList);
-            setLoading(false);
-          });
-        });
-        //console.log("userNftList is",userNftList);
-        //console.log("myNft is",myNfts);
-      });
+      }
+      // account.assetBalances.map(async(asset)=>{
+      //   const token = await ledger2.asset.getAsset({assetId:asset.asset});
+      //   if(token.issuer === nftTokenIssuer && token.name === "BetterMi"){
+      //     console.log(JSON.parse(token.description));
+      //     console.log(JSON.parse(token.description).descriptor);
+      //     console.log(typeof(JSON.parse(token.description).descriptor));
+      //     userNftToken.push({level:1,image:JSON.parse(token.description).descriptor});
+      //     setNftTokenList(userNftToken);
+      // }
+      // });      setLoading(false);
+    }).then(() => { setLoading(false);}).catch((error)=>{console.log(error)});;
+
+
+    // ledger2.asset.getAssetsByOwner({accountId:userAccountId}).then(
+    //   async(assets) => {
+    //     assets.assets.map((asset)=>{
+    //       if(asset.issuer === process.env.REACT_APP_NFT_DISTRIBUTOR && asset.name === "BetterMi"){
+    //         console.log(JSON.parse(asset.description));
+    //         console.log(JSON.parse(asset.description).descriptor);
+    //         console.log(typeof(JSON.parse(asset.description).descriptor));
+    //         userNftToken.push({level:1,image:JSON.parse(asset.description).descriptor});
+    //         setNftTokenList(userNftToken);
+    //         setLoading(false);
+    //       }
+    //     });
+    //   }
+    // ).catch((error)=>{console.log(error)});
+    // console.log(userNftToken,"userNftToken");
+    // console.log(userNftTokenList ,"userNftTokenList");//Get token by ownership
+
+
+
+    // ledger2.account.getAccountTransactions({accountId:"2826449997764829726"}).then(
+    //   async(transactions) => {
+    //   //console.log("transaction is ",transactions);
+    //   //console.log(transactions.transactions.length);
+    //   for(var i=0;i<transactions.transactions.length;i++){
+    //     if(transactions.transactions[i].sender == trialAccountId){
+    //      // console.log(transactions.transactions[i].sender);
+    //       nftAddressList = transactions.transactions[i].attachment.message.split(",");
+    //       //console.log(nftAddressList);
+    //       break;
+    //     }
+    //   }
+    //   console.log("nftAddress is  ",nftAddressList);
+    //   nftAddressList.map((nftAddress)=>{
+    //     ledger2.contract.getContract(nftAddress).then((hi)=>{
+    //         //console.log("array is ",nftAddress,"  ",hi);
+    //         const trial = JSON.parse(hi.description);
+    //         //console.log(trial);
+    //         //console.log(trial.descriptor);
+    //         nft = {level:trial.version,image:trial.descriptor};
+    //         //console.log([...myNfts,nft]);
+    //         //console.log(myNfts);
+    //         setMyNfts([...myNfts,nft]);
+    //         setArray([...array,"123"]);
+    //         //console.log("testing array is ",array);
+    //         //console.log("appended list is ",[...myNfts,nft]);
+    //         userNftList.push(nft);
+    //         setMyNfts(userNftList);
+    //         setLoading(false);
+    //     });
+    //   });
+    //   //console.log("userNftList is",userNftList);
+    //   //console.log("myNft is",myNfts);
+    // });
 
 
   }, []);
@@ -175,113 +222,77 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
     'top': '44px',
   }
   const displayMyNft = myNfts.map((nft) => {//Contract Id
-    console.log("userNftList is  ", userNftList);
-    return (
-      <MyNft image={nft.image} level={nft.level} isOpenPopup={isOpenPopup} setIsOpenPopup={setIsOpenPopup} ></MyNft>
+    console.log("userNftList is  ",userNftList);
+    return(
+      <MyNft  image={nft.image} level = {nft.level} assetId = {nft.assetId}></MyNft>
     );
   }
   );
-  const tempDisplayMyNft = tempNftList.map((nft) => {//Contract Id
-    console.log("myNftList is  ", myNfts);
-    console.log("loading is  ", loading);
-    return (
-      <MyNft image={nft.image} level={nft.level} isOpenPopup={isOpenPopup} setIsOpenPopup={setIsOpenPopup} ></MyNft>
+  const displayNftToken = userNftTokenList.map((nft) => {//Contract Id
+    console.log("userNftTokenList is  ",nft);
+    return(
+      <MyNft  image={nft.image} level = {nft.level} assetId = {nft.assetId}></MyNft>
     );
   }
   );
+  // const tempDisplayMyNft = tempNftList.map((nft) => {//Contract Id
+  //   console.log("myNftList is  ",myNfts);
+  //   console.log("loading is  ",loading);
+  //   return(
+  //     <MyNft  image={nft.image} level = {nft.level}></MyNft>
+  //   );
+  //   }
+  // );
   //const content : JSX.Element = (
-  return (
-    <div style={bgStyle} >
-      <div style={centerLayoutStyle} className='bettermidapp-mimi-nfts-send-address-1'>
-        <ShortTitleBar title='My NFTs' />
-        <div className={isOpenPopup ? 'containerMyNftList-popup' : 'containerMyNftList'}>
-          <div className="containerMyNftList2">
-            {loading ? (<div>set sth on duty</div>) : (
-              <div className="myNftList">
-                <img className="myNftImage" src={`https://ipfs.io/ipfs/${onDuty}`}></img>
-                <div className="myNftDescription">
-                  <div className="myNftNumber">#0000000001</div>
-                  <div>
-                    <span className="myNftLevel">
-                      Lv{1}
-                    </span>
-                    <span className="myNftReward">
-                      reward + 1000%
-                    </span>
-                  </div>
-                  <div className="myNftPrice">
-                    $0 signa
-                  </div>
-                </div>
-                <div className="myNftBottom">
-                  <button className="myNftButtonOnDuty" style={{ backgroundColor: "#39B3AF!important" }}>On Duty</button>
-                  <img className="myNftButtomArrow" src={`${process.env.PUBLIC_URL}/img/NftList/ic-send@1x.png`}></img>
-                </div>
-              </div>
-            )
+return(
+    <div style={bgStyle}>
+    <div style={centerLayoutStyle}>
+              <ShortTitleBar title='My NFTs' addSign = {true} setting = {false} filter = {true}/>
+      <div className = "containerMyNftList">
+        <div className = "containerMyNftList2">
+        {loading?(<div>set sth on duty</div>):(
+             <div className = "myNftList">
+             <img className = "myNftImage" src = {`https://ipfs.io/ipfs/${onDuty}`}></img>
+             <div className = "myNftDescription">
+             <div className = "myNftNumber">#0000000001</div>
+               <div className = "myNftBar">
+                 <div  className = "myNftLevel">
+                   Lv{1}       
+                   </div>
+                   <div className = "myNftVerticalLine"></div>  
+                   <div  className = "myNftReward">
+                     reward + 1000%
+                     </div>
+               </div>
+               <div className = "myNftPrice">
+                 $0 signa
+               </div>
+             </div>
+             <div className = "myNftBottom">
+             <button className = "myNftButtonOnDuty" style = {{backgroundColor:"#39B3AF!important"}}>On Duty</button>
+             <img className = "myNftButtomArrow" src  = {`${process.env.PUBLIC_URL}/img/NftList/ic-send@1x.png`}></img>
+             </div>
+           </div>
+               )
 
-            }
-            {displayMyNft}
-          </div>
+               }
+              {/* {displayMyNft} */}
+              {displayNftToken}
         </div>
-        {isOpenPopup && 
-          <div className="edit-profile-layer">
-            <div className="icon-arrow-left-1-popup icon-arrow-left-3-popup">
-              <img className="icon-arrow-left-popup" onClick={() => setIsOpenPopup((prev) => !prev)} src="img/myNftList/icon-arrow-left-1@1x.png" alt="icon-arrow-left" />
-            </div>
-            <div className="edit-profile">
-              <div className="overlap-group-1">
-                <img className="seperate-line-1" src="img/myNftList/seperate-line-1@1x.png" alt="Seperate line" />
-                <img className="bg" src="img/myNftList/bg-2@1x.png" alt="BG" />
-                <img className="seperat-line-1 seperat-line-3" src="img/myNftList/seperat-line-3@1x.png" alt="Seperat line" />
-                <div className="transfer-n-ft inter-bold-royal-blue-15px">TRANSFER NFT</div>
-                <div className="recipient inter-bold-royal-blue-15px">RECIPIENT</div>
-                <div className="nft-details inter-bold-royal-blue-15px">NFT DETAILS</div>
-                <div className="rewards">
-                  <div className="ic_send-1">
-                    <img className="ic_send-1-content" src="img/myNftList/ic-send-1@1x.png" alt="" />
-                  </div>
-                  <div className="place inter-semi-bold-white-18px">Send</div>
-                </div>
-                <div className="search_bar"></div>
-                <div className="search_bar-1 search_bar-4"><p className="card-number">e.g. S-6SJC-…, 17332… or peter</p></div>
-                <div className="search_bar-2 search_bar-4"></div>
-                <div className="button_save" onClick={() => setIsOpenPopup((prev) => !prev)}>
-                  <div className="continue inter-semi-bold-white-15px">Transfer</div>
-                </div>
-                <p className="address-id-to-send-nft-to">Address, ID to send NFT to.</p>
-                <h1 className="text-7">#00000001</h1>
-                <div className="x0-signa-1">$0 SIGNA</div>
-                <div className="x16228">
-                  <div className="lv-1-1">LV 1</div>
-                  <img className="x6" src="img/myNftList/file---6@1x.png" alt="6" />
-                  <div className="reward-10-1">REWARD +10%</div>
-                </div>
-                <div className="search_bar-3 search_bar-4">
-                  <p className="card-number-1">
-                    You may attach some text or binary data to this transaction. Here you also enter the memo required
-                    by many exchanges
-                  </p>
-                </div>
-                <div className="additional-text inter-bold-royal-blue-15px">ADDITIONAL TEXT</div>
-              </div>
-            </div>
-          </div>
-      }
-        {/* {loading?(<p>loading...</p>):(
-          <>
-                <ShortTitleBar title='My NFTs' />
-                {console.log(userNftList)}{console.log(array)}
-        <div className = "containerMyNftList">
-          <div className = "containerMyNftList2">
-              {displayMyNft}
-          </div>
-        </div>
-        </>
-        )
-  } */}
-
       </div>
+      {/* {loading?(<p>loading...</p>):(
+        <>
+              <ShortTitleBar title='My NFTs' />
+              {console.log(userNftList)}{console.log(array)}
+      <div className = "containerMyNftList">
+        <div className = "containerMyNftList2">
+            {displayMyNft}
+        </div>
+      </div>
+      </>
+      )
+} */}
+    </div>
     </div>
 
 

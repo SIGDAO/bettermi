@@ -9,29 +9,33 @@ import { useSelector } from "react-redux";
 import { Api } from "@signumjs/core";
 import { walletNodeHost } from "../redux/wallet";
 import { useNavigate } from "react-router-dom";
+import { GenericExtensionWallet } from "@signumjs/wallets";
 
 
-export async function TransferToken(nodeHost:any,accountId:any){
+export async function P2PTransferNftToken(Wallet:any,nodeHost:any,accountId:any,assetId:string,publicKey:string){
   const walletNodeHost:string = nodeHost?nodeHost:window.localStorage.getItem('nodeHost');
-  
-    const ledger2 =LedgerClientFactory.createClient({nodeHost:nodeHost || walletNodeHost});
-    
-    const assetId = "3862155318820066741";
-    console.log(ledger2, "ledger2");
-    console.log(nodeHost, "nodeHost");
+    const wallet = new GenericExtensionWallet();
+    await wallet.connect({
+      appName:"123",
+      networkName:"Signum-TESTNET",
 
+    });
+    const ledger2 =LedgerClientFactory.createClient({nodeHost:nodeHost || walletNodeHost});
+    console.log(nodeHost, "nodeHost");
+  console.log(assetId);
+  console.log(publicKey);
+  console.log(accountId);
 
     if(ledger2 != null){
       try {
-        await ledger2.asset.transferAsset({
+        const unsignedTransaction = await ledger2.asset.transferAsset({
           assetId:assetId,
-          quantity:"10",
+          quantity:"1",
           recipientId:accountId,
-          senderPrivateKey:"83a4a4e95bc8da68a9c00b7b86523d576b967236ac67a7c0bfb98b3c5d19df0e",
-          skipAdditionalSecurityCheck:true,
           feePlanck:"1000000",
-          senderPublicKey:"041f3b333d93ba9b24eaf324d1090f763f7c78ed0b7922d2d3eaeecaf440501c",
-        })
+          senderPublicKey:publicKey,
+        });
+        await wallet.confirm(unsignedTransaction.unsignedTransactionBytes);
 
       } catch (error) {
         console.log(error);

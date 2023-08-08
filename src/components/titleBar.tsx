@@ -8,6 +8,8 @@ interface IShortTitleBarProps {
   setting?: boolean;
   help?: boolean;
   transparent?: boolean | undefined;
+  filter?: boolean;
+  addSign?:boolean;
 }
 
 
@@ -22,8 +24,9 @@ const settingIcon: JSX.Element = (
 )
 
 export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (props) => {
-  const { title, setting, help, transparent } = props;
-
+  const { title, setting, help, transparent,filter,addSign } = props;
+  console.log(setting);
+  console.log(setting === false);
   return (
     <div className="title-bar-layout">
       <div className={transparent ? "transparent-title-bar-container" : "title-bar-container"}
@@ -35,12 +38,16 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
       >
         <div className="title-bar-title inter-semi-bold-white-18px">{title}</div>
         {/* <img className="title-bar-seperat-line seperat-line" src={process.env.PUBLIC_URL + "/img/seperat-line-11@1x.png"} alt="Seperat line" /> */}
-        {/* setting */}
-        <Link to="/setting">
-          <div className="title-bar-ic_help_24px ic_help_24px">
-              <img className="title-bar-ic_help_24px-img ic_help_24px" src={process.env.PUBLIC_URL + "/img/ic-settings-24px-1@1x.png"} alt="ic_help_24px" />
-          </div>
-        </Link>
+        {addSign === true?
+        <div className = "titleBarAddSign">
+          <img className = "titleBarAddSignImg" src = {process.env.PUBLIC_URL + "/img/NftList/ic-add@1x.png"}/>
+        </div>
+        :
+        <div className="title-bar-ic_help_24px ic_help_24px">
+            <img className="title-bar-ic_help_24px-img ic_help_24px" src={process.env.PUBLIC_URL + "/img/ic-help-24px-1@1x.png"} alt="ic_help_24px" />
+        </div>
+}
+        {/*the filter and the plus sign change this div*/}
         <a href="javascript:history.back()">
           <div className="icon-arrow-left-container icon-arrow-left">
               <img
@@ -50,7 +57,7 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
                 />
           </div>
         </a>
-        {setting === false ? null : (
+        {setting === false ? null :(
           <Link to="/aiCoachSelect">
             <div className="ic_settings_24px-container ic_settings_24px">
               <img
@@ -60,7 +67,42 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
                 />
             </div>
           </Link>
-        )}
+        )
+      //   :
+      //   (
+      //   <div className="title-bar-ic_help_24px ic_help_24px">
+      //     <img className="title-bar-ic_help_24px-img ic_help_24px" src={process.env.PUBLIC_URL + "/img/ic-help-24px-1@1x.png"} alt="ic_help_24px" />
+      // </div>
+      //  )
+      }
+      {filter != true ? null :(
+      // <div className = "titleBarDropDown">
+      //   <button className = "titleBarFilter">
+      //     <div className = "titleBarFilterName">Free</div>
+      //     <img className = "titleBarFilterArrow" src = {process.env.PUBLIC_URL + "img/NftList/ic-arrow-drop-down@1x.png"}></img>
+      //     <div className="titleBarDropdown-content">
+      //       <a href="#">Link 1</a>
+      //       <a href="#">Link 2</a>
+      //       <a href="#">Link 3</a>
+      //     </div>
+      //   </button>
+      // </div>
+      <div className="dropdown">
+  <button className="dropbtn">
+    <div className = "dropbtnDescription">Free</div>
+        
+      <img className = "dropbtnArrow" src = {process.env.PUBLIC_URL + "img/NftList/ic-arrow-drop-down@1x.png"}/>
+
+  </button>
+  <div className="dropdown-content">
+    <a href="#">Lowest Price</a>
+    <a href="#">Highest Price</a>
+    <a href="#">All</a>
+  </div>
+</div>
+      
+      )}
+
         {/* <img className="bg-MY4xZJ" src={process.env.PUBLIC_URL + "/img/bg-11@1x.png"} alt="BG" /> */}
       </div>
     </div>
