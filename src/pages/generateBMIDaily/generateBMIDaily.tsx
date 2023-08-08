@@ -171,7 +171,7 @@ const GenerateBMIDaily: React.FunctionComponent<IGenerateBMIDailyProps> = (props
         </div>
         <div className="bmi-result-xzTWC0">
           <div className="bg-jtY5eq"></div>
-          <div className="x255-jtY5eq">25.5</div>
+          <div className="x255-jtY5eq">{bmi || '25.5'}</div>
           <div className="kgm2-jtY5eq">
             <span className="span0-JRVpal inter-normal-royal-blue-14px">kg/m</span><span className="span1-JRVpal inter-normal-royal-blue-14px">2</span>
           </div>
