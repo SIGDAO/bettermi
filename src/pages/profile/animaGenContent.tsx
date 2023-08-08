@@ -1,6 +1,6 @@
 import * as React from 'react';
 import MenuBar from '../../components/menuBar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ShortTitleBar } from '../../components/titleBar';
 import { useState } from 'react';
 import { useAppSelector } from '../../redux/useLedger';
@@ -10,8 +10,12 @@ import { useEffect } from 'react';
 import { accountId } from '../../redux/account';
 import { useSelector } from 'react-redux';
 import { selectCurrentAboutYourself, selectCurrentDescription, selectCurrentDiscordUsername, selectCurrentUsername } from '../../redux/profile';
+import { CustomInput, RandomGenNameInput } from '../../components/input';
+import { CustomTextArea } from '../../components/input';
 
 interface IAnimaGenContentProps {
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
 }
 
 const handleCopyDiscordUsername = (discordUsername) => {
@@ -22,9 +26,6 @@ const handleCopyDiscordUsername = (discordUsername) => {
 
 
 const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) => {
-  const [loading, setLoading] = useState<boolean>(true);
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [imgAddress, setImgAddress] = useState<string>("");
   const nodeHost = useAppSelector(selectWalletNodeHost);
   const ledger2 = LedgerClientFactory.createClient({nodeHost});
   const userId = useAppSelector(accountId);
@@ -32,6 +33,16 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   const discordUsername = useSelector(selectCurrentDiscordUsername)
   const description = useSelector(selectCurrentDescription)
   const aboutYourself = useSelector(selectCurrentAboutYourself)
+  const navigate = useNavigate();
+
+  const { isOpen, setIsOpen } = props;
+  const [loading, setLoading] = useState<boolean>(true);
+  const [imgAddress, setImgAddress] = useState<string>("");
+  const [name, setName] = useState<string>(username);
+  const [aboutYourselfText, setAboutYourselfText] = useState<string>(aboutYourself);
+  const [descriptionText, setDescriptionText] = useState<string>(description);
+  const [discordUsernameText, setDiscordUsernameText] = useState<string>(discordUsername);
+
 
   const handleSave = () => {
     setIsOpen((prev) => !prev)
@@ -56,7 +67,12 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   }, []);
 
   return (
-    <div className="bettermidapp-profile-3">
+    <div 
+      className="bettermidapp-profile-3" 
+      style={{
+        'height': `${ isOpen ? '100vh' : '844px'}`,
+      }}
+    >
       <ShortTitleBar title="Profile" />
       <div className="overlap-group5">
         <div className="overlap-group1-profile">
@@ -91,7 +107,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
           </div>
         </div>
         <div className="x3">
-          <div className="overlap-group-profile">
+          <div className="overlap-group-profile" onClick={() => navigate('/myNftList')} >
             <img className="add" src="img/profile/add-2@1x.png" alt="Add" />
             <img className="ic_add" src="img/profile/ic-add-2@1x.png" alt="ic_add" />
           </div>
@@ -119,23 +135,29 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
                 <div className="ic_edit-1"></div>
                 <div className="edit-profile-1 inter-semi-bold-white-18px">Edit Profile</div>
               </div>
+
               <div className="search_bar">
-                <div className="card-number-1 inter-normal-white-15px">zoe_li</div>
+                <RandomGenNameInput name={name} setName={setName} width={300} />
+
+                {/* <div className="card-number-1 inter-normal-white-15px">zoe_li</div>
                 <div className="random-dice">
                   <div className="card-number-2">Random</div>
                   <img className="ic_casino_24px" src="img/profile/ic-casino-24px@1x.png" alt="ic_casino_24px" />
-                </div>
+                </div> */}
               </div>
               <div className="search_bar-1 search_bar-4">
-                <p className="card-number-3 inter-semi-bold-keppel-15px">
+                {/* <p className="card-number-3 inter-semi-bold-keppel-15px">
                   ♉️&nbsp;&nbsp;|&nbsp;&nbsp;29&nbsp;&nbsp;|&nbsp;&nbsp;PERSONAL TRAINER
-                </p>
+                </p> */}
+                <CustomTextArea importClassName='inter-semi-bold-keppel-15px' text={aboutYourselfText} setText={setAboutYourselfText} width={300} />
               </div>
               <div className="search_bar-2 search_bar-4">
-                <p className="card-number-4 inter-normal-white-15px">I'm a positive person. I love to travel and eat.</p>
+                {/* <p className="card-number-4 inter-normal-white-15px">I'm a positive person. I love to travel and eat.</p> */}
+                <CustomTextArea importClassName='inter-normal-white-15px' text={descriptionText} setText={setDescriptionText} width={300} />
               </div>
               <div className="search_bar-3 search_bar-4">
-                <div className="card-number-5 inter-normal-white-15px">zoeeeee#1234</div>
+                <CustomInput importClassName={"inter-normal-white-15px"} text={discordUsernameText} setText={setDiscordUsernameText} width={300} />
+                {/* <div className="card-number-5 inter-normal-white-15px">zoeeeee#1234</div> */}
               </div>
               <div className="button_save" onClick={() => handleSave()}>
                 <div className="continue-1 inter-semi-bold-white-15px">Save</div>
@@ -151,54 +173,6 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
         </div>
       }
       <MenuBar />
-      {/* <div className="title-bar">
-        <div className="overlap-group2">
-          <div className="bars-status-bar-i-phone-light">
-            <div className="status-bar">
-              <div className="time-style"><div className="time sfprotext-semi-bold-white-15px">9:41</div></div>
-              <img className="cellular-connection" src="img/profile/cellular-connection-1@1x.png" alt="Cellular Connection" />
-              <img className="wifi" src="img/profile/wifi-1@1x.png" alt="Wifi" />
-              <div className="battery">
-                <div className="overlap-group-1">
-                  <div className="capacity"></div>
-                </div>
-                <img className="cap" src="img/profile/cap-1@1x.png" alt="Cap" />
-              </div>
-            </div>
-          </div>
-          <div className="overlap-group3">
-            <div className="profile inter-semi-bold-white-18px">Profile</div>
-            <div className="overlap-group1-profile-1">
-              <img className="seperat-line" src="img/profile/seperat-line-10@1x.png" alt="Seperat line" />
-              <div className="icon-arrow-left">
-                <img className="icon-arrow-left-1" src="img/profile/icon-arrow-left-1@1x.png" alt="icon-arrow-left" />
-              </div>
-            </div>
-            <div className="ic_settings_24px"></div>
-            <div className="ic_sentiment_very_satisfied_24px"></div>
-          </div>
-        </div>
-      </div> */}
-      {/* <div className="menu-bar">
-        <div className="overlap-group4">
-          <img className="seperat-line-1" src="img/profile/seperat-line-10@1x.png" alt="Seperat line" />
-          <div className="flex-row">
-            <div className="ic_-missions ic_"></div>
-            <div className="ic_-selfie ic_"></div>
-            <div className="ic_home"></div>
-            <div className="ic_rewards">
-              <div className="ic_rewards-1">
-                <img className="x11661" src="img/profile/file---11661@1x.png" alt="11661" />
-                <div className="flex-row-1">
-                  <img className="x116" src="img/profile/file---11659@1x.png" alt="11659" />
-                  <img className="x116" src="img/profile/file---11660@1x.png" alt="11660" />
-                </div>
-              </div>
-            </div>
-            <div className="ic_profile"></div>
-          </div>
-        </div>
-      </div> */}
     </div>
   )
 };
@@ -304,3 +278,53 @@ export default AnimaGenContent;
 //     <MenuBar/>
 //   </div>
 // )
+
+
+      /* <div className="title-bar">
+        <div className="overlap-group2">
+          <div className="bars-status-bar-i-phone-light">
+            <div className="status-bar">
+              <div className="time-style"><div className="time sfprotext-semi-bold-white-15px">9:41</div></div>
+              <img className="cellular-connection" src="img/profile/cellular-connection-1@1x.png" alt="Cellular Connection" />
+              <img className="wifi" src="img/profile/wifi-1@1x.png" alt="Wifi" />
+              <div className="battery">
+                <div className="overlap-group-1">
+                  <div className="capacity"></div>
+                </div>
+                <img className="cap" src="img/profile/cap-1@1x.png" alt="Cap" />
+              </div>
+            </div>
+          </div>
+          <div className="overlap-group3">
+            <div className="profile inter-semi-bold-white-18px">Profile</div>
+            <div className="overlap-group1-profile-1">
+              <img className="seperat-line" src="img/profile/seperat-line-10@1x.png" alt="Seperat line" />
+              <div className="icon-arrow-left">
+                <img className="icon-arrow-left-1" src="img/profile/icon-arrow-left-1@1x.png" alt="icon-arrow-left" />
+              </div>
+            </div>
+            <div className="ic_settings_24px"></div>
+            <div className="ic_sentiment_very_satisfied_24px"></div>
+          </div>
+        </div>
+      </div> */
+      /* <div className="menu-bar">
+        <div className="overlap-group4">
+          <img className="seperat-line-1" src="img/profile/seperat-line-10@1x.png" alt="Seperat line" />
+          <div className="flex-row">
+            <div className="ic_-missions ic_"></div>
+            <div className="ic_-selfie ic_"></div>
+            <div className="ic_home"></div>
+            <div className="ic_rewards">
+              <div className="ic_rewards-1">
+                <img className="x11661" src="img/profile/file---11661@1x.png" alt="11661" />
+                <div className="flex-row-1">
+                  <img className="x116" src="img/profile/file---11659@1x.png" alt="11659" />
+                  <img className="x116" src="img/profile/file---11660@1x.png" alt="11660" />
+                </div>
+              </div>
+            </div>
+            <div className="ic_profile"></div>
+          </div>
+        </div>
+      </div> */

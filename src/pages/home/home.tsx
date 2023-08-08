@@ -1,5 +1,5 @@
 import React, { useRef }  from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './home.css'
 import { CenterLayout } from '../../components/layout';
 import MenuBar from '../../components/menuBar';
@@ -8,12 +8,15 @@ import { selectCurrentUsername } from '../../redux/profile';
 import { accountToken } from '../../redux/account';
 import { store } from '../../redux/reducer';
 import { useState } from 'react';
- import { useAppSelector } from '../../redux/useLedger';
- import { LedgerClientFactory } from '@signumjs/core';
- import { selectWalletNodeHost } from '../../redux/useLedger';
- import { accountId } from '../../redux/account';
- import { useEffect } from 'react';
- import { accountSlice } from '../../redux/account';
+import { useAppSelector } from '../../redux/useLedger';
+import { LedgerClientFactory } from '@signumjs/core';
+import { selectWalletNodeHost } from '../../redux/useLedger';
+import { useEffect } from 'react';
+import { accountSlice } from '../../redux/account';
+import { isTodayHaveSelfieRecord } from '../../components/bmiCalculate';
+import { useLedger } from '../../redux/useLedger';
+import { accountId } from '../../redux/account';
+
 
 interface IHomeProps {
 }
@@ -46,14 +49,19 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const name = useSelector(selectCurrentUsername);
   const Token:string = useSelector(accountToken);
   const userAccountId = useSelector(accountId);
-  console.log(Token);
-  console.log(store.getState());
-  console.log("Token is  ",Token);
   const [loading, setLoading] = useState<boolean>(true);
   const [imgAddress, setImgAddress] = useState<string>("");
   const nodeHost = useAppSelector(selectWalletNodeHost);
   const ledger2 = LedgerClientFactory.createClient({nodeHost});
   const userId = useAppSelector(accountId);
+  const navigate = useNavigate();
+  const tempAccountId = useSelector(accountId);
+  const Ledger2 = useLedger();
+
+  console.log(Token);
+  console.log(store.getState());
+  console.log("Token is  ",Token);
+
   useEffect(() => {
     // Function to fetch data from the APIc
     ledger2.account.getAccount({accountId:userId})
@@ -73,6 +81,17 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   }, []);
   // todo: map
   // const userSIGDAO = 
+
+  // todo: export a button as take a selfie component
+  async function handleTakeASelfie() {
+    if (await isTodayHaveSelfieRecord(tempAccountId, Ledger2)) {
+      alert('already taken a selfie, since we are in demo mode, click comfirm for another selfie')
+      navigate('/takeSelfie')
+    }
+    navigate('/takeSelfie')
+  }
+  
+  
 
   const content: JSX.Element = (
     <div className="screen">
@@ -127,13 +146,13 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
           <div className="discord-RoXPLo inter-medium-royal-blue-14px">Discord</div>
         </Link>
         <div className="our-community-RoXPLo inter-semi-bold-white-21px">Our Community</div>
-        <Link to="/selfieToEarn">
-          <div className="button_-selfie-to-earn-RoXPLo">
-            <p className="take-a-selfie-to-earn-TRrnim inter-semi-bold-white-15px">Take a Selfie to Earn!</p>
-            <img className="ic_selfie-TRrnim" src={`${process.env.PUBLIC_URL}/img/ic-selfie-1@1x.png`} alt="ic_selfie" />
-            <img className="ic_arrow_forward-TRrnim" src={`${process.env.PUBLIC_URL}/img/ic-arrow-forward-1@1x.png`} alt="ic_arrow_forward" />
-          </div>
-        </Link>
+        {/* <Link to="/selfieToEarn"> */}
+        <div className="button_-selfie-to-earn-RoXPLo" onClick={() => handleTakeASelfie()}>
+          <p className="take-a-selfie-to-earn-TRrnim inter-semi-bold-white-15px">Take a Selfie to Earn!</p>
+          <img className="ic_selfie-TRrnim" src={`${process.env.PUBLIC_URL}/img/ic-selfie-1@1x.png`} alt="ic_selfie" />
+          <img className="ic_arrow_forward-TRrnim" src={`${process.env.PUBLIC_URL}/img/ic-arrow-forward-1@1x.png`} alt="ic_arrow_forward" />
+        </div>
+        {/* </Link> */}
         <div className="quick-actions-RoXPLo inter-semi-bold-white-21px">Quick Actions</div>
         <div className="greetings-RoXPLo">
           <h1 className="title-2ZgxSS">Hi！</h1>

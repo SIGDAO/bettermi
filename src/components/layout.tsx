@@ -5,13 +5,16 @@ export interface ICenterLayoutProps {
   bgImg ?: boolean | string;
   content ?: any;
   desktop ?: boolean;
+  noScroll ?: boolean | undefined;
 }
 
 export function CenterLayout (props: ICenterLayoutProps) {
-  const {bgImg, content, desktop} = props;
+  const {bgImg, content, desktop, noScroll} = props;
   let height : string | number
   let width : string | number;
   const mobile = process.env.REACT_APP_MOBILE === 'true'
+
+  console.log('noScroll', noScroll)
 
 
   // display in iphone 12 pro size
@@ -38,7 +41,7 @@ export function CenterLayout (props: ICenterLayoutProps) {
     'width': '100vw',
     'minHeight': '100vh',
     'height': '100%',
-    'overflowY': 'auto',
+    'overflowY': `${noScroll ? 'hidden' : 'auto'}`,
     'zIndex': '1',
     'overflowX': 'hidden',
   }

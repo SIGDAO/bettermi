@@ -700,8 +700,25 @@
   top:88px;
   display: flex;
   flex-direction: row;
-justify-content: center;
+  justify-content: center;
 }
+
+.containerMyNftList-popup {
+  position: absolute;
+  left:calc((100vw - 390px) / 2);
+  /* background-color: #4136f1; */
+  background-color: inherit;
+  width:390px;
+  top:88px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: calc(100vh - 88px);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+
 .containerMyNftList2{
   margin-top: 10px;
   width:340px;
@@ -834,22 +851,29 @@ opacity: 0.5;
   display: flex;
   flex-direction: column;
   gap: 9.5px;
-  height: 844px;
+  /* height: 844px; */
+  height: 100vh;
   left: calc((100vw - 390px) / 2);
   position: absolute;
-  top: 45px;
+  /* top: 45px; */
+  top: 0px;
   width: 390px;
+  overflow: hidden;
+  z-index: 999;
 }
 
 .bettermidapp-mimi-nfts-send-address-1 .icon-arrow-left-1-popup {
-  margin-left: 16px;
-  margin-top: 44px;
+  margin-left: 30px;
+  margin-top: 58px;
+  cursor: pointer;
+  z-index: 1000;
 }
 
 .bettermidapp-mimi-nfts-send-address-1 .icon-arrow-left-popup {
   height: 16px;
   object-fit: cover;
   width: 16px;
+  /* cursor: pointer; */
 }
 
 .bettermidapp-mimi-nfts-send-address-1 .edit-profile {

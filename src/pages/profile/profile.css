@@ -5,7 +5,6 @@
   background: linear-gradient(180deg, #171717 0%, #291a49 41.22%, #171717 100%);
   background-color: rgba(255,255,255,1.0);
   display: flex;
-  height: 844px;
   justify-content: center;
   overflow: hidden;
   width: 390px;
@@ -101,6 +100,7 @@
   height: 217px;
   position: relative;
   width: 152px;
+  cursor: pointer;
 }
 
 .bettermidapp-profile-3 .add {
@@ -995,7 +995,7 @@
 }
 
 .bettermidapp-profile-3 .search_bar {
-  background-color: #FFFFFF08;
+  background-color: transparent;
   border-radius: 10px;
   display: flex;
   height: 56px;
@@ -1054,7 +1054,7 @@
 
 .bettermidapp-profile-3 .search_bar-1 {
   height: 76px;
-  padding: 19.5px 15px;
+  /* padding: 19.5px 15px; */
   top: 257px;
 }
 
@@ -1067,7 +1067,7 @@
 
 .bettermidapp-profile-3 .search_bar-2 {
   height: 76px;
-  padding: 14.5px 15px;
+  /* padding: 14.5px 15px; */
   top: 387px;
 }
 
@@ -1080,7 +1080,7 @@
 
 .bettermidapp-profile-3 .search_bar-3 {
   height: 40px;
-  padding: 3.1px 15px;
+  /* padding: 3.1px 15px; */
   top: 512px;
 }
 

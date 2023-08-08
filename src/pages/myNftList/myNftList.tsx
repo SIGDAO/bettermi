@@ -145,6 +145,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
       'width': '100vw',
       'minHeight': '100vh',
       'height': '100%',
+      // 'overflowY': `${isOpenPopup ? 'hidden' : 'auto'}`,
       'overflowY': 'auto',
       'zIndex': '1',
       'overflowX': 'hidden',
@@ -193,7 +194,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
     <div style={bgStyle} >
       <div style={centerLayoutStyle} className='bettermidapp-mimi-nfts-send-address-1'>
         <ShortTitleBar title='My NFTs' />
-        <div className="containerMyNftList">
+        <div className={isOpenPopup ? 'containerMyNftList-popup' : 'containerMyNftList'}>
           <div className="containerMyNftList2">
             {loading ? (<div>set sth on duty</div>) : (
               <div className="myNftList">
@@ -226,7 +227,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
         {isOpenPopup && 
           <div className="edit-profile-layer">
             <div className="icon-arrow-left-1-popup icon-arrow-left-3-popup">
-              <img className="icon-arrow-left-popup" src="img/myNftList/icon-arrow-left-1@1x.png" alt="icon-arrow-left" />
+              <img className="icon-arrow-left-popup" onClick={() => setIsOpenPopup((prev) => !prev)} src="img/myNftList/icon-arrow-left-1@1x.png" alt="icon-arrow-left" />
             </div>
             <div className="edit-profile">
               <div className="overlap-group-1">
@@ -245,9 +246,9 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
                 <div className="search_bar"></div>
                 <div className="search_bar-1 search_bar-4"><p className="card-number">e.g. S-6SJC-…, 17332… or peter</p></div>
                 <div className="search_bar-2 search_bar-4"></div>
-                <a href="bettermidapp-mimi-nfts-2.html">
-                  <div className="button_save"><div className="continue inter-semi-bold-white-15px">Transfer</div></div></a
-                >
+                <div className="button_save" onClick={() => setIsOpenPopup((prev) => !prev)}>
+                  <div className="continue inter-semi-bold-white-15px">Transfer</div>
+                </div>
                 <p className="address-id-to-send-nft-to">Address, ID to send NFT to.</p>
                 <h1 className="text-7">#00000001</h1>
                 <div className="x0-signa-1">$0 SIGNA</div>

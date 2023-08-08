@@ -18,7 +18,7 @@
   left: calc((100% - 390px) / 2);
   background-color: var(--woodsmoke);
   border-top: 1px solid var(--royal-blue);
-  z-index: 999;
+  z-index: 99;
 }
 
 

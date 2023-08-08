@@ -1715,7 +1715,8 @@
 }
 
 .rewards_card-container {
-  width: calc(100% - 16px * 2);
+  /* width: calc(100% - 16px * 2); */
+  width: 100%;
   /* height: calc(434px - 60px); */
   height: 90px;
   overflow: auto;
@@ -2499,7 +2500,7 @@
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  padding-bottom: 21px;
+  /* padding-bottom: 21px; */
 }
 
 .bettermidapp-selfie-to-earn-1 .button_-selfie-to-earn-MUU5YC {
