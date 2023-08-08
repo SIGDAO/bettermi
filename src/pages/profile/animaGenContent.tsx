@@ -8,8 +8,8 @@ import { selectWalletNodeHost } from '../../redux/useLedger';
 import { LedgerClientFactory } from '@signumjs/core';
 import { useEffect } from 'react';
 import { accountId } from '../../redux/account';
-import { useSelector } from 'react-redux';
-import { selectCurrentAboutYourself, selectCurrentDescription, selectCurrentDiscordUsername, selectCurrentUsername } from '../../redux/profile';
+import { useDispatch, useSelector } from 'react-redux';
+import { profileSlice, selectCurrentAboutYourself, selectCurrentDescription, selectCurrentDiscordUsername, selectCurrentUsername } from '../../redux/profile';
 import { CustomInput, RandomGenNameInput } from '../../components/input';
 import { CustomTextArea } from '../../components/input';
 
@@ -34,6 +34,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   const description = useSelector(selectCurrentDescription)
   const aboutYourself = useSelector(selectCurrentAboutYourself)
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const { isOpen, setIsOpen } = props;
   const [loading, setLoading] = useState<boolean>(true);
@@ -45,6 +46,11 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
 
 
   const handleSave = () => {
+    dispatch(profileSlice.actions.setUsername(name));
+    dispatch(profileSlice.actions.setAboutYourself(aboutYourselfText));
+    dispatch(profileSlice.actions.setDescription(descriptionText));
+    dispatch(profileSlice.actions.setDiscordUsername(discordUsernameText));
+
     setIsOpen((prev) => !prev)
   }
 
@@ -95,7 +101,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
             </div>
           </div>
           <img className="nft_-avatar" src="img/profile/nft-avatar-1@1x.png" alt="NFT_Avatar" />
-          <div className="card-number inter-normal-white-15px">zoeeeee#1234</div>
+          <div className="card-number inter-normal-white-15px">{discordUsername || "zoeeeee#1234"}</div>
           <div className="copy-icon" onClick={() => handleCopyDiscordUsername(discordUsername)}>
             <img src="img/profile/file---11690@1x.png" alt="" />
           </div>

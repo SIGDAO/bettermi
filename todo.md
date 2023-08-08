@@ -266,5 +266,8 @@ selfie to earn
   u own your data
   maybe can sell the data to other company
 
+profile
+  add "copied" reminder
+
 Roadmap
   if user type in url, wallet not collected error

@@ -15,6 +15,13 @@ interface ICircularWithValueLabelProps {
   time: number;
 }
 
+function formatTime(seconds: number): string {
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = seconds % 60;
+  const formattedSeconds = remainingSeconds < 10 ? `0${remainingSeconds}` : remainingSeconds;
+  return `${minutes}:${formattedSeconds}`;
+}
+
 function CircularProgressWithLabel(
   props: CircularProgressProps & { value: number, displayNum: number},
 ) {
@@ -55,7 +62,9 @@ function CircularProgressWithLabel(
             fontStyle: 'normal',
             fontWeight: '600',
           }}
-        >{`00:${monNum.toString().length !== 2? `0${monNum}` : monNum.toString()}`}</Typography>
+        // >{`00:${monNum.toString().length !== 2? `0${monNum}` : monNum.toString()}`}</Typography>
+        >{formatTime(monNum)}</Typography>
+
       </Box>
     </Box>
   );

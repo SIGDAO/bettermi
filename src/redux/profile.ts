@@ -21,7 +21,7 @@ export interface BMIState {
 const initialState: ProfileState = {
   selfiePath: "",
   username: "",
-  discordUsername: "",
+  discordUsername: "zoeeeee#1234",
   description: "I'm a positive person. I love to travel and eat.",
   aboutYourself: "♉️  |  29  |  PERSONAL TRAINER",
   bmi: "",
