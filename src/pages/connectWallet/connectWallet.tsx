@@ -65,8 +65,8 @@ export default function ConnectWallet (props: IConnectWalletProps) {
     // navigate('/connectSuccess');
     if(ourContract.ats[0] != null){
       console.log("called the if statement");
-      navigate('/connectSuccess');
-      //navigate("/home");
+      // navigate('/connectSuccess');
+      navigate("/home");
     }
     else{
     console.log(store.getState());

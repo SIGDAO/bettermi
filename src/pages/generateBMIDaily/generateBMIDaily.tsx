@@ -50,7 +50,7 @@ const GenerateBMIDaily: React.FunctionComponent<IGenerateBMIDailyProps> = (props
 
     const sendBMI = await ledger.message.sendMessage({
       message: JSON.stringify({
-        'bmi': bmi,
+        'bmi': bmi || '25.5',
         'time': new Date(),
       }) ,
       messageIsText: true,
