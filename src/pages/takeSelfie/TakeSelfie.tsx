@@ -134,7 +134,8 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
       console.log(webcamRef)
       const imageSrc = webcamRef.current?.getScreenshot();
       if (imageSrc) {
-        store.dispatch(profileSlice.actions.setSelfieImage(imageSrc))
+        dispatch(profileSlice.actions.setSelfieImage(imageSrc))
+        dispatch(profileSlice.actions.setBMI('25.5'))
         action(imageSrc)
       }
       navigate(navigatePath)
