@@ -15,6 +15,7 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
   const userAccountId = useSelector(accountId);
   const codeHashId = "7457358473503628676"; // the code hash of the BMI contract 
   const [count, setCount] = useState(1);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
 
 
@@ -37,6 +38,7 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
       console.log(ourContract);
     }
     setCount(100)
+    setIsLoading(false);
     // navigate('/generateFreeNFT');
   }
 
@@ -52,7 +54,7 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
   useEffect(() => {
     const incrementInterval = 240000 / 96; // Time divided by the number of increments
     const timer = setInterval(() => {
-      if (count < 97 && count !== 100) {
+      if (count < 97 && isLoading) {
         setCount((prevCount) => prevCount + 1);
       } else {
         clearInterval(timer);

@@ -143,7 +143,9 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
               <div className="about-yourself">ABOUT YOURSELF</div>
               <div className="description-to-friends">DESCRIPTION TO FRIENDS</div>
               <div className="rewards">
-                <div className="ic_edit-1"></div>
+                <div className="ic_edit-1">
+                  <img className='ic_edit-1-content' src="img/profile/ic-edit-1@1x.png" alt="" />
+                </div>
                 <div className="edit-profile-1 inter-semi-bold-white-18px">Edit Profile</div>
               </div>
 
