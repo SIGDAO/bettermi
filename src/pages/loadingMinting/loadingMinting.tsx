@@ -4,7 +4,7 @@ import { useLedger } from '../../redux/useLedger';
 import { useSelector } from 'react-redux';
 import { accountId } from '../../redux/account';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 interface ILoadingMintingProps {
 }
@@ -14,6 +14,8 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
   const ledger = useLedger();
   const userAccountId = useSelector(accountId);
   const codeHashId = "7457358473503628676"; // the code hash of the BMI contract 
+  const [count, setCount] = useState(1);
+
 
 
   const checkIfNFTMinted = async () => {
@@ -34,7 +36,8 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
         });
       console.log(ourContract);
     }
-    navigate('/generateFreeNFT');
+    setCount(100)
+    // navigate('/generateFreeNFT');
   }
 
 
@@ -44,6 +47,36 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
         console.error(err);
       })
   }, [])
+
+  
+  useEffect(() => {
+    const incrementInterval = 240000 / 96; // Time divided by the number of increments
+    const timer = setInterval(() => {
+      if (count < 97 && count !== 100) {
+        setCount((prevCount) => prevCount + 1);
+      } else {
+        clearInterval(timer);
+      }
+    }, incrementInterval);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
+
+
+  useEffect(() => {
+    if (count === 100) {
+      const timeout = setTimeout(() => {
+        navigate('/generateFreeNFT');
+      }, 1000);
+  
+      return () => {
+        clearTimeout(timeout);
+      };
+    }
+  }, [count]);
+
 
 
 
@@ -65,7 +98,7 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
             </div>
           </div> */}
           <div className="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-          <div className="x50-7ckAMs">50%</div>
+          <div className="x50-7ckAMs">{count}%</div>
           <a href="bettermidapp-settings-1.html">
             <div className="ic_settings_24px-7ckAMs ic_settings_24px">
                 <img
