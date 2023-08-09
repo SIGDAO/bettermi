@@ -222,16 +222,16 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
     'top': '44px',
   }
   const displayMyNft = myNfts.map((nft) => {//Contract Id
-    console.log("userNftList is  ",userNftList);
-    return(
-      <MyNft  image={nft.image} level = {nft.level} assetId = {nft.assetId} ></MyNft>
+    console.log("userNftList is  ", userNftList);
+    return (
+      <MyNft image={nft.image} level={nft.level} isOpenPopup={isOpenPopup} setIsOpenPopup={setIsOpenPopup} ></MyNft>
     );
   }
   );
   const displayNftToken = userNftTokenList.map((nft) => {//Contract Id
     console.log("userNftTokenList is  ",nft);
     return(
-      <MyNft  image={nft.image} level = {nft.level} assetId = {nft.assetId}></MyNft>
+      <MyNft image={nft.image} level={nft.level} isOpenPopup={isOpenPopup} setIsOpenPopup={setIsOpenPopup} ></MyNft>
     );
   }
   );
@@ -302,19 +302,64 @@ return(
               {/* {displayMyNft} */}
               {loading?(<div></div>):(displayNftToken)}
         </div>
-      </div>
-      {/* {loading?(<p>loading...</p>):(
-        <>
-              <ShortTitleBar title='My NFTs' />
-              {console.log(userNftList)}{console.log(array)}
-      <div className = "containerMyNftList">
-        <div className = "containerMyNftList2">
-            {displayMyNft}
+        {isOpenPopup && 
+          <div className="edit-profile-layer">
+            <div className="icon-arrow-left-1-popup icon-arrow-left-3-popup">
+              <img className="icon-arrow-left-popup" onClick={() => setIsOpenPopup((prev) => !prev)} src="img/myNftList/icon-arrow-left-1@1x.png" alt="icon-arrow-left" />
+            </div>
+            <div className="edit-profile">
+              <div className="overlap-group-1">
+                <img className="seperate-line-1" src="img/myNftList/seperate-line-1@1x.png" alt="Seperate line" />
+                <img className="bg" src="img/myNftList/bg-2@1x.png" alt="BG" />
+                <img className="seperat-line-1 seperat-line-3" src="img/myNftList/seperat-line-3@1x.png" alt="Seperat line" />
+                <div className="transfer-n-ft inter-bold-royal-blue-15px">TRANSFER NFT</div>
+                <div className="recipient inter-bold-royal-blue-15px">RECIPIENT</div>
+                <div className="nft-details inter-bold-royal-blue-15px">NFT DETAILS</div>
+                <div className="rewards">
+                  <div className="ic_send-1">
+                    <img className="ic_send-1-content" src="img/myNftList/ic-send-1@1x.png" alt="" />
+                  </div>
+                  <div className="place inter-semi-bold-white-18px">Send</div>
+                </div>
+                <div className="search_bar"></div>
+                <div className="search_bar-1 search_bar-4"><p className="card-number">e.g. S-6SJC-�K, 17332�K or peter</p></div>
+                <div className="search_bar-2 search_bar-4"></div>
+                <div className="button_save" onClick={() => setIsOpenPopup((prev) => !prev)}>
+                  <div className="continue inter-semi-bold-white-15px">Transfer</div>
+                </div>
+                <p className="address-id-to-send-nft-to">Address, ID to send NFT to.</p>
+                <h1 className="text-7">#00000001</h1>
+                <div className="x0-signa-1">$0 SIGNA</div>
+                <div className="x16228">
+                  <div className="lv-1-1">LV 1</div>
+                  <img className="x6" src="img/myNftList/file---6@1x.png" alt="6" />
+                  <div className="reward-10-1">REWARD +10%</div>
+                </div>
+                <div className="search_bar-3 search_bar-4">
+                  <p className="card-number-1">
+                    You may attach some text or binary data to this transaction. Here you also enter the memo required
+                    by many exchanges
+                  </p>
+                </div>
+                <div className="additional-text inter-bold-royal-blue-15px">ADDITIONAL TEXT</div>
+              </div>
+            </div>
+          </div>
+      }
+        {/* {loading?(<p>loading...</p>):(
+          <>
+                <ShortTitleBar title='My NFTs' />
+                {console.log(userNftList)}{console.log(array)}
+        <div className = "containerMyNftList">
+          <div className = "containerMyNftList2">
+              {displayMyNft}
+          </div>
         </div>
+        </>
+        )
+  } */}
+
       </div>
-      </>
-      )
-} */}
     </div>
     </div>
 

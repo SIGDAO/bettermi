@@ -143,6 +143,7 @@
   /* left: -34px; */
   mix-blend-mode: normal;
   overflow-x: scroll;
+  overflow-y: hidden;
   top: 260px;
   width: 390px;
   margin: 0;

@@ -186,6 +186,7 @@
   right: calc(18.50% - 4px);
   top: 56px;
   width: 20px;
+  position: absolute;
 }
 
 .bettermidapp-generate-free-nft-minting .ic_sentiment_very_satisfied_24px-VxvOOd {
@@ -327,6 +328,8 @@
   background-color: transparent;
   height: auto;
   left: 163px;
+
+  /* left: calc((100% - ); */
   letter-spacing: 0.00px;
   line-height: 14px;
   position: absolute;
