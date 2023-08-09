@@ -9,6 +9,8 @@ import { BirthSelect, GenderSelect } from '../../components/select';
 import { selectCurrentGender, selectCurrentImg, selectCurrentBMI, selectCurrentBirthday } from '../../redux/profile';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { selectWalletNodeHost } from '../../redux/useLedger';
+import { TransferNftTokenOwnershipFinale } from '../../components/transferNftTokenFinale';
 
 import { useNavigate } from 'react-router-dom';
 import { useLedger } from '../../redux/useLedger';
@@ -34,7 +36,7 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
   const selfie = useSelector(selectCurrentImg)
   const BMI = useSelector(selectCurrentBMI)
   const birthday = useSelector(selectCurrentBirthday)
-
+  const nodeHost = useSelector(selectWalletNodeHost);
   const [minted, setMinted] = React.useState(false); // whether the user has minted the NFT
   const navigate = useNavigate();
   const ledger = useLedger();
@@ -62,7 +64,7 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
 
     if(ledger){
       setMinted(true);
-      
+      TransferNftTokenOwnershipFinale(nodeHost,userAccountId);   
       const asset = await ledger.asset.getAssetHolders({assetId:"3862155318820066741"});
       asset.accountAssets.map((obj)=>{
         if(obj.account == userAccountId){
