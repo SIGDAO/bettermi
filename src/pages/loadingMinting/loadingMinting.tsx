@@ -55,30 +55,39 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
     // const incrementInterval = 240000 / 96; // Time divided by the number of increments
     const incrementInterval = 5000 / 100;
     const timer = setInterval(() => {
-      if (count <= 100 && isLoading) {
-        setCount((prevCount) => prevCount + 1);
-      } else {
-        setIsLoading(false);
-        clearInterval(timer);
-      }
+      setCount((prevCount) => prevCount + 1);
+
+      // if (count => 100 ) {
+      // } else {
+      //   setIsLoading(false);
+      //   navigate('/generateFreeNFT');
+      //   clearInterval(timer);
+      // }
     }, incrementInterval);
 
     return () => {
+      // setIsLoading(false);
+      // navigate('/generateFreeNFT');
       clearInterval(timer);
     };
   }, []);
 
 
   useEffect(() => {
-    if (count === 100) {
-      const timeout = setTimeout(() => {
-        setIsLoading(false);
-        navigate('/generateFreeNFT');
-      }, 1000);
+    if (count >= 100) {
+      setIsLoading(false);
+      navigate('/generateFreeNFT');
+
+      // const timeout = setTimeout(() => {
+      //   setIsLoading(false);
+      //   navigate('/generateFreeNFT');
+      // }, 1000);
+
+      // timeout
   
-      return () => {
-        clearTimeout(timeout);
-      };
+      // return () => {
+      //   clearTimeout(timeout);
+      // };
     }
   }, [count]);
 
