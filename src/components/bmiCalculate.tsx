@@ -19,10 +19,7 @@ const findBMIblockchainContract = async (tempAccountId: string, Ledger2: any) =>
 
   console.log(contractId, 'contractID');
 
-  if (!contractId.hasOwnProperty('ats')) return {
-    message: null,
-    description: null,
-  };
+  if (!contractId.hasOwnProperty('ats')) return false
 
   for(let i = 0;i < contractId.ats.length;i++){
       if(contractId.ats[i].machineCodeHashId == "7457358473503628676"){
@@ -33,26 +30,24 @@ const findBMIblockchainContract = async (tempAccountId: string, Ledger2: any) =>
       }
   }
 
-  if (!contractAddress) return {
-    message: null,
-    description: null,
-  };
+  if (!contractAddress) return false
 
   const message = await Ledger2.account.getAccountTransactions({accountId:contractAddress}); //Contract Id
   console.log(message);
   console.log(description);
 
-  // return {
-  //   message: message,
-  //   description: description,
-  // };
+  return {
+    message: message,
+    description: description,
+  };
 }
 
 
 export const findBMI = async (tempAccountId: string, Ledger2: any, today?: boolean | undefined) => {
   if(Ledger2 == null) return [];
 
-  const message = await findBMIblockchainContract(tempAccountId, Ledger2);
+  const bmiDataObject = await findBMIblockchainContract(tempAccountId, Ledger2);
+  const message = bmiDataObject ? bmiDataObject.message : null;
   if (!message) return [];
   let BMI: SeriesDataItemTypeMap['Area'][]= [];
   for(let i = message.transactions.length - 1; i >= 0 ;i--){
