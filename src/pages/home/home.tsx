@@ -72,9 +72,13 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
         console.log(typeof(Object.keys(description.av)[0]));
         setImgAddress(Object.keys(description.av)[0]);
         setLoading(false);  
+        console.log(imgAddress);
+        console.log(typeof(imgAddress));
       })
       .catch((error)=>{ 
         console.log("need to equip nft");
+        console.log(imgAddress);
+        console.log(typeof(imgAddress));
         setLoading(false);
       });
 
@@ -161,7 +165,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
             <div className="nft-reward-10-b5x63m inter-semi-bold-white-15px">NFT REWARD +10%</div>
             <img className="seperate-line-b5x63m" src={`${process.env.PUBLIC_URL}/img/seperate-line-1@1x.png`} alt="seperate line" />
           </div>
-          {loading?
+          {imgAddress === ""?
           <img className="nft_-avatar-2ZgxSS" src={`${process.env.PUBLIC_URL}/img/home/nft-avatar-13@1x.png`} alt="NFT_Avatar" />
           :(
             <img className = "nft_-avatar-2ZgxSS" src = {`https://ipfs.io/ipfs/${imgAddress}`}></img>

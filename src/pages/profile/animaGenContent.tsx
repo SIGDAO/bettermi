@@ -100,7 +100,12 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
               </p>
             </div>
           </div>
-          <img className="nft_-avatar" src="img/profile/nft-avatar-1@1x.png" alt="NFT_Avatar" />
+          {loading ? (
+            <img className="nft_-avatar" src="img/profile/nft-avatar-1@1x.png" alt="NFT_Avatar" />
+          ):(
+            <img className="nft_-avatar" src = {`https://ipfs.io/ipfs/${imgAddress}`} alt="NFT_Avatar" />
+          )
+          }
           <div className="card-number inter-normal-white-15px">{discordUsername || "zoeeeee#1234"}</div>
           <div className="copy-icon" onClick={() => handleCopyDiscordUsername(discordUsername)}>
             <img src="img/profile/file---11690@1x.png" alt="" />
