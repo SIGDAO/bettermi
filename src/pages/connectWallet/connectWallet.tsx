@@ -5,7 +5,7 @@ import { store } from '../../redux/reducer';
 import { walletSlice } from '../../redux/wallet';
 import { DeeplinkableWallet,GenericExtensionWallet } from '@signumjs/wallets';
 import { Address, Ledger } from '@signumjs/core';
-import { userAccount } from '../../redux/account';
+import { accountId, userAccount } from '../../redux/account';
 import { accountSlice } from '../../redux/account';
 import { useContext } from 'react';
 import { AppContext } from '../../redux/useContext';
@@ -48,24 +48,47 @@ export default function ConnectWallet (props: IConnectWalletProps) {
         machineCodeHash: codeHashId,
       });
             ledger.asset.getAssetHolders({assetId:"3862155318820066741"}).then((asset)=>{
-        asset.accountAssets.map((obj)=>{
-          console.log(asset);
-          console.log(import_account.getNumericId());
-          if(obj.account == import_account.getNumericId()){
-            store.dispatch(accountSlice.actions.setToken(Number(obj.quantityQNT)));
-            localStorage.setItem('token',obj.quantityQNT);
-              console.log(obj.quantityQNT);
-          }
-        })
+              console.log(asset);
+              console.log(asset.accountAssets.length);
+              console.log(accountinfo.accountId);
+              for(var i = 0; i<asset.accountAssets.length;i++){
+                if(asset.accountAssets[i].account === accountinfo.accountId){
+                  store.dispatch(accountSlice.actions.setToken(Number(asset.accountAssets[i].quantityQNT)));
+                  localStorage.setItem('token',asset.accountAssets[i].quantityQNT);
+                  console.log(asset.accountAssets[i].quantityQNT);
+                  break;
+                }
+                if(i == asset.accountAssets.length - 1){
+                  store.dispatch(accountSlice.actions.setToken(0));
+                  localStorage.setItem('token',"0");
+                }
+              }
+        // asset.accountAssets.map((obj)=>{
+        //   console.log(asset);
+        //   console.log(import_account.getNumericId());
+        //   if(obj.account == import_account.getNumericId()){
+        //     store.dispatch(accountSlice.actions.setToken(Number(obj.quantityQNT)));
+        //     localStorage.setItem('token',obj.quantityQNT);
+        //       console.log(obj.quantityQNT);
+        //   }
+        // })
         });
       console.log(ourContract);
       console.log(ourContract.ats[0]);
       console.log(typeof(ourContract.ats[0]));
       console.log(typeof(ourContract));
+      const asset = await ledger.asset.getAssetHolders({assetId:"3862155318820066741"});
+      asset.accountAssets.map((obj)=>{
+        if(obj.account == accountinfo.accountId){
+          store.dispatch(accountSlice.actions.setToken(Number(obj.quantityQNT)));
+          localStorage.setItem('token',obj.quantityQNT);
+            console.log(obj.quantityQNT);
+        }
+      });
     // navigate('/connectSuccess');
     if(ourContract.ats[0] != null){
       console.log("called the if statement");
-      // navigate('/connectSuccess');
+       //navigate('/connectSuccess');
       navigate("/home");
     }
     else{
