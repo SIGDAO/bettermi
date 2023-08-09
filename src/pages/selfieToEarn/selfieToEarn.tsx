@@ -126,10 +126,10 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
 
   // todo: export a button as take a selfie component
   async function handleTakeASelfie() {
-    if (await isTodayHaveSelfieRecord(tempAccountId, Ledger2)) {
-      alert('already taken a selfie, since we are in demo mode, click comfirm for another selfie')
-      navigate('/takeSelfie')
-    }
+    // if (await isTodayHaveSelfieRecord(tempAccountId, Ledger2)) {
+    //   alert('already taken a selfie, since we are in demo mode, click comfirm for another selfie')
+    //   navigate('/takeSelfie')
+    // }
     navigate('/takeSelfie')
   }
 
