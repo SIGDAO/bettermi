@@ -2517,7 +2517,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: calc(326px - 37.25px - 33.04px);
+  /* width: calc(326px - 37.25px - 33.04px); */
   padding-left: 37.25px;
   padding-right: 33.04px;
 }

@@ -85,7 +85,7 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
   const content: JSX.Element = (
     <div className="bettermidapp-generate-free-nft-minting">
       <div className="bg_2-JdJl2l">
-          <img className="bg-7ckAMs" src="img/loadingMinting/bg-11@1x.png" alt="BG" />
+          {/* <img className="bg-7ckAMs" src="img/loadingMinting/bg-11@1x.png" alt="BG" /> */}
           {/* <div className="loader-7ckAMs">
             <div className="x001-loading-u5QZHJ">
                 <div className="x107-MxmV9X"></div>
@@ -129,7 +129,7 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
                 />
           </div>
       </a>
-      <div className="bars-status-bar-i-phone-light-JdJl2l">
+      {/* <div className="bars-status-bar-i-phone-light-JdJl2l">
           <div className="frame-PAFj23"></div>
           <div className="status-bar-PAFj23">
             <div className="battery-9cGPS4">
@@ -143,7 +143,7 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
                 <div className="time-fIdwUD sfprotext-semi-bold-white-15px">9:41</div>
             </div>
           </div>
-      </div>
+      </div> */}
       <div className="minting-JdJl2l inter-normal-white-15px">Minting…</div>
     </div>
   )
