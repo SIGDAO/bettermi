@@ -269,6 +269,7 @@ align-self: flex-start;
   flex-grow: 0;
   flex-shrink: 0;
 }
+
 .challengeCompletedLink:hover{
     cursor: pointer;
    background-color: #123456;

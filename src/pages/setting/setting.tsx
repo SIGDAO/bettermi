@@ -8,10 +8,10 @@ interface ISettingProps {
 const Setting: React.FunctionComponent<ISettingProps> = (props) => {
   const content: JSX.Element = (
     <div className="bettermidapp-settings-1">
-      <a href="bettermidapp-profile-edit-1.html"><img className="bg-7DUKxJ" src="img/setting/bg-9@1x.png" alt="BG" /> </a>
+      {/* <a href="bettermidapp-profile-edit-1.html"><img className="bg-7DUKxJ" src="img/setting/bg-9@1x.png" alt="BG" /> </a> */}
       <div className="bars-status-bar-i-phone-light-7DUKxJ">
         <div className="frame-xpaCij"></div>
-        <div className="status-bar-xpaCij">
+        {/* <div className="status-bar-xpaCij">
           <div className="battery-KqfEf3">
             <div className="border-7gOqqF"></div>
             <img className="cap-7gOqqF" src="img/setting/cap-1@1x.png" alt="Cap" />
@@ -22,7 +22,7 @@ const Setting: React.FunctionComponent<ISettingProps> = (props) => {
           <div className="time-style-KqfEf3">
             <div className="time-XixtqU sfprotext-semi-bold-white-15px">9:41</div>
           </div>
-        </div>
+        </div> */}
       </div>
       <div className="settings-7DUKxJ settings">
         <img className="layer-azNBHQ" src="img/setting/layer-1@1x.png" alt="Layer" />

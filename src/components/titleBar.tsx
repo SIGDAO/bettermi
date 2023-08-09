@@ -43,9 +43,12 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
           <img className = "titleBarAddSignImg" src = {process.env.PUBLIC_URL + "/img/NftList/ic-add@1x.png"}/>
         </div>
         :
+        <Link to='/setting'>
         <div className="title-bar-ic_help_24px ic_help_24px">
-            <img className="title-bar-ic_help_24px-img ic_help_24px" src={process.env.PUBLIC_URL + "/img/ic-help-24px-1@1x.png"} alt="ic_help_24px" />
+          <img className="title-bar-ic_help_24px-img ic_help_24px" src={process.env.PUBLIC_URL + "/img/ic-settings-24px-1@1x.png"} alt="ic_help_24px" />
         </div>
+
+        </Link>
 }
         {/*the filter and the plus sign change this div*/}
         <a href="javascript:history.back()">

@@ -1,8 +1,8 @@
 /* screen - bettermidapp-settings-1 */
 
 .bettermidapp-settings-1 {
-  background: linear-gradient(180deg, #171717 0%, #291a49 41.22%, #171717 100%);
-  background-color: rgba(255,255,255,1.0);
+  background: transparent;
+  /* background-color: rgba(255,255,255,1.0); */
   height: 844px;
   overflow: hidden;
   overflow-x: hidden;
@@ -546,6 +546,7 @@
   left: 341px;
   top: 56px;
   width: 20px;
+  position: absolute;
 }
 
 .bettermidapp-settings-1 .ic_sentiment_very_satisfied_24px-FSbIhl {

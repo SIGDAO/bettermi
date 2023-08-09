@@ -130,7 +130,7 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
                 </div>
             </div>
           </button>
-          <button className = "challengeCompletedLink">
+          <button className = "challengeCompletedLinkDisabled" disabled = {true} style = {{  opacity: "0.4"}}>
             <img className = "buttonIconChallengeCompleted" src={`${process.env.PUBLIC_URL}/img/allMission/nft-avatar-2@1x.png`} alt="Card_bg"></img>
             <div className = "descriptionChallengeCompleted">
               <div className = "descriptionTitleChallengeCompleted">
