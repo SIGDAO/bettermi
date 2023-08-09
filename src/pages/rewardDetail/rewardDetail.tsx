@@ -49,7 +49,7 @@ const rewardDetailList: rewardDetailListProps[] = [
   {
     id: 4,
     title: 'Elite Challenger',
-    reward: 'Get a Random NFT.',
+    reward: 'Receive our exclusive healthy product',
     description: `Users who complete 50 challenges, whether accumulated over time or in one continuous effort, 
                   unlock this achievement. As a result, they gain access to an enhanced AI coach service, providing valuable guidance 
                   and support to overcome future obstacles.`,
@@ -132,7 +132,7 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
             {displayRewardDetail?.description}
           </p>
           <p className="better-mi-reserves-t-tOBH5R inter-normal-cadet-blue-12px">
-            BetterMi reserves the right to the final decision <br />in case of any disputes.
+            Bettermi.io reserves the right to the final decision <br />in case of any disputes.
           </p>
           {isSigdaoReward ? (
             <>

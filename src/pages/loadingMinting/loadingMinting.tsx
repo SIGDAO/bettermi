@@ -70,7 +70,7 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
   useEffect(() => {
     if (count === 100) {
       const timeout = setTimeout(() => {
-        navigate('/generateFreeNFT');
+        // navigate('/generateFreeNFT');
       }, 1000);
   
       return () => {
@@ -144,7 +144,7 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
             </div>
           </div>
       </div> */}
-      <div className="minting-JdJl2l inter-normal-white-15px">Minting…</div>
+      <div className="minting-JdJl2l inter-normal-white-15px">Minting…<br/><br/>Please do not refresh the page</div>
     </div>
   )
   

@@ -155,7 +155,7 @@
   font-style: normal;
   font-weight: 400;
   height: 23px;
-  left: 184px;
+  left: calc((100% - 38px)/2);
   letter-spacing: 0.00px;
   line-height: 20px;
   position: absolute;
@@ -327,9 +327,9 @@
 .bettermidapp-generate-free-nft-minting .minting-JdJl2l {
   background-color: transparent;
   height: auto;
-  left: 163px;
+  /* left: 163px; */
 
-  /* left: calc((100% - ); */
+  left: calc((100% - 218.21px)/2);
   letter-spacing: 0.00px;
   line-height: 14px;
   position: absolute;

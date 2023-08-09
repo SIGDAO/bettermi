@@ -246,8 +246,8 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
   //const content : JSX.Element = (
 return(
     <div style={bgStyle}>
-    <div style={centerLayoutStyle}>
-              <ShortTitleBar title='My NFTs' addSign = {true} setting = {false} filter = {true}/>
+    <div style={centerLayoutStyle} className='bettermidapp-mimi-nfts-send-address-1'>
+      <ShortTitleBar title='My NFTs' addSign = {true} setting = {false} filter = {true}/>
       <div className = "containerMyNftList">
         <div className = "containerMyNftList2">
         {onDuty === ""?(             
@@ -269,8 +269,11 @@ return(
                </div>
              </div>
              <div className = "myNftBottom">
-             <button className = "myNftButtonOnDuty" style = {{backgroundColor:"#39B3AF!important"}}>On Duty</button>
-             <img className = "myNftButtomArrow" src  = {`${process.env.PUBLIC_URL}/img/NftList/ic-send@1x.png`}></img>
+             <button 
+              className = "myNftButtonOnDuty" 
+              style = {{backgroundColor:"#39B3AF!important"}}
+            >On Date</button>
+             <img className = "myNftButtomArrow" src  = {`${process.env.PUBLIC_URL}/img/NftList/ic-send@1x.png`} onClick={() => setIsOpenPopup((prev) => !prev)}></img>
              </div>
            </div>
            ):(
@@ -292,8 +295,8 @@ return(
                </div>
              </div>
              <div className = "myNftBottom">
-             <button className = "myNftButtonOnDuty" style = {{backgroundColor:"#39B3AF!important"}}>On Duty</button>
-             <img className = "myNftButtomArrow" src  = {`${process.env.PUBLIC_URL}/img/NftList/ic-send@1x.png`}></img>
+             <button className = "myNftButtonOnDuty" style = {{backgroundColor:"#39B3AF!important"}}>On Date</button>
+             <img className = "myNftButtomArrow" src  = {`${process.env.PUBLIC_URL}/img/NftList/ic-send@1x.png`} onClick={() => setIsOpenPopup((prev) => !prev)}></img>
              </div>
            </div>
                )
@@ -302,7 +305,20 @@ return(
               {/* {displayMyNft} */}
               {loading?(<div></div>):(displayNftToken)}
         </div>
-        {isOpenPopup && 
+        {/* {loading?(<p>loading...</p>):(
+          <>
+                <ShortTitleBar title='My NFTs' />
+                {console.log(userNftList)}{console.log(array)}
+        <div className = "containerMyNftList">
+          <div className = "containerMyNftList2">
+              {displayMyNft}
+          </div>
+        </div>
+        </>
+        )
+  } */}
+      </div>
+      {isOpenPopup && 
           <div className="edit-profile-layer">
             <div className="icon-arrow-left-1-popup icon-arrow-left-3-popup">
               <img className="icon-arrow-left-popup" onClick={() => setIsOpenPopup((prev) => !prev)} src="img/myNftList/icon-arrow-left-1@1x.png" alt="icon-arrow-left" />
@@ -346,20 +362,6 @@ return(
             </div>
           </div>
       }
-        {/* {loading?(<p>loading...</p>):(
-          <>
-                <ShortTitleBar title='My NFTs' />
-                {console.log(userNftList)}{console.log(array)}
-        <div className = "containerMyNftList">
-          <div className = "containerMyNftList2">
-              {displayMyNft}
-          </div>
-        </div>
-        </>
-        )
-  } */}
-
-      </div>
     </div>
     </div>
 

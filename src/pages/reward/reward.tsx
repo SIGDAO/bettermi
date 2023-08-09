@@ -55,13 +55,13 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
             </div>
           </div>
         </Link>
-        <Link to="/rewardDetail/3">
+        <Link to="/rewardDetail/4">
           <div className="rewards-cards-xzgu34 rewards-cards">
             <img className="card_bg" src={`${process.env.PUBLIC_URL}/img/reward/card-bg-1@1x.png`} alt="Card_bg" />
-            <div className="social-butterfly-nGgOF5 inter-semi-bold-white-18px">Social Butterfly</div>
-            <img className="nft_-avatar" src={`${process.env.PUBLIC_URL}/img/reward/nft-avatar-6@1x.png`} alt="NFT_Avatar" />
+            <div className="social-butterfly-nGgOF5 inter-semi-bold-white-18px">Elite Challenger</div>
+            <img className="nft_-avatar" src={`${process.env.PUBLIC_URL}/img/reward/nft-avatar-7@1x.png`} alt="NFT_Avatar" />
             <p className="build-a-thriving-network-of-75-friends-nGgOF5 inter-normal-cadet-blue-12px">
-              Build a thriving network of 75 friends.
+              Complete 50 challenges
             </p>
             <div className="ic_next">
               <img className="ic_chevron_right_24px" src={`${process.env.PUBLIC_URL}/img/reward/ic-chevron-right-24px-1@1x.png`} alt="ic_chevron_right_24px" />
@@ -73,12 +73,12 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
               <div className="x893"></div>
               <div className="goal-1TY7aZ goal">
                 <div className="x0 inter-semi-bold-keppel-14px">0</div>
-                <div className="x3-E0cPgC x3 inter-semi-bold-white-14px">/ 75</div>
+                <div className="x3-E0cPgC x3 inter-semi-bold-white-14px">/ 50</div>
               </div>
             </div>
           </div>
         </Link>
-        <Link to="/rewardDetail/4">
+        {/* <Link to="/rewardDetail/4">
           <div className="rewards-cards-C55ruw rewards-cards">
             <img className="card_bg" src={`${process.env.PUBLIC_URL}/img/reward/card-bg-1@1x.png`} alt="Card_bg" />
             <div className="elite-challenger-yvS2xN inter-semi-bold-white-18px">Elite Challenger</div>
@@ -95,7 +95,7 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
               </div>
             </div>
           </div>
-        </Link>
+        </Link> */}
       </div>
     </div>
   )

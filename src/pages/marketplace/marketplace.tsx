@@ -90,10 +90,10 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
             <Link to="/rewardDetail/3" >
               <div className="rewards-cards-YuvWOM rewards-cards">
                 <img className="card_bg" src={`${process.env.PUBLIC_URL}/img/marketplace/card-bg-1@1x.png`} alt="Card_bg" />
-                <div className="social-butterfly-00FLo4 inter-semi-bold-white-18px">Social Butterfly</div>
-                <img className="nft_-avatar" src={`${process.env.PUBLIC_URL}/img/marketplace/nft-avatar-6@1x.png`} alt="NFT_Avatar" />
+                <div className="social-butterfly-00FLo4 inter-semi-bold-white-18px">Elite Challenger</div>
+                <img className="nft_-avatar" src={`${process.env.PUBLIC_URL}/img/marketplace/nft-avatar-7@1x.png`} alt="NFT_Avatar" />
                 <p className="build-a-thriving-network-of-75-friends-00FLo4 inter-normal-cadet-blue-12px">
-                  Build a thriving network of 75 friends.
+                  Complete 50 challenges
                 </p>
                 <div className="ic_next">
                   <img
@@ -106,12 +106,12 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
                   <div className="x893"></div>
                   <div className="goal-4xB4wg goal">
                     <div className="x0-mOFaDT x0 inter-semi-bold-keppel-14px">0</div>
-                    <div className="x3-mOFaDT x3 inter-semi-bold-white-14px">/ 75</div>
+                    <div className="x3-mOFaDT x3 inter-semi-bold-white-14px">/ 50</div>
                   </div>
                 </div>
               </div>
             </Link>
-            <Link to="/rewardDetail/4" >
+            {/* <Link to="/rewardDetail/4" >
               <div className="rewards-cards-DNKKjx rewards-cards">
                 <img className="card_bg" src={`${process.env.PUBLIC_URL}/img/marketplace/card-bg-1@1x.png`} alt="Card_bg" />
                 <div className="elite-challenger-VtU7WE inter-semi-bold-white-18px">Elite Challenger</div>
@@ -132,7 +132,7 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
                   </div>
                 </div>
               </div>
-            </Link>
+            </Link> */}
           </div>
         </div>
         <div className="partner-company-Rea9Nd partner-company">

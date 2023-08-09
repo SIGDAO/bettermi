@@ -13,26 +13,39 @@ export interface UserBMIState {
 
 const findBMIblockchainContract = async (tempAccountId: string, Ledger2: any) => {
   var contractAddress:string = '';
+  var description: object = {};
 
   const contractId = await Ledger2.contract.getContractsByAccount({ accountId :tempAccountId});
+
   console.log(contractId, 'contractID');
 
-  if (!contractId.hasOwnProperty('ats')) return false;
+  if (!contractId.hasOwnProperty('ats')) return {
+    message: null,
+    description: null,
+  };
 
   for(let i = 0;i < contractId.ats.length;i++){
       if(contractId.ats[i].machineCodeHashId == "7457358473503628676"){
           contractAddress = contractId.ats[i].at;
-          console.log(contractAddress);
+          console.log(contractId.ats[i]);
+          description = JSON.parse(contractId.ats[i].description).bmi;
           break;
       }
   }
 
-  if (!contractAddress) return false;
+  if (!contractAddress) return {
+    message: null,
+    description: null,
+  };
 
   const message = await Ledger2.account.getAccountTransactions({accountId:contractAddress}); //Contract Id
   console.log(message);
+  console.log(description);
 
-  return message;
+  // return {
+  //   message: message,
+  //   description: description,
+  // };
 }
 
 

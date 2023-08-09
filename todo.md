@@ -271,3 +271,17 @@ profile
 
 Roadmap
   if user type in url, wallet not collected error
+
+
+implotent:
+gen 1000 acc
+gen pass
+
+
+i18n: check the format on i18n, for ppl to type in the data
+
+
+roadmap：
+hugging face
+vercel
+planetscale
