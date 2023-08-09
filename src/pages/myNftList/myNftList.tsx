@@ -252,7 +252,7 @@ return(
         <div className = "containerMyNftList2">
         {onDuty === ""?(             
         <div className = "myNftList">
-             <img className = "myNftImage" src = {"img/profile/nft-avatar-1@1x.png"}></img>
+             <img className = "myNftImage" src = {"img/myNftList/nft-1@1x.png"}></img>
              <div className = "myNftDescription">
              <div className = "myNftNumber">#0000000001</div>
                <div className = "myNftBar">
