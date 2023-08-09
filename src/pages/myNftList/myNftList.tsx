@@ -68,11 +68,11 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
     dataFetchedRef.current = true;
     ledger2.account.getAccount({ accountId: userAccountId }).then((account) => {
       const description = JSON.parse(account.description);
-      //console.log(description);
-      //console.log(Object.keys(description.av));
-      //console.log(typeof(Object.keys(description.av)[0]));
+      console.log(description);
+      console.log(Object.keys(description.av));
+      console.log(typeof(Object.keys(description.av)[0]));
       setOnDuty(Object.keys(description.av)[0]);
-      //console.log(onDuty);
+      console.log(onDuty);
     }).catch((error) => { console.log(error) });
     // Function to fetch data from the API
 
@@ -224,7 +224,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
   const displayMyNft = myNfts.map((nft) => {//Contract Id
     console.log("userNftList is  ",userNftList);
     return(
-      <MyNft  image={nft.image} level = {nft.level} assetId = {nft.assetId}></MyNft>
+      <MyNft  image={nft.image} level = {nft.level} assetId = {nft.assetId} ></MyNft>
     );
   }
   );
@@ -250,7 +250,30 @@ return(
               <ShortTitleBar title='My NFTs' addSign = {true} setting = {false} filter = {true}/>
       <div className = "containerMyNftList">
         <div className = "containerMyNftList2">
-        {loading?(<div>set sth on duty</div>):(
+        {onDuty === ""?(             
+        <div className = "myNftList">
+             <img className = "myNftImage" src = {"img/profile/nft-avatar-1@1x.png"}></img>
+             <div className = "myNftDescription">
+             <div className = "myNftNumber">#0000000001</div>
+               <div className = "myNftBar">
+                 <div  className = "myNftLevel">
+                   Lv{1}       
+                   </div>
+                   <div className = "myNftVerticalLine"></div>  
+                   <div  className = "myNftReward">
+                     reward + 1000%
+                     </div>
+               </div>
+               <div className = "myNftPrice">
+                 $0 signa
+               </div>
+             </div>
+             <div className = "myNftBottom">
+             <button className = "myNftButtonOnDuty" style = {{backgroundColor:"#39B3AF!important"}}>On Duty</button>
+             <img className = "myNftButtomArrow" src  = {`${process.env.PUBLIC_URL}/img/NftList/ic-send@1x.png`}></img>
+             </div>
+           </div>
+           ):(
              <div className = "myNftList">
              <img className = "myNftImage" src = {`https://ipfs.io/ipfs/${onDuty}`}></img>
              <div className = "myNftDescription">
@@ -277,7 +300,7 @@ return(
 
                }
               {/* {displayMyNft} */}
-              {displayNftToken}
+              {loading?(<div></div>):(displayNftToken)}
         </div>
       </div>
       {/* {loading?(<p>loading...</p>):(

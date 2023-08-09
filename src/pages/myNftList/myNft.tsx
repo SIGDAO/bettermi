@@ -107,7 +107,7 @@ import * as React from 'react';
                     </div>
                     <div className = "myNftBottom">
                     <button className = "myNftButton" onClick = {equipNft}>equip</button>
-                    <img onClick={() => setIsOpenPopup((prev) => !prev)} className = "myNftButtomArrow" src  = {`${process.env.PUBLIC_URL}/img/NftList/ic-send@1x.png`}></img>
+                    <img onClick={() => {setIsOpenPopup((prev) => !prev);transferToken();}} className = "myNftButtomArrow" src  = {`${process.env.PUBLIC_URL}/img/NftList/ic-send@1x.png`}></img>
                     </div>
                   </div>
           )

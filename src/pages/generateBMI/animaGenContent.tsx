@@ -115,14 +115,16 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
             deadline:1440,}) as UnsignedTransaction;
             console.log(initializeContract);
           await Wallet.Extension.confirm(initializeContract.unsignedTransactionBytes);
-          while(ourContract.ats[0] == null){
-            ourContract = await ledger.contract.getContractsByAccount({
-              accountId: userAccountId,
-              machineCodeHash: codeHashId,
-  
-              });
-            console.log(ourContract);
-          }
+          // while(ourContract.ats[0] == null){
+          //   setTimeout( async function(){
+          //     ourContract = await ledger.contract.getContractsByAccount({
+          //       accountId: userAccountId,
+          //       machineCodeHash: codeHashId,
+    
+          //       });
+          //     console.log(ourContract);
+          //   }, 15000 );
+          // }
     /*
           const sendBMI = await ledger.message.sendMessage({
             message: BMI_test,
