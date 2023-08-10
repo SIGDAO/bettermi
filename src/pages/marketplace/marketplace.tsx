@@ -23,12 +23,12 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
             </Link>
             <p className="discover-thousands-o-vbUx2m">Discover thousands of products that accept SIGDAO!</p>
             <div className="x7-vbUx2m">
-              <img className="zoe-fitness-8cjGPE zoe-fitness" src={`${process.env.PUBLIC_URL}/img/marketplace/zoe-fitness@1x.png`} alt="Zoe Fitness" />
-              <img className="vitev-8cjGPE" src={`${process.env.PUBLIC_URL}/img/marketplace/vitev@1x.png`} alt="Vitev" />
-              <div className="zoe-fitness-HI0Hnc zoe-fitness"></div>
-              <div className="zoe-fitness-eRgkx7 zoe-fitness"></div>
-              <div className="zoe-fitness-u91zz4 zoe-fitness"></div>
-              <div className="zoe-fitness-aEJ33D zoe-fitness"></div>
+              <img className="zoe-fitness-8cjGPE zoe-fitness" src={`${process.env.PUBLIC_URL}/img/marketplace/Toget.png`} alt="Zoe Fitness" />
+              <img className="vitev-8cjGPE" src={`${process.env.PUBLIC_URL}/img/marketplace/Flower.png`} alt="Vitev" />
+              <img className="zoe-fitness-HI0Hnc zoe-fitness" src = {`${process.env.PUBLIC_URL}/img/marketplace/Ruto.png`}/>
+              <img className="zoe-fitness-eRgkx7 zoe-fitness" src = {`${process.env.PUBLIC_URL}/img/marketplace/Era.png`}/>
+              <img className="zoe-fitness-u91zz4 zoe-fitness" src = {`${process.env.PUBLIC_URL}/img/marketplace/ALC.png`}/>
+              <img className="zoe-fitness-aEJ33D zoe-fitness" src = {`${process.env.PUBLIC_URL}/img/marketplace/FlavourHouse.png`}/>
               <div className="zoe-fitness-Jc5OoT zoe-fitness"></div>
               <div className="zoe-fitness-SxtrzH zoe-fitness"></div>
               <div className="zoe-fitness-ppgU72 zoe-fitness"></div>
