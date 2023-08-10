@@ -846,6 +846,10 @@ opacity: 0.5;
   font-weight: 600;
   color:#FFFFFF
 }
+.myNftButtonOnDuty:hover{
+  opacity: 0.5;
+  cursor: pointer;
+}
 
 .bettermidapp-mimi-nfts-send-address-1 .edit-profile-layer {
   background-color: #0d0d0dcb;

@@ -16,6 +16,10 @@ import { LedgerClientFactory } from '@signumjs/core';
 import { useState, useEffect } from 'react';
 import { useRef } from 'react';
 import {generateMasterKeys} from "@signumjs/crypto";
+import { P2PTransferNftToken } from '../../components/p2pTransferNftToken';
+import { AppContext } from '../../redux/useContext';
+import { useContext } from 'react';
+import { accountPublicKey } from '../../redux/account';
 
 interface IMyNftListProps {
 }
@@ -38,7 +42,9 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
   const [isOpenPopup, setIsOpenPopup] = useState<boolean>(false);
   const [userNftTokenList,setNftTokenList] = useState<myNftList[]>([]);
   const dataFetchedRef = useRef(false);
+  const {appName,Wallet,Ledger} = useContext(AppContext);
   const nftTokenIssuer:string = process.env.REACT_APP_NFT_TOKEN_ISSUER!;
+  const userAccountpublicKey:string = useSelector(accountPublicKey);
   console.log(typeof(nftTokenIssuer));
   console.log(nftTokenIssuer);
   console.log(nftTokenIssuer=="4572964086056463895");
@@ -224,17 +230,33 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
   const displayMyNft = myNfts.map((nft) => {//Contract Id
     console.log("userNftList is  ", userNftList);
     return (
-      <MyNft image={nft.image} level={nft.level} isOpenPopup={isOpenPopup} setIsOpenPopup={setIsOpenPopup} ></MyNft>
+      <MyNft image={nft.image} level={nft.level} isOpenPopup={isOpenPopup} setIsOpenPopup={setIsOpenPopup} assetId = {nft.assetId} ></MyNft>
     );
   }
   );
   const displayNftToken = userNftTokenList.map((nft) => {//Contract Id
     console.log("userNftTokenList is  ",nft);
     return(
-      <MyNft image={nft.image} level={nft.level} isOpenPopup={isOpenPopup} setIsOpenPopup={setIsOpenPopup} ></MyNft>
+      <MyNft image={nft.image} level={nft.level} isOpenPopup={isOpenPopup} setIsOpenPopup={setIsOpenPopup} assetId= {nft.assetId} ></MyNft>
     );
   }
   );
+  const returnNftToMe = async() => {
+    // console.log(userAccountId);
+    // ledger2.account.getAccount({accountId:userAccountId}).then(async(account) => {
+    //   console.log(account);
+    //   for (var i = 0;i<account.assetBalances.length;i++){
+    //     const token = await ledger2.asset.getAsset({assetId:account.assetBalances[i].asset});
+    //     console.log(token);
+    //     if(token.issuer === process.env.REACT_APP_NFT_TOKEN_ISSUER && token.name === "BetterMi"){
+    //       console.log(JSON.parse(token.description));
+    //       console.log(JSON.parse(token.description).descriptor);
+    //       console.log(typeof(JSON.parse(token.description).descriptor));
+    //       P2PTransferNftToken(Wallet,nodeHost,"4572964086056463895",token.asset,userAccountpublicKey);
+    //     }
+    //   }
+    // });
+  }
   // const tempDisplayMyNft = tempNftList.map((nft) => {//Contract Id
   //   console.log("myNftList is  ",myNfts);
   //   console.log("loading is  ",loading);
@@ -270,10 +292,11 @@ return(
              </div>
              <div className = "myNftBottom">
              <button 
+             onClick = {returnNftToMe}
               className = "myNftButtonOnDuty" 
               style = {{backgroundColor:"#39B3AF!important"}}
             >On Date</button>
-             <img className = "myNftButtomArrow" src  = {`${process.env.PUBLIC_URL}/img/NftList/ic-send@1x.png`} onClick={() => setIsOpenPopup((prev) => !prev)}></img>
+             <img  className = "myNftButtomArrow" src  = {`${process.env.PUBLIC_URL}/img/NftList/ic-send@1x.png`} onClick={() => setIsOpenPopup((prev) => !prev)}></img>
              </div>
            </div>
            ):(
@@ -338,9 +361,9 @@ return(
                   <div className="place inter-semi-bold-white-18px">Send</div>
                 </div>
                 <div className="search_bar"></div>
-                <div className="search_bar-1 search_bar-4"><p className="card-number">e.g. S-6SJC-�K, 17332�K or peter</p></div>
+                <div className="search_bar-1 search_bar-4"><p className="card-number">e.g. TS-9DJR-MGA2-VH44-5GMXY or Anderson</p></div>
                 <div className="search_bar-2 search_bar-4"></div>
-                <div className="button_save" onClick={() => setIsOpenPopup((prev) => !prev)}>
+                <div className="button_save" onClick={() => {setIsOpenPopup((prev) => !prev)}}>
                   <div className="continue inter-semi-bold-white-15px">Transfer</div>
                 </div>
                 <p className="address-id-to-send-nft-to">Address, ID to send NFT to.</p>
