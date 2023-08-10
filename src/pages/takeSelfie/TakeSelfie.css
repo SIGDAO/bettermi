@@ -62,3 +62,12 @@ video {
   left: calc((100% - 450px) / 2);
   top: calc(676px - 50px) ;
 }
+
+@media only screen and (max-device-width: 390px) {
+  .disclaimer {
+    width: 370px;
+    left: calc((100% - 370px) / 2);
+    font-size: 13px;
+  }
+  
+}
