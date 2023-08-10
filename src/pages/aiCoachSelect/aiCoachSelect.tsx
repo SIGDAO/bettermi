@@ -11,7 +11,7 @@ const AiCoachSelect: React.FunctionComponent<IAiCoachSelectProps> = (props) => {
   const content: JSX.Element = (
     <div className="screen">
           <div className="bettermidapp-ai-coach">
-      <ShortTitleBar title='' />
+      <ShortTitleBar title='Your AI coaches' />
       <img className="bg-O0wesW" src="img/aiCoachSelect/bg-7@1x.png" alt="BG" />
       <div className="bg-C4VecI"></div>
       <div className="time-indicator-O0wesW">
