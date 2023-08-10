@@ -9,7 +9,8 @@ interface IAiCoachSelectProps {
 
 const AiCoachSelect: React.FunctionComponent<IAiCoachSelectProps> = (props) => {
   const content: JSX.Element = (
-    <div className="bettermidapp-ai-coach">
+    <div className="screen">
+          <div className="bettermidapp-ai-coach">
       <ShortTitleBar title='' />
       <img className="bg-O0wesW" src="img/aiCoachSelect/bg-7@1x.png" alt="BG" />
       <div className="bg-C4VecI"></div>
@@ -157,6 +158,8 @@ const AiCoachSelect: React.FunctionComponent<IAiCoachSelectProps> = (props) => {
           </div>
         </Link>
       </div>
+    </div>
+
     </div>
   )
   

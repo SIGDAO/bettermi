@@ -7,7 +7,8 @@ interface ISettingProps {
 
 const Setting: React.FunctionComponent<ISettingProps> = (props) => {
   const content: JSX.Element = (
-    <div className="bettermidapp-settings-1">
+    <div className="screen">
+          <div className="bettermidapp-settings-1">
       {/* <a href="bettermidapp-profile-edit-1.html"><img className="bg-7DUKxJ" src="img/setting/bg-9@1x.png" alt="BG" /> </a> */}
       <div className="bars-status-bar-i-phone-light-7DUKxJ">
         <div className="frame-xpaCij"></div>
@@ -175,6 +176,8 @@ const Setting: React.FunctionComponent<ISettingProps> = (props) => {
             />
         </div>
       </a>
+    </div>
+
     </div>
   )
   

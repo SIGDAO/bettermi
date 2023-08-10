@@ -65,7 +65,8 @@ const GenerateBMIDaily: React.FunctionComponent<IGenerateBMIDailyProps> = (props
 }
 
   const content: JSX.Element = (
-    <div className="bettermidapp-generate-bmi-daily">
+    <div className="screen">
+          <div className="bettermidapp-generate-bmi-daily">
       <div className="bg_2-Fd1por"><img className="bg-8YXhC4" src={`${process.env.PUBLIC_URL}/img/generateBMIDaily/bg-11@1x.png`} alt="BG" /></div>
       <img className="photo-Fd1por" src={selfie ? selfie : `${process.env.PUBLIC_URL}/img/generateBMIDaily/photo-1@1x.png`} alt="Photo" />
       <BackButton />
@@ -178,6 +179,8 @@ const GenerateBMIDaily: React.FunctionComponent<IGenerateBMIDailyProps> = (props
         </div>
         <h1 className="title-xzTWC0 inter-semi-bold-white-28px">Your BMI Result :</h1>
       </div>
+    </div>
+
     </div>
   )
   

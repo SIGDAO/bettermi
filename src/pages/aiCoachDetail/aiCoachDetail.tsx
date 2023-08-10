@@ -34,7 +34,8 @@ const AiCoachDetail: React.FunctionComponent = () => {
   const { id } = useParams();
   const displayCoach: IAiCoachDetailProps = coachList.find((coach) => coach.coachID === id) || coachList[0];
   const content: JSX.Element = (
-    <div className="bettermidapp-ai-coach-mimi">
+    <div className="screen">
+        <div className="bettermidapp-ai-coach-mimi">
     {/* <img className="bg-QyTK2J bg" src={`${process.env.PUBLIC_URL}/img/aiCoachDetail/bg-2@1x.png`} alt="BG" /> */}
     <img className="ai-chatbot_-mimi-QyTK2J" src={`${process.env.PUBLIC_URL}/img/aiCoachDetail/${displayCoach.coachImagePath}`} alt="Ai Chatbot_Mimi" />
     {/* <div className="title-bar-QyTK2J">
@@ -147,6 +148,8 @@ const AiCoachDetail: React.FunctionComponent = () => {
     <div className="mental-coach-QyTK2J inter-normal-white-15px">@{displayCoach.coachUserName}</div>
     <div className="mimi-is-typing-QyTK2J inter-normal-white-15px">{displayCoach.coachName} is typing……</div>
   </div>
+
+    </div>
 )
   
 

@@ -540,6 +540,7 @@
   right: 25px;
   top: calc(42.54% - 8px);
   width: 21px;
+  position: absolute;
 }
 
 .bettermidapp-ai-coach .ic_send-7HEubO {
@@ -548,6 +549,7 @@
   object-fit: cover;
   top: 0px;
   width: 100%;
+  position: absolute;
 }
 
 .bettermidapp-ai-coach .user-O0wesW {
