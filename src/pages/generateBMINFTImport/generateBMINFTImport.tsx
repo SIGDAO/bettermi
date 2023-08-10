@@ -139,7 +139,8 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
 
 
   const content: JSX.Element = (
-    <div
+    <div className="screen">
+          <div
       className="bettermidapp-generate-bmidata-import"
       // onclick="window.open('bettermidapp-generate-bmi-daily.html', '_self');"
     >
@@ -174,6 +175,8 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
       </div>
 
       <img className="photo-pqhvJT" src={selfie? selfie : "img/generateBMINFTImport/photo-1@1x.png"} alt="Photo" />
+    </div>
+
     </div>
   )
   

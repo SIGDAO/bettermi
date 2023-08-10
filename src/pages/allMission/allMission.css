@@ -209,6 +209,7 @@ width: 392px;
     height: 159px;
     width:100%;
 align-self: flex-start;
+  z-index: 999;
 }
 .body{
     height:calc(100% - 159px);
