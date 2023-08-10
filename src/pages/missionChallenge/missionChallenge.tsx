@@ -59,7 +59,7 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
             <Button onClick={() => navigate('/challengeCountdown/1')} className="challenge-cards-Ic1qil">
                 <img className="card_bg" src="img/missionChallenge/card-bg-1@1x.png" alt="Card_bg" />
                 <div className="x1-hello-bae inter-semi-bold-white-18px">1. Hello Bae !</div>
-                <Link to="/challengeCountdown">
+                <Link to="/challengeCountdown/1">
                   <div className="ic_next">
                     <img
                       className="ic_chevron_right_24px"

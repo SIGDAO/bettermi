@@ -95,7 +95,8 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
 
 
   const content: JSX.Element = (
-    <div className="bettermidapp-generate-free-nft-minting">
+    <div className="screen">
+          <div className="bettermidapp-generate-free-nft-minting">
       <div className="bg_2-JdJl2l">
           {/* <img className="bg-7ckAMs" src="img/loadingMinting/bg-11@1x.png" alt="BG" /> */}
           {/* <div className="loader-7ckAMs">
@@ -157,6 +158,8 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
           </div>
       </div> */}
       <div className="minting-JdJl2l inter-normal-white-15px">Minting…<br/><br/>Please do not refresh the page</div>
+    </div>
+
     </div>
   )
   
