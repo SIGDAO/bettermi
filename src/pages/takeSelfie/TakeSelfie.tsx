@@ -16,6 +16,7 @@ import useEnhancedEffect from '@mui/material/utils/useEnhancedEffect';
 import { isSelfieRecord, isTodayHaveSelfieRecord } from '../../components/bmiCalculate';
 import { accountId } from '../../redux/account';
 import { useLedger } from '../../redux/useLedger';
+import BorderLinearProgress from './borderLinearProgress';
 
 interface ITakeSelfieProps {
 }
@@ -65,9 +66,12 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [bmidata, setbmidata] = useState<any>();
+  // const [isLoading, setIsLoading] = useState(false);
   var navigatePath: string = '/generateBMIDaily'
   const tempAccountId = useSelector(accountId);
   const Ledger2 = useLedger();
+
+  var [imageSrc, setImageSrc] = useState<string | null | undefined>();
 
 
   const [ getBMI, {isLoading, data} ] = useGetBMIMutation()
@@ -75,8 +79,8 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   useEffect(() => {
     if (data) {
       const { bmi } = data
-      console.log(bmi, 'difsjodifjiosdijfio')
-      dispatch(profileSlice.actions.setBMI(bmi.toFixed(2).toString()))
+      dispatch(profileSlice.actions.setBMI(bmi.toFixed(1).toString()))
+      navigate(navigatePath)
     }
   }
   , [data])
@@ -97,11 +101,25 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   // 1. post the selfie image to the hugging face, and analyze the BMI result
   //    BMI result should be stored in the redux store
   // 2. trigger smart contract to send message to store the BMI result in the blockchain
-  const action: Function = async (imageSrc: string) => {
+  const action: Function = async () => {
     const formData = new FormData();
+    if (!imageSrc) {
+      console.log('imageSrc is null');
+      return;
+    }
     formData.append('file', convertBase64toJpg(imageSrc))
-    await getBMI(formData)    
+    dispatch(profileSlice.actions.setSelfieImage(imageSrc))
+    await getBMI(formData)   
   }
+
+  useEffect(() => {
+    if (imageSrc) {
+      // dispatch(profileSlice.actions.setSelfieImage(imageSrc))
+      // dispatch(profileSlice.actions.setBMI('25.5'))
+      action()
+    }
+    // navigate(navigatePath)
+  }, [imageSrc])
 
   // for mobile
   const webcamContainerStyle : CSS.Properties = {
@@ -131,18 +149,16 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   // capture the selfie image, and store it in the redux store
   const capture = React.useCallback(
     () => {
-      console.log(webcamRef)
-      const imageSrc = webcamRef.current?.getScreenshot();
-      if (imageSrc) {
-        dispatch(profileSlice.actions.setSelfieImage(imageSrc))
-        dispatch(profileSlice.actions.setBMI('25.5'))
-        action(imageSrc)
-      }
-      navigate(navigatePath)
+      setImageSrc(webcamRef.current?.getScreenshot())
+      // if (imageSrc) {
+      //   // dispatch(profileSlice.actions.setSelfieImage(imageSrc))
+      //   // dispatch(profileSlice.actions.setBMI('25.5'))
+      //   action()
+      // }
+      // navigate(navigatePath)
     },
     [webcamRef]
   );
-
 
   const content : JSX.Element = (
     <div className='selfie-content-container'>
@@ -151,7 +167,13 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
       We super care your privacy, your selfie will not be stored
       </div>
       <div className="webcam-container" style={webcamContainerStyle}>
-        <Webcam 
+        {
+          isLoading ?
+          <div className="loading-container">
+            <img src={imageSrc ? imageSrc : undefined } alt="loading" />
+          </div>
+          :
+          <Webcam 
             audio={false}
             // height={720}
             screenshotFormat="image/jpeg"
@@ -159,12 +181,19 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
             width={width}
             ref={webcamRef}
             videoConstraints={videoConstraints}
-        />
+          />
+
+        }
         <div className="selfie-shadow"></div>
-        <button 
-          style={takeSelfieButton}
-          onClick={capture}
-        />
+        {isLoading ? 
+        <BorderLinearProgress variant='determinate' value={50} />
+        : 
+          <button 
+            style={takeSelfieButton}
+            onClick={capture}
+          />
+        }
+      
       </div>
     </div>
   )
