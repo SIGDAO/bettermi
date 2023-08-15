@@ -100,7 +100,7 @@
   overflow-y: scroll;
   position: absolute;
   top: 414px;
-  width: 320px;
+  width: 358px;
 }
 
 .bettermidapp-ai-coach .bettermi_qa-j4ugSM {
@@ -109,7 +109,7 @@
   left: 0px;
   position: relative;
   top: 0px;
-  width: 320px;
+  width: 358px;
 }
 
 .bettermidapp-ai-coach .size-DIcdLh {
@@ -133,6 +133,7 @@
   text-align: left;
   white-space: nowrap;
   width: calc(100.00% - 28px);
+  cursor: pointer;
 }
 
 .bettermidapp-ai-coach .size-F1ipSf {
@@ -159,7 +160,7 @@
 }
 
 .bettermidapp-ai-coach .size-XuahuD {
-  left: calc(50.00% - 160px);
+  /* left: calc(50.00% - 160px); */
   top: calc(28.57% - 14px);
   width: 320px;
 }
@@ -230,7 +231,7 @@
 
 .bettermidapp-ai-coach .size-d8uTg1 {
   bottom: calc(28.57% - 14px);
-  left: calc(5.80% - 15px);
+  /* left: calc(5.80% - 15px); */
   width: 251px;
 }
 
@@ -253,7 +254,7 @@
 
 .bettermidapp-ai-coach .size-D87IBR {
   bottom: calc(14.29% - 7px);
-  left: calc(6.15% - 16px);
+  /* left: calc(6.15% - 16px); */
   width: 255px;
 }
 
@@ -276,7 +277,7 @@
 
 .bettermidapp-ai-coach .size-TQoxDx {
   bottom: 0px;
-  left: calc(3.10% - 6px);
+  /* left: calc(3.10% - 6px); */
   width: 191px;
 }
 
@@ -699,10 +700,33 @@
   top: 0px;
 }
 
+.answer-box {
+  background-color: var(--eerie-black);
+  border: 1px solid;
+  border-color: var(--royal-blue);
+  border-radius: 10px;
+  /* height: 48px; */
+  left: 0px;
+  position: relative;
+  top: 0px;
+  padding: 15px;
+  width: 320px;
+}
+
 .size {
   margin: 0;
 }
 
 .inter-normal-white-15px {
   margin: 0;
+}
+
+.talking-container {
+  cursor: pointer;
+}
+
+.ans-container {
+  top: 58px;
+  right: 0px;
+  position: absolute;
 }

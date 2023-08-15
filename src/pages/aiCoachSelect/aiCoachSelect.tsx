@@ -7,10 +7,27 @@ import { Link } from 'react-router-dom';
 interface IAiCoachSelectProps {
 }
 
+const questionList = [
+  {
+    question: 'What is Bettermi.io?',
+    ans: "Bettermi.io is a web application designed to enhance users' lifestyles by integrating fitness, wellness, and social elements."
+  }
+]
+
+
 const AiCoachSelect: React.FunctionComponent<IAiCoachSelectProps> = (props) => {
+  const [showQuestion, setShowQuestion] = React.useState(false);
+  const [answer, setAnswer] = React.useState('');
+  const handleExportAns = (questionIndex: number) => {
+    setAnswer(questionList[questionIndex].ans);
+    console.log(answer);
+    setShowQuestion((prev) => !prev);
+  }
+  
+
   const content: JSX.Element = (
     <div className="screen">
-          <div className="bettermidapp-ai-coach">
+      <div className="bettermidapp-ai-coach">
       <ShortTitleBar title='Your AI coaches' />
       <img className="bg-O0wesW" src="img/aiCoachSelect/bg-7@1x.png" alt="BG" />
       <div className="bg-C4VecI"></div>
@@ -22,64 +39,78 @@ const AiCoachSelect: React.FunctionComponent<IAiCoachSelectProps> = (props) => {
       <p className="know-more-about-bettermiio-O0wesW inter-bold-royal-blue-15px">KNOW MORE ABOUT BETTERMI.IO :</p>
       <div className="x9-O0wesW">
         <div className="bettermi_qa-j4ugSM">
-          <div className="size-DIcdLh size">
-            <div className="talking-container">
-              <div className="x425-ZFGQqm x425"></div>
+          <div className="size-DIcdLh size" onClick={(e) => handleExportAns(0)}>
+            <div className="talking-container" >
+              <div className="x425-ZFGQqm x425" ></div>
             </div>
             <div className="what-is-bettermiio-nVZFoH inter-normal-white-15px">What is Bettermi.io?</div>
           </div>
-          <div className="size-F1ipSf size">
-            <div className="talking-container">
-              <div className="x425-U7TqLi x425"></div>
+          {showQuestion && (
+            <div className="ans-container">
+              <div className="talking-container" >
+                <div className="answer-box inter-normal-white-15px" >
+                  {answer}
+                </div>
+              </div>
+              
             </div>
-            <div className="how-does-bettermiio-work-4kIHJA inter-normal-white-15px">How does Bettermi.io work?</div>
-          </div>
-          <div className="size-XuahuD size">
-            <div className="talking-container">
-              <div className="x425-CldZpK x425"></div>
-            </div>
-            <p className="what-are-the-key-features-of-bettermiio-MGMwe3 inter-normal-white-15px">
-              What are the key features of Bettermi.io?
-            </p>
-          </div>
-          <div className="size-pREf5B size">
-            <div className="talking-container">
-              <div className="x425-nCPlS4 x425"></div>
-            </div>
-            <p className="how-can-i-earn-rewards-on-bettermiio-R6LMwU inter-normal-white-15px">
-              How can I earn rewards on Bettermi.io?
-            </p>
-          </div>
-          <div className="size-MqzVLg size">
-            <div className="talking-container">
-              <div className="x425-Q9y5XS x425"></div>
-            </div>
-            <p className="are-the-nf-ts-on-bettermiio-valuable-fWbW1Y inter-normal-white-15px">
-              Are the NFTs on Bettermi.io valuable?
-            </p>
-          </div>
-          <div className="size-d8uTg1 size">
-            <div className="talking-container">
-              <div className="x425-TexyRD x425"></div>
-            </div>
-            <p className="can-i-connect-with-other-users-k5mvEy inter-normal-white-15px">
-              Can I connect with other users?
-            </p>
-          </div>
-          <div className="size-D87IBR size">
-            <div className="talking-container">
-              <div className="x425-glM2wM x425"></div>
-            </div>
-            <p className="is-my-personal-information-safe-KoUJ4p inter-normal-white-15px">
-              Is my personal information safe?
-            </p>
-          </div>
-          <div className="size-TQoxDx size">
-            <div className="talking-container">
-              <div className="x425-I1YSAZ x425"></div>
-            </div>
-            <p className="how-can-i-get-started-CqVjCz inter-normal-white-15px">How can I get started ?</p>
-          </div>
+          )}
+          {!showQuestion && (
+            <>
+              <div className="size-F1ipSf size">
+                <div className="talking-container">
+                  <div className="x425-U7TqLi x425"></div>
+                </div>
+                <div className="how-does-bettermiio-work-4kIHJA inter-normal-white-15px">How does Bettermi.io work?</div>
+              </div>
+              <div className="size-XuahuD size">
+                <div className="talking-container">
+                  <div className="x425-CldZpK x425"></div>
+                </div>
+                <p className="what-are-the-key-features-of-bettermiio-MGMwe3 inter-normal-white-15px">
+                  What are the key features of Bettermi.io?
+                </p>
+              </div>
+              <div className="size-pREf5B size">
+                <div className="talking-container">
+                  <div className="x425-nCPlS4 x425"></div>
+                </div>
+                <p className="how-can-i-earn-rewards-on-bettermiio-R6LMwU inter-normal-white-15px">
+                  How can I earn rewards on Bettermi.io?
+                </p>
+              </div>
+              <div className="size-MqzVLg size">
+                <div className="talking-container">
+                  <div className="x425-Q9y5XS x425"></div>
+                </div>
+                <p className="are-the-nf-ts-on-bettermiio-valuable-fWbW1Y inter-normal-white-15px">
+                  Are the NFTs on Bettermi.io valuable?
+                </p>
+              </div>
+              <div className="size-d8uTg1 size">
+                <div className="talking-container">
+                  <div className="x425-TexyRD x425"></div>
+                </div>
+                <p className="can-i-connect-with-other-users-k5mvEy inter-normal-white-15px">
+                  Can I connect with other users?
+                </p>
+              </div>
+              <div className="size-D87IBR size">
+                <div className="talking-container">
+                  <div className="x425-glM2wM x425"></div>
+                </div>
+                <p className="is-my-personal-information-safe-KoUJ4p inter-normal-white-15px">
+                  Is my personal information safe?
+                </p>
+              </div>
+              <div className="size-TQoxDx size">
+                <div className="talking-container">
+                  <div className="x425-I1YSAZ x425"></div>
+                </div>
+                <p className="how-can-i-get-started-CqVjCz inter-normal-white-15px">How can I get started ?</p>
+              </div>
+            </>
+          )}
         </div>
       </div>
       {/* <div className="title-bar-O0wesW">

@@ -285,3 +285,7 @@ roadmap：
 hugging face
 vercel
 planetscale
+change the image name, not "-" and "@"
+
+
+ai model
