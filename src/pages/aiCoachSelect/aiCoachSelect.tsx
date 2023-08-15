@@ -162,7 +162,7 @@ const AiCoachSelect: React.FunctionComponent<IAiCoachSelectProps> = (props) => {
           </div>
         </Link>
       </div> */}
-      <div className="write-msg-O0wesW">
+      {/* <div className="write-msg-O0wesW">
         <img className="menu_bar_bg-jnPNgT" src="img/aiCoachSelect/menu-bar-bg-1@1x.png" alt="menu_bar_bg" />
         <div className="chat-input-jnPNgT">
           <div className="x123-5EBaGo"></div>
@@ -170,7 +170,7 @@ const AiCoachSelect: React.FunctionComponent<IAiCoachSelectProps> = (props) => {
         <div className="ic_send-jnPNgT ic_send">
           <img className="ic_send-7HEubO ic_send" src="img/aiCoachSelect/ic-send-1@1x.png" alt="ic_send" />
         </div>
-      </div>
+      </div> */}
       <div className="user-O0wesW">
         <Link to="/aiCoachDetail/1">
           <div className="ai-chatbot_-mmi-NgcGm6">
