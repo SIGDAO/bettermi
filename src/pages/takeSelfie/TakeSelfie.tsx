@@ -79,12 +79,9 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
 
   useEffect(() => {
     if (data) {
-      setCount(100)
-      setTimeout(() => {
-        const { bmi } = data
-        dispatch(profileSlice.actions.setBMI(bmi.toFixed(1).toString()))
-        navigate(navigatePath)
-      }, 1000)
+      const { bmi } = data
+      dispatch(profileSlice.actions.setBMI(bmi.toFixed(1).toString()))
+      navigate(navigatePath)
     }
   }
   , [data])
@@ -150,11 +147,11 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   }
 
   const counttime = () => {
-    const incrementInterval = 30000 / 96;
+    const incrementInterval = 30000 / 99;
     const timer = setInterval(() => {
       setCount((prevCount) => {
         const newCount = prevCount + 1;
-        if (newCount >= 96) {
+        if (newCount >= 99) {
           clearInterval(timer);
         }
         return newCount;
