@@ -54,7 +54,7 @@ const GenerateBMIDaily: React.FunctionComponent<IGenerateBMIDailyProps> = (props
         'time': new Date(),
       }) ,
       messageIsText: true,
-      recipientId: ourContract.ats[0].at,
+      recipientId: ourContract.ats[0]?.at,
       feePlanck: "1000000",
       senderPublicKey: publicKey,
       deadline: 1440,

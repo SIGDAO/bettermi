@@ -67,9 +67,10 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   const dispatch = useDispatch();
   const [bmidata, setbmidata] = useState<any>();
   // const [isLoading, setIsLoading] = useState(false);
-  var navigatePath: string = '/generateBMIDaily'
+  var navigatePath: string = '/generateBMINFTImport'
   const tempAccountId = useSelector(accountId);
   const Ledger2 = useLedger();
+  const [count, setCount] = useState(0);
 
   var [imageSrc, setImageSrc] = useState<string | null | undefined>();
 
@@ -78,9 +79,12 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
 
   useEffect(() => {
     if (data) {
-      const { bmi } = data
-      dispatch(profileSlice.actions.setBMI(bmi.toFixed(1).toString()))
-      navigate(navigatePath)
+      setCount(100)
+      setTimeout(() => {
+        const { bmi } = data
+        dispatch(profileSlice.actions.setBMI(bmi.toFixed(1).toString()))
+        navigate(navigatePath)
+      }, 1000)
     }
   }
   , [data])
@@ -90,7 +94,7 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
     isSelfieRecord(tempAccountId, Ledger2)
       .then((result) => {
         if (!result) {
-          navigatePath = '/generateBMINFTImport'
+          navigatePath = '/generateBMIDaily'
         }
       })
   }, []);
@@ -144,6 +148,30 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
     webcamContainerStyle.width = '819px'
     webcamContainerStyle.left = 'calc((100% - 819px) / 2)'
   }
+
+  const counttime = () => {
+    const incrementInterval = 30000 / 96;
+    const timer = setInterval(() => {
+      setCount((prevCount) => {
+        const newCount = prevCount + 1;
+        if (newCount >= 96) {
+          clearInterval(timer);
+        }
+        return newCount;
+      });
+    }, incrementInterval);
+  
+    return () => {
+      clearInterval(timer);
+    };
+  };
+  
+  useEffect(() => {
+    if (isLoading && count === 0) {
+      counttime();
+    }
+  }, [isLoading]);
+
   
 
   // capture the selfie image, and store it in the redux store
@@ -163,9 +191,18 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   const content : JSX.Element = (
     <div className='selfie-content-container'>
       <BackButton/>
-      <div className="disclaimer inter-normal-white-15px">
+      {isLoading ?
+        <div className="disclaimer inter-normal-white-15px">
+          Scaning...
+        </div>
+        :
+        <div className="disclaimer inter-normal-white-15px">
+          We super care your privacy, your selfie will not be stored
+        </div>
+      }
+      {/* <div className="disclaimer inter-normal-white-15px">
       We super care your privacy, your selfie will not be stored
-      </div>
+      </div> */}
       <div className="webcam-container" style={webcamContainerStyle}>
         {
           isLoading ?
@@ -186,7 +223,12 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
         }
         <div className="selfie-shadow"></div>
         {isLoading ? 
-        <BorderLinearProgress variant='determinate' value={50} />
+        <div className="animation-containter">
+          <div className="percentage-display inter-normal-cape-cod-12px">
+            {count}%
+          </div>
+          <BorderLinearProgress variant='determinate' value={count} />
+        </div>
         : 
           <button 
             style={takeSelfieButton}

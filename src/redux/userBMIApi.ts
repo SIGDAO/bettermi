@@ -7,7 +7,6 @@ export interface BMI {
   category: string;
 }
 
-// 透過 createApi 可以建立 RTK query 的 API service，取名為 userBMIApi
 export const userBMIApi = createApi({
   reducerPath: 'userBMIApi',
   baseQuery: fetchBaseQuery({ 
@@ -28,5 +27,4 @@ export const userBMIApi = createApi({
   }),
 });
 
-// userBMIApi 會帶有 useGetPokemonByNameQuery 的方法，可以直接呼叫
 export const { useGetBMIMutation } = userBMIApi;

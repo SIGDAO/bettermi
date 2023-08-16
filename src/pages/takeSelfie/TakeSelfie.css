@@ -63,6 +63,19 @@ video {
   top: calc(676px - 50px) ;
 }
 
+
+
+.animation-containter {
+  width: 819px;
+  display: flex;
+  flex-direction: column;
+  top: 529px;
+  justify-items: center;
+  align-items: center;
+  position: absolute;
+  gap: 10px;
+}
+
 @media only screen and (max-device-width: 390px) {
   .disclaimer {
     width: 370px;
@@ -70,4 +83,8 @@ video {
     font-size: 13px;
   }
   
+}
+
+.percentage-display {
+  color: #39B3AF;
 }
