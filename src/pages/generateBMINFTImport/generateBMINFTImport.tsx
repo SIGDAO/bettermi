@@ -156,7 +156,7 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
         </div>
         <div className="bmi-result-bL0gm3">
           <div className="bg-Gw4eM2"></div>
-          <div className="x255-Gw4eM2">25.5</div>
+          <div className="x255-Gw4eM2">{BMI || 25.5}</div>
           <div className="kgm2-Gw4eM2">
             <span className="span0-IFVIgU inter-normal-royal-blue-14px">kg/m</span><span className="span1-IFVIgU inter-normal-royal-blue-14px">2</span>
           </div>

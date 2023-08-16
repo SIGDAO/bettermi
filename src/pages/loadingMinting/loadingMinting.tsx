@@ -76,7 +76,7 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
   useEffect(() => {
     if (count >= 100) {
       setIsLoading(false);
-      navigate('/generateFreeNFT');
+      // navigate('/generateFreeNFT');
 
       // const timeout = setTimeout(() => {
       //   setIsLoading(false);
@@ -96,7 +96,7 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
 
   const content: JSX.Element = (
     <div className="screen">
-          <div className="bettermidapp-generate-free-nft-minting">
+    <div className="bettermidapp-generate-free-nft-minting">
       <div className="bg_2-JdJl2l">
           {/* <img className="bg-7ckAMs" src="img/loadingMinting/bg-11@1x.png" alt="BG" /> */}
           {/* <div className="loader-7ckAMs">
@@ -157,7 +157,9 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
             </div>
           </div>
       </div> */}
-      <div className="minting-JdJl2l inter-normal-white-15px">Minting…<br/><br/>Please do not refresh the page</div>
+      <div className="minting-JdJl2l inter-normal-white-15px">Minting…</div>
+      <div className="inter-normal-white-15px">Please do not refresh the page</div>
+      <div className="inter-normal-white-15px">Please wait patiently</div>
     </div>
 
     </div>

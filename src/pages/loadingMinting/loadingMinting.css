@@ -341,20 +341,17 @@
 
 .lds-default {
   display: inline-block;
+  position: relative;
   width: 80px;
   height: 80px;
-  left: calc(50.00% - 40px);
-  position: absolute;
-  top: calc(50.00% - 42.5px - 90px);
 }
 .lds-default div {
   position: absolute;
-  width: 9px;
-  height: 9px;
+  width: 25px;
+  height: 25px;
   background: linear-gradient(134.3deg, #4136f1 20.02%, #8643ff 84.24%)#fff;
   border-radius: 50%;
   animation: lds-default 1.2s linear infinite;
-  
 }
 .lds-default div:nth-child(1) {
   animation-delay: 0s;
@@ -421,6 +418,6 @@
     transform: scale(1);
   }
   50% {
-    transform: scale(1.5);
+    transform: scale(1.8);
   }
 }

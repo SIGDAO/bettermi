@@ -59,8 +59,26 @@ const convertBase64toJpg = (base64String: string): File => {
 
 }
 
+const counttime = (setCount) => {
+  const incrementInterval = 30000 / 99;
+  const timer = setInterval(() => {
+    setCount((prevCount) => {
+      const newCount = prevCount + 1;
+      if (newCount >= 99) {
+        clearInterval(timer);
+      }
+      return newCount;
+    });
+  }, incrementInterval);
+
+  return () => {
+    clearInterval(timer);
+  };
+};
 
 
+
+// main function
 const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   const webcamRef = useRef<Webcam>(null);
   const navigate = useNavigate();
@@ -71,23 +89,24 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   const tempAccountId = useSelector(accountId);
   const Ledger2 = useLedger();
   const [count, setCount] = useState(0);
-
   var [imageSrc, setImageSrc] = useState<string | null | undefined>();
-
 
   const [ getBMI, {isLoading, data} ] = useGetBMIMutation()
 
   useEffect(() => {
-    if (data) {
+    if (data && "bmi" in data) {
       const { bmi } = data
+      console.log('bmi', bmi)
       dispatch(profileSlice.actions.setBMI(bmi.toFixed(1).toString()))
+      navigate(navigatePath)
+    } else if (data){
       navigate(navigatePath)
     }
   }
   , [data])
 
+  // chane the navigate path when the user has already create bmi contract
   useEffect(() => {
-    // real data
     isSelfieRecord(tempAccountId, Ledger2)
       .then((result) => {
         if (!result) {
@@ -97,23 +116,19 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   }, []);
 
 
-
-  // todo: 
-  // 1. post the selfie image to the hugging face, and analyze the BMI result
-  //    BMI result should be stored in the redux store
-  // 2. trigger smart contract to send message to store the BMI result in the blockchain
-  const action: Function = async () => {
-    const formData = new FormData();
-    if (!imageSrc) {
-      console.log('imageSrc is null');
-      return;
-    }
-    formData.append('file', convertBase64toJpg(imageSrc))
-    dispatch(profileSlice.actions.setSelfieImage(imageSrc))
-    await getBMI(formData)   
-  }
-
+  // action after 
   useEffect(() => {
+    const action: Function = async () => {
+      const formData = new FormData();
+      if (!imageSrc) {
+        console.log('imageSrc is null');
+        return;
+      }
+      formData.append('file', convertBase64toJpg(imageSrc))
+      dispatch(profileSlice.actions.setSelfieImage(imageSrc))
+      await getBMI(formData)   
+    }
+  
     if (imageSrc) {
       // dispatch(profileSlice.actions.setSelfieImage(imageSrc))
       // dispatch(profileSlice.actions.setBMI('25.5'))
@@ -146,26 +161,10 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
     webcamContainerStyle.left = 'calc((100% - 819px) / 2)'
   }
 
-  const counttime = () => {
-    const incrementInterval = 30000 / 99;
-    const timer = setInterval(() => {
-      setCount((prevCount) => {
-        const newCount = prevCount + 1;
-        if (newCount >= 99) {
-          clearInterval(timer);
-        }
-        return newCount;
-      });
-    }, incrementInterval);
-  
-    return () => {
-      clearInterval(timer);
-    };
-  };
   
   useEffect(() => {
     if (isLoading && count === 0) {
-      counttime();
+      counttime(setCount);
     }
   }, [isLoading]);
 
