@@ -4,21 +4,21 @@ import { clear } from "console";
 import { useLedger } from './useLedger';
 import { accountId } from './account';
 import { useSelector } from "react-redux";
-import { UTCTimestamp } from "lightweight-charts";
+import { UTCTimestamp, SeriesDataItemTypeMap, Time } from 'lightweight-charts';
 import { findBMI } from "../components/bmiCalculate";
 
-export interface BMI_Day {
-  time: string | UTCTimestamp | number;
-  value: number;
-}
+// export interface BMI_Day {
+//   time: string | UTCTimestamp | number;
+//   value: number;
+// }
 
 
 export interface UserBMIState {
-  userBMI: BMI_Day[];
+  userBMI: SeriesDataItemTypeMap['Area'][];
 }
 
 const initialState: UserBMIState = {
-  userBMI:[],
+  userBMI: [],
 };
 
 
@@ -35,7 +35,7 @@ export const userBMISlice = createSlice({
   name: "selfieImage",
   initialState,
   reducers: {
-    setBMI: (state, action: PayloadAction<BMI_Day[]>) => {
+    setBMI: (state, action: PayloadAction<SeriesDataItemTypeMap['Area'][]>) => {
     // setBMI: (state, action: PayloadAction<string>) => {
       // state is imagePath
       state.userBMI = action.payload;

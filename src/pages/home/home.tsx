@@ -159,7 +159,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
         {/* </Link> */}
         <div className="quick-actions-RoXPLo inter-semi-bold-white-21px">Quick Actions</div>
         <div className="greetings-RoXPLo">
-          <h1 className="title-2ZgxSS">Hi！</h1>
+          <h1 className="title-2ZgxSS">Hi ! </h1>
           <div className="lv_-reward-2ZgxSS">
             <div className="lv-1-b5x63m inter-semi-bold-keppel-15px">LV 1</div>
             <div className="nft-reward-10-b5x63m inter-semi-bold-white-15px">NFT REWARD +10%</div>

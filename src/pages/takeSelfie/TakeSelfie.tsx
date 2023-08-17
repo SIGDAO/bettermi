@@ -122,6 +122,7 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
       const formData = new FormData();
       if (!imageSrc) {
         console.log('imageSrc is null');
+        navigate(navigatePath)
         return;
       }
       formData.append('file', convertBase64toJpg(imageSrc))

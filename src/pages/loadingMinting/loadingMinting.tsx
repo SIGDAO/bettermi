@@ -76,7 +76,7 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
   useEffect(() => {
     if (count >= 100) {
       setIsLoading(false);
-      // navigate('/generateFreeNFT');
+      navigate('/generateFreeNFT');
 
       // const timeout = setTimeout(() => {
       //   setIsLoading(false);
@@ -112,9 +112,12 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
                 <div className="x115-MxmV9X"></div>
             </div>
           </div> */}
-          <div className="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+          {/* <div className="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> */}
+          <div className="mimi-loading">
+            <img className='mimi-loading-image' src="/img/loadingMinting/mimi-dancing-for-loadin-page.gif" alt="" />
+          </div>
           <div className="x50-7ckAMs">{count}%</div>
-          <a href="bettermidapp-settings-1.html">
+          {/* <a href="bettermidapp-settings-1.html">
             <div className="ic_settings_24px-7ckAMs ic_settings_24px">
                 <img
                   className="ic_settings_24px-alZAUJ ic_settings_24px"
@@ -122,8 +125,8 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
                   alt="ic_settings_24px"
                   />
             </div>
-          </a>
-          <a href="bettermidapp-ai-coach.html">
+          </a> */}
+          {/* <a href="bettermidapp-ai-coach.html">
             <div className="ic_sentiment_very_satisfied_24px-7ckAMs ic_sentiment_very_satisfied_24px">
                 <img
                   className="ic_sentiment_very_satisfied_24px-VxvOOd ic_sentiment_very_satisfied_24px"
@@ -131,7 +134,7 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
                   alt="ic_sentiment_very_satisfied_24px"
                   />
             </div>
-          </a>
+          </a> */}
       </div>
       <a href="javascript:history.back()">
           <div className="icon-arrow-left-JdJl2l icon-arrow-left">
@@ -158,8 +161,8 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
           </div>
       </div> */}
       <div className="minting-JdJl2l inter-normal-white-15px">Minting…</div>
-      <div className="inter-normal-white-15px">Please do not refresh the page</div>
-      <div className="inter-normal-white-15px">Please wait patiently</div>
+      <div className="reminder-text-1 inter-normal-white-15px">Please wait patiently<br/>and do not refresh the page</div>
+      {/* <div className="reminder-text-2 inter-normal-white-15px">and do not refresh the page</div> */}
     </div>
 
     </div>

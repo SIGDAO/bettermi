@@ -148,7 +148,7 @@
 
 .bettermidapp-generate-free-nft-minting .x50-7ckAMs {
   background-color: transparent;
-  bottom: 502px;
+  bottom: 392px;
   color: var(--white);
   font-family: var(--font-family-inter);
   font-size: var(--font-size-l);
@@ -328,16 +328,19 @@
   background-color: transparent;
   height: auto;
   /* left: 163px; */
-
-  left: calc((100% - 218.21px)/2);
+  /* left: calc((100% - 218.21px)/2); */
   letter-spacing: 0.00px;
   line-height: 14px;
   position: absolute;
   text-align: center;
+  display: flex;
+  justify-content: center;
   top: 698px;
   white-space: nowrap;
-  width: auto;
+  width: 100%;
 }
+
+
 
 .lds-default {
   display: inline-block;
@@ -421,3 +424,31 @@
     transform: scale(1.8);
   }
 }
+
+.mimi-loading {
+  position: absolute;
+  top: 235px;
+  left: calc(50% - 100px);
+}
+
+.mimi-loading-image {
+  width: 200px;
+  height: 200px
+}
+
+.reminder-text-1, .reminder-text-2 {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  text-align: center;
+}
+
+.reminder-text-1 {
+  top: calc(698px + 25px);
+  font-size: 14px;
+}
+
+/* .reminder-text-2 {
+  top: calc(698px + 25px + 15px);
+} */

@@ -233,7 +233,7 @@ home
   Hello! -> Hi!
   
 reward
-maybe change reward - delete social Social Butterfly
+<!-- maybe change reward - delete social Social Butterfly -->
 
 
 error page
@@ -241,12 +241,12 @@ may change error icon and "Oops" on error - by andy
 for error icon, make it be more positive
 
 profile
-   add discord - username
+   <!-- add discord - username -->
 
 put the improvment to github issue - 
 
 general
-  domain: app.bettermi.io
+  <!-- domain: app.bettermi.io -->
 
 demo stage
 base on
@@ -274,7 +274,7 @@ Roadmap
 
 
 implotent:
-gen 1000 acc
+<!-- gen 1000 acc -->
 gen pass
 
 
@@ -282,12 +282,57 @@ i18n: check the format on i18n, for ppl to type in the data
 
 
 roadmap：
-hugging face
-vercel
-planetscale
-change the image name, not "----" and "@"
+  new hugging face bmi model
+  may hold by vercel, planetscale
+  change the image name, not "---" and "@"
+  responsive design
+  self hold model - llm, flowise
+    https://github.com/langchain-ai/langchain
 
+
+
+https://stackblitz.com/edit/burstpay-paper-wallet-plain?file=README.md
+  script for create by andy
 
 ai model
 
 box 
+
+Bettermi.io dAPP   
+- “Flowrise” to train customize AI coach for each business (roadmap)
+- Add to partnership
+
+fix bugs
+- get 1M / 1Y /5Y
+
+
+from ppt
+  https://docs.google.com/presentation/d/1bnNfMgiaLvXB1q7ir3ZxJ5i7S72YGK46h-EeyxQ4SFA/edit#slide=id.p
+
+  home page
+    / Position of Arrow
+    / Add AI bot icon
+    / Add Setting icon
+
+    / Clickable Banners link to Bettermi.io website
+    / Auto scroll next banners (with dots below shows how many promotion banners)
+    / “View all” change to “See all”
+    / Add back locked layer and icon for disable items
+
+  Feature missions Page
+    / Add AI bot icon
+    / Add Setting icon
+
+    / Add back locked layer and icon for disable items
+
+    / No need to display menu bar
+
+  Selfie to Earn Page
+    / Should create spacing between calender and menu bar 
+    / Import partner company promotion banner/ special deals. (Find partner banner in drive)
+
+  Profile
+    / The username is missing and cannot display.
+    / The description spacing should follow the right reference in .XD
+
+

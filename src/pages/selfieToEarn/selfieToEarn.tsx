@@ -68,8 +68,8 @@ const genBMIlist = (option: string) => {
 
 const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
   const [value, setValue] = useState(); // selected day on calendar
-  // const [data, setData] = useState<SeriesDataItemTypeMap['Area'][]>()
-  const [data, setData] = useState<any>()
+  const [data, setData] = useState<SeriesDataItemTypeMap['Area'][]>()
+  // const [data, setData] = useState<any>()
   const [daySelectedData, setDaySelectedData] = useState<any>()
   const [weekOption, setweekOption] = useState(true);
   const [monthOption, setmonthOption] = useState(false);
@@ -80,8 +80,9 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
   const Ledger2 = useLedger();
   
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   // demo data
-  const bmi_testing = useSelector(selectBMI) || 35;
+  const bmi_fetchedData = useSelector(selectBMI);
 
 
   // var data: BMI_Day[];
@@ -126,59 +127,50 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
 
   // todo: export a button as take a selfie component
   async function handleTakeASelfie() {
-    // if (await isTodayHaveSelfieRecord(tempAccountId, Ledger2)) {
-    //   alert('already taken a selfie, since we are in demo mode, click comfirm for another selfie')
-    //   navigate('/takeSelfie')
-    // }
-    navigate('/takeSelfie')
+    if (await isTodayHaveSelfieRecord(tempAccountId, Ledger2, bmi_fetchedData)) {
+      alert('already taken a selfie')
+      // navigate('/takeSelfie')
+    }
+    // navigate('/takeSelfie')
   }
 
   useEffect(() => {
     // testing data
     // let res = genBMIlist("1W")
-    setData([
-      { time: Math.floor(new Date().getTime() / 1000), value: 25.5 },
-      // { time: Math.floor(new Date('2023-07-19').getTime() / 1000), value: 19.1 },
-      // { time: Math.floor(new Date('2023-07-20').getTime() / 1000), value: 20.1 },
-      // { time: Math.floor(new Date('2023-07-21').getTime() / 1000), value: 21.1 },
-      // { time: Math.floor(new Date('2023-07-22').getTime() / 1000), value: 26.5 },
-      // { time: Math.floor(new Date('2023-07-23').getTime() / 1000), value: 27.5 },
-      // { time: Math.floor(new Date('2023-07-25').getTime() / 1000), value: 22.68 },
-      // { time: Math.floor(new Date('2023-07-26').getTime() / 1000), value: 22.67 },      
-      // { time: '2023-07-20', value: 20.1 },
-      // { time: '2023-07-21', value: 21.1 },
-      // { time: '2023-07-22', value: 26.5 },
-      // { time: '2023-07-23', value: 27.5 },
-      // { time: '2023-07-25', value: 22.68 },
-      // { time: '2023-07-26', value: 22.67 },
-    ]
-    )
-    setValue(new Date())
+    // setData([
+    //   { time: Math.floor(new Date().getTime() / 1000), value: 25.5 },
+    //   // { time: Math.floor(new Date('2023-07-19').getTime() / 1000), value: 19.1 },
+    //   // { time: Math.floor(new Date('2023-07-20').getTime() / 1000), value: 20.1 },
+    //   // { time: Math.floor(new Date('2023-07-21').getTime() / 1000), value: 21.1 },
+    //   // { time: Math.floor(new Date('2023-07-22').getTime() / 1000), value: 26.5 },
+    //   // { time: Math.floor(new Date('2023-07-23').getTime() / 1000), value: 27.5 },
+    //   // { time: Math.floor(new Date('2023-07-25').getTime() / 1000), value: 22.68 },
+    //   // { time: Math.floor(new Date('2023-07-26').getTime() / 1000), value: 22.67 },      
+    //   // { time: '2023-07-20', value: 20.1 },
+    //   // { time: '2023-07-21', value: 21.1 },
+    //   // { time: '2023-07-22', value: 26.5 },
+    //   // { time: '2023-07-23', value: 27.5 },
+    //   // { time: '2023-07-25', value: 22.68 },
+    //   // { time: '2023-07-26', value: 22.67 },
+    // ]
+    // )
+    // setValue(new Date())
 
     // real data
-    // findBMI(tempAccountId, Ledger2)
-    //   .then((res) => {
-    //     // data = res
-    //     // const displayData = [res]
-    //     console.log('res', res)
-    //     setData(res)
-    //     // dispatch(userBMISlice.actions.setBMI(res))
-    //   })
+    // console.log('Ledger2', Ledger2)
+    findBMI(tempAccountId, Ledger2)
+      .then((res) => {
+        setData(res)
+      })
   }, []);
 
-  // const genBMIlist 
-
   useEffect(() => {
-    console.log('data', data)
-    // console.log('data', typeof data[0].time)
-    // console.log('data', typeof initialData)
-    // console.log('data', typeof initialData[0].time)
-    // if (data) {
-    //   // displayData.push(...data)
-    // }
-    // console.log('displayData', displayData)
+    if (data && data.length !== 0) {
+      dispatch(userBMISlice?.actions?.setBMI(data))
+    }
   }, [data])
 
+  // const genBMIlist 
   
   useEffect(() => {
     // console.log(item)
@@ -196,24 +188,24 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
     // })
   }, [ weekOption, monthOption, yearOption, fiveYearOption ])
 
-  useEffect(() => {
-    console.log('value', typeof value)
-    if (value && typeof value === 'object') {
-      console.log('daySelectedData', value)
-      console.log('data', data)
-      let todayTimestamp = Math.floor((value.getTime() / 1000))
-      let tmrTimestamp = todayTimestamp + 86400
-      setDaySelectedData(data?.filter((item: any) => {
-        // console.log('item', item)
-        // console.log('todayTimestamp', todayTimestamp)
-        // console.log('yesterdayTimestamp', yesterdayTimestamp)
-        // console.log('today', new Date(todayTimestamp * 1000 ))
-        // console.log('yesterday', new Date(yesterdayTimestamp * 1000 ))
-        return item.time >= todayTimestamp && item.time < tmrTimestamp
-      }))
-      console.log('daySelectedData', daySelectedData)
-      }
-  }, [value])
+  // useEffect(() => {
+  //   console.log('value', typeof value)
+  //   if (value && typeof value === 'object') {
+  //     console.log('daySelectedData', value)
+  //     console.log('data', data)
+  //     let todayTimestamp = Math.floor((value.getTime() / 1000))
+  //     let tmrTimestamp = todayTimestamp + 86400
+  //     setDaySelectedData(data?.filter((item: any) => {
+  //       // console.log('item', item)
+  //       // console.log('todayTimestamp', todayTimestamp)
+  //       // console.log('yesterdayTimestamp', yesterdayTimestamp)
+  //       // console.log('today', new Date(todayTimestamp * 1000 ))
+  //       // console.log('yesterday', new Date(yesterdayTimestamp * 1000 ))
+  //       return item.time >= todayTimestamp && item.time < tmrTimestamp
+  //     }))
+  //     console.log('daySelectedData', daySelectedData)
+  //     }
+  // }, [value])
 
   // const Custom..
 

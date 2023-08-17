@@ -23,6 +23,7 @@
     "lightweight-charts": "^4.0.1",
     "lightweight-charts-react-wrapper": "^2.0.0",
     "moment": "^2.29.4",
+    "node_characterai": "^1.1.9",
     "react": "^18.2.0",
     "react-calendar": "^4.3.0",
     "react-dom": "^18.2.0",
