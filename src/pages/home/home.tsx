@@ -16,6 +16,7 @@ import { accountSlice } from '../../redux/account';
 import { isTodayHaveSelfieRecord } from '../../components/bmiCalculate';
 import { useLedger } from '../../redux/useLedger';
 import { accountId } from '../../redux/account';
+import { testing } from '../../redux/characteraiAPI';
 
 
 interface IHomeProps {
@@ -61,6 +62,10 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   console.log(Token);
   console.log(store.getState());
   console.log("Token is  ",Token);
+
+  // useEffect(() => {
+  //   testing();
+  // }, []);
 
   useEffect(() => {
     // Function to fetch data from the APIc
@@ -179,6 +184,12 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
                 alt="ic_chevron_right_24px"
                 />
             </div>
+          </Link>
+          <Link to='/aiCoachSelect'>
+            <img className='home-ai-select-icon' src={`${process.env.PUBLIC_URL}/img/ic-sentiment-very-satisfied-24px-1@1x.png`}/>
+          </Link>
+          <Link to='/setting'>
+            <img className='home-setting-icon' src={`${process.env.PUBLIC_URL}/img/ic-settings-24px-1@1x.png`} alt="" />
           </Link>
           <div className="score-bar_3-2ZgxSS">
             <div className="sigdao-score-iPTNDG sigdao-score">

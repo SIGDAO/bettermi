@@ -763,7 +763,7 @@
   cursor: pointer;
   height: 44px;
   position: absolute;
-  right: 6px;
+  left: 168px;
   top: 0px;
   width: 44px;
 }
@@ -1091,4 +1091,21 @@
   position: absolute;
   top: 0px;
   width: 187px;
+}
+
+.home-ai-select-icon {
+  position: absolute;
+  top: 12px;
+  left: 257px;
+  width: 20px;
+  height: 20px;
+}
+
+.home-setting-icon {
+  position: absolute;
+
+  width: 20px;
+  height: 20px;
+  top: 12px;
+  left: 297px
 }

@@ -335,4 +335,27 @@ from ppt
     / The username is missing and cannot display.
     / The description spacing should follow the right reference in .XD
 
+    / “Plus” button on the right top corner should link to NFT marketplace(Signum Art to buy more NFTs)
 
+  My NFTs Page
+    / The background color is same as NFT background
+    / Please look again the spacing
+    / the seperated line color should be #A6B3BB
+    / reward -> should be “Reward”
+    / “signa” -> “SIGNA”
+    / The “Send” button should be aline horizontally with the button “ON DATE” & “AVALIBLE” and all capital
+    / The filter button isn’t functional
+    / “Plus” button on the right top corner should link to NFT marketplace (Signum Art to buy more NFTs)
+
+My NFTs (Transfer ownership) Page
+  / NFT Details need to get data from the NFT user want to transfer, display include (NFT ID, Level & Reward%, SIGNA amount)
+  / Able to type
+  / Able to transfer NFT to other address(make sure with backend)
+
+Marketplace Page
+  / NFT Details need to get data from the NFT user want to transfer, display include (NFT ID, Level & Reward%, SIGNA amount)
+  / Able to type
+  / Able to transfer NFT to other address(make sure with backend)
+
+error page:
+  / add gif and change the sentence of error
