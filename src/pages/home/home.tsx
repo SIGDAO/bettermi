@@ -106,7 +106,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
     <div className="screen">
       <div className="bettermidapp-home-1">
         <Link to="/allMission">
-          <div className="view-all-RoXPLo inter-medium-royal-blue-14px">View all</div>
+          <div className="view-all-RoXPLo inter-medium-royal-blue-14px">See all</div>
         </Link>
         <div className="feature-missions-RoXPLo inter-semi-bold-white-21px">Feature Missions</div>
         <div className="reservation_button-RoXPLo">
@@ -130,9 +130,15 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
         <div className="special-card-RoXPLo">
           <div className="special-scroll-hH9Cww">
             <div className="x25-hK4LUV">
-              <div className="x01-78JfKY"><img className="x1" src={`${process.env.PUBLIC_URL}/img/home/1@1x.png`} alt="1" /></div>
-              <div className="x11-78JfKY"><img className="x1" src={`${process.env.PUBLIC_URL}/img/home/1@1x.png`} alt="1" /></div>
-              <div className="x21-78JfKY"><img className="x1" src={`${process.env.PUBLIC_URL}/img/home/1@1x.png`} alt="1" /></div>
+              <Link to='https://www.bettermi.io/'>
+                <div className="x01-78JfKY"><img className="x1" src={`${process.env.PUBLIC_URL}/img/home/1@1x.png`} alt="1" /></div>
+              </Link>
+              <Link to=''>
+                <div className="x11-78JfKY"><img className="x1" src={`${process.env.PUBLIC_URL}/img/home/1@1x.png`} alt="1" /></div>
+              </Link>
+              <Link to=''>
+                <div className="x21-78JfKY"><img className="x1" src={`${process.env.PUBLIC_URL}/img/home/1@1x.png`} alt="1" /></div>
+              </Link>
             </div>
           </div>
           <div className="slide-dots-hH9Cww">

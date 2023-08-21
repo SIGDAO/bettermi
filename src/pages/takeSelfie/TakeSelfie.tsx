@@ -85,7 +85,8 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   const dispatch = useDispatch();
   const [bmidata, setbmidata] = useState<any>();
   // const [isLoading, setIsLoading] = useState(false);
-  var navigatePath: string = '/generateBMINFTImport'
+  // var navigatePath: string = '/generateBMINFTImport'
+  var navigatePath: string = '/generateBMIDaily'
   const tempAccountId = useSelector(accountId);
   const Ledger2 = useLedger();
   const [count, setCount] = useState(0);

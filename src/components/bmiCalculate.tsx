@@ -26,15 +26,19 @@ const findBMIblockchainContract = async (tempAccountId: string, Ledger2: any) =>
 
   for(let i = 0;i < contractId.ats.length;i++){
     if(contractId.ats[i].machineCodeHashId == "7457358473503628676"){
+        console.log('hi')
         contractData = contractId.ats[i];
         break;
     }
   }
 
+  if (!contractData) return false;
+  console.log(contractData, 'contractData');
   contractAddress = contractData.at;
 
   // todo: make it better
   try {
+    
     description = JSON.parse(contractData?.description);
   } catch (error) {
     description = null;

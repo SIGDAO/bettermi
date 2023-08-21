@@ -188,24 +188,24 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
     // })
   }, [ weekOption, monthOption, yearOption, fiveYearOption ])
 
-  // useEffect(() => {
-  //   console.log('value', typeof value)
-  //   if (value && typeof value === 'object') {
-  //     console.log('daySelectedData', value)
-  //     console.log('data', data)
-  //     let todayTimestamp = Math.floor((value.getTime() / 1000))
-  //     let tmrTimestamp = todayTimestamp + 86400
-  //     setDaySelectedData(data?.filter((item: any) => {
-  //       // console.log('item', item)
-  //       // console.log('todayTimestamp', todayTimestamp)
-  //       // console.log('yesterdayTimestamp', yesterdayTimestamp)
-  //       // console.log('today', new Date(todayTimestamp * 1000 ))
-  //       // console.log('yesterday', new Date(yesterdayTimestamp * 1000 ))
-  //       return item.time >= todayTimestamp && item.time < tmrTimestamp
-  //     }))
-  //     console.log('daySelectedData', daySelectedData)
-  //     }
-  // }, [value])
+  useEffect(() => {
+    console.log('value', typeof value)
+    if (value && typeof value === 'object') {
+      console.log('daySelectedData', value)
+      console.log('data', data)
+      let todayTimestamp = Math.floor((value.getTime() / 1000))
+      let tmrTimestamp = todayTimestamp + 86400
+      setDaySelectedData(data?.filter((item: any) => {
+        // console.log('item', item)
+        // console.log('todayTimestamp', todayTimestamp)
+        // console.log('yesterdayTimestamp', yesterdayTimestamp)
+        // console.log('today', new Date(todayTimestamp * 1000 ))
+        // console.log('yesterday', new Date(yesterdayTimestamp * 1000 ))
+        return item.time >= todayTimestamp && item.time < tmrTimestamp
+      }))
+      console.log('daySelectedData', daySelectedData)
+      }
+  }, [value])
 
   // const Custom..
 

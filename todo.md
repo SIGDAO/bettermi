@@ -310,14 +310,13 @@ from ppt
   https://docs.google.com/presentation/d/1bnNfMgiaLvXB1q7ir3ZxJ5i7S72YGK46h-EeyxQ4SFA/edit#slide=id.p
 
   home page
-    / Position of Arrow
-    / Add AI bot icon
-    / Add Setting icon
-
-    / Clickable Banners link to Bettermi.io website
-    / Auto scroll next banners (with dots below shows how many promotion banners)
-    / “View all” change to “See all”
-    / Add back locked layer and icon for disable items
+    <!-- / Position of Arrow -->
+    <!-- / Add AI bot icon -->
+    <!-- / Add Setting icon -->
+    <!-- / Clickable Banners link to Bettermi.io website -->
+    / Auto scroll next banners (with dots below shows how many promotion banners) <!-- need check -->
+    <!-- / “View all” change to “See all” -->
+    / Add back locked layer and icon for disable items <!-- need check -->
 
   Feature missions Page
     / Add AI bot icon
