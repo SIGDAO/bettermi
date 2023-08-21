@@ -39,8 +39,11 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
   const [myNfts, setMyNfts] = useState<myNftList[]>([]);
   const [onDuty, setOnDuty] = useState<string>("");
   const [array, setArray] = useState<string[]>([]);
+  const [selectedAssetId, setSelectedAssetId] = useState<string>("");
   const [isOpenPopup, setIsOpenPopup] = useState<boolean>(false);
   const [userNftTokenList,setNftTokenList] = useState<myNftList[]>([]);
+  const [inputValue, setInputValue] = useState('');
+  const [inputAddress,setInputAddress] = useState("");
   const dataFetchedRef = useRef(false);
   const {appName,Wallet,Ledger} = useContext(AppContext);
   const nftTokenIssuer:string = process.env.REACT_APP_NFT_TOKEN_ISSUER!;
@@ -230,17 +233,43 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
   const displayMyNft = myNfts.map((nft) => {//Contract Id
     console.log("userNftList is  ", userNftList);
     return (
-      <MyNft image={nft.image} level={nft.level} isOpenPopup={isOpenPopup} setIsOpenPopup={setIsOpenPopup} assetId = {nft.assetId} ></MyNft>
+      <MyNft image={nft.image} level={nft.level} isOpenPopup={isOpenPopup} setIsOpenPopup={setIsOpenPopup} assetId = {nft.assetId} setSelectedAssetId={setSelectedAssetId}></MyNft>
     );
   }
   );
   const displayNftToken = userNftTokenList.map((nft) => {//Contract Id
     console.log("userNftTokenList is  ",nft);
     return(
-      <MyNft image={nft.image} level={nft.level} isOpenPopup={isOpenPopup} setIsOpenPopup={setIsOpenPopup} assetId= {nft.assetId} ></MyNft>
+      <MyNft image={nft.image} level={nft.level} isOpenPopup={isOpenPopup} setIsOpenPopup={setIsOpenPopup} assetId= {nft.assetId} setSelectedAssetId={setSelectedAssetId}></MyNft>
     );
   }
   );
+  const transferNft = async(assetId:string) => {
+    try{
+    const recipientAccount = await ledger2.account.getAccount({
+      accountId:inputAddress,
+    });
+    console.log(recipientAccount);
+    if(assetId !== ""){
+      console.log(assetId);
+      console.log(publicKey);
+      const unsignedTransaction = await ledger2.asset.transferAsset({
+        assetId:assetId,
+        quantity:"1",
+        recipientId:recipientAccount.account,
+        feePlanck:"1000000",
+        senderPublicKey:userAccountpublicKey,
+      });
+      await Wallet.Extension.confirm(unsignedTransaction.unsignedTransactionBytes);
+    }
+    else{
+      console.log("assetId doesnt exists");
+    }
+  }
+  catch{
+    alert("account not exist");
+  }
+  }
   const returnNftToMe = async() => {
     // console.log(userAccountId);
     // ledger2.account.getAccount({accountId:userAccountId}).then(async(account) => {
@@ -266,6 +295,13 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
   //   }
   // );
   //const content : JSX.Element = (
+    const handleInputChange = (event:any) => {
+      setInputValue(event.target.value);
+    };
+    const handleAddressChange = (event:any) => {
+      setInputAddress(event.target.value);
+    };
+
 return(
     <div style={bgStyle}>
     <div style={centerLayoutStyle} className='bettermidapp-mimi-nfts-send-address-1'>
@@ -361,9 +397,15 @@ return(
                   <div className="place inter-semi-bold-white-18px">Send</div>
                 </div>
                 <div className="search_bar"></div>
-                <div className="search_bar-1 search_bar-4"><p className="card-number">e.g. TS-9DJR-MGA2-VH44-5GMXY or Anderson</p></div>
+                <textarea
+                className="search_bar-1 search_bar-4"
+                value={inputAddress}
+                onChange={handleAddressChange}
+                placeholder="Enter something"
+              />
+                {/* <div className="search_bar-1 search_bar-4"><p className="card-number">e.g. TS-9DJR-MGA2-VH44-5GMXY or Anderson</p></div> */}
                 <div className="search_bar-2 search_bar-4"></div>
-                <div className="button_save" onClick={() => {setIsOpenPopup((prev) => !prev)}}>
+                <div className="button_save" onClick={() => transferNft(selectedAssetId)}>
                   <div className="continue inter-semi-bold-white-15px">Transfer</div>
                 </div>
                 <p className="address-id-to-send-nft-to">Address, ID to send NFT to.</p>
@@ -374,12 +416,19 @@ return(
                   <img className="x6" src="img/myNftList/file---6@1x.png" alt="6" />
                   <div className="reward-10-1">REWARD +10%</div>
                 </div>
-                <div className="search_bar-3 search_bar-4">
+                <textarea
+                className="search_bar-3 search_bar-4"
+                value={inputValue}
+                onChange={handleInputChange}
+                placeholder="Enter something"
+              />
+              {/* <p>Input Value: {inputValue}</p> */}
+                {/* <div className="search_bar-3 search_bar-4">
                   <p className="card-number-1">
                     You may attach some text or binary data to this transaction. Here you also enter the memo required
                     by many exchanges
                   </p>
-                </div>
+                </div> */}
                 <div className="additional-text inter-bold-royal-blue-15px">ADDITIONAL TEXT</div>
               </div>
             </div>
