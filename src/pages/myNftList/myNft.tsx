@@ -25,11 +25,12 @@ import * as React from 'react';
     isOpenPopup: boolean;
     setIsOpenPopup: (isOpenPopup: boolean) => void;
      assetId:string;
+     setSelectedAssetId:(assetId:string) => void;
  }
 
 
  const MyNft: React.FunctionComponent<MyNftProps> =  (props) => {
-     const {image, level, isOpenPopup, setIsOpenPopup,assetId} = props;
+     const {image, level, isOpenPopup, setIsOpenPopup,assetId,setSelectedAssetId} = props;
      const [loading, setLoading] = useState<boolean>(true);
      const [imgAddress, setImgAddress] = useState<string>("");
      const nodeHost = useAppSelector(selectWalletNodeHost);
@@ -93,13 +94,14 @@ import * as React from 'react';
                     <img className = "myNftImage" src = {`https://ipfs.io/ipfs/${imgAddress}`}></img>
                     <div className = "myNftDescription">
                     <div className = "myNftNumber">#0000000001</div>
-                      <div>
-                        <span  className = "myNftLevel">
-                          Lv{level}       
-                          </span>   
-                          <span  className = "myNftReward">
+                      <div className = "myNftBar">
+                        <div  className = "myNftLevel">
+                          Lv{1}       
+                          </div>
+                          <div className = "myNftVerticalLine"></div>  
+                          <div  className = "myNftReward">
                             reward + 1000%
-                            </span>
+                            </div>
                       </div>
                       <div className = "myNftPrice">
                         $0 signa
@@ -110,7 +112,7 @@ import * as React from 'react';
                     <img 
                       onClick={() => {
                         setIsOpenPopup((prev) => !prev);
-                        transferToken();
+                        setSelectedAssetId(assetId);
                       }} 
                       className = "myNftButtomArrow" 
                       src  = {`${process.env.PUBLIC_URL}/img/NftList/ic-send@1x.png`}

@@ -11,6 +11,7 @@ import { useContext } from 'react';
 import { AppContext } from '../../redux/useContext';
 import { useNavigate } from 'react-router-dom';
 import { LedgerClientFactory } from '@signumjs/core';
+import { profileSlice } from '../../redux/profile';
 export interface IConnectWalletProps {
 }
 
@@ -88,6 +89,33 @@ export default function ConnectWallet (props: IConnectWalletProps) {
     // navigate('/connectSuccess');
     if(ourContract.ats[0] != null){
       console.log("called the if statement");
+      var description = ourContract.ats[0].description;
+      console.log(description);
+      
+      //description = description.replace(/'/g, '"');
+      //description = description.replace(/ /g, '"');
+      // description = `"${description}"`
+      //  description = JSON.parse(description);
+      // console.log(description);
+      if(description.includes("Female") === true){
+        store.dispatch(profileSlice.actions.setGender("Female"));
+      }
+      else if(description.includes("Male") === true){
+        store.dispatch(profileSlice.actions.setGender("Male"));
+      }
+      else{
+        store.dispatch(profileSlice.actions.setGender("Male"));
+      }
+console.log(description.includes("Female"));
+console.log(description.includes("Male"))
+// Replace single quotes with double quotes
+
+
+
+
+      // store.dispatch(profileSlice.actions.setGender(gender));
+      // console.log(gender);
+      // console.log(ourContract.ats[0]);
        //navigate('/connectSuccess');
       navigate("/home");
     }

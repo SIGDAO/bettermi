@@ -62,4 +62,5 @@ await Ledger2.asset.transferAsset({
     skipAdditionalSecurityCheck:true,
     senderPublicKey: publicKey,
 });
+console.log("token transferred");
 }

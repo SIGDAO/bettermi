@@ -17,7 +17,7 @@ import { isTodayHaveSelfieRecord } from '../../components/bmiCalculate';
 import { useLedger } from '../../redux/useLedger';
 import { accountId } from '../../redux/account';
 import { testing } from '../../redux/characteraiAPI';
-
+import { selectCurrentGender } from '../../redux/profile';
 
 interface IHomeProps {
 }
@@ -58,6 +58,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const navigate = useNavigate();
   const tempAccountId = useSelector(accountId);
   const Ledger2 = useLedger();
+  const gender = useSelector(selectCurrentGender)
 
   console.log(Token);
   console.log(store.getState());
@@ -170,8 +171,10 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
             <div className="nft-reward-10-b5x63m inter-semi-bold-white-15px">NFT REWARD +10%</div>
             <img className="seperate-line-b5x63m" src={`${process.env.PUBLIC_URL}/img/seperate-line-1@1x.png`} alt="seperate line" />
           </div>
-          {imgAddress === ""?
-          <img className="nft_-avatar-2ZgxSS" src={`${process.env.PUBLIC_URL}/img/home/nft-avatar-13@1x.png`} alt="NFT_Avatar" />
+          {imgAddress === ""?gender === "Female"?<img className="nft_-avatar-2ZgxSS" src={`${process.env.PUBLIC_URL}/img/home/nft-avatar-13@1x.png`} alt="NFT_Avatar" />
+          :(
+              <img className="nft_-avatar-2ZgxSS" src={`${process.env.PUBLIC_URL}/img/home/1.png`} alt="NFT_Avatar" />
+          )
           :(
             <img className = "nft_-avatar-2ZgxSS" src = {`https://ipfs.io/ipfs/${imgAddress}`}></img>
           )
