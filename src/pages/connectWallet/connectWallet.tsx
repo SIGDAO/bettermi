@@ -36,6 +36,7 @@ export default function ConnectWallet (props: IConnectWalletProps) {
         publicKey:import_account.getPublicKey(),
         isWatchOnlyMode:true,
         token:0,
+        level:"1",
       };
     store.dispatch(accountSlice.actions.setAccount(accountinfo));
     console.log(store.getState());

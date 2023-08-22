@@ -74,6 +74,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
     ledger2.account.getAccount({accountId:userId})
       .then((account)=>{
         const description = JSON.parse(account.description);
+        store.dispatch(accountSlice.actions.setLevel(description.ds));
         console.log(description);
         console.log(Object.keys(description.av));
         console.log(typeof(Object.keys(description.av)[0]));

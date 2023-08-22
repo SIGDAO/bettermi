@@ -37,6 +37,7 @@ import * as React from 'react';
      const ledger2 = LedgerClientFactory.createClient({nodeHost});
      const userAccountpublicKey:string = useSelector(accountPublicKey);
      const {appName,Wallet,Ledger} = useContext(AppContext);
+     const [nftLevel,setLevel] = useState<string>("");
      var nftImgAddress:string = "";
      var addressSuffix:string ="https://ipfs.io/ipfs/"; 
      useEffect(() => {
@@ -44,8 +45,9 @@ import * as React from 'react';
          //console.log(`ipfs.io/ipfs/${image}`);
          fetch(`https://ipfs.io/ipfs/${image}`).then((res)=>{
              res.text().then((text)=>{
-                 //console.log(text); 
+                 console.log(text); 
                  var nftInfo = JSON.parse(text);
+                 setLevel(nftInfo.attributes[0].level);
                  //console.log(nftInfo); 
                  //console.log(typeof(nftInfo.media[0].social));
                  setImgAddress(nftInfo.media[0].social);
@@ -72,7 +74,7 @@ import * as React from 'react';
      }
      const equipNft = async() => {
        console.log("123");
-       const accountInfo = `{"av":{"${imgAddress}":"image/png"}}`;
+       const accountInfo = `{"av":{"${imgAddress}":"image/png"},"ds":"${nftLevel}"}`;
        const setAccountInfo = await ledger2.account.setAccountInfo({
          name:"1234",
          description:accountInfo,

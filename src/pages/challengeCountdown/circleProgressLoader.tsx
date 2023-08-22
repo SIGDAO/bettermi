@@ -78,7 +78,7 @@ const CircularWithValueLabel: React.FunctionComponent<ICircularWithValueLabelPro
   const userWalletNodeHost = useSelector(walletNodeHost);
 
   const handleTransfer = () => {
-    TransferToken(userWalletNodeHost,userAccountId)
+    TransferToken(userWalletNodeHost,userAccountId,"5.25")
     navigate('/challengeCompleted')
   }
 

@@ -8,6 +8,7 @@ export interface userAccount
     publicKey: string,
     isWatchOnlyMode: boolean,
     token:number,
+    level:string,
 }   
 
 const initialState: userAccount = {
@@ -16,6 +17,7 @@ const initialState: userAccount = {
     publicKey: "",
     isWatchOnlyMode: false,
     token:0,
+    level:"1",
 };
 
 export const accountSlice = createSlice({
@@ -31,6 +33,9 @@ export const accountSlice = createSlice({
         },
         setToken:(state, action: PayloadAction<number>) => {
             state.token = action.payload;
+        },
+        setLevel:(state,action:PayloadAction<string>) => {
+            state.level = action.payload;
         }
     }   
 });
@@ -42,3 +47,6 @@ export const accountId = (state: any) => {
 export const accountToken = (state: any) => {
     return state.account.token?state.account.token:localStorage.getItem("token");
 };
+export const accountLevel = (state:any) => {
+    return state.account.level?state.account.token:localStorage.getItem("level");
+}
