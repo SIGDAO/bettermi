@@ -1,3 +1,4 @@
+import React from 'react';
 import './connectWallet.css'
 import { CenterLayout } from '../../components/layout';
 import { ButtonWithAction, ButtonWithNavigation, DisabledButton } from '../../components/button';

@@ -92,7 +92,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
             <img className='ic_edit-content' src="img/profile/ic-edit-1@1x.png" alt="" />
           </div>
           <div className="profile-content">
-            <div className="zoe_li">{username}</div>
+            <div className="zoe_li">{username || "zoe_li"}</div>
             <div className="perso-container">
               <p className="im-a-positive-perso">{description || "I'm a positive person. I love to travel and eat."}</p>
               <p className="x29-personal-trainer inter-semi-bold-keppel-15px">

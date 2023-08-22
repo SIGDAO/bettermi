@@ -18,6 +18,7 @@ import { useLedger } from '../../redux/useLedger';
 import { accountId } from '../../redux/account';
 import { testing } from '../../redux/characteraiAPI';
 import { selectCurrentGender } from '../../redux/profile';
+import { NavigateToTakeSelfieButton } from '../../components/button';
 
 interface IHomeProps {
 }
@@ -163,11 +164,12 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
         </Link>
         <div className="our-community-RoXPLo inter-semi-bold-white-21px">Our Community</div>
         {/* <Link to="/selfieToEarn"> */}
-        <div className="button_-selfie-to-earn-RoXPLo" onClick={() => handleTakeASelfie()}>
+        {/* <div className="button_-selfie-to-earn-RoXPLo" onClick={() => handleTakeASelfie()}>
           <p className="take-a-selfie-to-earn-TRrnim inter-semi-bold-white-15px">Take a Selfie to Earn!</p>
           <img className="ic_selfie-TRrnim" src={`${process.env.PUBLIC_URL}/img/ic-selfie-1@1x.png`} alt="ic_selfie" />
           <img className="ic_arrow_forward-TRrnim" src={`${process.env.PUBLIC_URL}/img/ic-arrow-forward-1@1x.png`} alt="ic_arrow_forward" />
-        </div>
+        </div> */}
+        <NavigateToTakeSelfieButton/>
         {/* </Link> */}
         <div className="quick-actions-RoXPLo inter-semi-bold-white-21px">Quick Actions</div>
         <div className="greetings-RoXPLo">

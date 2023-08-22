@@ -144,3 +144,15 @@ export const BackButton: React.FunctionComponent<IBackButtonProps> = (props) => 
     </a>
   )
 }
+
+export const NavigateToTakeSelfieButton: React.FunctionComponent = () => {
+
+
+  return (
+    <div className="button_-selfie-to-earn-RoXPLo" onClick={() => console.log('sdifsjij')}>
+      <p className="take-a-selfie-to-earn-TRrnim inter-semi-bold-white-15px">Take a Selfie to Earn!</p>
+      <img className="ic_selfie-TRrnim" src={`${process.env.PUBLIC_URL}/img/ic-selfie-1@1x.png`} alt="ic_selfie" />
+      <img className="ic_arrow_forward-TRrnim" src={`${process.env.PUBLIC_URL}/img/ic-arrow-forward-1@1x.png`} alt="ic_arrow_forward" />
+    </div>
+  )
+}

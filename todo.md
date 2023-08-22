@@ -319,8 +319,8 @@ from ppt
     / Add back locked layer and icon for disable items <!-- need check -->
 
   Feature missions Page
-    / Add AI bot icon
-    / Add Setting icon
+    <!-- / Add AI bot icon -->
+    <!-- / Add Setting icon -->
 
     / Add back locked layer and icon for disable items
 
@@ -333,8 +333,8 @@ from ppt
   Profile
     / The username is missing and cannot display.
     / The description spacing should follow the right reference in .XD
-
-    / “Plus” button on the right top corner should link to NFT marketplace(Signum Art to buy more NFTs)
+    / “Plus” button on the right top corner should link to NFT marketplace(Signum Art to buy more NFTs) 
+    <!-- need to check this one -->
 
   My NFTs Page
     / The background color is same as NFT background

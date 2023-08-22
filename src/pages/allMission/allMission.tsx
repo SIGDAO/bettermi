@@ -92,7 +92,7 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
               </div>
               <div className = "iconBar">
                 <img style = {{height:"20px", width: "20px", alignSelf:"center"}} src={`${process.env.PUBLIC_URL}/img/ic-sentiment-very-satisfied-24px-1@1x.png`} alt="" />
-                <img style = {{height:"20px", alignSelf:"center"}} src = {`${process.env.PUBLIC_URL}/img/allMission/ic-help-24px-1@1x.png`}></img>
+                <img style = {{height:"20px", alignSelf:"center"}} src = {`${process.env.PUBLIC_URL}/img/ic-settings-24px-1@1x.png`}></img>
               </div>
           </div>
           <div className = "titleBar">
@@ -115,7 +115,7 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
             <img className = "buttonIconChallengeCompleted" src={`${process.env.PUBLIC_URL}/img/allMission/nft-avatar-1@1x.png`} alt="Card_bg"></img>
             <div className = "descriptionChallengeCompleted">
               <div className = "descriptionTitleChallengeCompleted">
-                Challenge X9 Hacks
+                  Challenge X9 Hacks
                 </div>
                 <div className = "descriptionBodyChallengeCompleted">
                   1-3 Mins Each
@@ -131,45 +131,51 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
                 </div>
             </div>
           </button>
-          <button className = "challengeCompletedLinkDisabled" disabled = {true} style = {{  opacity: "0.4"}}>
-            <img className = "buttonIconChallengeCompleted" src={`${process.env.PUBLIC_URL}/img/allMission/nft-avatar-2@1x.png`} alt="Card_bg"></img>
-            <div className = "descriptionChallengeCompleted">
-              <div className = "descriptionTitleChallengeCompleted">
-                Weekly Meditation Session
-                </div>
-                <div className = "descriptionBodyChallengeCompleted">
-                  Saturday Only
-                </div>
-                <div className = "descriptionBottomBodyChallengeCompleted">
-                  <div className = "sigdaoIconChallengeCompleted">
-                    <img src = {`${process.env.PUBLIC_URL}/img/allMission/file---880-1x-png-10@1x.png`}></img>
-                    </div>
-                    <div className = "sigdaoChallengeCompleted">
-                    +5.25 ~ 5.00
+          <button className = "challengeCompletedLinkDisabled" disabled = {true} style = {{}}>
+            <img src={`${process.env.PUBLIC_URL}/img/ic-locked-1@1x.png`} className='lock-image' alt="" /> 
+            <div className="mission-button-content" >
+              <img className = "buttonIconChallengeCompleted" src={`${process.env.PUBLIC_URL}/img/allMission/nft-avatar-2@1x.png`} alt="Card_bg"></img>
+              <div className = "descriptionChallengeCompleted">
+                <div className = "descriptionTitleChallengeCompleted">
+                  Weekly Meditation Session
                   </div>
-                  <img className = "arrowChallengeCompleted" src={`${process.env.PUBLIC_URL}/img/allMission/ic-chevron-right-24px-1@1x.png`}></img>
-                </div>
+                  <div className = "descriptionBodyChallengeCompleted">
+                    Saturday Only
+                  </div>
+                  <div className = "descriptionBottomBodyChallengeCompleted">
+                    <div className = "sigdaoIconChallengeCompleted">
+                      <img src = {`${process.env.PUBLIC_URL}/img/allMission/file---880-1x-png-10@1x.png`}></img>
+                      </div>
+                      <div className = "sigdaoChallengeCompleted">
+                        +5.25 ~ 5.00
+                    </div>
+                    <img className = "arrowChallengeCompleted" src={`${process.env.PUBLIC_URL}/img/allMission/ic-chevron-right-24px-1@1x.png`}></img>
+                  </div>
+              </div>
             </div>
           </button>
-          <button disabled = {true} style = {{  opacity: "0.4"}} className = "challengeCompletedLinkDisabled">
-            <img className = "buttonIconChallengeCompleted" src={`${process.env.PUBLIC_URL}/img/allMission/nft-avatar-3@1x.png`} alt="Card_bg"></img>
-            <div className = "descriptionChallengeCompleted">
-              <div style = {{display:"flex", flexDirection:"row"}} className = "descriptionTitleChallengeCompleted">
-                <div>Daily Walking Mission</div>
-                <img  style = {{width:"15px", height:"20px",paddingLeft:"10px"}} src={`${process.env.PUBLIC_URL}/img/allMission/ic-locked-1@1x.png`}></img>
-                </div>
-                <div className = "descriptionBodyChallengeCompleted">
-                  Step Count
-                </div>
-                <div className = "descriptionBottomBodyChallengeCompleted">
-                  <div className = "sigdaoIconChallengeCompleted">
-                    <img src = {`${process.env.PUBLIC_URL}/img/allMission/file---880-1x-png-10@1x.png`}></img>
-                    </div>
-                    <div className = "sigdaoChallengeCompleted">
-                    +5.25 ~ 15.75
+          <button disabled = {true} style = {{}} className = "challengeCompletedLinkDisabled">
+            <img src={`${process.env.PUBLIC_URL}/img/ic-locked-1@1x.png`} className='lock-image' alt="" /> 
+            <div className="mission-button-content" >
+              <img className = "buttonIconChallengeCompleted" src={`${process.env.PUBLIC_URL}/img/allMission/nft-avatar-3@1x.png`} alt="Card_bg"></img>
+              <div className = "descriptionChallengeCompleted">
+                <div style = {{display:"flex", flexDirection:"row"}} className = "descriptionTitleChallengeCompleted">
+                  <div>Daily Walking Mission</div>
+                  <img  style = {{width:"15px", height:"20px",paddingLeft:"10px"}} src={`${process.env.PUBLIC_URL}/img/allMission/ic-locked-1@1x.png`}></img>
                   </div>
-                  <img className = "arrowChallengeCompleted" src={`${process.env.PUBLIC_URL}/img/allMission/ic-chevron-right-24px-1@1x.png`}></img>
-                </div>
+                  <div className = "descriptionBodyChallengeCompleted">
+                    Step Count
+                  </div>
+                  <div className = "descriptionBottomBodyChallengeCompleted">
+                    <div className = "sigdaoIconChallengeCompleted">
+                      <img src = {`${process.env.PUBLIC_URL}/img/allMission/file---880-1x-png-10@1x.png`}></img>
+                      </div>
+                      <div className = "sigdaoChallengeCompleted">
+                      +5.25 ~ 15.75
+                    </div>
+                    <img className = "arrowChallengeCompleted" src={`${process.env.PUBLIC_URL}/img/allMission/ic-chevron-right-24px-1@1x.png`}></img>
+                  </div>
+              </div>
             </div>
           </button>
           {/* <button className = "challengeCompletedLink">

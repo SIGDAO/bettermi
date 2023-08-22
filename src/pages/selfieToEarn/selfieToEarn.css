@@ -3,7 +3,7 @@
 .bettermidapp-selfie-to-earn-1 {
   background: linear-gradient(180deg, #171717 0%, #291a49 41.22%, #171717 100%);
   background-color: rgba(255,255,255,1.0);
-  height: calc(1553px - 280px - 60px);
+  height: calc(1553px - 280px - 60px + 50px);
   /* height: 1553px; */
   /* overflow: hidden;
   overflow-x: hidden; */
@@ -1690,6 +1690,7 @@
   /* max-height: calc(434px + 95px); */
   max-height: 434px;
   left: 0px;
+  padding: 25px 0px;
   position: absolute;
   /* top: calc(1023px + 86px - 21.5px); */
   top: calc(1023px + 7px );
