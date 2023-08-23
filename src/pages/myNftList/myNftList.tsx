@@ -306,6 +306,8 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
       setInputAddress(event.target.value);
     };
 
+    // testing for github update
+
 return(
     <div style={bgStyle}>
     <div style={centerLayoutStyle} className='bettermidapp-mimi-nfts-send-address-1'>
