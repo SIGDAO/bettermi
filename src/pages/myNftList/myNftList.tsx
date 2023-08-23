@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './myNftList.css'
 import { CenterLayout } from '../../components/layout';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BackButton } from '../../components/button';
 import { GetToken } from '../../components/getToken';
 import { useSelector } from 'react-redux';
@@ -20,6 +20,7 @@ import { P2PTransferNftToken } from '../../components/p2pTransferNftToken';
 import { AppContext } from '../../redux/useContext';
 import { useContext } from 'react';
 import { accountPublicKey } from '../../redux/account';
+import { CustomTextArea } from '../../components/input';
 
 interface IMyNftListProps {
 }
@@ -63,6 +64,8 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
   var nftAddressList:string[] = [];
   var userNftList:myNftList[] = [];
   var userNftToken:myNftList[] = [];
+  const navigate = useNavigate();
+
   // for(var i = 0;i<6;i++){
   //   nft = {
   //     image:`${process.env.PUBLIC_URL}/img/NftList/nft-1@1x.png`,
@@ -261,6 +264,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
         senderPublicKey:userAccountpublicKey,
       });
       await Wallet.Extension.confirm(unsignedTransaction.unsignedTransactionBytes);
+      navigate("/NFTTransferCompleted");
     }
     else{
       console.log("assetId doesnt exists");
@@ -318,12 +322,12 @@ return(
                    Lv{1}       
                    </div>
                    <div className = "myNftVerticalLine"></div>  
-                   <div  className = "myNftReward">
-                     reward + 1000%
+                   <div  className = "inter-normal-white-12px">
+                     Reward + 10%
                      </div>
                </div>
                <div className = "myNftPrice">
-                 $0 signa
+                 $0 SIGNA
                </div>
              </div>
              <div className = "myNftBottom">
@@ -331,7 +335,7 @@ return(
              onClick = {returnNftToMe}
               className = "myNftButtonOnDuty" 
               style = {{backgroundColor:"#39B3AF!important"}}
-            >On Date</button>
+            >ON DATE</button>
              <img  className = "myNftButtomArrow" src  = {`${process.env.PUBLIC_URL}/img/NftList/ic-send@1x.png`} onClick={() => setIsOpenPopup((prev) => !prev)}></img>
              </div>
            </div>
@@ -346,15 +350,15 @@ return(
                    </div>
                    <div className = "myNftVerticalLine"></div>  
                    <div  className = "myNftReward">
-                     reward + 1000%
+                     Reward + 10%
                      </div>
                </div>
                <div className = "myNftPrice">
-                 $0 signa
+                 $0 SIGNA
                </div>
              </div>
              <div className = "myNftBottom">
-             <button className = "myNftButtonOnDuty" style = {{backgroundColor:"#39B3AF!important"}}>On Date</button>
+             <button className = "myNftButtonOnDuty" style = {{backgroundColor:"#39B3AF!important"}}>ON DATE</button>
              <img className = "myNftButtomArrow" src  = {`${process.env.PUBLIC_URL}/img/NftList/ic-send@1x.png`} onClick={() => setIsOpenPopup((prev) => !prev)}></img>
              </div>
            </div>
@@ -397,12 +401,21 @@ return(
                   <div className="place inter-semi-bold-white-18px">Send</div>
                 </div>
                 <div className="search_bar"></div>
-                <textarea
-                className="search_bar-1 search_bar-4"
-                value={inputAddress}
-                onChange={handleAddressChange}
-                placeholder="Enter something"
-              />
+                <CustomTextArea 
+                  text= {inputAddress} 
+                  setText={setInputAddress} 
+                  width={300} 
+                  height={56} 
+                  importClassName="card-number-1 search_bar-1 search_bar-4"
+                  activeClassName="active-card-number-1 search_bar-1 search_bar-4"
+                  placeholder="e.g. TS-9DJR-MGA2-VH44-5GMXY"
+                />
+                {/* <textarea
+                  className="search_bar-1 search_bar-4"
+                  value={inputAddress}
+                  onChange={handleAddressChange}
+                  placeholder="Enter something"
+                /> */}
                 {/* <div className="search_bar-1 search_bar-4"><p className="card-number">e.g. TS-9DJR-MGA2-VH44-5GMXY or Anderson</p></div> */}
                 <div className="search_bar-2 search_bar-4"></div>
                 <div className="button_save" onClick={() => transferNft(selectedAssetId)}>
@@ -416,12 +429,21 @@ return(
                   <img className="x6" src="img/myNftList/file---6@1x.png" alt="6" />
                   <div className="reward-10-1">REWARD +10%</div>
                 </div>
-                <textarea
-                className="search_bar-3 search_bar-4"
-                value={inputValue}
-                onChange={handleInputChange}
-                placeholder="Enter something"
-              />
+                <CustomTextArea 
+                  text= {inputValue} 
+                  setText={setInputValue} 
+                  width={300} 
+                  height={121} 
+                  importClassName="card-number-1 search_bar-4 search_bar-3"
+                  activeClassName="active-card-number-1 search_bar-4 search_bar-3"
+                  placeholder="You may attach some text or binary data to this transaction. Here you also enter the memo required by many exchanges"
+                />
+                {/* <textarea
+                  className="search_bar-3 search_bar-4"
+                  value={inputValue}
+                  onChange={handleInputChange}
+                  placeholder="You may attach some text or binary data to this transaction. Here you also enter the memo required by many exchanges"
+                /> */}
               {/* <p>Input Value: {inputValue}</p> */}
                 {/* <div className="search_bar-3 search_bar-4">
                   <p className="card-number-1">

@@ -170,7 +170,9 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
           <img className="ic_selfie-TRrnim" src={`${process.env.PUBLIC_URL}/img/ic-selfie-1@1x.png`} alt="ic_selfie" />
           <img className="ic_arrow_forward-TRrnim" src={`${process.env.PUBLIC_URL}/img/ic-arrow-forward-1@1x.png`} alt="ic_arrow_forward" />
         </div> */}
-        <NavigateToTakeSelfieButton/>
+        <div className="nav-to-take-selfie-content">
+          <NavigateToTakeSelfieButton/>
+        </div>
         {/* </Link> */}
         <div className="quick-actions-RoXPLo inter-semi-bold-white-21px">Quick Actions</div>
         <div className="greetings-RoXPLo">
@@ -234,32 +236,36 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
             </div>
           </Link>
           <div className="meditations-GEWAL1">
-            <div className="small-image">
-              <img className="meditation_banner-dLbFgX" src={`${process.env.PUBLIC_URL}/img/home/meditation-banner@1x.png`} alt="Meditation_banner" />
-            </div>
-            <div className="weekly-meditation-3kbxqV inter-medium-white-15px">Weekly Meditation</div>
-            <div className="saturday-only-3kbxqV inter-normal-cadet-blue-12px">Saturday only</div>
-            <div className="sigdao-score-3kbxqV sigdao-score">
-              <div className="x10-UyxTRp x10 inter-semi-bold-keppel-14px">+20</div>
-              <div className="signdao_tokengradient-UyxTRp signdao_tokengradient">
-                <div className="x441-ozHgg7 x441"></div>
-                <div className="x442-ozHgg7 x442"></div>
-                <img className="x880-ozHgg7 x880" src={`${process.env.PUBLIC_URL}/img/file---880-1x-png-10@1x.png`} alt="880" />
+            <div className="home-meditation-content">
+              <div className="small-image">
+                <img className="meditation_banner-dLbFgX" src={`${process.env.PUBLIC_URL}/img/home/meditation-banner@1x.png`} alt="Meditation_banner" />
+              </div>
+              <div className="weekly-meditation-3kbxqV inter-medium-white-15px">Weekly Meditation</div>
+              <div className="saturday-only-3kbxqV inter-normal-cadet-blue-12px">Saturday only</div>
+              <div className="sigdao-score-3kbxqV sigdao-score">
+                <div className="x10-UyxTRp x10 inter-semi-bold-keppel-14px">+20</div>
+                <div className="signdao_tokengradient-UyxTRp signdao_tokengradient">
+                  <div className="x441-ozHgg7 x441"></div>
+                  <div className="x442-ozHgg7 x442"></div>
+                  <img className="x880-ozHgg7 x880" src={`${process.env.PUBLIC_URL}/img/file---880-1x-png-10@1x.png`} alt="880" />
+                </div>
               </div>
             </div>
           </div>
           <div className="step-counts-GEWAL1">
-            <div className="small-image">
-              <img className="step_count_banner-45Wblr" src={`${process.env.PUBLIC_URL}/img/home/step-count-banner@1x.png`} alt="Step_count_banner" />
-            </div>
-            <div className="walking-mission-7hGHU0 inter-medium-white-15px">Walking mission</div>
-            <div className="step-count-7hGHU0 inter-normal-cadet-blue-12px">Step Count</div>
-            <div className="sigdao-score-7hGHU0 sigdao-score">
-              <div className="x10-SMcg87 x10 inter-semi-bold-keppel-14px">+20</div>
-              <div className="signdao_tokengradient-SMcg87 signdao_tokengradient">
-                <div className="x441-JHyhgs x441"></div>
-                <div className="x442-JHyhgs x442"></div>
-                <img className="x880-JHyhgs x880" src={`${process.env.PUBLIC_URL}/img/file---880-1x-png-10@1x.png`} alt="880" />
+            <div className="home-meditation-content">
+              <div className="small-image">
+                <img className="step_count_banner-45Wblr" src={`${process.env.PUBLIC_URL}/img/home/step-count-banner@1x.png`} alt="Step_count_banner" />
+              </div>
+              <div className="walking-mission-7hGHU0 inter-medium-white-15px">Walking mission</div>
+              <div className="step-count-7hGHU0 inter-normal-cadet-blue-12px">Step Count</div>
+              <div className="sigdao-score-7hGHU0 sigdao-score">
+                <div className="x10-SMcg87 x10 inter-semi-bold-keppel-14px">+20</div>
+                <div className="signdao_tokengradient-SMcg87 signdao_tokengradient">
+                  <div className="x441-JHyhgs x441"></div>
+                  <div className="x442-JHyhgs x442"></div>
+                  <img className="x880-JHyhgs x880" src={`${process.env.PUBLIC_URL}/img/file---880-1x-png-10@1x.png`} alt="880" />
+                </div>
               </div>
             </div>
           </div>

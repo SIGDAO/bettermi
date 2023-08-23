@@ -732,8 +732,8 @@
 .myNftList{
   height:322px;
   width:162px;
-  background-color: inherit;
-  /* background-color: #8643ff; */
+  /* background-color: inherit; */
+  background-color: #0D0D0D;
   align-self: center;
   gap:8px;
   margin-top: 10px;
@@ -788,21 +788,20 @@
 }
 
 .myNftReward{
-  font-family: var(--font-family-inter);
+  /* font-family: var(--font-family-inter);
   font-size: 12px;
   font-style: normal;
   font-weight: 600;
   color:#FFFFFF;
-  text-align:left;
+  text-align:left; */
 }
 
 .myNftPrice{
   font-family: var(--font-family-inter);
   font-size: 12px;
   font-style: normal;
-  font-weight: 600;
-  color:#FFFFFF;
-  opacity: 0.6;
+  /* font-weight: 600; */
+  color:#A6B3BB98;
 }
 .myNftButton{
   width:100px;
@@ -812,7 +811,7 @@
   border: 0px;
   color:#FFFFFF;
   font-family: var(--font-family-inter);
-  font-size: 15px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 600;
 }
@@ -841,7 +840,7 @@ opacity: 0.5;
   border-radius: 3px;
   border: 0px;
   font-family: var(--font-family-inter);
-  font-size: 15px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 600;
   color:#FFFFFF
@@ -872,6 +871,7 @@ opacity: 0.5;
   margin-top: 58px;
   cursor: pointer;
   z-index: 1000;
+  background: linear-gradient(112deg, #221D4B 0%, #171717 100%);
 }
 
 .bettermidapp-mimi-nfts-send-address-1 .icon-arrow-left-popup {
@@ -1154,10 +1154,22 @@ opacity: 0.5;
   font-weight: 400;
   letter-spacing: 0;
   line-height: 22px;
-  min-height: 87px;
+  /* min-height: 87px; */
   width: 262px;
   margin: 0;
 }
+
+.bettermidapp-mimi-nfts-send-address-1 .active-card-number-1 {
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 22px;
+  width: 262px;
+  margin: 0;
+}
+
 
 .bettermidapp-mimi-nfts-send-address-1 .additional-text {
   left: 60px;
@@ -1191,7 +1203,7 @@ opacity: 0.5;
 
 .myNftVerticalLine{
   width:1px;
-  background-color: #ffffff;
+  background-color: #A6B3BB33;
 }
 .myNftBar{
   display:flex;

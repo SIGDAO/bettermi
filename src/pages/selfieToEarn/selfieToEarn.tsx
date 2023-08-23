@@ -16,6 +16,7 @@ import { findBMI, isTodayHaveSelfieRecord } from '../../components/bmiCalculate'
 import { BMI_Day } from '../../redux/userBMI';
 import { SeriesDataItemTypeMap } from 'lightweight-charts';
 import moment from 'moment';
+import { NavigateToTakeSelfieButton } from '../../components/button';
 // import { useFindBMI } from '../../components/findBMI';
 
 
@@ -126,13 +127,6 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
   }
 
   // todo: export a button as take a selfie component
-  async function handleTakeASelfie() {
-    if (await isTodayHaveSelfieRecord(tempAccountId, Ledger2, bmi_fetchedData)) {
-      alert('already taken a selfie')
-      // navigate('/takeSelfie')
-    }
-    // navigate('/takeSelfie')
-  }
 
   useEffect(() => {
     // testing data
@@ -254,11 +248,12 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
       <div className="bettermidapp-selfie-to-earn-1">
         <ShortTitleBar title='Selfie to Earn'/>
         <div className="take-a-selfie-button-container">
-          <div className="button_-selfie-to-earn-MUU5YC" onClick={handleTakeASelfie}>
+          {/* <div className="button_-selfie-to-earn-MUU5YC" onClick={handleTakeASelfie}>
               <img className="ic_selfie-u8P1YH" src="img/selfieToEarn/ic-selfie-1@1x.png" alt="ic_selfie" />
               <p className="take-a-selfie-to-earn-u8P1YH inter-semi-bold-white-15px">Take a Selfie to Earn!</p>
               <img className="ic_arrow_forward-u8P1YH" src="img/selfieToEarn/ic-arrow-forward-1@1x.png" alt="ic_arrow_forward" />
-          </div>
+          </div> */}
+          <NavigateToTakeSelfieButton/>
         </div>
         <div className="bmi_-status-MUU5YC">
             <div className="current-kgm2-C5Ye0d inter-normal-cadet-blue-12px-2">

@@ -1,10 +1,17 @@
 import { Button } from '@mui/material';
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CSS from 'csstype';
 import exp from 'constants';
 import './button.css'
+import { isTodayHaveSelfieRecord } from './bmiCalculate';
+import { accountId } from '../redux/account';
+import { useSelector } from 'react-redux';
+import { useLedger } from '../redux/useLedger';
+import { selectCurrentBMI } from '../redux/profile';
+import { selectBMI } from '../redux/userBMI';
+
 
 
 interface IButtonProps {
@@ -23,6 +30,7 @@ interface IButtonProps {
 interface IBackButtonProps {
   top?: string;
 }
+
 
 export const ButtonWithNavigation: React.FunctionComponent<IButtonProps> = (props) => {
   const {text, height, width, navigation} = props;
@@ -146,13 +154,51 @@ export const BackButton: React.FunctionComponent<IBackButtonProps> = (props) => 
 }
 
 export const NavigateToTakeSelfieButton: React.FunctionComponent = () => {
+  const navigate = useNavigate();
+  const tempAccountId = useSelector(accountId);
+  // const bmi_fetchedData = useSelector(selectBMI);
+  const Ledger2 = useLedger();
+  const [isActive, setIsActive] = React.useState<boolean>(false);
+
+  React.useEffect(() => {
+    isTodayHaveSelfieRecord(tempAccountId, Ledger2)
+      .then((result) => {
+        setIsActive(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+    console.log(isActive)
+  }, [])
+
+  async function handleTakeASelfie() {
+    if (!isActive) navigate('/takeSelfie');
+  }
 
 
-  return (
-    <div className="button_-selfie-to-earn-RoXPLo" onClick={() => console.log('sdifsjij')}>
-      <p className="take-a-selfie-to-earn-TRrnim inter-semi-bold-white-15px">Take a Selfie to Earn!</p>
-      <img className="ic_selfie-TRrnim" src={`${process.env.PUBLIC_URL}/img/ic-selfie-1@1x.png`} alt="ic_selfie" />
-      <img className="ic_arrow_forward-TRrnim" src={`${process.env.PUBLIC_URL}/img/ic-arrow-forward-1@1x.png`} alt="ic_arrow_forward" />
-    </div>
-  )
+  if (!isActive) {
+    return (
+      <div className="button_-selfie-to-earn-MUU5YC" onClick={() => handleTakeASelfie()}>
+        <img className="ic_selfie-u8P1YH" src="img/selfieToEarn/ic-selfie-1@1x.png" alt="ic_selfie" />
+        <p className="take-a-selfie-to-earn-u8P1YH inter-semi-bold-white-15px">Take a Selfie to Earn!</p>
+        <img className="ic_arrow_forward-u8P1YH" src="img/selfieToEarn/ic-arrow-forward-1@1x.png" alt="ic_arrow_forward" />
+      </div>
+    )
+  } else {
+    return (
+      <div className="lock-button-cover">
+        <div className="lock-button">
+          <p className="selfie-time-countdown inter-semi-bold-white-15px">
+            12:00:00
+          </p>
+          <img className='lock-icon-NavigateToTakeSelfieButton' src="/img/ic-locked-1@1x.png" alt="" />
+        </div>
+        <div className="button_-selfie-to-earn-MUU5YC" onClick={() => handleTakeASelfie()}>
+          <img className="ic_selfie-u8P1YH" src="img/selfieToEarn/ic-selfie-1@1x.png" alt="ic_selfie" />
+          <p className="take-a-selfie-to-earn-u8P1YH inter-semi-bold-white-15px">Take a Selfie to Earn!</p>
+          <img className="ic_arrow_forward-u8P1YH" src="img/selfieToEarn/ic-arrow-forward-1@1x.png" alt="ic_arrow_forward" />
+        </div>
+      </div>
+    )
+  }
 }

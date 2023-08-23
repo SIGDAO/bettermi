@@ -118,10 +118,12 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
           </div>
         </div>
         <div className="x3">
-          <div className="overlap-group-profile" onClick={() => navigate('/myNftList')} >
-            <img className="add" src="img/profile/add-2@1x.png" alt="Add" />
-            <img className="ic_add" src="img/profile/ic-add-2@1x.png" alt="ic_add" />
-          </div>
+          <Link to="https://test.signumart.io/">
+            <div className="overlap-group-profile" >
+              <img className="add" src="img/profile/add-2@1x.png" alt="Add" />
+              <img className="ic_add" src="img/profile/ic-add-2@1x.png" alt="ic_add" />
+            </div>
+          </Link>
           <div className="x24">
             <img className="x24-item" src="img/profile/nft-1@1x.png" alt="NFT" />
             <img className="x24-item" src="img/profile/nft-1@1x.png" alt="NFT" />

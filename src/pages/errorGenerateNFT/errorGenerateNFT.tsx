@@ -16,11 +16,11 @@ const ErrorGenerateNFT: React.FunctionComponent<IErrorGenerateNFTProps> = (props
             <p className="this-nft-has-been-sn-RYas9d">
               This NFT has been snatched up by someone else. Go ahead and mint another Free NFT now !
             </p>
-            <h1 className="title-RYas9d inter-semi-bold-white-28px">Oops!</h1>
+            <h1 className="title-RYas9d inter-semi-bold-white-28px">Sumimasen!</h1>
             <div className="ic_sentiment_very_dissatisfied_24px-RYas9d ic_sentiment_very_dissatisfied_24px">
               <img
                 className="ic_sentiment_very_dissatisfied_24px-TVetTD ic_sentiment_very_dissatisfied_24px"
-                src="img/errorGenerateNFT/ic-sentiment-very-dissatisfied-24px@1x.png"
+                src="img/errorGenerateNFT/mimi_for_error_page.png"
                 alt="ic_sentiment_very_dissatisfied_24px"
                 />
             </div>

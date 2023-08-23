@@ -120,11 +120,14 @@ export const isTodayHaveSelfieRecord = async (tempAccountId: string, Ledger2: an
   let BMI: SeriesDataItemTypeMap['Area'][]= [];
 
   // handle bmi contract description
-  const descriptionTime = new Date(description.time);
-  if (descriptionTime.getDate() === descriptionTime.getDate() && descriptionTime.getMonth() === descriptionTime.getMonth() && descriptionTime.getFullYear() === descriptionTime.getFullYear()) {
-    return true;
-  };
-
+  try {
+    const descriptionTime = new Date(description.time);
+    if (descriptionTime.getDate() === descriptionTime.getDate() && descriptionTime.getMonth() === descriptionTime.getMonth() && descriptionTime.getFullYear() === descriptionTime.getFullYear()) {
+      return true;
+    };
+  } catch (error) {
+    return false;
+  }
 
   // handle bmi contract message
   for(let i = message.transactions.length - 1; i >= 0 ;i--){

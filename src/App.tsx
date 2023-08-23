@@ -61,7 +61,6 @@ const theme = createTheme({
 const CheckStore: React.FC = () => {
   const location = useLocation();
   const currentPath: string = location.pathname;
-  console.log('Current URL:', currentPath);
 
   if (currentPath === '/' || currentPath === '/connectWallet' ){
     return <Outlet/>
@@ -120,6 +119,7 @@ function App() {
               <Route path='/errorGenerateNFT' element={<ErrorGenerateNFT />} />
               <Route path='/loadingMinting' element={<LoadingMinting />} />
               <Route path='/setting' element={<Setting />} />
+              <Route path='/NFTTransferCompleted' element={<ChallengeCompleted NFT={true} />} />
               <Route path="*" element={<Navigate to="/home" />} />
             </Route>
           </Routes>

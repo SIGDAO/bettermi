@@ -101,16 +101,16 @@ import * as React from 'react';
                           Lv{1}       
                           </div>
                           <div className = "myNftVerticalLine"></div>  
-                          <div  className = "myNftReward">
-                            reward + 1000%
+                          <div  className = "inter-normal-white-12px">
+                            Reward + 10%
                             </div>
                       </div>
                       <div className = "myNftPrice">
-                        $0 signa
+                        $0 SIGNA
                       </div>
                     </div>
                     <div className = "myNftBottom">
-                    <button className = "myNftButton" onClick = {equipNft}>Available</button>
+                    <button className = "myNftButton" onClick = {equipNft}>AVALIBLE</button>
                     <img 
                       onClick={() => {
                         setIsOpenPopup((prev) => !prev);
