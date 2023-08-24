@@ -44,45 +44,26 @@ export const Carousel = ({ children }) => {
         style={{ transform: `translateX(-${activeIndex * 250}px)` }}
       >
         {children}
-        <div className="slide-dots-hH9Cww">
-          {children.map((child, index) => {
-            return (
-              <button
-                key={index}
-                onClick={() => updateIndex(index)}
-                className={`${activeIndex === index ? "x444-3SAlGE" : "x445-3SAlGE"}`}
-              >
-                {index + 1}
-              </button>
-            );
-          })}
-          {/* <div className="x444-3SAlGE"></div>
-          <div className="x445-3SAlGE"></div>
-          <div className="x446-3SAlGE"></div> */}
-        </div>
       </div>
-
-      {/* <div>
-        <button onClick={() => updateIndex(activeIndex - 1)}>Prev</button>
+      <div className="slide-dots-hH9Cww">
         {children.map((child, index) => {
           return (
-            <button
+            <div
               key={index}
               onClick={() => updateIndex(index)}
-              className={`${activeIndex === index ? "active" : ""}`}
-            >
-              {index + 1}
-            </button>
+              className={`${activeIndex === index ? "x444-3SAlGE" : "x445-3SAlGE"}`}
+            />
           );
         })}
-        <button onClick={() => updateIndex(activeIndex + 1)}>Next</button>
-      </div> */}
+      </div>
     </div>
   );
 };
 
 const ImageSlider: React.FunctionComponent<IImageSliderProps> = (props) => {
   const { slides } = props;
+  const [activeIndex, setActiveIndex] = useState(0);
+
 
   return (
     <>
@@ -99,69 +80,10 @@ const ImageSlider: React.FunctionComponent<IImageSliderProps> = (props) => {
               )
             })}
           </Carousel>
-          {/* <Link to='https://www.bettermi.io/'>
-            <div className="x01-78JfKY"><img className="x1" src={`${process.env.PUBLIC_URL}/img/home/1@1x.png`} alt="1" /></div>
-          </Link>
-          <Link to=''>
-            <div className="x11-78JfKY"><img className="x1" src={`${process.env.PUBLIC_URL}/img/home/1@1x.png`} alt="1" /></div>
-          </Link>
-          <Link to=''>
-            <div className="x21-78JfKY"><img className="x1" src={`${process.env.PUBLIC_URL}/img/home/1@1x.png`} alt="1" /></div>
-          </Link> */}
         </div>
       </div>
-      {/* <div className="slide-dots-hH9Cww">
-        <div className="x444-3SAlGE"></div>
-        <div className="x445-3SAlGE"></div>
-        <div className="x446-3SAlGE"></div>
-      </div> */}
     </>
   )
 }
 
 export default ImageSlider;
-
-// import * as React from 'react';
-// import { Link } from 'react-router-dom';
-
-// interface IImageSliderProps {
-//   slides: any[];
-// }
-
-// const ImageSlider: React.FunctionComponent<IImageSliderProps> = (props) => {
-//   const { slides } = props;
-
-//   return (
-//     <div className="special-card-RoXPLo">
-//     <div className="special-scroll-hH9Cww">
-//       {slides.map((slide, index) => {
-//         return (
-//           <div className={index === 2 ? "home-scroller-element" : "home-scroller-element"} key={index}>
-//             <img className='home-scroller-element-image' src={slide.src} alt="" />
-//           </div>
-//         )
-//       })}
-
-//       {/* <div className="x25-hK4LUV">
-//       </div> */}
-//     </div>
-//     <div className="slide-dots-hH9Cww">
-//       <div className="x444-3SAlGE"></div>
-//       <div className="x445-3SAlGE"></div>
-//       <div className="x446-3SAlGE"></div>
-//     </div>
-//     <div className="special_button-hH9Cww">
-//       <div className="button_bg-9uK1Tx"></div>
-//       <div className="ic_notifications-9uK1Tx ic_notifications">
-//         <img
-//           className="ic_notifications-6bhCAa ic_notifications"
-//           src={`${process.env.PUBLIC_URL}/img/home/ic-notifications@1x.png`}
-//           alt="ic_notifications"
-//           />
-//       </div>
-//     </div>
-//   </div>
-// );
-// };
-
-// export default ImageSlider;

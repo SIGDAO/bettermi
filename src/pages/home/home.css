@@ -522,7 +522,7 @@
   bottom: 11px;
   height: 5px;
   position: absolute;
-  right: calc(37.21% - 9px);
+  left: calc(50% - 12.5px);
   width: 25px;
   display: flex;
   flex-direction: row;
@@ -535,9 +535,6 @@
   border-color: var(--cadet-blue-2);
   border-radius: 2.5px;
   height: 100%;
-  /* left: 0px;
-  position: absolute;
-  top: 0px; */
   width: 5px;
 }
 
@@ -551,6 +548,7 @@
   position: absolute;
   top: 0px; */
   width: 5px;
+  cursor: pointer;
 }
 
 .bettermidapp-home-1 .x446-3SAlGE {
@@ -563,6 +561,7 @@
   right: 0px;
   top: 0px; */
   width: 5px;
+  cursor: pointer;
 }
 
 .bettermidapp-home-1 .special_button-hH9Cww {
