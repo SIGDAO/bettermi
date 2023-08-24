@@ -48,5 +48,6 @@ export const accountToken = (state: any) => {
     return state.account.token?state.account.token:localStorage.getItem("token");
 };
 export const accountLevel = (state:any) => {
-    return state.account.level?state.account.token:localStorage.getItem("level");
+
+    return state.account.level;
 }

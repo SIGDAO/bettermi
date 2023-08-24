@@ -27,7 +27,6 @@ interface IMyNftListProps {
 
 interface myNftList{
   image:string;
-  level:number;
   assetId:string;
 }
 
@@ -45,6 +44,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
   const [userNftTokenList,setNftTokenList] = useState<myNftList[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [inputAddress,setInputAddress] = useState("");
+  const [level,setLevel] = useState("");
   const dataFetchedRef = useRef(false);
   const {appName,Wallet,Ledger} = useContext(AppContext);
   const nftTokenIssuer:string = process.env.REACT_APP_NFT_TOKEN_ISSUER!;
@@ -97,7 +97,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
           console.log(JSON.parse(token.description));
           console.log(JSON.parse(token.description).descriptor);
           console.log(typeof(JSON.parse(token.description).descriptor));
-          userNftToken.push({level:1,image:JSON.parse(token.description).descriptor,assetId:token.asset});
+          userNftToken.push({image:JSON.parse(token.description).descriptor,assetId:token.asset});
           setNftTokenList(userNftToken);
         }
       }
@@ -236,14 +236,14 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
   const displayMyNft = myNfts.map((nft) => {//Contract Id
     console.log("userNftList is  ", userNftList);
     return (
-      <MyNft image={nft.image} level={nft.level} isOpenPopup={isOpenPopup} setIsOpenPopup={setIsOpenPopup} assetId = {nft.assetId} setSelectedAssetId={setSelectedAssetId}></MyNft>
+      <MyNft image={nft.image} level={level} isOpenPopup={isOpenPopup} setIsOpenPopup={setIsOpenPopup} assetId = {nft.assetId} setSelectedAssetId={setSelectedAssetId} setLevel={setLevel}></MyNft>
     );
   }
   );
   const displayNftToken = userNftTokenList.map((nft) => {//Contract Id
     console.log("userNftTokenList is  ",nft);
     return(
-      <MyNft image={nft.image} level={nft.level} isOpenPopup={isOpenPopup} setIsOpenPopup={setIsOpenPopup} assetId= {nft.assetId} setSelectedAssetId={setSelectedAssetId}></MyNft>
+      <MyNft image={nft.image} level={level} isOpenPopup={isOpenPopup} setIsOpenPopup={setIsOpenPopup} assetId= {nft.assetId} setSelectedAssetId={setSelectedAssetId} setLevel={setLevel}></MyNft>
     );
   }
   );
@@ -427,7 +427,7 @@ return(
                 <h1 className="text-7">#00000001</h1>
                 <div className="x0-signa-1">$0 SIGNA</div>
                 <div className="x16228">
-                  <div className="lv-1-1">LV 1</div>
+                  <div className="lv-1-1">LV {level}</div>
                   <img className="x6" src="img/myNftList/file---6@1x.png" alt="6" />
                   <div className="reward-10-1">REWARD +10%</div>
                 </div>
