@@ -20,6 +20,7 @@ import { testing } from '../../redux/characteraiAPI';
 import { selectCurrentGender } from '../../redux/profile';
 import { NavigateToTakeSelfieButton } from '../../components/button';
 import ImageSlider from './imageSlider';
+import { accountLevel } from '../../redux/account';
 
 interface IHomeProps {
 }
@@ -65,6 +66,10 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const tempAccountId = useSelector(accountId);
   const Ledger2 = useLedger();
   const gender = useSelector(selectCurrentGender)
+  const [level,setLevel] = useState<string>("");
+  console.log(Token);
+  console.log(store.getState());
+  console.log("Token is  ",Token);
 
   // useEffect(() => {
   //   testing();
@@ -75,7 +80,15 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
     ledger2.account.getAccount({accountId:userId})
       .then((account)=>{
         const description = JSON.parse(account.description);
+        console.log(description.ds);
+        if(description.ds != null){
         store.dispatch(accountSlice.actions.setLevel(description.ds));
+        setLevel(description.ds);
+        }
+        else{
+          setLevel("1");
+          store.dispatch(accountSlice.actions.setLevel(description.ds));
+        }
         console.log(description);
         console.log(Object.keys(description.av));
         console.log(typeof(Object.keys(description.av)[0]));
@@ -180,7 +193,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
         <div className="greetings-RoXPLo">
           <h1 className="title-2ZgxSS">Hi ! </h1>
           <div className="lv_-reward-2ZgxSS">
-            <div className="lv-1-b5x63m inter-semi-bold-keppel-15px">LV 1</div>
+            <div className="lv-1-b5x63m inter-semi-bold-keppel-15px">LV {level}</div>
             <div className="nft-reward-10-b5x63m inter-semi-bold-white-15px">NFT REWARD +10%</div>
             <img className="seperate-line-b5x63m" src={`${process.env.PUBLIC_URL}/img/seperate-line-1@1x.png`} alt="seperate line" />
           </div>

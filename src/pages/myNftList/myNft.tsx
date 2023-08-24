@@ -21,23 +21,24 @@ import * as React from 'react';
 
  interface MyNftProps {
     image:string;
-    level:number;
+    level:string;
     isOpenPopup: boolean;
     setIsOpenPopup: (isOpenPopup: boolean) => void;
      assetId:string;
      setSelectedAssetId:(assetId:string) => void;
+    setLevel:(level:string) => void;
  }
 
 
  const MyNft: React.FunctionComponent<MyNftProps> =  (props) => {
-     const {image, level, isOpenPopup, setIsOpenPopup,assetId,setSelectedAssetId} = props;
+     const {image, level, isOpenPopup, setIsOpenPopup,assetId,setSelectedAssetId,setLevel} = props;
      const [loading, setLoading] = useState<boolean>(true);
      const [imgAddress, setImgAddress] = useState<string>("");
      const nodeHost = useAppSelector(selectWalletNodeHost);
      const ledger2 = LedgerClientFactory.createClient({nodeHost});
      const userAccountpublicKey:string = useSelector(accountPublicKey);
      const {appName,Wallet,Ledger} = useContext(AppContext);
-     const [nftLevel,setLevel] = useState<string>("");
+     const [nftLevel,setNftLevel] = useState<string>("");
      var nftImgAddress:string = "";
      var addressSuffix:string ="https://ipfs.io/ipfs/"; 
      useEffect(() => {
@@ -47,7 +48,7 @@ import * as React from 'react';
              res.text().then((text)=>{
                  console.log(text); 
                  var nftInfo = JSON.parse(text);
-                 setLevel(nftInfo.attributes[0].level);
+                 setNftLevel(nftInfo.attributes[0].level);
                  //console.log(nftInfo); 
                  //console.log(typeof(nftInfo.media[0].social));
                  setImgAddress(nftInfo.media[0].social);
@@ -98,7 +99,7 @@ import * as React from 'react';
                     <div className = "myNftNumber">#0000000001</div>
                       <div className = "myNftBar">
                         <div  className = "myNftLevel">
-                          Lv{1}       
+                          Lv{nftLevel}       
                           </div>
                           <div className = "myNftVerticalLine"></div>  
                           <div  className = "inter-normal-white-12px">
@@ -115,6 +116,7 @@ import * as React from 'react';
                       onClick={() => {
                         setIsOpenPopup((prev) => !prev);
                         setSelectedAssetId(assetId);
+                        setLevel(nftLevel);
                       }} 
                       className = "myNftButtomArrow" 
                       src  = {`${process.env.PUBLIC_URL}/img/NftList/ic-send@1x.png`}
