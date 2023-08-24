@@ -464,10 +464,12 @@
   bottom: 0px;
   height: 185px;
   mix-blend-mode: normal;
-  overflow-x: scroll;
+  overflow: hidden;
   position: absolute;
   right: 0px;
   width: 250px;
+  display: flex;
+  flex: 1;
 }
 
 .bettermidapp-home-1 .x25-hK4LUV {
@@ -477,6 +479,15 @@
   position: relative;
   top: 0px;
   width: 800px;
+}
+
+.home-scroller-element-image {
+  height: 185px;
+  width: 250px;
+}
+
+.home-scroller-element {
+  
 }
 
 .bettermidapp-home-1 .x01-78JfKY {

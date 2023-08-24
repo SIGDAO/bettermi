@@ -50,7 +50,9 @@ const HorizontalScrollContainer = (props: any) => {
 
 const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const slides = [
-    {'url': `${process.env.PUBLIC_URL}/img/home/1@1x.png`}
+    {'src': `${process.env.PUBLIC_URL}/img/home/1@1x.png`, 'link': 'https://www.bettermi.io/'},
+    {'src': `${process.env.PUBLIC_URL}/img/home/1@1x.png`, 'link': 'https://www.bettermi.io/'},
+    {'src': `${process.env.PUBLIC_URL}/img/home/1@1x.png`, 'link': 'https://www.bettermi.io/'},
   ]
 
   // info
@@ -144,10 +146,10 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
             <img className="ic_locked-Itp9oo ic_locked" src={`${process.env.PUBLIC_URL}/img/ic-locked-1@1x.png`} alt="ic_locked" />
           </div>
         </div>
-        <div className="special-card-RoXPLo">
+        <ImageSlider slides={slides} />
+        {/* <div className="special-card-RoXPLo">
           <div className="special-scroll-hH9Cww">
-            <ImageSlider slides={slides} />
-            {/* <div className="x25-hK4LUV">
+            <div className="x25-hK4LUV">
               <Link to='https://www.bettermi.io/'>
                 <div className="x01-78JfKY"><img className="x1" src={`${process.env.PUBLIC_URL}/img/home/1@1x.png`} alt="1" /></div>
               </Link>
@@ -157,7 +159,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
               <Link to=''>
                 <div className="x21-78JfKY"><img className="x1" src={`${process.env.PUBLIC_URL}/img/home/1@1x.png`} alt="1" /></div>
               </Link>
-            </div> */}
+            </div>
           </div>
           <div className="slide-dots-hH9Cww">
             <div className="x444-3SAlGE"></div>
@@ -174,7 +176,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
                 />
             </div>
           </div>
-        </div>
+        </div> */}
         <Link to="https://discord.gg/8tpu5SrX">
           <div className="discord-RoXPLo inter-medium-royal-blue-14px">Discord</div>
         </Link>

@@ -24,47 +24,6 @@ export type ISelfieToEarnProps = {
   // children?: Promise<Element>;
 }
 
-const genBMIlist = (option: string) => {
-  let returnList: BMI_Day [] = []
-  let today = new Date()
-  // console.log(today, "today")
-  let totalDays = 0
-  switch (option) {
-    case '1W':
-      totalDays = 7
-      today = new Date(today.getDate() - totalDays)
-      break
-    case '1M':
-      totalDays = 30
-      today = new Date(today.getDate() - totalDays)
-      break
-    case '1Y':
-      totalDays = 365
-      today = new Date(today.getDate() - totalDays)
-      break
-    case '5Y':
-      totalDays = 365 * 5
-      today = new Date(today.getDate() - totalDays)
-      break
-    default:
-      return []
-  }
-  for (let i = 0; i < totalDays; i++) {
-    let tempDate = new Date(today.setDate(today.getDate() + 1))
-    const year = tempDate.getFullYear();
-    const month = ('0' + (tempDate.getMonth() + 1)).slice(-2);
-    const day = ('0' + tempDate.getDate()).slice(-2);
-    const hours = ('0' + tempDate.getHours()).slice(-2);
-    const minutes = ('0' + tempDate.getMinutes()).slice(-2);
-    const formattedDate = `${year}-${month}-${day}`;
-
-    // let dateFormat: string = tempDate.getFullYear() + "-" + (tempDate.getMonth()+1) + "-" + tempDate.getDate()
-    // console.log()
-    returnList.push({time: formattedDate, value: Math.floor(Math.random() * 10) + 20.1})
-  }
-  return returnList
-
-}
 
 
 const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
@@ -120,6 +79,20 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
       }
     })
   }
+
+  const calRewardSigdao = (bmi: number) => {
+
+    if (bmi >= 18.5 && bmi <= 22.9) {
+      return 5.25
+    } else if (bmi > 22.9 && bmi <= 23.4 || bmi >= 18 && bmi < 18.5) {
+      return 3.94
+    } else if (bmi > 23.4 && bmi <= 23.7 || bmi >= 17.7 && bmi < 18) {
+      return 2.63
+    } else {
+      return 1.31
+    }
+  }
+
 
 
   function onChange(nextValue: any) {
@@ -231,7 +204,7 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
             <div className="x442"></div>
             <img className="x880" src="img/selfieToEarn/file---880-1x-png-10@1x.png" alt="880" />
           </div> */}
-          <div className="sigdao-reward-text-container inter-semi-bold-keppel-14px">+2.625</div>
+          <div className="sigdao-reward-text-container inter-semi-bold-keppel-14px">+ {calRewardSigdao(item?.value)}</div>
         </div>
       </div>
     )
@@ -264,8 +237,8 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
             </div>
             <img className="bmi-goal-C5Ye0d bmi-goal" src="img/selfieToEarn/bmi-goal-1@1x.png" alt="BMI Goal" />
             <img className="bmi-goal-HuKS2x bmi-goal" src="img/selfieToEarn/bmi-goal-1@1x.png" alt="BMI Goal" />
-            <div className="x255-C5Ye0d">{data && data[0]?.value}</div>
-            <div className="x265-C5Ye0d">{data && data[data?.length -1]?.value}</div>
+            <div className="x255-C5Ye0d">{data && data[data?.length -1]?.value}</div>
+            <div className="x265-C5Ye0d">{data && data[0]?.value}</div>
             <img className="x598-C5Ye0d" src="img/selfieToEarn/file---598@1x.png" alt="598" />
         </div>
         <div className="x6-MUU5YC x6">

@@ -31,6 +31,50 @@ const initialColors = {
 
 const testing:LineWidth = 1
 
+// garbge code, don't know where to put
+const genBMIlist = (option: string) => {
+  // let returnList: BMI_Day [] = []
+  let today = new Date()
+  // console.log(today, "today")
+  let totalDays = 0
+  switch (option) {
+    case '1W':
+      totalDays = 7
+      today = new Date(today.getDate() - totalDays)
+      break
+    case '1M':
+      totalDays = 30
+      today = new Date(today.getDate() - totalDays)
+      break
+    case '1Y':
+      totalDays = 365
+      today = new Date(today.getDate() - totalDays)
+      break
+    case '5Y':
+      totalDays = 365 * 5
+      today = new Date(today.getDate() - totalDays)
+      break
+    default:
+      return []
+  }
+  for (let i = 0; i < totalDays; i++) {
+    let tempDate = new Date(today.setDate(today.getDate() + 1))
+    const year = tempDate.getFullYear();
+    const month = ('0' + (tempDate.getMonth() + 1)).slice(-2);
+    const day = ('0' + tempDate.getDate()).slice(-2);
+    const hours = ('0' + tempDate.getHours()).slice(-2);
+    const minutes = ('0' + tempDate.getMinutes()).slice(-2);
+    const formattedDate = `${year}-${month}-${day}`;
+
+    // let dateFormat: string = tempDate.getFullYear() + "-" + (tempDate.getMonth()+1) + "-" + tempDate.getDate()
+    // console.log()
+    returnList.push({time: formattedDate, value: Math.floor(Math.random() * 10) + 20.1})
+  }
+  return returnList
+
+}
+
+
 const areaSeriesInitialOptions = {
   // lineColor: initialColors.lineColor!,
   lineColor: 'transparent',
@@ -79,6 +123,7 @@ const CustomTradingViewChart: React.FC = () => {
   // useEffect(() => {
   //   console.log('data', data)
   // }, [data])
+
 
   
 
