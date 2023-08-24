@@ -163,6 +163,7 @@ export const NavigateToTakeSelfieButton: React.FunctionComponent = () => {
   React.useEffect(() => {
     isTodayHaveSelfieRecord(tempAccountId, Ledger2)
       .then((result) => {
+        console.log('result', result)
         setIsActive(result);
       })
       .catch((err) => {

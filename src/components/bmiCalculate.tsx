@@ -96,14 +96,16 @@ export const findBMI = async (tempAccountId: string, Ledger2: any, today?: boole
 export const isTodayHaveSelfieRecord = async (tempAccountId: string, Ledger2: any, bmi_fetchedData?: any) => {
   // if no ledger, return false
   if(Ledger2 == null) return false;
+  const today = new Date();
+
 
   // if bmi_fetchedData, check if today have record
   if (bmi_fetchedData) {    
     for (let i = 0; i < bmi_fetchedData.length; i++) {
       const element = bmi_fetchedData[i];
-      const today = new Date();
       const elementDate = new Date(element.time * 1000);
       if (elementDate.getDate() === today.getDate() && elementDate.getMonth() === today.getMonth() && elementDate.getFullYear() === today.getFullYear()) {
+        console.log('hihi')
         return true;
       };
     }
@@ -119,10 +121,12 @@ export const isTodayHaveSelfieRecord = async (tempAccountId: string, Ledger2: an
 
   let BMI: SeriesDataItemTypeMap['Area'][]= [];
 
+
   // handle bmi contract description
   try {
     const descriptionTime = new Date(description.time);
-    if (descriptionTime.getDate() === descriptionTime.getDate() && descriptionTime.getMonth() === descriptionTime.getMonth() && descriptionTime.getFullYear() === descriptionTime.getFullYear()) {
+    if (descriptionTime.getDate() === today.getDate() && descriptionTime.getMonth() === today.getMonth() && descriptionTime.getFullYear() === today.getFullYear()) {
+      console.log('today have record description');
       return true;
     };
   } catch (error) {
@@ -136,10 +140,10 @@ export const isTodayHaveSelfieRecord = async (tempAccountId: string, Ledger2: an
     if (typeof content === 'number') continue;
 
     let tempDate = new Date(content.time)
-    const today = new Date();
 
     console.log(tempDate.getDate(), today.getDate(), 'today', 'tmr');
     if (tempDate.getDate() === today.getDate() && tempDate.getMonth() === today.getMonth() && tempDate.getFullYear() === today.getFullYear()) {
+      console.log('today have record');
       return true;
     };
   }

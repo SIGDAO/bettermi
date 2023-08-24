@@ -19,6 +19,7 @@ import { accountId } from '../../redux/account';
 import { testing } from '../../redux/characteraiAPI';
 import { selectCurrentGender } from '../../redux/profile';
 import { NavigateToTakeSelfieButton } from '../../components/button';
+import ImageSlider from './imageSlider';
 
 interface IHomeProps {
 }
@@ -47,6 +48,10 @@ const HorizontalScrollContainer = (props: any) => {
 }
 
 const Home: React.FunctionComponent<IHomeProps> = (props) => {
+  const slides = [
+    {'url': `${process.env.PUBLIC_URL}/img/home/1@1x.png`}
+  ]
+
   // info
   const name = useSelector(selectCurrentUsername);
   const Token:string = useSelector(accountToken);
@@ -60,10 +65,6 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const tempAccountId = useSelector(accountId);
   const Ledger2 = useLedger();
   const gender = useSelector(selectCurrentGender)
-
-  console.log(Token);
-  console.log(store.getState());
-  console.log("Token is  ",Token);
 
   // useEffect(() => {
   //   testing();
@@ -102,7 +103,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
     // }
     navigate('/takeSelfie')
   }
-  
+
   
 
   const content: JSX.Element = (
@@ -132,7 +133,8 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
         </div>
         <div className="special-card-RoXPLo">
           <div className="special-scroll-hH9Cww">
-            <div className="x25-hK4LUV">
+            <ImageSlider slides={slides} />
+            {/* <div className="x25-hK4LUV">
               <Link to='https://www.bettermi.io/'>
                 <div className="x01-78JfKY"><img className="x1" src={`${process.env.PUBLIC_URL}/img/home/1@1x.png`} alt="1" /></div>
               </Link>
@@ -142,7 +144,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
               <Link to=''>
                 <div className="x21-78JfKY"><img className="x1" src={`${process.env.PUBLIC_URL}/img/home/1@1x.png`} alt="1" /></div>
               </Link>
-            </div>
+            </div> */}
           </div>
           <div className="slide-dots-hH9Cww">
             <div className="x444-3SAlGE"></div>
