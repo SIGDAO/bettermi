@@ -99,6 +99,7 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
       const { bmi } = data
       console.log('bmi', bmi)
       dispatch(profileSlice.actions.setBMI(bmi.toFixed(1).toString()))
+      
       navigate(navigatePath)
     } else if (data){
       navigate(navigatePath)

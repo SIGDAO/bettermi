@@ -310,44 +310,44 @@ from ppt
   https://docs.google.com/presentation/d/1bnNfMgiaLvXB1q7ir3ZxJ5i7S72YGK46h-EeyxQ4SFA/edit#slide=id.p
 
   home page
-    <!-- / Position of Arrow -->
-    <!-- / Add AI bot icon -->
-    <!-- / Add Setting icon -->
-    <!-- / Clickable Banners link to Bettermi.io website -->
+    <!-- / Position of Arrow -->√
+    <!-- / Add AI bot icon -->√
+    <!-- / Add Setting icon -->√
+    <!-- / Clickable Banners link to Bettermi.io website -->√
     / Auto scroll next banners (with dots below shows how many promotion banners) <!-- need check -->
-    <!-- / “View all” change to “See all” -->
-    <!-- / Add back locked layer and icon for disable items need check -->
+    <!-- / “View all” change to “See all” -->√
+    <!-- / Add back locked layer and icon for disable items need check -->√
 
   Feature missions Page
-    <!-- / Add AI bot icon -->
-    <!-- / Add Setting icon -->
-    <!-- / Add back locked layer and icon for disable items -->
-    <!-- / No need to display menu bar -->
+    <!-- / Add AI bot icon -->√
+    <!-- / Add Setting icon -->√
+    <!-- / Add back locked layer and icon for disable items -->√
+    <!-- / No need to display menu bar -->√
 
   Selfie to Earn Page
-    <!-- / Should create spacing between calender and menu bar  -->
-    <!-- / Import partner company promotion banner/ special deals. (Find partner banner in drive) -->
+    <!-- / Should create spacing between calender and menu bar  -->√
+    <!-- / Import partner company promotion banner/ special deals. (Find partner banner in drive) -->√
 
   Profile
-    <!-- / The username is missing and cannot display. -->
-    <!-- / The description spacing should follow the right reference in .XD -->
-    <!-- / “Plus” button on the right top corner should link to NFT marketplace(Signum Art to buy more NFTs)  -->
+    <!-- / The username is missing and cannot display. -->√
+    <!-- / The description spacing should follow the right reference in .XD -->√
+    <!-- / “Plus” button on the right top corner should link to NFT marketplace(Signum Art to buy more NFTs)  -->√
     <!-- need to check this one -->
 
   My NFTs Page
     / The background color is same as NFT background
     / Please look again the spacing
     / the seperated line color should be #A6B3BB
-    <!-- / reward -> should be “Reward” -->
-    <!-- / “signa” -> “SIGNA” -->
-    <!-- / The “Send” button should be aline horizontally with the button “ON DATE” & “AVALIBLE” and all capital -->
+    <!-- / reward -> should be “Reward” -->√
+    <!-- / “signa” -> “SIGNA” -->√
+    <!-- / The “Send” button should be aline horizontally with the button “ON DATE” & “AVALIBLE” and all capital -->√
     / The filter button isn’t functional <!-- need ask  -->
-    <!-- / “Plus” button on the right top corner should link to NFT marketplace (Signum Art to buy more NFTs) -->
+    <!-- / “Plus” button on the right top corner should link to NFT marketplace (Signum Art to buy more NFTs) -->√
 
 My NFTs (Transfer ownership) Page
-  <!-- / NFT Details need to get data from the NFT user want to transfer, display include (NFT ID, Level & Reward%, SIGNA amount) -->
-  <!-- / Able to type -->
-  <!-- / Able to transfer NFT to other address(make sure with backend) -->
+  <!-- / NFT Details need to get data from the NFT user want to transfer, display include (NFT ID, Level & Reward%, SIGNA amount) √-->√
+  <!-- / Able to type -->√
+  <!-- / Able to transfer NFT to other address(make sure with backend) -->√
 
 Marketplace Page
   <!-- / NFT Details need to get data from the NFT user want to transfer, display include (NFT ID, Level & Reward%, SIGNA amount) -->

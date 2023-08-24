@@ -15,6 +15,7 @@ import { findBMI } from "../components/bmiCalculate";
 
 export interface UserBMIState {
   userBMI: SeriesDataItemTypeMap['Area'][];
+  localtok
 }
 
 const initialState: UserBMIState = {

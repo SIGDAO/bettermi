@@ -11,3 +11,34 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+.CarouselWrapper {
+  width: 250px;
+  font-family: sans-serif;
+  text-align: center;
+  align-items: end;
+  overflow: hidden;
+}
+.inner {
+  white-space: nowrap;
+  transition: transform 0.3s;
+  /* width: 250px;
+  overflow: hidden; */
+}
+
+.carousel {
+  /* height: 185px; */
+  /* background-color: salmon; */
+  justify-content: center;
+  align-items: center;
+  display: inline-flex;
+  width: 250px;
+}
+
+button {
+  margin-right: 5px;
+}
+
+button.active {
+  background-color: salmon;
+}

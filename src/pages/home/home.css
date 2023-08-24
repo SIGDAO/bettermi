@@ -524,6 +524,9 @@
   position: absolute;
   right: calc(37.21% - 9px);
   width: 25px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .bettermidapp-home-1 .x444-3SAlGE {
@@ -532,9 +535,9 @@
   border-color: var(--cadet-blue-2);
   border-radius: 2.5px;
   height: 100%;
-  left: 0px;
+  /* left: 0px;
   position: absolute;
-  top: 0px;
+  top: 0px; */
   width: 5px;
 }
 
@@ -544,9 +547,9 @@
   border-color: var(--cadet-blue-2);
   border-radius: 2.5px;
   height: 100%;
-  left: calc(50.00% - 2px);
+  /* left: calc(50.00% - 2px);
   position: absolute;
-  top: 0px;
+  top: 0px; */
   width: 5px;
 }
 
@@ -556,9 +559,9 @@
   border-color: var(--cadet-blue-2);
   border-radius: 2.5px;
   height: 100%;
-  position: absolute;
+  /* position: absolute;
   right: 0px;
-  top: 0px;
+  top: 0px; */
   width: 5px;
 }
 

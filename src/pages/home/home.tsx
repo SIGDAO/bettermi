@@ -19,7 +19,7 @@ import { accountId } from '../../redux/account';
 import { testing } from '../../redux/characteraiAPI';
 import { selectCurrentGender } from '../../redux/profile';
 import { NavigateToTakeSelfieButton } from '../../components/button';
-import ImageSlider from './imageSlider';
+import ImageSlider, { Carousel, CarouselItem } from './Carousel';
 import { accountLevel } from '../../redux/account';
 
 interface IHomeProps {
@@ -146,10 +146,21 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
             <img className="ic_locked-Itp9oo ic_locked" src={`${process.env.PUBLIC_URL}/img/ic-locked-1@1x.png`} alt="ic_locked" />
           </div>
         </div>
-        <ImageSlider slides={slides} />
-        {/* <div className="special-card-RoXPLo">
-          <div className="special-scroll-hH9Cww">
+        {/* <ImageSlider slides={slides} /> */}
+        <div className="special-card-RoXPLo">
+          {/* <div className="special-scroll-hH9Cww">
             <div className="x25-hK4LUV">
+              <Carousel>
+                {slides.map((slide, index) => {
+                  return (
+                    <CarouselItem key={index}>
+                      <Link to={slide.link}>
+                        <img className='home-scroller-element-image' src={slide.src} alt="" />
+                      </Link>
+                    </CarouselItem>
+                  )
+                })}
+              </Carousel>
               <Link to='https://www.bettermi.io/'>
                 <div className="x01-78JfKY"><img className="x1" src={`${process.env.PUBLIC_URL}/img/home/1@1x.png`} alt="1" /></div>
               </Link>
@@ -165,7 +176,8 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
             <div className="x444-3SAlGE"></div>
             <div className="x445-3SAlGE"></div>
             <div className="x446-3SAlGE"></div>
-          </div>
+          </div> */}
+          <ImageSlider slides={slides} />
           <div className="special_button-hH9Cww">
             <div className="button_bg-9uK1Tx"></div>
             <div className="ic_notifications-9uK1Tx ic_notifications">
@@ -176,7 +188,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
                 />
             </div>
           </div>
-        </div> */}
+        </div>
         <Link to="https://discord.gg/8tpu5SrX">
           <div className="discord-RoXPLo inter-medium-royal-blue-14px">Discord</div>
         </Link>
