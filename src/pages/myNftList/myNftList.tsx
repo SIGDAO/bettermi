@@ -321,7 +321,7 @@ return(
              <div className = "myNftNumber">#0000000001</div>
                <div className = "myNftBar">
                  <div  className = "myNftLevel">
-                   Lv{1}       
+                   Lv {1}       
                    </div>
                    <div className = "myNftVerticalLine"></div>  
                    <div  className = "inter-normal-white-12px">
@@ -348,7 +348,7 @@ return(
              <div className = "myNftNumber">#0000000001</div>
                <div className = "myNftBar">
                  <div  className = "myNftLevel">
-                   Lv{1}       
+                   Lv {1}       
                    </div>
                    <div className = "myNftVerticalLine"></div>  
                    <div  className = "myNftReward">
@@ -427,7 +427,7 @@ return(
                 <h1 className="text-7">#00000001</h1>
                 <div className="x0-signa-1">$0 SIGNA</div>
                 <div className="x16228">
-                  <div className="lv-1-1">LV {level}</div>
+                  <div className="lv-1-1">LV {level || 1}</div>
                   <img className="x6" src="img/myNftList/file---6@1x.png" alt="6" />
                   <div className="reward-10-1">REWARD +10%</div>
                 </div>

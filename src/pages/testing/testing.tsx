@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./testing.css";
 import { CarouselItem, Carousel } from "./Carousel";
 import { Link } from "react-router-dom";
+import { useSendMsgMutation } from "../../redux/characteraiAPI";
 
 export default function Testing() {
   const slides = [
@@ -10,18 +11,32 @@ export default function Testing() {
     {'src': `${process.env.PUBLIC_URL}/img/home/1@1x.png`, 'link': 'https://www.bettermi.io/'},
   ]
 
+  const [ sendMsg, {isLoading, data} ] = useSendMsgMutation()
+
+  useEffect(() => {
+    console.log("testing")
+    
+  }, []);
+
+  const handleSendMsg = async () => {
+    await sendMsg({msg: "testing sendMsg"})
+  }
+
   return (
-    <Carousel>
-      {slides.map((slide, index) => {
-        return (
-          <CarouselItem key={index}>
-            <Link to={slide.link}>
-              <img className='home-scroller-element-image' src={slide.src} alt="" />
-            </Link>
-          </CarouselItem>
-        )
-      })}
-    </Carousel>
+    <button onClick={() => handleSendMsg()}>
+      testing sendMsg
+    </button>
+    // <Carousel>
+    //   {slides.map((slide, index) => {
+    //     return (
+    //       <CarouselItem key={index}>
+    //         <Link to={slide.link}>
+    //           <img className='home-scroller-element-image' src={slide.src} alt="" />
+    //         </Link>
+    //       </CarouselItem>
+    //     )
+    //   })}
+    // </Carousel>
   );
 }
 

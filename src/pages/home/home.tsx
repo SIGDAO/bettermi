@@ -280,13 +280,16 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
                 </div>
               </div>
             </div>
+            <div className="meditations-overlay">
+              <img src="/img/ic-locked-1@1x.png" className='lock-image' alt="" />
+            </div>
           </div>
           <div className="step-counts-GEWAL1">
             <div className="home-meditation-content">
               <div className="small-image">
                 <img className="step_count_banner-45Wblr" src={`${process.env.PUBLIC_URL}/img/home/step-count-banner@1x.png`} alt="Step_count_banner" />
               </div>
-              <div className="walking-mission-7hGHU0 inter-medium-white-15px">Walking mission</div>
+              <div className="walking-mission-7hGHU0 inter-medium-white-15px">Walking Mission</div>
               <div className="step-count-7hGHU0 inter-normal-cadet-blue-12px">Step Count</div>
               <div className="sigdao-score-7hGHU0 sigdao-score">
                 <div className="x10-SMcg87 x10 inter-semi-bold-keppel-14px">+20</div>
@@ -297,6 +300,10 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
                 </div>
               </div>
             </div>
+            <div className="meditations-overlay">
+              <img src="/img/ic-locked-1@1x.png" className='lock-image' alt="" />
+            </div>
+
           </div>
         </HorizontalScrollContainer>
         {/* <div className="missions-scroll-RoXPLo">

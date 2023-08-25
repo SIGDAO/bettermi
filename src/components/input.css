@@ -71,6 +71,11 @@
   width: 15px;
 }
 
+.customTextArea::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
 .customTextArea {
   padding: 19.5px 15px;
   resize: none;

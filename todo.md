@@ -356,3 +356,19 @@ Marketplace Page
 
 error page:
   <!-- / add gif and change the sentence of error -->
+
+  mimi / io / -
+
+
+refix
+
+<!-- lock -->
+<!-- sigdao icon on calendar -->
+<!-- myNftList
+https://test.signumart.io/ -->
+
+task list til 29
+character ai
+sigdao reward
+1W 1M 1Y 5Y
+No record today

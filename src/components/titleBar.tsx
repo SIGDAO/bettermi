@@ -39,9 +39,11 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
         <div className="title-bar-title inter-semi-bold-white-18px">{title}</div>
         {/* <img className="title-bar-seperat-line seperat-line" src={process.env.PUBLIC_URL + "/img/seperat-line-11@1x.png"} alt="Seperat line" /> */}
         {addSign === true?
-        <div className = "titleBarAddSign">
-          <img className = "titleBarAddSignImg" src = {process.env.PUBLIC_URL + "/img/NftList/ic-add@1x.png"}/>
-        </div>
+        <Link to='https://test.signumart.io/collection/13061730801426095294'>
+          <div className = "titleBarAddSign">
+            <img className = "titleBarAddSignImg" src = {process.env.PUBLIC_URL + "/img/NftList/ic-add@1x.png"}/>
+          </div>
+        </Link>
         :
         <Link to='/setting'>
         <div className="title-bar-ic_help_24px ic_help_24px">

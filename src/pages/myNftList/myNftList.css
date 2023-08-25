@@ -771,11 +771,12 @@
   width:137px;
   display: flex;
   flex-direction: column;
+  gap: 5px;
 }
 .myNftNumber{
   color:#4136F1;
   font-family: var(--font-family-inter);
-  font-size: var(--font-size-xxl);
+  font-size: 14px;
   font-style: normal;
   font-weight: 600;
 }
@@ -1208,7 +1209,8 @@ opacity: 0.5;
 .myNftBar{
   display:flex;
   flex-direction: row;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  gap: 10px;
 }
 .myNftSend{
   background-color: inherit;
