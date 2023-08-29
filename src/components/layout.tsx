@@ -14,9 +14,6 @@ export function CenterLayout (props: ICenterLayoutProps) {
   let width : string | number;
   const mobile = process.env.REACT_APP_MOBILE === 'true'
 
-  console.log('noScroll', noScroll)
-
-
   // display in iphone 12 pro size
 
   if (mobile) { 

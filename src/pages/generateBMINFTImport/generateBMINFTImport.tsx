@@ -23,6 +23,8 @@ import { accountId } from '../../redux/account';
 import { TransferNFTOwnership } from './transferNFTOwnership';
 import { accountSlice } from '../../redux/account';
 import { store } from '../../redux/reducer';
+import { calBMIType, calRewardSigdaoOnSelfie } from '../../components/selfieToEarnRewardType';
+import { TransferToken } from '../../components/transferToken';
 
 
 
@@ -127,7 +129,7 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
           }) as UnsignedTransaction;
           await Wallet.Extension.confirm(sendBMI.unsignedTransactionBytes);
         }
-        console.log('confirm');
+        await TransferToken(nodeHost, userAccountId, calRewardSigdaoOnSelfie(BMI).toString());
         //await TransferNFTOwnership(ledger,userAccountId,Wallet);
         navigate('/loadingMinting');
       } catch (error) {
@@ -155,7 +157,8 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
           <img className="seperate-line-X2g18V seperate-line" src="img/generateBMINFTImport/seperat-line-1@1x.png" alt="seperate line" />
         </div>
         <div className="bmi-result-bL0gm3">
-          <div className="bg-Gw4eM2"></div>
+          {/* <div className="bg-Gw4eM2" style={{backgroundColor: calBMIType(BMI).color}}></div> */}
+          <div className="bg-Gw4eM2" ></div>
           <div className="x255-Gw4eM2">{BMI || 25.5}</div>
           <div className="kgm2-Gw4eM2">
             <span className="span0-IFVIgU inter-normal-royal-blue-14px">kg/m</span><span className="span1-IFVIgU inter-normal-royal-blue-14px">2</span>

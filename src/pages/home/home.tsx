@@ -124,7 +124,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const content: JSX.Element = (
     <div className="screen">
       <div className="bettermidapp-home-1">
-        <Link to="/allMission">
+        <Link to="/featureMissions">
           <div className="view-all-RoXPLo inter-medium-royal-blue-14px">See all</div>
         </Link>
         <div className="feature-missions-RoXPLo inter-semi-bold-white-21px">Feature Missions</div>

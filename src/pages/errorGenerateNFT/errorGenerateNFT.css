@@ -252,15 +252,19 @@
 }
 
 .bettermidapp-generate-free-nft-error .button_-mintagain-QHnb0b {
-  background-color: transparent;
+  background: linear-gradient(-90deg, #8743ff 0%, #4136f1 100%);
   cursor: pointer;
   height: 100%;
   left: 0px;
   position: relative;
   top: 0px;
   width: 100%;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
+/* 
 .bettermidapp-generate-free-nft-error .button1-7FeCxk {
   background: linear-gradient(-90deg, #8743ff 0%, #4136f1 100%);
   background-color: transparent;
@@ -271,19 +275,22 @@
   position: absolute;
   top: 0px;
   width: 100%;
-}
+} */
 
 .bettermidapp-generate-free-nft-error .mintagain-7FeCxk {
   background-color: transparent;
-  bottom: calc(38.57% - 8px);
+  /* bottom: calc(38.57% - 8px); */
   height: 21px;
   letter-spacing: 0.00px;
   line-height: 14px;
-  position: absolute;
-  right: calc(49.41% - 39px);
+  display: flex;
+  align-items: center;
+  /* position: absolute; */
+  /* right: calc(49.41% - 39px); */
   text-align: center;
   white-space: nowrap;
-  width: 78px;
+  align-items: center;
+  /* width: 78px; */
 }
 
 .bettermidapp-generate-free-nft-error .ic_sentiment_very_dissatisfied_24px {

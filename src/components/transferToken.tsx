@@ -19,6 +19,7 @@ export async function TransferToken(nodeHost:any,accountId:any,quantity:string){
     const assetId = "3862155318820066741";
     console.log(ledger2, "ledger2");
     console.log(nodeHost, "nodeHost");
+    console.log(quantity, 'quantity');
 
 
     if(ledger2 != null){

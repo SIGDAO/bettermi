@@ -41,7 +41,7 @@ export const Carousel = ({ children }) => {
         {children}
       </div>
 
-      {/* <div>
+      <div>
         <button onClick={() => updateIndex(activeIndex - 1)}>Prev</button>
         {children.map((child, index) => {
           return (
@@ -55,7 +55,7 @@ export const Carousel = ({ children }) => {
           );
         })}
         <button onClick={() => updateIndex(activeIndex + 1)}>Next</button>
-      </div> */}
+      </div>
     </div>
   );
 };

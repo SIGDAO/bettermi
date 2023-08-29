@@ -72,20 +72,20 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
         <div className = "container2">
         {/* <a href="javascript:history.back()">
           <div className="icon-arrow-left" style={customStyle} >
-            <img className="icon-arrow-left-1" src={`${process.env.PUBLIC_URL}/img/connectSuccess/icon-arrow-left-8@1x.png`} alt="icon-arrow-left" />
+            <img className="icon-arrow-left-1" src={`${process.env.PUBLIC_URL}/img/connectSucceed/icon-arrow-left-8@1x.png`} alt="icon-arrow-left" />
           </div>
         </a> */}
         <div></div>
           <div className = "banner">
           {/* <a href="javascript:history.back()">
           <div className="iconChallengeCompleted" >
-            <img className="icon-arrow-left-1" src={`${process.env.PUBLIC_URL}/img/connectSuccess/icon-arrow-left-8@1x.png`} alt="icon-arrow-left" />
+            <img className="icon-arrow-left-1" src={`${process.env.PUBLIC_URL}/img/connectSucceed/icon-arrow-left-8@1x.png`} alt="icon-arrow-left" />
           </div>
         </a> */}
               <div className = "title">
               <a style = {{marginRight:"31px"}} href="javascript:history.back()">
                     <div className="iconChallengeCompleted" >
-                      <img className="icon-arrow-left-1" src={`${process.env.PUBLIC_URL}/img/connectSuccess/icon-arrow-left-8@1x.png`} alt="icon-arrow-left" />
+                      <img className="icon-arrow-left-1" src={`${process.env.PUBLIC_URL}/img/connectSucceed/icon-arrow-left-8@1x.png`} alt="icon-arrow-left" />
                     </div>
                   </a>
                 <div>Feature Missions</div>

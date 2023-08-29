@@ -11,7 +11,7 @@ const MenuBar: React.FC<IMenuBarProps> = (props) => {
     <div className="menu-bar-layout">
       <div className="menu-bar-RoXPLo">
         {/* <img className="menu_bar_bg-j7gIYx" src={`${process.env.PUBLIC_URL}/img/menuBar/menu-bar-bg-1@1x.png`} alt="menu_bar_bg" /> */}
-        <Link to={'/allMission'} >
+        <Link to={'/featureMissions'} >
           <div className="ic_-missions-container">
             <img className="ic_-missions-img" src={`${process.env.PUBLIC_URL}/img/menuBar/ic-missions-1@1x.png`} alt="ic_Missions" />
           </div>

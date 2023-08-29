@@ -17,6 +17,7 @@ import { BMI_Day } from '../../redux/userBMI';
 import { SeriesDataItemTypeMap } from 'lightweight-charts';
 import moment from 'moment';
 import { NavigateToTakeSelfieButton } from '../../components/button';
+import { calRewardSigdaoOnSelfie } from '../../components/selfieToEarnRewardType';
 // import { useFindBMI } from '../../components/findBMI';
 
 
@@ -27,8 +28,6 @@ export type ISelfieToEarnProps = {
 
 
 const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
-
-  
   const [value, setValue] = useState(); // selected day on calendar
   const [data, setData] = useState<SeriesDataItemTypeMap['Area'][]>()
   // const [data, setData] = useState<any>()
@@ -82,18 +81,17 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
     })
   }
 
-  const calRewardSigdao = (bmi: number) => {
-
-    if (bmi >= 18.5 && bmi <= 22.9) {
-      return 5.25
-    } else if (bmi > 22.9 && bmi <= 23.4 || bmi >= 18 && bmi < 18.5) {
-      return 3.94
-    } else if (bmi > 23.4 && bmi <= 23.7 || bmi >= 17.7 && bmi < 18) {
-      return 2.63
-    } else {
-      return 1.31
-    }
-  }
+  // const calRewardSigdaoOnSelfie = (bmi: number) => {
+  //   if (bmi >= 18.5 && bmi <= 22.9) {
+  //     return 5.25
+  //   } else if (bmi > 22.9 && bmi <= 23.4 || bmi >= 18 && bmi < 18.5) {
+  //     return 3.94
+  //   } else if (bmi > 23.4 && bmi <= 23.7 || bmi >= 17.7 && bmi < 18) {
+  //     return 2.63
+  //   } else {
+  //     return 1.31
+  //   }
+  // }
 
 
 
@@ -206,7 +204,7 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
             <div className="x442"></div>
             <img className="x880" src="img/selfieToEarn/file---880-1x-png-10@1x.png" alt="880" />
           </div>
-          <div className="sigdao-reward-text-container inter-semi-bold-keppel-14px">+{calRewardSigdao(item?.value)}</div>
+          <div className="sigdao-reward-text-container inter-semi-bold-keppel-14px">+{calRewardSigdaoOnSelfie(item?.value)}</div>
         </div>
       </div>
     )

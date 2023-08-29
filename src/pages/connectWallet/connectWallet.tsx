@@ -88,7 +88,7 @@ export default function ConnectWallet (props: IConnectWalletProps) {
             console.log(obj.quantityQNT);
         }
       });
-    // navigate('/connectSuccess');
+    // navigate('/connectSucceed');
     if(ourContract.ats[0] != null){
       console.log("called the if statement");
       var description = ourContract.ats[0].description;
@@ -118,12 +118,12 @@ console.log(description.includes("Male"))
       // store.dispatch(profileSlice.actions.setGender(gender));
       // console.log(gender);
       // console.log(ourContract.ats[0]);
-       //navigate('/connectSuccess');
+       //navigate('/connectSucceed');
       navigate("/home");
     }
     else{
     console.log(store.getState());
-    navigate('/connectSuccess')
+    navigate('/connectSucceed')
     }
   })
   // todo: add error handling, and show it to user

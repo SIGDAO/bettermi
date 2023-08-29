@@ -21,7 +21,7 @@ import LogoPage from './pages/logoPage/LogoPage';
 import ConnectWallet from './pages/connectWallet/connectWallet';
 import GenerateBMI from './pages/generateBMI/GenerateBMI';
 import TakeSelfie from './pages/takeSelfie/TakeSelfie';
-import ConnectSuccess from './pages/connectSuccess/connectSuccess';
+import ConnectSucceed from './pages/connectSucceed/connectSucceed';
 import GenerateFreeNFT from './pages/generateFreeNFT/generateFreeNFT';
 import CustomizeYourProfile from './pages/customizeYourProfile/customizeYourProfile';
 import Home from './pages/home/home';
@@ -62,11 +62,11 @@ const titleList = {
   '/connectWallet': 'Connect Wallet - BetterMi',
   '/generateBMI': 'Generate BMI - BetterMi',
   '/takeSelfie': 'Take Selfie - BetterMi',
-  '/connectSuccess': 'Connect Success - BetterMi',
+  '/connectSucceed': 'Connect Succeed - BetterMi',
   '/generateFreeNFT': 'Generate Free NFT - BetterMi',
   '/customizeYourProfile': 'Customize Your Profile - BetterMi',
   '/home': 'Home - BetterMi',
-  '/allMission': 'All Mission - BetterMi',
+  '/featureMissions': 'Feature Missions - BetterMi',
   '/challengeCompleted': 'Challenge Completed - BetterMi',
   '/challengeCountdown': 'Challenge Countdown - BetterMi',
   '/missionChallenge': 'Mission Challenge - BetterMi',
@@ -82,6 +82,7 @@ const titleList = {
   '/aiCoachSelect': 'AI Coach Select - BetterMi',
   '/aiCoachDetail': 'AI Coach Detail - BetterMi',
   '/errorGenerateNFT': 'Error Generate NFT - BetterMi',
+  '/errorTakeSelfie': 'Error Take Selfie - BetterMi',
   '/loadingMinting': 'Loading Minting - BetterMi',
   '/setting': 'Setting - BetterMi',
   '/NFTTransferCompleted': 'NFT Transfer Completed - BetterMi',
@@ -123,12 +124,12 @@ function App() {
               <Route path="/connectWallet" element={<ConnectWallet/>} />
               <Route path="/generateBMI" element={<GenerateBMI/>} />
               <Route path="/takeSelfie" element={<TakeSelfie/>} />
-              <Route path="/connectSuccess" element={<ConnectSuccess/>} />
+              <Route path="/connectSucceed" element={<ConnectSucceed/>} />
               <Route path="/generateFreeNFT" element={<GenerateFreeNFT/>} />
               <Route path="/customizeYourProfile" element={<CustomizeYourProfile/>} />
               {/* flow 2 */}
               <Route path="/home" element={<Home/>} />
-              <Route path="/allMission" element={<AllMission/>} />
+              <Route path="/featureMissions" element={<AllMission/>} />
               <Route path="/challengeCompleted" element={<ChallengeCompleted/>} />
               <Route path="/challengeCountdown">
                 <Route path=":id" element={<ChallengeCountdown/>} />
@@ -151,6 +152,7 @@ function App() {
                 <Route path=':id' element={<AiCoachDetail />} />
               </Route>
               <Route path='/errorGenerateNFT' element={<ErrorGenerateNFT />} />
+              <Route path='/errorTakeSelfie' element={<ErrorGenerateNFT />} />
               <Route path='/loadingMinting' element={<LoadingMinting />} />
               <Route path='/setting' element={<Setting />} />
               <Route path='/NFTTransferCompleted' element={<ChallengeCompleted NFT={true} />} />

@@ -371,4 +371,11 @@ task list til 29
 character ai
 sigdao reward
 1W 1M 1Y 5Y
-No record today
+<!-- No record today -->
+error page
+  error message for selfie
+
+/ BMI reward calculations
+/ Challenge countdown 
+/ Take selfie again for BMI detection error
+/ AI Mimi and .Io functional etc.

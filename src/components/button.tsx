@@ -147,7 +147,7 @@ export const BackButton: React.FunctionComponent<IBackButtonProps> = (props) => 
   return (
     <a href="javascript:history.back()">
       <div className="icon-arrow-left" style={customStyle} >
-        <img className="icon-arrow-left-1" src={`${process.env.PUBLIC_URL}/img/connectSuccess/icon-arrow-left-8@1x.png`} alt="icon-arrow-left" />
+        <img className="icon-arrow-left-1" src={`${process.env.PUBLIC_URL}/img/connectSucceed/icon-arrow-left-8@1x.png`} alt="icon-arrow-left" />
       </div>
     </a>
   )
@@ -159,6 +159,8 @@ export const NavigateToTakeSelfieButton: React.FunctionComponent = () => {
   // const bmi_fetchedData = useSelector(selectBMI);
   const Ledger2 = useLedger();
   const [isActive, setIsActive] = React.useState<boolean>(false);
+
+  
 
   React.useEffect(() => {
     isTodayHaveSelfieRecord(tempAccountId, Ledger2)
