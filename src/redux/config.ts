@@ -16,6 +16,7 @@ const Networks = {
       ? "https://testnet.explorer.signum.network/"
       : "https://explorer.signum.network/";
   
+  
   export const Config = {
     appName,
     IsTestnet: selectedNetwork === Networks.TestNet,

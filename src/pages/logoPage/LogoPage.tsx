@@ -17,7 +17,6 @@ const Logo: React.FC = () => {
         />
       </div>
     </Link>
-
   )
 
 

@@ -51,3 +51,40 @@ video {
   position: absolute;
   left: calc((100% - 819px) / 2);
 }
+
+.disclaimer {
+  display: inline;
+  /* justify-content: center; */
+  /* margin-top: 30px; */
+  position: absolute;
+  text-align: center;
+  width: 450px;
+  left: calc((100% - 450px) / 2);
+  top: calc(676px - 50px) ;
+}
+
+
+
+.animation-containter {
+  width: 819px;
+  display: flex;
+  flex-direction: column;
+  top: 529px;
+  justify-items: center;
+  align-items: center;
+  position: absolute;
+  gap: 10px;
+}
+
+@media only screen and (max-device-width: 390px) {
+  .disclaimer {
+    width: 370px;
+    left: calc((100% - 370px) / 2);
+    font-size: 13px;
+  }
+  
+}
+
+.percentage-display {
+  color: #39B3AF;
+}

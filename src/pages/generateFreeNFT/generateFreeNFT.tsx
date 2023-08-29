@@ -24,7 +24,6 @@ const GenerateFreeNFT: React.FunctionComponent<GenerateFreeNFTProps> = (props) =
       </div>
       <div className="x0-signa">$0 SIGNA</div>
       <div className="button_-import" onClick={() => navigate('/customizeYourProfile')}><div className="continue inter-semi-bold-white-15px">Import</div></div>
-
     </>
   )
 

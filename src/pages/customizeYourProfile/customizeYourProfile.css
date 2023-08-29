@@ -62,6 +62,7 @@
 
 .button_-save-Gzrq3v {
   background-color: transparent;
+  cursor: pointer;
   height: 56px;
   left: calc((100% - 248px) /2);
   position: absolute;
@@ -110,74 +111,9 @@
   width: 333px;
 }
 
-.search_bar-Gzrq3v {
-  background-color: transparent;
-  height: 56px;
+.search-bar-container-customizeYourProfile {
   left: calc((100% - 310px) /2);
   position: absolute;
   top: 645px;
-  width: 310px;
-}
 
-
-.search-AToI7d {
-  cursor: text;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #ffffff08;
-  border-radius: 10px;
-  height: 100%;
-  left: 0px;
-  position: absolute;
-  top: 0px;
-  width: 300px;
-}
-
-.card-number-AToI7d::placeholder {
-  color: white;
-}
-
-.card-number-AToI7d {
-  bottom: calc(44.29% - 9px);
-  color: var(--white);
-  font-size: var(--font-size-l);
-  height: 100%;
-  margin-left: 15px;
-  width: 180px;
-  padding: 0;
-  border: 0;
-  outline: 0;
-  color: white;
-  font-family: var(--font-family-inter);
-  background-color: transparent;
-}
-
-.random-dice-AToI7d {
-  cursor: pointer;
-  background-color: transparent;
-  height: 17px;
-  position: absolute;
-  right: 20px;
-  width: 79px;
-}
-
-.card-number-zhUTxv {
-  color: #39b3af;
-  font-size: var(--font-size-m);
-  height: 19px;
-  left: calc(100% / 2);
-  top: 8.82%;
-  white-space: nowrap;
-  width: 56px;
-}
-
-.ic_casino_24px-zhUTxv {
-  background-color: transparent;
-  height: 15px;
-  object-fit: cover;
-  position: absolute;
-  right: 0px;
-  top: 1px;
-  width: 15px;
 }

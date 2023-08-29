@@ -1,10 +1,17 @@
 import { Button } from '@mui/material';
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CSS from 'csstype';
 import exp from 'constants';
 import './button.css'
+import { isTodayHaveSelfieRecord } from './bmiCalculate';
+import { accountId } from '../redux/account';
+import { useSelector } from 'react-redux';
+import { useLedger } from '../redux/useLedger';
+import { selectCurrentBMI } from '../redux/profile';
+import { selectBMI } from '../redux/userBMI';
+
 
 
 interface IButtonProps {
@@ -21,8 +28,9 @@ interface IButtonProps {
 // const defaultButtonStyle = makeStyles<Theme
 
 interface IBackButtonProps {
-
+  top?: string;
 }
+
 
 export const ButtonWithNavigation: React.FunctionComponent<IButtonProps> = (props) => {
   const {text, height, width, navigation} = props;
@@ -36,7 +44,6 @@ export const ButtonWithNavigation: React.FunctionComponent<IButtonProps> = (prop
     'background': 'linear-gradient(-90deg, #8743ff 0%, #4136f1 100%)',
     'borderRadius': '10px',
     'boxShadow': '0px 15px 30px #1466cc29',
-
   }
 
   return (
@@ -122,11 +129,77 @@ export const DisabledButton: React.FunctionComponent<IButtonProps> = (props) => 
 }
 
 export const BackButton: React.FunctionComponent<IBackButtonProps> = (props) => {
+  const {top} = props;
+
+  const customStyle: CSS.Properties = {
+    'alignItems': 'flex-start',
+    'cursor': 'pointer',
+    'display': 'flex',
+    'height': '44px',
+    'left': '16px',
+    'minWidth': '44px',
+    'paddingLeft': '14px',
+    'position': 'relative',
+    'top': top || '44px',
+  }
+
+
   return (
     <a href="javascript:history.back()">
-      <div className="icon-arrow-left">
-        <img className="icon-arrow-left-1" src={`${process.env.PUBLIC_URL}/img/connectSuccess/icon-arrow-left-8@1x.png`} alt="icon-arrow-left" />
+      <div className="icon-arrow-left" style={customStyle} >
+        <img className="icon-arrow-left-1" src={`${process.env.PUBLIC_URL}/img/connectSucceed/icon-arrow-left-8@1x.png`} alt="icon-arrow-left" />
       </div>
     </a>
   )
+}
+
+export const NavigateToTakeSelfieButton: React.FunctionComponent = () => {
+  const navigate = useNavigate();
+  const tempAccountId = useSelector(accountId);
+  // const bmi_fetchedData = useSelector(selectBMI);
+  const Ledger2 = useLedger();
+  const [isActive, setIsActive] = React.useState<boolean>(false);
+
+  React.useEffect(() => {
+    isTodayHaveSelfieRecord(tempAccountId, Ledger2)
+      .then((result) => {
+        console.log('result', result)
+        setIsActive(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+    console.log(isActive)
+  }, [])
+
+  async function handleTakeASelfie() {
+    if (!isActive) navigate('/takeSelfie');
+  }
+
+
+  if (!isActive) {
+    return (
+      <div className="button_-selfie-to-earn-MUU5YC" onClick={() => handleTakeASelfie()}>
+        <img className="ic_selfie-u8P1YH" src="img/selfieToEarn/ic-selfie-1@1x.png" alt="ic_selfie" />
+        <p className="take-a-selfie-to-earn-u8P1YH inter-semi-bold-white-15px">Take a Selfie to Earn!</p>
+        <img className="ic_arrow_forward-u8P1YH" src="img/selfieToEarn/ic-arrow-forward-1@1x.png" alt="ic_arrow_forward" />
+      </div>
+    )
+  } else {
+    return (
+      <div className="lock-button-cover">
+        <div className="lock-button">
+          <p className="selfie-time-countdown inter-semi-bold-white-15px">
+            12:00:00
+          </p>
+          <img className='lock-icon-NavigateToTakeSelfieButton' src="/img/ic-locked-1@1x.png" alt="" />
+        </div>
+        <div className="button_-selfie-to-earn-MUU5YC" onClick={() => handleTakeASelfie()}>
+          <img className="ic_selfie-u8P1YH" src="img/selfieToEarn/ic-selfie-1@1x.png" alt="ic_selfie" />
+          <p className="take-a-selfie-to-earn-u8P1YH inter-semi-bold-white-15px">Take a Selfie to Earn!</p>
+          <img className="ic_arrow_forward-u8P1YH" src="img/selfieToEarn/ic-arrow-forward-1@1x.png" alt="ic_arrow_forward" />
+        </div>
+      </div>
+    )
+  }
 }
