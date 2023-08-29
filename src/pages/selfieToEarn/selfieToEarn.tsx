@@ -27,6 +27,8 @@ export type ISelfieToEarnProps = {
 
 
 const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
+
+  
   const [value, setValue] = useState(); // selected day on calendar
   const [data, setData] = useState<SeriesDataItemTypeMap['Area'][]>()
   // const [data, setData] = useState<any>()

@@ -4,8 +4,9 @@ import { useParams } from 'react-router-dom';
 import { CenterLayout } from '../../components/layout';
 import { BackButton } from '../../components/button';
 import { ShortTitleBar } from '../../components/titleBar';
+import { useEffect } from 'react';
 
-interface IAiCoachDetailProps {
+interface IAiCoachDetailListProps {
   coachName: string,
   coachID: string,
   coachImagePath: string,
@@ -13,7 +14,10 @@ interface IAiCoachDetailProps {
   coachUserName: string,
 }
 
-const coachList: IAiCoachDetailProps[] = [
+interface IAiCoachDetailProps {
+}
+
+const coachList: IAiCoachDetailListProps[] = [
   {
     coachID: `1`,
     coachImagePath:  `ai-chatbot-mimi-1@1x.png`,
@@ -30,9 +34,13 @@ const coachList: IAiCoachDetailProps[] = [
   },
 ]
 
-const AiCoachDetail: React.FunctionComponent = () => {
+const AiCoachDetail: React.FunctionComponent<IAiCoachDetailProps> = (props) => {
   const { id } = useParams();
-  const displayCoach: IAiCoachDetailProps = coachList.find((coach) => coach.coachID === id) || coachList[0];
+  const displayCoach: IAiCoachDetailListProps = coachList.find((coach) => coach.coachID === id) || coachList[0];
+
+
+
+
   const content: JSX.Element = (
     <div className="screen">
         <div className="bettermidapp-ai-coach-mimi">

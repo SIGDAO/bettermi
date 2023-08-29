@@ -5,14 +5,16 @@ import {BrowserRouter, Routes, Route, Navigate, useLocation, Outlet} from 'react
 import { useDispatch, useSelector } from 'react-redux';
 import { Provider as ReduxProvider } from "react-redux";
 import  { Fragment } from 'react';
-
+import { Analytics } from '@vercel/analytics/react';
+import { loadState, saveState } from './redux/sessionStorage';
+import { createTheme , ThemeProvider } from "@mui/material"
 
 // setting
 import { store } from './redux/reducer';
 import { appConfig } from './redux/useContext';
 import { AppContext } from './redux/useContext';
 
-// JSX element
+// JSX element and css
 import './App.css';
 import 'react-calendar/dist/Calendar.css';
 import LogoPage from './pages/logoPage/LogoPage';
@@ -33,11 +35,8 @@ import RewardDetail from './pages/rewardDetail/rewardDetail';
 import SelfieToEarn from './pages/selfieToEarn/selfieToEarn';
 import Profile from './pages/profile/profile';
 import Marketplace from './pages/marketplace/marketplace';
-import { loadState, saveState } from './redux/sessionStorage';
 import Testing from './pages/testing/testing';
-import { createTheme , ThemeProvider } from "@mui/material"
 // import { ThemeProvider , createTheme } from '@mui/material/styles';
-import { Analytics } from '@vercel/analytics/react';
 import GenerateBMIDaily from './pages/generateBMIDaily/generateBMIDaily';
 import GenerateBMINFTImport from './pages/generateBMINFTImport/generateBMINFTImport';
 import AiCoachSelect from './pages/aiCoachSelect/aiCoachSelect';
@@ -58,6 +57,36 @@ const theme = createTheme({
   }
 })
 
+const titleList = {
+  '/': 'BetterMi',
+  '/connectWallet': 'Connect Wallet - BetterMi',
+  '/generateBMI': 'Generate BMI - BetterMi',
+  '/takeSelfie': 'Take Selfie - BetterMi',
+  '/connectSuccess': 'Connect Success - BetterMi',
+  '/generateFreeNFT': 'Generate Free NFT - BetterMi',
+  '/customizeYourProfile': 'Customize Your Profile - BetterMi',
+  '/home': 'Home - BetterMi',
+  '/allMission': 'All Mission - BetterMi',
+  '/challengeCompleted': 'Challenge Completed - BetterMi',
+  '/challengeCountdown': 'Challenge Countdown - BetterMi',
+  '/missionChallenge': 'Mission Challenge - BetterMi',
+  '/myNftList': 'My NFT List - BetterMi',
+  '/reward': 'Reward - BetterMi',
+  '/rewardDetail': 'Reward Detail - BetterMi',
+  '/selfieToEarn': 'Selfie To Earn - BetterMi',
+  '/profile': 'Profile - BetterMi',
+  '/marketplace': 'Marketplace - BetterMi',
+  '/testing': 'Testing - BetterMi',
+  '/generateBMIDaily': 'Generate BMI Daily - BetterMi',
+  '/generateBMINFTImport': 'Generate BMI NFT Import - BetterMi',
+  '/aiCoachSelect': 'AI Coach Select - BetterMi',
+  '/aiCoachDetail': 'AI Coach Detail - BetterMi',
+  '/errorGenerateNFT': 'Error Generate NFT - BetterMi',
+  '/loadingMinting': 'Loading Minting - BetterMi',
+  '/setting': 'Setting - BetterMi',
+  '/NFTTransferCompleted': 'NFT Transfer Completed - BetterMi',
+}
+
 const CheckStore: React.FC = () => {
   const location = useLocation();
   const currentPath: string = location.pathname;
@@ -73,6 +102,11 @@ const CheckStore: React.FC = () => {
 
 
 function App() {
+  const location = useLocation()
+  useEffect(() => {
+    document.title = titleList[location.pathname] ?? 'BetterMi'
+  } ,[location])
+
   return (
     // path
     <ThemeProvider theme={theme}>

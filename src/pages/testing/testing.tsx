@@ -1,10 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./testing.css";
 import { CarouselItem, Carousel } from "./Carousel";
 import { Link } from "react-router-dom";
 import { useSendMsgMutation } from "../../redux/characteraiAPI";
 
+
 export default function Testing() {
+  const initialArray: any[] = Array.from({ length: 10 }); // Example array with length 10
+  const [booleanStates, setBooleanStates] = useState<boolean[]>(Array(initialArray.length).fill(false));
+
+
   const slides = [
     {'src': `${process.env.PUBLIC_URL}/img/home/1@1x.png`, 'link': 'https://www.bettermi.io/'},
     {'src': `${process.env.PUBLIC_URL}/img/home/1@1x.png`, 'link': 'https://www.bettermi.io/'},
@@ -15,7 +20,7 @@ export default function Testing() {
 
   useEffect(() => {
     console.log("testing")
-    
+    console.log(booleanStates)
   }, []);
 
   const handleSendMsg = async () => {
@@ -23,9 +28,11 @@ export default function Testing() {
   }
 
   return (
-    <button onClick={() => handleSendMsg()}>
-      testing sendMsg
-    </button>
+    // <button onClick={() => handleSendMsg()}>
+    <p>{booleanStates}</p>
+    // <button>
+    //   {booleanStates}
+    // </button>
     // <Carousel>
     //   {slides.map((slide, index) => {
     //     return (
