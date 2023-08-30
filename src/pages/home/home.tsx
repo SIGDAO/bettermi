@@ -23,6 +23,8 @@ import ImageSlider, { Carousel, CarouselItem } from './Carousel';
 import { accountLevel } from '../../redux/account';
 import { calRewardSigdaoOnSelfie } from '../../components/selfieToEarnRewardType';
 import { TransferToken } from '../../components/transferToken';
+import { useContext } from 'react';
+import { AppContext } from '../../redux/useContext';
 
 interface IHomeProps {
 }
@@ -58,6 +60,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   ]
 
   // info
+  const {appName,Wallet,Ledger} = useContext(AppContext);
   const name = useSelector(selectCurrentUsername);
   const Token:string = useSelector(accountToken);
   const userAccountId = useSelector(accountId);
@@ -74,6 +77,9 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   console.log(Token);
   console.log(store.getState());
   console.log("Token is  ",Token);
+  console.log(Wallet);
+  console.log(Wallet.Extension.connection);  
+  console.log(Wallet.Extension.connection == null);
 
   // useEffect(() => {
   //   testing();
@@ -84,8 +90,8 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
     ledger2.account.getAccount({accountId:userId})
       .then((account)=>{
         for (var i = 0;i<account.assetBalances.length;i++){
-          if(account.assetBalances[i].asset === "3862155318820066741"){
-            store.dispatch(accountSlice.actions.setToken(Number(account.assetBalances[i].balanceQNT)));
+          if(account.assetBalances[i].asset === "13116962758643420722"){
+            store.dispatch(accountSlice.actions.setToken(Number(account.assetBalances[i].balanceQNT)/1000000));
             localStorage.setItem('token',account.assetBalances[i].balanceQNT);
             console.log(account.assetBalances[i].balanceQNT);
           }
