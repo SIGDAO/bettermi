@@ -21,36 +21,74 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
   const userAccountId = useSelector(accountId);
   const userWalletNodeHost = useSelector(walletNodeHost);
   const navigate = useNavigate();
-  const [isInTimeSlot, setIsInTimeSlot] = useState(false);
-  const [booleanStates, setBooleanStates] = useState<boolean[]>(Array(missionList.length).fill(false));
-
-
-  const checkTimeSlot = () => {
-    const currentTime = new Date().toLocaleTimeString([], {
-      hour: '2-digit',
-      minute: '2-digit',
-    });
-
-    for (const mission of missionList) {
-      for (const time of mission.timeslot) {
-        if (currentTime >= time.startingTime && currentTime <= time.endTime) {
-          setIsInTimeSlot(true);
-          return;
-        }
-      }
-    }
-
-
-    setIsInTimeSlot(false);
-  };
+  const [isInTimeSlot, setIsInTimeSlot] = useState<boolean[]>([]);
 
   useEffect(() => {
-    const interval = setInterval(checkTimeSlot, 1000); // Check every second
+    const checkTimeSlot = () => {
+      const now = new Date();
+      const currentTime = now.getHours() * 60 + now.getMinutes();
 
-    return () => {
-      clearInterval(interval);
+      console.log(currentTime, 'currentTime')
+
+      setIsInTimeSlot(
+        missionList.map((mission) => {
+          const { timeslot } = mission;
+          console.log(getTimeInMinutes(timeslot[1].startingTime), 'sdifjsodijfodsi')
+          const isInSlot = timeslot.some(
+            (slot) => currentTime >= getTimeInMinutes(slot.startingTime) && currentTime <= getTimeInMinutes(slot.endTime)
+          );
+          return isInSlot;
+        })
+      );
+
+      console.log(isInTimeSlot, 'isInTimeSlot');
     };
+
+    const interval = setInterval(checkTimeSlot, 1000);
+
+    return () => clearInterval(interval);
+
+      // setIsInTimeSlot(
+      //   missionList.map((mission) => {
+      //     return true;
+      //   })
+      // );
+
+
   }, []);
+
+  const getTimeInMinutes = (time: string): number => {
+    const [hours, minutes] = time.split(':').map(Number);
+    return hours * 60 + minutes;
+  };
+
+
+  // const checkTimeSlot = () => {
+  //   const currentTime = new Date().toLocaleTimeString([], {
+  //     hour: '2-digit',
+  //     minute: '2-digit',
+  //   });
+
+  //   for (const mission of missionList) {
+  //     for (const time of mission.timeslot) {
+  //       if (currentTime >= time.startingTime && currentTime <= time.endTime) {
+  //         setIsInTimeSlot(true);
+  //         return;
+  //       }
+  //     }
+  //   }
+
+
+  //   setIsInTimeSlot(false);
+  // };
+
+  // useEffect(() => {
+  //   const interval = setInterval(checkTimeSlot, 1000); // Check every second
+
+  //   return () => {
+  //     clearInterval(interval);
+  //   };
+  // }, []);
 
 
   const content: JSX.Element = (
@@ -65,10 +103,28 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
               {missionList.map((mission, index) => {
                 return (
                   <Button
-                    onClick={() => navigate(`/challengeCountdown/${index+1}`)}
+                    onClick={() => {
+                      if (isInTimeSlot[index]) {
+                        navigate(`/challengeCountdown/${index+1}`)
+                      }
+                    }}
                     className="challenge-cards-Ic1qil"
                   >
-                    <div className="inner-mission-container">
+                    {isInTimeSlot[index] ? 
+                      <div className="score-bar_2">
+                        <div className="starting inter-semi-bold-white-15px">
+                          STARTING
+                        </div>
+                      </div>
+                    : 
+                      <div className="score-bar_2-active inter-semi-bold-keppel-15px">
+                        {mission.timeslot[0].startingTime}
+                      </div>
+                    }
+                    <div 
+                      className="inner-mission-container" 
+                      // style={isInTimeSlot[index] ? {opacity: '1'} : {opacity: '0.4'}}
+                    >
                       <div className="mission-graph">
                         <img className='mission-gif' src={mission.missionImgPath} alt="" />
                       </div>

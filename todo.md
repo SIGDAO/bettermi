@@ -369,13 +369,38 @@ https://test.signumart.io/ -->
 
 task list til 29
 character ai
-sigdao reward
 1W 1M 1Y 5Y
 <!-- No record today -->
-error page
-  error message for selfie
+<!-- error page
+  error message for selfie -->
 
-/ BMI reward calculations
+<!-- / BMI reward calculations -->
 / Challenge countdown 
 / Take selfie again for BMI detection error
 / AI Mimi and .Io functional etc.
+change the ai to disable
+question like dropdown
+
+
+
+
+delet the arrow from the countdown
+
+completed：tick to mi心心
+delete the setting
+
+Take selfie again -> selfie again
+
+scanning
+
+disable the ai aoach button
+
+after mint the nft, cannot use the back button
+
+Profile
+  showing the hint instead of default desciption
+  after reg, show the profile enter info box, and have the validation check
+  if user don't enter the info, show a darker color to display the placeholder
+  for first edit challengeCountdown, disable the back button
+  for ppl that don't write
+  show star in the profile edit
