@@ -50,13 +50,13 @@ export default function ConnectWallet (props: IConnectWalletProps) {
         accountId: accountinfo.accountId,
         machineCodeHash: codeHashId,
       });
-            ledger.asset.getAssetHolders({assetId:"3862155318820066741"}).then((asset)=>{
+            ledger.asset.getAssetHolders({assetId:"13116962758643420722"}).then((asset)=>{
               console.log(asset);
               console.log(asset.accountAssets.length);
               console.log(accountinfo.accountId);
               for(var i = 0; i<asset.accountAssets.length;i++){
                 if(asset.accountAssets[i].account === accountinfo.accountId){
-                  store.dispatch(accountSlice.actions.setToken(Number(asset.accountAssets[i].quantityQNT)));
+                  store.dispatch(accountSlice.actions.setToken(Number(asset.accountAssets[i].quantityQNT)/1000000));
                   localStorage.setItem('token',asset.accountAssets[i].quantityQNT);
                   console.log(asset.accountAssets[i].quantityQNT);
                   break;
@@ -80,10 +80,10 @@ export default function ConnectWallet (props: IConnectWalletProps) {
       console.log(ourContract.ats[0]);
       console.log(typeof(ourContract.ats[0]));
       console.log(typeof(ourContract));
-      const asset = await ledger.asset.getAssetHolders({assetId:"3862155318820066741"});
+      const asset = await ledger.asset.getAssetHolders({assetId:"13116962758643420722"});
       asset.accountAssets.map((obj)=>{
         if(obj.account == accountinfo.accountId){
-          store.dispatch(accountSlice.actions.setToken(Number(obj.quantityQNT)));
+          store.dispatch(accountSlice.actions.setToken(Number(obj.quantityQNT)/1000000));
           localStorage.setItem('token',obj.quantityQNT);
             console.log(obj.quantityQNT);
         }

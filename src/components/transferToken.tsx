@@ -16,7 +16,8 @@ export async function TransferToken(nodeHost:any,accountId:any,quantity:string){
   
     const ledger2 =LedgerClientFactory.createClient({nodeHost:nodeHost || walletNodeHost});
     
-    const assetId = "3862155318820066741";
+    //const assetId = "3862155318820066741";
+    const assetId = "13116962758643420722";
     console.log(ledger2, "ledger2");
     console.log(nodeHost, "nodeHost");
     console.log(quantity, 'quantity');

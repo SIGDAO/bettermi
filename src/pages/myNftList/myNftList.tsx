@@ -44,7 +44,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
   const [userNftTokenList,setNftTokenList] = useState<myNftList[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [inputAddress,setInputAddress] = useState("");
-  const [level,setLevel] = useState("");
+  const [level,setLevel] = useState("1");
   const dataFetchedRef = useRef(false);
   const {appName,Wallet,Ledger} = useContext(AppContext);
   const nftTokenIssuer:string = process.env.REACT_APP_NFT_TOKEN_ISSUER!;
@@ -321,7 +321,7 @@ return(
              <div className = "myNftNumber">#0000000001</div>
                <div className = "myNftBar">
                  <div  className = "myNftLevel">
-                   Lv {1}       
+                   Lv{level}       
                    </div>
                    <div className = "myNftVerticalLine"></div>  
                    <div  className = "inter-normal-white-12px">
@@ -348,7 +348,7 @@ return(
              <div className = "myNftNumber">#0000000001</div>
                <div className = "myNftBar">
                  <div  className = "myNftLevel">
-                   Lv {1}       
+                   Lv{level}       
                    </div>
                    <div className = "myNftVerticalLine"></div>  
                    <div  className = "myNftReward">
