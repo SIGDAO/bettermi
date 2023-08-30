@@ -1,6 +1,6 @@
 // package
 import React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import {BrowserRouter, Routes, Route, Navigate, useLocation, Outlet} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Provider as ReduxProvider } from "react-redux";
@@ -8,6 +8,7 @@ import  { Fragment } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import { loadState, saveState } from './redux/sessionStorage';
 import { createTheme , ThemeProvider } from "@mui/material"
+
 
 // setting
 import { store } from './redux/reducer';
@@ -91,9 +92,15 @@ const titleList = {
 const CheckStore: React.FC = () => {
   const location = useLocation();
   const currentPath: string = location.pathname;
+  const {appName,Wallet,Ledger} = useContext(AppContext);
+
 
   if (currentPath === '/' || currentPath === '/connectWallet' ){
     return <Outlet/>
+  }
+
+  if (Wallet.Extension.connection == null) {
+    return <Navigate to="/" />
   }
 
   return sessionStorage.getItem('state') === null ? <Navigate to="/" /> : <Outlet/>;
@@ -153,6 +160,7 @@ function App() {
               </Route>
               <Route path='/errorGenerateNFT' element={<ErrorGenerateNFT />} />
               <Route path='/errorTakeSelfie' element={<ErrorGenerateNFT />} />
+              <Route path='/errorWalletNotConnected' element={<ErrorGenerateNFT />} />
               <Route path='/loadingMinting' element={<LoadingMinting />} />
               <Route path='/setting' element={<Setting />} />
               <Route path='/NFTTransferCompleted' element={<ChallengeCompleted NFT={true} />} />

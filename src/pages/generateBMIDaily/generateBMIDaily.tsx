@@ -59,7 +59,15 @@ const GenerateBMIDaily: React.FunctionComponent<IGenerateBMIDailyProps> = (props
       senderPublicKey: publicKey,
       deadline: 1440,
     }) as UnsignedTransaction;
+    
+
     await Wallet.Extension.confirm(sendBMI.unsignedTransactionBytes);
+
+    // try {
+    //   await Wallet.Extension.confirm(sendBMI.unsignedTransactionBytes);
+    // } catch (error) {
+    //   navigate('/errorWalletNotConnected');
+    // }
 
     navigate('/selfieToEarn');
 }

@@ -8,6 +8,8 @@ import { useSelector } from 'react-redux';
 import { accountId } from '../../redux/account';
 import { walletNodeHost } from '../../redux/wallet';
 import { TransferToken } from '../../components/transferToken';
+import { missionList } from '../../data/featureMissionList';
+import { useParams } from 'react-router-dom';
 
 interface IChallengeCountdownProps {
   taskName?: string;
@@ -15,26 +17,34 @@ interface IChallengeCountdownProps {
 
 
 const ChallengeCountdown: React.FunctionComponent<IChallengeCountdownProps> = (props) => {
+  const id = useParams().id?.toString() || '1';
   const [time, setTime] = React.useState(32);
   const userAccountId = useSelector(accountId);
   const userWalletNodeHost = useSelector(walletNodeHost);
+  const displayMission = missionList.find((mission, index) => index === parseInt(id)-1) || missionList[0];
+
+
+  const displayTime = (function () {
+    const minutes: number = parseInt(displayMission.duration.split(' ')[0]);
+    return minutes * 60;
+  })()
 
 
   const content: JSX.Element = (
     <div className="screen">
       <div className="bettermidapp-challenges-countdown-1">
-        <ShortTitleBar title='1. Hello Bae!' setting={false} />
+        <ShortTitleBar title={displayMission.title} setting={false} />
         {/* <img className="bg-oEaurv" src={`${process.env.PUBLIC_URL}/img/challengeCountdown/bg-10@1x.png`} alt="BG" /> */}
         <img
         className="x1-hello-bae-gradient-bg-oEaurv"
         // src={`${process.env.PUBLIC_URL}/img/challengeCountdown/1hellobae-gradientbg@1x.png`}
-        src={`${process.env.PUBLIC_URL}/img/missionChallenge/1HelloBae-BetterMiWithUniform.gif`}
+        src={displayMission.missionImgPath}
         alt="1HelloBae-GradientBg"
         />
         <div className="challenge-content-oEaurv">
           <img className="layer-D6xMU2" src={`${process.env.PUBLIC_URL}/img/challengeCountdown/layer@1x.png`} alt="Layer" />
           <div className="countdown-D6xMU2">
-            <CircularWithValueLabel time={180} />
+            <CircularWithValueLabel time={displayTime} />
             {/* <div className="t-countdown-YGwjuf">
               <div className="bg-C3TEa1"></div>
               <img className="process-circle-C3TEa1" src={`${process.env.PUBLIC_URL}/img/challengeCountdown/process-circle@1x.png`} alt="Process circle" />
@@ -56,7 +66,7 @@ const ChallengeCountdown: React.FunctionComponent<IChallengeCountdownProps> = (p
             <img className="ic_chevron_left_24px-hZsyDr" src={`${process.env.PUBLIC_URL}/img/challengeCountdown/ic-chevron-left-24px@1x.png`} alt="ic_chevron_left_24px" />
           </div>
           <div className="sigdao-score-D6xMU2">
-            <div className="x10-ajiZIc inter-semi-bold-keppel-14px">+5.25</div>
+            <div className="x10-ajiZIc inter-semi-bold-keppel-14px">{displayMission.sigdao}</div>
             <div className="signdao_tokengradient-ajiZIc">
               <div className="x441-8JkMaQ"></div>
               <div className="x442-8JkMaQ"></div>

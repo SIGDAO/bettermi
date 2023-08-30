@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import { useLedger } from '../redux/useLedger';
 import { selectCurrentBMI } from '../redux/profile';
 import { selectBMI } from '../redux/userBMI';
+import { useEffect, useState } from 'react';
 
 
 
@@ -153,14 +154,42 @@ export const BackButton: React.FunctionComponent<IBackButtonProps> = (props) => 
   )
 }
 
+
+
 export const NavigateToTakeSelfieButton: React.FunctionComponent = () => {
   const navigate = useNavigate();
   const tempAccountId = useSelector(accountId);
   // const bmi_fetchedData = useSelector(selectBMI);
   const Ledger2 = useLedger();
   const [isActive, setIsActive] = React.useState<boolean>(false);
+  const [timeDifference, setTimeDifference] = useState('');
+  // const [isMidnight, setIsMidnight] = useState(false);
 
-  
+  useEffect(() => {
+    const calculateTimeDifference = () => {
+      const now = new Date();
+      const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+      tomorrow.setHours(0, 0, 0, 0);
+
+      const timeDiff = tomorrow.getTime() - now.getTime();
+      const hours = Math.floor(timeDiff / (1000 * 60 * 60));
+      const minutes = Math.floor((timeDiff / (1000 * 60)) % 60);
+      const seconds = Math.floor((timeDiff / 1000) % 60);
+
+      // if (hours === 0 && minutes === 0 && seconds === 0) {
+      //   setIsMidnight(true);
+      // }
+
+      setTimeDifference(`${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
+    };
+
+    const interval = setInterval(calculateTimeDifference, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+
+
 
   React.useEffect(() => {
     isTodayHaveSelfieRecord(tempAccountId, Ledger2)
@@ -192,7 +221,7 @@ export const NavigateToTakeSelfieButton: React.FunctionComponent = () => {
       <div className="lock-button-cover">
         <div className="lock-button">
           <p className="selfie-time-countdown inter-semi-bold-white-15px">
-            12:00:00
+            {timeDifference}
           </p>
           <img className='lock-icon-NavigateToTakeSelfieButton' src="/img/ic-locked-1@1x.png" alt="" />
         </div>

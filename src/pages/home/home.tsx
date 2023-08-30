@@ -81,6 +81,13 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
     // Function to fetch data from the APIc
     ledger2.account.getAccount({accountId:userId})
       .then((account)=>{
+        for (var i = 0;i<account.assetBalances.length;i++){
+          if(account.assetBalances[i].asset === "3862155318820066741"){
+            store.dispatch(accountSlice.actions.setToken(Number(account.assetBalances[i].balanceQNT)));
+            localStorage.setItem('token',account.assetBalances[i].balanceQNT);
+            console.log(account.assetBalances[i].balanceQNT);
+          }
+        }
         const description = JSON.parse(account.description);
         console.log(description.ds);
         if(description.ds != null){

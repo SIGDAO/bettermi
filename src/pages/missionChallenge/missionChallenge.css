@@ -67,14 +67,19 @@
   position: relative;
   top: 4px;
   width: 358px;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  padding-top: 11px;
 }
 
 .bettermidapp-challenges-1 .challenge-cards-Ic1qil {
   background-color: transparent;
   height: 168px;
-  left: 9px;
-  position: absolute;
-  top: 11px;
+  /* left: 9px; */
+  /* position: absolute;
+  top: 11px; */
   width: 340px;
 }
 
@@ -357,7 +362,6 @@
   top: 89px;
   width: 72px;
 }
-
 .bettermidapp-challenges-1 .card_bg {
   background-color: transparent;
   height: 150px;
@@ -379,11 +383,8 @@
 
 .bettermidapp-challenges-1 .ic_-body {
   background-color: transparent;
-  height: 100%;
-  left: 0px;
+  height: 16.67px;
   object-fit: cover;
-  position: absolute;
-  top: 1px;
   width: 15px;
 }
 
@@ -398,12 +399,9 @@
 }
 
 .bettermidapp-challenges-1 .ic_time {
-  background-color: transparent;
-  height: calc(100.00% - 2px);
-  left: 0px;
+  /* background-color: transparent; */
+  height: 15px;
   object-fit: cover;
-  position: absolute;
-  top: 1px;
   width: 15px;
 }
 
@@ -461,11 +459,13 @@
 
 .bettermidapp-challenges-1 .signdao_tokengradient {
   background-color: transparent;
-  height: 100%;
-  left: 0px;
-  position: absolute;
-  top: 1px;
+  /* height: 100%; */
+  /* left: 0px;
+  position: absolute; */
+  /* top: 1px; */
   width: 17px;
+  height: 17px;
+  position: relative;
 }
 
 .bettermidapp-challenges-1 .starting {
@@ -528,9 +528,9 @@
   background-color: var(--white);
   border-radius: 8.26px;
   height: 100%;
-  left: 0px;
+  /* left: 0px; */
   position: absolute;
-  top: 0px;
+  /* top: 0px; */
   width: 100%;
 }
 
@@ -539,19 +539,20 @@
   background-color: transparent;
   border-radius: 8.03px;
   height: 97.18%;
-  left: 1.41%;
+  /* left: 1.41%; */
   position: absolute;
-  top: 1.41%;
+  /* top: 1.41%; */
   width: 97.18%;
 }
 
 .bettermidapp-challenges-1 .x880 {
   background-color: transparent;
   height: 54.68%;
-  left: 25.90%;
+  /* left: 25.90%; */
   object-fit: cover;
   position: absolute;
-  top: 22.14%;
+  top: calc((100% - 54.68%) / 2);
+  left: calc((100% - 47.30%) / 2);
   width: 47.30%;
 }
 
@@ -566,4 +567,97 @@
   position: absolute;
   top: 0px;
   width: 100%;
+}
+
+.inner-mission-container {
+  height: 150px;
+  width: 340px;
+  background-color: #0D0D0D;
+  border-radius: 10px;
+  border: 1px solid #4136F1;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  gap: 17px;
+}
+
+.mission-gif {
+  height: 107px;
+  width: 107px;
+}
+
+.mission-detail {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  /* margin: 0 auto; */
+}
+
+.mission-time-bodyPart-container {
+  display: flex;
+  align-items: center;
+  gap: 9px; 
+}
+
+.mission-bodyPart-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* .mission-time-container p, .mission-bodyPart-container p{
+  margin: 0;
+} */
+
+.mission-time-bodyPart-container p {
+  margin: 0;
+}
+
+.mission-time-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.mission-level-and-reward {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mission-level {
+  display: inline;
+}
+
+.css-4dz1kn-MuiButtonBase-root-MuiButton-root {
+  text-transform: none !important;
+  padding: 0 !important;
+}
+
+.bettermidapp-challenges-1 p {
+  margin: 0;
+}
+
+.level-and-sigdao-separate-line {
+  height: 15px;
+  width: 1px;
+  background: #A6B3BB33;
+}
+
+.mission-reward-container {
+  display: flex;
+  align-items: center;
+  gap: 3.23px;
+}
+
+.mission-topic {
+  text-align: left;
+}
+
+.mission-bar-arrow-right {
+  height: 12px;
+  width: 7px;
+  margin-left: 50.5px;
 }
