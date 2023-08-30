@@ -5,14 +5,16 @@ export const calRewardSigdaoOnSelfie = (bmi: number) => {
   console.log("calBmi", typeof calBmi);
 
   if (calBmi >= 18.5 && calBmi <= 22.9) {
-    return 5.25 * 10 ** 5
+    return 5.25 * 10 ** 6
   } else if ((calBmi > 22.9 && calBmi <= 23.4) || (calBmi >= 18 && calBmi < 18.5)) {
-    return 3.94 * 10 ** 5
+    return 3.94 * 10 ** 6
   } else if ((calBmi > 23.4 && calBmi <= 23.7) || (calBmi >= 17.7 && calBmi < 18)) {
-    return 2.63 * 10 ** 5
+    return 2.63 * 10 ** 6
   } else {
-    return 1.31 * 10 ** 5
+    return 1.31 * 10 ** 6
   }
+
+
 }
 // Healthy
 // Overweight

@@ -21,6 +21,8 @@ import { selectCurrentGender } from '../../redux/profile';
 import { NavigateToTakeSelfieButton } from '../../components/button';
 import ImageSlider, { Carousel, CarouselItem } from './Carousel';
 import { accountLevel } from '../../redux/account';
+import { calRewardSigdaoOnSelfie } from '../../components/selfieToEarnRewardType';
+import { TransferToken } from '../../components/transferToken';
 
 interface IHomeProps {
 }
@@ -112,6 +114,13 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
         console.log(typeof(imgAddress));
         setLoading(false);
       });
+
+      TransferToken(nodeHost,userId,calRewardSigdaoOnSelfie(22.9).toString())
+        .then((result)=>{
+          console.log(result);
+        })
+
+      console.log(calRewardSigdaoOnSelfie(22.9), "calRewardSigdaoOnSelfie(22.9)");
 
   }, []);
   // todo: map
