@@ -47,6 +47,9 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
   const userAccountId = useSelector(accountId);
   const codeHashId = "7457358473503628676";
   const storeNftCodeHashId = "4589039375104983465";
+  const [isTransferToken, setIsTransferToken] = React.useState(false);
+
+
   console.log(process.env.REACT_APP_NFT_STORAGE);
   console.log(process.env.REACT_APP_NFT_STORAGE?.split(","));
   const nftStorageAccounts = process.env.REACT_APP_NFT_STORAGE?.split(",");
@@ -56,6 +59,10 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
   console.log(nftStorageAccount);
   var nftsWaitedToBeDistributed:string[] = [];
   var nftsToBeDistributed:string;
+
+  React.useEffect(() => {
+    console.log(calRewardSigdaoOnSelfie(BMI).toString())
+  }, [])
 
   console.log(ledger);
   const confirm = async () => {
@@ -129,11 +136,18 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
           }) as UnsignedTransaction;
           await Wallet.Extension.confirm(sendBMI.unsignedTransactionBytes);
         }
-        await TransferToken(nodeHost, userAccountId, calRewardSigdaoOnSelfie(BMI).toString());
+        if (!isTransferToken) {
+          TransferToken(nodeHost, userAccountId, calRewardSigdaoOnSelfie(BMI).toString())
+            .then((result) => {
+              setIsTransferToken(true)
+            })
+        }
         //await TransferNFTOwnership(ledger,userAccountId,Wallet);
         navigate('/loadingMinting');
       } catch (error) {
-        console.log(error);
+        if (error.name !== "ExtensionWalletError") {
+          navigate('/errorGenerateNFT')
+        }
         setMinted(false);
       }
     }

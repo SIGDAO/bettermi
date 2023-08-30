@@ -62,7 +62,7 @@
 
 .bettermidapp-challenges-1 .challenge-cards-QuyfDF {
   background-color: transparent;
-  height: 1680px;
+  /* height: 1680px; */
   left: 0px;
   position: relative;
   top: 4px;
@@ -72,6 +72,8 @@
   /* justify-content: center; */
   align-items: center;
   padding-top: 11px;
+  gap: 33px;
+  padding-bottom: 50px;
 }
 
 .bettermidapp-challenges-1 .challenge-cards-Ic1qil {
@@ -81,6 +83,8 @@
   /* position: absolute;
   top: 11px; */
   width: 340px;
+  display: flex;
+  align-items: end;
 }
 
 .bettermidapp-challenges-1 .challenge-cards-VYwpDS {
@@ -430,12 +434,34 @@
 }
 
 .bettermidapp-challenges-1 .score-bar_2 {
+  background: linear-gradient(106.32deg, #f51ee2 0.28%, #4136f1 99.6%);
   background-color: transparent;
+  border: 1px solid;
+  border-color: var(--royal-blue);
+  border-radius: 5px;
   height: 35px;
   left: 230px;
   position: absolute;
   top: 0px;
   width: 110px;
+  z-index: 10;
+}
+
+.bettermidapp-challenges-1 .score-bar_2-active {
+  /* background: linear-gradient(106.32deg, #f51ee2 0.28%, #4136f1 99.6%); */
+  background-color: #0D0D0D;
+  border: 1px solid;
+  border-color: var(--royal-blue);
+  border-radius: 5px;
+  height: 35px;
+  left: 230px;
+  position: absolute;
+  top: 0px;
+  width: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
 }
 
 .bettermidapp-challenges-1 .seperate-line {
@@ -654,6 +680,11 @@
 
 .mission-topic {
   text-align: left;
+  width: 166px;
+  height: 31.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .mission-bar-arrow-right {
@@ -661,3 +692,4 @@
   width: 7px;
   margin-left: 50.5px;
 }
+

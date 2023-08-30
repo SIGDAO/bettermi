@@ -1,12 +1,17 @@
 export const calRewardSigdaoOnSelfie = (bmi: number) => {
-  if (bmi >= 18.5 && bmi <= 22.9) {
-    return 5.25
-  } else if (bmi > 22.9 && bmi <= 23.4 || bmi >= 18 && bmi < 18.5) {
-    return 3.94
-  } else if (bmi > 23.4 && bmi <= 23.7 || bmi >= 17.7 && bmi < 18) {
-    return 2.63
+  console.log("bmi calRewardSigdaoOnSelfie", typeof bmi);
+  const calBmi = parseFloat(bmi);
+
+  console.log("calBmi", typeof calBmi);
+
+  if (calBmi >= 18.5 && calBmi <= 22.9) {
+    return 5.25 * 10 ** 5
+  } else if ((calBmi > 22.9 && calBmi <= 23.4) || (calBmi >= 18 && calBmi < 18.5)) {
+    return 3.94 * 10 ** 5
+  } else if ((calBmi > 23.4 && calBmi <= 23.7) || (calBmi >= 17.7 && calBmi < 18)) {
+    return 2.63 * 10 ** 5
   } else {
-    return 1.31
+    return 1.31 * 10 ** 5
   }
 }
 // Healthy

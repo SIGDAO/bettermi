@@ -102,7 +102,7 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
       
       navigate(navigatePath)
     } else if (data){
-      navigate(navigatePath)
+      navigate('/errorTakeSelfie')
     }
   }
   , [data])
