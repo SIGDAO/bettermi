@@ -384,23 +384,28 @@ question like dropdown
 
 
 
-delet the arrow from the countdown
+<!-- delet the arrow from the countdown -->
 
-completed：tick to mi心心
-delete the setting
 
-Take selfie again -> selfie again
+<!-- completed：tick to mi心心 -->
+<!-- delete the setting -->
+
+<!-- Take selfie again -> selfie again -->
 
 scanning
 
-disable the ai aoach button
+<!-- disable the ai aoach button -->
 
-after mint the nft, cannot use the back button
+<!-- after mint the nft, cannot use the back button --> 
+
+chaning the discord invite link
+
+for first edit challengeCountdown, disable the back button
+
 
 Profile
-  showing the hint instead of default desciption
-  after reg, show the profile enter info box, and have the validation check
-  if user don't enter the info, show a darker color to display the placeholder
-  for first edit challengeCountdown, disable the back button
-  for ppl that don't write
-  show star in the profile edit
+  <!-- default desciption -> placeholder -->
+  <!-- if user don't enter the info, show a darker color to display the placeholder -->
+  <!-- after reg, show the profile enter info box -->
+  and have the validation check
+  for ppl that don't writ,  show star in the profile edit

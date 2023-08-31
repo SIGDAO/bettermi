@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { CenterLayout } from '../../components/layout';
 import { BackButton } from '../../components/button';
 import './customizeYourProfile.css'
@@ -17,10 +17,10 @@ const CustomizeYourProfile: React.FunctionComponent<ICustomizeYourProfileProps> 
   const nftImage = '';
   const defaultName = 'zoe_li'
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   // when user press "Save", putting the generated name into local storage
   const [name, setName] = useState<string>('');
-
 
   const handleSave = () => {
     if (!name) {
@@ -31,7 +31,7 @@ const CustomizeYourProfile: React.FunctionComponent<ICustomizeYourProfileProps> 
       store.dispatch(profileSlice.actions.setUsername(name))
     }
 
-    navigate('/home');
+    navigate('/profile', { state: { previousPath: pathname}});
   }
 
   const content: JSX.Element = (

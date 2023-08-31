@@ -63,7 +63,7 @@ export const RandomGenNameInput: React.FunctionComponent<IRandomGenNameInputProp
 };
 
 export const CustomInput: React.FC<ICustomTextAreaProps> = (props) => {
-  const { text, setText, width, importClassName } = props;
+  const { text, setText, width, importClassName, placeholder } = props;
 
   return (
     <input 
@@ -75,6 +75,7 @@ export const CustomInput: React.FC<ICustomTextAreaProps> = (props) => {
       }}
       value={text}
       onChange={(e) => setText(e.target.value)}
+      placeholder={placeholder || ''}
     />
   )
 }

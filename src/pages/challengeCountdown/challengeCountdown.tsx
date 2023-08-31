@@ -33,7 +33,7 @@ const ChallengeCountdown: React.FunctionComponent<IChallengeCountdownProps> = (p
   const content: JSX.Element = (
     <div className="screen">
       <div className="bettermidapp-challenges-countdown-1">
-        <ShortTitleBar title={displayMission.title} setting={false} />
+        <ShortTitleBar title={displayMission.title} backButton={false} aiCoach={false} />
         {/* <img className="bg-oEaurv" src={`${process.env.PUBLIC_URL}/img/challengeCountdown/bg-10@1x.png`} alt="BG" /> */}
         <img
         className="x1-hello-bae-gradient-bg-oEaurv"
@@ -44,7 +44,7 @@ const ChallengeCountdown: React.FunctionComponent<IChallengeCountdownProps> = (p
         <div className="challenge-content-oEaurv">
           <img className="layer-D6xMU2" src={`${process.env.PUBLIC_URL}/img/challengeCountdown/layer@1x.png`} alt="Layer" />
           <div className="countdown-D6xMU2">
-            <CircularWithValueLabel time={displayTime} />
+            <CircularWithValueLabel time={displayTime} reward={parseFloat(displayMission.sigdao)} />
             {/* <div className="t-countdown-YGwjuf">
               <div className="bg-C3TEa1"></div>
               <img className="process-circle-C3TEa1" src={`${process.env.PUBLIC_URL}/img/challengeCountdown/process-circle@1x.png`} alt="Process circle" />
@@ -55,16 +55,16 @@ const ChallengeCountdown: React.FunctionComponent<IChallengeCountdownProps> = (p
             Straighten your arms &amp; Shake them outwardly.
           </p>
           <div className="challenge-guide-D6xMU2 inter-semi-bold-royal-blue-15px">CHALLENGE GUIDE</div>
-          <div className="ic_next-D6xMU2">
+          {/* <div className="ic_next-D6xMU2">
             <img
               className="ic_chevron_right_24px-0Ajecm"
               src={`${process.env.PUBLIC_URL}/img/challengeCountdown/ic-chevron-right-24px-1@1x.png`}
               alt="ic_chevron_right_24px"
               />
-          </div>
-          <div className="ic_previous-D6xMU2">
+          </div> */}
+          {/* <div className="ic_previous-D6xMU2">
             <img className="ic_chevron_left_24px-hZsyDr" src={`${process.env.PUBLIC_URL}/img/challengeCountdown/ic-chevron-left-24px@1x.png`} alt="ic_chevron_left_24px" />
-          </div>
+          </div> */}
           <div className="sigdao-score-D6xMU2">
             <div className="x10-ajiZIc inter-semi-bold-keppel-14px">{displayMission.sigdao}</div>
             <div className="signdao_tokengradient-ajiZIc">

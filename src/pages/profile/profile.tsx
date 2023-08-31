@@ -2,7 +2,8 @@ import * as React from 'react';
 import './profile.css'
 import { CenterLayout } from '../../components/layout';
 import AnimaGenContent from './animaGenContent';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 
 interface IProfileProps  {
@@ -10,12 +11,27 @@ interface IProfileProps  {
 
 const Profile: React.FunctionComponent<IProfileProps> = (props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isBackButton, setIsBackButton] = useState<boolean>(true);
+  const { state } = useLocation();
+
+  useEffect(() => {
+    if (state?.previousPath === '/customizeYourProfile') {
+      setIsOpen(true);
+      setIsBackButton(false);
+    }
+
+  }, [])
 
 
   return <CenterLayout
     content={
       <div className='screen'>
-        <AnimaGenContent isOpen={isOpen} setIsOpen={setIsOpen} />
+        <AnimaGenContent 
+          isOpen={isOpen} 
+          setIsOpen={setIsOpen} 
+          isBackButton={isBackButton}
+          setIsBackButton={setIsBackButton}
+        />
       </div>
     }
     bgImg={false}

@@ -113,81 +113,23 @@ const AiCoachSelect: React.FunctionComponent<IAiCoachSelectProps> = (props) => {
           )}
         </div>
       </div>
-      {/* <div className="title-bar-O0wesW">
-        <img className="bg-L4Fqzm" src="img/aiCoachSelect/bg-5@1x.png" alt="BG" />
-        <div className="icon-arrow-left-L4Fqzm icon-arrow-left">
-          <img
-            className="icon-arrow-left-lvAQvJ icon-arrow-left"
-            src="img/aiCoachSelect/icon-arrow-left-10@1x.png"
-            alt="icon-arrow-left"
-            />
-        </div>
-        <div className="bars-status-bar-i-phone-light-L4Fqzm">
-          <div className="frame-qOI8qW"></div>
-          <div className="status-bar-qOI8qW">
-            <div className="battery-SgxZlV">
-              <div className="border-kGvBQj"></div>
-              <img className="cap-kGvBQj" src="img/aiCoachSelect/cap-1@1x.png" alt="Cap" />
-              <div className="capacity-kGvBQj"></div>
-            </div>
-            <img className="wifi-SgxZlV" src="img/aiCoachSelect/wifi-1@1x.png" alt="Wifi" />
-            <img
-              className="cellular-connection-SgxZlV"
-              src="img/aiCoachSelect/cellular-connection-1@1x.png"
-              alt="Cellular Connection"
-              />
-            <div className="time-style-SgxZlV">
-              <div className="time-xjBQbt sfprotext-semi-bold-white-15px">9:41</div>
-            </div>
-          </div>
-        </div>
-        <div className="your-ai-coaches-L4Fqzm inter-semi-bold-white-18px">Your AI coaches</div>
-        <img className="seperat-line-L4Fqzm" src="img/aiCoachSelect/seperat-line-1@1x.png" alt="Seperat line" />
-        <a href="javascript:history.back()">
-          <div className="icon-arrow-left-xKQNPw icon-arrow-left">
-            <img
-              className="icon-arrow-left-BSydv2 icon-arrow-left"
-              src="img/aiCoachSelect/icon-arrow-left-10@1x.png"
-              alt="icon-arrow-left"
-              />
-          </div>
-        </Link>
-        <a href="bettermidapp-settings-1.html">
-          <div className="ic_settings_24px-L4Fqzm ic_settings_24px">
-            <img
-              className="ic_settings_24px-2Orjam ic_settings_24px"
-              src="img/aiCoachSelect/ic-settings-24px-1@1x.png"
-              alt="ic_settings_24px"
-              />
-          </div>
-        </Link>
-      </div> */}
-      {/* <div className="write-msg-O0wesW">
-        <img className="menu_bar_bg-jnPNgT" src="img/aiCoachSelect/menu-bar-bg-1@1x.png" alt="menu_bar_bg" />
-        <div className="chat-input-jnPNgT">
-          <div className="x123-5EBaGo"></div>
-        </div>
-        <div className="ic_send-jnPNgT ic_send">
-          <img className="ic_send-7HEubO ic_send" src="img/aiCoachSelect/ic-send-1@1x.png" alt="ic_send" />
-        </div>
-      </div> */}
       <div className="user-O0wesW">
-        <Link to="/aiCoachDetail/1">
+        {/* <Link to="/aiCoachDetail/1"> */}
           <div className="ai-chatbot_-mmi-NgcGm6">
             <div className="bg-Kcwf64"></div>
             <img className="ai-chatbot_-mimi-Kcwf64" src="img/aiCoachSelect/ai-chatbot-mimi-2@1x.png" alt="Ai Chatbot_Mimi" />
             <div className="mental-coach-Kcwf64 inter-normal-white-12px">Mental coach</div>
             <div className="mimi-Kcwf64 inter-semi-bold-white-15px">Mimi</div>
           </div>
-        </Link>
-        <Link to="/aiCoachDetail/2">
+        {/* </Link> */}
+        {/* <Link to="/aiCoachDetail/2"> */}
           <div className="ai-chatbot_io-NgcGm6 ai-chatbot_io">
             <div className="bg-aeJf5z"></div>
             <img className="ai-chatbot_io-aeJf5z ai-chatbot_io" src="img/aiCoachSelect/ai-chatbot-io@1x.png" alt="Ai Chatbot_io" />
             <div className="physical-coach-aeJf5z inter-normal-white-12px">Physical coach</div>
             <div className="io-aeJf5z inter-semi-bold-white-15px">.io</div>
           </div>
-        </Link>
+        {/* </Link> */}
       </div>
     </div>
 

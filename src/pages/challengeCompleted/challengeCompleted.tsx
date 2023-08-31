@@ -3,10 +3,23 @@ import './challengeCompleted.css'
 import { Link, useLocation } from 'react-router-dom';
 import { CenterLayout } from '../../components/layout';
 import { ShortTitleBar } from '../../components/titleBar';
+import { missionList } from '../../data/featureMissionList';
 
 interface IChallengeCompletedProps {
   NFT?: boolean;
 }
+
+const displayReawrd = ( pathname: string ): string | undefined => {
+  if (pathname) {
+    const pathList = pathname.split('/');
+    const reward = pathList[pathList.length - 1];
+    
+    return missionList.find((mission, index) => index === parseInt(reward) - 1)?.sigdao || undefined
+  }
+
+  return ""
+}
+
 
 const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (props) => {
   const { NFT } = props;
@@ -16,9 +29,9 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
   React.useEffect(() => {
     setPathname(() => {
       if (location.pathname === '/NFTTransferCompleted') {
-        return '/allMission';
-      } else {
         return '/myNftList';
+      } else {
+        return '/allMission';
       }
     });
   }, [location]);
@@ -29,19 +42,20 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
   const content: JSX.Element = (
     <div className="screen">
       <div className="bettermidapp-challenge-finished-1">
-        <ShortTitleBar title='' setting={false} />
+        <ShortTitleBar title='' setting={false} aiCoach={false} transparent={true} />
         <div className="x16219-iwUDzs">
           <div className="you-have-earned-75VOY2">{SmallTitle}</div>
           <h1 className="title-75VOY2">Congratulations !</h1>
           <div className="finished-75VOY2">
-            <div className="button3-copy-3oZEl3">
+            <img src="img/challengeCompleted/completed-mimi.png" alt="" className="mimi-heart-challenge-completed" />
+            {/* <div className="button3-copy-3oZEl3">
               <div className="button1-vX3ONf button1"></div>
             </div>
-            <img className="icon-awesome-check-3oZEl3" src={`${process.env.PUBLIC_URL}/img/challengeSuccess/icon-awesome-check@1x.png`} alt="Icon awesome-check" />
+            <img className="icon-awesome-check-3oZEl3" src={`${process.env.PUBLIC_URL}/img/challengeSuccess/icon-awesome-check@1x.png`} alt="Icon awesome-check" /> */}
           </div>
           {NFT ? null :
             <div className="sigdao-score-75VOY2">
-              <div className="x10-VOfFBB inter-semi-bold-keppel-14px">+5.25</div>
+              <div className="x10-VOfFBB inter-semi-bold-keppel-14px">{ displayReawrd(location.state?.previousPath) || ""}</div>
               <div className="signdao_tokengradient-VOfFBB">
                 <div className="x441-gxWo6F"></div>
                 <div className="x442-gxWo6F"></div>

@@ -92,7 +92,7 @@ const AiCoachDetail: React.FunctionComponent<IAiCoachDetailProps> = (props) => {
         </div>
       </a>
     </div> */}
-    <ShortTitleBar title='' setting={false} transparent={true} />
+    <ShortTitleBar title='' aiCoach={false} transparent={true} />
     <img className="bg-xQomhb bg" src={`${process.env.PUBLIC_URL}/img/aiCoachDetail/bg-1@1x.png`} alt="BG" />
     <div className="write-msg-QyTK2J">
       <div className="chat-input-Jhcaae">

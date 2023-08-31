@@ -1,42 +1,50 @@
-import * as React from 'react';
-import MenuBar from '../../components/menuBar';
-import { Link, useNavigate } from 'react-router-dom';
-import { ShortTitleBar } from '../../components/titleBar';
-import { useState } from 'react';
-import { useAppSelector } from '../../redux/useLedger';
-import { selectWalletNodeHost } from '../../redux/useLedger';
-import { LedgerClientFactory } from '@signumjs/core';
-import { useEffect } from 'react';
-import { accountId } from '../../redux/account';
-import { useDispatch, useSelector } from 'react-redux';
-import { profileSlice, selectCurrentAboutYourself, selectCurrentDescription, selectCurrentDiscordUsername, selectCurrentUsername } from '../../redux/profile';
-import { CustomInput, RandomGenNameInput } from '../../components/input';
-import { CustomTextArea } from '../../components/input';
+import * as React from "react";
+import MenuBar from "../../components/menuBar";
+import { Link, useNavigate } from "react-router-dom";
+import { ShortTitleBar } from "../../components/titleBar";
+import { useState } from "react";
+import { useAppSelector } from "../../redux/useLedger";
+import { selectWalletNodeHost } from "../../redux/useLedger";
+import { LedgerClientFactory } from "@signumjs/core";
+import { useEffect } from "react";
+import { accountId } from "../../redux/account";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  profileSlice,
+  selectCurrentAboutYourself,
+  selectCurrentDescription,
+  selectCurrentDiscordUsername,
+  selectCurrentUsername,
+} from "../../redux/profile";
+import { CustomInput, RandomGenNameInput } from "../../components/input";
+import { CustomTextArea } from "../../components/input";
 
 interface IAnimaGenContentProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
+  isBackButton: boolean;
+  setIsBackButton: (isBackButton: boolean) => void;
 }
 
 const handleCopyDiscordUsername = (discordUsername) => {
   navigator.clipboard.writeText(discordUsername);
   // todo: display a message to tell the user that the username has been copied to clipboard
   // alert("Copied to clipboard!");
-}
-
+};
 
 const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) => {
   const nodeHost = useAppSelector(selectWalletNodeHost);
-  const ledger2 = LedgerClientFactory.createClient({nodeHost});
+  const ledger2 = LedgerClientFactory.createClient({ nodeHost });
   const userId = useAppSelector(accountId);
-  const username = useSelector(selectCurrentUsername)
-  const discordUsername = useSelector(selectCurrentDiscordUsername)
-  const description = useSelector(selectCurrentDescription)
-  const aboutYourself = useSelector(selectCurrentAboutYourself)
+  const username = useSelector(selectCurrentUsername);
+  const discordUsername = useSelector(selectCurrentDiscordUsername);
+  const description = useSelector(selectCurrentDescription);
+  const aboutYourself = useSelector(selectCurrentAboutYourself);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { isOpen, setIsOpen } = props;
+
+  const { isOpen, setIsOpen, isBackButton, setIsBackButton } = props;
   const [loading, setLoading] = useState<boolean>(true);
   const [imgAddress, setImgAddress] = useState<string>("");
   const [name, setName] = useState<string>(username);
@@ -44,39 +52,43 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   const [descriptionText, setDescriptionText] = useState<string>(description);
   const [discordUsernameText, setDiscordUsernameText] = useState<string>(discordUsername);
 
-
   const handleSave = () => {
     dispatch(profileSlice.actions.setUsername(name));
     dispatch(profileSlice.actions.setAboutYourself(aboutYourselfText));
     dispatch(profileSlice.actions.setDescription(descriptionText));
     dispatch(profileSlice.actions.setDiscordUsername(discordUsernameText));
 
-    setIsOpen((prev) => !prev)
-  }
+    setIsOpen((prev) => !prev);
+    setIsBackButton(true);
+  };
 
   const handleCancel = () => {
-    setIsOpen((prev) => !prev)
-  }
-
+    setIsOpen((prev) => !prev);
+  };
 
   useEffect(() => {
     // Function to fetch data from the APIc
-    ledger2.account.getAccount({accountId:userId}).then((account)=>{
-      console.log(account);
-      const description = JSON.parse(account.description);
-      console.log(description);
-      console.log(Object.keys(description.av));
-      console.log(typeof(Object.keys(description.av)[0]));
-      setImgAddress(Object.keys(description.av)[0]);
-      setLoading(false);  
-    }).catch((error)=>{ console.log("need to equip nft");});
+    ledger2.account
+      .getAccount({ accountId: userId })
+      .then((account) => {
+        console.log(account);
+        const description = JSON.parse(account.description);
+        console.log(description);
+        console.log(Object.keys(description.av));
+        console.log(typeof Object.keys(description.av)[0]);
+        setImgAddress(Object.keys(description.av)[0]);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log("need to equip nft");
+      });
   }, []);
 
   return (
-    <div 
-      className="bettermidapp-profile-3" 
+    <div
+      className="bettermidapp-profile-3"
       style={{
-        'height': `${ isOpen ? '100vh' : '844px'}`,
+        height: `${isOpen ? "100vh" : "844px"}`,
       }}
     >
       <ShortTitleBar title="Profile" />
@@ -85,75 +97,142 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
           <img className="layer" src="img/profile/layer-1@1x.png" alt="Layer" />
           <Link to="/myNftList">
             <div className="button_nft-collections">
-              <div className="continue-profile inter-semi-bold-white-15px">My NFTs Collections</div>
+              <div className="continue-profile inter-semi-bold-white-15px">
+                My NFTs Collections
+              </div>
             </div>
           </Link>
           <div className="ic_edit" onClick={() => setIsOpen((prev) => !prev)}>
-            <img className='ic_edit-content' src="img/profile/ic-edit-1@1x.png" alt="" />
+            <img
+              className="ic_edit-content"
+              src="img/profile/ic-edit-1@1x.png"
+              alt=""
+            />
           </div>
           <div className="profile-content">
             <div className="zoe_li">{username || "zoe_li"}</div>
             <div className="perso-container">
-              <p className="im-a-positive-perso">{description || "I'm a positive person. I love to travel and eat."}</p>
+              <p 
+                className="im-a-positive-perso"
+                style={description ? {} : { color: "#8e8e8e" }}
+              >
+                {description ||
+                  "Please enter DESCRIPTION TO FRIENDS"}
+              </p>
               <p className="x29-personal-trainer inter-semi-bold-keppel-15px">
                 {aboutYourself || `♉️  |  29  |  PERSONAL TRAINER`}
               </p>
             </div>
           </div>
           {loading ? (
-            <img className="nft_-avatar" src="img/profile/nft-avatar-1@1x.png" alt="NFT_Avatar" />
-          ):(
-            <img className="nft_-avatar" src = {`https://ipfs.io/ipfs/${imgAddress}`} alt="NFT_Avatar" />
-          )
-          }
-          <div className="card-number inter-normal-white-15px">{discordUsername || "zoeeeee#1234"}</div>
-          <div className="copy-icon" onClick={() => handleCopyDiscordUsername(discordUsername)}>
+            <img
+              className="nft_-avatar"
+              src="img/profile/nft-avatar-1@1x.png"
+              alt="NFT_Avatar"
+            />
+          ) : (
+            <img
+              className="nft_-avatar"
+              src={`https://ipfs.io/ipfs/${imgAddress}`}
+              alt="NFT_Avatar"
+            />
+          )}
+          <div className="card-number inter-normal-white-15px">
+            {discordUsername || "zoeeeee#1234"}
+          </div>
+          <div
+            className="copy-icon"
+            onClick={() => handleCopyDiscordUsername(discordUsername)}
+          >
             <img src="img/profile/file---11690@1x.png" alt="" />
           </div>
           <div className="x16227">
             <div className="discord-icon">
-              <img className="discord-icon-content" src='img/profile/file---11691@1x.png' />
+              <img
+                className="discord-icon-content"
+                src="img/profile/file---11691@1x.png"
+              />
             </div>
             <div className="discord inter-bold-royal-blue-15px">DISCORD</div>
           </div>
         </div>
         <div className="x3">
           <Link to="https://test.signumart.io/">
-            <div className="overlap-group-profile" >
+            <div className="overlap-group-profile">
               <img className="add" src="img/profile/add-2@1x.png" alt="Add" />
-              <img className="ic_add" src="img/profile/ic-add-2@1x.png" alt="ic_add" />
+              <img
+                className="ic_add"
+                src="img/profile/ic-add-2@1x.png"
+                alt="ic_add"
+              />
             </div>
           </Link>
           <div className="x24">
-            <img className="x24-item" src="img/profile/nft-1@1x.png" alt="NFT" />
-            <img className="x24-item" src="img/profile/nft-1@1x.png" alt="NFT" />
-            <img className="x24-item" src="img/profile/nft-1@1x.png" alt="NFT" />
+            <img
+              className="x24-item"
+              src="img/profile/nft-1@1x.png"
+              alt="NFT"
+            />
+            <img
+              className="x24-item"
+              src="img/profile/nft-1@1x.png"
+              alt="NFT"
+            />
+            <img
+              className="x24-item"
+              src="img/profile/nft-1@1x.png"
+              alt="NFT"
+            />
           </div>
         </div>
       </div>
-      {isOpen && 
+      {isOpen && (
         <div className="edit-profile-layer">
-          <div className="icon-arrow-left-1-popup icon-arrow-left-3-popup" onClick={() => handleCancel()}>
-            <img className="icon-arrow-left-popup" src="img/profile/icon-arrow-left-1@1x.png" alt="icon-arrow-left" />
+          <div
+            className="icon-arrow-left-1-popup icon-arrow-left-3-popup"
+            onClick={() => handleCancel()}
+          >
+            {isBackButton && (
+              <img
+                className="icon-arrow-left-popup"
+                src="img/profile/icon-arrow-left-1@1x.png"
+                alt="icon-arrow-left"
+              />
+            )}
           </div>
           <div className="edit-profile">
             <div className="overlap-group-1-popup inter-bold-royal-blue-15px">
-              <img className="seperate-line" src="img/profile/seperate-line-1@1x.png" alt="Seperate line" />
+              <img
+                className="seperate-line"
+                src="img/profile/seperate-line-1@1x.png"
+                alt="Seperate line"
+              />
               <img className="bg" src="img/profile/bg-7@1x.png" alt="BG" />
-              <img className="seperat-line" src="img/profile/seperat-line-3@1x.png" alt="Seperat line" />
+              <img
+                className="seperat-line"
+                src="img/profile/seperat-line-3@1x.png"
+                alt="Seperat line"
+              />
               <div className="pick-a-username">PICK A USERNAME</div>
               <div className="about-yourself">ABOUT YOURSELF</div>
-              <div className="description-to-friends">DESCRIPTION TO FRIENDS</div>
+              <div className="description-to-friends">
+                DESCRIPTION TO FRIENDS
+              </div>
               <div className="rewards">
                 <div className="ic_edit-1">
-                  <img className='ic_edit-1-content' src="img/profile/ic-edit-1@1x.png" alt="" />
+                  <img
+                    className="ic_edit-1-content"
+                    src="img/profile/ic-edit-1@1x.png"
+                    alt=""
+                  />
                 </div>
-                <div className="edit-profile-1 inter-semi-bold-white-18px">Edit Profile</div>
+                <div className="edit-profile-1 inter-semi-bold-white-18px">
+                  Edit Profile
+                </div>
               </div>
 
               <div className="search_bar">
                 <RandomGenNameInput name={name} setName={setName} width={300} />
-
                 {/* <div className="card-number-1 inter-normal-white-15px">zoe_li</div>
                 <div className="random-dice">
                   <div className="card-number-2">Random</div>
@@ -164,36 +243,60 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
                 {/* <p className="card-number-3 inter-semi-bold-keppel-15px">
                   ♉️&nbsp;&nbsp;|&nbsp;&nbsp;29&nbsp;&nbsp;|&nbsp;&nbsp;PERSONAL TRAINER
                 </p> */}
-                <CustomTextArea importClassName='inter-semi-bold-keppel-15px' text={aboutYourselfText} setText={setAboutYourselfText} width={300} />
+                <CustomTextArea
+                  importClassName="inter-semi-bold-keppel-15px"
+                  text={aboutYourselfText}
+                  setText={setAboutYourselfText}
+                  width={300}
+                  placeholder="♉️  |  29  |  PERSONAL TRAINER"
+                />
               </div>
               <div className="search_bar-2 search_bar-4">
                 {/* <p className="card-number-4 inter-normal-white-15px">I'm a positive person. I love to travel and eat.</p> */}
-                <CustomTextArea importClassName='inter-normal-white-15px' text={descriptionText} setText={setDescriptionText} width={300} />
+                <CustomTextArea
+                  importClassName="inter-normal-white-15px"
+                  text={descriptionText}
+                  setText={setDescriptionText}
+                  width={300}
+                  placeholder="I'm a positive person. I love to travel and eat."
+                />
               </div>
               <div className="search_bar-3 search_bar-4">
-                <CustomInput importClassName={"inter-normal-white-15px"} text={discordUsernameText} setText={setDiscordUsernameText} width={300} />
+                <CustomInput
+                  importClassName={"inter-normal-white-15px"}
+                  text={discordUsernameText}
+                  setText={setDiscordUsernameText}
+                  width={300}
+                  placeholder="zoeeeee#1234"
+                />
                 {/* <div className="card-number-5 inter-normal-white-15px">zoeeeee#1234</div> */}
               </div>
               <div className="button_save" onClick={() => handleSave()}>
-                <div className="continue-1 inter-semi-bold-white-15px">Save</div>
+                <div className="continue-1 inter-semi-bold-white-15px">
+                  Save
+                </div>
               </div>
               <div className="x16227-1">
                 <div className="discord-icon">
-                  <img className="discord-icon-content" src='img/profile/file---11691@1x.png' />
+                  <img
+                    className="discord-icon-content"
+                    src="img/profile/file---11691@1x.png"
+                  />
                 </div>
-                <div className="discord-username inter-bold-royal-blue-15px">DISCORD USERNAME</div>
+                <div className="discord-username inter-bold-royal-blue-15px">
+                  DISCORD USERNAME
+                </div>
               </div>
             </div>
           </div>
         </div>
-      }
+      )}
       <MenuBar />
     </div>
-  )
+  );
 };
 
 export default AnimaGenContent;
-
 
 // return (
 //   <div className="bettermidapp-profile-1">
@@ -294,8 +397,7 @@ export default AnimaGenContent;
 //   </div>
 // )
 
-
-      /* <div className="title-bar">
+/* <div className="title-bar">
         <div className="overlap-group2">
           <div className="bars-status-bar-i-phone-light">
             <div className="status-bar">
@@ -323,7 +425,7 @@ export default AnimaGenContent;
           </div>
         </div>
       </div> */
-      /* <div className="menu-bar">
+/* <div className="menu-bar">
         <div className="overlap-group4">
           <img className="seperat-line-1" src="img/profile/seperat-line-10@1x.png" alt="Seperat line" />
           <div className="flex-row">

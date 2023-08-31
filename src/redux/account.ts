@@ -29,7 +29,6 @@ export const accountSlice = createSlice({
             state.accountRS = action.payload.accountRS;
             state.publicKey = action.payload.publicKey;
             state.isWatchOnlyMode = action.payload.isWatchOnlyMode;
-            
         },
         setToken:(state, action: PayloadAction<number>) => {
             state.token = action.payload;

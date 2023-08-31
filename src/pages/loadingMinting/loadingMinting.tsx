@@ -1,3 +1,4 @@
+import React from 'react';
 import './loadingMinting.css';
 import { CenterLayout } from '../../components/layout';
 import { useLedger } from '../../redux/useLedger';
@@ -136,7 +137,7 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
             </div>
           </a> */}
       </div>
-      <a href="javascript:history.back()">
+      {/* <a href="javascript:history.back()">
           <div className="icon-arrow-left-JdJl2l icon-arrow-left">
             <img
                 className="icon-arrow-left-cQ3AYZ icon-arrow-left"
@@ -144,7 +145,7 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
                 alt="icon-arrow-left"
                 />
           </div>
-      </a>
+      </a> */}
       {/* <div className="bars-status-bar-i-phone-light-JdJl2l">
           <div className="frame-PAFj23"></div>
           <div className="status-bar-PAFj23">

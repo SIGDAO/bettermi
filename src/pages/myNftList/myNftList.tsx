@@ -311,7 +311,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
 return(
     <div style={bgStyle}>
     <div style={centerLayoutStyle} className='bettermidapp-mimi-nfts-send-address-1'>
-      <ShortTitleBar title='My NFTs' addSign = {true} setting = {false} filter = {true}/>
+      <ShortTitleBar title='My NFTs' addSign = {true} aiCoach = {false} filter = {true}/>
       <div className = "containerMyNftList">
         <div className = "containerMyNftList2">
         {onDuty === ""?(             

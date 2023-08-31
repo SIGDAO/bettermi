@@ -21,7 +21,7 @@ const ErrorGenerateNFT: React.FunctionComponent<IErrorGenerateNFTProps> = (props
       setNavigatePath('/generateBMINFTImport')
     } else if (location.pathname === '/errorTakeSelfie') {
       setErrorMsg('Please make sure that only your face is visible in the frame.');
-      setButtonText('Take Selfie again');
+      setButtonText('Selfie again');
       setNavigatePath('/takeSelfie')
     } 
   }, [])
@@ -35,7 +35,7 @@ const ErrorGenerateNFT: React.FunctionComponent<IErrorGenerateNFTProps> = (props
             <p className="this-nft-has-been-sn-RYas9d">
               {errorMsg}
             </p>
-            <h1 className="title-RYas9d inter-semi-bold-white-28px">Sumimasen!</h1>
+            <h1 className="title-RYas9d inter-semi-bold-white-28px">すみません!</h1>
             <div className="ic_sentiment_very_dissatisfied_24px-RYas9d ic_sentiment_very_dissatisfied_24px">
               <img
                 className="ic_sentiment_very_dissatisfied_24px-TVetTD ic_sentiment_very_dissatisfied_24px"

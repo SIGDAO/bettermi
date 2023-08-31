@@ -121,12 +121,9 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
         setLoading(false);
       });
 
-      TransferToken(nodeHost,userId,calRewardSigdaoOnSelfie(22.9).toString())
-        .then((result)=>{
-          console.log(result);
-        })
+      // TransferToken(nodeHost,userId,"10");
 
-      console.log(calRewardSigdaoOnSelfie(22.9), "calRewardSigdaoOnSelfie(22.9)");
+      // console.log(calRewardSigdaoOnSelfie(22.9), "calRewardSigdaoOnSelfie(22.9)");
 
   }, []);
   // todo: map
@@ -140,6 +137,10 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
     // }
     navigate('/takeSelfie')
   }
+
+  // const testing = async () => {
+  //   await TransferToken(nodeHost,userId, calRewardSigdaoOnSelfie(22.9).toString())
+  // }
 
   
 
@@ -211,8 +212,8 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
             </div>
           </div>
         </div>
-        <Link to="https://discord.gg/8tpu5SrX">
-          <div className="discord-RoXPLo inter-medium-royal-blue-14px">Discord</div>
+        <Link to="https://discord.com/invite/BF8NjfEd4Y)">
+          <div className="discord-RoXPLo inter-medium-royal-blue-14px" >Discord</div>
         </Link>
         <div className="our-community-RoXPLo inter-semi-bold-white-21px">Our Community</div>
         {/* <Link to="/selfieToEarn"> */}
@@ -227,7 +228,8 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
         {/* </Link> */}
         <div className="quick-actions-RoXPLo inter-semi-bold-white-21px">Quick Actions</div>
         <div className="greetings-RoXPLo">
-          <h1 className="title-2ZgxSS">Hi ! </h1>
+          {/* <h1 className="title-2ZgxSS">Hi ! </h1> */}
+          <h1 className="title-2ZgxSS">Hello ! </h1>
           <div className="lv_-reward-2ZgxSS">
             <div className="lv-1-b5x63m inter-semi-bold-keppel-15px">LV {level}</div>
             <div className="nft-reward-10-b5x63m inter-semi-bold-white-15px">NFT REWARD +10%</div>

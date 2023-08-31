@@ -67,7 +67,7 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
   console.log(ledger);
   const confirm = async () => {
     if (minted){
-      console.log('not minted');
+      console.log('minted');
       return
     }
 

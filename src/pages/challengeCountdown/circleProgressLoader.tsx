@@ -2,7 +2,7 @@ import * as React from 'react';
 import CircularProgress, {
   CircularProgressProps,
 } from '@mui/material/CircularProgress';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { TransferToken } from '../../components/transferToken';
@@ -13,6 +13,7 @@ import { walletNodeHost } from '../../redux/wallet';
 
 interface ICircularWithValueLabelProps {
   time: number;
+  reward: number;
 }
 
 function formatTime(seconds: number): string {
@@ -71,15 +72,17 @@ function CircularProgressWithLabel(
 }
 
 const CircularWithValueLabel: React.FunctionComponent<ICircularWithValueLabelProps> = (props) => {
-  const { time } = props;
+  const { time, reward } = props;
   const [progress, setProgress] = React.useState(time);
   const navigate = useNavigate();
   const userAccountId = useSelector(accountId);
   const userWalletNodeHost = useSelector(walletNodeHost);
+  const rewardInSigdao = reward * 10 ** 6;
+  const { pathname } = useLocation();
 
   const handleTransfer = () => {
-    TransferToken(userWalletNodeHost,userAccountId,"5.25")
-    navigate('/challengeCompleted')
+    TransferToken(userWalletNodeHost,userAccountId, rewardInSigdao.toString( ))
+    navigate('/challengeCompleted', { state: { previousPath: pathname } })
   }
 
   React.useEffect(() => {
