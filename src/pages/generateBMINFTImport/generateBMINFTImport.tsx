@@ -142,7 +142,6 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
               setIsTransferToken(true)
             })
         }
-        //await TransferNFTOwnership(ledger,userAccountId,Wallet);
         navigate('/loadingMinting');
       } catch (error) {
         if (error.name !== "ExtensionWalletError") {

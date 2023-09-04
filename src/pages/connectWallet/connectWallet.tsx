@@ -57,7 +57,7 @@ export default function ConnectWallet (props: IConnectWalletProps) {
 
 
 
-    //TransferNft(ledger,import_account.getNumericId(),nftStorageAccounts,codeHashIdForNft,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey);  
+    
     
 
 
@@ -111,7 +111,14 @@ export default function ConnectWallet (props: IConnectWalletProps) {
       machineCodeHash: codeHashIdForNft,
   });
 
-    if(ourContract.ats[0] != null && senderNftStorage){
+    if(ourContract.ats[0] != null && senderNftStorage.ats[0] != null){
+
+      TransferNft(ledger,import_account.getNumericId(),nftStorageAccounts,codeHashIdForNft,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey);
+      //Transfer Nft plaed here for better testing. Will cancel later
+
+
+
+
     console.log(senderNftStorage.ats[0].at);
     store.dispatch(accountSlice.actions.setNftContractStorage(senderNftStorage.ats[0].at));
       console.log("called the if statement");
@@ -146,6 +153,7 @@ console.log(description.includes("Male"))
       navigate("/home");
     }
     else{
+
     console.log(store.getState());
     navigate('/connectSucceed')
     }

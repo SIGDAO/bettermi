@@ -206,7 +206,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
     // });
 
 
-  }, []);
+  }, [userAccountId]);
 
 
 
