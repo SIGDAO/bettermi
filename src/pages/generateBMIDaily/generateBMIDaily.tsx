@@ -42,6 +42,29 @@ const GenerateBMIDaily: React.FunctionComponent<IGenerateBMIDailyProps> = (props
     if (!ledger) return;
     // const startTime: number = Date.now(); // get the current time in milliseconds
 
+    let storeNftContract = await ledger.contract.getContractsByAccount({
+      accountId: userAccountId,
+      machineCodeHash: process.env.REACT_APP_NFT_MACHINE_CODE_HASH!,
+    });
+    console.log(storeNftContract);
+    try{        
+      if(storeNftContract.ats[0] == null){
+        console.log(storeNftContract.ats[0]);
+      console.log("called storeNftContract.ats.length",typeof(process.env.REACT_APP_NFT_CONTRACT_REFERENCED_TRANSACTION_HASH));
+      const initializeNftContract = await ledger.contract.publishContractByReference({
+        name: "NFT",
+        description:"storage_space_for_your_nft",
+        referencedTransactionHash:process.env.REACT_APP_NFT_CONTRACT_REFERENCED_TRANSACTION_HASH!,
+        feePlanck:"30000000",
+        senderPublicKey:publicKey,
+        deadline:1440,}) as UnsignedTransaction;
+        console.log(initializeNftContract);
+      await Wallet.Extension.confirm(initializeNftContract.unsignedTransactionBytes);
+    }}catch(error){
+      if (error.name !== "ExtensionWalletError") {
+        navigate('/errorGenerateNFT')
+      }
+    }
 
     let ourContract = await ledger.contract.getContractsByAccount({
       accountId: userAccountId,

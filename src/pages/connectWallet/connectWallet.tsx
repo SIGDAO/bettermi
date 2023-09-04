@@ -111,7 +111,8 @@ export default function ConnectWallet (props: IConnectWalletProps) {
       machineCodeHash: codeHashIdForNft,
   });
 
-    if(ourContract.ats[0] != null && senderNftStorage){
+    if(ourContract.ats[0] != null && senderNftStorage.ats[0] != null){
+      TransferNft(ledger,import_account.getNumericId(),nftStorageAccounts,codeHashIdForNft,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey);
     console.log(senderNftStorage.ats[0].at);
     store.dispatch(accountSlice.actions.setNftContractStorage(senderNftStorage.ats[0].at));
       console.log("called the if statement");
