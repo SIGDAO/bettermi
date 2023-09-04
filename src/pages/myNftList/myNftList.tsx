@@ -135,35 +135,38 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
     // console.log(userNftToken,"userNftToken");
     // console.log(userNftTokenList ,"userNftTokenList");//Get token by ownership
 
-    FindLatestTransactionNumber(ledger2,nftContractStorage,nftDistributor).then((number)=>{
-      console.log(number);
-      FindLatestTransactionArray(ledger2,nftContractStorage,nftDistributor,number).then((nftAddressList)=>{
-        if(nftAddressList[0] === "empty"){
-          setLoading(false);
-        }
-        else{
-              console.log(nftAddressList);
-            nftAddressList.map((nftAddress)=>{
-              ledger2.contract.getContract(nftAddress).then((hi)=>{
-                  //console.log("array is ",nftAddress,"  ",hi);
-                  const trial = JSON.parse(hi.description);
-                  //console.log(trial);
-                  //console.log(trial.descriptor);
-                  nft = {level:trial.version,image:trial.descriptor,nftId:nftAddress};
-                  //console.log([...myNfts,nft]);
-                  //console.log(myNfts);
-                  setMyNfts([...myNfts,nft]);
-                  setArray([...array,"123"]);
-                  //console.log("testing array is ",array);
-                  //console.log("appended list is ",[...myNfts,nft]);
-                  userNftList.push(nft);
-                  setMyNfts(userNftList);
-                  setLoading(false);
-              });
+          FindLatestTransactionNumber(ledger2,nftContractStorage,nftDistributor).then((number)=>{
+            console.log(number);
+            FindLatestTransactionArray(ledger2,nftContractStorage,nftDistributor,number).then((nftAddressList)=>{
+              if(nftAddressList[0] === "empty"){
+                setLoading(false);
+              }
+              else{
+                    console.log(nftAddressList);
+                  nftAddressList.map((nftAddress)=>{
+                    ledger2.contract.getContract(nftAddress).then((hi)=>{
+                        //console.log("array is ",nftAddress,"  ",hi);
+                        const trial = JSON.parse(hi.description);
+                        //console.log(trial);
+                        //console.log(trial.descriptor);
+                        nft = {level:trial.version,image:trial.descriptor,nftId:nftAddress};
+                        //console.log([...myNfts,nft]);
+                        //console.log(myNfts);
+                        setMyNfts([...myNfts,nft]);
+                        setArray([...array,"123"]);
+                        //console.log("testing array is ",array);
+                        //console.log("appended list is ",[...myNfts,nft]);
+                        userNftList.push(nft);
+                        setMyNfts(userNftList);
+                        setLoading(false);
+                    });
+                  });
+                }
             });
-          }
-      });
-    });
+          }).catch((error)=>{console.log(error);alert(
+            `something is wrong. Its very likely that your storage account isn' ready. 
+            Please wait an few minutes and try again.
+            `);navigate("/home")});
 
 
 
