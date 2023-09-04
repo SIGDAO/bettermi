@@ -68,7 +68,7 @@ import * as React from 'react';
          // If you had any subscription or timers, you'd clean them up here
 
          // Since we want the effect to run only once (on mount), we pass an empty dependency array
-       }, []);
+       }, [image]);
      const test = (abc:string) => {
          console.log(abc);
          return 1;
