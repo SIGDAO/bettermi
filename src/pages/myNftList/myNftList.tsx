@@ -138,25 +138,30 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
     FindLatestTransactionNumber(ledger2,nftContractStorage,nftDistributor).then((number)=>{
       console.log(number);
       FindLatestTransactionArray(ledger2,nftContractStorage,nftDistributor,number).then((nftAddressList)=>{
-        console.log(nftAddressList);
-      nftAddressList.map((nftAddress)=>{
-        ledger2.contract.getContract(nftAddress).then((hi)=>{
-            //console.log("array is ",nftAddress,"  ",hi);
-            const trial = JSON.parse(hi.description);
-            //console.log(trial);
-            //console.log(trial.descriptor);
-            nft = {level:trial.version,image:trial.descriptor,nftId:nftAddress};
-            //console.log([...myNfts,nft]);
-            //console.log(myNfts);
-            setMyNfts([...myNfts,nft]);
-            setArray([...array,"123"]);
-            //console.log("testing array is ",array);
-            //console.log("appended list is ",[...myNfts,nft]);
-            userNftList.push(nft);
-            setMyNfts(userNftList);
-            setLoading(false);
-        });
-      });
+        if(nftAddressList[0] === "empty"){
+          setLoading(false);
+        }
+        else{
+              console.log(nftAddressList);
+            nftAddressList.map((nftAddress)=>{
+              ledger2.contract.getContract(nftAddress).then((hi)=>{
+                  //console.log("array is ",nftAddress,"  ",hi);
+                  const trial = JSON.parse(hi.description);
+                  //console.log(trial);
+                  //console.log(trial.descriptor);
+                  nft = {level:trial.version,image:trial.descriptor,nftId:nftAddress};
+                  //console.log([...myNfts,nft]);
+                  //console.log(myNfts);
+                  setMyNfts([...myNfts,nft]);
+                  setArray([...array,"123"]);
+                  //console.log("testing array is ",array);
+                  //console.log("appended list is ",[...myNfts,nft]);
+                  userNftList.push(nft);
+                  setMyNfts(userNftList);
+                  setLoading(false);
+              });
+            });
+          }
       });
     });
 
