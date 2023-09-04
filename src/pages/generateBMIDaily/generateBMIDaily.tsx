@@ -11,8 +11,9 @@ import { accountId } from '../../redux/account';
 import { accountPublicKey } from '../../redux/account';
 import { AppContext } from '../../redux/useContext';
 import { UnsignedTransaction } from "@signumjs/core";
-
-
+import { TransferNft } from '../../NftSystem/transferNft';
+import { walletNodeHost } from '../../redux/wallet';
+import { LedgerClientFactory } from '@signumjs/core';
 
 
 
@@ -27,8 +28,8 @@ const GenerateBMIDaily: React.FunctionComponent<IGenerateBMIDailyProps> = (props
   const publicKey = useSelector(accountPublicKey);
   const userAccountId = useSelector(accountId);
   const {appName, Wallet, Ledger} = useContext(AppContext);
-
-
+  const nftStorageAccounts = process.env.REACT_APP_NFT_STORAGE?.split(",");
+  const codeHashIdForNft = "5093642053599315133";
 
 
   const navigate = useNavigate();
@@ -60,6 +61,7 @@ const GenerateBMIDaily: React.FunctionComponent<IGenerateBMIDailyProps> = (props
       deadline: 1440,
     }) as UnsignedTransaction;
     
+   // TransferNft(ledger2,userAccountId,nftStorageAccounts,codeHashIdForNft);
 
     await Wallet.Extension.confirm(sendBMI.unsignedTransactionBytes);
 
