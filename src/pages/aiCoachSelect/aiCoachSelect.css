@@ -105,18 +105,16 @@
 
 .bettermidapp-ai-coach .bettermi_qa-j4ugSM {
   background-color: transparent;
-  height: 454px;
+  /* height: 454px; */
   left: 0px;
   position: relative;
   top: 0px;
   width: 358px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.bettermidapp-ai-coach .size-DIcdLh {
-  left: 0px;
-  top: 0px;
-  width: 171px;
-}
 
 .bettermidapp-ai-coach .x425-ZFGQqm {
   width: 171px;
@@ -686,10 +684,6 @@
 .bettermidapp-ai-coach .size {
   background-color: transparent;
   height: 48px;
-  position: absolute;
-}
-
-.bettermidapp-ai-coach .x425 {
   background-color: var(--eerie-black);
   border: 1px solid;
   border-color: var(--royal-blue);
@@ -698,7 +692,24 @@
   left: 0px;
   position: relative;
   top: 0px;
+  width: 171px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* position: absolute; */
 }
+
+/* .bettermidapp-ai-coach .x425 {
+  background-color: var(--eerie-black);
+  border: 1px solid;
+  border-color: var(--royal-blue);
+  border-radius: 10px;
+  height: 48px;
+  left: 0px;
+  position: relative;
+  top: 0px;
+} */
 
 .answer-box {
   background-color: var(--eerie-black);
@@ -706,11 +717,13 @@
   border-color: var(--royal-blue);
   border-radius: 10px;
   /* height: 48px; */
-  left: 0px;
+  /* left: 0px;
   position: relative;
-  top: 0px;
+  top: 0px; */
   padding: 15px;
-  width: 320px;
+  width: max-content;
+  max-width: calc(320px - 30px);
+  display: inline-block;
 }
 
 .size {
@@ -726,7 +739,7 @@
 }
 
 .ans-container {
-  top: 58px;
+  /* top: 58px;
   right: 0px;
-  position: absolute;
+  position: absolute; */
 }

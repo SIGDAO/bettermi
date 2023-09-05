@@ -398,9 +398,9 @@ scanning
 
 <!-- after mint the nft, cannot use the back button --> 
 
-chaning the discord invite link
+<!-- chaning the discord invite link -->
 
-for first edit challengeCountdown, disable the back button
+<!-- for first edit challengeCountdown, disable the back button -->
 
 
 Profile

@@ -3,6 +3,7 @@ import './aiCoachSelect.css';
 import { CenterLayout } from '../../components/layout';
 import { ShortTitleBar } from '../../components/titleBar';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 interface IAiCoachSelectProps {
 }
@@ -11,18 +12,96 @@ const questionList = [
   {
     question: 'What is Bettermi.io?',
     ans: "Bettermi.io is a web application designed to enhance users' lifestyles by integrating fitness, wellness, and social elements."
+  },
+  {
+    question: 'How does Bettermi.io work?',
+    ans: "Bettermi.io combines Game-Fi and Social-Fi aspects, motivating users to lead healthier lives while connecting with a community of like-minded individuals."
+  },
+  {
+    question: 'What are the key features of Bettermi.io?',
+    ans: "The key features include fitness tracking, personalized workouts, NFT rewards, social interaction, AI coaching, and goal-setting capabilities."
+  },
+  {
+    question: 'How can I earn rewards on Bettermi.io?',
+    ans: "Yes, the NFTs on Bettermi.io hold value as they can be used within the app to unlock features, earn additional rewards, and showcase achievements."
+  },
+  {
+    question: "Can I connect with other users?",
+    ans: "Yes, the NFTs on Bettermi.io hold value as they can be used within the app to unlock features, earn additional rewards, and showcase achievements."
+  },
+  {
+    question: "Is my personal information safe?",
+    ans: "Bettermi.io takes privacy and data security seriously, implementing measures to protect users' personal information in accordance with relevant privacy laws."
+  },
+  {
+    question: "How can I get started?",
+    ans: "To get started, simply visit the Bettermi.io website and create an account. From there, you can explore the app's features, set goals, and embark on your wellness journey."
+  },
+  {
+    question: "What is blockchain technology and how is it used in Bettermi.io?",
+    ans: "Blockchain technology is a decentralized and transparent digital ledger that securely records and verifies transactions. In Bettermi.io, blockchain is utilized to power the NFT ecosystem, ensuring authenticity, traceability, and ownership of the NFT rewards and assets."
+  },
+  {
+    question: "What are NFTs and how do they work in Bettermi.io?",
+    ans: "NFTs, or non-fungible tokens, are unique digital assets that represent ownership or proof of authenticity of a specific item or piece of content. In Bettermi.io, NFTs are used as rewards, collectibles, and in-game assets that users can earn and trade within the platform. They would also work as passes to gain access to different events or services in Bettermi.io."
+  },
+  {
+    question: "What is Signum and how is it integrated into Bettermi.io?",
+    ans: "Signum is a blockchain platform that provides the underlying infrastructure for Bettermi.io. It facilitates secure transactions, data storage, and smart contract functionality within the app, enabling seamless interactions and rewards distribution."
+  },
+  {
+    question: "What is Sigdao?",
+    ans: "Sigdao is the native cryptocurrency of the Bettermi.io platform. It is a digital token built on the Signum blockchain, specifically designed to fuel the in-app economy and reward system. Sigdao can be earned by users through various activities such as completing challenges, achieving fitness goals, and participating in the Bettermi.io community."
+  },
+  {
+    question: "How is Sigdao connected to the Signum blockchain?",
+    ans: "Sigdao is built on the Signum blockchain, which serves as the underlying infrastructure for the Bettermi.io platform. The Signum blockchain provides the secure and efficient network for Sigdao transactions, ensuring transparency, immutability, and decentralization. By leveraging Signum's technology, Sigdao inherits the benefits of a robust blockchain network, enabling seamless transactions and interactions within the Bettermi.io ecosystem."
+  },
+  {
+    question: "Can you provide more information about the partner collaborations in Bettermi.io?",
+    ans: "Bettermi.io has partnered with leading fitness and wellness brands to provide users with a diverse range of products, services, and experiences. These partnerships enhance the user experience by offering access to exclusive discounts, premium content, and unique opportunities."
   }
 ]
 
 
 const AiCoachSelect: React.FunctionComponent<IAiCoachSelectProps> = (props) => {
-  const [showQuestion, setShowQuestion] = React.useState(false);
+  // const initialArray: any[] = Array.from({ length: 10 }); // Example array with length 10
+  const [showQuestion, setshowQuestion] = useState<boolean[]>(Array(questionList.length).fill(false));
+
+  // const [showQuestion, setShowQuestion] = React.useState(false);
   const [answer, setAnswer] = React.useState('');
   const handleExportAns = (questionIndex: number) => {
     setAnswer(questionList[questionIndex].ans);
     console.log(answer);
-    setShowQuestion((prev) => !prev);
+    // setShowQuestion((prev) => !prev);
+    setshowQuestion((prev) => {
+      const newArray = [...prev];
+      newArray[questionIndex] = !newArray[questionIndex];
+      return newArray;
+    })
   }
+
+  const questionListContent = questionList.map((question, index) => {
+    return (
+      <>
+        <div
+          className="answer-box inter-normal-white-15px"
+          onClick={(e) => handleExportAns(index)}
+        >
+          {question.question}
+        </div>
+        {showQuestion[index] && (
+          <div className="ans-container">
+            <div className="talking-container" >
+              <div className="answer-box inter-normal-white-15px" >
+                {question.ans}
+              </div>
+            </div>
+          </div>
+        )}
+      </>
+    );
+  })
   
 
   const content: JSX.Element = (
@@ -39,78 +118,7 @@ const AiCoachSelect: React.FunctionComponent<IAiCoachSelectProps> = (props) => {
       <p className="know-more-about-bettermiio-O0wesW inter-bold-royal-blue-15px">KNOW MORE ABOUT BETTERMI.IO :</p>
       <div className="x9-O0wesW">
         <div className="bettermi_qa-j4ugSM">
-          <div className="size-DIcdLh size" onClick={(e) => handleExportAns(0)}>
-            <div className="talking-container" >
-              <div className="x425-ZFGQqm x425" ></div>
-            </div>
-            <div className="what-is-bettermiio-nVZFoH inter-normal-white-15px">What is Bettermi.io?</div>
-          </div>
-          {showQuestion && (
-            <div className="ans-container">
-              <div className="talking-container" >
-                <div className="answer-box inter-normal-white-15px" >
-                  {answer}
-                </div>
-              </div>
-              
-            </div>
-          )}
-          {!showQuestion && (
-            <>
-              <div className="size-F1ipSf size">
-                <div className="talking-container">
-                  <div className="x425-U7TqLi x425"></div>
-                </div>
-                <div className="how-does-bettermiio-work-4kIHJA inter-normal-white-15px">How does Bettermi.io work?</div>
-              </div>
-              <div className="size-XuahuD size">
-                <div className="talking-container">
-                  <div className="x425-CldZpK x425"></div>
-                </div>
-                <p className="what-are-the-key-features-of-bettermiio-MGMwe3 inter-normal-white-15px">
-                  What are the key features of Bettermi.io?
-                </p>
-              </div>
-              <div className="size-pREf5B size">
-                <div className="talking-container">
-                  <div className="x425-nCPlS4 x425"></div>
-                </div>
-                <p className="how-can-i-earn-rewards-on-bettermiio-R6LMwU inter-normal-white-15px">
-                  How can I earn rewards on Bettermi.io?
-                </p>
-              </div>
-              <div className="size-MqzVLg size">
-                <div className="talking-container">
-                  <div className="x425-Q9y5XS x425"></div>
-                </div>
-                <p className="are-the-nf-ts-on-bettermiio-valuable-fWbW1Y inter-normal-white-15px">
-                  Are the NFTs on Bettermi.io valuable?
-                </p>
-              </div>
-              <div className="size-d8uTg1 size">
-                <div className="talking-container">
-                  <div className="x425-TexyRD x425"></div>
-                </div>
-                <p className="can-i-connect-with-other-users-k5mvEy inter-normal-white-15px">
-                  Can I connect with other users?
-                </p>
-              </div>
-              <div className="size-D87IBR size">
-                <div className="talking-container">
-                  <div className="x425-glM2wM x425"></div>
-                </div>
-                <p className="is-my-personal-information-safe-KoUJ4p inter-normal-white-15px">
-                  Is my personal information safe?
-                </p>
-              </div>
-              <div className="size-TQoxDx size">
-                <div className="talking-container">
-                  <div className="x425-I1YSAZ x425"></div>
-                </div>
-                <p className="how-can-i-get-started-CqVjCz inter-normal-white-15px">How can I get started ?</p>
-              </div>
-            </>
-          )}
+          {questionListContent}
         </div>
       </div>
       <div className="user-O0wesW">

@@ -2,7 +2,7 @@ import * as React from "react";
 import MenuBar from "../../components/menuBar";
 import { Link, useNavigate } from "react-router-dom";
 import { ShortTitleBar } from "../../components/titleBar";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useAppSelector } from "../../redux/useLedger";
 import { selectWalletNodeHost } from "../../redux/useLedger";
 import { LedgerClientFactory } from "@signumjs/core";
@@ -51,8 +51,31 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   const [aboutYourselfText, setAboutYourselfText] = useState<string>(aboutYourself);
   const [descriptionText, setDescriptionText] = useState<string>(description);
   const [discordUsernameText, setDiscordUsernameText] = useState<string>(discordUsername);
+  const [showStar, setShowStar] = useState<boolean>(false);
+  // const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   const handleSave = () => {
+    // validation check
+    let foundEmptyField = false;
+    // console.log("fdisjoidfsjioiosdfiodio", inputRefs)
+
+    // inputRefs.current.forEach((input, index) => {
+    //   console.log(input);
+    //   if (input && input.value === '') {
+    //     if (!foundEmptyField) {
+    //       input.focus();
+    //       console.log("idfosjdiofjdsiiofdisodfjio")
+    //       foundEmptyField = true;
+    //     }
+    //   }
+    // });
+
+    if (name.length === 0 || aboutYourself.length === 0 || description.length === 0 ) {
+      // alert("Please fill in all the fields");
+      setShowStar(true);
+      return;
+    }
+
     dispatch(profileSlice.actions.setUsername(name));
     dispatch(profileSlice.actions.setAboutYourself(aboutYourselfText));
     dispatch(profileSlice.actions.setDescription(descriptionText));
@@ -65,6 +88,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   const handleCancel = () => {
     setIsOpen((prev) => !prev);
   };
+
 
   useEffect(() => {
     // Function to fetch data from the APIc
@@ -82,6 +106,8 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
       .catch((error) => {
         console.log("need to equip nft");
       });
+
+    // inputRefs.current = inputRefs.current.slice(0, inputRefs.current.length);
   }, []);
 
   return (
@@ -230,9 +256,10 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
                   Edit Profile
                 </div>
               </div>
-
               <div className="search_bar">
-                <RandomGenNameInput name={name} setName={setName} width={300} />
+                <RandomGenNameInput name={name} setName={setName} width={300} 
+                  // ref={(el) => (inputRefs.current[0] = el)} 
+                />
                 {/* <div className="card-number-1 inter-normal-white-15px">zoe_li</div>
                 <div className="random-dice">
                   <div className="card-number-2">Random</div>
@@ -249,6 +276,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
                   setText={setAboutYourselfText}
                   width={300}
                   placeholder="♉️  |  29  |  PERSONAL TRAINER"
+                  // ref={(el) => (inputRefs.current[1] = el)}
                 />
               </div>
               <div className="search_bar-2 search_bar-4">
@@ -259,6 +287,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
                   setText={setDescriptionText}
                   width={300}
                   placeholder="I'm a positive person. I love to travel and eat."
+                  // ref={(el) => (inputRefs.current[2] = el)}
                 />
               </div>
               <div className="search_bar-3 search_bar-4">
@@ -268,6 +297,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
                   setText={setDiscordUsernameText}
                   width={300}
                   placeholder="zoeeeee#1234"
+                  // ref={(el) => (inputRefs.current[3] = el)}
                 />
                 {/* <div className="card-number-5 inter-normal-white-15px">zoeeeee#1234</div> */}
               </div>
