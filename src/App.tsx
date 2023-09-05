@@ -99,9 +99,9 @@ const CheckStore: React.FC = () => {
     return <Outlet/>
   }
 
-  // if (Wallet.Extension.connection == null) {
-  //   return <Navigate to="/" />
-  // }
+  if (Wallet.Extension.connection == null) {
+    return <Navigate to="/" />
+  }
 
   return sessionStorage.getItem('state') === null ? <Navigate to="/" /> : <Outlet/>;
 }
