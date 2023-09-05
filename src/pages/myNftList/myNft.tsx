@@ -24,14 +24,14 @@ import * as React from 'react';
     level:string;
     isOpenPopup: boolean;
     setIsOpenPopup: (isOpenPopup: boolean) => void;
-     assetId:string;
-     setSelectedAssetId:(assetId:string) => void;
+     nftId:string;
+     setSelectedAssetId:(nftId:string) => void;
     setLevel:(level:string) => void;
  }
 
 
  const MyNft: React.FunctionComponent<MyNftProps> =  (props) => {
-     const {image, level, isOpenPopup, setIsOpenPopup,assetId,setSelectedAssetId,setLevel} = props;
+     const {image, level, isOpenPopup, setIsOpenPopup,nftId,setSelectedAssetId,setLevel} = props;
      const [loading, setLoading] = useState<boolean>(true);
      const [imgAddress, setImgAddress] = useState<string>("");
      const nodeHost = useAppSelector(selectWalletNodeHost);
@@ -68,7 +68,7 @@ import * as React from 'react';
          // If you had any subscription or timers, you'd clean them up here
 
          // Since we want the effect to run only once (on mount), we pass an empty dependency array
-       }, []);
+       }, [image]);
      const test = (abc:string) => {
          console.log(abc);
          return 1;
@@ -86,7 +86,7 @@ import * as React from 'react';
        Wallet.Extension.confirm(setAccountInfo.unsignedTransactionBytes);
      };
      const transferToken = async() => {
-      P2PTransferNftToken(Wallet,nodeHost,"4572964086056463895",assetId,userAccountpublicKey);
+      P2PTransferNftToken(Wallet,nodeHost,"4572964086056463895",nftId,userAccountpublicKey);
      };
    return(
       <>
@@ -115,7 +115,7 @@ import * as React from 'react';
                     <img 
                       onClick={() => {
                         setIsOpenPopup((prev) => !prev);
-                        setSelectedAssetId(assetId);
+                        setSelectedAssetId(nftId);
                         setLevel(nftLevel);
                       }} 
                       className = "myNftButtomArrow" 

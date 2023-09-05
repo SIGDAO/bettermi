@@ -21,13 +21,22 @@ import { AppContext } from '../../redux/useContext';
 import { useContext } from 'react';
 import { accountPublicKey } from '../../redux/account';
 import { CustomTextArea } from '../../components/input';
+import { FindLatestTransactionArray,FindLatestTransactionNumber, p2pTransferNft } from '../../NftSystem/updateUserNftStorage';
+import { getNftContractStorage } from '../../redux/account';
+import { CheckNftOwnerId,TransferNft,UpdateUserStorage } from '../../NftSystem/updateUserNftStorage';
 
 interface IMyNftListProps {
 }
 
+// interface myNftList{
+//   image:string;
+//   assetId:string;
+// }
+
 interface myNftList{
+  level:string;
   image:string;
-  assetId:string;
+  nftId:string;
 }
 
 const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
@@ -39,7 +48,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
   const [myNfts, setMyNfts] = useState<myNftList[]>([]);
   const [onDuty, setOnDuty] = useState<string>("");
   const [array, setArray] = useState<string[]>([]);
-  const [selectedAssetId, setSelectedAssetId] = useState<string>("");
+  const [selectedNftId, setSelectedNftId] = useState<string>("");
   const [isOpenPopup, setIsOpenPopup] = useState<boolean>(false);
   const [userNftTokenList,setNftTokenList] = useState<myNftList[]>([]);
   const [inputValue, setInputValue] = useState('');
@@ -66,6 +75,11 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
   var userNftToken:myNftList[] = [];
   const navigate = useNavigate();
 
+  const codeHashIdForNft = "5093642053599315133";
+  const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
+  const nftDistributorPublicKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PUBLIC_KEY!;
+  const nftDistributorPrivateKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PRIVATE_KEY!;
+  const nftContractStorage = useSelector(getNftContractStorage);
   // for(var i = 0;i<6;i++){
   //   nft = {
   //     image:`${process.env.PUBLIC_URL}/img/NftList/nft-1@1x.png`,
@@ -88,30 +102,20 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
     }).catch((error) => { console.log(error) });
     // Function to fetch data from the API
 
-    ledger2.account.getAccount({accountId:userAccountId}).then(async(account) => {
-      console.log(account);
-      for (var i = 0;i<account.assetBalances.length;i++){
-        const token = await ledger2.asset.getAsset({assetId:account.assetBalances[i].asset});
-        console.log(token);
-        if(token.issuer === process.env.REACT_APP_NFT_TOKEN_ISSUER && token.name === "BetterMi"){
-          console.log(JSON.parse(token.description));
-          console.log(JSON.parse(token.description).descriptor);
-          console.log(typeof(JSON.parse(token.description).descriptor));
-          userNftToken.push({image:JSON.parse(token.description).descriptor,assetId:token.asset});
-          setNftTokenList(userNftToken);
-        }
-      }
-      // account.assetBalances.map(async(asset)=>{
-      //   const token = await ledger2.asset.getAsset({assetId:asset.asset});
-      //   if(token.issuer === nftTokenIssuer && token.name === "BetterMi"){
-      //     console.log(JSON.parse(token.description));
-      //     console.log(JSON.parse(token.description).descriptor);
-      //     console.log(typeof(JSON.parse(token.description).descriptor));
-      //     userNftToken.push({level:1,image:JSON.parse(token.description).descriptor});
-      //     setNftTokenList(userNftToken);
-      // }
-      // });      setLoading(false);
-    }).then(() => { setLoading(false);}).catch((error)=>{console.log(error)});;
+    // ledger2.account.getAccount({accountId:userAccountId}).then(async(account) => {
+    //   console.log(account);
+    //   for (var i = 0;i<account.assetBalances.length;i++){
+    //     const token = await ledger2.asset.getAsset({assetId:account.assetBalances[i].asset});
+    //     console.log(token);
+    //     if(token.issuer === process.env.REACT_APP_NFT_TOKEN_ISSUER && token.name === "BetterMi"){
+    //       console.log(JSON.parse(token.description));
+    //       console.log(JSON.parse(token.description).descriptor);
+    //       console.log(typeof(JSON.parse(token.description).descriptor));
+    //       userNftToken.push({image:JSON.parse(token.description).descriptor,assetId:token.asset});
+    //       setNftTokenList(userNftToken);
+    //     }
+    //   }
+    // }).then(() => { setLoading(false);}).catch((error)=>{console.log(error)});;
 
 
     // ledger2.asset.getAssetsByOwner({accountId:userAccountId}).then(
@@ -130,6 +134,39 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
     // ).catch((error)=>{console.log(error)});
     // console.log(userNftToken,"userNftToken");
     // console.log(userNftTokenList ,"userNftTokenList");//Get token by ownership
+
+          FindLatestTransactionNumber(ledger2,nftContractStorage,nftDistributor).then((number)=>{
+            console.log(number);
+            FindLatestTransactionArray(ledger2,nftContractStorage,nftDistributor,number).then((nftAddressList)=>{
+              if(nftAddressList[0] === "empty"){
+                setLoading(false);
+              }
+              else{
+                    console.log(nftAddressList);
+                  nftAddressList.map((nftAddress)=>{
+                    ledger2.contract.getContract(nftAddress).then((hi)=>{
+                        //console.log("array is ",nftAddress,"  ",hi);
+                        const trial = JSON.parse(hi.description);
+                        //console.log(trial);
+                        //console.log(trial.descriptor);
+                        nft = {level:trial.version,image:trial.descriptor,nftId:nftAddress};
+                        //console.log([...myNfts,nft]);
+                        //console.log(myNfts);
+                        setMyNfts([...myNfts,nft]);
+                        setArray([...array,"123"]);
+                        //console.log("testing array is ",array);
+                        //console.log("appended list is ",[...myNfts,nft]);
+                        userNftList.push(nft);
+                        setMyNfts(userNftList);
+                        setLoading(false);
+                    });
+                  });
+                }
+            });
+          }).catch((error)=>{console.log(error);alert(
+            `something is wrong. Its very likely that your storage account isn' ready. 
+            Please wait an few minutes and try again.
+            `);navigate("/home")});
 
 
 
@@ -169,7 +206,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
     // });
 
 
-  }, []);
+  }, [userAccountId]);
 
 
 
@@ -234,46 +271,84 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
     'top': '44px',
   }
   const displayMyNft = myNfts.map((nft) => {//Contract Id
-    console.log("userNftList is  ", userNftList);
+    console.log("userNftList is  ", myNfts);
     return (
-      <MyNft image={nft.image} level={level} isOpenPopup={isOpenPopup} setIsOpenPopup={setIsOpenPopup} assetId = {nft.assetId} setSelectedAssetId={setSelectedAssetId} setLevel={setLevel}></MyNft>
+      <MyNft image={nft.image} level={level} isOpenPopup={isOpenPopup} setIsOpenPopup={setIsOpenPopup} nftId = {nft.nftId} setSelectedAssetId={setSelectedNftId} setLevel={setLevel}></MyNft>
     );
   }
   );
   const displayNftToken = userNftTokenList.map((nft) => {//Contract Id
     console.log("userNftTokenList is  ",nft);
     return(
-      <MyNft image={nft.image} level={level} isOpenPopup={isOpenPopup} setIsOpenPopup={setIsOpenPopup} assetId= {nft.assetId} setSelectedAssetId={setSelectedAssetId} setLevel={setLevel}></MyNft>
+      <MyNft image={nft.image} level={level} isOpenPopup={isOpenPopup} setIsOpenPopup={setIsOpenPopup} nftId= {nft.nftId} setSelectedAssetId={setSelectedNftId} setLevel={setLevel}></MyNft>
     );
   }
   );
   const transferNft = async(assetId:string) => {
     try{
-    const recipientAccount = await ledger2.account.getAccount({
-      accountId:inputAddress,
-    });
-    console.log(recipientAccount);
-    if(assetId !== ""){
-      console.log(assetId);
-      console.log(publicKey);
-      const unsignedTransaction = await ledger2.asset.transferAsset({
-        assetId:assetId,
-        quantity:"1",
-        recipientId:recipientAccount.account,
-        feePlanck:"1000000",
-        senderPublicKey:userAccountpublicKey,
-      });
-      await Wallet.Extension.confirm(unsignedTransaction.unsignedTransactionBytes);
-      navigate("/NFTTransferCompleted");
+      const nftOwner = await CheckNftOwnerId(ledger2,selectedNftId);
+      console.log("nftOwner is",nftOwner);
+      if(nftOwner === userAccountId){
+        //TransferNft(ledger2,selectedNftId,userAccountId,codeHashIdForNft,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey);
+        const latestTransactionNumber:string = await FindLatestTransactionNumber(ledger2,nftContractStorage,nftDistributor);
+        const latestArray:string[] = await FindLatestTransactionArray(ledger2,nftContractStorage,nftDistributor,latestTransactionNumber);
+        const transactionCost = (Math.floor((latestArray.length)/8+1)*1000000).toString();
+       const userCoverTheirTransactionCost = await ledger2.transaction.sendAmountToSingleRecipient({
+          recipientId: nftDistributor,
+          amountPlanck: transactionCost,
+          feePlanck: "1000000",
+          senderPublicKey: userAccountpublicKey,
+        });
+        await Wallet.Extension.confirm(userCoverTheirTransactionCost.unsignedTransactionBytes);
+        const recipientInfo  = await ledger2.account.getAccount({accountId:inputAddress});
+        console.log(recipientInfo.account);
+        console.log(selectedNftId);
+        console.log(userAccountpublicKey);
+        console.log(Wallet);
+        //await p2pTransferNft(ledger2,Wallet,selectedNftId,userAccountpublicKey,recipientInfo.account);
+        const transaction = await ledger2.contract.callContractMethod({
+          senderPublicKey: userAccountpublicKey,
+          feePlanck: "2000000",
+          amountPlanck: "30000000",
+          contractId: selectedNftId,
+          methodHash: "-8011735560658290665",
+          methodArgs: [recipientInfo.account],
+          });
+          await Wallet.Extension.confirm(transaction.unsignedTransactionBytes);
+        await UpdateUserStorage(ledger2,userAccountId,inputAddress,codeHashIdForNft,selectedNftId,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey);
+      }
     }
-    else{
-      console.log("assetId doesnt exists");
+    catch(e){
+      console.log(e);
+      alert("Transaction not signed");
     }
   }
-  catch{
-    alert("account not exist");
-  }
-  }
+  //   try{
+  //   const recipientAccount = await ledger2.account.getAccount({
+  //     accountId:inputAddress,
+  //   });
+  //   console.log(recipientAccount);
+  //   if(assetId !== ""){
+  //     console.log(assetId);
+  //     console.log(publicKey);
+  //     const unsignedTransaction = await ledger2.asset.transferAsset({
+  //       assetId:assetId,
+  //       quantity:"1",
+  //       recipientId:recipientAccount.account,
+  //       feePlanck:"1000000",
+  //       senderPublicKey:userAccountpublicKey,
+  //     });
+  //     await Wallet.Extension.confirm(unsignedTransaction.unsignedTransactionBytes);
+  //     navigate("/NFTTransferCompleted");
+  //   }
+  //   else{
+  //     console.log("assetId doesnt exists");
+  //   }
+  // }
+  // catch{
+  //   alert("account not exist");
+  // }
+  // }
   const returnNftToMe = async() => {
     // console.log(userAccountId);
     // ledger2.account.getAccount({accountId:userAccountId}).then(async(account) => {
@@ -368,7 +443,7 @@ return(
 
                }
               {/* {displayMyNft} */}
-              {loading?(<div></div>):(displayNftToken)}
+              {loading?(<div></div>):(displayMyNft)}
         </div>
         {/* {loading?(<p>loading...</p>):(
           <>
@@ -420,7 +495,7 @@ return(
                 /> */}
                 {/* <div className="search_bar-1 search_bar-4"><p className="card-number">e.g. TS-9DJR-MGA2-VH44-5GMXY or Anderson</p></div> */}
                 <div className="search_bar-2 search_bar-4"></div>
-                <div className="button_save" onClick={() => transferNft(selectedAssetId)}>
+                <div className="button_save" onClick={() => transferNft(selectedNftId)}>
                   <div className="continue inter-semi-bold-white-15px">Transfer</div>
                 </div>
                 <p className="address-id-to-send-nft-to">Address, ID to send NFT to.</p>

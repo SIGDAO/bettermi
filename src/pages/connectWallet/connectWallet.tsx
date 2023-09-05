@@ -13,6 +13,7 @@ import { AppContext } from '../../redux/useContext';
 import { useNavigate } from 'react-router-dom';
 import { LedgerClientFactory } from '@signumjs/core';
 import { profileSlice } from '../../redux/profile';
+import { TransferNft } from '../../NftSystem/transferNft';
 export interface IConnectWalletProps {
 }
 
@@ -20,6 +21,11 @@ export default function ConnectWallet (props: IConnectWalletProps) {
   const navigate = useNavigate();
   const {appName,Wallet,Ledger} = useContext(AppContext);
   const codeHashId = "7457358473503628676";
+  const nftStorageAccounts = process.env.REACT_APP_NFT_STORAGE!.split(",");
+  const codeHashIdForNft = "5093642053599315133";
+  const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
+  const nftDistributorPublicKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PUBLIC_KEY!;
+  const nftDistributorPrivateKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PRIVATE_KEY!;
   const connectWallet = (appName:any,Wallet:any,Ledger:any) => {
     //const wallet = new GenericExtensionWallet();
     console.log(typeof process.env.REACT_APP_MOBILE)
@@ -37,6 +43,7 @@ export default function ConnectWallet (props: IConnectWalletProps) {
         isWatchOnlyMode:true,
         token:0,
         level:"1",
+        nftContractStorage:"",
       };
     store.dispatch(accountSlice.actions.setAccount(accountinfo));
     console.log(store.getState());
@@ -46,6 +53,15 @@ export default function ConnectWallet (props: IConnectWalletProps) {
     localStorage.setItem('accountId',import_account.getNumericId());
     localStorage.setItem('nodeHost',wallet.currentNodeHost);
     const ledger = LedgerClientFactory.createClient({nodeHost:wallet.currentNodeHost});
+
+
+
+
+    
+    
+
+
+
     let ourContract = await ledger.contract.getContractsByAccount({
         accountId: accountinfo.accountId,
         machineCodeHash: codeHashId,
@@ -89,7 +105,22 @@ export default function ConnectWallet (props: IConnectWalletProps) {
         }
       });
     // navigate('/connectSucceed');
-    if(ourContract.ats[0] != null){
+
+    let senderNftStorage = await ledger.contract.getContractsByAccount({
+      accountId: accountinfo.accountId,
+      machineCodeHash: codeHashIdForNft,
+  });
+
+    if(ourContract.ats[0] != null && senderNftStorage.ats[0] != null){
+
+      TransferNft(ledger,import_account.getNumericId(),nftStorageAccounts,codeHashIdForNft,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey);
+      //Transfer Nft plaed here for better testing. Will cancel later
+
+
+
+
+    console.log(senderNftStorage.ats[0].at);
+    store.dispatch(accountSlice.actions.setNftContractStorage(senderNftStorage.ats[0].at));
       console.log("called the if statement");
       var description = ourContract.ats[0].description;
       console.log(description);
@@ -122,6 +153,7 @@ console.log(description.includes("Male"))
       navigate("/home");
     }
     else{
+
     console.log(store.getState());
     navigate('/connectSucceed')
     }
