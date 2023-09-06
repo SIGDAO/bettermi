@@ -24,6 +24,8 @@ import { CustomTextArea } from '../../components/input';
 import { FindLatestTransactionArray,FindLatestTransactionNumber, p2pTransferNft } from '../../NftSystem/updateUserNftStorage';
 import { getNftContractStorage } from '../../redux/account';
 import { CheckNftOwnerId,TransferNft,UpdateUserStorage } from '../../NftSystem/updateUserNftStorage';
+import { store } from '../../redux/reducer';
+import { accountSlice } from '../../redux/account';
 
 interface IMyNftListProps {
 }
@@ -55,6 +57,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
   const [inputAddress,setInputAddress] = useState("");
   const [level,setLevel] = useState("1");
   const dataFetchedRef = useRef(false);
+  const nftContractChecked = useRef(false);
   const {appName,Wallet,Ledger} = useContext(AppContext);
   const nftTokenIssuer:string = process.env.REACT_APP_NFT_TOKEN_ISSUER!;
   const userAccountpublicKey:string = useSelector(accountPublicKey);
@@ -88,6 +91,24 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
   //   myNfts.push(nft);
   // }
   // console.log(myNfts);
+  useEffect(() => {
+    if (nftContractChecked.current) { console.log("called"); return; }
+    nftContractChecked.current = true;
+    ledger2.contract.getContractsByAccount({
+          accountId: userAccountId,
+          machineCodeHash: codeHashIdForNft,
+      }).then((senderNftStorage)=>{
+    
+        store.dispatch(accountSlice.actions.setNftContractStorage(senderNftStorage.ats[0].at));
+        console.log("called the if statement");
+      }).catch((error)=>{
+        console.log(error);alert(
+          `something is wrong. Its very likely that your storage account isn' ready. 
+          Please wait an few minutes and try again.
+          `);navigate("/home")
+      });
+    
+      },[]);
 
   useEffect(() => {
     if (dataFetchedRef.current) { console.log("called"); return; }
@@ -163,10 +184,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
                   });
                 }
             });
-          }).catch((error)=>{console.log(error);alert(
-            `something is wrong. Its very likely that your storage account isn' ready. 
-            Please wait an few minutes and try again.
-            `);navigate("/home")});
+          }).catch((error)=>{console.log(error);navigate("/home")});
 
 
 

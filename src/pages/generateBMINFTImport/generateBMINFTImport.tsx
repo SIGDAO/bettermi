@@ -100,11 +100,11 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
       try {
         // todo: check if user has finished all smart contract build up
         if(storeNftContract.ats[0] == null){
-          //console.log("called storeNftContract.ats.length",typeof(process.env.REACT_APP_NFT_CONTRACT_REFERENCED_TRANSACTION_HASH));
+          console.log("called storeNftContract.ats.length",typeof(process.env.REACT_APP_NFT_CONTRACT_REFERENCED_TRANSACTION_FULL_HASH));
           const initializeNftContract = await ledger.contract.publishContractByReference({
             name: "NFT",
             description:"storage_space_for_your_nft",
-            referencedTransactionHash:process.env.REACT_APP_NFT_CONTRACT_REFERENCED_TRANSACTION_HASH!,
+            referencedTransactionHash:process.env.REACT_APP_NFT_CONTRACT_REFERENCED_TRANSACTION_FULL_HASH!,
             feePlanck:"30000000",
             senderPublicKey:publicKey,
             deadline:1440,}) as UnsignedTransaction;
@@ -112,7 +112,7 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
           await Wallet.Extension.confirm(initializeNftContract.unsignedTransactionBytes);
         }
         if(ourContract.ats[0] == null){
-          //console.log("called ourContract.ats[0] == null");
+          console.log("called ourContract.ats[0] == null");
           const initializeContract = await ledger.contract.publishContractByReference({
             name: "BMI",
             description: JSON.stringify({'bmi': BMI, 'gender': gender, 'birthday': birthday, 'time': new Date()}),  //the first data is hidden in the description

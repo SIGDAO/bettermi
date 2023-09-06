@@ -259,6 +259,7 @@ export async function p2pTransferNft(ledger2:any,wallet:any,nftToBeDistributed:s
 }
 
 export async function TransferNft(ledger2:any,wallet:any,nftToBeDistributed:string,recipientId:string,senderPrivateKey:string,senderPublicKey:string){
+    
 await ledger2.contract.callContractMethod({
   senderPublicKey: senderPublicKey,
   senderPrivateKey: senderPrivateKey,

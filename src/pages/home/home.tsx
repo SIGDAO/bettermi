@@ -74,6 +74,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const Ledger2 = useLedger();
   const gender = useSelector(selectCurrentGender)
   const [level,setLevel] = useState<string>("");
+  const codeHashIdForNft = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!;
   console.log(Token);
   console.log(store.getState());
   console.log("Token is  ",Token);
@@ -126,6 +127,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
       // console.log(calRewardSigdaoOnSelfie(22.9), "calRewardSigdaoOnSelfie(22.9)");
 
   }, []);
+
   // todo: map
   // const userSIGDAO = 
 
