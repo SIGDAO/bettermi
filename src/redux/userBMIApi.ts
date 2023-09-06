@@ -10,7 +10,7 @@ export interface BMI {
 export const userBMIApi = createApi({
   reducerPath: 'userBMIApi',
   baseQuery: fetchBaseQuery({ 
-    baseUrl: 'http://3.113.21.169/' 
+    baseUrl: '//3.113.21.169/' 
   }),
   endpoints: (builder) => ({
     getBMI: builder.mutation<BMI, Object>({
