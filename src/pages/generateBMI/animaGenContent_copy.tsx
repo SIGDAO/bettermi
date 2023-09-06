@@ -89,11 +89,11 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
 
       try {
         if(storeNftContract.ats[0] == null){
-          //console.log("called storeNftContract.ats.length",typeof(process.env.REACT_APP_NFT_CONTRACT_REFERENCED_TRANSACTION_HASH));
+          //console.log("called storeNftContract.ats.length",typeof(process.env.REACT_APP_NFT_CONTRACT_REFERENCED_TRANSACTION_FULL_HASH));
           const initializeNftContract = await ledger.contract.publishContractByReference({
             name: "NFT",
             description:"storage_space_for_your_nft",
-            referencedTransactionHash:process.env.REACT_APP_NFT_CONTRACT_REFERENCED_TRANSACTION_HASH!,
+            referencedTransactionHash:process.env.REACT_APP_NFT_CONTRACT_REFERENCED_TRANSACTION_FULL_HASH!,
             feePlanck:"30000000",
             senderPublicKey:publicKey,
             deadline:1440,}) as UnsignedTransaction;

@@ -14,6 +14,9 @@ import { useNavigate } from 'react-router-dom';
 import { LedgerClientFactory } from '@signumjs/core';
 import { profileSlice } from '../../redux/profile';
 import { TransferNft } from '../../NftSystem/transferNft';
+import { CheckUnconfirmedNewNFTContract } from '../myNftList/checkNewContract';
+import { CheckUnconfirmedNewBMIContract } from '../myNftList/checkNewContract';
+
 export interface IConnectWalletProps {
 }
 
@@ -26,15 +29,12 @@ export default function ConnectWallet (props: IConnectWalletProps) {
   const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
   const nftDistributorPublicKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PUBLIC_KEY!;
   const nftDistributorPrivateKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PRIVATE_KEY!;
-  const connectWallet = (appName:any,Wallet:any,Ledger:any) => {
+  const connectWallet = async (appName:any,Wallet:any,Ledger:any) => {
     //const wallet = new GenericExtensionWallet();
-    console.log(typeof process.env.REACT_APP_MOBILE)
     let key:string;
     Wallet.Extension.connect({appName,networkName:Ledger.Network})
     .then(async (wallet:any) => {
-      console.log(wallet);
       key = wallet.publicKey; 
-      console.log(key);
       const import_account:Address =  Address.fromPublicKey(key, Ledger.AddressPrefix);
       const accountinfo:userAccount = {
         accountId:import_account.getNumericId(),
@@ -46,16 +46,16 @@ export default function ConnectWallet (props: IConnectWalletProps) {
         nftContractStorage:"",
       };
     store.dispatch(accountSlice.actions.setAccount(accountinfo));
-    console.log(store.getState());
     store.dispatch(walletSlice.actions.setWalletPublicKey(key));
     store.dispatch(walletSlice.actions.setIsWalletConnected(true));
     store.dispatch(walletSlice.actions.setWalletNodeHost(wallet.currentNodeHost));
     localStorage.setItem('accountId',import_account.getNumericId());
     localStorage.setItem('nodeHost',wallet.currentNodeHost);
     const ledger = LedgerClientFactory.createClient({nodeHost:wallet.currentNodeHost});
+    const openedNftContract = await CheckUnconfirmedNewNFTContract(ledger,import_account.getNumericId());
+    const openedBmiContract = await CheckUnconfirmedNewBMIContract(ledger,import_account.getNumericId());
 
-
-
+      localStorage.clear();//Guess we need to clear out all local storage after connecting account
 
     
     
@@ -67,14 +67,10 @@ export default function ConnectWallet (props: IConnectWalletProps) {
         machineCodeHash: codeHashId,
       });
             ledger.asset.getAssetHolders({assetId:"13116962758643420722"}).then((asset)=>{
-              console.log(asset);
-              console.log(asset.accountAssets.length);
-              console.log(accountinfo.accountId);
               for(var i = 0; i<asset.accountAssets.length;i++){
                 if(asset.accountAssets[i].account === accountinfo.accountId){
                   store.dispatch(accountSlice.actions.setToken(Number(asset.accountAssets[i].quantityQNT)/1000000));
                   localStorage.setItem('token',asset.accountAssets[i].quantityQNT);
-                  console.log(asset.accountAssets[i].quantityQNT);
                   break;
                 }
                 if(i == asset.accountAssets.length - 1){
@@ -92,16 +88,11 @@ export default function ConnectWallet (props: IConnectWalletProps) {
         //   }
         // })
         });
-      console.log(ourContract);
-      console.log(ourContract.ats[0]);
-      console.log(typeof(ourContract.ats[0]));
-      console.log(typeof(ourContract));
       const asset = await ledger.asset.getAssetHolders({assetId:"13116962758643420722"});
       asset.accountAssets.map((obj)=>{
         if(obj.account == accountinfo.accountId){
           store.dispatch(accountSlice.actions.setToken(Number(obj.quantityQNT)/1000000));
           localStorage.setItem('token',obj.quantityQNT);
-            console.log(obj.quantityQNT);
         }
       });
     // navigate('/connectSucceed');
@@ -111,36 +102,36 @@ export default function ConnectWallet (props: IConnectWalletProps) {
       machineCodeHash: codeHashIdForNft,
   });
 
-    if(ourContract.ats[0] != null && senderNftStorage.ats[0] != null){
+    if((ourContract.ats[0] != null || openedBmiContract === true) && (senderNftStorage.ats[0] != null || openedNftContract === true)){
 
-      TransferNft(ledger,import_account.getNumericId(),nftStorageAccounts,codeHashIdForNft,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey);
+      //await TransferNft(ledger,import_account.getNumericId(),nftStorageAccounts,codeHashIdForNft,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey);
       //Transfer Nft plaed here for better testing. Will cancel later
 
-
-
-
-    console.log(senderNftStorage.ats[0].at);
-    store.dispatch(accountSlice.actions.setNftContractStorage(senderNftStorage.ats[0].at));
       console.log("called the if statement");
-      var description = ourContract.ats[0].description;
-      console.log(description);
-      
-      //description = description.replace(/'/g, '"');
-      //description = description.replace(/ /g, '"');
-      // description = `"${description}"`
-      //  description = JSON.parse(description);
-      // console.log(description);
-      if(description.includes("Female") === true){
-        store.dispatch(profileSlice.actions.setGender("Female"));
+
+
+      if(senderNftStorage.ats[0] != null){
+        store.dispatch(accountSlice.actions.setNftContractStorage(senderNftStorage.ats[0].at));
       }
-      else if(description.includes("Male") === true){
-        store.dispatch(profileSlice.actions.setGender("Male"));
-      }
-      else{
-        store.dispatch(profileSlice.actions.setGender("Male"));
-      }
-console.log(description.includes("Female"));
-console.log(description.includes("Male"))
+    if(ourContract.ats[0] != null ){
+          var description = ourContract.ats[0].description;
+        
+          //description = description.replace(/'/g, '"');
+          //description = description.replace(/ /g, '"');
+          // description = `"${description}"`
+          //  description = JSON.parse(description);
+          // console.log(description);
+          if(description.includes("Female") === true){
+            store.dispatch(profileSlice.actions.setGender("Female"));
+          }
+          else if(description.includes("Male") === true){
+            store.dispatch(profileSlice.actions.setGender("Male"));
+          }
+          else{
+            store.dispatch(profileSlice.actions.setGender("Male"));
+          }
+        }
+
 // Replace single quotes with double quotes
 
 
@@ -153,15 +144,11 @@ console.log(description.includes("Male"))
       navigate("/home");
     }
     else{
-
-    console.log(store.getState());
     navigate('/connectSucceed')
     }
   })
   // todo: add error handling, and show it to user
     .catch((error:any) => {
-      console.log(error);
-      console.log(error.NotFoundWalletError);
       if (error.name === 'NotFoundWalletError'){
         window.location.href = 'https://chrome.google.com/webstore/detail/signum-xt-wallet/kdgponmicjmjiejhifbjgembdcaclcib/'
       }

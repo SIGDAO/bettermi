@@ -54,7 +54,7 @@ const GenerateBMIDaily: React.FunctionComponent<IGenerateBMIDailyProps> = (props
       const initializeNftContract = await ledger.contract.publishContractByReference({
         name: "NFT",
         description:"storage_space_for_your_nft",
-        referencedTransactionHash:process.env.REACT_APP_NFT_CONTRACT_REFERENCED_TRANSACTION_HASH!,
+        referencedTransactionHash:process.env.REACT_APP_NFT_CONTRACT_REFERENCED_TRANSACTION_FULL_HASH!,
         feePlanck:"30000000",
         senderPublicKey:publicKey,
         deadline:1440,}) as UnsignedTransaction;
