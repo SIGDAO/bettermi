@@ -395,7 +395,6 @@ question like dropdown
 scanning
 
 <!-- disable the ai aoach button -->
-
 <!-- after mint the nft, cannot use the back button --> 
 
 <!-- chaning the discord invite link -->
@@ -407,5 +406,18 @@ Profile
   <!-- default desciption -> placeholder -->
   <!-- if user don't enter the info, show a darker color to display the placeholder -->
   <!-- after reg, show the profile enter info box -->
+  profile - save button not function
+
+
   and have the validation check
   for ppl that don't writ,  show star in the profile edit
+  NFT marketplace (Signum Art for now)
+  BMI reward calculations
+  NFT ownership (Import NFT function)
+  Challenge countdown
+  Take selfie again for BMI detection error
+  Reward page linked to website
+  Q&A drop down to be completed
+  Please also disable rewards page "Redeem" button.
+  AI Mimi and .Io disable (if don’t have time)
+
