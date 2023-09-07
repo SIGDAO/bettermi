@@ -10,6 +10,18 @@
   width: 390px;
 }
 
+.importButton{
+  position:relative;
+  left:263px;
+  height:25px;
+  width:71px;
+  top:54px;
+  background-color:inherit;
+  border:none;
+  color:#FFFFFF;
+}
+
+
 .bettermidapp-mimi-nfts-1 .bg-ipEwgj {
   height: 934px;
   width: 480px;
@@ -910,7 +922,7 @@ opacity: 0.5;
 }
 
 .bettermidapp-mimi-nfts-send-address-1 .bg {
-  height: 720px;
+  height: 392px;
   left: 15px;
   object-fit: cover;
   position: absolute;
@@ -1052,7 +1064,7 @@ opacity: 0.5;
   letter-spacing: 0;
   line-height: 20px;
   position: absolute;
-  top: 357px;
+  top: 257px;
   white-space: nowrap;
   margin: 0;
 }
@@ -1219,4 +1231,28 @@ opacity: 0.5;
 .myNftSend:hover{
   opacity: 0.5;
   cursor: pointer;
+}
+
+
+/* nft import screen css */
+
+
+
+
+
+/* screen - bettermidapp-mimi-nft-import-error */
+
+.bettermidapp-mimi-nft-import-error .edit-profile-layer {
+  align-items: flex-start;
+  background-color: var(--woodsmoke-2);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 130px;
+  left: 45px;
+  min-height: 844px;
+  padding: 44px 16px;
+  position: absolute;
+  top: 45px;
+  width: 390px;
 }

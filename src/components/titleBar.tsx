@@ -2,6 +2,7 @@ import * as React from 'react';
 import './titleBar.css';
 import { BackButton } from './button';
 import { Link } from 'react-router-dom';
+import { Button } from 'reactstrap';
 
 interface IShortTitleBarProps {
   title: string | undefined;
@@ -12,6 +13,9 @@ interface IShortTitleBarProps {
   addSign?:boolean;
   setting?: boolean;
   backButton?: boolean;
+  importButton?: boolean;
+  setIsOpenImport?: (isOpenImport: boolean) => void;
+  isOpenImport?: boolean;
 }
 
 
@@ -26,7 +30,7 @@ const settingIcon: JSX.Element = (
 )
 
 export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (props) => {
-  const { title, aiCoach, help, transparent,filter,addSign, setting, backButton } = props;
+  const { title, aiCoach, help, transparent,filter,addSign, setting, backButton,importButton,setIsOpenImport,isOpenImport } = props;
   console.log(aiCoach);
   console.log(aiCoach === false);
   return (
@@ -113,6 +117,13 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
       </div>
       
       )}
+      {
+        importButton === false ? null :
+          setIsOpenImport === undefined ? null :
+        (
+          <Button className = "importButton inter-semi-bold-white-12px" onClick = {() => setIsOpenImport(!isOpenImport)}>Import Nft</Button>
+        )
+      }
 
         {/* <img className="bg-MY4xZJ" src={process.env.PUBLIC_URL + "/img/bg-11@1x.png"} alt="BG" /> */}
       </div>
