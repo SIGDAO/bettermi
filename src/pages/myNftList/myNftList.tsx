@@ -26,6 +26,7 @@ import { getNftContractStorage } from '../../redux/account';
 import { CheckNftOwnerId,TransferNft,UpdateUserStorage } from '../../NftSystem/updateUserNftStorage';
 import { store } from '../../redux/reducer';
 import { accountSlice } from '../../redux/account';
+import { updateReceiverAccount } from '../../NftSystem/updateUserNftStorage';
 
 interface IMyNftListProps {
 }
@@ -291,6 +292,20 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
     'position': 'relative',
     'top': '44px',
   }
+  const importNft = async (ledger2:any,nftAddress:string,userAccountId:string) => {
+    try{
+let accountDes = await ledger2.account.getAccount({accountId:nftAddress});
+const nftId = accountDes.account;
+    const nftOwnerId = await CheckNftOwnerId(ledger2,nftId);
+    if(nftOwnerId === userAccountId){
+      updateReceiverAccount(ledger2,userAccountId,codeHashIdForNft,nftId,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey);
+    }
+  }
+  catch(e){
+    console.log(e);
+    alert("hmmm it seems like some error occurs");
+  }
+  }
   const displayMyNft = myNfts.map((nft) => {//Contract Id
     console.log("userNftList is  ", myNfts);
     return (
@@ -555,43 +570,46 @@ return(
           </div>
       }
             {isOpenImport && 
-            <div className="edit-profile-layer">
-            <a href="javascript:history.back()">
-              <div className="icon-arrow-left-3">
-                <img className="icon-arrow-left" src="img/importScreen/icon-arrow-left-10@1x.png" alt="icon-arrow-left" />
+            <div className="importAccount-layer">
+              <div className="importAccount-icon-arrow-left-3" onClick={() => setIsOpenImport(!isOpenImport)}>
+                <img className="importAccount-icon-arrow-left" src="img/importAccount/importAccount-icon-left.png" alt="icon-arrow-left" />
               </div>
-            </a>
-            <div className="edit-profile">
+              <div className="importAccount">
                 <div className="overlap-group1-1">
-                  <img className="seperate-line-1" src="img/importScreen/seperate-line-14@1x.png" alt="Seperate line" />
-                  <img className="bg" src="img/importScreen/bg-11@1x.png" alt="BG" />
-                  <img className="seperat-line" src="img/importScreen/seperat-line-10@1x.png" alt="Seperat line" />
-                  <div className="your-n-ft-id inter-bold-royal-blue-15px">YOUR NFT ID</div>
-                  <div className="rewards">
+                  <img className="seperate-line-importAccount-1" src="img/importAccount/seperate-line-14@1x.png" alt="Seperate line" />
+                  <img className="importAccountbg" src="img/importAccount/bg-11@1x.png" alt="BG" />
+                  <img className="importAccount-seperate-line" src="img/importAccount/seperat-line-10@1x.png" alt="Seperat line" />
+                  <div className="your-n-ft-id">YOUR NFT ID</div>
+                  <div className="importAccountrewards">
                     <div className="ic_add-1 ic_add-3">
-                      <div className="overlap-group-1">
-                        <img className="add" src="img/importScreen/add-1@1x.png" alt="Add" />
-                        <img className="ic_add" src="img/importScreen/ic-add-1@1x.png" alt="ic_add" />
+                      <div className="importAccount-overlap-group-1">
+                        <img className="importAccountadd" src="img/importAccount/add-1@1x.png" alt="Add" />
+                        <img className="importAccountic_add" src="img/importAccount/ic-add-1@1x.png" alt="ic_add" />
                       </div>
                     </div>
-                    <div className="import-your-nft inter-semi-bold-white-18px">Import Your NFT</div>
+                    <div className="importAccount-import-your-nft">Import Your NFT</div>
                   </div>
-                  <div className="search_bar"></div>
-                  <a href="bettermidapp-mimi-nfts.html" >
-                    <div className="button_save">
-                      <div className="continue inter-semi-bold-white-15px">Import Again</div>
-                    </div></a>
-                  <h1 className="text-15">#00000001</h1>
-                  <div className="error-message">
-                    <div className="error_icon">
-                      <div className="x-container">
-                        <img className="x11692" src="img/importScreen/file---11692@1x.png" alt="11692" />
-                        <img className="x11693" src="img/importScreen/file---11693@1x.png" alt="11693" />
+                  <CustomTextArea 
+                  text= {inputAddress} 
+                  setText={setInputAddress} 
+                  width={300} 
+                  height={56} 
+                  importClassName="card-number-1 importAccount_search_bar-1 importAccount_search_bar-4"
+                  activeClassName="active-card-number-1 importAccount_search_bar-1 importAccount_search_bar-4"
+                  placeholder="#0000000001"
+                />
+                  {/* <div className="importAccountsearch_bar"></div> */}
+                    <div className="importAccountbutton_save"><div className="importAccountcontinue" onClick = {() =>  {importNft(ledger2,inputAddress,userAccountId);setIsOpenImport(!isOpenImport);}}>Import Again</div></div>
+                  {/* <h1 className="importAccounttext-7">#00000001</h1> */}
+                  <div className="importAccount-error-message">
+                    {/* <div className="importAccount_error_icon">
+                      <div className="importAccount-x-container">
+                        <img className="importAccountx11692" src="img/importAccount/file---11692@1x.png" alt="11692" />
+                        <img className="importAccountx11693" src="img/importAccount/file---11693@1x.png" alt="11693" />
                       </div>
-                    </div>
-                    <p className="it-looks-like-your-c">
-                      It looks like your contact ID can’t be located. <br />Double-check the contract ID of the NFT you
-                      purchased on Signumart.
+                    </div> */}
+                    <p className="importAccount-it-looks-like-your-c">
+                      Please input the contract Address you bought on signumart. 
                     </p>
                   </div>
                 </div>
