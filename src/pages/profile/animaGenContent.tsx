@@ -71,11 +71,11 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
     // });
 
     // problem code
-    // if (name.length === 0 || aboutYourself.length === 0 || description.length === 0 ) {
-    //   // alert("Please fill in all the fields");
-    //   setShowStar(true);
-    //   return;
-    // }
+    if (name.length === 0 || aboutYourselfText.length === 0 || descriptionText.length === 0 || discordUsernameText.length === 0 ) {
+      // alert("Please fill in all the fields");
+      setShowStar(true);
+      return;
+    }
 
     dispatch(profileSlice.actions.setUsername(name));
     dispatch(profileSlice.actions.setAboutYourself(aboutYourselfText));
