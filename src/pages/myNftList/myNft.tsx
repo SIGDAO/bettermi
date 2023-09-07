@@ -48,7 +48,20 @@ import * as React from 'react';
              res.text().then((text)=>{
                  console.log(text); 
                  var nftInfo = JSON.parse(text);
-                 setNftLevel(nftInfo.attributes[0].level);
+                //  setNftLevel(nftInfo.attributes[0].level);
+                //  console.log(nftInfo.attributes.description);
+                 let check1 = nftInfo.description.includes("1");
+                 let check2 = nftInfo.description.includes("2");
+                 let check3 = nftInfo.description.includes("3");
+                 if(check1 === true){
+                  setNftLevel("1");
+                 }
+                 if(check2 === true){
+                  setNftLevel("2");
+                 }
+                 if(check3 === true){
+                  setNftLevel("3");
+                 }
                  //console.log(nftInfo); 
                  //console.log(typeof(nftInfo.media[0].social));
                  setImgAddress(nftInfo.media[0].social);
