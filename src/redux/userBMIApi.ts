@@ -20,6 +20,7 @@ export const userBMIApi = createApi({
         body: imageForm,
         header: {
           'content-type': 'multipart/form-data',
+          'Content-Security-Policy': 'upgrade-insecure-requests',
         },
       }),
       transformResponse: (response: BMI) => response,
