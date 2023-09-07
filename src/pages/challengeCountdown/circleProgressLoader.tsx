@@ -82,7 +82,7 @@ const CircularWithValueLabel: React.FunctionComponent<ICircularWithValueLabelPro
 
   const handleTransfer = () => {
     TransferToken(userWalletNodeHost,userAccountId, rewardInSigdao.toString( ))
-    navigate('/challengeCompleted', { state: { previousPath: pathname } })
+    navigate('/challengeCompleted', { state: { reward: pathname } })
   }
 
   React.useEffect(() => {

@@ -55,7 +55,7 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
           </div>
           {NFT ? null :
             <div className="sigdao-score-75VOY2">
-              <div className="x10-VOfFBB inter-semi-bold-keppel-14px">{ displayReawrd(location.state?.previousPath) || ""}</div>
+              <div className="x10-VOfFBB inter-semi-bold-keppel-14px">{ displayReawrd(location.state?.reward) || ""}</div>
               <div className="signdao_tokengradient-VOfFBB">
                 <div className="x441-gxWo6F"></div>
                 <div className="x442-gxWo6F"></div>

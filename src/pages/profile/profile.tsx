@@ -18,6 +18,7 @@ const Profile: React.FunctionComponent<IProfileProps> = (props) => {
     if (state?.previousPath === '/customizeYourProfile') {
       setIsOpen(true);
       setIsBackButton(false);
+      window.history.replaceState({}, document.title)
     }
 
   }, [])
