@@ -85,6 +85,7 @@
   width: 340px;
   display: flex;
   align-items: end;
+  text-transform: none;
 }
 
 .bettermidapp-challenges-1 .challenge-cards-VYwpDS {
