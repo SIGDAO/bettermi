@@ -123,7 +123,7 @@ function App() {
           <Routes>
             <Route element = {
               <Fragment>
-                <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"/>
+                <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
                 <CheckStore/>
                 <Analytics/>
               </Fragment>
