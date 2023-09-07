@@ -655,6 +655,7 @@
 
 .mission-level {
   display: inline;
+  width: 35px;
 }
 
 .css-4dz1kn-MuiButtonBase-root-MuiButton-root {
@@ -690,6 +691,6 @@
 .mission-bar-arrow-right {
   height: 12px;
   width: 7px;
-  margin-left: 50.5px;
+  margin-left: 25.5px;
 }
 
