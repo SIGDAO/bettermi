@@ -73,7 +73,7 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
 
     if(ledger){
       setMinted(true);
-      TransferNftTokenOwnershipFinale(nodeHost,userAccountId);   
+      // TransferNftTokenOwnershipFinale(nodeHost,userAccountId);   
       const asset = await ledger.asset.getAssetHolders({assetId:"13116962758643420722"});
       asset.accountAssets.map((obj)=>{
         if(obj.account == userAccountId){

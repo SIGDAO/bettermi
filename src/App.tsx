@@ -99,9 +99,9 @@ const CheckStore: React.FC = () => {
     return <Outlet/>
   }
 
-  if (Wallet.Extension.connection == null) {
-    return <Navigate to="/" />
-  }
+  // if (Wallet.Extension.connection == null) {
+  //   return <Navigate to="/" />
+  // }
 
   return sessionStorage.getItem('state') === null ? <Navigate to="/" /> : <Outlet/>;
 }
@@ -123,6 +123,7 @@ function App() {
           <Routes>
             <Route element = {
               <Fragment>
+                <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"/>
                 <CheckStore/>
                 <Analytics/>
               </Fragment>
