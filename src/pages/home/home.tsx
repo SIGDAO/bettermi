@@ -72,7 +72,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const navigate = useNavigate();
   const tempAccountId = useSelector(accountId);
   const Ledger2 = useLedger();
-  const gender = useSelector(selectCurrentGender)
+  const gender = useSelector(selectCurrentGender);
   const [level,setLevel] = useState<string>("");
   const codeHashIdForNft = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!;
   console.log(Token);
@@ -143,8 +143,21 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   // const testing = async () => {
   //   await TransferToken(nodeHost,userId, calRewardSigdaoOnSelfie(22.9).toString())
   // }
+  const nftContractChecked = useRef(false);
+  useEffect(() => {
+    if (nftContractChecked.current) { console.log("called"); return; }
+    nftContractChecked.current = true;
+    ledger2.contract.getContractsByAccount({
+          accountId: userAccountId,
+          machineCodeHash: codeHashIdForNft,
+      }).then((senderNftStorage)=>{
+        store.dispatch(accountSlice.actions.setNftContractStorage(senderNftStorage.ats[0].at));
 
-  
+      }).catch((error)=>{
+        console.log(error);
+      });
+    
+      },[]);
 
   const content: JSX.Element = (
     <div className="screen">

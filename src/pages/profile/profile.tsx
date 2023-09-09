@@ -4,7 +4,7 @@ import { CenterLayout } from '../../components/layout';
 import AnimaGenContent from './animaGenContent';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-
+import { selectCurrentGender } from '../../redux/profile';
 
 interface IProfileProps  {
 }

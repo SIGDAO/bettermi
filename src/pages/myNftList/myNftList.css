@@ -1242,7 +1242,7 @@ opacity: 0.5;
 
 /* screen - bettermidapp-mimi-nft-import-error */
 
- .importAccount-layer {
+ /* .importAccount-layer {
   left: calc((100vw - 390px) / 2);
   align-items: flex-start;
   background-color: #0d0d0dcb;
@@ -1486,8 +1486,22 @@ opacity: 0.5;
   padding: 16.5px 15px;
   color: #FFFFFF;
 }
-.importAccount-it-looks-like-your-c {
-  /* color: #f51ee2; */
+.importAccount-noError {
+  color:#FFFFFF;
+  flex: 1;
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-l);
+  font-weight: 400;
+  height: 61px;
+  letter-spacing: 0;
+  line-height: 21px;
+  margin-bottom: 1.5px;
+  margin-right: -2px;
+  max-height: 61px;
+  text-align: center;
+  margin-top:70px;
+}
+.importAccount-hasError {
   color:#FFFFFF;
   flex: 1;
   font-family: var(--font-family-inter);
@@ -1512,4 +1526,4 @@ opacity: 0.5;
   min-width: 96px;
   text-align: center;
   white-space: nowrap;
-}
+} */

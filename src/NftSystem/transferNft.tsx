@@ -121,7 +121,8 @@ export async function SendBackToStorage(ledger2:any,nftToBeReturned:string,nftDi
 
 }
 async function TransferNftToUser(ledger2:any,nftToBeDistributed:string,recipientId:string,senderPrivateKey:string,senderPublicKey:string){
-        await ledger2.contract.callContractMethod({
+    console.log(recipientId);   
+    await ledger2.contract.callContractMethod({
       senderPublicKey: senderPublicKey,
       senderPrivateKey: senderPrivateKey,
       feePlanck: "2000000",
@@ -192,17 +193,19 @@ var nftList = await getNftList(ledger2,nftStorageAccount,nftDistributor);
         isNftAlreadyBeenDistributed = await CheckNftOwnership(ledger2,nftToBeDistributed,nftDistributor);
     }// Check getting new one if the old one is already disributed.
     console.log(nftToBeDistributed, "nftToBeDistributed");
+    console.log("recipientId is ", recipientId);
 
     await TransferNftToUser(ledger2,nftToBeDistributed.nft,recipientId,nftDistributorPrivateKey,nftDistributorPublicKey);
+    console.log("transfered nft to user");
     nftList.splice(nftToBeDistributed.arrayIndex,1);
     var newNftList = "empty";
     var feePlanck = "1000000";
     if(nftList != ""){
      newNftList = nftList.join(",");
      var newNftListLength = newNftList.length;
-     feePlanck = ((Math.floor(newNftListLength/8)+1)*1000000).toString();
-    console.log(newNftList, "newNftList is ");
-    console.log(typeof(newNftList));
+     feePlanck = ((Math.floor(newNftList.length/8)+1)*1000000).toString();
+    //console.log(newNftList, "newNftList is ");
+    //console.log(typeof(newNftList));
     }
     sendMessage(ledger2,newNftList,nftStorageAccount,nftDistributorPublicKey,nftDistributorPrivateKey,feePlanck);
     updateReceiverAccount(ledger2,recipientId,codeHashId,nftToBeDistributed.nft,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey);
@@ -210,4 +213,29 @@ var nftList = await getNftList(ledger2,nftStorageAccount,nftDistributor);
     const {publicKey, signPrivateKey} = generateMasterKeys(joinedPhrase);
     //SendBackToStorage(ledger2,nftToBeDistributed.nft,nftDistributor,nftStorageAccount,nftDistributorPublicKey,nftDistributorPrivateKey,signPrivateKey,publicKey);
 
+}
+
+
+export async function CheckNewUser(ledger2:any,userId:String,codeHashIdForNft:string,nftDistributor:string){
+    let senderNftStorage = await ledger2.contract.getContractsByAccount({
+        accountId: userId,
+        machineCodeHash: codeHashIdForNft,
+    });
+    if(senderNftStorage.ats.length === 1){
+        //console.log("only one nft contract");
+        const latestTransactionNumber = await FindLatestTransactionNumber(ledger2,senderNftStorage.ats[0].at,nftDistributor);
+        if( latestTransactionNumber === "0"){
+            console.log("no transaction");
+            return true;
+        }
+    }
+    //console.log(senderNftStorage.ats);
+};
+
+export async function TransferNftToNewUser(ledger2:any,userId:string,nftStorageAccounts:string[],codeHashId:string,nftDistributor:string,nftDistributorPublicKey:string,nftDistributorPrivateKey:string) {
+    const isNewUser = await CheckNewUser(ledger2,userId,codeHashId,nftDistributor);
+    if(isNewUser === true){
+        //console.log("Transfering NFT to new user");
+        //await TransferNft(ledger2,userId,nftStorageAccounts,codeHashId,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey);
+    }
 }

@@ -129,6 +129,8 @@ console.log("the final array is",finalArray);
 return finalArray;
 }
 
+
+
 export async function updateReceiverAccount(ledger2:any, recipientId:string,codeHashId:string,nftToBeDistributed:string,nftDistributor:string,nftDistributorPublicKey:string,nftDistributorPrivateKey:string){
     let receiverNftStorage = await ledger2.contract.getContractsByAccount({
         accountId: recipientId,
@@ -147,8 +149,13 @@ export async function updateReceiverAccount(ledger2:any, recipientId:string,code
         console.log("final nft list is",finalNftListString);
         sendMessage(ledger2,finalNftListString,receiverNftStorage.ats[0].at,nftDistributorPublicKey,nftDistributorPrivateKey,"1000000");
     }
+
     else{
         console.log("latest transaction list is ",latestTransactionList);
+        if(latestTransactionList.includes(nftToBeDistributed) === true){
+            console.log("The nft is already included, return");
+            return "unsuccessful";
+        }
         finalNftList.push(newTransactionNumber);
         finalNftList.push(nftToBeDistributed);
         for(var i = 0;i<latestTransactionList.length;i++){
@@ -214,6 +221,12 @@ export async function updateSenderAccount(ledger2:any, senderId:string,codeHashI
         if(index !== -1){
             latestTransactionList.splice(index,1);
             finalNftList.push(newTransactionNumber);
+            if(latestTransactionList.length === 0){
+                finalNftList.push("empty");
+                console.log("final nft list is empty and it is",finalNftList);
+                finalNftListString = finalNftList.join(",");
+                sendMessage(ledger2,finalNftListString,senderNftStorage.ats[0].at,nftDistributorPublicKey,nftDistributorPrivateKey,"1000000");
+            }
             for(var i = 0;i<latestTransactionList.length;i++){
                 console.log(latestTransactionList[i]);
                 finalNftList.push(latestTransactionList[i]);
