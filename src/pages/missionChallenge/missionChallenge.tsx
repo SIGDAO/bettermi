@@ -22,11 +22,13 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
   const userWalletNodeHost = useSelector(walletNodeHost);
   const navigate = useNavigate();
   const [isInTimeSlot, setIsInTimeSlot] = useState<boolean[]>([]);
+  const [Timedifferent, setTimedifferent] = useState<string[]>([]);
 
   useEffect(() => {
     const checkTimeSlot = () => {
       const now = new Date();
       const currentTime = now.getHours() * 60 + now.getMinutes();
+      const currentTimeInSecond = now.getHours() * 60 * 60 + now.getMinutes() * 60 + now.getSeconds();
 
       console.log(currentTime, 'currentTime')
 
@@ -41,6 +43,43 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
         })
       );
 
+      setTimedifferent(
+        missionList.map((mission) => {
+          const { timeslot } = mission;
+          const timedifferentInFormat = timeslot.map((slot) => {
+            const time = slot.startingTime.split(':').map(ele => parseInt(ele));
+            const formatTime = time[0] * 60 * 60 + time[1] * 60;
+            const timeDiff = formatTime - currentTimeInSecond;
+
+            if (timeDiff < 0) {
+              return timeDiff + 24 * 60 * 60;
+            }
+
+            return timeDiff;
+          })
+          let filteredtimedifferentInFormat = timedifferentInFormat.filter((date) => {
+            console.log(date > 0, 'timedifferentInFormat date')
+            return date > 0;
+          })
+          console.log(filteredtimedifferentInFormat, 'filteredtimedifferentInFormat')
+
+          filteredtimedifferentInFormat.sort((a, b) => a - b);
+          console.log(filteredtimedifferentInFormat, 'timedifferentInFormat')
+          const hours = Math.floor(filteredtimedifferentInFormat[0] / 3600).toString().padStart(2, '0');
+          const minutes = Math.floor((filteredtimedifferentInFormat[0] % 3600) / 60).toString().padStart(2, '0');
+          const seconds = (filteredtimedifferentInFormat[0] % 60).toString().padStart(2, '0');
+
+          console.log(hours, minutes, seconds, 'hours, minutes, seconds')
+          // const hours = Math.floor(timedifferentInFormat[0] / (1000 * 60 * 60));
+          // const minutes = Math.floor((timedifferentInFormat[0] / (1000 * 60)) % 60);
+          // const seconds = Math.floor((timedifferentInFormat[0] / 1000) % 60);
+
+          return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+          // return timedifferentInFormat;
+          // return '';
+        })
+      )
+      console.log(Timedifferent, 'Timedifferent');
       console.log(isInTimeSlot, 'isInTimeSlot');
     };
 
@@ -118,7 +157,8 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
                       </div>
                     : 
                       <div className="score-bar_2-active inter-semi-bold-keppel-15px">
-                        {mission.timeslot[0].startingTime}
+                        {/* {mission.timeslot[0].startingTime} */}
+                        {Timedifferent[index]}
                       </div>
                     }
                     <div 
