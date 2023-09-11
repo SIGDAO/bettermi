@@ -25,10 +25,6 @@ export const missionList = [
       startingTime: '10:00',
       endTime: '10:06',
     },
-    {
-      startingTime: '10:00',
-      endTime: '18:00',
-    }
   ],
   },
   {
