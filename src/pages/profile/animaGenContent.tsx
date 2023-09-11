@@ -18,6 +18,7 @@ import {
 } from "../../redux/profile";
 import { CustomInput, RandomGenNameInput } from "../../components/input";
 import { CustomTextArea } from "../../components/input";
+import { selectCurrentGender } from '../../redux/profile';
 
 interface IAnimaGenContentProps {
   isOpen: boolean;
@@ -42,7 +43,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   const aboutYourself = useSelector(selectCurrentAboutYourself);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const gender = useAppSelector(selectCurrentGender);
 
   const { isOpen, setIsOpen, isBackButton, setIsBackButton } = props;
   const [loading, setLoading] = useState<boolean>(true);
@@ -151,13 +152,14 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
               </p>
             </div>
           </div>
-          {loading ? (
+          {loading ?gender === "Female"?
+           (
             <img
               className="nft_-avatar"
               src="img/profile/nft-avatar-1@1x.png"
               alt="NFT_Avatar"
             />
-          ) : (
+          ):( <img className="nft_-avatar" src={`${process.env.PUBLIC_URL}/img/home/1.png`} alt="NFT_Avatar" />) : (
             <img
               className="nft_-avatar"
               src={`https://ipfs.io/ipfs/${imgAddress}`}

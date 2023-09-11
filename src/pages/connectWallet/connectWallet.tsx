@@ -24,7 +24,7 @@ export default function ConnectWallet (props: IConnectWalletProps) {
   const navigate = useNavigate();
   const {appName,Wallet,Ledger} = useContext(AppContext);
   const codeHashId = "7457358473503628676";
-  const nftStorageAccounts = process.env.REACT_APP_NFT_STORAGE!.split(",");
+  //const nftStorageAccounts = process.env.REACT_APP_NFT_STORAGE!.split(",");
   const codeHashIdForNft = "5093642053599315133";
   const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
   const nftDistributorPublicKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PUBLIC_KEY!;

@@ -27,6 +27,7 @@ import * as React from 'react';
      nftId:string;
      setSelectedAssetId:(nftId:string) => void;
     setLevel:(level:string) => void;
+    
  }
 
 
@@ -50,16 +51,13 @@ import * as React from 'react';
                  var nftInfo = JSON.parse(text);
                 //  setNftLevel(nftInfo.attributes[0].level);
                 //  console.log(nftInfo.attributes.description);
-                 let check1 = nftInfo.description.includes("1");
-                 let check2 = nftInfo.description.includes("2");
-                 let check3 = nftInfo.description.includes("3");
-                 if(check1 === true){
+                 if(nftInfo.description.includes("1") === true){
                   setNftLevel("1");
                  }
-                 if(check2 === true){
+                 if(nftInfo.description.includes("2") === true){
                   setNftLevel("2");
                  }
-                 if(check3 === true){
+                 if(nftInfo.description.includes("3") === true){
                   setNftLevel("3");
                  }
                  //console.log(nftInfo); 

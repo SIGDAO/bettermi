@@ -28,9 +28,6 @@ import { store } from '../../redux/reducer';
 import { accountSlice } from '../../redux/account';
 import { updateReceiverAccount } from '../../NftSystem/updateUserNftStorage';
 import ImportAccountScreen from '../../components/importAccountScreens';
-import ImportSuccessScreen from '../../components/importAccountSuccessScreen';
-import { TransferNftToNewUser } from '../../NftSystem/transferNft';
-import { selectCurrentGender } from '../../redux/profile';
 
 interface IMyNftListProps {
 }
@@ -61,22 +58,25 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
   const [inputValue, setInputValue] = useState('');
   const [inputAddress,setInputAddress] = useState("");
   const [level,setLevel] = useState("1");
-  const [hasImportError, setHasImportError] = useState<boolean>(false);
-  const [importSuccess,setImportSuccess] = useState<boolean>(false);
+
   const [isOpenImport, setIsOpenImport] = useState<boolean>(false);
-  const gender = useSelector(selectCurrentGender);
+
   const dataFetchedRef = useRef(false);
   const nftContractChecked = useRef(false);
   const {appName,Wallet,Ledger} = useContext(AppContext);
   const nftTokenIssuer:string = process.env.REACT_APP_NFT_TOKEN_ISSUER!;
   const userAccountpublicKey:string = useSelector(accountPublicKey);
-  const mimiNftStorageAccounts = process.env.REACT_APP_NFT_STORAGE_MIMI!.split(",");
-  console.log(mimiNftStorageAccounts, "miminftstorage is");
-  const ioNftStorageAccounts = process.env.REACT_APP_NFT_STORAGE_IO!.split(",");
-  console.log(ioNftStorageAccounts, "ionftstorage is");
+  console.log(typeof(nftTokenIssuer));
+  console.log(nftTokenIssuer);
+  console.log(nftTokenIssuer=="4572964086056463895");
+  const {publicKey, signPrivateKey} = generateMasterKeys("smoke term keen design mirror skull mom humble twin welcome speak gloom");
+  console.log("publicKey", publicKey);  
+  console.log("signPrivateKey", signPrivateKey);
+  //var myNft:myNftList[] = [];
   var nft: myNftList;
   const nodeHost = useAppSelector(selectWalletNodeHost);
   const ledger2 = LedgerClientFactory.createClient({ nodeHost });
+  console.log(nodeHost);
   const trialAccountId = "416342944383657789";
   var nftAddressList:string[] = [];
   var userNftList:myNftList[] = [];
@@ -88,6 +88,14 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
   const nftDistributorPublicKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PUBLIC_KEY!;
   const nftDistributorPrivateKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PRIVATE_KEY!;
   const nftContractStorage = useSelector(getNftContractStorage);
+  // for(var i = 0;i<6;i++){
+  //   nft = {
+  //     image:`${process.env.PUBLIC_URL}/img/NftList/nft-1@1x.png`,
+  //     level:1,
+  //   }
+  //   myNfts.push(nft);
+  // }
+  // console.log(myNfts);
   useEffect(() => {
     if (nftContractChecked.current) { console.log("called"); return; }
     nftContractChecked.current = true;
@@ -95,26 +103,17 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
           accountId: userAccountId,
           machineCodeHash: codeHashIdForNft,
       }).then((senderNftStorage)=>{
+    
         store.dispatch(accountSlice.actions.setNftContractStorage(senderNftStorage.ats[0].at));
-        if(gender === "Female"){
-          console.log("you are female");
-        TransferNftToNewUser(ledger2,userAccountId,mimiNftStorageAccounts,codeHashIdForNft,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey);
-        }
-        if(gender === "Male"){
-          console.log("you are male");
-          TransferNftToNewUser(ledger2,userAccountId,ioNftStorageAccounts,codeHashIdForNft,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey);
-          }
+        console.log("called the if statement");
       }).catch((error)=>{
-        console.log(error);
-        alert(
+        console.log(error);alert(
           `something is wrong. Its very likely that your storage account isn' ready. 
           Please wait an few minutes and try again.
           `);navigate("/home")
       });
     
       },[]);
-    
-
 
   useEffect(() => {
     if (dataFetchedRef.current) { console.log("called"); return; }
@@ -300,13 +299,12 @@ let accountDes = await ledger2.account.getAccount({accountId:nftAddress});
 const nftId = accountDes.account;
     const nftOwnerId = await CheckNftOwnerId(ledger2,nftId);
     if(nftOwnerId === userAccountId){
-      console.log("updating receiver account");
-      console.log(userAccountId);
       updateReceiverAccount(ledger2,userAccountId,codeHashIdForNft,nftId,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey);
     }
   }
   catch(e){
     console.log(e);
+    alert("hmmm it seems like some error occurs");
   }
   }
   const displayMyNft = myNfts.map((nft) => {//Contract Id
@@ -359,6 +357,7 @@ const nftId = accountDes.account;
     }
     catch(e){
       console.log(e);
+      alert("Transaction not signed");
     }
   }
   //   try{
@@ -429,14 +428,7 @@ return(
         <div className = "containerMyNftList2">
         {onDuty === ""?(             
         <div className = "myNftList">
-          {gender === "Female"?
-             (
              <img className = "myNftImage" src = {"img/myNftList/nft-1@1x.png"}></img>
-             ):
-             (
-              <img className="myNftImage" src={`${process.env.PUBLIC_URL}/img/home/1.png`} alt="NFT_Avatar" />
-             )
-          }
              <div className = "myNftDescription">
              <div className = "myNftNumber">#0000000001</div>
                <div className = "myNftBar">
@@ -578,11 +570,54 @@ return(
             </div>
           </div>
       }
-      { isOpenImport&& <ImportAccountScreen setIsOpenImport={setIsOpenImport} isOpenImport = {isOpenImport} importSuccess = {importSuccess}setImportSuccess={setImportSuccess} ></ImportAccountScreen>}
-      {hasImportError && <ImportAccountScreen setIsOpenImport={setIsOpenImport} isOpenImport = {isOpenImport} importSuccess = {importSuccess}setImportSuccess={setImportSuccess}></ImportAccountScreen>}
-      {importSuccess && <ImportSuccessScreen importSuccess = {importSuccess} setImportSuccess={setImportSuccess}></ImportSuccessScreen>}
-
-      
+      {isOpenImport &&<ImportAccountScreen setIsOpenImport={setIsOpenImport} isOpenImport = {isOpenImport}></ImportAccountScreen>}
+            {isOpenImport && 
+            <div className="importAccount-layer">
+              <div className="importAccount-icon-arrow-left-3" onClick={() => setIsOpenImport(!isOpenImport)}>
+                <img className="importAccount-icon-arrow-left" src="img/importAccount/importAccount-icon-left.png" alt="icon-arrow-left" />
+              </div>
+              <div className="importAccount">
+                <div className="overlap-group1-1">
+                  <img className="seperate-line-importAccount-1" src="img/importAccount/seperate-line-14@1x.png" alt="Seperate line" />
+                  <img className="importAccountbg" src="img/importAccount/bg-11@1x.png" alt="BG" />
+                  <img className="importAccount-seperate-line" src="img/importAccount/seperat-line-10@1x.png" alt="Seperat line" />
+                  <div className="your-n-ft-id">YOUR NFT ID</div>
+                  <div className="importAccountrewards">
+                    <div className="ic_add-1 ic_add-3">
+                      <div className="importAccount-overlap-group-1">
+                        <img className="importAccountadd" src="img/importAccount/add-1@1x.png" alt="Add" />
+                        <img className="importAccountic_add" src="img/importAccount/ic-add-1@1x.png" alt="ic_add" />
+                      </div>
+                    </div>
+                    <div className="importAccount-import-your-nft">Import Your NFT</div>
+                  </div>
+                  <CustomTextArea 
+                  text= {inputAddress} 
+                  setText={setInputAddress} 
+                  width={300} 
+                  height={56} 
+                  importClassName="card-number-1 importAccount_search_bar-1 importAccount_search_bar-4"
+                  activeClassName="active-card-number-1 importAccount_search_bar-1 importAccount_search_bar-4"
+                  placeholder="#0000000001"
+                />
+                  {/* <div className="importAccountsearch_bar"></div> */}
+                    <div className="importAccountbutton_save"><div className="importAccountcontinue" onClick = {() =>  {importNft(ledger2,inputAddress,userAccountId);setIsOpenImport(!isOpenImport);}}>Import Again</div></div>
+                  {/* <h1 className="importAccounttext-7">#00000001</h1> */}
+                  <div className="importAccount-error-message">
+                    {/* <div className="importAccount_error_icon">
+                      <div className="importAccount-x-container">
+                        <img className="importAccountx11692" src="img/importAccount/file---11692@1x.png" alt="11692" />
+                        <img className="importAccountx11693" src="img/importAccount/file---11693@1x.png" alt="11693" />
+                      </div>
+                    </div> */}
+                    <p className="importAccount-it-looks-like-your-c">
+                      Please input the contract Address of the NFT you have bought on signumart. 
+                    </p>
+                  </div>
+                </div>
+              </div>
+          </div>
+      }
     </div>
     </div>
 
