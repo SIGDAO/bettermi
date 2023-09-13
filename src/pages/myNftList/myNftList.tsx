@@ -471,7 +471,7 @@ return(
                    Lv{level}       
                    </div>
                    <div className = "myNftVerticalLine"></div>  
-                   <div  className = "myNftReward">
+                   <div  className = "inter-normal-white-12px">
                      Reward + 10%
                      </div>
                </div>
