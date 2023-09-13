@@ -9,7 +9,7 @@ import { isTodayHaveSelfieRecord } from './bmiCalculate';
 import { accountId } from '../redux/account';
 import { useSelector } from 'react-redux';
 import { useLedger } from '../redux/useLedger';
-import { selectCurrentBMI } from '../redux/profile';
+import { selectCurrentBMI, selectCurrentIsSelfie } from '../redux/profile';
 import { selectBMI } from '../redux/userBMI';
 import { useEffect, useState } from 'react';
 
@@ -163,7 +163,9 @@ export const NavigateToTakeSelfieButton: React.FunctionComponent = () => {
   const Ledger2 = useLedger();
   const [isActive, setIsActive] = React.useState<boolean>(false);
   const [timeDifference, setTimeDifference] = useState('');
+  const isSelfie = useSelector(selectCurrentIsSelfie);
   // const [isMidnight, setIsMidnight] = useState(false);
+  
 
   useEffect(() => {
     const calculateTimeDifference = () => {
@@ -179,6 +181,8 @@ export const NavigateToTakeSelfieButton: React.FunctionComponent = () => {
       // if (hours === 0 && minutes === 0 && seconds === 0) {
       //   setIsMidnight(true);
       // }
+
+      console.log('is', isSelfie)
 
       setTimeDifference(`${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
     };
@@ -208,15 +212,7 @@ export const NavigateToTakeSelfieButton: React.FunctionComponent = () => {
   }
 
 
-  if (!isActive) {
-    return (
-      <div className="button_-selfie-to-earn-MUU5YC" onClick={() => handleTakeASelfie()}>
-        <img className="ic_selfie-u8P1YH" src="img/selfieToEarn/ic-selfie-1@1x.png" alt="ic_selfie" />
-        <p className="take-a-selfie-to-earn-u8P1YH inter-semi-bold-white-15px">Take a Selfie to Earn!</p>
-        <img className="ic_arrow_forward-u8P1YH" src="img/selfieToEarn/ic-arrow-forward-1@1x.png" alt="ic_arrow_forward" />
-      </div>
-    )
-  } else {
+  if (isSelfie || isActive) {
     return (
       <div className="lock-button-cover">
         <div className="lock-button">
@@ -232,5 +228,15 @@ export const NavigateToTakeSelfieButton: React.FunctionComponent = () => {
         </div>
       </div>
     )
+
+  } else {
+    return (
+      <div className="button_-selfie-to-earn-MUU5YC" onClick={() => handleTakeASelfie()}>
+        <img className="ic_selfie-u8P1YH" src="img/selfieToEarn/ic-selfie-1@1x.png" alt="ic_selfie" />
+        <p className="take-a-selfie-to-earn-u8P1YH inter-semi-bold-white-15px">Take a Selfie to Earn!</p>
+        <img className="ic_arrow_forward-u8P1YH" src="img/selfieToEarn/ic-arrow-forward-1@1x.png" alt="ic_arrow_forward" />
+      </div>
+    )
+
   }
 }

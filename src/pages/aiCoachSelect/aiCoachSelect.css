@@ -562,7 +562,7 @@
 
 .bettermidapp-ai-coach .ai-chatbot_-mmi-NgcGm6 {
   background-color: transparent;
-  cursor: pointer;
+  /* cursor: pointer; */
   height: 100%;
   left: 0px;
   position: absolute;
@@ -621,7 +621,7 @@
 }
 
 .bettermidapp-ai-coach .ai-chatbot_io-NgcGm6 {
-  cursor: pointer;
+  /* cursor: pointer; */
   height: calc(100.00% - 9px);
   right: 0px;
   top: 0px;
@@ -724,6 +724,7 @@
   width: max-content;
   max-width: calc(320px - 30px);
   display: inline-block;
+  cursor: pointer;
 }
 
 .size {

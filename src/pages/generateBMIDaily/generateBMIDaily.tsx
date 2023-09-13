@@ -3,8 +3,8 @@ import './generateBMIDaily.css';
 import { CenterLayout } from '../../components/layout';
 import { BackButton } from '../../components/button';
 import { Link, useNavigate } from 'react-router-dom';
-import { selectCurrentGender, selectCurrentImg, selectCurrentBMI } from '../../redux/profile';
-import { useSelector } from 'react-redux';
+import { selectCurrentGender, selectCurrentImg, selectCurrentBMI, profileSlice } from '../../redux/profile';
+import { useDispatch, useSelector } from 'react-redux';
 import { useContext } from 'react';
 import { useLedger } from '../../redux/useLedger';
 import { accountId } from '../../redux/account';
@@ -34,6 +34,7 @@ const GenerateBMIDaily: React.FunctionComponent<IGenerateBMIDailyProps> = (props
 
   const navigate = useNavigate();
   const ledger = useLedger();
+  const dispatch = useDispatch();
   const codeHashId = "7457358473503628676"; // the code hash of the BMI contract 
   
   
@@ -88,6 +89,8 @@ const GenerateBMIDaily: React.FunctionComponent<IGenerateBMIDailyProps> = (props
 
     await Wallet.Extension.confirm(sendBMI.unsignedTransactionBytes);
 
+
+    dispatch(profileSlice.actions.setIsSelfie(true));
     // try {
     //   await Wallet.Extension.confirm(sendBMI.unsignedTransactionBytes);
     // } catch (error) {
