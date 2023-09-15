@@ -164,6 +164,7 @@ export const NavigateToTakeSelfieButton: React.FunctionComponent = () => {
   const [isActive, setIsActive] = React.useState<boolean>(false);
   const [timeDifference, setTimeDifference] = useState('');
   const isSelfie = useSelector(selectCurrentIsSelfie);
+  const [isLoading, setIsLoading] = useState(true);
   // const [isMidnight, setIsMidnight] = useState(false);
   
 
@@ -200,6 +201,7 @@ export const NavigateToTakeSelfieButton: React.FunctionComponent = () => {
       .then((result) => {
         console.log('result', result)
         setIsActive(result);
+        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -230,7 +232,7 @@ export const NavigateToTakeSelfieButton: React.FunctionComponent = () => {
     )
 
   } else {
-    return (
+    return isLoading ? null : (
       <div className="button_-selfie-to-earn-MUU5YC" onClick={() => handleTakeASelfie()}>
         <img className="ic_selfie-u8P1YH" src="img/selfieToEarn/ic-selfie-1@1x.png" alt="ic_selfie" />
         <p className="take-a-selfie-to-earn-u8P1YH inter-semi-bold-white-15px">Take a Selfie to Earn!</p>

@@ -421,3 +421,6 @@ Profile
   Please also disable rewards page "Redeem" button.
   AI Mimi and .Io disable (if don’t have time)
 
+
+have a market place, that just display the merch that created by user
+need merchart to 
