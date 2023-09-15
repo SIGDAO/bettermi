@@ -66,7 +66,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const userAccountId = useSelector(accountId);
   const [loading, setLoading] = useState<boolean>(true);
   const [imgAddress, setImgAddress] = useState<string>("");
-  const nodeHost = useAppSelector(selectWalletNodeHost);
+  const nodeHost = useSelector(selectWalletNodeHost);
   const ledger2 = LedgerClientFactory.createClient({nodeHost});
   const userId = useAppSelector(accountId);
   const navigate = useNavigate();

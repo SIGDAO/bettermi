@@ -74,7 +74,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
   console.log("signPrivateKey", signPrivateKey);
   //var myNft:myNftList[] = [];
   var nft: myNftList;
-  const nodeHost = useAppSelector(selectWalletNodeHost);
+  const nodeHost = useSelector(selectWalletNodeHost);
   const ledger2 = LedgerClientFactory.createClient({ nodeHost });
   console.log(nodeHost);
   const trialAccountId = "416342944383657789";

@@ -33,6 +33,9 @@ import { TransferNftToNewUser } from '../../NftSystem/transferNft';
 import { selectCurrentGender } from '../../redux/profile';
 
 interface IMyNftListProps {
+  isUpdatingDescription:boolean;
+  myNfts:myNftList[];
+  setIsUpdatingDescription:(isUpdatingDescription:boolean) => void;
 }
 
 // interface myNftList{
@@ -47,12 +50,13 @@ interface myNftList{
 }
 
 const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
+  const {isUpdatingDescription,myNfts,setIsUpdatingDescription} = props;
   const userAccountId: string = useSelector(accountId);
   const mobile = process.env.REACT_APP_MOBILE === 'true';
   let height: string | number
   let width: string | number;
   const [loading, setLoading] = useState(true);
-  const [myNfts, setMyNfts] = useState<myNftList[]>([]);
+  //const [myNfts, setMyNfts] = useState<myNftList[]>([]);
   const [onDuty, setOnDuty] = useState<string>("");
   const [array, setArray] = useState<string[]>([]);
   const [selectedNftId, setSelectedNftId] = useState<string>("");
@@ -75,7 +79,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
   const ioNftStorageAccounts = process.env.REACT_APP_NFT_STORAGE_IO!.split(",");
   console.log(ioNftStorageAccounts, "ionftstorage is");
   var nft: myNftList;
-  const nodeHost = useAppSelector(selectWalletNodeHost);
+  const nodeHost = useSelector(selectWalletNodeHost);
   const ledger2 = LedgerClientFactory.createClient({ nodeHost });
   const trialAccountId = "416342944383657789";
   var nftAddressList:string[] = [];
@@ -127,123 +131,53 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
       setOnDuty(Object.keys(description.av)[0]);
       console.log(onDuty);
     }).catch((error) => { console.log(error) });
-    // Function to fetch data from the API
+  },[]);
 
-    // ledger2.account.getAccount({accountId:userAccountId}).then(async(account) => {
-    //   console.log(account);
-    //   for (var i = 0;i<account.assetBalances.length;i++){
-    //     const token = await ledger2.asset.getAsset({assetId:account.assetBalances[i].asset});
-    //     console.log(token);
-    //     if(token.issuer === process.env.REACT_APP_NFT_TOKEN_ISSUER && token.name === "BetterMi"){
-    //       console.log(JSON.parse(token.description));
-    //       console.log(JSON.parse(token.description).descriptor);
-    //       console.log(typeof(JSON.parse(token.description).descriptor));
-    //       userNftToken.push({image:JSON.parse(token.description).descriptor,assetId:token.asset});
-    //       setNftTokenList(userNftToken);
-    //     }
-    //   }
-    // }).then(() => { setLoading(false);}).catch((error)=>{console.log(error)});;
+  //   useEffect(() => {
+  //         FindLatestTransactionNumber(ledger2,nftContractStorage,nftDistributor).then((number)=>{
+  //           console.log(number);
+  //           FindLatestTransactionArray(ledger2,nftContractStorage,nftDistributor,number).then(async(nftAddressList)=>{
+  //             if(nftAddressList[0] === "empty"){
+  //               setLoading(false);
+  //             }
+  //             else{
+  //                   console.log(nftAddressList);
+  //                 // nftAddressList.map((nftAddress)=>{
+  //                 //   ledger2.contract.getContract(nftAddress).then((hi)=>{
+  //                 //       //console.log("array is ",nftAddress,"  ",hi);
+  //                 //       const trial = JSON.parse(hi.description);
+  //                 //       //console.log(trial);
+  //                 //       //console.log(trial.descriptor);
+  //                 //       nft = {level:trial.version,image:trial.descriptor,nftId:nftAddress};
+  //                 //       //console.log([...myNfts,nft]);
+  //                 //       //console.log(myNfts);
+  //                 //       setMyNfts([...myNfts,nft]);
+  //                 //       setArray([...array,"123"]);
+  //                 //       //console.log("testing array is ",array);
+  //                 //       //console.log("appended list is ",[...myNfts,nft]);
+  //                 //       userNftList.push(nft);
+  //                 //       setMyNfts(userNftList);
+  //                 //       setLoading(false);
+  //                 //   });
+  //                 // });
+  //                 for (var i = 0;i < nftAddressList.length;i++){
+  //                   const contractInfo = await ledger2.contract.getContract(nftAddressList[i]);
+  //                   const trial = JSON.parse(contractInfo.description);
+  //                   nft = {level:trial.version,image:trial.descriptor,nftId:nftAddressList[i]};
+  //                   userNftList.push(nft);
+  //                   if(i === nftAddressList.length-1){
+  //                     console.log(userNftList);
+  //                     setMyNfts(userNftList);
+  //                     setLoading(false);
+  //                   }
+  //                 }
+  //               }
+  //           });
+  //         }).catch((error)=>{console.log(error);navigate("/home")});
 
-
-    // ledger2.asset.getAssetsByOwner({accountId:userAccountId}).then(
-    //   async(assets) => {
-    //     assets.assets.map((asset)=>{
-    //       if(asset.issuer === process.env.REACT_APP_NFT_DISTRIBUTOR && asset.name === "BetterMi"){
-    //         console.log(JSON.parse(asset.description));
-    //         console.log(JSON.parse(asset.description).descriptor);
-    //         console.log(typeof(JSON.parse(asset.description).descriptor));
-    //         userNftToken.push({level:1,image:JSON.parse(asset.description).descriptor});
-    //         setNftTokenList(userNftToken);
-    //         setLoading(false);
-    //       }
-    //     });
-    //   }
-    // ).catch((error)=>{console.log(error)});
-    // console.log(userNftToken,"userNftToken");
-    // console.log(userNftTokenList ,"userNftTokenList");//Get token by ownership
-
-          FindLatestTransactionNumber(ledger2,nftContractStorage,nftDistributor).then((number)=>{
-            console.log(number);
-            FindLatestTransactionArray(ledger2,nftContractStorage,nftDistributor,number).then((nftAddressList)=>{
-              if(nftAddressList[0] === "empty"){
-                setLoading(false);
-              }
-              else{
-                    console.log(nftAddressList);
-                  nftAddressList.map((nftAddress)=>{
-                    ledger2.contract.getContract(nftAddress).then((hi)=>{
-                        //console.log("array is ",nftAddress,"  ",hi);
-                        const trial = JSON.parse(hi.description);
-                        //console.log(trial);
-                        //console.log(trial.descriptor);
-                        nft = {level:trial.version,image:trial.descriptor,nftId:nftAddress};
-                        //console.log([...myNfts,nft]);
-                        //console.log(myNfts);
-                        setMyNfts([...myNfts,nft]);
-                        setArray([...array,"123"]);
-                        //console.log("testing array is ",array);
-                        //console.log("appended list is ",[...myNfts,nft]);
-                        userNftList.push(nft);
-                        setMyNfts(userNftList);
-                        setLoading(false);
-                    });
-                  });
-                }
-            });
-          }).catch((error)=>{console.log(error);navigate("/home")});
+  // }, [userAccountId]);
 
 
-
-    // ledger2.account.getAccountTransactions({accountId:"2826449997764829726"}).then(
-    //   async(transactions) => {
-    //   //console.log("transaction is ",transactions);
-    //   //console.log(transactions.transactions.length);
-    //   for(var i=0;i<transactions.transactions.length;i++){
-    //     if(transactions.transactions[i].sender == trialAccountId){
-    //      // console.log(transactions.transactions[i].sender);
-    //       nftAddressList = transactions.transactions[i].attachment.message.split(",");
-    //       //console.log(nftAddressList);
-    //       break;
-    //     }
-    //   }
-    //   console.log("nftAddress is  ",nftAddressList);
-    //   nftAddressList.map((nftAddress)=>{
-    //     ledger2.contract.getContract(nftAddress).then((hi)=>{
-    //         //console.log("array is ",nftAddress,"  ",hi);
-    //         const trial = JSON.parse(hi.description);
-    //         //console.log(trial);
-    //         //console.log(trial.descriptor);
-    //         nft = {level:trial.version,image:trial.descriptor};
-    //         //console.log([...myNfts,nft]);
-    //         //console.log(myNfts);
-    //         setMyNfts([...myNfts,nft]);
-    //         setArray([...array,"123"]);
-    //         //console.log("testing array is ",array);
-    //         //console.log("appended list is ",[...myNfts,nft]);
-    //         userNftList.push(nft);
-    //         setMyNfts(userNftList);
-    //         setLoading(false);
-    //     });
-    //   });
-    //   //console.log("userNftList is",userNftList);
-    //   //console.log("myNft is",myNfts);
-    // });
-
-
-  }, [userAccountId]);
-
-
-
-  /*const myNftList = ledger2.account.getAccountTransactions({accountId:"	2826449997764829726"}); //Contract Id
-  const BMI:BMI_Day[] = [];
-  message.transactions.map((obj)=>{
-      // console.log(obj);
-      // console.log(typeof(obj.attachment.message),typeof(obj.timestamp));
-      BMI.push({timeStamp:Number(obj.timestamp),BMI:obj.attachment.message});
-      return_Date(Number(obj.timestamp));
-  }); 
-  //console.log(message);
-  console.log(BMI);*/
 
   if (mobile) {
     height = "844px";
@@ -312,19 +246,36 @@ const nftId = accountDes.account;
   const displayMyNft = myNfts.map((nft) => {//Contract Id
     console.log("userNftList is  ", myNfts);
     return (
-      <MyNft image={nft.image} level={level} isOpenPopup={isOpenPopup} setIsOpenPopup={setIsOpenPopup} nftId = {nft.nftId} setSelectedAssetId={setSelectedNftId} setLevel={setLevel}></MyNft>
+      <MyNft image={nft.image} level={level} isOpenPopup={isOpenPopup} setIsOpenPopup={setIsOpenPopup} nftId = {nft.nftId} setSelectedAssetId={setSelectedNftId} setLevel={setLevel} isUpdatingDescription = {isUpdatingDescription} setIsUpdatingDescription={setIsUpdatingDescription} ></MyNft>
     );
   }
   );
   const displayNftToken = userNftTokenList.map((nft) => {//Contract Id
     console.log("userNftTokenList is  ",nft);
     return(
-      <MyNft image={nft.image} level={level} isOpenPopup={isOpenPopup} setIsOpenPopup={setIsOpenPopup} nftId= {nft.nftId} setSelectedAssetId={setSelectedNftId} setLevel={setLevel}></MyNft>
+      <MyNft image={nft.image} level={level} isOpenPopup={isOpenPopup} setIsOpenPopup={setIsOpenPopup} nftId= {nft.nftId} setSelectedAssetId={setSelectedNftId} setLevel={setLevel}isUpdatingDescription = {isUpdatingDescription} setIsUpdatingDescription={setIsUpdatingDescription}></MyNft>
     );
   }
   );
   const transferNft = async(assetId:string) => {
     try{
+      const contractInfo = await ledger2.contract.getContract(selectedNftId);
+      const trial = JSON.parse(contractInfo.description);
+      console.log("on duty is ",onDuty);
+      console.log("trial descriptor is ",trial.descriptor);
+      /*  Get the NFT image of ths selected asset and check if its same to the onDuty one      */
+      const res = await fetch(`https://ipfs.io/ipfs/${trial.descriptor}`);
+      const text = await res.text();
+      var nftInfo = JSON.parse(text);
+      const nftImage = nftInfo.media[0].social;
+      console.log(nftImage);
+
+      /**/
+      
+      if(onDuty === nftImage){
+        alert("You can't transfer the NFT you are using");
+        return;
+      }
       const nftOwner = await CheckNftOwnerId(ledger2,selectedNftId);
       console.log("nftOwner is",nftOwner);
       if(nftOwner === userAccountId){
@@ -361,57 +312,7 @@ const nftId = accountDes.account;
       console.log(e);
     }
   }
-  //   try{
-  //   const recipientAccount = await ledger2.account.getAccount({
-  //     accountId:inputAddress,
-  //   });
-  //   console.log(recipientAccount);
-  //   if(assetId !== ""){
-  //     console.log(assetId);
-  //     console.log(publicKey);
-  //     const unsignedTransaction = await ledger2.asset.transferAsset({
-  //       assetId:assetId,
-  //       quantity:"1",
-  //       recipientId:recipientAccount.account,
-  //       feePlanck:"1000000",
-  //       senderPublicKey:userAccountpublicKey,
-  //     });
-  //     await Wallet.Extension.confirm(unsignedTransaction.unsignedTransactionBytes);
-  //     navigate("/NFTTransferCompleted");
-  //   }
-  //   else{
-  //     console.log("assetId doesnt exists");
-  //   }
-  // }
-  // catch{
-  //   alert("account not exist");
-  // }
-  // }
-  const returnNftToMe = async() => {
-    // console.log(userAccountId);
-    // ledger2.account.getAccount({accountId:userAccountId}).then(async(account) => {
-    //   console.log(account);
-    //   for (var i = 0;i<account.assetBalances.length;i++){
-    //     const token = await ledger2.asset.getAsset({assetId:account.assetBalances[i].asset});
-    //     console.log(token);
-    //     if(token.issuer === process.env.REACT_APP_NFT_TOKEN_ISSUER && token.name === "BetterMi"){
-    //       console.log(JSON.parse(token.description));
-    //       console.log(JSON.parse(token.description).descriptor);
-    //       console.log(typeof(JSON.parse(token.description).descriptor));
-    //       P2PTransferNftToken(Wallet,nodeHost,"4572964086056463895",token.asset,userAccountpublicKey);
-    //     }
-    //   }
-    // });
-  }
-  // const tempDisplayMyNft = tempNftList.map((nft) => {//Contract Id
-  //   console.log("myNftList is  ",myNfts);
-  //   console.log("loading is  ",loading);
-  //   return(
-  //     <MyNft  image={nft.image} level = {nft.level}></MyNft>
-  //   );
-  //   }
-  // );
-  //const content : JSX.Element = (
+
     const handleInputChange = (event:any) => {
       setInputValue(event.target.value);
     };
@@ -431,10 +332,10 @@ return(
         <div className = "myNftList">
           {gender === "Female"?
              (
-             <img className = "myNftImage" src = {"img/myNftList/nft-1@1x.png"}></img>
+             <div className = "myNftEmptyImage" ></div>
              ):
              (
-              <img className="myNftImage" src={`${process.env.PUBLIC_URL}/img/home/1.png`} alt="NFT_Avatar" />
+              <div className="myNftEmptyImage" />
              )
           }
              <div className = "myNftDescription">
@@ -454,7 +355,6 @@ return(
              </div>
              <div className = "myNftBottom">
              <button 
-             onClick = {returnNftToMe}
               className = "myNftButtonOnDuty" 
               style = {{backgroundColor:"#39B3AF!important"}}
             >ON DATE</button>
@@ -463,7 +363,12 @@ return(
            </div>
            ):(
              <div className = "myNftList">
-             <img className = "myNftImage" src = {`https://ipfs.io/ipfs/${onDuty}`}></img>
+              {isUpdatingDescription === true?
+              <img className = "myNftImage" src = "/img/loadingMinting/mimi-dancing-for-loadin-page.gif"></img>
+              :(
+                <img className = "myNftImage" src = {`https://ipfs.io/ipfs/${onDuty}`}></img>
+              )
+              }
              <div className = "myNftDescription">
              <div className = "myNftNumber">#0000000001</div>
                <div className = "myNftBar">
@@ -488,7 +393,8 @@ return(
 
                }
               {/* {displayMyNft} */}
-              {loading?(<div></div>):(displayMyNft)}
+              {/* {loading?(<div></div>):(displayMyNft)} */}
+              {displayMyNft}
         </div>
         {/* {loading?(<p>loading...</p>):(
           <>
