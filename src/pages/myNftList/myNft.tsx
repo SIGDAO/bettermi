@@ -42,7 +42,9 @@ import * as React from 'react';
      const ledger2 = LedgerClientFactory.createClient({nodeHost});
      const userAccountpublicKey:string = useSelector(accountPublicKey);
      const {appName,Wallet,Ledger} = useContext(AppContext);
-     const [nftLevel,setNftLevel] = useState<string>("");  
+     const [nftLevel,setNftLevel] = useState<string>("");
+     const [nftNumber,setNftNumber] = useState<number>();
+     const [reward,setReward] = useState<string>("");
      const navigate = useNavigate();
      var nftImgAddress:string = "";
      var addressSuffix:string ="https://ipfs.io/ipfs/"; 
@@ -53,16 +55,22 @@ import * as React from 'react';
              res.text().then((text)=>{
                  console.log(text); 
                  var nftInfo = JSON.parse(text);
+                 let matches = nftInfo.name.match(/(\d+)/);
+                 console.log(matches[0]);
+                 setNftNumber(matches[0]);
                 //  setNftLevel(nftInfo.attributes[0].level);
                 //  console.log(nftInfo.attributes.description);
                  if(nftInfo.description.includes("1") === true){
                   setNftLevel("1");
+                  setReward("10"); //To be confirmed
                  }
                  if(nftInfo.description.includes("2") === true){
                   setNftLevel("2");
+                  setReward("15");//To be confirmed
                  }
                  if(nftInfo.description.includes("3") === true){
                   setNftLevel("3");
+                  setReward("20");//To be confirmed
                  }
                  //console.log(nftInfo); 
                  //console.log(typeof(nftInfo.media[0].social));
@@ -112,7 +120,7 @@ import * as React from 'react';
                   <div className = "myNftList">
                     <img className = "myNftImage" src = {`https://ipfs.io/ipfs/${imgAddress}`}></img>
                     <div className = "myNftDescription">
-                    <div className = "myNftNumber">#0000000001</div>
+                    <div className = "myNftNumber">#{nftNumber}</div>
                       <div className = "myNftBar">
                         <div  className = "myNftLevel">
                           Lv{nftLevel}       

@@ -142,9 +142,15 @@ const ImportAccountScreen: React.FC<IimportAccountScreensProps> = (props) => {
                                 </div>
                                 }
                             <Button className="importAccountbutton_save" onClick = {() =>  {importNft(ledger2,inputAddress,userAccountId)}}>
-                                <div className="importAccountcontinue" >
-                                    Import Again
-                                </div>
+                                {hasError === false?
+                                    <div className="importAccountcontinue" >
+                                        Import Your Nft
+                                    </div>:
+                                    (
+                                    <div className="importAccountcontinue" >
+                                        Import Again
+                                    </div>
+                                    )}
                             </Button>
                             <div className="importAccount-error-message">
                                 {(hasError === false) &&

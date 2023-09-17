@@ -170,7 +170,7 @@
 
   }
   .importAccountbutton_save:hover{
-    opacity: 0.6;
+    
   }
   
   .importAccounttext-7 {
@@ -327,12 +327,11 @@
     width: 20px;
   }
   .importAccountLoadingPage {
-    height:126px;
-    left:100px;
-    object-fit:cover;
+    height:100px;
+    left:105px;
     position:absolute;
-    top:-56px;
-    width:126px;
+    top:-40px;
+    width:100px;
   }
   .importSuccessCongrats{
     color: var(--royal-blue);
