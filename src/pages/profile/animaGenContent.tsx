@@ -25,6 +25,7 @@ interface IAnimaGenContentProps {
   setIsOpen: (isOpen: boolean) => void;
   isBackButton: boolean;
   setIsBackButton: (isBackButton: boolean) => void;
+  
 }
 
 const handleCopyDiscordUsername = (discordUsername) => {
@@ -34,16 +35,16 @@ const handleCopyDiscordUsername = (discordUsername) => {
 };
 
 const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) => {
-  const nodeHost = useAppSelector(selectWalletNodeHost);
+  const nodeHost = useSelector(selectWalletNodeHost);
   const ledger2 = LedgerClientFactory.createClient({ nodeHost });
-  const userId = useAppSelector(accountId);
+  const userId = useSelector(accountId);
   const username = useSelector(selectCurrentUsername);
   const discordUsername = useSelector(selectCurrentDiscordUsername);
   const description = useSelector(selectCurrentDescription);
   const aboutYourself = useSelector(selectCurrentAboutYourself);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const gender = useAppSelector(selectCurrentGender);
+  const gender = useSelector(selectCurrentGender);
 
   const { isOpen, setIsOpen, isBackButton, setIsBackButton } = props;
   const [loading, setLoading] = useState<boolean>(true);
@@ -123,7 +124,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
       <div className="overlap-group5">
         <div className="overlap-group1-profile">
           <img className="layer" src="img/profile/layer-1@1x.png" alt="Layer" />
-          <Link to="/myNftList">
+          <Link to="/indexMyNftList">
             <div className="button_nft-collections">
               <div className="continue-profile inter-semi-bold-white-15px">
                 My NFTs Collections
@@ -152,16 +153,14 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
               </p>
             </div>
           </div>
-          {loading ?gender === "Female"?
+          {loading === true ?
            (
-            <img
-              className="nft_-avatar"
-              src="img/profile/nft-avatar-1@1x.png"
-              alt="NFT_Avatar"
+            <div
+              className="nft_-avatar_empty"
             />
-          ):( <img className="nft_-avatar" src={`${process.env.PUBLIC_URL}/img/home/1.png`} alt="NFT_Avatar" />) : (
+          ): (
             <img
-              className="nft_-avatar"
+              className="nft_-avatar_empty"
               src={`https://ipfs.io/ipfs/${imgAddress}`}
               alt="NFT_Avatar"
             />

@@ -30,17 +30,17 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
       machineCodeHash: codeHashId,
     });
 
-    // while(ourContract.ats[0] == null){
-    //   ourContract = await ledger.contract.getContractsByAccount({
-    //     accountId: userAccountId,
-    //     machineCodeHash: codeHashId,
+    while(ourContract.ats[0] == null){
+      ourContract = await ledger.contract.getContractsByAccount({
+        accountId: userAccountId,
+        machineCodeHash: codeHashId,
 
-    //     });
-    //   console.log(ourContract);
-    // }
-    // setCount(100)
-    // setIsLoading(false);
-    // navigate('/generateFreeNFT');
+        });
+      console.log(ourContract);
+    }
+    setCount(100)
+    setIsLoading(false);
+    navigate('/generateFreeNFT');
   }
 
 

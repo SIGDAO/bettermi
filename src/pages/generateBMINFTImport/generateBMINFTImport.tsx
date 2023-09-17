@@ -144,6 +144,7 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
         }
         navigate('/loadingMinting');
       } catch (error) {
+        console.log(error);
         if (error.name !== "ExtensionWalletError") {
           navigate('/errorGenerateNFT')
         }
