@@ -112,6 +112,8 @@
   position: relative;
   width: 152px;
   cursor: pointer;
+  margin-left:10px;
+  margin-right: 12px;
 }
 
 .bettermidapp-profile-3 .add {
