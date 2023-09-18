@@ -30,17 +30,17 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
       machineCodeHash: codeHashId,
     });
 
-    // while(ourContract.ats[0] == null){
-    //   ourContract = await ledger.contract.getContractsByAccount({
-    //     accountId: userAccountId,
-    //     machineCodeHash: codeHashId,
+    while(ourContract.ats[0] == null){
+      ourContract = await ledger.contract.getContractsByAccount({
+        accountId: userAccountId,
+        machineCodeHash: codeHashId,
 
-    //     });
-    //   console.log(ourContract);
-    // }
-    // setCount(100)
-    // setIsLoading(false);
-    // navigate('/generateFreeNFT');
+        });
+      console.log(ourContract);
+    }
+    setCount(100)
+    setIsLoading(false);
+    navigate('/generateFreeNFT');
   }
 
 
@@ -53,8 +53,8 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
 
   
   useEffect(() => {
-    // const incrementInterval = 240000 / 96; // Time divided by the number of increments
-    const incrementInterval = 5000 / 100;
+    const incrementInterval = 240000 / 96; // Time divided by the number of increments
+    // const incrementInterval = 5000 / 100;
     const timer = setInterval(() => {
       setCount((prevCount) => prevCount + 1);
 

@@ -19,6 +19,8 @@ import {
 import { CustomInput, RandomGenNameInput } from "../../components/input";
 import { CustomTextArea } from "../../components/input";
 import { selectCurrentGender } from '../../redux/profile';
+import { Alert } from "@mui/material";
+import CheckIcon from '@mui/icons-material/Check';
 
 interface IAnimaGenContentProps {
   isOpen: boolean;
@@ -26,12 +28,6 @@ interface IAnimaGenContentProps {
   isBackButton: boolean;
   setIsBackButton: (isBackButton: boolean) => void;
 }
-
-const handleCopyDiscordUsername = (discordUsername) => {
-  navigator.clipboard.writeText(discordUsername);
-  // todo: display a message to tell the user that the username has been copied to clipboard
-  // alert("Copied to clipboard!");
-};
 
 const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) => {
   const nodeHost = useAppSelector(selectWalletNodeHost);
@@ -53,7 +49,25 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   const [descriptionText, setDescriptionText] = useState<string>(description);
   const [discordUsernameText, setDiscordUsernameText] = useState<string>(discordUsername);
   const [showStar, setShowStar] = useState<boolean>(false);
+  const [alert, setAlert] = useState<boolean>(false);
   // const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    const countdown = () => {
+      if (count > 0) {
+        setCount((prevCount) => prevCount - 1);
+      }
+      if (count === 0) {
+        setAlert(false);
+      }
+    };
+
+    const timer = setInterval(countdown, 1000);
+
+    return () => clearInterval(timer);
+  }, [count]);
+
 
   const handleSave = () => {
     // validation check
@@ -86,6 +100,18 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
     setIsOpen((prev) => !prev);
     setIsBackButton(true);
   };
+
+  const handleCopyDiscordUsername = (discordUsername) => {
+    
+
+    navigator.clipboard.writeText(discordUsername);
+    setAlert(true);
+    setCount(1);
+    // todo: display a message to tell the user that the username has been copied to clipboard
+    // alert("Copied to clipboard!");
+  };
+  
+  
 
   const handleCancel = () => {
     setIsOpen((prev) => !prev);
@@ -120,6 +146,12 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
       }}
     >
       <ShortTitleBar title="Profile" />
+      {alert && (
+            <Alert className="copied-alert" icon={<CheckIcon fontSize="inherit" />} severity="success">
+              Copied!
+            </Alert>
+          )}
+
       <div className="overlap-group5">
         <div className="overlap-group1-profile">
           <img className="layer" src="img/profile/layer-1@1x.png" alt="Layer" />

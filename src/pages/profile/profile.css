@@ -710,7 +710,7 @@
   height: 18px;
   left: 168px;
   position: absolute;
-  top: 230px;
+  top: 228px;
   width: 17px;
   cursor: pointer;
 }
@@ -1152,3 +1152,17 @@
   white-space: nowrap;
 }
 
+
+.copied-alert {
+  width: 200px;
+  z-index: 999;
+  position: absolute;
+  top: 100px;
+  background-color: rgb(13 13 13);
+  color: white;
+
+}
+
+.copied-alert div {
+  color: white;
+}
