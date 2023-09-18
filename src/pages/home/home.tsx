@@ -30,8 +30,17 @@ interface IHomeProps {
 }
 
 function handleScrollHorizontally(event: any) {
-  const container = event.target;
+  console.log(event);   
+  const container = document.querySelector("div.missions-scroll-RoXPLo.x-")!;
+  //const container = event.target;
+  const largeContainer = document.querySelector("div");
   const delta = Math.max(-1, Math.min(1, (event.deltaY || -event.detail)));
+  largeContainer?.classList.add("no-scroll");
+  console.log(container);
+  const scrollTop = event.pageYOffset || document.documentElement.scrollTop;
+  window.onscroll = function() {
+    window.scrollTo(-scrollTop,0 );
+  };
   container.scrollLeft -= (delta * 40); // Adjust scrolling speed here
   event.preventDefault();
 
@@ -252,9 +261,25 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
           </div>
           {imgAddress === ""?gender === "Female"?
           // <img className="nft_-avatar-2ZgxSS" src={`${process.env.PUBLIC_URL}/img/home/nft-avatar-13@1x.png`} alt="NFT_Avatar" />
-          <div className="home_nft_-avatar">Equip your Nft</div>
+          <Link to="https://test.signumart.io/">
+              <div className="home_nft_-avatar">
+                  <img
+                    className="home_icon_ic_add"
+                    src="img/profile/ic-add-2@1x.png"
+                    alt="ic_add"
+                  />
+              </div>
+            </Link>
           :(
-            <div className="home_nft_-avatar">Equip your Nft</div>
+            <Link to="https://test.signumart.io/">
+              <div className="home_nft_-avatar">
+                <img
+                  className="home_icon_ic_add"
+                  src="img/profile/ic-add-2@1x.png"
+                  alt="ic_add"
+                />
+              </div>
+            </Link>
               // <img className="nft_-avatar-2ZgxSS" src={`${process.env.PUBLIC_URL}/img/home/1.png`} alt="NFT_Avatar" />
           )
           :(

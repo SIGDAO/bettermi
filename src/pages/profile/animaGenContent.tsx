@@ -177,12 +177,13 @@ var userNftList:string[] = [];
                     userNftList.push(nftInfo.media[0].social);
                     console.log(userNftList);
                     setMyNfts(userNftList);
-                    setLoadingNft(false);
                 })
               }).catch((error)=>{
                 alert("some error occured");
               });
-
+              if(i === nftAddressList.length - 1){
+                setLoadingNft(false);
+              }
 
             }
           }
@@ -201,19 +202,44 @@ var userNftList:string[] = [];
   }
   }, []);
 
-  const images = [
-    'img/profile/nft-1@1x.png',
-    'img/profile/nft-1@1x.png',
-    'img/profile/nft-1@1x.png',
-    'img/profile/nft-1@1x.png',
-    'img/profile/nft-1@1x.png',
-    'img/profile/nft-1@1x.png',
-    'img/profile/nft-1@1x.png',
-    'img/profile/nft-1@1x.png',
-    'img/profile/nft-1@1x.png',
-    'img/profile/nft-1@1x.png',
-    // Add more image URLs as needed
-  ];
+
+  const handleScroll = (event:any) => {
+    console.log(event);
+    const container = document.querySelector("div.profileHorizontalScroll")!;
+    console.log(container);
+    const scrollAmount = event.deltaY;
+    const largeContainer = document.querySelector("div")!;
+    largeContainer.scrollTo({
+      top: container.scrollTop - scrollAmount,
+      left: 0,
+
+    });
+    // window.onscroll = function() {
+    //   window.scrollTo({left:0, top:-scrollAmount});
+    // };
+    console.log(container.scrollLeft);
+    container.scrollTo({
+      top: 0,
+      left: container.scrollLeft + scrollAmount,
+
+    });
+  };
+
+  const handleScroll2 = (event:any) => {
+    console.log(event);
+    const container = event.target!;
+    console.log(container);
+    const scrollAmount = event.deltaY;
+    console.log(scrollAmount);
+    window.onscroll = function() {
+      window.scrollTo({left:0, top:-scrollAmount});
+    };
+    container.scrollTo({
+      top: 0,
+      left: container.scrollLeft + scrollAmount,
+
+    });
+  };
 
 
   return (
@@ -222,6 +248,7 @@ var userNftList:string[] = [];
       style={{
         height: `${isOpen ? "100vh" : "844px"}`,
       }}
+      onWheel={handleScroll2}
     >
       <ShortTitleBar title="Profile" />
       {alert && (
@@ -264,9 +291,18 @@ var userNftList:string[] = [];
           </div>
           {loading === true ?
            (
-            <div
-              className="nft_-avatar_empty"
-            />
+            <Link to="https://test.signumart.io/">
+            <div className="profile_icon_nft_-avatar_empty">
+              <img
+                className="profile_icon_ic_add"
+                src="img/profile/ic-add-2@1x.png"
+                alt="ic_add"
+              />
+            </div>
+          </Link>
+            // <div
+            //   className="nft_-avatar_empty"
+            // />
           ): (
             <img
               className="nft_-avatar_empty"
@@ -295,12 +331,14 @@ var userNftList:string[] = [];
         </div>
 
         {/* This is the new horizontal scroll */}
-        <div
+         <div className = "profileHorizontalScroll"
           style={{
+            backgroundColor: 'inherit',
             width: '400px',
             height: '400px',
             overflowY: 'scroll',
           }}
+          onWheel = {handleScroll}
         >
           <div
             style={{
@@ -308,6 +346,7 @@ var userNftList:string[] = [];
               height: '217px',
               display: 'flex',
             }}
+            onWheel = {handleScroll}
           >
             <Link to="https://test.signumart.io/">
             <div className="overlap-group-profile">
@@ -319,7 +358,22 @@ var userNftList:string[] = [];
               />
             </div>
           </Link>
-            {myNfts.map((MyNft) => (
+            {loadingNft === true?     
+            <>
+              <img
+                  src={"/img/loadingMinting/mimi-dancing-for-loadin-page.gif"}
+                  style={{
+                    width: '152px',
+                    height: '217px',
+                    objectFit: 'cover',
+                    marginRight: '10px',
+                  }}
+                />
+              {/* <div className="minting-JdJl2l inter-normal-white-15px">loading your NFTs</div>
+              <div className="reminder-text-1 inter-normal-white-15px">Please wait patiently<br/>and do not refresh the page</div> */}
+              </>
+              :
+            myNfts.map((MyNft) => (
               <img
                 src={`https://ipfs.io/ipfs/${MyNft}`}
                 style={{
@@ -330,8 +384,8 @@ var userNftList:string[] = [];
                 }}
               />
             ))}
-          </div>
-        </div>
+              </div>
+        </div> 
 
         {/* This is the old horizontal scroll */}
 

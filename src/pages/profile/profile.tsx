@@ -61,6 +61,7 @@ useEffect(() => {
 
 
   return <CenterLayout
+  noScroll = {true}
     content={
       <div className='screen'>
         <AnimaGenContent 

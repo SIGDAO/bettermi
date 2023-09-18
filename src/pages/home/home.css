@@ -258,7 +258,7 @@
   height: 54.69%;
 }
 .home_nft_-avatar{
-  background-color: linear-gradient(180deg, #8743FF 0%, #4136F1 100%);
+  background: linear-gradient(180deg, #8743FF 0%, #4136F1 100%);
   text-align: center;
   display: flex;
   align-items: center;
@@ -269,7 +269,16 @@
   position: absolute;
   top: 8px;
   width: 107px;
-
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+.home_icon_ic_add{
+  height: 28px;
+  width: 28px;
+}
+.home_nft_-avatar:hover{
+  cursor: pointer;
 }
 
 .bettermidapp-home-1 .step-counts-GEWAL1 {
@@ -1166,4 +1175,8 @@ color
   left: 30px;
   position: absolute;
   top: 238px;
+}
+
+.no-scroll{
+  overflow: hidden;
 }

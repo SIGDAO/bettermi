@@ -14,6 +14,7 @@ import { getNftContractStorage } from '../../redux/account';
 import { useRef } from 'react';
 import LoadingMinting from '../loadingMinting/loadingMinting';
 import LoadingMintingMyNftList from './loadMintingMyNftList';
+import { ShortTitleBar } from '../../components/titleBar';
 
  interface MyNftProps {
     
@@ -69,9 +70,13 @@ interface myNftList{
    return(
       <>
         {
-              (isLoading === true||loadingNft === true) ?(<LoadingMintingMyNftList loadingNft={loadingNft} 
-                setLoadingNft={setLoadingNft} myNfts={myNfts} setMyNfts = {setMyNfts}></LoadingMintingMyNftList>):
-
+              (isLoading === true||loadingNft === true) ?(
+                <>
+                <ShortTitleBar title='My NFTs' setting = {false}addSign = {false} aiCoach = {false} filter = {false} importButton = {false} />
+              <LoadingMintingMyNftList loadingNft={loadingNft} 
+                setLoadingNft={setLoadingNft} myNfts={myNfts} setMyNfts = {setMyNfts}></LoadingMintingMyNftList>
+                </>
+                ):
               (
 
                     <MyNftList setIsUpdatingDescription={setIsUpdating} isUpdatingDescription={isUpdating} myNfts = {myNfts}></MyNftList>

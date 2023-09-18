@@ -72,11 +72,27 @@ export function CenterLayout (props: ICenterLayoutProps) {
   const hihi = () => {
     console.log(process.env.MOBILE)
     return content
-  }
+  }  
+  const handleScroll2 = (event:any) => {
+    console.log(event);
+    const container = event.target!;
+    console.log(container);
+    const scrollAmount = event.deltaY;
+    console.log(scrollAmount);
+    window.onscroll = function() {
+      window.scrollTo({left:0, top:-scrollAmount});
+    };
+    container.scrollTo({
+      top: 0,
+      left: container.scrollLeft + scrollAmount,
+
+    });
+  };
+
   
 
   return (
-    <div style={bgStyle}>
+    <div style={bgStyle} >
       <div style={centerLayoutStyle}>
         {typeof content === 'function' ? content() : content}
       </div>

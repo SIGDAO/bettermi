@@ -102,20 +102,6 @@
   padding-left: 100px;
 }
 
-.bettermidapp-profile-3 .overlap-group-profile {
-  background: linear-gradient(90deg, #0d0d0d 0%, #4136f1 102.54%);
-  border: 1px solid;
-  border-color: var(--royal-blue);
-  border-radius: 10px;
-  flex: 0 0 auto;
-  height: 217px;
-  position: relative;
-  width: 152px;
-  cursor: pointer;
-  margin-left:10px;
-  margin-right: 12px;
-}
-
 .bettermidapp-profile-3 .add {
   height: 30px;
   left: 60px;
@@ -718,6 +704,55 @@
   background-color: #221D4B;
  /* background-color: linear-gradient(180deg, #171717 0%, #291a49 41.22%, #171717 100%); */
 }
+.profile_icon_nft_-avatar_empty {
+  border-radius: 6px;
+  height: 80px;
+  left: 52px;
+  object-fit: cover;
+  position: absolute;
+  top: -5;
+  width: 80px;
+  background: linear-gradient(180deg, #8743FF 0%, #4136F1 100%);;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+ /* background-color: linear-gradient(180deg, #171717 0%, #291a49 41.22%, #171717 100%); */
+}
+.profile_icon_ic_add {
+  height: 28px;
+  width: 28px;
+  align-self: center;
+}
+
+
+.bettermidapp-profile-3 .add {
+  height: 30px;
+  left: 60px;
+  object-fit: cover;
+  position: absolute;
+  top: 93px;
+  width: 30px;
+}
+ .profile_icon_add {
+  height: 30px;
+  align-self: center;
+  width: 30px;
+}
+
+
+.bettermidapp-profile-3 .overlap-group-profile {
+  background: linear-gradient(90deg, #0d0d0d 0%, #4136f1 102.54%);
+  border: 1px solid;
+  border-color: var(--royal-blue);
+  border-radius: 10px;
+  flex: 0 0 auto;
+  height: 217px;
+  position: relative;
+  width: 152px;
+  cursor: pointer;
+  margin-left:10px;
+  margin-right: 12px;
+}
 
 
 .bettermidapp-profile-3 .copy-icon {
@@ -1170,6 +1205,20 @@
 }
 
 
+.profileHorizontalScroll{
+  background-color: inherit;
+  margin-top: -10px;
+}
+
+.profileHorizontalScroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.profileHorizontalScroll {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
 .copied-alert {
   width: 200px;
   z-index: 999;
