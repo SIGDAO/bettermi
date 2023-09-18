@@ -45,6 +45,7 @@ import AiCoachDetail from './pages/aiCoachDetail/aiCoachDetail';
 import ErrorGenerateNFT from './pages/errorGenerateNFT/errorGenerateNFT';
 import LoadingMinting from './pages/loadingMinting/loadingMinting';
 import Setting from './pages/setting/setting';
+import IndexMyNftList from './pages/myNftList/indexMyNftList';
 
 store.subscribe(() => {
   saveState(store.getState());
@@ -142,7 +143,8 @@ function App() {
                 <Route path=":id" element={<ChallengeCountdown/>} />
               </Route>
               <Route path="/missionChallenge" element={<MissionChallenge/>} />
-              <Route path="/myNftList" element={<MyNftList/>} />
+              {/* <Route path="/myNftList" element={<MyNftList/>} /> */}
+              <Route path = "/indexMyNftList" element = {<IndexMyNftList/>}/>
               <Route path="/reward" element={<Reward/>} />
               <Route path="/rewardDetail">
                 <Route path=":id" element={<RewardDetail/>} />

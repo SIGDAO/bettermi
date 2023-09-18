@@ -66,7 +66,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const userAccountId = useSelector(accountId);
   const [loading, setLoading] = useState<boolean>(true);
   const [imgAddress, setImgAddress] = useState<string>("");
-  const nodeHost = useAppSelector(selectWalletNodeHost);
+  const nodeHost = useSelector(selectWalletNodeHost);
   const ledger2 = LedgerClientFactory.createClient({nodeHost});
   const userId = useAppSelector(accountId);
   const navigate = useNavigate();
@@ -250,9 +250,12 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
             <div className="nft-reward-10-b5x63m inter-semi-bold-white-15px">NFT REWARD +10%</div>
             <img className="seperate-line-b5x63m" src={`${process.env.PUBLIC_URL}/img/seperate-line-1@1x.png`} alt="seperate line" />
           </div>
-          {imgAddress === ""?gender === "Female"?<img className="nft_-avatar-2ZgxSS" src={`${process.env.PUBLIC_URL}/img/home/nft-avatar-13@1x.png`} alt="NFT_Avatar" />
+          {imgAddress === ""?gender === "Female"?
+          // <img className="nft_-avatar-2ZgxSS" src={`${process.env.PUBLIC_URL}/img/home/nft-avatar-13@1x.png`} alt="NFT_Avatar" />
+          <div className="home_nft_-avatar">Equip your Nft</div>
           :(
-              <img className="nft_-avatar-2ZgxSS" src={`${process.env.PUBLIC_URL}/img/home/1.png`} alt="NFT_Avatar" />
+            <div className="home_nft_-avatar">Equip your Nft</div>
+              // <img className="nft_-avatar-2ZgxSS" src={`${process.env.PUBLIC_URL}/img/home/1.png`} alt="NFT_Avatar" />
           )
           :(
             <img className = "nft_-avatar-2ZgxSS" src = {`https://ipfs.io/ipfs/${imgAddress}`}></img>

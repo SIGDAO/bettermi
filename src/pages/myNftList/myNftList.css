@@ -777,6 +777,13 @@
   border-radius: 5px;
   margin-top: 15px;
 }
+.myNftEmptyImage{
+  height:217px;
+  width: 137px;
+  border-radius: 5px;
+  margin-top: 15px;
+  background-color: linear-gradient(112deg, #221D4B 0%, #171717 100%);
+}
 .myNftDescription{
   background-color: inherit;
   /* background-color: rgb(0, 255, 60); */

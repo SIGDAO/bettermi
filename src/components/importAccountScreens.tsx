@@ -12,6 +12,7 @@ import { accountId } from '../redux/account';
 import { Button } from 'reactstrap';
 import { TransferNft } from '../NftSystem/transferNft';
 import { selectCurrentGender } from '../redux/profile';
+import { useSelector } from 'react-redux';
 
 export interface IimportAccountScreensProps {
     setIsOpenImport: (isOpenImport: boolean) => void;
@@ -29,9 +30,9 @@ const ImportAccountScreen: React.FC<IimportAccountScreensProps> = (props) => {
     const nftDistributorPrivateKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PRIVATE_KEY!;
     const [hasError, setHasError] = useState<boolean>(false);
     const [loading,setLoading] = useState<boolean>(false);
-    const nodeHost = useAppSelector(selectWalletNodeHost);
-    const userAccountId = useAppSelector(accountId);
-    const gender = useAppSelector(selectCurrentGender)
+    const nodeHost = useSelector(selectWalletNodeHost);
+    const userAccountId = useSelector(accountId);
+    const gender = useSelector(selectCurrentGender)
     const ledger2 = LedgerClientFactory.createClient({ nodeHost });
     const mimiNftStorageAccounts = process.env.REACT_APP_NFT_STORAGE_MIMI!.split(",");
     console.log(mimiNftStorageAccounts, "miminftstorage is");
@@ -141,9 +142,15 @@ const ImportAccountScreen: React.FC<IimportAccountScreensProps> = (props) => {
                                 </div>
                                 }
                             <Button className="importAccountbutton_save" onClick = {() =>  {importNft(ledger2,inputAddress,userAccountId)}}>
-                                <div className="importAccountcontinue" >
-                                    Import Again
-                                </div>
+                                {hasError === false?
+                                    <div className="importAccountcontinue" >
+                                        Import Your Nft
+                                    </div>:
+                                    (
+                                    <div className="importAccountcontinue" >
+                                        Import Again
+                                    </div>
+                                    )}
                             </Button>
                             <div className="importAccount-error-message">
                                 {(hasError === false) &&

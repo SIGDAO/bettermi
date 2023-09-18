@@ -21,25 +21,34 @@ import { CustomTextArea } from "../../components/input";
 import { selectCurrentGender } from '../../redux/profile';
 import { Alert } from "@mui/material";
 import CheckIcon from '@mui/icons-material/Check';
+import { FindLatestTransactionArray,FindLatestTransactionNumber, p2pTransferNft } from '../../NftSystem/updateUserNftStorage';
+import { getNftContractStorage } from "../../redux/account";
 
 interface IAnimaGenContentProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
   isBackButton: boolean;
   setIsBackButton: (isBackButton: boolean) => void;
+  
+}
+interface myNftList{
+  level:string;
+  image:string;
+  nftId:string;
 }
 
+
 const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) => {
-  const nodeHost = useAppSelector(selectWalletNodeHost);
+  const nodeHost = useSelector(selectWalletNodeHost);
   const ledger2 = LedgerClientFactory.createClient({ nodeHost });
-  const userId = useAppSelector(accountId);
+  const userId = useSelector(accountId);
   const username = useSelector(selectCurrentUsername);
   const discordUsername = useSelector(selectCurrentDiscordUsername);
   const description = useSelector(selectCurrentDescription);
   const aboutYourself = useSelector(selectCurrentAboutYourself);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const gender = useAppSelector(selectCurrentGender);
+  const gender = useSelector(selectCurrentGender);
 
   const { isOpen, setIsOpen, isBackButton, setIsBackButton } = props;
   const [loading, setLoading] = useState<boolean>(true);
@@ -137,6 +146,75 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
 
     // inputRefs.current = inputRefs.current.slice(0, inputRefs.current.length);
   }, []);
+  const [loadingNft,setLoadingNft] = useState<boolean>(true);
+  const [myNfts,setMyNfts] = useState<string[]>([]);
+const nftContractStorage = useSelector(getNftContractStorage);
+const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
+const nftDistributorPublicKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PUBLIC_KEY!;
+const nftDistributorPrivateKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PRIVATE_KEY!;
+const nftLoaded = useRef(false);
+var nft: myNftList;
+var userNftList:string[] = [];
+  const loadNftList = async() => {
+    FindLatestTransactionNumber(ledger2,nftContractStorage,nftDistributor).then((number)=>{
+      console.log(number);
+      FindLatestTransactionArray(ledger2,nftContractStorage,nftDistributor,number).then(async(nftAddressList)=>{
+        if(nftAddressList[0] === "empty"){
+          setLoadingNft(false);
+        }
+        else{
+              console.log(nftAddressList);
+            for (var i = 0;i < nftAddressList.length;i++){
+
+
+              const contractInfo = await ledger2.contract.getContract(nftAddressList[i]);
+              const trial = JSON.parse(contractInfo.description);
+              nft = {level:trial.version,image:trial.descriptor,nftId:nftAddressList[i]};
+              fetch(`https://ipfs.io/ipfs/${nft.image}`).then((res)=>{
+                res.text().then((text)=>{
+                    console.log(text); 
+                    var nftInfo = JSON.parse(text);
+                    userNftList.push(nftInfo.media[0].social);
+                    console.log(userNftList);
+                    setMyNfts(userNftList);
+                    setLoadingNft(false);
+                })
+              }).catch((error)=>{
+                alert("some error occured");
+              });
+
+
+            }
+          }
+      });
+    }).catch((error)=>{console.log(error);navigate("/home")});
+  
+  };
+  
+    useEffect(() => {
+  if(nftLoaded.current ===true){
+    console.log("loaded nft");
+  }
+  else{
+    nftLoaded.current = true;
+      loadNftList();
+  }
+  }, []);
+
+  const images = [
+    'img/profile/nft-1@1x.png',
+    'img/profile/nft-1@1x.png',
+    'img/profile/nft-1@1x.png',
+    'img/profile/nft-1@1x.png',
+    'img/profile/nft-1@1x.png',
+    'img/profile/nft-1@1x.png',
+    'img/profile/nft-1@1x.png',
+    'img/profile/nft-1@1x.png',
+    'img/profile/nft-1@1x.png',
+    'img/profile/nft-1@1x.png',
+    // Add more image URLs as needed
+  ];
+
 
   return (
     <div
@@ -155,7 +233,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
       <div className="overlap-group5">
         <div className="overlap-group1-profile">
           <img className="layer" src="img/profile/layer-1@1x.png" alt="Layer" />
-          <Link to="/myNftList">
+          <Link to="/indexMyNftList">
             <div className="button_nft-collections">
               <div className="continue-profile inter-semi-bold-white-15px">
                 My NFTs Collections
@@ -184,16 +262,14 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
               </p>
             </div>
           </div>
-          {loading ?gender === "Female"?
+          {loading === true ?
            (
-            <img
-              className="nft_-avatar"
-              src="img/profile/nft-avatar-1@1x.png"
-              alt="NFT_Avatar"
+            <div
+              className="nft_-avatar_empty"
             />
-          ):( <img className="nft_-avatar" src={`${process.env.PUBLIC_URL}/img/home/1.png`} alt="NFT_Avatar" />) : (
+          ): (
             <img
-              className="nft_-avatar"
+              className="nft_-avatar_empty"
               src={`https://ipfs.io/ipfs/${imgAddress}`}
               alt="NFT_Avatar"
             />
@@ -217,7 +293,50 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
             <div className="discord inter-bold-royal-blue-15px">DISCORD</div>
           </div>
         </div>
-        <div className="x3">
+
+        {/* This is the new horizontal scroll */}
+        <div
+          style={{
+            width: '400px',
+            height: '400px',
+            overflowY: 'scroll',
+          }}
+        >
+          <div
+            style={{
+              width: '152px',
+              height: '217px',
+              display: 'flex',
+            }}
+          >
+            <Link to="https://test.signumart.io/">
+            <div className="overlap-group-profile">
+              <img className="add" src="img/profile/add-2@1x.png" alt="Add" />
+              <img
+                className="ic_add"
+                src="img/profile/ic-add-2@1x.png"
+                alt="ic_add"
+              />
+            </div>
+          </Link>
+            {myNfts.map((MyNft) => (
+              <img
+                src={`https://ipfs.io/ipfs/${MyNft}`}
+                style={{
+                  width: '152px',
+                  height: '217px',
+                  objectFit: 'cover',
+                  marginRight: '10px',
+                }}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* This is the old horizontal scroll */}
+
+        
+        {/* <div className="x3">
           <Link to="https://test.signumart.io/">
             <div className="overlap-group-profile">
               <img className="add" src="img/profile/add-2@1x.png" alt="Add" />
@@ -245,7 +364,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
               alt="NFT"
             />
           </div>
-        </div>
+        </div> */}
       </div>
       {isOpen && (
         <div className="edit-profile-layer">

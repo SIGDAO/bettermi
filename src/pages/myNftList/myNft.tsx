@@ -18,6 +18,7 @@ import * as React from 'react';
  import { useContext } from 'react';
  import { AppContext } from '../../redux/useContext';
  import { P2PTransferNftToken } from '../../components/p2pTransferNftToken';
+ import { useNavigate } from 'react-router-dom';
 
  interface MyNftProps {
     image:string;
@@ -27,19 +28,24 @@ import * as React from 'react';
      nftId:string;
      setSelectedAssetId:(nftId:string) => void;
     setLevel:(level:string) => void;
+    isUpdatingDescription:boolean;
+    setIsUpdatingDescription:(isUpdatingDescription:boolean) => void;
     
  }
 
 
  const MyNft: React.FunctionComponent<MyNftProps> =  (props) => {
-     const {image, level, isOpenPopup, setIsOpenPopup,nftId,setSelectedAssetId,setLevel} = props;
+     const {image, level, isOpenPopup, setIsOpenPopup,nftId,setSelectedAssetId,setLevel,isUpdatingDescription,setIsUpdatingDescription} = props;
      const [loading, setLoading] = useState<boolean>(true);
      const [imgAddress, setImgAddress] = useState<string>("");
-     const nodeHost = useAppSelector(selectWalletNodeHost);
+     const nodeHost = useSelector(selectWalletNodeHost);
      const ledger2 = LedgerClientFactory.createClient({nodeHost});
      const userAccountpublicKey:string = useSelector(accountPublicKey);
      const {appName,Wallet,Ledger} = useContext(AppContext);
      const [nftLevel,setNftLevel] = useState<string>("");
+     const [nftNumber,setNftNumber] = useState<number>();
+     const [reward,setReward] = useState<string>("");
+     const navigate = useNavigate();
      var nftImgAddress:string = "";
      var addressSuffix:string ="https://ipfs.io/ipfs/"; 
      useEffect(() => {
@@ -49,16 +55,22 @@ import * as React from 'react';
              res.text().then((text)=>{
                  console.log(text); 
                  var nftInfo = JSON.parse(text);
+                 let matches = nftInfo.name.match(/(\d+)/);
+                 console.log(matches[0]);
+                 setNftNumber(matches[0]);
                 //  setNftLevel(nftInfo.attributes[0].level);
                 //  console.log(nftInfo.attributes.description);
                  if(nftInfo.description.includes("1") === true){
                   setNftLevel("1");
+                  setReward("10"); //To be confirmed
                  }
                  if(nftInfo.description.includes("2") === true){
                   setNftLevel("2");
+                  setReward("15");//To be confirmed
                  }
                  if(nftInfo.description.includes("3") === true){
                   setNftLevel("3");
+                  setReward("20");//To be confirmed
                  }
                  //console.log(nftInfo); 
                  //console.log(typeof(nftInfo.media[0].social));
@@ -92,9 +104,10 @@ import * as React from 'react';
          description:accountInfo,
          feePlanck:"1000000",
          senderPublicKey:userAccountpublicKey,
-       })
+       });
        //console.log(setAccountInfo);
-       Wallet.Extension.confirm(setAccountInfo.unsignedTransactionBytes);
+       await Wallet.Extension.confirm(setAccountInfo.unsignedTransactionBytes);
+       setIsUpdatingDescription(true);
      };
      const transferToken = async() => {
       P2PTransferNftToken(Wallet,nodeHost,"4572964086056463895",nftId,userAccountpublicKey);
@@ -107,7 +120,7 @@ import * as React from 'react';
                   <div className = "myNftList">
                     <img className = "myNftImage" src = {`https://ipfs.io/ipfs/${imgAddress}`}></img>
                     <div className = "myNftDescription">
-                    <div className = "myNftNumber">#0000000001</div>
+                    <div className = "myNftNumber">#{nftNumber}</div>
                       <div className = "myNftBar">
                         <div  className = "myNftLevel">
                           Lv{nftLevel}       
@@ -128,6 +141,7 @@ import * as React from 'react';
                         setIsOpenPopup((prev) => !prev);
                         setSelectedAssetId(nftId);
                         setLevel(nftLevel);
+
                       }} 
                       className = "myNftButtomArrow" 
                       src  = {`${process.env.PUBLIC_URL}/img/NftList/ic-send@1x.png`}
