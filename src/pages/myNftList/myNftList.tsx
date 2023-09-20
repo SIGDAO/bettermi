@@ -319,6 +319,12 @@ const nftId = accountDes.account;
     const handleAddressChange = (event:any) => {
       setInputAddress(event.target.value);
     };
+    const unequipNft = async() => {
+      const waitingToBeChangedDescription = await ledger2.account.getAccount({accountId: userAccountId});
+      let newDes =waitingToBeChangedDescription.description===undefined?{}:JSON.parse(waitingToBeChangedDescription.description);
+      console.log(newDes);
+
+    }
 
     // testing for github update
 
@@ -332,10 +338,28 @@ return(
         <div className = "myNftList">
           {gender === "Female"?
              (
-             <div className = "myNftEmptyImage" ></div>
+            <Link to="https://test.signumart.io/">
+            <div className="myNftListEmptyNft">
+              <img className="myNftListAdd" src="img/profile/add-2@1x.png" alt="Add" />
+              <img
+                className="myNftListadd2"
+                src="img/profile/ic-add-2@1x.png"
+                alt="ic_add"
+              />
+            </div>
+          </Link>
              ):
              (
-              <div className="myNftEmptyImage" />
+              <Link to="https://test.signumart.io/">
+              <div className="myNftListEmptyNft">
+                <img className="myNftListAdd" src="img/profile/add-2@1x.png" alt="Add" />
+                <img
+                  className="myNftListadd2"
+                  src="img/profile/ic-add-2@1x.png"
+                  alt="ic_add"
+                />
+              </div>
+            </Link>
              )
           }
              <div className = "myNftDescription">
@@ -355,6 +379,7 @@ return(
              </div>
              <div className = "myNftBottom">
              <button 
+             onClick = {() => {}}
               className = "myNftButtonOnDuty" 
               style = {{backgroundColor:"#39B3AF!important"}}
             >ON DATE</button>

@@ -1241,6 +1241,42 @@ opacity: 0.5;
   cursor: pointer;
 }
 
+.myNftListEmptyNft {
+  background: linear-gradient(90deg, #0d0d0d 0%, #4136f1 102.54%);
+  border: 1px solid;
+  border-color: var(--royal-blue);
+  border-radius: 10px;
+  flex: 0 0 auto;
+  height: 197px;
+  position: relative;
+  width: 137px;
+  cursor: pointer;
+  margin-left:10px;
+  margin-right: 10px;
+  margin-top: 20px;
+}
+.myNftListEmptyNft:hover {
+  cursor: pointer;
+}
+
+
+.myNftListAdd {
+  height: 30px;
+  left: 60px;
+  object-fit: cover;
+  position: absolute;
+  top: 93px;
+  width: 30px;
+}
+.myNftListadd2 {
+  height: 28px;
+  left: 61px;
+  object-fit: cover;
+  position: absolute;
+  top: 94px;
+  width: 28px;
+}
+
 
 /* nft import screen css */
 

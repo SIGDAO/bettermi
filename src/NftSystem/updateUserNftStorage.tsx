@@ -15,6 +15,8 @@ import { sendMessage } from "./updateUserNftList";
 export async function AddNftToAccount(ledger2:any, recipientId:string,nftToBeDistributed:string){
     
 }
+
+
 export async function FindLatestTransactionNumber(ledger2:any,recipient:string,nftDistributor:string){//Takes the account id of recipient but not the contrat Id
     console.log(ledger2);
     console.log(recipient);

@@ -19,6 +19,7 @@ import * as React from 'react';
  import { AppContext } from '../../redux/useContext';
  import { P2PTransferNftToken } from '../../components/p2pTransferNftToken';
  import { useNavigate } from 'react-router-dom';
+ import { CheckNftOwnerId } from '../../NftSystem/updateUserNftStorage';
 
  interface MyNftProps {
     image:string;
@@ -41,6 +42,7 @@ import * as React from 'react';
      const nodeHost = useSelector(selectWalletNodeHost);
      const ledger2 = LedgerClientFactory.createClient({nodeHost});
      const userAccountpublicKey:string = useSelector(accountPublicKey);
+     const userAccountId:string = useSelector(accountId);
      const {appName,Wallet,Ledger} = useContext(AppContext);
      const [nftLevel,setNftLevel] = useState<string>("");
      const [nftNumber,setNftNumber] = useState<number>();
@@ -49,6 +51,7 @@ import * as React from 'react';
      var nftImgAddress:string = "";
      var addressSuffix:string ="https://ipfs.io/ipfs/"; 
      useEffect(() => {
+      console.log(nftId);
          // Function to fetch data from the APIc
          //console.log(`ipfs.io/ipfs/${image}`);
          fetch(`https://ipfs.io/ipfs/${image}`).then((res)=>{
@@ -97,17 +100,32 @@ import * as React from 'react';
          return 1;
      }
      const equipNft = async() => {
+      const nftOwner = await CheckNftOwnerId(ledger2,nftId);
+      if(nftOwner === userAccountId){
+      const waitingToBeChangedDescription = await ledger2.account.getAccount({accountId: userAccountId});
+      let newDes =waitingToBeChangedDescription.description===undefined?{}:JSON.parse(waitingToBeChangedDescription.description);
+      console.log(newDes);
+      console.log(imgAddress);
        console.log("123");
-       const accountInfo = `{"av":{"${imgAddress}":"image/png"},"ds":"${nftLevel}"}`;
+       let obj = {
+        [imgAddress]:"image/png"
+       }
+       newDes = Object.assign(newDes,{av:obj});       
+       newDes = Object.assign(newDes,{id:nftId});
+       newDes = JSON.stringify(newDes);
        const setAccountInfo = await ledger2.account.setAccountInfo({
          name:"1234",
-         description:accountInfo,
+         description:newDes,
          feePlanck:"1000000",
          senderPublicKey:userAccountpublicKey,
        });
        //console.log(setAccountInfo);
        await Wallet.Extension.confirm(setAccountInfo.unsignedTransactionBytes);
        setIsUpdatingDescription(true);
+      }
+      else{
+        alert("We are sorry, it seems like you still don't own this NFT, maybe wait for a few more minutes if you just received it revcently");
+      }
      };
      const transferToken = async() => {
       P2PTransferNftToken(Wallet,nodeHost,"4572964086056463895",nftId,userAccountpublicKey);
