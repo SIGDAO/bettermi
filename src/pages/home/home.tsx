@@ -25,6 +25,9 @@ import { calRewardSigdaoOnSelfie } from '../../components/selfieToEarnRewardType
 import { TransferToken } from '../../components/transferToken';
 import { useContext } from 'react';
 import { AppContext } from '../../redux/useContext';
+import HorizontalScrollContainerMission from './horzontalScrollContainer';
+import { CheckNftOwnerId } from '../../NftSystem/updateUserNftStorage';
+import UserIcon from '../../components/loadUserIcon';
 
 interface IHomeProps {
 }
@@ -98,7 +101,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   useEffect(() => {
     // Function to fetch data from the APIc
     ledger2.account.getAccount({accountId:userId})
-      .then((account)=>{
+      .then(async(account)=>{
         for (var i = 0;i<account.assetBalances.length;i++){
           if(account.assetBalances[i].asset === "13116962758643420722"){
             store.dispatch(accountSlice.actions.setToken(Number(account.assetBalances[i].balanceQNT)/1000000));
@@ -107,14 +110,48 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
           }
         }
         const description = JSON.parse(account.description);
-        console.log(description.ds);
-        if(description.ds != null){
-        store.dispatch(accountSlice.actions.setLevel(description.ds));
-        setLevel(description.ds);
+        console.log(description.id);
+        const nftOwner = await CheckNftOwnerId(ledger2,description.id);
+        console.log(nftOwner);
+        console.log(userAccountId);
+        if(nftOwner !== userAccountId){
+          try{
+            alert("you do not have this NFT, please unequip it");
+            const accountInfo = await ledger2.account.getAccount(userAccountId);
+            console.log(accountInfo);
+          }
+          catch(e:any){
+
+          }
         }
         else{
-          setLevel("1");
-          store.dispatch(accountSlice.actions.setLevel(description.ds));
+              if(description.id != null){
+                const accountInfo = await ledger2.contract.getContract(description.id);
+                console.log(accountInfo);
+                const ipfsAddress = JSON.parse(accountInfo.description).descriptor;
+                console.log(ipfsAddress);
+                const ipfsJson = await fetch(`https://ipfs.io/ipfs/${ipfsAddress}`);
+                console.log(ipfsJson);
+                const text = await ipfsJson.text();
+                console.log(text);
+                const nftInfo = JSON.parse(text);
+                console.log(nftInfo);
+              if(nftInfo.description.includes("1") === true){
+                setLevel("1");
+              }
+              if(nftInfo.description.includes("2") === true){
+                setLevel("2");
+
+              }
+              if(nftInfo.description.includes("3") === true){
+                setLevel("3");
+              }
+              store.dispatch(accountSlice.actions.setLevel(description.ds));
+            }
+            else{
+              setLevel("1");
+              store.dispatch(accountSlice.actions.setLevel(description.ds));
+            }
         }
         console.log(description);
         console.log(Object.keys(description.av));
@@ -259,7 +296,8 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
             <div className="nft-reward-10-b5x63m inter-semi-bold-white-15px">NFT REWARD +10%</div>
             <img className="seperate-line-b5x63m" src={`${process.env.PUBLIC_URL}/img/seperate-line-1@1x.png`} alt="seperate line" />
           </div>
-          {imgAddress === ""?gender === "Female"?
+          <UserIcon home = {true}></UserIcon>
+          {/* {imgAddress === ""?gender === "Female"?
           // <img className="nft_-avatar-2ZgxSS" src={`${process.env.PUBLIC_URL}/img/home/nft-avatar-13@1x.png`} alt="NFT_Avatar" />
           <Link to="https://test.signumart.io/">
               <div className="home_nft_-avatar">
@@ -285,7 +323,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
           :(
             <img className = "nft_-avatar-2ZgxSS" src = {`https://ipfs.io/ipfs/${imgAddress}`}></img>
           )
-          }
+          } */}
           <Link to="/profile">
             <div className="ic_next-2ZgxSS">
               <img
@@ -313,6 +351,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
           </div>
           <div className="sigdao-2ZgxSS inter-semi-bold-white-15px">SIGDAO:</div>
         </div>
+        {/* <HorizontalScrollContainerMission></HorizontalScrollContainerMission> */}
         <HorizontalScrollContainer>
           <Link to="/missionChallenge">
             <div className="challenges-x9-hacks-GEWAL1">

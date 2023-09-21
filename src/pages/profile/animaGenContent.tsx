@@ -7,7 +7,7 @@ import { useAppSelector } from "../../redux/useLedger";
 import { selectWalletNodeHost } from "../../redux/useLedger";
 import { LedgerClientFactory } from "@signumjs/core";
 import { useEffect } from "react";
-import { accountId } from "../../redux/account";
+import { accountId, accountPublicKey } from "../../redux/account";
 import { useDispatch, useSelector } from "react-redux";
 import {
   profileSlice,
@@ -21,15 +21,17 @@ import { CustomTextArea } from "../../components/input";
 import { selectCurrentGender } from '../../redux/profile';
 import { Alert } from "@mui/material";
 import CheckIcon from '@mui/icons-material/Check';
-import { FindLatestTransactionArray,FindLatestTransactionNumber, p2pTransferNft } from '../../NftSystem/updateUserNftStorage';
+import { FindLatestTransactionArray,FindLatestTransactionNumber, IsUserSettingUpdating, p2pTransferNft } from '../../NftSystem/updateUserNftStorage';
 import { getNftContractStorage } from "../../redux/account";
+import { useContext } from "react";
+import { AppContext } from "../../redux/useContext";
+import UserIcon from "../../components/loadUserIcon";
 
 interface IAnimaGenContentProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
   isBackButton: boolean;
   setIsBackButton: (isBackButton: boolean) => void;
-  
 }
 interface myNftList{
   level:string;
@@ -39,21 +41,23 @@ interface myNftList{
 
 
 const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) => {
+  const {appName,Wallet,Ledger} = useContext(AppContext);
   const nodeHost = useSelector(selectWalletNodeHost);
   const ledger2 = LedgerClientFactory.createClient({ nodeHost });
   const userId = useSelector(accountId);
   const username = useSelector(selectCurrentUsername);
+  const userAccountpublicKey = useSelector(accountPublicKey);
   const discordUsername = useSelector(selectCurrentDiscordUsername);
   const description = useSelector(selectCurrentDescription);
   const aboutYourself = useSelector(selectCurrentAboutYourself);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const gender = useSelector(selectCurrentGender);
-
+  const userAccountId = useSelector(accountId);
   const { isOpen, setIsOpen, isBackButton, setIsBackButton } = props;
-  const [loading, setLoading] = useState<boolean>(true);
   const [imgAddress, setImgAddress] = useState<string>("");
   const [name, setName] = useState<string>(username);
+  const [haveNft,setHaveNft] = useState<boolean>(false);
   const [aboutYourselfText, setAboutYourselfText] = useState<string>(aboutYourself);
   const [descriptionText, setDescriptionText] = useState<string>(description);
   const [discordUsernameText, setDiscordUsernameText] = useState<string>(discordUsername);
@@ -77,8 +81,34 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
     return () => clearInterval(timer);
   }, [count]);
 
+  const uploadToChain = async () => {
+    try{
+    const waitingToBeChangedDescription = await ledger2.account.getAccount({accountId: userAccountId});
+    let newDes =waitingToBeChangedDescription.description===undefined?{}:JSON.parse(waitingToBeChangedDescription.description);
+    console.log(newDes);
+    newDes = Object.assign(newDes,{bg:{QmXakmiPKMEA2aWRvxhJgpuj6NCkcCpZv7i4BAnskcio1C:"image/png"}});
+    newDes = Object.assign(newDes,{nm:name});
+    newDes = Object.assign(newDes,{ds:aboutYourselfText});
+    newDes = Object.assign(newDes,{hp:descriptionText});
+    newDes = Object.assign(newDes,{sc:[discordUsernameText]});
+    newDes = Object.assign(newDes,{si:{QmVTn8BkVodgZwL3jowEayfDVfMFQFXu9ctuadpTquZeAM: "image/webp"}});
+    newDes = Object.assign(newDes,{tw:"https://twitter.com/neverforget0612"});
+    const newDesString = JSON.stringify(newDes);
+    console.log(newDesString);
+    console.log(descriptionText);
+    console.log(discordUsernameText);
+    console.log(aboutYourselfText);
+    console.log(name);
+    const setAcc = await ledger2.account.setAccountInfo({name:name,description:newDesString,feePlanck:"3000000",senderPublicKey:userAccountpublicKey});
+    await Wallet.Extension.confirm(setAcc.unsignedTransactionBytes);
+    }
+    catch(e: any){
+      console.log(e);
+    }
+  }
 
-  const handleSave = () => {
+
+  const handleSave = async () => {
     // validation check
     let foundEmptyField = false;
     // console.log("fdisjoidfsjioiosdfiodio", inputRefs)
@@ -100,6 +130,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
       setShowStar(true);
       return;
     }
+    uploadToChain();
 
     dispatch(profileSlice.actions.setUsername(name));
     dispatch(profileSlice.actions.setAboutYourself(aboutYourselfText));
@@ -125,11 +156,16 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   const handleCancel = () => {
     setIsOpen((prev) => !prev);
   };
-
-
-  useEffect(() => {
-    // Function to fetch data from the APIc
-    ledger2.account
+  const [isUpdating,setIsUpdating] = useState<boolean>(false);  
+  const [loading, setLoading] = useState<boolean>(true);
+  const fetchUserIcon = async () => {
+    const isUserSettingUpdating = await IsUserSettingUpdating(ledger2,userAccountId);
+    if(isUserSettingUpdating === true){
+      setIsUpdating(true);
+      setLoading(false);
+    }
+    else{
+      ledger2.account
       .getAccount({ accountId: userId })
       .then((account) => {
         console.log(account);
@@ -138,23 +174,31 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
         console.log(Object.keys(description.av));
         console.log(typeof Object.keys(description.av)[0]);
         setImgAddress(Object.keys(description.av)[0]);
+        setHaveNft(true);
         setLoading(false);
       })
       .catch((error) => {
         console.log("need to equip nft");
       });
+    }
 
-    // inputRefs.current = inputRefs.current.slice(0, inputRefs.current.length);
+  }
+
+  useEffect(() => {
+    fetchUserIcon();
   }, []);
+
+
+
   const [loadingNft,setLoadingNft] = useState<boolean>(true);
   const [myNfts,setMyNfts] = useState<string[]>([]);
-const nftContractStorage = useSelector(getNftContractStorage);
-const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
-const nftDistributorPublicKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PUBLIC_KEY!;
-const nftDistributorPrivateKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PRIVATE_KEY!;
-const nftLoaded = useRef(false);
-var nft: myNftList;
-var userNftList:string[] = [];
+  const nftContractStorage = useSelector(getNftContractStorage);
+  const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
+  const nftDistributorPublicKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PUBLIC_KEY!;
+  const nftDistributorPrivateKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PRIVATE_KEY!;
+  const nftLoaded = useRef(false);
+  var nft: myNftList;
+  var userNftList:string[] = [];
   const loadNftList = async() => {
     FindLatestTransactionNumber(ledger2,nftContractStorage,nftDistributor).then((number)=>{
       console.log(number);
@@ -192,6 +236,8 @@ var userNftList:string[] = [];
   
   };
   
+
+
     useEffect(() => {
   if(nftLoaded.current ===true){
     console.log("loaded nft");
@@ -208,12 +254,7 @@ var userNftList:string[] = [];
     const container = document.querySelector("div.profileHorizontalScroll")!;
     console.log(container);
     const scrollAmount = event.deltaY;
-    const largeContainer = document.querySelector("div")!;
-    largeContainer.scrollTo({
-      top: container.scrollTop - scrollAmount,
-      left: 0,
 
-    });
     // window.onscroll = function() {
     //   window.scrollTo({left:0, top:-scrollAmount});
     // };
@@ -225,21 +266,93 @@ var userNftList:string[] = [];
     });
   };
 
+  //Set and fetch info from the chain
+  const [fetchDescription,setFetchDescription] = useState<string>("");
+  const [fetchName,setFetchName] = useState<string>("");
+  const [fetchAboutYourself,setFetchAboutYourself] = useState<string>("");
+  const [fetchDiscordUsername,setFetchDiscordUsername] = useState<string>("");
+  const [isLoading,setIsLoading] = useState<boolean>(true);
+  const [isEmptyProfile,setIsEmptyProfile] = useState<boolean>(false);
+
+  const fetchProfile = async() => {
+    const account = await ledger2.account.getAccount({accountId: userAccountId});
+    console.log(account);
+    //    let newDes =waitingToBeChangedDescription.description===undefined?"":JSON.parse(waitingToBeChangedDescription.description);
+    if(account.description === undefined){
+      setIsLoading(false);
+      setIsEmptyProfile(true);
+    }
+    else{
+      const description = JSON.parse(account.description);
+      console.log(description);
+      setFetchName(description.nm);
+      setFetchAboutYourself(description.hp);
+      setFetchDiscordUsername(description.sc[0]);
+      setFetchDescription(description.ds);
+      setIsLoading(false);
+    }
+  }
+
+/*Ends here*/
+
+
   const handleScroll2 = (event:any) => {
     console.log(event);
     const container = event.target!;
     console.log(container);
     const scrollAmount = event.deltaY;
     console.log(scrollAmount);
-    window.onscroll = function() {
-      window.scrollTo({left:0, top:-scrollAmount});
-    };
     container.scrollTo({
       top: 0,
       left: container.scrollLeft + scrollAmount,
 
     });
   };
+
+  const [isSettingLoading,setIsSettingLoading] = useState<boolean>(true);
+  const fetchSetting = async() => {
+    const waitingToBeChangedDescription = await ledger2.account.getAccount({accountId: userAccountId});
+    let newDes =waitingToBeChangedDescription.description===undefined?{}:JSON.parse(waitingToBeChangedDescription.description);
+    console.log(newDes);
+    if(newDes.nm == null){
+      console.log("called newDes.nm == null here");
+      setFetchName("");
+    }
+    else{
+      console.log("called newDes.nm else here");
+      setFetchName(newDes.nm);
+    }
+    if(newDes.ds == null){
+      console.log("called newDes.ds == null here");
+      setFetchDescription("");
+    }
+    else{
+      console.log("called newDes.ds else here");
+      setFetchDescription(newDes.ds);
+    }
+    if(newDes.sc == null){      
+      console.log("called newDes.sc[0] == null here");
+      setFetchDiscordUsername("")
+    }
+    else{      
+      console.log("called newDes.sc[0] else here");
+      setFetchDiscordUsername(newDes.sc[0]);
+    }
+    if(newDes.hp == null){
+      console.log("called newDes.hp == null here");
+      setFetchAboutYourself("");
+    }
+    else{
+      console.log("called newDes.hp else here");
+      setFetchAboutYourself(newDes.hp);
+    }
+    console.log("isSetting");
+    setIsSettingLoading(false);
+  }
+
+  useEffect(() => {
+    fetchSetting();
+  },[]);
 
 
   return (
@@ -274,60 +387,97 @@ var userNftList:string[] = [];
               alt=""
             />
           </div>
-          <div className="profile-content">
-            <div className="zoe_li">{username || "zoe_li"}</div>
-            <div className="perso-container">
-              <p 
-                className="im-a-positive-perso"
-                style={description ? {} : { color: "#8e8e8e" }}
+        {isSettingLoading ===true?(
+                  <div className="profile-content">
+                      {/* <img
+                      src={"/img/loadingMinting/mimi-dancing-for-loadin-page.gif"}
+                      style={{
+                        width: '152px',
+                        height: '217px',
+                        marginRight: '10px',
+                        zIndex:100,
+                      }}
+                    /> */}
+                    <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
+                  </div>
+        ):(
+              <div className="profile-content">
+                <div className="zoe_li">{fetchName?fetchName:username || "zoe_li"}</div>
+                <div className="perso-container">
+                  <p 
+                    className="im-a-positive-perso"
+                    style={description ? {} : { color: "#8e8e8e" }}
+                  >
+                    {fetchDescription?fetchDescription:description ||
+                      "Please enter DESCRIPTION TO FRIENDS"}
+                  </p>
+                  <p className="x29-personal-trainer inter-semi-bold-keppel-15px">
+                    {fetchAboutYourself?fetchAboutYourself:aboutYourself || `♉️  |  29  |  PERSONAL TRAINER`}
+                  </p>
+                </div>
+              </div>
+              )
+            } 
+            <UserIcon profile = {true}></UserIcon>
+          {/* {loading === true ?(
+            <div></div>
+          ):
+            isUpdating === true?
+            (
+                <Link to="https://test.signumart.io/">
+                <div className="profile_icon_nft_-avatar_empty">
+                  <img
+                    className="profile_icon_ic_add"
+                    src="img/profile/ic-add-2@1x.png"
+                    alt="ic_add"
+                  />
+                </div>
+              </Link>
+                // <div
+                //   className="nft_-avatar_empty"
+                // />
+              ):
+              haveNft === true? (
+                  <img
+                    className="nft_-avatar_empty"
+                    src={`https://ipfs.io/ipfs/${imgAddress}`}
+                    alt="NFT_Avatar"
+                  />
+                ):(
+                <Link to="https://test.signumart.io/">
+                  <div className="profile_icon_nft_-avatar_empty">
+                    <img
+                      className="profile_icon_ic_add"
+                      src="img/profile/ic-add-2@1x.png"
+                      alt="ic_add"
+                    />
+                  </div>
+                </Link>
+          )
+          } */}
+            {isSettingLoading ===true?<div></div>:(
+              <>
+              <div className="card-number inter-normal-white-15px">
+                {fetchDiscordUsername?fetchDiscordUsername:discordUsername || "zoeeeee#1234"}
+              </div>
+            
+              <div
+                className="copy-icon"
+                onClick={() => handleCopyDiscordUsername(discordUsername)}
               >
-                {description ||
-                  "Please enter DESCRIPTION TO FRIENDS"}
-              </p>
-              <p className="x29-personal-trainer inter-semi-bold-keppel-15px">
-                {aboutYourself || `♉️  |  29  |  PERSONAL TRAINER`}
-              </p>
-            </div>
-          </div>
-          {loading === true ?
-           (
-            <Link to="https://test.signumart.io/">
-            <div className="profile_icon_nft_-avatar_empty">
-              <img
-                className="profile_icon_ic_add"
-                src="img/profile/ic-add-2@1x.png"
-                alt="ic_add"
-              />
-            </div>
-          </Link>
-            // <div
-            //   className="nft_-avatar_empty"
-            // />
-          ): (
-            <img
-              className="nft_-avatar_empty"
-              src={`https://ipfs.io/ipfs/${imgAddress}`}
-              alt="NFT_Avatar"
-            />
-          )}
-          <div className="card-number inter-normal-white-15px">
-            {discordUsername || "zoeeeee#1234"}
-          </div>
-          <div
-            className="copy-icon"
-            onClick={() => handleCopyDiscordUsername(discordUsername)}
-          >
-            <img src="img/profile/file---11690@1x.png" alt="" />
-          </div>
-          <div className="x16227">
-            <div className="discord-icon">
-              <img
-                className="discord-icon-content"
-                src="img/profile/file---11691@1x.png"
-              />
-            </div>
-            <div className="discord inter-bold-royal-blue-15px">DISCORD</div>
-          </div>
+                <img src="img/profile/file---11690@1x.png" alt="" />
+              </div>
+              <div className="x16227">
+                <div className="discord-icon">
+                  <img
+                    className="discord-icon-content"
+                    src="img/profile/file---11691@1x.png"
+                  />
+                </div>
+                <div className="discord inter-bold-royal-blue-15px">DISCORD</div>
+              </div>
+              </>
+            )}
         </div>
 
         {/* This is the new horizontal scroll */}
