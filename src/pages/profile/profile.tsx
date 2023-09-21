@@ -60,7 +60,8 @@ useEffect(() => {
 
 
 
-  return <CenterLayout
+  return (
+  <CenterLayout
   noScroll = {true}
     content={
       <div className='screen'>
@@ -74,7 +75,7 @@ useEffect(() => {
     }
     bgImg={false}
     // noScroll={isOpen}
-  />
+  />)
 };
 
 export default Profile;

@@ -304,6 +304,21 @@ export async function UpdateUserStorage(ledger2:any, senderId:string,recipientId
 
 }
 
+export async function IsUserSettingUpdating(ledger2:any,userAccountId:string){
+
+        const messages = await ledger2.account.getUnconfirmedAccountTransactions(userAccountId);
+        console.log(messages);
+        for (var i = 0; i < messages.unconfirmedTransactions.length; i++){
+            if(messages.unconfirmedTransactions[i].type === 1 && messages.unconfirmedTransactions[i].subtype === 5 && messages.unconfirmedTransactions[i].sender === userAccountId){
+                console.log("updating personal info");
+
+                return true;
+            }
+        }
+        return false;
+
+}
+
 // export function UpdateUserStorageButton(){
 //     const codeHashId = "5093642053599315133";
 //     const Ledger2 = LedgerClientFactory.createClient({nodeHost:"https:europe3.testnet.signum.network"});

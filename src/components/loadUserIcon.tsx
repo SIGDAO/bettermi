@@ -1,0 +1,111 @@
+import React from "react";
+import { useState } from "react";
+import { IsUserSettingUpdating } from "../NftSystem/updateUserNftStorage";
+import { LedgerClientFactory } from "@signumjs/core";
+import { useSelector } from "react-redux";
+import { selectWalletNodeHost } from "../redux/useLedger";
+import { accountId } from "../redux/account";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import'../pages/home/home.css';
+import '../pages/profile/profile.css';
+
+
+export interface IUserIconProps {
+    home?:boolean;
+    profile?:boolean;
+}
+export interface ClassNames{
+    forEmptyIcon:string;
+    forAddSign:string;
+    forLoading:string
+    forNftDisplay:string;
+}
+const UserIcon: React.FC<IUserIconProps> = (props) => {
+const homeClassNames = {forEmptyIcon:"home_nft_-avatar",
+                        forAddSign:"home_icon_ic_add",
+                        forNftDisplay:"nft_-avatar-2ZgxSS"};
+const profileClassNames = {forEmptyIcon:"profile_icon_nft_-avatar_empty",
+                            forAddSign:"profile_icon_ic_add",
+                            forNftDisplay:"nft_-avatar_empty"};
+const {home,profile} = props;
+let finalClassNames:ClassNames = home?homeClassNames:profileClassNames; 
+const [isUpdating,setIsUpdating] = useState<boolean>(false);  
+const [isLoading, setIsLoading] = useState<boolean>(true);
+const [haveNft,setHaveNft] = useState<boolean>(false);
+const nodeHost = useSelector(selectWalletNodeHost);
+const ledger2 = LedgerClientFactory.createClient({nodeHost});
+const userAccountId = useSelector(accountId);
+const [imgAddress, setImgAddress] = useState<string>("");
+const fetchUserIcon = async () => {
+  const isUserSettingUpdating = await IsUserSettingUpdating(ledger2,userAccountId);
+  if(isUserSettingUpdating === true){
+    setIsUpdating(true);
+    setIsLoading(false);
+  }
+  else{
+    ledger2.account
+    .getAccount({ accountId: userAccountId })
+    .then((account) => {
+      console.log(account);
+      const description = JSON.parse(account.description);
+      console.log(description);
+      console.log(Object.keys(description.av));
+      console.log(typeof Object.keys(description.av)[0]);
+      setImgAddress(Object.keys(description.av)[0]);
+      setHaveNft(true);
+      setIsLoading(false);
+    })
+    .catch((error) => {
+      console.log("need to equip nft");
+    });
+  }
+
+}
+
+useEffect(() => {
+  fetchUserIcon();
+}, []);
+return(
+    <>
+        {isLoading === true ?(
+            <div></div>
+        ):
+            isUpdating === true?
+            (
+                <Link to="https://test.signumart.io/">
+                <div className={finalClassNames.forEmptyIcon}>
+                <img
+                    className={finalClassNames.forAddSign}
+                    src= "/img/loadingMinting/mimi-dancing-for-loadin-page.gif"
+                    alt="ic_add"
+                />
+                </div>
+            </Link>
+                // <div
+                //   className="nft_-avatar_empty"
+                // />
+            ):
+            haveNft === true? (
+                <img
+                    className={finalClassNames.forNftDisplay}
+                    src={`https://ipfs.io/ipfs/${imgAddress}`}
+                    alt="NFT_Avatar"
+                />
+                ):(
+                <Link to="https://test.signumart.io/">
+                <div className={finalClassNames.forEmptyIcon}>
+                    <img
+                    className={finalClassNames.forAddSign}
+                    src="img/profile/ic-add-2@1x.png"
+                    alt="ic_add"
+                    />
+                </div>
+                </Link>
+        )
+        }
+    </>
+);
+}
+
+export default UserIcon;

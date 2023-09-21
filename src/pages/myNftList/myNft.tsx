@@ -116,7 +116,7 @@ import * as React from 'react';
        const setAccountInfo = await ledger2.account.setAccountInfo({
          name:"1234",
          description:newDes,
-         feePlanck:"1000000",
+         feePlanck:"3000000",
          senderPublicKey:userAccountpublicKey,
        });
        //console.log(setAccountInfo);

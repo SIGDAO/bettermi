@@ -107,7 +107,7 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   }
   , [data])
 
-  // chane the navigate path when the user has already create bmi contract
+  // change the navigate path when the user has already create bmi contract
   useEffect(() => {
     isSelfieRecord(tempAccountId, Ledger2)
       .then((result) => {
