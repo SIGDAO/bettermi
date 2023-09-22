@@ -106,10 +106,14 @@ export async function FindLatestTransactionArray(ledger2:any,recipient:string,nf
     console.log("Finding the lastest transaction from user's nftStorage account",nftListInUserAccount);
     console.log(nftListInUserAccount.length);
     for (var i = 0;i<nftListInUserAccount.length;i++){
-        tempArray = nftListInUserAccount[i].attachment.message.split(",");
-        console.log(i);
-        console.log(tempArray);
         if(nftListInUserAccount[i].sender === nftDistributor && nftListInUserAccount[i].recipient === recipient){
+            tempArray = nftListInUserAccount[i].attachment.message.split(",");
+            console.log(i);
+            console.log(tempArray);
+            if(Number(tempArray[0]) != Number(latestTransactionNumber)){
+                console.log("not latest transaction",latestTransactionNumber,"   ",tempArray);
+                break;
+            } 
             if(tempArray[1] === "empty"){
                 console.log("no nft left");
                 finalArray.push("empty")
@@ -121,10 +125,6 @@ export async function FindLatestTransactionArray(ledger2:any,recipient:string,nf
                 finalArray = finalArray.concat(tempArray);
                 continue;
             }
-            if(Number(tempArray[0]) != Number(latestTransactionNumber)){
-                console.log("not latest transaction",latestTransactionNumber,"   ",tempArray);
-                break;
-            } 
         }
 }
 console.log("the final array is",finalArray);
@@ -317,6 +317,41 @@ export async function IsUserSettingUpdating(ledger2:any,userAccountId:string){
         }
         return false;
 
+}
+export async function IsUserUpdatingIcon(ledger2:any,userAccountId:string){
+    const messages = await ledger2.account.getUnconfirmedAccountTransactions(userAccountId);
+    const originalDescription = await ledger2.account.getAccount({accountId: userAccountId});
+    console.log(messages);
+    for (var i = 0; i < messages.unconfirmedTransactions.length; i++){
+        if(messages.unconfirmedTransactions[i].type === 1 && messages.unconfirmedTransactions[i].subtype === 5 && messages.unconfirmedTransactions[i].sender === userAccountId){
+            const newDescription = JSON.parse(messages.unconfirmedTransactions[i].attachment.description);
+            if(newDescription.av == null){
+                return false;
+            }
+            const newImage = Object.keys(newDescription.av)[0];
+            console.log(originalDescription);
+            if(originalDescription.description == null){
+                return true;
+            }
+            else{
+                const description = JSON.parse(originalDescription.description);
+                console.log(Object.keys(description.av));
+                console.log(newImage);
+                console.log("updating personal info");
+                if(Object.keys(description.av)[0] === newImage){
+                    console.log("returned false");
+                    return false;
+                }
+                else{
+                    console.log("returned true");
+                    return true;
+                }
+            }
+
+            return true;
+        }
+    }
+    return false;
 }
 
 // export function UpdateUserStorageButton(){

@@ -29,8 +29,8 @@ const Profile: React.FunctionComponent<IProfileProps> = (props) => {
   }, []);
 
 /* Function to check whether we are updating personal information*/
-  const [isUpdating, setIsUpdating] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isUpdatingUserSetting, setIsUpdatingUserSetting] = useState<boolean>(false);
+  const [isSettingLoading, setIsSettingLoading] = useState<boolean>(true);
   const userAccountId = useSelector(accountId);
   const nodeHost = useSelector(selectWalletNodeHost);
 const ledger2 = LedgerClientFactory.createClient({nodeHost});
@@ -41,14 +41,14 @@ const ledger2 = LedgerClientFactory.createClient({nodeHost});
     for (var i = 0; i < messages.unconfirmedTransactions.length; i++){
         if(messages.unconfirmedTransactions[i].type === 1 && messages.unconfirmedTransactions[i].subtype === 5 && messages.unconfirmedTransactions[i].sender === userAccountId){
             console.log("the user is updating personal info");
-            setIsUpdating(true);
-            setIsLoading(false);
+            setIsUpdatingUserSetting(true);
+            setIsSettingLoading(false);
             return;
         }
     }
 
-    setIsUpdating(false);
-    setIsLoading(false);
+    setIsUpdatingUserSetting(false);
+    setIsSettingLoading(false);
 };
 
 useEffect(() => {
@@ -70,6 +70,7 @@ useEffect(() => {
           setIsOpen={setIsOpen} 
           isBackButton={isBackButton}
           setIsBackButton={setIsBackButton}
+          isUpdatingUserSetting={isUpdatingUserSetting}
         />
       </div>
     }

@@ -15,6 +15,7 @@ import { useRef } from 'react';
 import LoadingMinting from '../loadingMinting/loadingMinting';
 import LoadingMintingMyNftList from './loadMintingMyNftList';
 import { ShortTitleBar } from '../../components/titleBar';
+import { IsUserUpdatingIcon } from '../../NftSystem/updateUserNftStorage';
 
  interface MyNftProps {
     
@@ -44,19 +45,31 @@ interface myNftList{
 
     const checkIsLoading = async() => {
 
-        const messages = await ledger2.account.getUnconfirmedAccountTransactions(userAccountId);
-        console.log(messages);
-        for (var i = 0; i < messages.unconfirmedTransactions.length; i++){
-            if(messages.unconfirmedTransactions[i].type === 1 && messages.unconfirmedTransactions[i].subtype === 5 && messages.unconfirmedTransactions[i].sender === userAccountId){
+        // const messages = await ledger2.account.getUnconfirmedAccountTransactions(userAccountId);
+        // console.log(messages);
+        // for (var i = 0; i < messages.unconfirmedTransactions.length; i++){
+        //     if(messages.unconfirmedTransactions[i].type === 1 && messages.unconfirmedTransactions[i].subtype === 5 && messages.unconfirmedTransactions[i].sender === userAccountId){
+        //         console.log("updating personal info");
+        //         setIsUpdating(true);
+        //         setIsLoading(false);
+        //         return;
+        //     }
+        // }
+        try{
+        const isUserUpdatingIcon = await IsUserUpdatingIcon(ledger2,userAccountId);
+        if(isUserUpdatingIcon === true){
                 console.log("updating personal info");
                 setIsUpdating(true);
                 setIsLoading(false);
                 return;
-            }
         }
-
+        console.log("is user updating icon",isUserUpdatingIcon);
         setIsUpdating(false);
         setIsLoading(false);
+      }
+      catch(e:any){
+        console.log(e);
+      }
     };
 
     useEffect(() => {

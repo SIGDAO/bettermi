@@ -86,7 +86,7 @@ const loadNftList = async() => {
         setLoadingNft(false);
       }
       else{
-            console.log(nftAddressList);
+            console.log("nftAddress is ",nftAddressList);
           // nftAddressList.map((nftAddress)=>{
           //   ledger2.contract.getContract(nftAddress).then((hi)=>{
           //       //console.log("array is ",nftAddress,"  ",hi);

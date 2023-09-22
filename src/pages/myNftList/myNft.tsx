@@ -84,9 +84,9 @@ import * as React from 'react';
                  nftImgAddress = addressSuffix.concat(nftImgAddress);
                  //console.log(nftImgAddress);
                  setLoading(false);
-             });
+             }).catch((e:any) => {console.log(e);});
 
-         });
+         }).catch((e:any) => {console.log(e);});
 
          // Call the fetchData function
 
@@ -100,32 +100,37 @@ import * as React from 'react';
          return 1;
      }
      const equipNft = async() => {
-      const nftOwner = await CheckNftOwnerId(ledger2,nftId);
-      if(nftOwner === userAccountId){
-      const waitingToBeChangedDescription = await ledger2.account.getAccount({accountId: userAccountId});
-      let newDes =waitingToBeChangedDescription.description===undefined?{}:JSON.parse(waitingToBeChangedDescription.description);
-      console.log(newDes);
-      console.log(imgAddress);
-       console.log("123");
-       let obj = {
-        [imgAddress]:"image/png"
-       }
-       newDes = Object.assign(newDes,{av:obj});       
-       newDes = Object.assign(newDes,{id:nftId});
-       newDes = JSON.stringify(newDes);
-       const setAccountInfo = await ledger2.account.setAccountInfo({
-         name:"1234",
-         description:newDes,
-         feePlanck:"3000000",
-         senderPublicKey:userAccountpublicKey,
-       });
-       //console.log(setAccountInfo);
-       await Wallet.Extension.confirm(setAccountInfo.unsignedTransactionBytes);
-       setIsUpdatingDescription(true);
-      }
-      else{
-        alert("We are sorry, it seems like you still don't own this NFT, maybe wait for a few more minutes if you just received it revcently");
-      }
+      try{
+            const nftOwner = await CheckNftOwnerId(ledger2,nftId);
+            if(nftOwner === userAccountId){
+            const waitingToBeChangedDescription = await ledger2.account.getAccount({accountId: userAccountId});
+            let newDes =waitingToBeChangedDescription.description===undefined?{}:JSON.parse(waitingToBeChangedDescription.description);
+            console.log(newDes);
+            console.log(imgAddress);
+            console.log("123");
+            let obj = {
+              [imgAddress]:"image/png"
+            }
+            newDes = Object.assign(newDes,{av:obj});       
+            newDes = Object.assign(newDes,{id:nftId});
+            newDes = JSON.stringify(newDes);
+            const setAccountInfo = await ledger2.account.setAccountInfo({
+              name:"1234",
+              description:newDes,
+              feePlanck:"3000000",
+              senderPublicKey:userAccountpublicKey,
+            });
+            //console.log(setAccountInfo);
+            await Wallet.Extension.confirm(setAccountInfo.unsignedTransactionBytes);
+            setIsUpdatingDescription(true);
+            }
+            else{
+              alert("We are sorry, it seems like you still don't own this NFT, maybe wait for a few more minutes if you just received it revcently");
+            }
+          }
+          catch(e){
+            console.log(e);
+          }
      };
      const transferToken = async() => {
       P2PTransferNftToken(Wallet,nodeHost,"4572964086056463895",nftId,userAccountpublicKey);

@@ -126,10 +126,14 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
     ledger2.account.getAccount({ accountId: userAccountId }).then((account) => {
       const description = JSON.parse(account.description);
       console.log(description);
+      if(description.av == null){
+
       console.log(Object.keys(description.av));
       console.log(typeof(Object.keys(description.av)[0]));
       setOnDuty(Object.keys(description.av)[0]);
       console.log(onDuty);
+
+      }
     }).catch((error) => { console.log(error) });
   },[]);
 
@@ -307,8 +311,12 @@ const nftId = accountDes.account;
           await Wallet.Extension.confirm(transaction.unsignedTransactionBytes);
         await UpdateUserStorage(ledger2,userAccountId,inputAddress,codeHashIdForNft,selectedNftId,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey);
       }
+      else{
+        alert("We are sorry, it seems like you still don't own this NFT, maybe wait for a few more minutes if you just received it revcently");
+      }
     }
     catch(e){
+     
       console.log(e);
     }
   }

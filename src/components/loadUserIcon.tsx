@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { IsUserSettingUpdating } from "../NftSystem/updateUserNftStorage";
+import { IsUserSettingUpdating,IsUserUpdatingIcon } from "../NftSystem/updateUserNftStorage";
 import { LedgerClientFactory } from "@signumjs/core";
 import { useSelector } from "react-redux";
 import { selectWalletNodeHost } from "../redux/useLedger";
@@ -18,7 +18,6 @@ export interface IUserIconProps {
 export interface ClassNames{
     forEmptyIcon:string;
     forAddSign:string;
-    forLoading:string
     forNftDisplay:string;
 }
 const UserIcon: React.FC<IUserIconProps> = (props) => {
@@ -38,7 +37,8 @@ const ledger2 = LedgerClientFactory.createClient({nodeHost});
 const userAccountId = useSelector(accountId);
 const [imgAddress, setImgAddress] = useState<string>("");
 const fetchUserIcon = async () => {
-  const isUserSettingUpdating = await IsUserSettingUpdating(ledger2,userAccountId);
+  //const isUserSettingUpdating = await IsUserSettingUpdating(ledger2,userAccountId);
+  const isUserSettingUpdating = await IsUserUpdatingIcon(ledger2,userAccountId);
   if(isUserSettingUpdating === true){
     setIsUpdating(true);
     setIsLoading(false);
@@ -57,6 +57,7 @@ const fetchUserIcon = async () => {
       setIsLoading(false);
     })
     .catch((error) => {
+        setIsLoading(false);
       console.log("need to equip nft");
     });
   }
@@ -68,8 +69,14 @@ useEffect(() => {
 }, []);
 return(
     <>
-        {isLoading === true ?(
-            <div></div>
+        {(isLoading === true) ?(
+                <div className={finalClassNames.forEmptyIcon}>
+                            <img
+                                className={finalClassNames.forAddSign}
+                                src= "/img/loadingMinting/mimi-dancing-for-loadin-page.gif"
+                                alt="ic_add"
+                            />
+                            </div>
         ):
             isUpdating === true?
             (

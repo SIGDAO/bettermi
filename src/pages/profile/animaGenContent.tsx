@@ -32,6 +32,8 @@ interface IAnimaGenContentProps {
   setIsOpen: (isOpen: boolean) => void;
   isBackButton: boolean;
   setIsBackButton: (isBackButton: boolean) => void;
+  isUpdating? : boolean;
+  isUpdatingUserSetting?:boolean;
 }
 interface myNftList{
   level:string;
@@ -101,6 +103,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
     console.log(name);
     const setAcc = await ledger2.account.setAccountInfo({name:name,description:newDesString,feePlanck:"3000000",senderPublicKey:userAccountpublicKey});
     await Wallet.Extension.confirm(setAcc.unsignedTransactionBytes);
+    setIsUpdatingUserSetting(true);
     }
     catch(e: any){
       console.log(e);
@@ -136,7 +139,6 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
     dispatch(profileSlice.actions.setAboutYourself(aboutYourselfText));
     dispatch(profileSlice.actions.setDescription(descriptionText));
     dispatch(profileSlice.actions.setDiscordUsername(discordUsernameText));
-
     setIsOpen((prev) => !prev);
     setIsBackButton(true);
   };
@@ -156,37 +158,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   const handleCancel = () => {
     setIsOpen((prev) => !prev);
   };
-  const [isUpdating,setIsUpdating] = useState<boolean>(false);  
-  const [loading, setLoading] = useState<boolean>(true);
-  const fetchUserIcon = async () => {
-    const isUserSettingUpdating = await IsUserSettingUpdating(ledger2,userAccountId);
-    if(isUserSettingUpdating === true){
-      setIsUpdating(true);
-      setLoading(false);
-    }
-    else{
-      ledger2.account
-      .getAccount({ accountId: userId })
-      .then((account) => {
-        console.log(account);
-        const description = JSON.parse(account.description);
-        console.log(description);
-        console.log(Object.keys(description.av));
-        console.log(typeof Object.keys(description.av)[0]);
-        setImgAddress(Object.keys(description.av)[0]);
-        setHaveNft(true);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log("need to equip nft");
-      });
-    }
 
-  }
-
-  useEffect(() => {
-    fetchUserIcon();
-  }, []);
 
 
 
@@ -310,7 +282,14 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   };
 
   const [isSettingLoading,setIsSettingLoading] = useState<boolean>(true);
+  const [isUpdatingUserSetting,setIsUpdatingUserSetting] = useState<boolean>(false);
   const fetchSetting = async() => {
+    const isUserSettingUpdating = await IsUserSettingUpdating(ledger2,userAccountId);
+    if(isUserSettingUpdating === true){
+      setIsUpdatingUserSetting(true);
+      setIsSettingLoading(false);
+      return;
+    }
     const waitingToBeChangedDescription = await ledger2.account.getAccount({accountId: userAccountId});
     let newDes =waitingToBeChangedDescription.description===undefined?{}:JSON.parse(waitingToBeChangedDescription.description);
     console.log(newDes);
@@ -350,6 +329,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
     setIsSettingLoading(false);
   }
 
+
   useEffect(() => {
     fetchSetting();
   },[]);
@@ -387,7 +367,15 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
               alt=""
             />
           </div>
-        {isSettingLoading ===true?(
+        {(isSettingLoading ===true || isUpdatingUserSetting === true)?(
+          <>
+              <div className="profile_icon_nft_-avatar_empty">
+                <img
+                    className="profile_icon_ic_add"
+                    src= "/img/loadingMinting/mimi-dancing-for-loadin-page.gif"
+                    alt="ic_add"
+                />
+                </div>
                   <div className="profile-content">
                       {/* <img
                       src={"/img/loadingMinting/mimi-dancing-for-loadin-page.gif"}
@@ -400,25 +388,28 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
                     /> */}
                     <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
                   </div>
+                </>
         ):(
+          <>
               <div className="profile-content">
-                <div className="zoe_li">{fetchName?fetchName:username || "zoe_li"}</div>
+                <div className="zoe_li">{fetchName?fetchName:name || "zoe_li"}</div>
                 <div className="perso-container">
                   <p 
                     className="im-a-positive-perso"
                     style={description ? {} : { color: "#8e8e8e" }}
                   >
-                    {fetchDescription?fetchDescription:description ||
+                    {fetchDescription?fetchDescription:descriptionText ||
                       "Please enter DESCRIPTION TO FRIENDS"}
                   </p>
                   <p className="x29-personal-trainer inter-semi-bold-keppel-15px">
-                    {fetchAboutYourself?fetchAboutYourself:aboutYourself || `♉️  |  29  |  PERSONAL TRAINER`}
+                    {fetchAboutYourself?fetchAboutYourself:aboutYourselfText || `♉️  |  29  |  PERSONAL TRAINER`}
                   </p>
                 </div>
               </div>
+              </>
               )
             } 
-            <UserIcon profile = {true}></UserIcon>
+                      <UserIcon profile = {true}></UserIcon>
           {/* {loading === true ?(
             <div></div>
           ):
@@ -455,10 +446,10 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
                 </Link>
           )
           } */}
-            {isSettingLoading ===true?<div></div>:(
+            {(isSettingLoading ===true || isUpdatingUserSetting === true)?<div></div>:(
               <>
               <div className="card-number inter-normal-white-15px">
-                {fetchDiscordUsername?fetchDiscordUsername:discordUsername || "zoeeeee#1234"}
+                {fetchDiscordUsername?fetchDiscordUsername:discordUsernameText || "zoeeeee#1234"}
               </div>
             
               <div
