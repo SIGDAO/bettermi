@@ -46,6 +46,7 @@ import ErrorGenerateNFT from './pages/errorGenerateNFT/errorGenerateNFT';
 import LoadingMinting from './pages/loadingMinting/loadingMinting';
 import Setting from './pages/setting/setting';
 import IndexMyNftList from './pages/myNftList/indexMyNftList';
+import Leaderboard from './pages/leaderboard/leaderboard';
 
 store.subscribe(() => {
   saveState(store.getState());
@@ -166,6 +167,7 @@ function App() {
               <Route path='/loadingMinting' element={<LoadingMinting />} />
               <Route path='/setting' element={<Setting />} />
               <Route path='/NFTTransferCompleted' element={<ChallengeCompleted NFT={true} />} />
+              <Route path='/leaderboard' element={<Leaderboard />} />
               <Route path="*" element={<Navigate to="/home" />} />
             </Route>
           </Routes>
