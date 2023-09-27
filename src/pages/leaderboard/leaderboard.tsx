@@ -7,25 +7,25 @@ type Props = {}
 
 const Leaderboard = (props: Props) => {
   const content: JSX.Element = (
-    <div className="screen">
+    // <div className="screen">
       <div className="bettermidapp-leaderboad-the-best-100 screen">
         <ShortTitleBar title="The Best 100" setting={false} aiCoach={false} />
-        <div className="overlap-group6">
+        <div className="overlap-group-leader6">
           <div className="_px-container">
             <div className="ic_sentiment_very_satisfied_24px"></div>
             <div className="ic_settings_24px"></div>
           </div>
-          <div className="overlap-group7">
+          <div className="overlap-group-leader7">
             <img className="photo" src="img/leaderboard/photo@1x.png" alt="Photo" />
             <div className="leaderboard-top3">
               <div className="leadboard_st-container">
                 <div className="leadboard_1st">
-                  <div className="overlap-group2">
-                    <div className="overlap-group1">
+                  <div className="overlap-group-leader2">
+                    <div className="overlap-group-leader1">
                       <img className="nft_-avatar-2 nft_-avatar-3" src="img/leaderboard/nft-avatar@1x.png" alt="NFT_Avatar" />
                       <div className="crown-with-red-stone">
                         <div className="crown-with-red-stone-1">
-                          <div className="overlap-group-1">
+                          <div className="overlap-group-leader-1">
                             <img className="x11694" src="img/leaderboard/file---11694@1x.png" alt="11694" />
                             <img className="x11695" src="img/leaderboard/file---11695@1x.png" alt="11695" />
                             <img className="x11696" src="img/leaderboard/file---11696@1x.png" alt="11696" />
@@ -74,7 +74,7 @@ const Leaderboard = (props: Props) => {
                   <div className="fung_fung00 inter-medium-white-12px">fung_fung00</div>
                   <div className="sigdao-score-1 sigdao-score-4">
                     <div className="signdao_tokengradient">
-                      <div className="overlap-group"><img className="x880" src="img/leaderboard/file---880@1x.png" alt="880" /></div>
+                      <div className="overlap-group-leader"><img className="x880" src="img/leaderboard/file---880@1x.png" alt="880" /></div>
                     </div>
                     <div className="x10 inter-semi-bold-keppel-14px">1234567</div>
                   </div>
@@ -87,7 +87,7 @@ const Leaderboard = (props: Props) => {
                   <div className="son inter-medium-white-12px">anderson_a</div>
                   <div className="sigdao-score-2 sigdao-score-4">
                     <div className="signdao_tokengradient">
-                      <div className="overlap-group"><img className="x880" src="img/leaderboard/file---880@1x.png" alt="880" /></div>
+                      <div className="overlap-group-leader"><img className="x880" src="img/leaderboard/file---880@1x.png" alt="880" /></div>
                     </div>
                     <div className="x10-1 x10-7 inter-semi-bold-keppel-14px">123456</div>
                   </div>
@@ -101,7 +101,7 @@ const Leaderboard = (props: Props) => {
                 <div className="son inter-medium-white-12px">alison_888</div>
                 <div className="sigdao-score-3 sigdao-score-4">
                   <div className="signdao_tokengradient">
-                    <div className="overlap-group"><img className="x880" src="img/leaderboard/file---880@1x.png" alt="880" /></div>
+                    <div className="overlap-group-leader"><img className="x880" src="img/leaderboard/file---880@1x.png" alt="880" /></div>
                   </div>
                   <div className="x10-2 x10-7 inter-semi-bold-keppel-14px">12345</div>
                 </div>
@@ -115,7 +115,7 @@ const Leaderboard = (props: Props) => {
               <div className="x300 inter-medium-white-12px">zoe_li</div>
               <div className="sigdao-score">
                 <div className="signdao_tokengradient">
-                  <div className="overlap-group"><img className="x880" src="img/leaderboard/file---880@1x.png" alt="880" /></div>
+                  <div className="overlap-group-leader"><img className="x880" src="img/leaderboard/file---880@1x.png" alt="880" /></div>
                 </div>
                 <div className="x10-3 x10-7 inter-semi-bold-keppel-14px">1234</div>
               </div>
@@ -126,7 +126,7 @@ const Leaderboard = (props: Props) => {
               <div className="x300 inter-medium-white-12px">zoe_li</div>
               <div className="sigdao-score">
                 <div className="signdao_tokengradient">
-                  <div className="overlap-group"><img className="x880" src="img/leaderboard/file---880@1x.png" alt="880" /></div>
+                  <div className="overlap-group-leader"><img className="x880" src="img/leaderboard/file---880@1x.png" alt="880" /></div>
                 </div>
                 <div className="x10-4 x10-7 inter-semi-bold-keppel-14px">1234</div>
               </div>
@@ -137,7 +137,7 @@ const Leaderboard = (props: Props) => {
               <div className="x300 inter-medium-white-12px">zoe_li</div>
               <div className="sigdao-score">
                 <div className="signdao_tokengradient">
-                  <div className="overlap-group"><img className="x880" src="img/leaderboard/file---880@1x.png" alt="880" /></div>
+                  <div className="overlap-group-leader"><img className="x880" src="img/leaderboard/file---880@1x.png" alt="880" /></div>
                 </div>
                 <div className="x10-5 x10-7 inter-semi-bold-keppel-14px">1234</div>
               </div>
@@ -148,7 +148,7 @@ const Leaderboard = (props: Props) => {
               <div className="x300 inter-medium-white-12px">zoe_li</div>
               <div className="sigdao-score">
                 <div className="signdao_tokengradient">
-                  <div className="overlap-group"><img className="x880" src="img/leaderboard/file---880@1x.png" alt="880" /></div>
+                  <div className="overlap-group-leader"><img className="x880" src="img/leaderboard/file---880@1x.png" alt="880" /></div>
                 </div>
                 <div className="x10-6 x10-7 inter-semi-bold-keppel-14px">1234</div>
               </div>
@@ -156,7 +156,7 @@ const Leaderboard = (props: Props) => {
           </div>
         </div>
       </div>
-    </div>
+    // </div>
   )
 
   return (

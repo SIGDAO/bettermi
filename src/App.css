@@ -340,3 +340,26 @@ html, body {
   position: absolute;
   left: calc((100vw - 390px) / 2);
 }
+
+
+.inter-medium-white-12px {
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.inter-semi-bold-keppel-14px {
+  color: var(--keppel);
+  font-family: var(--font-family-inter);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.inter-semi-bold-white-18px-2 {
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: 18px;
+}

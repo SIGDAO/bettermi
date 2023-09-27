@@ -521,6 +521,7 @@
 .home-scroller-element-image {
   height: 185px;
   width: 250px;
+  object-fit:cover;
 }
 
 .home-scroller-element {
