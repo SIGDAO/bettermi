@@ -1,11 +1,81 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { CenterLayout } from '../../components/layout'
 import './leaderboard.css'
-import { ShortTitleBar } from '../../components/titleBar'
+import { ShortTitleBar } from '../../components/titleBar';
+import { GetTokenRanking } from '../../components/getTokenRanking';
+import { LedgerClientFactory } from '@signumjs/core';
+import { useSelector } from 'react-redux';
+import { selectWalletNodeHost } from '../../redux/useLedger';
+import { UpdateUserNftList } from '../../NftSystem/updateUserNftList';
+import { LeaderBoardBanner } from './leaderBoardBanner';
+import { useRef } from 'react';
+import { store } from '../../redux/reducer';
+import { leaderBoardBanner, userRankingSlice } from '../../redux/userRanking';
+import { userRanking } from '../../redux/userRanking';
+import { userRankingListRedux } from '../../redux/userRanking';
 
 type Props = {}
 
 const Leaderboard = (props: Props) => {
+  const nodeHost = useSelector(selectWalletNodeHost);
+  const ledger2 = LedgerClientFactory.createClient({nodeHost});
+  const [userRankingList, setUserRankingList] = React.useState<leaderBoardBanner[]>([]);
+  const nftLoaded = useRef(false);
+  const[isLeaderBoardLoading,setIsLeaderBoardLoading] = React.useState<boolean>(true);
+  const userRankingListFromRedux = useSelector(userRankingListRedux);
+  console.log(userRankingListFromRedux);
+
+  const fetchUserRankingList = () => {
+    GetTokenRanking(ledger2).then((userRankingList) => {
+      setUserRankingList(userRankingList);
+      console.log(userRankingList);
+      setIsLeaderBoardLoading(false);
+      let state:userRanking = {userRankingList:userRankingList};
+      console.log(state);
+      store.dispatch(userRankingSlice.actions.setUserRanking(state));
+    }).catch((e:any) => {
+      setIsLeaderBoardLoading(false);
+      alert("some unkown error happened we would be grateful if this can be reported to us");
+      console.log(e);
+    });
+  }
+
+  useEffect(() => {
+    if(nftLoaded.current ===true){
+      console.log("loaded nft");
+    }
+    else{
+      nftLoaded.current = true;
+      if(userRankingListFromRedux == null ){
+        
+        fetchUserRankingList();
+      }
+      else{
+        if(userRankingListFromRedux.length === 0){//This is written because I am afraid that the userRankingList is [] but not null initially
+
+          fetchUserRankingList();
+        }
+        else{
+          setUserRankingList(userRankingListFromRedux);
+          setIsLeaderBoardLoading(false);
+        }
+      }
+    }
+  },[]);
+  const leaderBoardBanner = () => {
+    var banners:JSX.Element[] = [];
+    for(var i = 3; i <Math.min(userRankingList.length,100) ; i++){
+        banners.push(
+        <LeaderBoardBanner 
+          displayAccountId= {userRankingList[i].displayAccountId} 
+          userRanking={userRankingList[i].userRanking} 
+          tokenBalance={Number(userRankingList[i].tokenBalance)}
+          accountId = {userRankingList[i].accountId}
+          />
+        );
+    }
+    return banners;
+  }
   const content: JSX.Element = (
     // <div className="screen">
       <div className="bettermidapp-leaderboad-the-best-100 screen">
@@ -76,7 +146,12 @@ const Leaderboard = (props: Props) => {
                     <div className="signdao_tokengradient">
                       <div className="overlap-group-leader"><img className="x880" src="img/leaderboard/file---880@1x.png" alt="880" /></div>
                     </div>
-                    <div className="x10 inter-semi-bold-keppel-14px">1234567</div>
+                    {isLeaderBoardLoading === true ?
+                    <div className="x10 inter-semi-bold-keppel-14px">10000</div>
+                    :(
+                      <div className="x10 inter-semi-bold-keppel-14px">{userRankingList[0].tokenBalance}</div>
+                    )
+                    }
                   </div>
                 </div>
                 <div className="leadboard_1st-1 leadboard_1st-3">
@@ -109,7 +184,11 @@ const Leaderboard = (props: Props) => {
             </div>
           </div>
           <div className="x26">
-            <div className="rewards_card">
+            {isLeaderBoardLoading === true ? (<div></div>):(
+              leaderBoardBanner()
+            )
+}
+            {/* <div className="rewards_card">
               <div className="number inter-semi-bold-white-18px">4</div>
               <img className="nft_-avatar-1 nft_-avatar-3" src="img/leaderboard/nft-avatar-3@1x.png" alt="NFT_Avatar" />
               <div className="x300 inter-medium-white-12px">zoe_li</div>
@@ -152,7 +231,7 @@ const Leaderboard = (props: Props) => {
                 </div>
                 <div className="x10-6 x10-7 inter-semi-bold-keppel-14px">1234</div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

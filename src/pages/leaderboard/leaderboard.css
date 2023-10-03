@@ -7,10 +7,19 @@
   display: flex;
   height: 844px;
   justify-content: center;
-  overflow: hidden;
+  overflow: scroll;
   width: 390px;
   margin: 0 auto;
 
+}
+.bettermidapp-leaderboad-the-best-100::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.bettermidapp-leaderboad-the-best-100 {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 .bettermidapp-leaderboad-the-best-100 .overlap-group-leader6 {
@@ -653,6 +662,7 @@
   height: 80px;
   min-width: 358px;
   padding: 0 22px;
+  justify-content: space-between;
 }
 
 .bettermidapp-leaderboad-the-best-100 .number {
@@ -686,7 +696,6 @@
   height: 17px;
   justify-content: space-between;
   margin-bottom: 0;
-  margin-left: 126px;
   width: 56px;
 }
 

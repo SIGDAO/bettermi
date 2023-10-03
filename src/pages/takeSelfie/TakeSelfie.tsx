@@ -196,7 +196,7 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
         </div>
         :
         <div className="disclaimer inter-normal-white-15px">
-          We super care your privacy, your selfie will not be stored
+          We care about your privacy, your selfie will not be stored
         </div>
       }
       {/* <div className="disclaimer inter-normal-white-15px">

@@ -26,6 +26,7 @@ import { getNftContractStorage } from "../../redux/account";
 import { useContext } from "react";
 import { AppContext } from "../../redux/useContext";
 import UserIcon from "../../components/loadUserIcon";
+import { GetUserNftList } from "../../NftSystem/updateUserNftStorage";
 
 interface IAnimaGenContentProps {
   isOpen: boolean;
@@ -88,13 +89,13 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
     const waitingToBeChangedDescription = await ledger2.account.getAccount({accountId: userAccountId});
     let newDes =waitingToBeChangedDescription.description===undefined?{}:JSON.parse(waitingToBeChangedDescription.description);
     console.log(newDes);
-    newDes = Object.assign(newDes,{bg:{QmXakmiPKMEA2aWRvxhJgpuj6NCkcCpZv7i4BAnskcio1C:"image/png"}});
+    //newDes = Object.assign(newDes,{bg:{QmXakmiPKMEA2aWRvxhJgpuj6NCkcCpZv7i4BAnskcio1C:"image/png"}});
     newDes = Object.assign(newDes,{nm:name});
     newDes = Object.assign(newDes,{ds:aboutYourselfText});
     newDes = Object.assign(newDes,{hp:descriptionText});
     newDes = Object.assign(newDes,{sc:[discordUsernameText]});
-    newDes = Object.assign(newDes,{si:{QmVTn8BkVodgZwL3jowEayfDVfMFQFXu9ctuadpTquZeAM: "image/webp"}});
-    newDes = Object.assign(newDes,{tw:"https://twitter.com/neverforget0612"});
+    //newDes = Object.assign(newDes,{si:{QmVTn8BkVodgZwL3jowEayfDVfMFQFXu9ctuadpTquZeAM: "image/webp"}});
+    //newDes = Object.assign(newDes,{tw:"https://twitter.com/neverforget0612"});
     const newDesString = JSON.stringify(newDes);
     console.log(newDesString);
     console.log(descriptionText);
@@ -168,45 +169,25 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
   const nftDistributorPublicKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PUBLIC_KEY!;
   const nftDistributorPrivateKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PRIVATE_KEY!;
+  const codeHashIdForNft:string = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!;
   const nftLoaded = useRef(false);
   var nft: myNftList;
   var userNftList:string[] = [];
   const loadNftList = async() => {
-    FindLatestTransactionNumber(ledger2,nftContractStorage,nftDistributor).then((number)=>{
-      console.log(number);
-      FindLatestTransactionArray(ledger2,nftContractStorage,nftDistributor,number).then(async(nftAddressList)=>{
-        if(nftAddressList[0] === "empty"){
-          setLoadingNft(false);
-        }
-        else{
-              console.log(nftAddressList);
-            for (var i = 0;i < nftAddressList.length;i++){
-
-
-              const contractInfo = await ledger2.contract.getContract(nftAddressList[i]);
-              const trial = JSON.parse(contractInfo.description);
-              nft = {level:trial.version,image:trial.descriptor,nftId:nftAddressList[i]};
-              fetch(`https://ipfs.io/ipfs/${nft.image}`).then((res)=>{
-                res.text().then((text)=>{
-                    console.log(text); 
-                    var nftInfo = JSON.parse(text);
-                    userNftList.push(nftInfo.media[0].social);
-                    console.log(userNftList);
-                    setMyNfts(userNftList);
-                })
-              }).catch((error)=>{
-                alert("some error occured");
-              });
-              if(i === nftAddressList.length - 1){
-                setLoadingNft(false);
-              }
-
-            }
-          }
-      });
-    }).catch((error)=>{console.log(error);navigate("/home")});
-  
+    try{
+      console.log(userAccountId);
+      userNftList = await GetUserNftList(ledger2,userAccountId,nftDistributor,codeHashIdForNft);
+      setMyNfts(userNftList);
+      console.log(myNfts);
+      setLoadingNft(false);
+      console.log(userNftList);
+      console.log(userNftList[0]);
+    }
+    catch(e:any){
+      console.log(e);
+    }
   };
+  
   
 
 
@@ -218,7 +199,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
     nftLoaded.current = true;
       loadNftList();
   }
-  }, []);
+  }, [nftContractStorage]);
 
 
   const handleScroll = (event:any) => {
@@ -409,7 +390,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
               </>
               )
             } 
-                      <UserIcon profile = {true}></UserIcon>
+                      <UserIcon profile = {true} userAccountId = {userAccountId}></UserIcon>
           {/* {loading === true ?(
             <div></div>
           ):

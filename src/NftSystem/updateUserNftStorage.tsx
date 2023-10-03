@@ -10,6 +10,7 @@ import { sortUnconfirmedTransactionArrayAccordingToAscendingTimeStamps } from ".
 import { sortArrayAccordingToDescendingTimeStamps } from "./updateUserNftList";
 import { send } from "process";
 import { sendMessage } from "./updateUserNftList";
+import { myNftList } from "../pages/myNftList/myNftList";
 
 
 export async function AddNftToAccount(ledger2:any, recipientId:string,nftToBeDistributed:string){
@@ -307,7 +308,7 @@ export async function UpdateUserStorage(ledger2:any, senderId:string,recipientId
 export async function IsUserSettingUpdating(ledger2:any,userAccountId:string){
 
         const messages = await ledger2.account.getUnconfirmedAccountTransactions(userAccountId);
-        console.log(messages);
+        //console.log(messages);
         for (var i = 0; i < messages.unconfirmedTransactions.length; i++){
             if(messages.unconfirmedTransactions[i].type === 1 && messages.unconfirmedTransactions[i].subtype === 5 && messages.unconfirmedTransactions[i].sender === userAccountId){
                 console.log("updating personal info");
@@ -321,7 +322,7 @@ export async function IsUserSettingUpdating(ledger2:any,userAccountId:string){
 export async function IsUserUpdatingIcon(ledger2:any,userAccountId:string){
     const messages = await ledger2.account.getUnconfirmedAccountTransactions(userAccountId);
     const originalDescription = await ledger2.account.getAccount({accountId: userAccountId});
-    console.log(messages);
+    //console.log(messages);
     for (var i = 0; i < messages.unconfirmedTransactions.length; i++){
         if(messages.unconfirmedTransactions[i].type === 1 && messages.unconfirmedTransactions[i].subtype === 5 && messages.unconfirmedTransactions[i].sender === userAccountId){
             const newDescription = JSON.parse(messages.unconfirmedTransactions[i].attachment.description);
@@ -331,10 +332,12 @@ export async function IsUserUpdatingIcon(ledger2:any,userAccountId:string){
             const newImage = Object.keys(newDescription.av)[0];
             console.log(originalDescription);
             if(originalDescription.description == null){
+                console.log("called original description is ", originalDescription);
                 return true;
             }
             else{
                 const description = JSON.parse(originalDescription.description);
+                console.log(originalDescription);
                 console.log(Object.keys(description.av));
                 console.log(newImage);
                 console.log("updating personal info");
@@ -352,6 +355,66 @@ export async function IsUserUpdatingIcon(ledger2:any,userAccountId:string){
         }
     }
     return false;
+}
+
+export async function FindNftContractStorage(ledger2:any,accountId:string,codeHashIdForNft:string){
+    let NftContractStorage = await ledger2.contract.getContractsByAccount({
+        accountId: accountId,
+        machineCodeHash: codeHashIdForNft,
+    });
+    if(NftContractStorage.ats[0] != null){
+        return NftContractStorage.ats[0].at;
+    }
+    else{
+        return "";
+    }
+}
+
+export async function GetUserNftList(ledger2:any,accountId:string,nftDistributor:string,codeHashIdForNft:string){
+    const userNftContractStorage = await FindNftContractStorage(ledger2,accountId,codeHashIdForNft);
+    if(userNftContractStorage === null){
+        return [];
+    }
+    else{
+        const latestTransactionNumber = await FindLatestTransactionNumber(ledger2,userNftContractStorage,nftDistributor);
+        const latestTransactionList = await FindLatestTransactionArray(ledger2,userNftContractStorage,nftDistributor,latestTransactionNumber);
+        if(latestTransactionList[0] === "empty"){
+           return [];
+          }
+          else{
+                //console.log(latestTransactionList);
+                var nft : myNftList;
+                var userNftList:string[] = [];
+                for (var i = 0;i < latestTransactionList.length;i++){
+      
+      
+                    const contractInfo = await ledger2.contract.getContract(latestTransactionList[i]);
+                    const trial = JSON.parse(contractInfo.description);
+                    nft = {level:trial.version,image:trial.descriptor,nftId:latestTransactionList[i]};
+                    const res = await fetch(`https://ipfs.io/ipfs/${nft.image}`);
+                    const text = await res.text();
+                    const nftInfo = JSON.parse(text);
+                    userNftList.push(nftInfo.media[0].social);
+                    
+                    // fetch(`https://ipfs.io/ipfs/${nft.image}`).then((res)=>{
+                    //   res.text().then((text)=>{
+                    //       //console.log(text); 
+                    //       var nftInfo = JSON.parse(text);
+                    //       userNftList.push(nftInfo.media[0].social);
+                    //       console.log(nftInfo.media[0].social);
+                    //       //console.log(userNftList);
+                    //   })
+                    // }).catch((error)=>{
+                    //   console.log(error);
+                    //   return "error";
+                    // });
+                    
+                  }
+                  console.log(userNftList[0]);
+                  console.log(userNftList);
+                    return userNftList;
+          }
+    }
 }
 
 // export function UpdateUserStorageButton(){

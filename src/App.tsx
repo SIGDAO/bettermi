@@ -47,6 +47,7 @@ import LoadingMinting from './pages/loadingMinting/loadingMinting';
 import Setting from './pages/setting/setting';
 import IndexMyNftList from './pages/myNftList/indexMyNftList';
 import Leaderboard from './pages/leaderboard/leaderboard';
+import OtherUserProfile from './pages/leaderboard/otherUserProfile';
 
 store.subscribe(() => {
   saveState(store.getState());
@@ -101,9 +102,9 @@ const CheckStore: React.FC = () => {
     return <Outlet/>
   }
 
-  // if (Wallet.Extension.connection == null) {
-  //   return <Navigate to="/" />
-  // }
+  if (Wallet.Extension.connection == null) {
+    return <Navigate to="/" />
+  }
 
   return sessionStorage.getItem('state') === null ? <Navigate to="/" /> : <Outlet/>;
 }
@@ -168,6 +169,7 @@ function App() {
               <Route path='/setting' element={<Setting />} />
               <Route path='/NFTTransferCompleted' element={<ChallengeCompleted NFT={true} />} />
               <Route path='/leaderboard' element={<Leaderboard />} />
+              <Route path='/OtherUserProfile' element={<OtherUserProfile />} />
               <Route path="*" element={<Navigate to="/home" />} />
             </Route>
           </Routes>

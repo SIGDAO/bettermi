@@ -43,7 +43,7 @@ interface IMyNftListProps {
 //   assetId:string;
 // }
 
-interface myNftList{
+export interface myNftList{
   level:string;
   image:string;
   nftId:string;
@@ -126,7 +126,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
     ledger2.account.getAccount({ accountId: userAccountId }).then((account) => {
       const description = JSON.parse(account.description);
       console.log(description);
-      if(description.av == null){
+      if(description.av !== null){
 
       console.log(Object.keys(description.av));
       console.log(typeof(Object.keys(description.av)[0]));

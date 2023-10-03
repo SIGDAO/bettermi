@@ -14,6 +14,7 @@ import LoadingMinting from '../loadingMinting/loadingMinting';
 import { LedgerClientFactory } from '@signumjs/core';
 import { useAppSelector } from '../../redux/useLedger';
 import { selectWalletNodeHost } from '../../redux/useLedger';
+import { FindNftContractStorage } from '../../NftSystem/updateUserNftStorage';
 
 interface myNftList{
     level:string;
@@ -27,13 +28,16 @@ interface ILoadingMintingProps {
     setLoadingNft:(isLoading:boolean) => void;
     myNfts:myNftList[];
     setMyNfts:(myNftList:myNftList[]) => void;
+    userId?:string;
 }
 
 const LoadingMintingMyNftList: React.FunctionComponent<ILoadingMintingProps> = (props) => {
-    const {loadingNft,setLoadingNft,myNfts,setMyNfts} = props;
+    const {loadingNft,setLoadingNft,myNfts,setMyNfts,userId} = props;
   const navigate = useNavigate();
   const ledger = useLedger();
   const userAccountId = useSelector(accountId);
+  const Id = userId == null?userAccountId:userId;
+  console.log("Id is ",Id);
   const codeHashId = "7457358473503628676"; // the code hash of the BMI contract 
   const [count, setCount] = useState(1);
 
@@ -70,15 +74,16 @@ const LoadingMintingMyNftList: React.FunctionComponent<ILoadingMintingProps> = (
 //   }, [])
 const nodeHost = useSelector(selectWalletNodeHost);
 const ledger2 = LedgerClientFactory.createClient({nodeHost});
-const nftContractStorage = useSelector(getNftContractStorage);
 const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
 const nftDistributorPublicKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PUBLIC_KEY!;
 const nftDistributorPrivateKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PRIVATE_KEY!;
+const codeHashIdForNft:string = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!;
 const nftLoaded = useRef(false);
 var nft: myNftList;
 var userNftList:myNftList[] = [];
 
 const loadNftList = async() => {
+  const nftContractStorage = await FindNftContractStorage(ledger2,Id,codeHashIdForNft);
   FindLatestTransactionNumber(ledger2,nftContractStorage,nftDistributor).then((number)=>{
     console.log(number);
     FindLatestTransactionArray(ledger2,nftContractStorage,nftDistributor,number).then(async(nftAddressList)=>{
@@ -87,24 +92,6 @@ const loadNftList = async() => {
       }
       else{
             console.log("nftAddress is ",nftAddressList);
-          // nftAddressList.map((nftAddress)=>{
-          //   ledger2.contract.getContract(nftAddress).then((hi)=>{
-          //       //console.log("array is ",nftAddress,"  ",hi);
-          //       const trial = JSON.parse(hi.description);
-          //       //console.log(trial);
-          //       //console.log(trial.descriptor);
-          //       nft = {level:trial.version,image:trial.descriptor,nftId:nftAddress};
-          //       //console.log([...myNfts,nft]);
-          //       //console.log(myNfts);
-          //       setMyNfts([...myNfts,nft]);
-          //       setArray([...array,"123"]);
-          //       //console.log("testing array is ",array);
-          //       //console.log("appended list is ",[...myNfts,nft]);
-          //       userNftList.push(nft);
-          //       setMyNfts(userNftList);
-          //       setLoading(false);
-          //   });
-          // });
           for (var i = 0;i < nftAddressList.length;i++){
             const contractInfo = await ledger2.contract.getContract(nftAddressList[i]);
             const trial = JSON.parse(contractInfo.description);

@@ -6,7 +6,7 @@ import { useContext } from 'react';
 import { AppContext } from '../../redux/useContext';
 import { GenericExtensionWallet } from '@signumjs/wallets';
 import { useNavigate } from 'react-router-dom';
-
+import { store } from '../../redux/reducer';
 interface ISettingProps {
 }
 
@@ -15,6 +15,7 @@ const Setting: React.FunctionComponent<ISettingProps> = (props) => {
   const navigate = useNavigate();
   const logout = () => {
     console.log(Wallet);
+     store.dispatch({ type: 'USER_LOGOUT' });
     Wallet.Extension = new GenericExtensionWallet();
     console.log(Wallet);
     navigate('/');

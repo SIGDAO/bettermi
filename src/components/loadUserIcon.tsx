@@ -14,6 +14,7 @@ import '../pages/profile/profile.css';
 export interface IUserIconProps {
     home?:boolean;
     profile?:boolean;
+    userAccountId:string;
 }
 export interface ClassNames{
     forEmptyIcon:string;
@@ -27,14 +28,13 @@ const homeClassNames = {forEmptyIcon:"home_nft_-avatar",
 const profileClassNames = {forEmptyIcon:"profile_icon_nft_-avatar_empty",
                             forAddSign:"profile_icon_ic_add",
                             forNftDisplay:"nft_-avatar_empty"};
-const {home,profile} = props;
-let finalClassNames:ClassNames = home?homeClassNames:profileClassNames; 
+const {home,profile,userAccountId} = props;
+let finalClassNames:ClassNames = home === true?homeClassNames:profileClassNames;
 const [isUpdating,setIsUpdating] = useState<boolean>(false);  
 const [isLoading, setIsLoading] = useState<boolean>(true);
 const [haveNft,setHaveNft] = useState<boolean>(false);
 const nodeHost = useSelector(selectWalletNodeHost);
 const ledger2 = LedgerClientFactory.createClient({nodeHost});
-const userAccountId = useSelector(accountId);
 const [imgAddress, setImgAddress] = useState<string>("");
 const fetchUserIcon = async () => {
   //const isUserSettingUpdating = await IsUserSettingUpdating(ledger2,userAccountId);

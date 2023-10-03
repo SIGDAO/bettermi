@@ -29,6 +29,7 @@ export default function ConnectWallet (props: IConnectWalletProps) {
   const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
   const nftDistributorPublicKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PUBLIC_KEY!;
   const nftDistributorPrivateKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PRIVATE_KEY!;
+  store.dispatch({ type: 'USER_LOGOUT' });
   const connectWallet = async (appName:any,Wallet:any,Ledger:any) => {
     //const wallet = new GenericExtensionWallet();
     let key:string;

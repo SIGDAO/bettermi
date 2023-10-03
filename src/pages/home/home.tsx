@@ -80,7 +80,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const [imgAddress, setImgAddress] = useState<string>("");
   const nodeHost = useSelector(selectWalletNodeHost);
   const ledger2 = LedgerClientFactory.createClient({nodeHost});
-  const userId = useAppSelector(accountId);
+  const userAccoubntId = useAppSelector(accountId);
   const navigate = useNavigate();
   const tempAccountId = useSelector(accountId);
   const Ledger2 = useLedger();
@@ -100,7 +100,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
 
   useEffect(() => {
     // Function to fetch data from the APIc
-    ledger2.account.getAccount({accountId:userId})
+    ledger2.account.getAccount({accountId:userAccountId})
       .then(async(account)=>{
         for (var i = 0;i<account.assetBalances.length;i++){
           if(account.assetBalances[i].asset === "13116962758643420722"){
@@ -296,7 +296,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
             <div className="nft-reward-10-b5x63m inter-semi-bold-white-15px">NFT REWARD +10%</div>
             <img className="seperate-line-b5x63m" src={`${process.env.PUBLIC_URL}/img/seperate-line-1@1x.png`} alt="seperate line" />
           </div>
-          <UserIcon home = {true}></UserIcon>
+          <UserIcon home = {true} userAccountId = {userAccountId}></UserIcon>
           {/* {imgAddress === ""?gender === "Female"?
           // <img className="nft_-avatar-2ZgxSS" src={`${process.env.PUBLIC_URL}/img/home/nft-avatar-13@1x.png`} alt="NFT_Avatar" />
           <Link to="https://test.signumart.io/">

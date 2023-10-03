@@ -7,7 +7,7 @@ import * as React from 'react';
  import { useAppSelector } from '../../redux/useLedger';
  import { selectWalletNodeHost } from '../../redux/useLedger';
  import { LedgerClientFactory } from '@signumjs/core';
- import { useNavigate } from 'react-router-dom';
+ import { useLocation, useNavigate } from 'react-router-dom';
  import MyNftList from './myNftList';
 import { FindLatestTransactionArray,FindLatestTransactionNumber } from '../../NftSystem/updateUserNftStorage';
 import { getNftContractStorage } from '../../redux/account';
@@ -18,7 +18,7 @@ import { ShortTitleBar } from '../../components/titleBar';
 import { IsUserUpdatingIcon } from '../../NftSystem/updateUserNftStorage';
 
  interface MyNftProps {
-    
+    userId?:string
  }
 
 
@@ -30,11 +30,14 @@ interface myNftList{
 
 
  const IndexMyNftList: React.FunctionComponent<MyNftProps> =  (props) => {
+    const location = useLocation();
 
-  
      const nodeHost = useSelector(selectWalletNodeHost);
      const ledger2 = LedgerClientFactory.createClient({nodeHost});
-     const userAccountId = useSelector(accountId);
+    const userAccountId:string = useSelector(accountId);
+     const userId = location.state == null?userAccountId:location.state.userAccountId;
+     console.log("userId is ",userId);
+     console.log("userAccountId is ",userAccountId);
      const navigate = useNavigate();
      const [isUpdating, setIsUpdating] = useState<boolean>(false);
      const [isLoading,setIsLoading] = useState<boolean>(true);
@@ -56,7 +59,7 @@ interface myNftList{
         //     }
         // }
         try{
-        const isUserUpdatingIcon = await IsUserUpdatingIcon(ledger2,userAccountId);
+        const isUserUpdatingIcon = await IsUserUpdatingIcon(ledger2,userId);
         if(isUserUpdatingIcon === true){
                 console.log("updating personal info");
                 setIsUpdating(true);
@@ -86,7 +89,7 @@ interface myNftList{
               (isLoading === true||loadingNft === true) ?(
                 <>
                 <ShortTitleBar title='My NFTs' setting = {false}addSign = {false} aiCoach = {false} filter = {false} importButton = {false} />
-              <LoadingMintingMyNftList loadingNft={loadingNft} 
+              <LoadingMintingMyNftList loadingNft={loadingNft} userId = {userId}
                 setLoadingNft={setLoadingNft} myNfts={myNfts} setMyNfts = {setMyNfts}></LoadingMintingMyNftList>
                 </>
                 ):
