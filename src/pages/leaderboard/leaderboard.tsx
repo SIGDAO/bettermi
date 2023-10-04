@@ -35,7 +35,7 @@ const Leaderboard = (props: Props) => {
       store.dispatch(userRankingSlice.actions.setUserRanking(state));
     }).catch((e:any) => {
       setIsLeaderBoardLoading(false);
-      alert("some unkown error happened we would be grateful if this can be reported to us");
+      alert("some unkown error has happened. We would be grateful if this can be reported to us");
       console.log(e);
     });
   }
@@ -46,20 +46,20 @@ const Leaderboard = (props: Props) => {
     }
     else{
       nftLoaded.current = true;
-      if(userRankingListFromRedux == null ){
+      //if(userRankingListFromRedux == null ){
         
         fetchUserRankingList();
-      }
-      else{
-        if(userRankingListFromRedux.length === 0){//This is written because I am afraid that the userRankingList is [] but not null initially
+      //}
+      // else{
+      //   if(userRankingListFromRedux.length === 0){//This is written because I am afraid that the userRankingList is [] but not null initially
 
-          fetchUserRankingList();
-        }
-        else{
-          setUserRankingList(userRankingListFromRedux);
-          setIsLeaderBoardLoading(false);
-        }
-      }
+      //     fetchUserRankingList();
+      //   }
+      //   else{
+      //     setUserRankingList(userRankingListFromRedux);
+          // setIsLeaderBoardLoading(false);
+      //   }
+      // }
     }
   },[]);
   const leaderBoardBanner = () => {
@@ -71,6 +71,7 @@ const Leaderboard = (props: Props) => {
           userRanking={userRankingList[i].userRanking} 
           tokenBalance={Number(userRankingList[i].tokenBalance)}
           accountId = {userRankingList[i].accountId}
+          accountImage = {userRankingList[i].accountImage}
           />
         );
     }
@@ -79,7 +80,9 @@ const Leaderboard = (props: Props) => {
   const content: JSX.Element = (
     // <div className="screen">
       <div className="bettermidapp-leaderboad-the-best-100 screen">
-        <ShortTitleBar title="The Best 100" setting={false} aiCoach={false} />
+        <ShortTitleBar title="The Best 100" setting={false} aiCoach={false} /> 
+        {isLeaderBoardLoading === true ? (<div></div>):(
+          <>
         <div className="overlap-group-leader6">
           <div className="_px-container">
             <div className="ic_sentiment_very_satisfied_24px"></div>
@@ -92,7 +95,12 @@ const Leaderboard = (props: Props) => {
                 <div className="leadboard_1st">
                   <div className="overlap-group-leader2">
                     <div className="overlap-group-leader1">
-                      <img className="nft_-avatar-2 nft_-avatar-3" src="img/leaderboard/nft-avatar@1x.png" alt="NFT_Avatar" />
+
+                      <img className="nft_-avatar-2 nft_-avatar-3" 
+                            src={`https://ipfs.io/ipfs/${userRankingList[0].accountImage}`} 
+                            alt="NFT_Avatar" />
+                      
+                    
                       <div className="crown-with-red-stone">
                         <div className="crown-with-red-stone-1">
                           <div className="overlap-group-leader-1">
@@ -141,30 +149,26 @@ const Leaderboard = (props: Props) => {
                       <span className="inter-semi-bold-white-18px">1</span><span className="inter-semi-bold-white-18px">st</span>
                     </div>
                   </div>
-                  <div className="fung_fung00 inter-medium-white-12px">fung_fung00</div>
+                  <div className="fung_fung00 inter-medium-white-12px">{userRankingList[0].displayAccountId}</div>
                   <div className="sigdao-score-1 sigdao-score-4">
                     <div className="signdao_tokengradient">
                       <div className="overlap-group-leader"><img className="x880" src="img/leaderboard/file---880@1x.png" alt="880" /></div>
                     </div>
-                    {isLeaderBoardLoading === true ?
                     <div className="x10 inter-semi-bold-keppel-14px">10000</div>
-                    :(
                       <div className="x10 inter-semi-bold-keppel-14px">{userRankingList[0].tokenBalance}</div>
-                    )
-                    }
                   </div>
                 </div>
                 <div className="leadboard_1st-1 leadboard_1st-3">
                   <div className="x2nd inter-semi-bold-white-18px-2">
                     <span className="inter-semi-bold-white-18px">2</span><span className="inter-semi-bold-white-18px">nd</span>
                   </div>
-                  <img className="nft_-avatar" src="img/leaderboard/nft-avatar-1@1x.png" alt="NFT_Avatar" />
-                  <div className="son inter-medium-white-12px">anderson_a</div>
+                  <img className="nft_-avatar"      src={`https://ipfs.io/ipfs/${userRankingList[1].accountImage}`}  alt="NFT_Avatar" />
+                  <div className="son inter-medium-white-12px">{userRankingList[1].displayAccountId}</div>
                   <div className="sigdao-score-2 sigdao-score-4">
                     <div className="signdao_tokengradient">
                       <div className="overlap-group-leader"><img className="x880" src="img/leaderboard/file---880@1x.png" alt="880" /></div>
                     </div>
-                    <div className="x10-1 x10-7 inter-semi-bold-keppel-14px">123456</div>
+                    <div className="x10-1 x10-7 inter-semi-bold-keppel-14px">{userRankingList[1].tokenBalance}</div>
                   </div>
                 </div>
               </div>
@@ -172,21 +176,20 @@ const Leaderboard = (props: Props) => {
                 <div className="x3rd inter-semi-bold-white-18px-2">
                   <span className="inter-semi-bold-white-18px">3</span><span className="inter-semi-bold-white-18px">rd</span>
                 </div>
-                <img className="nft_-avatar" src="img/leaderboard/nft-avatar-1@1x.png" alt="NFT_Avatar" />
+                <img className="nft_-avatar"    src={`https://ipfs.io/ipfs/${userRankingList[2].accountImage}`} alt="NFT_Avatar" />
                 <div className="son inter-medium-white-12px">alison_888</div>
                 <div className="sigdao-score-3 sigdao-score-4">
                   <div className="signdao_tokengradient">
                     <div className="overlap-group-leader"><img className="x880" src="img/leaderboard/file---880@1x.png" alt="880" /></div>
                   </div>
-                  <div className="x10-2 x10-7 inter-semi-bold-keppel-14px">12345</div>
+                  <div className="x10-2 x10-7 inter-semi-bold-keppel-14px">{userRankingList[2].tokenBalance}</div>
                 </div>
               </div>
             </div>
           </div>
           <div className="x26">
-            {isLeaderBoardLoading === true ? (<div></div>):(
+            {
               leaderBoardBanner()
-            )
 }
             {/* <div className="rewards_card">
               <div className="number inter-semi-bold-white-18px">4</div>
@@ -234,6 +237,8 @@ const Leaderboard = (props: Props) => {
             </div> */}
           </div>
         </div>
+        </>
+        )}
       </div>
     // </div>
   )

@@ -36,6 +36,7 @@ interface IMyNftListProps {
   isUpdatingDescription:boolean;
   myNfts:myNftList[];
   setIsUpdatingDescription:(isUpdatingDescription:boolean) => void;
+  isOtherUser:boolean;
 }
 
 // interface myNftList{
@@ -50,7 +51,7 @@ export interface myNftList{
 }
 
 const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
-  const {isUpdatingDescription,myNfts,setIsUpdatingDescription} = props;
+  const {isUpdatingDescription,myNfts,setIsUpdatingDescription,isOtherUser} = props;
   const userAccountId: string = useSelector(accountId);
   const mobile = process.env.REACT_APP_MOBILE === 'true';
   let height: string | number
@@ -250,14 +251,36 @@ const nftId = accountDes.account;
   const displayMyNft = myNfts.map((nft) => {//Contract Id
     console.log("userNftList is  ", myNfts);
     return (
-      <MyNft image={nft.image} level={level} isOpenPopup={isOpenPopup} setIsOpenPopup={setIsOpenPopup} nftId = {nft.nftId} setSelectedAssetId={setSelectedNftId} setLevel={setLevel} isUpdatingDescription = {isUpdatingDescription} setIsUpdatingDescription={setIsUpdatingDescription} ></MyNft>
+      <MyNft 
+      image={nft.image} 
+      level={level} 
+      isOpenPopup={isOpenPopup} 
+      setIsOpenPopup={setIsOpenPopup} 
+      nftId = {nft.nftId} 
+      setSelectedAssetId={setSelectedNftId} 
+      setLevel={setLevel} 
+      isUpdatingDescription = {isUpdatingDescription} 
+      setIsUpdatingDescription={setIsUpdatingDescription} 
+      isOtherUser = {isOtherUser}
+      ></MyNft>
     );
   }
   );
   const displayNftToken = userNftTokenList.map((nft) => {//Contract Id
     console.log("userNftTokenList is  ",nft);
     return(
-      <MyNft image={nft.image} level={level} isOpenPopup={isOpenPopup} setIsOpenPopup={setIsOpenPopup} nftId= {nft.nftId} setSelectedAssetId={setSelectedNftId} setLevel={setLevel}isUpdatingDescription = {isUpdatingDescription} setIsUpdatingDescription={setIsUpdatingDescription}></MyNft>
+      <MyNft 
+      image={nft.image} 
+      level={level} 
+      isOpenPopup={isOpenPopup} 
+      setIsOpenPopup={setIsOpenPopup} 
+      nftId= {nft.nftId} 
+      setSelectedAssetId={setSelectedNftId} 
+      setLevel={setLevel}
+      isUpdatingDescription = {isUpdatingDescription} 
+      setIsUpdatingDescription={setIsUpdatingDescription}
+      isOtherUser = {isOtherUser}
+      ></MyNft>
     );
   }
   );
@@ -338,191 +361,204 @@ const nftId = accountDes.account;
 
 return(
     <div style={bgStyle}>
-    <div style={centerLayoutStyle} className='bettermidapp-mimi-nfts-send-address-1'>
-      <ShortTitleBar title='My NFTs' addSign = {true} aiCoach = {false} filter = {false} importButton = {true} isOpenImport = {isOpenImport} setIsOpenImport={setIsOpenImport}/>
-      <div className = "containerMyNftList">
-        <div className = "containerMyNftList2">
-        {onDuty === ""?(             
-        <div className = "myNftList">
-          {gender === "Female"?
-             (
-            <Link to="https://test.signumart.io/">
-            <div className="myNftListEmptyNft">
-              <img className="myNftListAdd" src="img/profile/add-2@1x.png" alt="Add" />
-              <img
-                className="myNftListadd2"
-                src="img/profile/ic-add-2@1x.png"
-                alt="ic_add"
-              />
-            </div>
-          </Link>
-             ):
-             (
-              <Link to="https://test.signumart.io/">
-              <div className="myNftListEmptyNft">
-                <img className="myNftListAdd" src="img/profile/add-2@1x.png" alt="Add" />
-                <img
-                  className="myNftListadd2"
-                  src="img/profile/ic-add-2@1x.png"
-                  alt="ic_add"
-                />
+      <div style={centerLayoutStyle} className='bettermidapp-mimi-nfts-send-address-1'>
+        {isOtherUser?(                
+          <>            
+          <ShortTitleBar title='My NFTs' addSign = {true} aiCoach = {false} filter = {false} />
+              <div className = "containerMyNftList">
+                <div className = "containerMyNftList2">     
+                    {displayMyNft}
+                </div>
               </div>
-            </Link>
-             )
-          }
-             <div className = "myNftDescription">
-             <div className = "myNftNumber">#0000000001</div>
-               <div className = "myNftBar">
-                 <div  className = "myNftLevel">
-                   Lv{level}       
-                   </div>
-                   <div className = "myNftVerticalLine"></div>  
-                   <div  className = "inter-normal-white-12px">
-                     Reward + 10%
-                     </div>
-               </div>
-               <div className = "myNftPrice">
-                 $0 SIGNA
-               </div>
-             </div>
-             <div className = "myNftBottom">
-             <button 
-             onClick = {() => {}}
-              className = "myNftButtonOnDuty" 
-              style = {{backgroundColor:"#39B3AF!important"}}
-            >ON DATE</button>
-             <img  className = "myNftButtomArrow" src  = {`${process.env.PUBLIC_URL}/img/NftList/ic-send@1x.png`} onClick={() => setIsOpenPopup((prev) => !prev)}></img>
-             </div>
-           </div>
-           ):(
-             <div className = "myNftList">
-              {isUpdatingDescription === true?
-              <img className = "myNftImage" src = "/img/loadingMinting/mimi-dancing-for-loadin-page.gif"></img>
-              :(
-                <img className = "myNftImage" src = {`https://ipfs.io/ipfs/${onDuty}`}></img>
-              )
-              }
-             <div className = "myNftDescription">
-             <div className = "myNftNumber">#0000000001</div>
-               <div className = "myNftBar">
-                 <div  className = "myNftLevel">
-                   Lv{level}       
-                   </div>
-                   <div className = "myNftVerticalLine"></div>  
-                   <div  className = "inter-normal-white-12px">
-                     Reward + 10%
-                     </div>
-               </div>
-               <div className = "myNftPrice">
-                 $0 SIGNA
-               </div>
-             </div>
-             <div className = "myNftBottom">
-             <button className = "myNftButtonOnDuty" style = {{backgroundColor:"#39B3AF!important"}}>ON DATE</button>
-             <img className = "myNftButtomArrow" src  = {`${process.env.PUBLIC_URL}/img/NftList/ic-send@1x.png`} onClick={() => setIsOpenPopup((prev) => !prev)}></img>
-             </div>
-           </div>
-               )
-
-               }
-              {/* {displayMyNft} */}
-              {/* {loading?(<div></div>):(displayMyNft)} */}
-              {displayMyNft}
-        </div>
-        {/* {loading?(<p>loading...</p>):(
-          <>
-                <ShortTitleBar title='My NFTs' />
-                {console.log(userNftList)}{console.log(array)}
-        <div className = "containerMyNftList">
-          <div className = "containerMyNftList2">
-              {displayMyNft}
-          </div>
-        </div>
-        </>
-        )
-  } */}
-      </div>
-      {isOpenPopup && 
-          <div className="edit-profile-layer">
-            <div className="icon-arrow-left-1-popup icon-arrow-left-3-popup">
-              <img className="icon-arrow-left-popup" onClick={() => setIsOpenPopup((prev) => !prev)} src="img/myNftList/icon-arrow-left-1@1x.png" alt="icon-arrow-left" />
-            </div>
-            <div className="edit-profile">
-              <div className="overlap-group-1">
-                <img className="seperate-line-1" src="img/myNftList/seperate-line-1@1x.png" alt="Seperate line" />
-                <img className="bg" src="img/myNftList/bg-2@1x.png" alt="BG" />
-                <img className="seperat-line-1 seperat-line-3" src="img/myNftList/seperat-line-3@1x.png" alt="Seperat line" />
-                <div className="transfer-n-ft inter-bold-royal-blue-15px">TRANSFER NFT</div>
-                <div className="recipient inter-bold-royal-blue-15px">RECIPIENT</div>
-                <div className="nft-details inter-bold-royal-blue-15px">NFT DETAILS</div>
-                <div className="rewards">
-                  <div className="ic_send-1">
-                    <img className="ic_send-1-content" src="img/myNftList/ic-send-1@1x.png" alt="" />
+              </>
+              ):
+        (<>
+            <ShortTitleBar title='My NFTs' addSign = {true} aiCoach = {false} filter = {false} importButton = {true} isOpenImport = {isOpenImport} setIsOpenImport={setIsOpenImport}/>
+            <div className = "containerMyNftList">
+              <div className = "containerMyNftList2">
+              {onDuty === ""?(             
+              <div className = "myNftList">
+                {gender === "Female"?
+                  (
+                  <Link to="https://test.signumart.io/">
+                  <div className="myNftListEmptyNft">
+                    <img className="myNftListAdd" src="img/profile/add-2@1x.png" alt="Add" />
+                    <img
+                      className="myNftListadd2"
+                      src="img/profile/ic-add-2@1x.png"
+                      alt="ic_add"
+                    />
                   </div>
-                  <div className="place inter-semi-bold-white-18px">Send</div>
+                </Link>
+                  ):
+                  (
+                    <Link to="https://test.signumart.io/">
+                    <div className="myNftListEmptyNft">
+                      <img className="myNftListAdd" src="img/profile/add-2@1x.png" alt="Add" />
+                      <img
+                        className="myNftListadd2"
+                        src="img/profile/ic-add-2@1x.png"
+                        alt="ic_add"
+                      />
+                    </div>
+                  </Link>
+                  )
+                }
+                  <div className = "myNftDescription">
+                  <div className = "myNftNumber">#0000000001</div>
+                    <div className = "myNftBar">
+                      <div  className = "myNftLevel">
+                        Lv{level}       
+                        </div>
+                        <div className = "myNftVerticalLine"></div>  
+                        <div  className = "inter-normal-white-12px">
+                          Reward + 10%
+                          </div>
+                    </div>
+                    <div className = "myNftPrice">
+                      $0 SIGNA
+                    </div>
+                  </div>
+                  <div className = "myNftBottom">
+                  <button 
+                  onClick = {() => {}}
+                    className = "myNftButtonOnDuty" 
+                    style = {{backgroundColor:"#39B3AF!important"}}
+                  >ON DATE</button>
+                  <img  className = "myNftButtomArrow" src  = {`${process.env.PUBLIC_URL}/img/NftList/ic-send@1x.png`} onClick={() => setIsOpenPopup((prev) => !prev)}></img>
+                  </div>
                 </div>
-                <div className="search_bar"></div>
-                <CustomTextArea 
-                  text= {inputAddress} 
-                  setText={setInputAddress} 
-                  width={300} 
-                  height={56} 
-                  importClassName="card-number-1 search_bar-1 search_bar-4"
-                  activeClassName="active-card-number-1 search_bar-1 search_bar-4"
-                  placeholder="e.g. TS-9DJR-MGA2-VH44-5GMXY"
-                />
-                {/* <textarea
-                  className="search_bar-1 search_bar-4"
-                  value={inputAddress}
-                  onChange={handleAddressChange}
-                  placeholder="Enter something"
-                /> */}
-                {/* <div className="search_bar-1 search_bar-4"><p className="card-number">e.g. TS-9DJR-MGA2-VH44-5GMXY or Anderson</p></div> */}
-                <div className="search_bar-2 search_bar-4"></div>
-                <div className="button_save" onClick={() => transferNft(selectedNftId)}>
-                  <div className="continue inter-semi-bold-white-15px">Transfer</div>
+                ):(
+                  <div className = "myNftList">
+                    {isUpdatingDescription === true?
+                    <img className = "myNftImage" src = "/img/loadingMinting/mimi-dancing-for-loadin-page.gif"></img>
+                    :(
+                      <img className = "myNftImage" src = {`https://ipfs.io/ipfs/${onDuty}`}></img>
+                    )
+                    }
+                  <div className = "myNftDescription">
+                  <div className = "myNftNumber">#0000000001</div>
+                    <div className = "myNftBar">
+                      <div  className = "myNftLevel">
+                        Lv{level}       
+                        </div>
+                        <div className = "myNftVerticalLine"></div>  
+                        <div  className = "inter-normal-white-12px">
+                          Reward + 10%
+                          </div>
+                    </div>
+                    <div className = "myNftPrice">
+                      $0 SIGNA
+                    </div>
+                  </div>
+                  <div className = "myNftBottom">
+                  <button className = "myNftButtonOnDuty" style = {{backgroundColor:"#39B3AF!important"}}>ON DATE</button>
+                  <img className = "myNftButtomArrow" src  = {`${process.env.PUBLIC_URL}/img/NftList/ic-send@1x.png`} onClick={() => setIsOpenPopup((prev) => !prev)}></img>
+                  </div>
                 </div>
-                <p className="address-id-to-send-nft-to">Address, ID to send NFT to.</p>
-                <h1 className="text-7">#00000001</h1>
-                <div className="x0-signa-1">$0 SIGNA</div>
-                <div className="x16228">
-                  <div className="lv-1-1">LV {level || 1}</div>
-                  <img className="x6" src="img/myNftList/file---6@1x.png" alt="6" />
-                  <div className="reward-10-1">REWARD +10%</div>
-                </div>
-                <CustomTextArea 
-                  text= {inputValue} 
-                  setText={setInputValue} 
-                  width={300} 
-                  height={121} 
-                  importClassName="card-number-1 search_bar-4 search_bar-3"
-                  activeClassName="active-card-number-1 search_bar-4 search_bar-3"
-                  placeholder="You may attach some text or binary data to this transaction. Here you also enter the memo required by many exchanges"
-                />
-                {/* <textarea
-                  className="search_bar-3 search_bar-4"
-                  value={inputValue}
-                  onChange={handleInputChange}
-                  placeholder="You may attach some text or binary data to this transaction. Here you also enter the memo required by many exchanges"
-                /> */}
-              {/* <p>Input Value: {inputValue}</p> */}
-                {/* <div className="search_bar-3 search_bar-4">
-                  <p className="card-number-1">
-                    You may attach some text or binary data to this transaction. Here you also enter the memo required
-                    by many exchanges
-                  </p>
-                </div> */}
-                <div className="additional-text inter-bold-royal-blue-15px">ADDITIONAL TEXT</div>
-              </div>
-            </div>
-          </div>
-      }
-      { isOpenImport&& <ImportAccountScreen setIsOpenImport={setIsOpenImport} isOpenImport = {isOpenImport} importSuccess = {importSuccess}setImportSuccess={setImportSuccess} ></ImportAccountScreen>}
-      {hasImportError && <ImportAccountScreen setIsOpenImport={setIsOpenImport} isOpenImport = {isOpenImport} importSuccess = {importSuccess}setImportSuccess={setImportSuccess}></ImportAccountScreen>}
-      {importSuccess && <ImportSuccessScreen importSuccess = {importSuccess} setImportSuccess={setImportSuccess}></ImportSuccessScreen>}
+                    )
 
-      
-    </div>
+                    }
+                    {/* {displayMyNft} */}
+                    {/* {loading?(<div></div>):(displayMyNft)} */}
+                    {displayMyNft}
+              </div>
+              {/* {loading?(<p>loading...</p>):(
+                <>
+                      <ShortTitleBar title='My NFTs' />
+                      {console.log(userNftList)}{console.log(array)}
+              <div className = "containerMyNftList">
+                <div className = "containerMyNftList2">
+                    {displayMyNft}
+                </div>
+              </div>
+              </>
+              )
+        } */}
+            </div>
+            {isOpenPopup && 
+                <div className="edit-profile-layer">
+                  <div className="icon-arrow-left-1-popup icon-arrow-left-3-popup">
+                    <img className="icon-arrow-left-popup" onClick={() => setIsOpenPopup((prev) => !prev)} src="img/myNftList/icon-arrow-left-1@1x.png" alt="icon-arrow-left" />
+                  </div>
+                  <div className="edit-profile">
+                    <div className="overlap-group-1">
+                      <img className="seperate-line-1" src="img/myNftList/seperate-line-1@1x.png" alt="Seperate line" />
+                      <img className="bg" src="img/myNftList/bg-2@1x.png" alt="BG" />
+                      <img className="seperat-line-1 seperat-line-3" src="img/myNftList/seperat-line-3@1x.png" alt="Seperat line" />
+                      <div className="transfer-n-ft inter-bold-royal-blue-15px">TRANSFER NFT</div>
+                      <div className="recipient inter-bold-royal-blue-15px">RECIPIENT</div>
+                      <div className="nft-details inter-bold-royal-blue-15px">NFT DETAILS</div>
+                      <div className="rewards">
+                        <div className="ic_send-1">
+                          <img className="ic_send-1-content" src="img/myNftList/ic-send-1@1x.png" alt="" />
+                        </div>
+                        <div className="place inter-semi-bold-white-18px">Send</div>
+                      </div>
+                      <div className="search_bar"></div>
+                      <CustomTextArea 
+                        text= {inputAddress} 
+                        setText={setInputAddress} 
+                        width={300} 
+                        height={56} 
+                        importClassName="card-number-1 search_bar-1 search_bar-4"
+                        activeClassName="active-card-number-1 search_bar-1 search_bar-4"
+                        placeholder="e.g. TS-9DJR-MGA2-VH44-5GMXY"
+                      />
+                      {/* <textarea
+                        className="search_bar-1 search_bar-4"
+                        value={inputAddress}
+                        onChange={handleAddressChange}
+                        placeholder="Enter something"
+                      /> */}
+                      {/* <div className="search_bar-1 search_bar-4"><p className="card-number">e.g. TS-9DJR-MGA2-VH44-5GMXY or Anderson</p></div> */}
+                      <div className="search_bar-2 search_bar-4"></div>
+                      <div className="button_save" onClick={() => transferNft(selectedNftId)}>
+                        <div className="continue inter-semi-bold-white-15px">Transfer</div>
+                      </div>
+                      <p className="address-id-to-send-nft-to">Address, ID to send NFT to.</p>
+                      <h1 className="text-7">#00000001</h1>
+                      <div className="x0-signa-1">$0 SIGNA</div>
+                      <div className="x16228">
+                        <div className="lv-1-1">LV {level || 1}</div>
+                        <img className="x6" src="img/myNftList/file---6@1x.png" alt="6" />
+                        <div className="reward-10-1">REWARD +10%</div>
+                      </div>
+                      <CustomTextArea 
+                        text= {inputValue} 
+                        setText={setInputValue} 
+                        width={300} 
+                        height={121} 
+                        importClassName="card-number-1 search_bar-4 search_bar-3"
+                        activeClassName="active-card-number-1 search_bar-4 search_bar-3"
+                        placeholder="You may attach some text or binary data to this transaction. Here you also enter the memo required by many exchanges"
+                      />
+                      {/* <textarea
+                        className="search_bar-3 search_bar-4"
+                        value={inputValue}
+                        onChange={handleInputChange}
+                        placeholder="You may attach some text or binary data to this transaction. Here you also enter the memo required by many exchanges"
+                      /> */}
+                    {/* <p>Input Value: {inputValue}</p> */}
+                      {/* <div className="search_bar-3 search_bar-4">
+                        <p className="card-number-1">
+                          You may attach some text or binary data to this transaction. Here you also enter the memo required
+                          by many exchanges
+                        </p>
+                      </div> */}
+                      <div className="additional-text inter-bold-royal-blue-15px">ADDITIONAL TEXT</div>
+                    </div>
+                  </div>
+                </div>
+            }
+            { isOpenImport&& <ImportAccountScreen setIsOpenImport={setIsOpenImport} isOpenImport = {isOpenImport} importSuccess = {importSuccess}setImportSuccess={setImportSuccess} ></ImportAccountScreen>}
+            {hasImportError && <ImportAccountScreen setIsOpenImport={setIsOpenImport} isOpenImport = {isOpenImport} importSuccess = {importSuccess}setImportSuccess={setImportSuccess}></ImportAccountScreen>}
+            {importSuccess && <ImportSuccessScreen importSuccess = {importSuccess} setImportSuccess={setImportSuccess}></ImportSuccessScreen>}
+            </>
+          )
+        }
+        
+      </div>
     </div>
 
 

@@ -836,6 +836,19 @@
   font-style: normal;
   font-weight: 600;
 }
+.myNftButtonDisabled{
+  width:100px;
+  height:31px;
+  background:  linear-gradient(90deg, #4136F1 0%, #8643FF 100%);
+  border-radius: 3px;
+  border: 0px;
+  color:#FFFFFF;
+  font-family: var(--font-family-inter);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  opacity:0.4;
+}
 .myNftButton:hover{
 opacity: 0.5;
 }
@@ -853,6 +866,15 @@ opacity: 0.5;
   margin-right: 20px;
   cursor: pointer;
 }
+.myNftButtomArrowDisabled{
+  align-self: center;
+  width:21px;
+  height:18px;
+  margin-right: 20px;
+  cursor: pointer;
+  opacity:0.4;
+}
+
 
 .myNftButtonOnDuty{
   width:100px;

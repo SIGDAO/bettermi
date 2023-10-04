@@ -31,12 +31,12 @@ import * as React from 'react';
     setLevel:(level:string) => void;
     isUpdatingDescription:boolean;
     setIsUpdatingDescription:(isUpdatingDescription:boolean) => void;
-    
+    isOtherUser:boolean;
  }
 
 
  const MyNft: React.FunctionComponent<MyNftProps> =  (props) => {
-     const {image, level, isOpenPopup, setIsOpenPopup,nftId,setSelectedAssetId,setLevel,isUpdatingDescription,setIsUpdatingDescription} = props;
+     const {image, level, isOpenPopup, setIsOpenPopup,nftId,setSelectedAssetId,setLevel,isUpdatingDescription,setIsUpdatingDescription,isOtherUser} = props;
      const [loading, setLoading] = useState<boolean>(true);
      const [imgAddress, setImgAddress] = useState<string>("");
      const nodeHost = useSelector(selectWalletNodeHost);
@@ -158,17 +158,37 @@ import * as React from 'react';
                       </div>
                     </div>
                     <div className = "myNftBottom">
-                    <button className = "myNftButton" onClick = {equipNft}>AVALIBLE</button>
-                    <img 
-                      onClick={() => {
-                        setIsOpenPopup((prev) => !prev);
-                        setSelectedAssetId(nftId);
-                        setLevel(nftLevel);
+                    {isOtherUser === true?(
+                      <>
+                        <button className = "myNftButtonDisabled" onClick = {equipNft}>AVALIBLE</button>
+                        <img 
+                          onClick={() => {
+                            setIsOpenPopup((prev) => !prev);
+                            setSelectedAssetId(nftId);
+                            setLevel(nftLevel);
+  
+                          }} 
+                          className = "myNftButtomArrowDisabled" 
+                          src  = {`${process.env.PUBLIC_URL}/img/NftList/ic-send@1x.png`}
+                        />
+                        </>
+                    ):(
+                      <>
+                          <button className = "myNftButton" onClick = {equipNft}>AVALIBLE</button>
+                          <img 
+                            onClick={() => {
+                              setIsOpenPopup((prev) => !prev);
+                              setSelectedAssetId(nftId);
+                              setLevel(nftLevel);
 
-                      }} 
-                      className = "myNftButtomArrow" 
-                      src  = {`${process.env.PUBLIC_URL}/img/NftList/ic-send@1x.png`}
-                    />
+                            }} 
+                            className = "myNftButtomArrow" 
+                            src  = {`${process.env.PUBLIC_URL}/img/NftList/ic-send@1x.png`}
+                          />
+                        </>
+                    )
+                    }
+
                     </div>
                   </div>
           )

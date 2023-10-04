@@ -9,12 +9,12 @@ interface leaderBoardBannerProps {
     userRanking:number;
     tokenBalance:number;
     accountId:string;
-    
+    accountImage:string;
  }
 
 
  export const LeaderBoardBanner: React.FunctionComponent<leaderBoardBannerProps> =  (props) => {
-    const {displayAccountId,userRanking,tokenBalance,accountId} = props;
+    const {displayAccountId,userRanking,tokenBalance,accountId,accountImage} = props;
     const navigate = useNavigate();
     const location = useLocation();
     const toUserProfile=()=>{     
@@ -30,7 +30,9 @@ interface leaderBoardBannerProps {
     return(
         <div className="rewards_card" onClick = {() => {toUserProfile()}}>
         <div className="number inter-semi-bold-white-18px">{userRanking}</div>
-        <img className="nft_-avatar-1 nft_-avatar-3" src="img/leaderboard/nft-avatar-3@1x.png" alt="NFT_Avatar" />
+        <img className="nft_-avatar-1 nft_-avatar-3" 
+              src={`https://ipfs.io/ipfs/${accountImage}`} 
+              alt="NFT_Avatar" />
         <div className="x300 inter-medium-white-12px">{displayAccountId}</div>
         <div className="sigdao-score">
           <div className="signdao_tokengradient">

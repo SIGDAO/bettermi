@@ -6,7 +6,7 @@ export interface leaderBoardBanner {
     userRanking:number;
     tokenBalance:string;
     accountId:string;
-    
+    accountImage:string;
  }
  export interface userRanking {
     userRankingList:leaderBoardBanner[];

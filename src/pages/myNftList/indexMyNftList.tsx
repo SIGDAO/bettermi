@@ -36,6 +36,7 @@ interface myNftList{
      const ledger2 = LedgerClientFactory.createClient({nodeHost});
     const userAccountId:string = useSelector(accountId);
      const userId = location.state == null?userAccountId:location.state.userAccountId;
+     console.log("location.state is  ",location.state);
      console.log("userId is ",userId);
      console.log("userAccountId is ",userAccountId);
      const navigate = useNavigate();
@@ -43,8 +44,12 @@ interface myNftList{
      const [isLoading,setIsLoading] = useState<boolean>(true);
      const [loadingNft,setLoadingNft] = useState<boolean>(true);
      const nftLoaded = useRef(false);
-     const [myNfts,setMyNfts] = useState<myNftList[]>([]);  
-
+     const [myNfts,setMyNfts] = useState<myNftList[]>([]);
+     var isOtherUser = true;
+     if(location.state == null){
+        isOtherUser = false;
+     }
+     console.log("isOtherUser is ",isOtherUser);
 
     const checkIsLoading = async() => {
 
@@ -93,12 +98,14 @@ interface myNftList{
                 setLoadingNft={setLoadingNft} myNfts={myNfts} setMyNfts = {setMyNfts}></LoadingMintingMyNftList>
                 </>
                 ):
-              (
+              (isOtherUser === true)?(
 
-                    <MyNftList setIsUpdatingDescription={setIsUpdating} isUpdatingDescription={isUpdating} myNfts = {myNfts}></MyNftList>
-                  
-
+                    <MyNftList setIsUpdatingDescription={setIsUpdating} isUpdatingDescription={isUpdating} myNfts = {myNfts} isOtherUser={true}></MyNftList>
+              ):(
+                <MyNftList setIsUpdatingDescription={setIsUpdating} isUpdatingDescription={isUpdating} myNfts = {myNfts} isOtherUser={false}></MyNftList>
               )
+
+              
         }
        </>
          );

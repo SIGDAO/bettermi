@@ -28,40 +28,95 @@ export async function GetTokenRanking (ledger2:any){
     var userRanking:number = 1;
     var userName:string = "";
     var userNumber:number = 1;
-    for (var i = 0; i < Math.min(sortedArray.length,100);i++){
+    let promises:any[] = [];
+    for(var i = 0;i < Math.min(sortedArray.length,100);i++){
         if(omittedAccounts.includes(sortedArray[i].account)){
             console.log("omitted account is detected", sortedArray[i].account);
+            sortedArray.splice(i,1);
+            console.log(sortedArray);
+            i = i - 1;
             continue;
-        } 
-        const waitingToBeChangedDescription = await ledger2.account.getAccount({accountId: sortedArray[i].account});
-        let newDes =waitingToBeChangedDescription.description===undefined?{}:JSON.parse(waitingToBeChangedDescription.description);
-        if(newDes.nm == null){
-            userName = "Anonymous User #" + userNumber.toString();
-            userName = userName + 1;
         }
-        else{
-            userName = newDes.nm;
+         promises.push(ledger2.account.getAccount({accountId: sortedArray[i].account}));
+    }
+    const results = await Promise.all(promises);
+    //console.log(contracts);
+    console.log("results:",results);
+    var imgAddress:string = "";
+    for(var i = 0; i < Math.min(sortedArray.length,100);i++){
+            let newDes = results[i].description===undefined?{}:JSON.parse(results[i].description);
+            console.log(newDes.nm,"newDes.av is ",newDes.av);
+            if(newDes.av == null){
+                console.log("called newDes.av is null");
+            }
+            else{
+                imgAddress = (Object.keys(newDes.av))[0];
+            }
+            if(newDes.nm == null){
+                userName = "Anonymous User #" + userNumber.toString();
+                userName = userName + 1;
+            }
+            else{
+                userName = newDes.nm;
+            }
+            tokenBalance = Number(sortedArray[i].quantityQNT)/(10**Number(tokenDecimalPlace));
+            userRankingInfo = {
+                userRanking:userRanking,
+                displayAccountId:userName,
+                tokenBalance:tokenBalance.toString(),
+                accountId : sortedArray[i].account,
+                accountImage : imgAddress,
+            }
+            imgAddress = "";
+            userRanking += 1;  
+                userList.push(userRankingInfo);
         }
-         tokenBalance = Number(sortedArray[i].quantityQNT)/(10**Number(tokenDecimalPlace));
-         userRankingInfo = {
-            userRanking:userRanking,
-            displayAccountId:userName,
-            tokenBalance:tokenBalance.toString(),
-            accountId : sortedArray[i].account,
-         }
-         userRanking += 1;  
-            userList.push(userRankingInfo);
-    }
-    for(var j = sortedArray.length; j < 100; j++){
-        userRankingInfo = {
-            userRanking:userRanking,
-            displayAccountId:"",
-            tokenBalance:"",
-            accountId : "",
-         }
-         userRanking += 1;  
-            userList.push(userRankingInfo);
-    }
+        // for(var j = sortedArray.length; j < 100; j++){
+        //     userRankingInfo = {
+        //         userRanking:userRanking,
+        //         displayAccountId:"",
+        //         tokenBalance:"",
+        //         accountId : "",
+        //         accountImage : "",
+        //     }
+        //     userRanking += 1;  
+        //         userList.push(userRankingInfo);
+        // }
+    
+    // for (var i = 0; i < Math.min(sortedArray.length,100);i++){
+    //     if(omittedAccounts.includes(sortedArray[i].account)){
+    //         console.log("omitted account is detected", sortedArray[i].account);
+    //         continue;
+    //     } 
+    //     const waitingToBeChangedDescription = await ledger2.account.getAccount({accountId: sortedArray[i].account});
+    //     let newDes =waitingToBeChangedDescription.description===undefined?{}:JSON.parse(waitingToBeChangedDescription.description);
+    //     if(newDes.nm == null){
+    //         userName = "Anonymous User #" + userNumber.toString();
+    //         userName = userName + 1;
+    //     }
+    //     else{
+    //         userName = newDes.nm;
+    //     }
+    //      tokenBalance = Number(sortedArray[i].quantityQNT)/(10**Number(tokenDecimalPlace));
+    //      userRankingInfo = {
+    //         userRanking:userRanking,
+    //         displayAccountId:userName,
+    //         tokenBalance:tokenBalance.toString(),
+    //         accountId : sortedArray[i].account,
+    //      }
+    //      userRanking += 1;  
+    //         userList.push(userRankingInfo);
+    // }
+    // for(var j = sortedArray.length; j < 100; j++){
+    //     userRankingInfo = {
+    //         userRanking:userRanking,
+    //         displayAccountId:"",
+    //         tokenBalance:"",
+    //         accountId : "",
+    //      }
+    //      userRanking += 1;  
+    //         userList.push(userRankingInfo);
+    // }
     console.log(userList);
     return userList;
 }
