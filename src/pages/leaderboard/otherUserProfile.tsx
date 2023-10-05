@@ -42,7 +42,7 @@ interface myNftList{
 const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props) => {
   const {appName,Wallet,Ledger} = useContext(AppContext);
   const nodeHost = useSelector(selectWalletNodeHost);
-  const ledger2 = LedgerClientFactory.createClient({ nodeHost });
+  const ledger2 = LedgerClientFactory.createClient({nodeHost});
   const username = useSelector(selectCurrentUsername);
   const userAccountpublicKey = useSelector(accountPublicKey);
   const discordUsername = useSelector(selectCurrentDiscordUsername);

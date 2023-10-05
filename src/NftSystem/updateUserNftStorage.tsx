@@ -150,7 +150,7 @@ export async function updateReceiverAccount(ledger2:any, recipientId:string,code
         finalNftList.push(nftToBeDistributed); 
         finalNftListString = finalNftList.join(",");
         console.log("final nft list is",finalNftListString);
-        sendMessage(ledger2,finalNftListString,receiverNftStorage.ats[0].at,nftDistributorPublicKey,nftDistributorPrivateKey,"1000000");
+        await sendMessage(ledger2,finalNftListString,receiverNftStorage.ats[0].at,nftDistributorPublicKey,nftDistributorPrivateKey,"1000000");
     }
 
     else{
@@ -167,7 +167,7 @@ export async function updateReceiverAccount(ledger2:any, recipientId:string,code
             if(i !=0 && i%46 == 0){
                 finalNftListString = finalNftList.join(",");
                 console.log("final nft list to be sent is",finalNftListString);
-                sendMessage(ledger2,finalNftListString,receiverNftStorage.ats[0].at,nftDistributorPublicKey,nftDistributorPrivateKey,"6000000");
+                await sendMessage(ledger2,finalNftListString,receiverNftStorage.ats[0].at,nftDistributorPublicKey,nftDistributorPrivateKey,"6000000");
                 finalNftList = [];
                 finalNftList.push(newTransactionNumber);
                 console.log("The finalNftList after clearing",finalNftList);
@@ -178,7 +178,7 @@ export async function updateReceiverAccount(ledger2:any, recipientId:string,code
                 console.log("final nft list to be sent is",finalNftListString);
                 const feePlanck:string = ((Math.floor((i%46)/8) + 1)*1000000).toString();
                 console.log(feePlanck);
-                sendMessage(ledger2,finalNftListString,receiverNftStorage.ats[0].at,nftDistributorPublicKey,nftDistributorPrivateKey,feePlanck);
+                await sendMessage(ledger2,finalNftListString,receiverNftStorage.ats[0].at,nftDistributorPublicKey,nftDistributorPrivateKey,feePlanck);
                 finalNftList = [];
                 finalNftList.push(newTransactionNumber);
                 console.log("The finalNftList after clearing",finalNftList);
@@ -228,7 +228,7 @@ export async function updateSenderAccount(ledger2:any, senderId:string,codeHashI
                 finalNftList.push("empty");
                 console.log("final nft list is empty and it is",finalNftList);
                 finalNftListString = finalNftList.join(",");
-                sendMessage(ledger2,finalNftListString,senderNftStorage.ats[0].at,nftDistributorPublicKey,nftDistributorPrivateKey,"1000000");
+                await sendMessage(ledger2,finalNftListString,senderNftStorage.ats[0].at,nftDistributorPublicKey,nftDistributorPrivateKey,"1000000");
             }
             for(var i = 0;i<latestTransactionList.length;i++){
                 console.log(latestTransactionList[i]);
@@ -236,7 +236,7 @@ export async function updateSenderAccount(ledger2:any, senderId:string,codeHashI
                 if(i !=0 && i%46 == 0){
                     finalNftListString = finalNftList.join(",");
                     console.log("final nft list to be sent is",finalNftListString);
-                    sendMessage(ledger2,finalNftListString,senderNftStorage.ats[0].at,nftDistributorPublicKey,nftDistributorPrivateKey,"6000000");
+                    await sendMessage(ledger2,finalNftListString,senderNftStorage.ats[0].at,nftDistributorPublicKey,nftDistributorPrivateKey,"6000000");
                     finalNftList = [];
                     finalNftList.push(newTransactionNumber);
                     console.log("The finalNftList after clearing",finalNftList);
@@ -247,7 +247,7 @@ export async function updateSenderAccount(ledger2:any, senderId:string,codeHashI
                     console.log("final nft list to be sent is",finalNftListString);
                     const feePlanck:string = ((Math.floor((i%46)/8) + 1)*1000000).toString();
                     console.log(feePlanck);
-                    sendMessage(ledger2,finalNftListString,senderNftStorage.ats[0].at,nftDistributorPublicKey,nftDistributorPrivateKey,feePlanck);
+                    await sendMessage(ledger2,finalNftListString,senderNftStorage.ats[0].at,nftDistributorPublicKey,nftDistributorPrivateKey,feePlanck);
                     finalNftList = [];
                     finalNftList.push(newTransactionNumber);
                     console.log("The finalNftList after clearing",finalNftList);
@@ -415,6 +415,45 @@ export async function GetUserNftList(ledger2:any,accountId:string,nftDistributor
                     return userNftList;
           }
     }
+}
+
+export async function FindNftIpfsAddressWithConractId(ledger2:any,nftId:string){
+    const contractInfo = await ledger2.contract.getContract(nftId);
+    const trial = JSON.parse(contractInfo.description);
+    console.log("trial.descriptor is ",trial.descriptor);   
+    const res = await fetch(`https://ipfs.io/ipfs/${trial.descriptor}`);
+    const text = await res.text();
+    const nftInfo = JSON.parse(text);
+    let matches = nftInfo.name.match(/(\d+)/);
+    const nftNumber = matches[0].toString().padStart(8, '0');
+    //const nftNumber = "1234".padStart(8, '0');
+    console.log(nftInfo.media[0].social);
+    console.log(nftNumber);
+    return {nftImage:nftInfo.media[0].social,nftNumber:nftNumber};     
+}
+
+export async function UpdateUserIcon(ledger2:any,imgAddress:string,nftId:string,userAccountId:string,userAccountpublicKey:string,Wallet:any){
+    const waitingToBeChangedDescription = await ledger2.account.getAccount({accountId: userAccountId});
+    let newDes =waitingToBeChangedDescription.description===undefined?{}:JSON.parse(waitingToBeChangedDescription.description);
+    console.log(newDes);
+    console.log(imgAddress);
+    console.log("123");
+    let obj = {
+      [imgAddress]:"image/png"
+    }
+    newDes = Object.assign(newDes,{av:obj});       
+    newDes = Object.assign(newDes,{id:nftId});
+    newDes = JSON.stringify(newDes);
+    console.log("newDes is ",newDes);
+    console.log("nftID is ",nftId);
+    const setAccountInfo = await ledger2.account.setAccountInfo({
+      name:"1234",
+      description:newDes,
+      feePlanck:"3000000",
+      senderPublicKey:userAccountpublicKey,
+    });
+    //console.log(setAccountInfo);
+    await Wallet.Extension.confirm(setAccountInfo.unsignedTransactionBytes);
 }
 
 // export function UpdateUserStorageButton(){

@@ -17,6 +17,8 @@ import LoadingMintingMyNftList from './loadMintingMyNftList';
 import { ShortTitleBar } from '../../components/titleBar';
 import { IsUserUpdatingIcon } from '../../NftSystem/updateUserNftStorage';
 
+
+
  interface MyNftProps {
     userId?:string
  }

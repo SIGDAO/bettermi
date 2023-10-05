@@ -103,12 +103,13 @@
 .photo-Gzrq3v {
   background-color: transparent;
   border-radius: 20px;
-  height: 365px;
+  height: 500px;
   left: calc((100% - 333px) /2);
   object-fit: cover;
   position: absolute;
   top: 91px;
   width: 333px;
+  clip:rect(0,351px,320px,0);
 }
 
 .search-bar-container-customizeYourProfile {

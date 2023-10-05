@@ -13,7 +13,6 @@ import { FindLatestTransactionArray, FindLatestTransactionNumber, UpdateUserStor
 import { updateReceiverAccount } from "./updateUserNftStorage";
 import { CheckNftOwnerId } from "./updateUserNftStorage";
 
-
 async function getNftList(ledger2:Api,nftStorageAccount:string,nftDistributor:string){
     const nftTokenId = await ledger2.account.getAccountTransactions({
         accountId: nftStorageAccount,
@@ -207,8 +206,8 @@ var nftList = await getNftList(ledger2,nftStorageAccount,nftDistributor);
     //console.log(newNftList, "newNftList is ");
     //console.log(typeof(newNftList));
     }
-    sendMessage(ledger2,newNftList,nftStorageAccount,nftDistributorPublicKey,nftDistributorPrivateKey,feePlanck);
-    updateReceiverAccount(ledger2,recipientId,codeHashId,nftToBeDistributed.nft,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey);
+    await sendMessage(ledger2,newNftList,nftStorageAccount,nftDistributorPublicKey,nftDistributorPrivateKey,feePlanck);
+    await updateReceiverAccount(ledger2,recipientId,codeHashId,nftToBeDistributed.nft,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey);
     const joinedPhrase = "find exotic multiply hen rib fence transfer wet era poem junk suffer";
     const {publicKey, signPrivateKey} = generateMasterKeys(joinedPhrase);
     //SendBackToStorage(ledger2,nftToBeDistributed.nft,nftDistributor,nftStorageAccount,nftDistributorPublicKey,nftDistributorPrivateKey,signPrivateKey,publicKey);
