@@ -319,6 +319,48 @@ export async function IsUserSettingUpdating(ledger2:any,userAccountId:string){
         return false;
 
 }
+
+export async function IsUserUpdatingDescription(ledger2:any,userAccountId:string){
+    const messages = await ledger2.account.getUnconfirmedAccountTransactions(userAccountId);
+    const originalDescription = await ledger2.account.getAccount({accountId: userAccountId});
+    //console.log(messages);
+    for (var i = 0; i < messages.unconfirmedTransactions.length; i++){
+        if(messages.unconfirmedTransactions[i].type === 1 && messages.unconfirmedTransactions[i].subtype === 5 && messages.unconfirmedTransactions[i].sender === userAccountId){
+            const newDescription = JSON.parse(messages.unconfirmedTransactions[i].attachment.description);
+            console.log(newDescription);
+            if(newDescription.nm == null){
+                return false;
+            }
+            else if(originalDescription.description == null){
+                console.log("called original description is ", originalDescription);
+                return true;
+            }
+            const description = JSON.parse(originalDescription.description);
+            console.log(description);
+            if(description.nm !== newDescription.nm){
+                console.log("called description.nm !== newDescription.nm");
+                return true;
+            }
+            if(description.ds !== newDescription.ds){
+                console.log("called description.ds !== newDescription.ds");
+                return true;
+            }
+            if(description.hp !== newDescription.hp){
+                console.log("called description.hp !== newDescription.hp");
+                return true;
+            }
+            if(description.sc !== newDescription.sc){
+                console.log("called description.sc !== newDescription.sc");
+                return true;
+            }
+
+            console.log("not updating personal info");
+            return false;
+        }
+    }
+    return false;
+}
+
 export async function IsUserUpdatingIcon(ledger2:any,userAccountId:string){
     const messages = await ledger2.account.getUnconfirmedAccountTransactions(userAccountId);
     const originalDescription = await ledger2.account.getAccount({accountId: userAccountId});
@@ -337,6 +379,9 @@ export async function IsUserUpdatingIcon(ledger2:any,userAccountId:string){
             }
             else{
                 const description = JSON.parse(originalDescription.description);
+                if(description.av == null){
+                    return true;
+                }
                 console.log(originalDescription);
                 console.log(Object.keys(description.av));
                 console.log(newImage);
@@ -356,6 +401,7 @@ export async function IsUserUpdatingIcon(ledger2:any,userAccountId:string){
     }
     return false;
 }
+
 
 export async function FindNftContractStorage(ledger2:any,accountId:string,codeHashIdForNft:string){
     let NftContractStorage = await ledger2.contract.getContractsByAccount({
@@ -420,34 +466,146 @@ export async function GetUserNftList(ledger2:any,accountId:string,nftDistributor
 export async function FindNftIpfsAddressWithConractId(ledger2:any,nftId:string){
     const contractInfo = await ledger2.contract.getContract(nftId);
     const trial = JSON.parse(contractInfo.description);
-    console.log("trial.descriptor is ",trial.descriptor);   
+    //console.log("trial.descriptor is ",trial.descriptor);   
     const res = await fetch(`https://ipfs.io/ipfs/${trial.descriptor}`);
     const text = await res.text();
     const nftInfo = JSON.parse(text);
     let matches = nftInfo.name.match(/(\d+)/);
     const nftNumber = matches[0].toString().padStart(8, '0');
     //const nftNumber = "1234".padStart(8, '0');
-    console.log(nftInfo.media[0].social);
-    console.log(nftNumber);
+    //console.log(nftInfo.media[0].social);
+    //console.log(nftNumber);
     return {nftImage:nftInfo.media[0].social,nftNumber:nftNumber};     
 }
 
-export async function UpdateUserIcon(ledger2:any,imgAddress:string,nftId:string,userAccountId:string,userAccountpublicKey:string,Wallet:any){
-    const waitingToBeChangedDescription = await ledger2.account.getAccount({accountId: userAccountId});
-    let newDes =waitingToBeChangedDescription.description===undefined?{}:JSON.parse(waitingToBeChangedDescription.description);
-    console.log(newDes);
-    console.log(imgAddress);
-    console.log("123");
+export async function UpdateUserIcon(ledger2:any,imgAddress:string,nftId:string,userAccountId:string,userAccountpublicKey:string,Wallet:any,name:string){
+    //let newDes =waitingToBeChangedDescription.description===undefined?{}:JSON.parse(waitingToBeChangedDescription.description);
+    const messages = await ledger2.account.getUnconfirmedAccountTransactions(userAccountId);
+    let newDescriptionObj = {};
+    //console.log(newDescriptionObj);
+    //console.log(imgAddress);
+    //console.log("123");
     let obj = {
       [imgAddress]:"image/png"
     }
-    newDes = Object.assign(newDes,{av:obj});       
-    newDes = Object.assign(newDes,{id:nftId});
+
+    newDescriptionObj = Object.assign(newDescriptionObj,{av:obj});       
+    newDescriptionObj = Object.assign(newDescriptionObj,{id:nftId});
+    //console.log("newDescriptionObj is ",newDescriptionObj);
+    //console.log("nftID is ",nftId);
+
+    //Part One, If there is updating user setting in the unconfirmed transaction list, the latest user setting info is in the unconfirmed transactionlist
+
+    for (var i = 0; i < messages.unconfirmedTransactions.length; i++){
+        if(messages.unconfirmedTransactions[i].type === 1 && messages.unconfirmedTransactions[i].subtype === 5 && messages.unconfirmedTransactions[i].sender === userAccountId){
+            let oldDescription = JSON.parse(messages.unconfirmedTransactions[i].attachment.description);
+            //newDescriptionObjcription = Object.assign({av:oldDescription.av},{id:oldDescription.id},newDescriptionObj);
+            let newDescription = {};
+            if(oldDescription.nm != null){                                              
+                newDescription = Object.assign({nm:oldDescription.nm},newDescription);          //Assign the old description to the new description if the old description exists
+            }
+            if(oldDescription.ds != null){
+                newDescription = Object.assign({ds:oldDescription.ds},newDescription);
+            }
+            if(oldDescription.hp != null){
+                newDescription = Object.assign({hp:oldDescription.hp},newDescription);
+            }
+            if(oldDescription.sc != null){
+                newDescription = Object.assign({sc:oldDescription.sc},newDescription);
+            }
+            newDescription = Object.assign(newDescription,newDescriptionObj);
+            //console.log("new Description is",newDescription); 
+            newDescription = JSON.stringify(newDescription);
+            const setAccountInfo = await ledger2.account.setAccountInfo({
+                name:name,
+                description:newDescription,
+                feePlanck:"3000000",
+                senderPublicKey:userAccountpublicKey,
+              });
+              //console.log(setAccountInfo);
+              await Wallet.Extension.confirm(setAccountInfo.unsignedTransactionBytes);
+            return newDescription;
+        }
+    }
+
+    //If there is no unconfirmed transactions, the latest version of user setting is on the BlockChain
+
+    let newDes = {};
+    const waitingToBeChangedDescription = await ledger2.account.getAccount({accountId: userAccountId});
+    let oldDes =waitingToBeChangedDescription.description===undefined?{}:JSON.parse(waitingToBeChangedDescription.description);
+    if(oldDes.nm != null){
+        newDes = Object.assign({nm:oldDes.nm},newDes);      //Assign the old description to the new description if the old description exists
+    }
+    if(oldDes.ds != null){
+        newDes = Object.assign({ds:oldDes.ds},newDes);
+    }
+    if(oldDes.hp != null){
+        newDes = Object.assign({hp:oldDes.hp},newDes);
+    }
+    if(oldDes.sc != null){
+        newDes = Object.assign({sc:oldDes.sc},newDes);
+    }
+    //console.log(newDes);
+    newDes = Object.assign(newDes,newDescriptionObj);
+    //console.log(newDes);
     newDes = JSON.stringify(newDes);
-    console.log("newDes is ",newDes);
-    console.log("nftID is ",nftId);
     const setAccountInfo = await ledger2.account.setAccountInfo({
       name:"1234",
+      description:newDes,
+      feePlanck:"3000000",
+      senderPublicKey:userAccountpublicKey,
+    });
+    //console.log(setAccountInfo);
+    await Wallet.Extension.confirm(setAccountInfo.unsignedTransactionBytes);
+    return newDes;
+}
+
+
+export async function UpdateUserDescription(ledger2:any,newDescriptionObj:any,userAccountId:string,userAccountpublicKey:string,Wallet:any,name:string){
+    const messages = await ledger2.account.getUnconfirmedAccountTransactions(userAccountId);
+    //const originalDescription = await ledger2.account.getAccount({accountId: userAccountId});
+    for (var i = 0; i < messages.unconfirmedTransactions.length; i++){
+        if(messages.unconfirmedTransactions[i].type === 1 && messages.unconfirmedTransactions[i].subtype === 5 && messages.unconfirmedTransactions[i].sender === userAccountId){
+            let oldDescription = JSON.parse(messages.unconfirmedTransactions[i].attachment.description);
+            //console.log(oldDescription);
+            let newDescription = {};
+            if(oldDescription.av != null){
+                newDescription = Object.assign({av:oldDescription.av},newDescription);
+            }
+            if(oldDescription.id != null){
+                newDescription = Object.assign({id:oldDescription.id},newDescription);
+            }
+            newDescription = Object.assign(newDescription,newDescriptionObj);
+            //console.log("new Description is",newDescription); 
+            newDescription = JSON.stringify(newDescription);
+            const setAccountInfo = await ledger2.account.setAccountInfo({
+                name:name,
+                description:newDescription,
+                feePlanck:"3000000",
+                senderPublicKey:userAccountpublicKey,
+              });
+              //console.log(setAccountInfo);
+              await Wallet.Extension.confirm(setAccountInfo.unsignedTransactionBytes);
+            return newDescription;
+        }
+    }
+    const waitingToBeChangedDescription = await ledger2.account.getAccount({accountId: userAccountId});
+    let oldDes =waitingToBeChangedDescription.description===undefined?{}:JSON.parse(waitingToBeChangedDescription.description);
+    //console.log(oldDes);
+    //console.log(newDescriptionObj);
+    let newDes = {};
+    if(oldDes.av != null){
+        newDes = Object.assign({av:oldDes.av},newDes);
+    };
+    if(oldDes.id != null){
+        newDes = Object.assign({id:oldDes.id},newDes);
+    }
+    newDes = Object.assign( newDes,newDescriptionObj);
+
+    //console.log(newDes);
+    newDes = JSON.stringify(newDes);
+    const setAccountInfo = await ledger2.account.setAccountInfo({
+      name:name,
       description:newDes,
       feePlanck:"3000000",
       senderPublicKey:userAccountpublicKey,

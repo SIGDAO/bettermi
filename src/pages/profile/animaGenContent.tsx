@@ -27,6 +27,9 @@ import { useContext } from "react";
 import { AppContext } from "../../redux/useContext";
 import UserIcon from "../../components/loadUserIcon";
 import { GetUserNftList } from "../../NftSystem/updateUserNftStorage";
+import { IsUserUpdatingDescription } from "../../NftSystem/updateUserNftStorage";
+import { IsUserUpdatingIcon } from "../../NftSystem/updateUserNftStorage";
+import { UpdateUserDescription } from "../../NftSystem/updateUserNftStorage";
 
 interface IAnimaGenContentProps {
   isOpen: boolean;
@@ -84,27 +87,16 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
     return () => clearInterval(timer);
   }, [count]);
 
+  
   const uploadToChain = async () => {
     try{
     const waitingToBeChangedDescription = await ledger2.account.getAccount({accountId: userAccountId});
-    let newDes =waitingToBeChangedDescription.description===undefined?{}:JSON.parse(waitingToBeChangedDescription.description);
-    console.log(newDes);
-    //newDes = Object.assign(newDes,{bg:{QmXakmiPKMEA2aWRvxhJgpuj6NCkcCpZv7i4BAnskcio1C:"image/png"}});
+    let newDes = {};
     newDes = Object.assign(newDes,{nm:name});
     newDes = Object.assign(newDes,{ds:aboutYourselfText});
     newDes = Object.assign(newDes,{hp:descriptionText});
     newDes = Object.assign(newDes,{sc:[discordUsernameText]});
-    //newDes = Object.assign(newDes,{si:{QmVTn8BkVodgZwL3jowEayfDVfMFQFXu9ctuadpTquZeAM: "image/webp"}});
-    //newDes = Object.assign(newDes,{tw:"https://twitter.com/neverforget0612"});
-    const newDesString = JSON.stringify(newDes);
-    console.log(newDesString);
-    console.log(descriptionText);
-    console.log(discordUsernameText);
-    console.log(aboutYourselfText);
-    console.log(name);
-    const setAcc = await ledger2.account.setAccountInfo({name:name,description:newDesString,feePlanck:"3000000",senderPublicKey:userAccountpublicKey});
-    await Wallet.Extension.confirm(setAcc.unsignedTransactionBytes);
-    setIsUpdatingUserSetting(true);
+    await UpdateUserDescription(ledger2,newDes,userAccountId,userAccountpublicKey,Wallet,name);
     }
     catch(e: any){
       console.log(e);
@@ -115,7 +107,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   const handleSave = async () => {
     // validation check
     let foundEmptyField = false;
-    // console.log("fdisjoidfsjioiosdfiodio", inputRefs)
+     //console.log("fdisjoidfsjioiosdfiodio");
 
     // inputRefs.current.forEach((input, index) => {
     //   console.log(input);
@@ -135,7 +127,6 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
       return;
     }
     uploadToChain();
-
     dispatch(profileSlice.actions.setUsername(name));
     dispatch(profileSlice.actions.setAboutYourself(aboutYourselfText));
     dispatch(profileSlice.actions.setDescription(descriptionText));
@@ -264,13 +255,28 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
 
   const [isSettingLoading,setIsSettingLoading] = useState<boolean>(true);
   const [isUpdatingUserSetting,setIsUpdatingUserSetting] = useState<boolean>(false);
+  //const [isUpdatingUserDescription, setIsUpdatingUserDescription] = useState<boolean>(false);
+  const [isUpdatingUserIcon,setIsUpdatingUserIcon] = useState<boolean>(false);
+  const [isUserIconLoading,setIsUserIconLoading] = useState<boolean>(true);
   const fetchSetting = async() => {
-    const isUserSettingUpdating = await IsUserSettingUpdating(ledger2,userAccountId);
-    if(isUserSettingUpdating === true){
+  //  const isUserSettingUpdating = await IsUserSettingUpdating(ledger2,userAccountId);
+    const isUserUpdatingDescription = await IsUserUpdatingDescription(ledger2,userAccountId);
+    const isUserUpdatingUserIcon = await IsUserUpdatingIcon(ledger2,userAccountId);
+    if(isUserUpdatingUserIcon === true){
+      setIsUpdatingUserIcon(true);
+      setIsUserIconLoading(false);
+    }
+    else{
+    setIsUserIconLoading(false);}
+    if(isUserUpdatingDescription === true){
       setIsUpdatingUserSetting(true);
       setIsSettingLoading(false);
-      return;
     }
+    // if(isUserSettingUpdating === true){
+    //   setIsUpdatingUserSetting(true);
+    //   setIsSettingLoading(false);
+    //   return;
+    // }
     const waitingToBeChangedDescription = await ledger2.account.getAccount({accountId: userAccountId});
     let newDes =waitingToBeChangedDescription.description===undefined?{}:JSON.parse(waitingToBeChangedDescription.description);
     console.log(newDes);
@@ -348,7 +354,41 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
               alt=""
             />
           </div>
-        {(isSettingLoading ===true || isUpdatingUserSetting === true)?(
+          {isUpdatingUserIcon === true || isUserIconLoading === true?(              
+          <div className="profile_icon_nft_-avatar_empty">
+                <img
+                    className="profile_icon_ic_add"
+                    src= "/img/loadingMinting/mimi-dancing-for-loadin-page.gif"
+                    alt="ic_add"
+                />
+                </div>):(
+                  <UserIcon profile = {true} userAccountId = {userAccountId}></UserIcon>
+                )}
+
+
+
+              {isUpdatingUserSetting === true || isSettingLoading === true?(
+                  <div className="profile-content">
+                    <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
+                  </div>):(
+                  <div className="profile-content">
+                    <div className="zoe_li">{fetchName?fetchName:name || "zoe_li"}</div>
+                      <div className="perso-container">
+                      <p 
+                        className="im-a-positive-perso"
+                        style={description ? {} : { color: "#8e8e8e" }}
+                      >
+                        {fetchDescription?fetchDescription:descriptionText ||
+                          "Please enter DESCRIPTION TO FRIENDS"}
+                      </p>
+                      <p className="x29-personal-trainer inter-semi-bold-keppel-15px">
+                        {fetchAboutYourself?fetchAboutYourself:aboutYourselfText || `♉️  |  29  |  PERSONAL TRAINER`}
+                      </p>
+                    </div>
+                  </div>
+                  )
+                  }
+        {/* {(isSettingLoading ===true || isUpdatingUserSetting === true)?(
           <>
               <div className="profile_icon_nft_-avatar_empty">
                 <img
@@ -358,15 +398,6 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
                 />
                 </div>
                   <div className="profile-content">
-                      {/* <img
-                      src={"/img/loadingMinting/mimi-dancing-for-loadin-page.gif"}
-                      style={{
-                        width: '152px',
-                        height: '217px',
-                        marginRight: '10px',
-                        zIndex:100,
-                      }}
-                    /> */}
                     <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
                   </div>
                 </>
@@ -390,44 +421,8 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
               </>
               )
             } 
-                      <UserIcon profile = {true} userAccountId = {userAccountId}></UserIcon>
-          {/* {loading === true ?(
-            <div></div>
-          ):
-            isUpdating === true?
-            (
-                <Link to="https://test.signumart.io/">
-                <div className="profile_icon_nft_-avatar_empty">
-                  <img
-                    className="profile_icon_ic_add"
-                    src="img/profile/ic-add-2@1x.png"
-                    alt="ic_add"
-                  />
-                </div>
-              </Link>
-                // <div
-                //   className="nft_-avatar_empty"
-                // />
-              ):
-              haveNft === true? (
-                  <img
-                    className="nft_-avatar_empty"
-                    src={`https://ipfs.io/ipfs/${imgAddress}`}
-                    alt="NFT_Avatar"
-                  />
-                ):(
-                <Link to="https://test.signumart.io/">
-                  <div className="profile_icon_nft_-avatar_empty">
-                    <img
-                      className="profile_icon_ic_add"
-                      src="img/profile/ic-add-2@1x.png"
-                      alt="ic_add"
-                    />
-                  </div>
-                </Link>
-          )
-          } */}
-            {(isSettingLoading ===true || isUpdatingUserSetting === true)?<div></div>:(
+              <UserIcon profile = {true} userAccountId = {userAccountId}></UserIcon> */}
+            {isUpdatingUserSetting === true || isSettingLoading === true?<div></div>:(
               <>
               <div className="card-number inter-normal-white-15px">
                 {fetchDiscordUsername?fetchDiscordUsername:discordUsernameText || "zoeeeee#1234"}

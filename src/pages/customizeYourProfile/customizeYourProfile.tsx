@@ -39,7 +39,7 @@ const CustomizeYourProfile: React.FunctionComponent<ICustomizeYourProfileProps> 
   const [name, setName] = useState<string>('');
 
   const handleSave = async () => {
-    await UpdateUserIcon(ledger,nftImage,nftId,userAccountId,userAccountpublicKey,Wallet);
+    await UpdateUserIcon(ledger,nftImage,nftId,userAccountId,userAccountpublicKey,Wallet,name);
     if (!name) {
       localStorage.setItem('name', defaultName);
       store.dispatch(profileSlice.actions.setUsername(defaultName))

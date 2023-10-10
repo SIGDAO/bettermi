@@ -13,6 +13,7 @@ import { store } from '../../redux/reducer';
 import { leaderBoardBanner, userRankingSlice } from '../../redux/userRanking';
 import { userRanking } from '../../redux/userRanking';
 import { userRankingListRedux } from '../../redux/userRanking';
+import { useNavigate } from 'react-router-dom';
 
 type Props = {}
 
@@ -23,6 +24,7 @@ const Leaderboard = (props: Props) => {
   const nftLoaded = useRef(false);
   const[isLeaderBoardLoading,setIsLeaderBoardLoading] = React.useState<boolean>(true);
   const userRankingListFromRedux = useSelector(userRankingListRedux);
+  const navigate = useNavigate();
   console.log(userRankingListFromRedux);
 
   const fetchUserRankingList = () => {
@@ -98,7 +100,9 @@ const Leaderboard = (props: Props) => {
 
                       <img className="nft_-avatar-2 nft_-avatar-3" 
                             src={`https://ipfs.io/ipfs/${userRankingList[0].accountImage}`} 
-                            alt="NFT_Avatar" />
+                            alt="NFT_Avatar" 
+                            onClick={() => {navigate('/OtherUserProfile',{state:{userId:userRankingList[0].accountId}})}}
+                            />
                       
                     
                       <div className="crown-with-red-stone">
@@ -158,7 +162,7 @@ const Leaderboard = (props: Props) => {
                       <div className="x10 inter-semi-bold-keppel-14px">{userRankingList[0].tokenBalance}</div>
                   </div>
                 </div>
-                <div className="leadboard_1st-1 leadboard_1st-3">
+                <div className="leadboard_1st-1 leadboard_1st-3"                         onClick={() => {navigate('/OtherUserProfile',{state:{userId:userRankingList[1].accountId}})}}>
                   <div className="x2nd inter-semi-bold-white-18px-2">
                     <span className="inter-semi-bold-white-18px">2</span><span className="inter-semi-bold-white-18px">nd</span>
                   </div>
@@ -172,7 +176,7 @@ const Leaderboard = (props: Props) => {
                   </div>
                 </div>
               </div>
-              <div className="leadboard_1st-2 leadboard_1st-3">
+              <div className="leadboard_1st-2 leadboard_1st-3"                          onClick={() => {navigate('/OtherUserProfile',{state:{userId:userRankingList[2].accountId}})}}>
                 <div className="x3rd inter-semi-bold-white-18px-2">
                   <span className="inter-semi-bold-white-18px">3</span><span className="inter-semi-bold-white-18px">rd</span>
                 </div>

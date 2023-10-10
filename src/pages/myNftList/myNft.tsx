@@ -20,6 +20,8 @@ import * as React from 'react';
  import { P2PTransferNftToken } from '../../components/p2pTransferNftToken';
  import { useNavigate } from 'react-router-dom';
  import { CheckNftOwnerId } from '../../NftSystem/updateUserNftStorage';
+ import { UpdateUserIcon } from '../../NftSystem/updateUserNftStorage';
+import { selectCurrentUsername } from '../../redux/profile';
 
  interface MyNftProps {
     image:string;
@@ -47,6 +49,7 @@ import * as React from 'react';
      const [nftLevel,setNftLevel] = useState<string>("");
      const [nftNumber,setNftNumber] = useState<number>();
      const [reward,setReward] = useState<string>("");
+     const name = useAppSelector(selectCurrentUsername);
      const navigate = useNavigate();
      var nftImgAddress:string = "";
      var addressSuffix:string ="https://ipfs.io/ipfs/"; 
@@ -103,26 +106,8 @@ import * as React from 'react';
       try{
             const nftOwner = await CheckNftOwnerId(ledger2,nftId);
             if(nftOwner === userAccountId){
-            const waitingToBeChangedDescription = await ledger2.account.getAccount({accountId: userAccountId});
-            let newDes =waitingToBeChangedDescription.description===undefined?{}:JSON.parse(waitingToBeChangedDescription.description);
-            console.log(newDes);
-            console.log(imgAddress);
-            console.log("123");
-            let obj = {
-              [imgAddress]:"image/png"
-            }
-            newDes = Object.assign(newDes,{av:obj});       
-            newDes = Object.assign(newDes,{id:nftId});
-            newDes = JSON.stringify(newDes);
-            const setAccountInfo = await ledger2.account.setAccountInfo({
-              name:"1234",
-              description:newDes,
-              feePlanck:"3000000",
-              senderPublicKey:userAccountpublicKey,
-            });
-            //console.log(setAccountInfo);
-            await Wallet.Extension.confirm(setAccountInfo.unsignedTransactionBytes);
-            setIsUpdatingDescription(true);
+              await UpdateUserIcon(ledger2,imgAddress,nftId,userAccountId,userAccountpublicKey,Wallet,name);
+              setIsUpdatingDescription(true);
             }
             else{
               alert("We are sorry, it seems like you still don't own this NFT, maybe wait for a few more minutes if you just received it revcently");

@@ -111,48 +111,34 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
         }
         const description = JSON.parse(account.description);
         console.log(description.id);
-        const nftOwner = await CheckNftOwnerId(ledger2,description.id);
-        console.log(nftOwner);
-        console.log(userAccountId);
-        if(nftOwner !== userAccountId){
-          try{
-            alert("you do not have this NFT, please unequip it");
-            const accountInfo = await ledger2.account.getAccount(userAccountId);
+          if(description.id != null){
+            const accountInfo = await ledger2.contract.getContract(description.id);
             console.log(accountInfo);
+            const ipfsAddress = JSON.parse(accountInfo.description).descriptor;
+            console.log(ipfsAddress);
+            const ipfsJson = await fetch(`https://ipfs.io/ipfs/${ipfsAddress}`);
+            console.log(ipfsJson);
+            const text = await ipfsJson.text();
+            console.log(text);
+            const nftInfo = JSON.parse(text);
+            console.log(nftInfo);
+          if(nftInfo.description.includes("1") === true){
+            setLevel("1");
           }
-          catch(e:any){
+          if(nftInfo.description.includes("2") === true){
+            setLevel("2");
 
           }
+          if(nftInfo.description.includes("3") === true){
+            setLevel("3");
+          }
+          store.dispatch(accountSlice.actions.setLevel(description.ds));
         }
         else{
-              if(description.id != null){
-                const accountInfo = await ledger2.contract.getContract(description.id);
-                console.log(accountInfo);
-                const ipfsAddress = JSON.parse(accountInfo.description).descriptor;
-                console.log(ipfsAddress);
-                const ipfsJson = await fetch(`https://ipfs.io/ipfs/${ipfsAddress}`);
-                console.log(ipfsJson);
-                const text = await ipfsJson.text();
-                console.log(text);
-                const nftInfo = JSON.parse(text);
-                console.log(nftInfo);
-              if(nftInfo.description.includes("1") === true){
-                setLevel("1");
-              }
-              if(nftInfo.description.includes("2") === true){
-                setLevel("2");
-
-              }
-              if(nftInfo.description.includes("3") === true){
-                setLevel("3");
-              }
-              store.dispatch(accountSlice.actions.setLevel(description.ds));
-            }
-            else{
-              setLevel("1");
-              store.dispatch(accountSlice.actions.setLevel(description.ds));
-            }
+          setLevel("1");
+          store.dispatch(accountSlice.actions.setLevel(description.ds));
         }
+        
         console.log(description);
         console.log(Object.keys(description.av));
         console.log(typeof(Object.keys(description.av)[0]));

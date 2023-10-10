@@ -104,8 +104,9 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
     const incrementInterval = 240000 / 96; // Time divided by the number of increments
     // const incrementInterval = 5000 / 100;
     const timer = setInterval(() => {
+      if(count < 100){
       setCount((prevCount) => prevCount + 1);
-
+      }
       // if (count => 100 ) {
       // } else {
       //   setIsLoading(false);
