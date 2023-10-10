@@ -498,7 +498,7 @@ export async function UpdateUserIcon(ledger2:any,imgAddress:string,nftId:string,
 
     for (var i = 0; i < messages.unconfirmedTransactions.length; i++){
         if(messages.unconfirmedTransactions[i].type === 1 && messages.unconfirmedTransactions[i].subtype === 5 && messages.unconfirmedTransactions[i].sender === userAccountId){
-            let oldDescription = JSON.parse(messages.unconfirmedTransactions[i].attachment.description);
+            let oldDescription = messages.unconfirmedTransactions[i].attachment.description==null?{}:JSON.parse(messages.unconfirmedTransactions[i].attachment.description);
             //newDescriptionObjcription = Object.assign({av:oldDescription.av},{id:oldDescription.id},newDescriptionObj);
             let newDescription = {};
             if(oldDescription.nm != null){                                              
@@ -532,7 +532,7 @@ export async function UpdateUserIcon(ledger2:any,imgAddress:string,nftId:string,
 
     let newDes = {};
     const waitingToBeChangedDescription = await ledger2.account.getAccount({accountId: userAccountId});
-    let oldDes =waitingToBeChangedDescription.description===undefined?{}:JSON.parse(waitingToBeChangedDescription.description);
+    let oldDes =waitingToBeChangedDescription.description==null?{}:JSON.parse(waitingToBeChangedDescription.description);
     if(oldDes.nm != null){
         newDes = Object.assign({nm:oldDes.nm},newDes);      //Assign the old description to the new description if the old description exists
     }
@@ -566,7 +566,7 @@ export async function UpdateUserDescription(ledger2:any,newDescriptionObj:any,us
     //const originalDescription = await ledger2.account.getAccount({accountId: userAccountId});
     for (var i = 0; i < messages.unconfirmedTransactions.length; i++){
         if(messages.unconfirmedTransactions[i].type === 1 && messages.unconfirmedTransactions[i].subtype === 5 && messages.unconfirmedTransactions[i].sender === userAccountId){
-            let oldDescription = JSON.parse(messages.unconfirmedTransactions[i].attachment.description);
+            let oldDescription = messages.unconfirmedTransactions[i].attachment.description==null?{}:JSON.parse(messages.unconfirmedTransactions[i].attachment.description);
             //console.log(oldDescription);
             let newDescription = {};
             if(oldDescription.av != null){
@@ -590,7 +590,7 @@ export async function UpdateUserDescription(ledger2:any,newDescriptionObj:any,us
         }
     }
     const waitingToBeChangedDescription = await ledger2.account.getAccount({accountId: userAccountId});
-    let oldDes =waitingToBeChangedDescription.description===undefined?{}:JSON.parse(waitingToBeChangedDescription.description);
+    let oldDes =waitingToBeChangedDescription.description==null?{}:JSON.parse(waitingToBeChangedDescription.description);
     //console.log(oldDes);
     //console.log(newDescriptionObj);
     let newDes = {};
@@ -612,6 +612,29 @@ export async function UpdateUserDescription(ledger2:any,newDescriptionObj:any,us
     });
     //console.log(setAccountInfo);
     await Wallet.Extension.confirm(setAccountInfo.unsignedTransactionBytes);
+}
+
+export async function GetEquippedNftId(ledger2:any,userAccountId:string){
+    const messages = await ledger2.account.getUnconfirmedAccountTransactions(userAccountId);
+    for (var i = 0; i < messages.unconfirmedTransactions.length; i++){
+        if(messages.unconfirmedTransactions[i].type === 1 && messages.unconfirmedTransactions[i].subtype === 5 && messages.unconfirmedTransactions[i].sender === userAccountId){
+            let CurrentDescription = messages.unconfirmedTransactions[i].attachment.description==null?{}:JSON.parse(messages.unconfirmedTransactions[i].attachment.description);
+            if(CurrentDescription.id != null){
+                return CurrentDescription.id;
+            }
+            else{
+                return "";
+            }
+        }
+    }
+    const waitingToBeChangedDescription = await ledger2.account.getAccount({accountId: userAccountId});
+    let currentDes =waitingToBeChangedDescription.description==null?{}:JSON.parse(waitingToBeChangedDescription.description);
+    if(currentDes.id != null){
+        return currentDes.id;
+    }
+    else{
+        return "";
+    }
 }
 
 // export function UpdateUserStorageButton(){

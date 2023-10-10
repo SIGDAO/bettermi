@@ -37,6 +37,7 @@ interface IMyNftListProps {
   myNfts:myNftList[];
   setIsUpdatingDescription:(isUpdatingDescription:boolean) => void;
   isOtherUser:boolean;
+  equippedNftIpfsAddress?:string;
 }
 
 // interface myNftList{
@@ -51,7 +52,7 @@ export interface myNftList{
 }
 
 const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
-  const {isUpdatingDescription,myNfts,setIsUpdatingDescription,isOtherUser} = props;
+  const {isUpdatingDescription,myNfts,setIsUpdatingDescription,isOtherUser,equippedNftIpfsAddress} = props;
   const userAccountId: string = useSelector(accountId);
   const mobile = process.env.REACT_APP_MOBILE === 'true';
   let height: string | number
@@ -239,8 +240,8 @@ let accountDes = await ledger2.account.getAccount({accountId:nftAddress});
 const nftId = accountDes.account;
     const nftOwnerId = await CheckNftOwnerId(ledger2,nftId);
     if(nftOwnerId === userAccountId){
-      console.log("updating receiver account");
-      console.log(userAccountId);
+      //console.log("updating receiver account");
+      //console.log(userAccountId);
       updateReceiverAccount(ledger2,userAccountId,codeHashIdForNft,nftId,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey);
     }
   }
@@ -249,7 +250,7 @@ const nftId = accountDes.account;
   }
   }
   const displayMyNft = myNfts.map((nft) => {//Contract Id
-    console.log("userNftList is  ", myNfts);
+    //console.log("userNftList is  ", myNfts);
     return (
       <MyNft 
       image={nft.image} 

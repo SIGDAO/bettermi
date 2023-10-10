@@ -54,15 +54,15 @@ import { selectCurrentUsername } from '../../redux/profile';
      var nftImgAddress:string = "";
      var addressSuffix:string ="https://ipfs.io/ipfs/"; 
      useEffect(() => {
-      console.log(nftId);
+      //console.log(nftId);
          // Function to fetch data from the APIc
          //console.log(`ipfs.io/ipfs/${image}`);
          fetch(`https://ipfs.io/ipfs/${image}`).then((res)=>{
              res.text().then((text)=>{
-                 console.log(text); 
+                 //console.log(text); 
                  var nftInfo = JSON.parse(text);
                  let matches = nftInfo.name.match(/(\d+)/);
-                 console.log(matches[0]);
+                 //console.log(matches[0]);
                  setNftNumber(matches[0]);
                 //  setNftLevel(nftInfo.attributes[0].level);
                 //  console.log(nftInfo.attributes.description);
@@ -99,7 +99,7 @@ import { selectCurrentUsername } from '../../redux/profile';
          // Since we want the effect to run only once (on mount), we pass an empty dependency array
        }, [image]);
      const test = (abc:string) => {
-         console.log(abc);
+         //console.log(abc);
          return 1;
      }
      const equipNft = async() => {

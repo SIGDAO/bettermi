@@ -15,6 +15,7 @@ import { LedgerClientFactory } from '@signumjs/core';
 import { useAppSelector } from '../../redux/useLedger';
 import { selectWalletNodeHost } from '../../redux/useLedger';
 import { FindNftContractStorage } from '../../NftSystem/updateUserNftStorage';
+import { GetEquippedNftId } from '../../NftSystem/updateUserNftStorage';
 
 interface myNftList{
     level:string;
@@ -29,15 +30,16 @@ interface ILoadingMintingProps {
     myNfts:myNftList[];
     setMyNfts:(myNftList:myNftList[]) => void;
     userId?:string;
+    isOtherUser:boolean;
 }
 
 const LoadingMintingMyNftList: React.FunctionComponent<ILoadingMintingProps> = (props) => {
-    const {loadingNft,setLoadingNft,myNfts,setMyNfts,userId} = props;
+    const {loadingNft,setLoadingNft,myNfts,setMyNfts,userId,isOtherUser} = props;
   const navigate = useNavigate();
-  const ledger = useLedger();
+  //const ledger = useLedger();
   const userAccountId = useSelector(accountId);
   const Id = userId == null?userAccountId:userId;
-  console.log("Id is ",Id);
+  //console.log("Id is ",Id);
   const codeHashId = "7457358473503628676"; // the code hash of the BMI contract 
   const [count, setCount] = useState(1);
 
@@ -85,27 +87,63 @@ var userNftList:myNftList[] = [];
 const loadNftList = async() => {
   const nftContractStorage = await FindNftContractStorage(ledger2,Id,codeHashIdForNft);
   FindLatestTransactionNumber(ledger2,nftContractStorage,nftDistributor).then((number)=>{
-    console.log(number);
     FindLatestTransactionArray(ledger2,nftContractStorage,nftDistributor,number).then(async(nftAddressList)=>{
       if(nftAddressList[0] === "empty"){
         setLoadingNft(false);
       }
       else{
-            console.log("nftAddress is ",nftAddressList);
-          for (var i = 0;i < nftAddressList.length;i++){
-            const contractInfo = await ledger2.contract.getContract(nftAddressList[i]);
-            const trial = JSON.parse(contractInfo.description);
-            nft = {level:trial.version,image:trial.descriptor,nftId:nftAddressList[i]};
-            userNftList.push(nft);
-            if(i === nftAddressList.length-1){
-              console.log(userNftList);
-              setCount(100);   
-              setTimeout(() => {
-                setMyNfts(userNftList);
-                setLoadingNft(false);
-              },1000);
+          if(isOtherUser ===false){
+            const equippedNft = await GetEquippedNftId(ledger2,Id);
+            console.log("equipped nft is ",equippedNft);
+            if(equippedNft != null){
+              const index = nftAddressList.indexOf(equippedNft);
+              if(index > -1){
+                nftAddressList.splice(index,1);
+              }
             }
           }
+            console.log("nftAddress is ",nftAddressList);
+            const promiseArray = nftAddressList.map((addressList) => 
+               ledger2.contract.getContract(addressList)
+            )
+            console.log("promise array is ",promiseArray);
+            const contractInfoArray = await Promise.all(promiseArray);
+            console.log("contractInfo Array is ",contractInfoArray);
+            for (var i = 0;i < contractInfoArray.length;i++){
+                console.log(i);
+                const trial = JSON.parse(contractInfoArray[i].description);
+                nft = {level:trial.version,image:trial.descriptor,nftId:nftAddressList[i]};
+                userNftList.push(nft);
+                if(i === contractInfoArray.length-1){
+                  console.log(userNftList);
+                  setCount(100);   
+                  setTimeout(() => {
+                    setMyNfts(userNftList);
+                    setLoadingNft(false);
+                  },1000);
+                }
+              }
+              if(contractInfoArray.length === 0){
+                setCount(100);   
+                setTimeout(() => {
+                  setMyNfts(userNftList);
+                  setLoadingNft(false);
+                },1000);
+            }
+          // for (var i = 0;i < nftAddressList.length;i++){
+          //   const contractInfo = await ledger2.contract.getContract(nftAddressList[i]);
+          //   const trial = JSON.parse(contractInfo.description);
+          //   nft = {level:trial.version,image:trial.descriptor,nftId:nftAddressList[i]};
+          //   userNftList.push(nft);
+          //   if(i === nftAddressList.length-1){
+          //     console.log(userNftList);
+          //     setCount(100);   
+          //     setTimeout(() => {
+          //       setMyNfts(userNftList);
+          //       setLoadingNft(false);
+          //     },1000);
+          //   }
+          // }
         }
     });
   }).catch((error)=>{console.log(error);navigate("/home")});
