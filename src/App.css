@@ -204,7 +204,7 @@ html, body {
 }
 
 .inter-bold-royal-blue-14px {
-  color: var(--royal-blue);
+  color: #5146FF;
   font-family: var(--font-family-inter);
   font-size: var(--font-size-l);
   font-style: normal;
@@ -250,7 +250,7 @@ html, body {
 }
 
 .inter-medium-royal-blue-14px {
-  color: var(--royal-blue);
+  color: #5146FF;
   font-family: var(--font-family-inter);
   font-size: var(--font-size-l);
   font-style: normal;
@@ -328,7 +328,7 @@ html, body {
 }
 
 .inter-bold-royal-blue-15px {
-  color: var(--royal-blue);
+  color: #5146FF;
   font-family: var(--font-family-inter);
   font-size: 15px;
   font-style: normal;

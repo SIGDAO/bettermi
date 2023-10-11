@@ -16,6 +16,7 @@ import { profileSlice } from '../../redux/profile';
 import { TransferNft } from '../../NftSystem/transferNft';
 import { CheckUnconfirmedNewNFTContract } from '../myNftList/checkNewContract';
 import { CheckUnconfirmedNewBMIContract } from '../myNftList/checkNewContract';
+import { Link } from 'react-router-dom';
 
 export interface IConnectWalletProps {
 }
@@ -150,6 +151,9 @@ export default function ConnectWallet (props: IConnectWalletProps) {
   })
   // todo: add error handling, and show it to user
     .catch((error:any) => {
+      if(error.name === "InvalidNetworkError"){
+        alert("It looks like you are not connecting to the correct signum node in your XT-Wallet, currently in our beta version we are using Europe node, please change your node to Europe node and try again");
+      }
       if (error.name === 'NotFoundWalletError'){
         window.location.href = 'https://chrome.google.com/webstore/detail/signum-xt-wallet/kdgponmicjmjiejhifbjgembdcaclcib/'
       }
@@ -169,11 +173,13 @@ export default function ConnectWallet (props: IConnectWalletProps) {
           <img className='connect-profilePic-side' src={process.env.PUBLIC_URL + "/img/connectWallet/photo-7@1x.png"} alt="photo" />
         </div>
         <div id='collectWallet-button-container'>
-          <DisabledButton
-            text='Phoenix wallet'
-            height='56px'
-            width='150px'
-          />
+          <Link to = "https://phoenix-wallet.rocks/">
+            <DisabledButton
+              text='Phoenix wallet'
+              height='56px'
+              width='150px'
+            />
+          </Link>
           <ButtonWithAction
             text='XT wallet'
             action={() => connectWallet(appName,Wallet,Ledger)} // TODO: add action to connect wallet

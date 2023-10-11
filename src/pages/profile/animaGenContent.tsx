@@ -357,7 +357,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
           {isUpdatingUserIcon === true || isUserIconLoading === true?(              
           <div className="profile_icon_nft_-avatar_empty">
                 <img
-                    className="profile_icon_ic_add"
+                    className="profile_icon_ic_loading"
                     src= "/img/loadingMinting/mimi-dancing-for-loadin-page.gif"
                     alt="ic_add"
                 />

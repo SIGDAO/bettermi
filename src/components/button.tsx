@@ -83,9 +83,9 @@ export const ButtonWithAction: React.FunctionComponent<IButtonProps> = (props) =
 
 export const DisabledButton: React.FunctionComponent<IButtonProps> = (props) => {
   const {text, height, width} = props;
-
+//I commented out display: flex as it draws a red line under the button on hover and onClick.
   const CustomButton = styled(Button)`
-    display: flex;
+    //display: flex;
     justify-content: center;
     align-items: center;
     background-color: #221d4b;

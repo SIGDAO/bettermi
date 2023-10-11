@@ -277,6 +277,10 @@
   height: 28px;
   width: 28px;
 }
+.home_icon_ic_loading{
+  height: 100px;
+  width: 100px;
+}
 .home_nft_-avatar:hover{
   cursor: pointer;
 }

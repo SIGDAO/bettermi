@@ -20,13 +20,16 @@ export interface ClassNames{
     forEmptyIcon:string;
     forAddSign:string;
     forNftDisplay:string;
+    forLoadingSign:string;
 }
 const UserIcon: React.FC<IUserIconProps> = (props) => {
 const homeClassNames = {forEmptyIcon:"home_nft_-avatar",
                         forAddSign:"home_icon_ic_add",
+                        forLoadingSign:"home_icon_ic_loading",
                         forNftDisplay:"nft_-avatar-2ZgxSS"};
 const profileClassNames = {forEmptyIcon:"profile_icon_nft_-avatar_empty",
                             forAddSign:"profile_icon_ic_add",
+                            forLoadingSign:"profile_icon_ic_loading",
                             forNftDisplay:"nft_-avatar_empty"};
 const {home,profile,userAccountId} = props;
 let finalClassNames:ClassNames = home === true?homeClassNames:profileClassNames;
@@ -72,7 +75,7 @@ return(
         {(isLoading === true) ?(
                 <div className={finalClassNames.forEmptyIcon}>
                             <img
-                                className={finalClassNames.forAddSign}
+                                className={finalClassNames.forLoadingSign}
                                 src= "/img/loadingMinting/mimi-dancing-for-loadin-page.gif"
                                 alt="ic_add"
                             />
@@ -83,7 +86,7 @@ return(
                 <Link to="https://test.signumart.io/">
                 <div className={finalClassNames.forEmptyIcon}>
                 <img
-                    className={finalClassNames.forAddSign}
+                    className={finalClassNames.forLoadingSign}
                     src= "/img/loadingMinting/mimi-dancing-for-loadin-page.gif"
                     alt="ic_add"
                 />

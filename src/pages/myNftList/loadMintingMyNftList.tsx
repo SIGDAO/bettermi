@@ -95,7 +95,7 @@ const loadNftList = async() => {
           if(isOtherUser ===false){
             const equippedNft = await GetEquippedNftId(ledger2,Id);
             console.log("equipped nft is ",equippedNft);
-            if(equippedNft != null){
+            if(equippedNft != ""){
               const index = nftAddressList.indexOf(equippedNft);
               if(index > -1){
                 nftAddressList.splice(index,1);

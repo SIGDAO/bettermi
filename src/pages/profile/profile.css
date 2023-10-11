@@ -720,9 +720,15 @@
 }
 .profile_icon_ic_add {
   height: 28px;
+  width:28px;
   align-self: center;
 }
 
+.profile_icon_ic_loading{
+  height: 80px;
+  width:80px;
+  align-self: center;
+}
 
 .bettermidapp-profile-3 .add {
   height: 30px;
@@ -1006,6 +1012,7 @@
   position: absolute;
   top: 112px;
   white-space: nowrap;
+  
 }
 
 .bettermidapp-profile-3 .about-yourself {

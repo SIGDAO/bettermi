@@ -63,7 +63,8 @@ import { selectCurrentUsername } from '../../redux/profile';
                  var nftInfo = JSON.parse(text);
                  let matches = nftInfo.name.match(/(\d+)/);
                  //console.log(matches[0]);
-                 setNftNumber(matches[0]);
+                 const nftNumber = matches[0].toString().padStart(8, '0');
+                 setNftNumber(nftNumber);
                 //  setNftLevel(nftInfo.attributes[0].level);
                 //  console.log(nftInfo.attributes.description);
                  if(nftInfo.description.includes("1") === true){

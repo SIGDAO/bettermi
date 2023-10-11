@@ -3,6 +3,7 @@ export async function sortArrayAccordingToDescendingTokenBalance(array:any[]){
     var temp;
     for(var i = 0;i<Math.min(array.length,200);i++){
         for(var j = i+1;j<Math.min(array.length,200);j++){
+            console.log("compare ",i," ",j," ",array[i].quantityQNT,array[j].quantityQNT);
             if(array[i].quantityQNT < array[j].quantityQNT){
                 temp = array[i];
                 array[i] = array[j];
@@ -23,7 +24,9 @@ export async function GetTokenRanking (ledger2:any){
     let userList:leaderBoardBanner[] = [];
     var userRankingInfo:leaderBoardBanner;
     var tokenBalance:Number = 0;
-    const sortedArray = await sortArrayAccordingToDescendingTokenBalance(getToken.accountAssets);
+    console.log(getToken.accountAssets);
+    //const sortedArray = await sortArrayAccordingToDescendingTokenBalance(getToken.accountAssets);
+    const sortedArray = getToken.accountAssets;
     console.log(sortedArray);
     var userRanking:number = 1;
     var userName:string = "";

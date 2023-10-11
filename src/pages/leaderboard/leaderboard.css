@@ -132,6 +132,9 @@
   position: absolute;
   top: 19px;
   width: 107px;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 0% 70%);
+    position: relative;
+    top: 10px;
 }
 
 .bettermidapp-leaderboad-the-best-100 .crown-with-red-stone {
@@ -601,6 +604,9 @@
   margin-top: 1px;
   object-fit: cover;
   width: 80px;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 0% 70%);
+  position:relative;
+  top:10px;
 }
 
 .bettermidapp-leaderboad-the-best-100 .son {
@@ -676,9 +682,10 @@
 }
 
 .bettermidapp-leaderboad-the-best-100 .nft_-avatar-1 {
-  height: 40px;
-  margin-left: 19px;
-  width: 40px;
+  margin-top: 20px;
+  height: 60px;
+  width: 60px;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 0% 70%);
 }
 
 .bettermidapp-leaderboad-the-best-100 .x300 {

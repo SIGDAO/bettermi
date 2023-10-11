@@ -69,16 +69,17 @@ interface myNftList{
         //     }
         // }
         try{
+          console.log("called check is loading");
         const equippedNftId = await GetEquippedNftId(ledger2,userId);
         setEquippedNftIpfsAddress(equippedNftId);
         const isUserUpdatingIcon = await IsUserUpdatingIcon(ledger2,userId);
         if(isUserUpdatingIcon === true){
-                //console.log("updating personal info");
+                console.log("updating personal info");
                 setIsUpdating(true);
                 setIsLoading(false);
                 return;
         }
-        //console.log("is user updating icon",isUserUpdatingIcon);
+        console.log("is user updating icon",isUserUpdatingIcon);
         setIsUpdating(false);
         setIsLoading(false);
       }
@@ -88,11 +89,10 @@ interface myNftList{
     };
 
     useEffect(() => {
-      if (dataFetchedRef.current === true) { console.log("called"); return; }
-      else{
-        dataFetchedRef.current = true;
+
+
         checkIsLoading();
-      }
+      
    },[]);
     
 

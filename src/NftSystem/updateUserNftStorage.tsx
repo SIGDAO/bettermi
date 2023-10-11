@@ -367,8 +367,9 @@ export async function IsUserUpdatingIcon(ledger2:any,userAccountId:string){
     //console.log(messages);
     for (var i = 0; i < messages.unconfirmedTransactions.length; i++){
         if(messages.unconfirmedTransactions[i].type === 1 && messages.unconfirmedTransactions[i].subtype === 5 && messages.unconfirmedTransactions[i].sender === userAccountId){
-            const newDescription = JSON.parse(messages.unconfirmedTransactions[i].attachment.description);
+            const newDescription =  messages.unconfirmedTransactions[i].attachment.description==null?{}:JSON.parse(messages.unconfirmedTransactions[i].attachment.description);
             if(newDescription.av == null){
+                console.log("called newDescription.av == null");
                 return false;
             }
             const newImage = Object.keys(newDescription.av)[0];
@@ -378,8 +379,9 @@ export async function IsUserUpdatingIcon(ledger2:any,userAccountId:string){
                 return true;
             }
             else{
-                const description = JSON.parse(originalDescription.description);
+                const description = originalDescription.description == null?{}:JSON.parse(originalDescription.description);
                 if(description.av == null){
+                    console.log("called description.av == null");
                     return true;
                 }
                 console.log(originalDescription);

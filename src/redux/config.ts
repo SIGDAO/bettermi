@@ -8,7 +8,7 @@ const Networks = {
   const selectedNetwork = Networks.TestNet;
   
   // Here you can assign the dApp name
-  const appName = "My Amazing React App";
+  const appName = "bettermi.io dapp";
   
   // Explorer URL
   const explorerUrl =

@@ -320,7 +320,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
             </div>
           </Link>
           <Link to='/aiCoachSelect'>
-            <img className='home-ai-select-icon' src={`${process.env.PUBLIC_URL}/img/ic-sentiment-very-satisfied-24px-1@1x.png`}/>
+            <img className='home-ai-select-icon' src={`${process.env.PUBLIC_URL}/img/ic_chat.png`}/>
           </Link>
           <Link to='/setting'>
             <img className='home-setting-icon' src={`${process.env.PUBLIC_URL}/img/ic-settings-24px-1@1x.png`} alt="" />

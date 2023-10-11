@@ -158,7 +158,7 @@ const Leaderboard = (props: Props) => {
                     <div className="signdao_tokengradient">
                       <div className="overlap-group-leader"><img className="x880" src="img/leaderboard/file---880@1x.png" alt="880" /></div>
                     </div>
-                    <div className="x10 inter-semi-bold-keppel-14px">10000</div>
+                    <div className="x10 inter-semi-bold-keppel-14px"></div>
                       <div className="x10 inter-semi-bold-keppel-14px">{userRankingList[0].tokenBalance}</div>
                   </div>
                 </div>

@@ -31,6 +31,7 @@ import ImportAccountScreen from '../../components/importAccountScreens';
 import ImportSuccessScreen from '../../components/importAccountSuccessScreen';
 import { TransferNftToNewUser } from '../../NftSystem/transferNft';
 import { selectCurrentGender } from '../../redux/profile';
+import { GetEquippedNftId } from '../../NftSystem/updateUserNftStorage';
 
 interface IMyNftListProps {
   isUpdatingDescription:boolean;
@@ -70,6 +71,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
   const [hasImportError, setHasImportError] = useState<boolean>(false);
   const [importSuccess,setImportSuccess] = useState<boolean>(false);
   const [isOpenImport, setIsOpenImport] = useState<boolean>(false);
+  const [nftNumber,setNftNumber] = useState<number>();
   const gender = useSelector(selectCurrentGender);
   const dataFetchedRef = useRef(false);
   const nftContractChecked = useRef(false);
@@ -120,13 +122,29 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
     
       },[]);
     
-
+      const getEquippedNftNumber = async() => {
+        const equippedNftId = await GetEquippedNftId(ledger2,userAccountId);
+        const equippedNftIDDescription = await ledger2.contract.getContract(equippedNftId);
+        console.log("equippedNftDescription",equippedNftIDDescription);
+        const equippedNftDescription = JSON.parse(equippedNftIDDescription.description);
+        const image = equippedNftDescription.descriptor;
+        fetch(`https://ipfs.io/ipfs/${image}`).then((res)=>{
+          res.text().then((text)=>{
+              //console.log(text); 
+              var nftInfo = JSON.parse(text);
+              let matches = nftInfo.name.match(/(\d+)/);
+              //console.log(matches[0]);
+              const nftNumber = matches[0].toString().padStart(8, '0');
+              setNftNumber(nftNumber);
+          })
+        }).catch((e) => {console.log(e);})
+      }
 
   useEffect(() => {
     if (dataFetchedRef.current) { console.log("called"); return; }
     dataFetchedRef.current = true;
     ledger2.account.getAccount({ accountId: userAccountId }).then((account) => {
-      const description = JSON.parse(account.description);
+      const description = account.description == null?{}:JSON.parse(account.description);
       console.log(description);
       if(description.av !== null){
 
@@ -134,7 +152,17 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
       console.log(typeof(Object.keys(description.av)[0]));
       setOnDuty(Object.keys(description.av)[0]);
       console.log(onDuty);
-
+      console.log(myNfts);
+      // fetch(`https://ipfs.io/ipfs/${Object.keys(description.av)[0]}`).then((res)=>{
+      //   res.text().then((text)=>{
+      //       //console.log(text); 
+      //       var nftInfo = JSON.parse(text);
+      //       let matches = nftInfo.name.match(/(\d+)/);
+      //       console.log("matches[0] is   ",matches[0]);
+      //       setNftNumber(matches[0]);
+      //   }).catch((error)=>{console.log(error)});
+      // }).catch((error)=>{console.log(error)});
+      getEquippedNftNumber();
       }
     }).catch((error) => { console.log(error) });
   },[]);
@@ -406,7 +434,7 @@ return(
                   )
                 }
                   <div className = "myNftDescription">
-                  <div className = "myNftNumber">#0000000001</div>
+                  <div className = "myNftNumber">#{nftNumber}</div>
                     <div className = "myNftBar">
                       <div  className = "myNftLevel">
                         Lv{level}       
@@ -438,7 +466,7 @@ return(
                     )
                     }
                   <div className = "myNftDescription">
-                  <div className = "myNftNumber">#0000000001</div>
+                  <div className = "myNftNumber">#{nftNumber}</div>
                     <div className = "myNftBar">
                       <div  className = "myNftLevel">
                         Lv{level}       

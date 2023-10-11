@@ -77,7 +77,7 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
             <div className="ic_settings_24px-container ic_settings_24px">
               <img
                 className="ic_settings_24px-img ic_settings_24px"
-                src={process.env.PUBLIC_URL + "/img/ic-sentiment-very-satisfied-24px-1@1x.png"}
+                src={process.env.PUBLIC_URL + "/img/ic_chat.svg"}
                 alt="ic_settings_24px"
                 />
             </div>
