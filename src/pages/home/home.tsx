@@ -21,13 +21,29 @@ import { selectCurrentGender } from '../../redux/profile';
 import { NavigateToTakeSelfieButton } from '../../components/button';
 import ImageSlider, { Carousel, CarouselItem } from './Carousel';
 import { accountLevel } from '../../redux/account';
+import { calRewardSigdaoOnSelfie } from '../../components/selfieToEarnRewardType';
+import { TransferToken } from '../../components/transferToken';
+import { useContext } from 'react';
+import { AppContext } from '../../redux/useContext';
+import HorizontalScrollContainerMission from './horzontalScrollContainer';
+import { CheckNftOwnerId } from '../../NftSystem/updateUserNftStorage';
+import UserIcon from '../../components/loadUserIcon';
 
 interface IHomeProps {
 }
 
 function handleScrollHorizontally(event: any) {
-  const container = event.target;
+  console.log(event);   
+  const container = document.querySelector("div.missions-scroll-RoXPLo.x-")!;
+  //const container = event.target;
+  const largeContainer = document.querySelector("div");
   const delta = Math.max(-1, Math.min(1, (event.deltaY || -event.detail)));
+  largeContainer?.classList.add("no-scroll");
+  console.log(container);
+  const scrollTop = event.pageYOffset || document.documentElement.scrollTop;
+  window.onscroll = function() {
+    window.scrollTo(-scrollTop,0 );
+  };
   container.scrollLeft -= (delta * 40); // Adjust scrolling speed here
   event.preventDefault();
 
@@ -51,27 +67,32 @@ const HorizontalScrollContainer = (props: any) => {
 const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const slides = [
     {'src': `${process.env.PUBLIC_URL}/img/home/1@1x.png`, 'link': 'https://www.bettermi.io/'},
-    {'src': `${process.env.PUBLIC_URL}/img/home/1@1x.png`, 'link': 'https://www.bettermi.io/'},
+    {'src': `${process.env.PUBLIC_URL}/img/leaderboard/photo@1x.png`, 'link': '/leaderboard'},
     {'src': `${process.env.PUBLIC_URL}/img/home/1@1x.png`, 'link': 'https://www.bettermi.io/'},
   ]
 
   // info
+  const {appName,Wallet,Ledger} = useContext(AppContext);
   const name = useSelector(selectCurrentUsername);
   const Token:string = useSelector(accountToken);
   const userAccountId = useSelector(accountId);
   const [loading, setLoading] = useState<boolean>(true);
   const [imgAddress, setImgAddress] = useState<string>("");
-  const nodeHost = useAppSelector(selectWalletNodeHost);
+  const nodeHost = useSelector(selectWalletNodeHost);
   const ledger2 = LedgerClientFactory.createClient({nodeHost});
-  const userId = useAppSelector(accountId);
+  const userAccoubntId = useAppSelector(accountId);
   const navigate = useNavigate();
   const tempAccountId = useSelector(accountId);
   const Ledger2 = useLedger();
-  const gender = useSelector(selectCurrentGender)
+  const gender = useSelector(selectCurrentGender);
   const [level,setLevel] = useState<string>("");
+  const codeHashIdForNft = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!;
   console.log(Token);
   console.log(store.getState());
   console.log("Token is  ",Token);
+  console.log(Wallet);
+  console.log(Wallet.Extension.connection);  
+  console.log(Wallet.Extension.connection == null);
 
   // useEffect(() => {
   //   testing();
@@ -79,18 +100,45 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
 
   useEffect(() => {
     // Function to fetch data from the APIc
-    ledger2.account.getAccount({accountId:userId})
-      .then((account)=>{
+    ledger2.account.getAccount({accountId:userAccountId})
+      .then(async(account)=>{
+        for (var i = 0;i<account.assetBalances.length;i++){
+          if(account.assetBalances[i].asset === "13116962758643420722"){
+            store.dispatch(accountSlice.actions.setToken(Number(account.assetBalances[i].balanceQNT)/1000000));
+            localStorage.setItem('token',account.assetBalances[i].balanceQNT);
+            console.log(account.assetBalances[i].balanceQNT);
+          }
+        }
         const description = JSON.parse(account.description);
-        console.log(description.ds);
-        if(description.ds != null){
-        store.dispatch(accountSlice.actions.setLevel(description.ds));
-        setLevel(description.ds);
+        console.log(description.id);
+          if(description.id != null){
+            const accountInfo = await ledger2.contract.getContract(description.id);
+            console.log(accountInfo);
+            const ipfsAddress = JSON.parse(accountInfo.description).descriptor;
+            console.log(ipfsAddress);
+            const ipfsJson = await fetch(`https://ipfs.io/ipfs/${ipfsAddress}`);
+            console.log(ipfsJson);
+            const text = await ipfsJson.text();
+            console.log(text);
+            const nftInfo = JSON.parse(text);
+            console.log(nftInfo);
+          if(nftInfo.description.includes("1") === true){
+            setLevel("1");
+          }
+          if(nftInfo.description.includes("2") === true){
+            setLevel("2");
+
+          }
+          if(nftInfo.description.includes("3") === true){
+            setLevel("3");
+          }
+          store.dispatch(accountSlice.actions.setLevel(description.ds));
         }
         else{
           setLevel("1");
           store.dispatch(accountSlice.actions.setLevel(description.ds));
         }
+        
         console.log(description);
         console.log(Object.keys(description.av));
         console.log(typeof(Object.keys(description.av)[0]));
@@ -106,7 +154,12 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
         setLoading(false);
       });
 
+      // TransferToken(nodeHost,userId,"10");
+
+      // console.log(calRewardSigdaoOnSelfie(22.9), "calRewardSigdaoOnSelfie(22.9)");
+
   }, []);
+
   // todo: map
   // const userSIGDAO = 
 
@@ -119,7 +172,24 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
     navigate('/takeSelfie')
   }
 
-  
+  // const testing = async () => {
+  //   await TransferToken(nodeHost,userId, calRewardSigdaoOnSelfie(22.9).toString())
+  // }
+  const nftContractChecked = useRef(false);
+  useEffect(() => {
+    if (nftContractChecked.current) { console.log("called"); return; }
+    nftContractChecked.current = true;
+    ledger2.contract.getContractsByAccount({
+          accountId: userAccountId,
+          machineCodeHash: codeHashIdForNft,
+      }).then((senderNftStorage)=>{
+        store.dispatch(accountSlice.actions.setNftContractStorage(senderNftStorage.ats[0].at));
+
+      }).catch((error)=>{
+        console.log(error);
+      });
+    
+      },[]);
 
   const content: JSX.Element = (
     <div className="screen">
@@ -189,8 +259,8 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
             </div>
           </div>
         </div>
-        <Link to="https://discord.gg/8tpu5SrX">
-          <div className="discord-RoXPLo inter-medium-royal-blue-14px">Discord</div>
+        <Link to="https://discord.com/invite/BF8NjfEd4Y)">
+          <div className="discord-RoXPLo inter-medium-royal-blue-14px" >Discord</div>
         </Link>
         <div className="our-community-RoXPLo inter-semi-bold-white-21px">Our Community</div>
         {/* <Link to="/selfieToEarn"> */}
@@ -205,20 +275,41 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
         {/* </Link> */}
         <div className="quick-actions-RoXPLo inter-semi-bold-white-21px">Quick Actions</div>
         <div className="greetings-RoXPLo">
-          <h1 className="title-2ZgxSS">Hi ! </h1>
+          {/* <h1 className="title-2ZgxSS">Hi ! </h1> */}
+          <h1 className="title-2ZgxSS">Hello ! </h1>
           <div className="lv_-reward-2ZgxSS">
             <div className="lv-1-b5x63m inter-semi-bold-keppel-15px">LV {level}</div>
             <div className="nft-reward-10-b5x63m inter-semi-bold-white-15px">NFT REWARD +10%</div>
             <img className="seperate-line-b5x63m" src={`${process.env.PUBLIC_URL}/img/seperate-line-1@1x.png`} alt="seperate line" />
           </div>
-          {imgAddress === ""?gender === "Female"?<img className="nft_-avatar-2ZgxSS" src={`${process.env.PUBLIC_URL}/img/home/nft-avatar-13@1x.png`} alt="NFT_Avatar" />
+          <UserIcon home = {true} userAccountId = {userAccountId}></UserIcon>
+          {/* {imgAddress === ""?gender === "Female"?
+          // <img className="nft_-avatar-2ZgxSS" src={`${process.env.PUBLIC_URL}/img/home/nft-avatar-13@1x.png`} alt="NFT_Avatar" />
+          <Link to="https://test.signumart.io/">
+              <div className="home_nft_-avatar">
+                  <img
+                    className="home_icon_ic_add"
+                    src="img/profile/ic-add-2@1x.png"
+                    alt="ic_add"
+                  />
+              </div>
+            </Link>
           :(
-              <img className="nft_-avatar-2ZgxSS" src={`${process.env.PUBLIC_URL}/img/home/1.png`} alt="NFT_Avatar" />
+            <Link to="https://test.signumart.io/">
+              <div className="home_nft_-avatar">
+                <img
+                  className="home_icon_ic_add"
+                  src="img/profile/ic-add-2@1x.png"
+                  alt="ic_add"
+                />
+              </div>
+            </Link>
+              // <img className="nft_-avatar-2ZgxSS" src={`${process.env.PUBLIC_URL}/img/home/1.png`} alt="NFT_Avatar" />
           )
           :(
             <img className = "nft_-avatar-2ZgxSS" src = {`https://ipfs.io/ipfs/${imgAddress}`}></img>
           )
-          }
+          } */}
           <Link to="/profile">
             <div className="ic_next-2ZgxSS">
               <img
@@ -229,7 +320,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
             </div>
           </Link>
           <Link to='/aiCoachSelect'>
-            <img className='home-ai-select-icon' src={`${process.env.PUBLIC_URL}/img/ic-sentiment-very-satisfied-24px-1@1x.png`}/>
+            <img className='home-ai-select-icon' src={`${process.env.PUBLIC_URL}/img/ic_chat.png`}/>
           </Link>
           <Link to='/setting'>
             <img className='home-setting-icon' src={`${process.env.PUBLIC_URL}/img/ic-settings-24px-1@1x.png`} alt="" />
@@ -246,6 +337,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
           </div>
           <div className="sigdao-2ZgxSS inter-semi-bold-white-15px">SIGDAO:</div>
         </div>
+        {/* <HorizontalScrollContainerMission></HorizontalScrollContainerMission> */}
         <HorizontalScrollContainer>
           <Link to="/missionChallenge">
             <div className="challenges-x9-hacks-GEWAL1">

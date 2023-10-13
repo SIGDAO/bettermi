@@ -9,8 +9,9 @@ import { isTodayHaveSelfieRecord } from './bmiCalculate';
 import { accountId } from '../redux/account';
 import { useSelector } from 'react-redux';
 import { useLedger } from '../redux/useLedger';
-import { selectCurrentBMI } from '../redux/profile';
+import { selectCurrentBMI, selectCurrentIsSelfie } from '../redux/profile';
 import { selectBMI } from '../redux/userBMI';
+import { useEffect, useState } from 'react';
 
 
 
@@ -82,9 +83,9 @@ export const ButtonWithAction: React.FunctionComponent<IButtonProps> = (props) =
 
 export const DisabledButton: React.FunctionComponent<IButtonProps> = (props) => {
   const {text, height, width} = props;
-
+//I commented out display: flex as it draws a red line under the button on hover and onClick.
   const CustomButton = styled(Button)`
-    display: flex;
+    //display: flex;
     justify-content: center;
     align-items: center;
     background-color: #221d4b;
@@ -153,18 +154,54 @@ export const BackButton: React.FunctionComponent<IBackButtonProps> = (props) => 
   )
 }
 
+
+
 export const NavigateToTakeSelfieButton: React.FunctionComponent = () => {
   const navigate = useNavigate();
   const tempAccountId = useSelector(accountId);
   // const bmi_fetchedData = useSelector(selectBMI);
   const Ledger2 = useLedger();
   const [isActive, setIsActive] = React.useState<boolean>(false);
+  const [timeDifference, setTimeDifference] = useState('');
+  const isSelfie = useSelector(selectCurrentIsSelfie);
+  const [isLoading, setIsLoading] = useState(true);
+  // const [isMidnight, setIsMidnight] = useState(false);
+  
+
+  useEffect(() => {
+    const calculateTimeDifference = () => {
+      const now = new Date();
+      const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+      tomorrow.setHours(0, 0, 0, 0);
+
+      const timeDiff = tomorrow.getTime() - now.getTime();
+      const hours = Math.floor(timeDiff / (1000 * 60 * 60));
+      const minutes = Math.floor((timeDiff / (1000 * 60)) % 60);
+      const seconds = Math.floor((timeDiff / 1000) % 60);
+
+      // if (hours === 0 && minutes === 0 && seconds === 0) {
+      //   setIsMidnight(true);
+      // }
+
+      console.log('is', isSelfie)
+
+      setTimeDifference(`${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
+    };
+
+    const interval = setInterval(calculateTimeDifference, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+
+
 
   React.useEffect(() => {
     isTodayHaveSelfieRecord(tempAccountId, Ledger2)
       .then((result) => {
         console.log('result', result)
         setIsActive(result);
+        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -177,20 +214,12 @@ export const NavigateToTakeSelfieButton: React.FunctionComponent = () => {
   }
 
 
-  if (!isActive) {
-    return (
-      <div className="button_-selfie-to-earn-MUU5YC" onClick={() => handleTakeASelfie()}>
-        <img className="ic_selfie-u8P1YH" src="img/selfieToEarn/ic-selfie-1@1x.png" alt="ic_selfie" />
-        <p className="take-a-selfie-to-earn-u8P1YH inter-semi-bold-white-15px">Take a Selfie to Earn!</p>
-        <img className="ic_arrow_forward-u8P1YH" src="img/selfieToEarn/ic-arrow-forward-1@1x.png" alt="ic_arrow_forward" />
-      </div>
-    )
-  } else {
+  if (isSelfie || isActive) {
     return (
       <div className="lock-button-cover">
         <div className="lock-button">
           <p className="selfie-time-countdown inter-semi-bold-white-15px">
-            12:00:00
+            {timeDifference}
           </p>
           <img className='lock-icon-NavigateToTakeSelfieButton' src="/img/ic-locked-1@1x.png" alt="" />
         </div>
@@ -201,5 +230,15 @@ export const NavigateToTakeSelfieButton: React.FunctionComponent = () => {
         </div>
       </div>
     )
+
+  } else {
+    return isLoading ? null : (
+      <div className="button_-selfie-to-earn-MUU5YC" onClick={() => handleTakeASelfie()}>
+        <img className="ic_selfie-u8P1YH" src="img/selfieToEarn/ic-selfie-1@1x.png" alt="ic_selfie" />
+        <p className="take-a-selfie-to-earn-u8P1YH inter-semi-bold-white-15px">Take a Selfie to Earn!</p>
+        <img className="ic_arrow_forward-u8P1YH" src="img/selfieToEarn/ic-arrow-forward-1@1x.png" alt="ic_arrow_forward" />
+      </div>
+    )
+
   }
 }

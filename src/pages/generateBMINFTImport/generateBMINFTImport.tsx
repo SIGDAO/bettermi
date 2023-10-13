@@ -23,6 +23,8 @@ import { accountId } from '../../redux/account';
 import { TransferNFTOwnership } from './transferNFTOwnership';
 import { accountSlice } from '../../redux/account';
 import { store } from '../../redux/reducer';
+import { calBMIType, calRewardSigdaoOnSelfie } from '../../components/selfieToEarnRewardType';
+import { TransferToken } from '../../components/transferToken';
 
 
 
@@ -45,6 +47,9 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
   const userAccountId = useSelector(accountId);
   const codeHashId = "7457358473503628676";
   const storeNftCodeHashId = "4589039375104983465";
+  const [isTransferToken, setIsTransferToken] = React.useState(false);
+
+
   console.log(process.env.REACT_APP_NFT_STORAGE);
   console.log(process.env.REACT_APP_NFT_STORAGE?.split(","));
   const nftStorageAccounts = process.env.REACT_APP_NFT_STORAGE?.split(",");
@@ -55,20 +60,24 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
   var nftsWaitedToBeDistributed:string[] = [];
   var nftsToBeDistributed:string;
 
+  React.useEffect(() => {
+    console.log(calRewardSigdaoOnSelfie(BMI).toString())
+  }, [])
+
   console.log(ledger);
   const confirm = async () => {
     if (minted){
-      console.log('not minted');
+      console.log('minted');
       return
     }
 
     if(ledger){
       setMinted(true);
-      TransferNftTokenOwnershipFinale(nodeHost,userAccountId);   
-      const asset = await ledger.asset.getAssetHolders({assetId:"3862155318820066741"});
+      // TransferNftTokenOwnershipFinale(nodeHost,userAccountId);   
+      const asset = await ledger.asset.getAssetHolders({assetId:"13116962758643420722"});
       asset.accountAssets.map((obj)=>{
         if(obj.account == userAccountId){
-          store.dispatch(accountSlice.actions.setToken(Number(obj.quantityQNT)));
+          store.dispatch(accountSlice.actions.setToken(Number(obj.quantityQNT)/1000000));
           localStorage.setItem('token',obj.quantityQNT);
             console.log(obj.quantityQNT);
         }
@@ -91,11 +100,11 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
       try {
         // todo: check if user has finished all smart contract build up
         if(storeNftContract.ats[0] == null){
-          //console.log("called storeNftContract.ats.length",typeof(process.env.REACT_APP_NFT_CONTRACT_REFERENCED_TRANSACTION_HASH));
+          console.log("called storeNftContract.ats.length",typeof(process.env.REACT_APP_NFT_CONTRACT_REFERENCED_TRANSACTION_FULL_HASH));
           const initializeNftContract = await ledger.contract.publishContractByReference({
             name: "NFT",
             description:"storage_space_for_your_nft",
-            referencedTransactionHash:process.env.REACT_APP_NFT_CONTRACT_REFERENCED_TRANSACTION_HASH!,
+            referencedTransactionHash:process.env.REACT_APP_NFT_CONTRACT_REFERENCED_TRANSACTION_FULL_HASH!,
             feePlanck:"30000000",
             senderPublicKey:publicKey,
             deadline:1440,}) as UnsignedTransaction;
@@ -103,7 +112,7 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
           await Wallet.Extension.confirm(initializeNftContract.unsignedTransactionBytes);
         }
         if(ourContract.ats[0] == null){
-          //console.log("called ourContract.ats[0] == null");
+          console.log("called ourContract.ats[0] == null");
           const initializeContract = await ledger.contract.publishContractByReference({
             name: "BMI",
             description: JSON.stringify({'bmi': BMI, 'gender': gender, 'birthday': birthday, 'time': new Date()}),  //the first data is hidden in the description
@@ -127,11 +136,18 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
           }) as UnsignedTransaction;
           await Wallet.Extension.confirm(sendBMI.unsignedTransactionBytes);
         }
-        console.log('confirm');
-        //await TransferNFTOwnership(ledger,userAccountId,Wallet);
+        if (!isTransferToken) {
+          TransferToken(nodeHost, userAccountId, calRewardSigdaoOnSelfie(BMI).toString())
+            .then((result) => {
+              setIsTransferToken(true)
+            })
+        }
         navigate('/loadingMinting');
       } catch (error) {
         console.log(error);
+        if (error.name !== "ExtensionWalletError") {
+          navigate('/errorGenerateNFT')
+        }
         setMinted(false);
       }
     }
@@ -155,7 +171,8 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
           <img className="seperate-line-X2g18V seperate-line" src="img/generateBMINFTImport/seperat-line-1@1x.png" alt="seperate line" />
         </div>
         <div className="bmi-result-bL0gm3">
-          <div className="bg-Gw4eM2"></div>
+          {/* <div className="bg-Gw4eM2" style={{backgroundColor: calBMIType(BMI).color}}></div> */}
+          <div className="bg-Gw4eM2" ></div>
           <div className="x255-Gw4eM2">{BMI || 25.5}</div>
           <div className="kgm2-Gw4eM2">
             <span className="span0-IFVIgU inter-normal-royal-blue-14px">kg/m</span><span className="span1-IFVIgU inter-normal-royal-blue-14px">2</span>

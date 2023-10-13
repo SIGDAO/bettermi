@@ -263,6 +263,7 @@ align-self: flex-start;
   top: 18px;
   width: 15px;
   height: 20px;
+  z-index: 20;
 }
 
 .challengeCompletedLinkDisabled{

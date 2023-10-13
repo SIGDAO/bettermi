@@ -18,37 +18,67 @@ import * as React from 'react';
  import { useContext } from 'react';
  import { AppContext } from '../../redux/useContext';
  import { P2PTransferNftToken } from '../../components/p2pTransferNftToken';
+ import { useNavigate } from 'react-router-dom';
+ import { CheckNftOwnerId } from '../../NftSystem/updateUserNftStorage';
+ import { UpdateUserIcon } from '../../NftSystem/updateUserNftStorage';
+import { selectCurrentUsername } from '../../redux/profile';
 
  interface MyNftProps {
     image:string;
     level:string;
     isOpenPopup: boolean;
     setIsOpenPopup: (isOpenPopup: boolean) => void;
-     assetId:string;
-     setSelectedAssetId:(assetId:string) => void;
+     nftId:string;
+     setSelectedAssetId:(nftId:string) => void;
     setLevel:(level:string) => void;
+    isUpdatingDescription:boolean;
+    setIsUpdatingDescription:(isUpdatingDescription:boolean) => void;
+    isOtherUser:boolean;
  }
 
 
  const MyNft: React.FunctionComponent<MyNftProps> =  (props) => {
-     const {image, level, isOpenPopup, setIsOpenPopup,assetId,setSelectedAssetId,setLevel} = props;
+     const {image, level, isOpenPopup, setIsOpenPopup,nftId,setSelectedAssetId,setLevel,isUpdatingDescription,setIsUpdatingDescription,isOtherUser} = props;
      const [loading, setLoading] = useState<boolean>(true);
      const [imgAddress, setImgAddress] = useState<string>("");
-     const nodeHost = useAppSelector(selectWalletNodeHost);
+     const nodeHost = useSelector(selectWalletNodeHost);
      const ledger2 = LedgerClientFactory.createClient({nodeHost});
      const userAccountpublicKey:string = useSelector(accountPublicKey);
+     const userAccountId:string = useSelector(accountId);
      const {appName,Wallet,Ledger} = useContext(AppContext);
      const [nftLevel,setNftLevel] = useState<string>("");
+     const [nftNumber,setNftNumber] = useState<number>();
+     const [reward,setReward] = useState<string>("");
+     const name = useAppSelector(selectCurrentUsername);
+     const navigate = useNavigate();
      var nftImgAddress:string = "";
      var addressSuffix:string ="https://ipfs.io/ipfs/"; 
      useEffect(() => {
+      //console.log(nftId);
          // Function to fetch data from the APIc
          //console.log(`ipfs.io/ipfs/${image}`);
          fetch(`https://ipfs.io/ipfs/${image}`).then((res)=>{
              res.text().then((text)=>{
-                 console.log(text); 
+                 //console.log(text); 
                  var nftInfo = JSON.parse(text);
-                 setNftLevel(nftInfo.attributes[0].level);
+                 let matches = nftInfo.name.match(/(\d+)/);
+                 //console.log(matches[0]);
+                 const nftNumber = matches[0].toString().padStart(8, '0');
+                 setNftNumber(nftNumber);
+                //  setNftLevel(nftInfo.attributes[0].level);
+                //  console.log(nftInfo.attributes.description);
+                 if(nftInfo.description.includes("1") === true){
+                  setNftLevel("1");
+                  setReward("10"); //To be confirmed
+                 }
+                 if(nftInfo.description.includes("2") === true){
+                  setNftLevel("2");
+                  setReward("15");//To be confirmed
+                 }
+                 if(nftInfo.description.includes("3") === true){
+                  setNftLevel("3");
+                  setReward("20");//To be confirmed
+                 }
                  //console.log(nftInfo); 
                  //console.log(typeof(nftInfo.media[0].social));
                  setImgAddress(nftInfo.media[0].social);
@@ -58,9 +88,9 @@ import * as React from 'react';
                  nftImgAddress = addressSuffix.concat(nftImgAddress);
                  //console.log(nftImgAddress);
                  setLoading(false);
-             });
+             }).catch((e:any) => {console.log(e);});
 
-         });
+         }).catch((e:any) => {console.log(e);});
 
          // Call the fetchData function
 
@@ -68,25 +98,28 @@ import * as React from 'react';
          // If you had any subscription or timers, you'd clean them up here
 
          // Since we want the effect to run only once (on mount), we pass an empty dependency array
-       }, []);
+       }, [image]);
      const test = (abc:string) => {
-         console.log(abc);
+         //console.log(abc);
          return 1;
      }
      const equipNft = async() => {
-       console.log("123");
-       const accountInfo = `{"av":{"${imgAddress}":"image/png"},"ds":"${nftLevel}"}`;
-       const setAccountInfo = await ledger2.account.setAccountInfo({
-         name:"1234",
-         description:accountInfo,
-         feePlanck:"1000000",
-         senderPublicKey:userAccountpublicKey,
-       })
-       //console.log(setAccountInfo);
-       Wallet.Extension.confirm(setAccountInfo.unsignedTransactionBytes);
+      try{
+            const nftOwner = await CheckNftOwnerId(ledger2,nftId);
+            if(nftOwner === userAccountId){
+              await UpdateUserIcon(ledger2,imgAddress,nftId,userAccountId,userAccountpublicKey,Wallet,name);
+              setIsUpdatingDescription(true);
+            }
+            else{
+              alert("We are sorry, it seems like you still don't own this NFT, maybe wait for a few more minutes if you just received it revcently");
+            }
+          }
+          catch(e){
+            console.log(e);
+          }
      };
      const transferToken = async() => {
-      P2PTransferNftToken(Wallet,nodeHost,"4572964086056463895",assetId,userAccountpublicKey);
+      P2PTransferNftToken(Wallet,nodeHost,"4572964086056463895",nftId,userAccountpublicKey);
      };
    return(
       <>
@@ -96,7 +129,7 @@ import * as React from 'react';
                   <div className = "myNftList">
                     <img className = "myNftImage" src = {`https://ipfs.io/ipfs/${imgAddress}`}></img>
                     <div className = "myNftDescription">
-                    <div className = "myNftNumber">#0000000001</div>
+                    <div className = "myNftNumber">#{nftNumber}</div>
                       <div className = "myNftBar">
                         <div  className = "myNftLevel">
                           Lv{nftLevel}       
@@ -111,16 +144,37 @@ import * as React from 'react';
                       </div>
                     </div>
                     <div className = "myNftBottom">
-                    <button className = "myNftButton" onClick = {equipNft}>AVALIBLE</button>
-                    <img 
-                      onClick={() => {
-                        setIsOpenPopup((prev) => !prev);
-                        setSelectedAssetId(assetId);
-                        setLevel(nftLevel);
-                      }} 
-                      className = "myNftButtomArrow" 
-                      src  = {`${process.env.PUBLIC_URL}/img/NftList/ic-send@1x.png`}
-                    />
+                    {isOtherUser === true?(
+                      <>
+                        <button className = "myNftButtonDisabled" onClick = {equipNft}>AVALIBLE</button>
+                        <img 
+                          onClick={() => {
+                            setIsOpenPopup((prev) => !prev);
+                            setSelectedAssetId(nftId);
+                            setLevel(nftLevel);
+  
+                          }} 
+                          className = "myNftButtomArrowDisabled" 
+                          src  = {`${process.env.PUBLIC_URL}/img/NftList/ic-send@1x.png`}
+                        />
+                        </>
+                    ):(
+                      <>
+                          <button className = "myNftButton" onClick = {equipNft}>AVALIBLE</button>
+                          <img 
+                            onClick={() => {
+                              setIsOpenPopup((prev) => !prev);
+                              setSelectedAssetId(nftId);
+                              setLevel(nftLevel);
+
+                            }} 
+                            className = "myNftButtomArrow" 
+                            src  = {`${process.env.PUBLIC_URL}/img/NftList/ic-send@1x.png`}
+                          />
+                        </>
+                    )
+                    }
+
                     </div>
                   </div>
           )

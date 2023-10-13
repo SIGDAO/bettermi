@@ -9,12 +9,12 @@
 
 .x0 {
   border-radius: 10px;
-  height: 560px;
-  left: calc((100% - 411px)/ 2);
+  height: 500px;
+  left: calc((100% - 351px)/ 2);
   object-fit: cover;
   position: absolute;
-  top: 112px;
-  width: 411px;
+  top: 135px;
+  width: 351px;
 }
 
 .text-1 {
@@ -41,6 +41,7 @@
   display: flex;
   align-items: center;
   white-space: nowrap;
+  justify-content: center;
 }
 
 .button_-import {

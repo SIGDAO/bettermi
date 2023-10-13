@@ -1,3 +1,4 @@
+import React from 'react';
 import './loadingMinting.css';
 import { CenterLayout } from '../../components/layout';
 import { useLedger } from '../../redux/useLedger';
@@ -5,6 +6,11 @@ import { useSelector } from 'react-redux';
 import { accountId } from '../../redux/account';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { TransferNftToNewUser } from '../../NftSystem/transferNft';
+import { FindLatestTransactionArray } from '../../NftSystem/updateUserNftStorage';
+import { FindLatestTransactionNumber } from '../../NftSystem/updateUserNftStorage';
+import { useLocation } from 'react-router-dom';
+import { useRef } from 'react';
 
 interface ILoadingMintingProps {
 }
@@ -13,50 +19,94 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
   const navigate = useNavigate();
   const ledger = useLedger();
   const userAccountId = useSelector(accountId);
-  const codeHashId = "7457358473503628676"; // the code hash of the BMI contract 
+  const nftCodeHashId = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!; // the code hash of the BMI contract 
+  const bmiCodeHashId = process.env.REACT_APP_BMI_MACHINE_CODE_HASH!; // the code hash of the BMI contract
   const [count, setCount] = useState(1);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-
-
-
+  const nftLoaded = useRef(false);
+  const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
+  const nftDistributorPublicKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PUBLIC_KEY!;
+  const nftDistributorPrivateKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PRIVATE_KEY!;
+  const mimiNftStorageAccounts = process.env.REACT_APP_NFT_STORAGE_MIMI!.split(",");
+  const ioNftStorageAccounts = process.env.REACT_APP_NFT_STORAGE_IO!.split(",");
   const checkIfNFTMinted = async () => {
     if (!ledger) return;
     // const startTime: number = Date.now(); // get the current time in milliseconds
 
 
-    let ourContract = await ledger.contract.getContractsByAccount({
+    let nftContract = await ledger.contract.getContractsByAccount({
       accountId: userAccountId,
-      machineCodeHash: codeHashId,
+      machineCodeHash: nftCodeHashId,
+    });
+    let bmiContract = await ledger.contract.getContractsByAccount({
+      accountId: userAccountId,
+      machineCodeHash: bmiCodeHashId,
     });
 
-    // while(ourContract.ats[0] == null){
-    //   ourContract = await ledger.contract.getContractsByAccount({
-    //     accountId: userAccountId,
-    //     machineCodeHash: codeHashId,
-
-    //     });
-    //   console.log(ourContract);
-    // }
-    // setCount(100)
-    // setIsLoading(false);
-    // navigate('/generateFreeNFT');
+    while(bmiContract.ats[0] == null){
+      bmiContract = await ledger.contract.getContractsByAccount({
+        accountId: userAccountId,
+        machineCodeHash: bmiCodeHashId,
+        });
+      nftContract = await ledger.contract.getContractsByAccount({
+        accountId: userAccountId,
+        machineCodeHash: nftCodeHashId,
+      });
+      console.log(nftContract);
+      console.log(bmiContract);
+    }
+    const description = bmiContract.ats[0].description;
+    var gender = "Male";
+    if(description.includes("Female")){
+      gender = "Female";
+    }
+    if(gender === "Male"){
+      console.log("called gender === Male");
+      await TransferNftToNewUser(ledger,userAccountId,ioNftStorageAccounts,nftCodeHashId,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey);
+    }
+    else{
+      await TransferNftToNewUser(ledger,userAccountId,mimiNftStorageAccounts,nftCodeHashId,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey);
+    }
+    console.log("gender is   ",gender);
+    const latestTransactionNumber = await FindLatestTransactionNumber(ledger,nftContract.ats[0].at,nftDistributor);
+    const latestTransactionList = await FindLatestTransactionArray(ledger,nftContract.ats[0].at,nftDistributor,latestTransactionNumber);
+    console.log(latestTransactionList);
+    console.log(latestTransactionList[0]);
+    if(latestTransactionList.length === 0){
+      console.log("The latestTransactionList is empty, returned error", latestTransactionList);
+      setCount(100)
+      setIsLoading(false);
+      navigate('/generateFreeNFT',{state:{nftId:"error"}});
+    }
+    else{
+      setCount(100)
+      setIsLoading(false);
+      navigate('/generateFreeNFT',{state:{nftId:latestTransactionList[0]}});
+    }
   }
 
 
   useEffect(() => {
+    if(nftLoaded.current ===true){
+      console.log("loaded nft");
+    }
+    else{
+      nftLoaded.current = true;
     checkIfNFTMinted()
       .catch((err) => {
         console.error(err);
       })
+    }
   }, [])
 
   
   useEffect(() => {
-    // const incrementInterval = 240000 / 96; // Time divided by the number of increments
-    const incrementInterval = 5000 / 100;
+    const incrementInterval = 240000 / 96; // Time divided by the number of increments
+    // const incrementInterval = 5000 / 100;
     const timer = setInterval(() => {
+      if(count < 100){
       setCount((prevCount) => prevCount + 1);
-
+      }
       // if (count => 100 ) {
       // } else {
       //   setIsLoading(false);
@@ -73,23 +123,23 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
   }, []);
 
 
-  useEffect(() => {
-    if (count >= 100) {
-      setIsLoading(false);
-      navigate('/generateFreeNFT');
+  // useEffect(() => {
+  //   if (count >= 100) {
+  //     setIsLoading(false);
+  //     navigate('/generateFreeNFT');
 
-      // const timeout = setTimeout(() => {
-      //   setIsLoading(false);
-      //   navigate('/generateFreeNFT');
-      // }, 1000);
+  //     // const timeout = setTimeout(() => {
+  //     //   setIsLoading(false);
+  //     //   navigate('/generateFreeNFT');
+  //     // }, 1000);
 
-      // timeout
+  //     // timeout
   
-      // return () => {
-      //   clearTimeout(timeout);
-      // };
-    }
-  }, [count]);
+  //     // return () => {
+  //     //   clearTimeout(timeout);
+  //     // };
+  //   }
+  // }, [count]);
 
 
 
@@ -136,7 +186,7 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
             </div>
           </a> */}
       </div>
-      <a href="javascript:history.back()">
+      {/* <a href="javascript:history.back()">
           <div className="icon-arrow-left-JdJl2l icon-arrow-left">
             <img
                 className="icon-arrow-left-cQ3AYZ icon-arrow-left"
@@ -144,7 +194,7 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
                 alt="icon-arrow-left"
                 />
           </div>
-      </a>
+      </a> */}
       {/* <div className="bars-status-bar-i-phone-light-JdJl2l">
           <div className="frame-PAFj23"></div>
           <div className="status-bar-PAFj23">

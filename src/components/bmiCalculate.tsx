@@ -149,7 +149,6 @@ export const isTodayHaveSelfieRecord = async (tempAccountId: string, Ledger2: an
   }
 
   return false;
-  
 }
 
 export const isSelfieRecord = async (tempAccountId: string, Ledger2: any) => {

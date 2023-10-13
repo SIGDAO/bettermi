@@ -257,6 +257,33 @@
 .bettermidapp-home-1 .x880-ozHgg7 {
   height: 54.69%;
 }
+.home_nft_-avatar{
+  background: linear-gradient(180deg, #8743FF 0%, #4136F1 100%);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  height: 100px;
+  left: 0px;
+  object-fit: cover;
+  position: absolute;
+  top: 8px;
+  width: 107px;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+.home_icon_ic_add{
+  height: 28px;
+  width: 28px;
+}
+.home_icon_ic_loading{
+  height: 100px;
+  width: 100px;
+}
+.home_nft_-avatar:hover{
+  cursor: pointer;
+}
 
 .bettermidapp-home-1 .step-counts-GEWAL1 {
   background-color: transparent;
@@ -498,6 +525,7 @@
 .home-scroller-element-image {
   height: 185px;
   width: 250px;
+  object-fit:cover;
 }
 
 .home-scroller-element {
@@ -787,12 +815,13 @@ color
 .bettermidapp-home-1 .nft_-avatar-2ZgxSS {
   background-color: transparent;
   border-radius: 10px;
-  height: calc(100.00% - 8px);
+  height: 155px;
   left: 0px;
   object-fit: cover;
   position: absolute;
   top: 8px;
   width: 107px;
+  clip: rect(0, 110px, 100px, 0);
 }
 
 .bettermidapp-home-1 .ic_next-2ZgxSS {
@@ -800,9 +829,9 @@ color
   cursor: pointer;
   height: 44px;
   position: absolute;
-  left: 168px;
+  left: 220px;
   top: 0px;
-  width: 44px;
+  width: 20px;
 }
 
 .bettermidapp-home-1 .ic_chevron_right_24px-LRB8nH {
@@ -1151,4 +1180,8 @@ color
   left: 30px;
   position: absolute;
   top: 238px;
+}
+
+.no-scroll{
+  overflow: hidden;
 }

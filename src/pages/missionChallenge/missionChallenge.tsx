@@ -10,186 +10,10 @@ import { Button } from '@mui/material';
 import { walletNodeHost } from '../../redux/wallet';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { missionList } from '../../data/featureMissionList';
 
 interface IMissionChallengeProps {
 }
-
-interface missionList {
-  title: string,
-  duration: string,
-  bodyPart: string,
-  sigdao: string,
-  nftLevel: string,
-  missionPath: string,
-}
-
-
-
-const missionList = [
-  {
-    title: `1. Hello Bae !`,
-    duration: `1 mins`,
-    bodyPart: `Arms`,
-    sigdao: `+5.25`,
-    nftLevel: `1`,
-    missionPath: '',
-    timeslot: [{
-      startingTime: '9:00',
-      endTime: '9:06',
-    },
-    {
-      startingTime: '10:00',
-      endTime: '10:06',
-    }],
-  },
-  // {
-  //   title: '2. Swiping Left & Right',
-  //   duration: `1 mins`,
-  //   bodyPart: `Arms`,
-  //   sigdao: `+5.25`,
-  //   nftLevel: `1`,
-  //   missionPath: '',
-  //   timeslot: [{
-  //     startingTime: '9:00',
-  //     endTime: '9:06',
-  //   },
-  //   {
-  //     startingTime: '10:00',
-  //     endTime: '10:06',
-  //   }],
-  // },
-  // {
-  //   title: '3. Into Your Dm',
-  //   duration: `1 mins`,
-  //   bodyPart: `Arms`,
-  //   sigdao: `+5.25`,
-  //   nftLevel: `1`,
-  //   missionPath: '',
-  //   timeslot: [{
-  //     startingTime: '9:00',
-  //     endTime: '9:06',
-  //   },
-  //   {
-  //     startingTime: '10:00',
-  //     endTime: '10:06',
-  //   }],
-  // },
-  // {
-  //   title: '4. Getting Butterflies',
-  //   duration: `2 mins`,
-  //   bodyPart: `Arms`,
-  //   sigdao: `+5.25`,
-  //   nftLevel: `2`,
-  //   missionPath: '',
-  //   timeslot: [{
-  //     startingTime: '14:00',
-  //     endTime: '14:06',
-  //   },
-  //   {
-  //     startingTime: '15:00',
-  //     endTime: '15:06',
-  //   }],
-  // },
-  // {
-  //   title: '5. Let\'s Cuddle',
-  //   duration: `2 mins`,
-  //   bodyPart: `Arms`,
-  //   sigdao: `+5.25`,
-  //   nftLevel: `2`,
-  //   missionPath: '',
-  //   timeslot: [{
-  //     startingTime: '14:00',
-  //     endTime: '14:06',
-  //   },
-  //   {
-  //     startingTime: '15:00',
-  //     endTime: '15:06',
-  //   }],
-  // },
-  // {
-  //   title: '6. I\'m a Good Listener',
-  //   duration: `2 mins`,
-  //   bodyPart: `Arms`,
-  //   sigdao: `+5.25`,
-  //   nftLevel: `2`,
-  //   missionPath: '',
-  //   timeslot: [{
-  //     startingTime: '14:00',
-  //     endTime: '14:06',
-  //   },
-  //   {
-  //     startingTime: '15:00',
-  //     endTime: '15:06',
-  //   }],
-  // },
-  // {
-  //   title: '7. I\'m a Good Listener',
-  //   duration: `3 mins`,
-  //   bodyPart: `Arms`,
-  //   sigdao: `+5.25`,
-  //   nftLevel: `3`,
-  //   missionPath: '',
-  //   timeslot: [{
-  //     startingTime: '20:00',
-  //     endTime: '20:06',
-  //   },
-  //   {
-  //     startingTime: '21:00',
-  //     endTime: '21:06',
-  //   }],
-  // },
-  // {
-  //   title: '8. I\'m a Good Listener',
-  //   duration: `3 mins`,
-  //   bodyPart: `Arms`,
-  //   sigdao: `+5.25`,
-  //   nftLevel: `3`,
-  //   missionPath: '',
-  //   timeslot: [{
-  //     startingTime: '20:00',
-  //     endTime: '20:06',
-  //   },
-  //   {
-  //     startingTime: '21:00',
-  //     endTime: '21:06',
-  //   }],
-  // },
-  // {
-  //   title: '9. I\'m a Good Listener',
-  //   duration: `3 mins`,
-  //   bodyPart: `Arms`,
-  //   sigdao: `+5.25`,
-  //   nftLevel: `3`,
-  //   missionPath: '',
-  //   timeslot: [{
-  //     startingTime: '20:00',
-  //     endTime: '20:06',
-  //   },
-  //   {
-  //     startingTime: '21:00',
-  //     endTime: '21:06',
-  //   }],
-  // },
-]
-
-// todo: replace this with real data
-// const missionFormList = () => {
-//   const missionList = []
-//   for (let i = 0; i < 9; i++) {
-//     missionList.push({
-//       title: `1. Hello Bae !`,
-//       duration: `3 mins`,
-//       bodyPart: `Arms`,
-//       sigdao: `+5.25`,
-//       nftLevel: `1`,
-//       missionPath: '',
-//     })
-//   }
-//   return missionList
-// }
-
-
-// const missionList: MissionFormList[] = missionFormList()
 
 
 const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props) => {
@@ -197,36 +21,111 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
   const userAccountId = useSelector(accountId);
   const userWalletNodeHost = useSelector(walletNodeHost);
   const navigate = useNavigate();
-  const [isInTimeSlot, setIsInTimeSlot] = useState(false);
-  const [booleanStates, setBooleanStates] = useState<boolean[]>(Array(missionList.length).fill(false));
-
-
-  const checkTimeSlot = () => {
-    const currentTime = new Date().toLocaleTimeString([], {
-      hour: '2-digit',
-      minute: '2-digit',
-    });
-
-    for (const mission of missionList) {
-      for (const time of mission.timeslot) {
-        if (currentTime >= time.startingTime && currentTime <= time.endTime) {
-          setIsInTimeSlot(true);
-          return;
-        }
-      }
-    }
-
-
-    setIsInTimeSlot(false);
-  };
+  const [isInTimeSlot, setIsInTimeSlot] = useState<boolean[]>([]);
+  const [Timedifference, setTimedifference] = useState<string[]>([]);
 
   useEffect(() => {
-    const interval = setInterval(checkTimeSlot, 1000); // Check every second
+    const checkTimeSlot = () => {
+      const now = new Date();
+      const currentTime = now.getHours() * 60 + now.getMinutes();
+      const currentTimeInSecond = now.getHours() * 60 * 60 + now.getMinutes() * 60 + now.getSeconds();
 
-    return () => {
-      clearInterval(interval);
+
+      setIsInTimeSlot(
+        missionList.map((mission) => {
+          const { timeslot } = mission;
+          const isInSlot = timeslot.some(
+            (slot) => currentTime >= getTimeInMinutes(slot.startingTime) && currentTime <= getTimeInMinutes(slot.endTime)
+          );
+          return isInSlot;
+        })
+      );
+
+      setTimedifference(
+        missionList.map((mission) => {
+          const { timeslot } = mission;
+          const timedifferentInFormat = timeslot.map((slot) => {
+            const time = slot.startingTime.split(':').map(ele => parseInt(ele));
+            const formatTime = time[0] * 60 * 60 + time[1] * 60;
+            const timeDiff = formatTime - currentTimeInSecond;
+
+            if (timeDiff < 0) {
+              return timeDiff + 24 * 60 * 60;
+            }
+
+            return timeDiff;
+          })
+          let filteredtimedifferentInFormat = timedifferentInFormat.filter((date) => {
+            console.log(date > 0, 'timedifferentInFormat date')
+            return date > 0;
+          })
+          console.log(filteredtimedifferentInFormat, 'filteredtimedifferentInFormat')
+
+          filteredtimedifferentInFormat.sort((a, b) => a - b);
+          console.log(filteredtimedifferentInFormat, 'timedifferentInFormat')
+          const hours = Math.floor(filteredtimedifferentInFormat[0] / 3600).toString().padStart(2, '0');
+          const minutes = Math.floor((filteredtimedifferentInFormat[0] % 3600) / 60).toString().padStart(2, '0');
+          const seconds = (filteredtimedifferentInFormat[0] % 60).toString().padStart(2, '0');
+
+          console.log(hours, minutes, seconds, 'hours, minutes, seconds')
+          // const hours = Math.floor(timedifferentInFormat[0] / (1000 * 60 * 60));
+          // const minutes = Math.floor((timedifferentInFormat[0] / (1000 * 60)) % 60);
+          // const seconds = Math.floor((timedifferentInFormat[0] / 1000) % 60);
+
+          return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+          // return timedifferentInFormat;
+          // return '';
+        })
+      )
+      console.log(Timedifference, 'Timedifference');
+      console.log(isInTimeSlot, 'isInTimeSlot');
     };
+
+    const interval = setInterval(checkTimeSlot, 1000);
+
+    return () => clearInterval(interval);
+
+      // setIsInTimeSlot(
+      //   missionList.map((mission) => {
+      //     return true;
+      //   })
+      // );
+
+
   }, []);
+
+  const getTimeInMinutes = (time: string): number => {
+    const [hours, minutes] = time.split(':').map(Number);
+    return hours * 60 + minutes;
+  };
+
+
+  // const checkTimeSlot = () => {
+  //   const currentTime = new Date().toLocaleTimeString([], {
+  //     hour: '2-digit',
+  //     minute: '2-digit',
+  //   });
+
+  //   for (const mission of missionList) {
+  //     for (const time of mission.timeslot) {
+  //       if (currentTime >= time.startingTime && currentTime <= time.endTime) {
+  //         setIsInTimeSlot(true);
+  //         return;
+  //       }
+  //     }
+  //   }
+
+
+  //   setIsInTimeSlot(false);
+  // };
+
+  // useEffect(() => {
+  //   const interval = setInterval(checkTimeSlot, 1000); // Check every second
+
+  //   return () => {
+  //     clearInterval(interval);
+  //   };
+  // }, []);
 
 
   const content: JSX.Element = (
@@ -241,41 +140,135 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
               {missionList.map((mission, index) => {
                 return (
                   <Button
-                    onClick={() => navigate(`/challengeCountdown/{}`)}
+                    onClick={() => {
+                      if (isInTimeSlot[index]) {
+                        navigate(`/challengeCountdown/${index+1}`)
+                      }
+                    }}
                     className="challenge-cards-Ic1qil"
                   >
-                    <div className="inner-mission-container">
-                      <div className="mission-graph">
-                        <img className='mission-gif' src="img/missionChallenge/1HelloBae-BetterMiWithUniform.gif" alt="" />
+                    {isInTimeSlot[index] ? 
+                      <>
+                        <div className="score-bar_2">
+                          <div className="starting inter-semi-bold-white-15px">
+                            STARTING
+                          </div>
+                        </div>
+                        <div 
+                          className="inner-mission-container" 
+                          // style={isInTimeSlot[index] ? {opacity: '1'} : {opacity: '0.4'}}
+                        >
+                          <div className="mission-graph">
+                            <img className='mission-gif' src={mission.missionImgPath} alt="" />
+                          </div>
+                          <div className="mission-detail">
+                            <div className="mission-topic inter-semi-bold-white-18px">
+                              {mission.title}
+                            </div>
+                            <div className="mission-time-bodyPart-container">
+                              <div className="mission-time-container">
+                                <img
+                                  className="ic_time"
+                                  src="img/missionChallenge/ic-time@1x.png"
+                                  alt="ic_time"
+                                />
+                                <p className='inter-semi-bold-cadet-blue-14px'>{mission.duration}</p>
+                              </div>
+                              <div className="mission-bodyPart-container">
+                                <img
+                                    className="ic_-body"
+                                    src="img/missionChallenge/ic-body@1x.png"
+                                    alt="ic_Body"
+                                  />
+                                <p className='inter-semi-bold-cadet-blue-14px'>{mission.bodyPart}</p>
+                              </div>
+                            </div>
+                            <div className="mission-level-and-reward">
+                              <div className="mission-level inter-semi-bold-keppel-15px">
+                                LV {mission.nftLevel}
+                              </div>
+                              <div className="level-and-sigdao-separate-line"></div>
+                              <div className="mission-reward-container">
+                              <div className="signdao_tokengradient">
+                                <div className="x441"></div>
+                                <div className="x442"></div>
+                                <img
+                                  className="x880"
+                                  src="img/missionChallenge/file---880-1x-png-10@1x.png"
+                                  alt="880"
+                                />
+                              </div>
+                                <p className='inter-semi-bold-keppel-14px'>{mission.sigdao}</p>
+                              </div>
+                              <img className='mission-bar-arrow-right' src="img/missionChallenge/ic-chevron-right-24px-1@1x.png" alt="" />
+                            </div>
+                          </div>
+                        </div>
+                      </>
+                    : 
+                    <>
+                      <div className="score-bar_2-active inter-semi-bold-keppel-15px">
+                        {/* {mission.timeslot[0].startingTime} */}
+                        {Timedifference[index]}
                       </div>
-                      <div className="mission-detail">
-                        <div className="mission-topic inter-semi-bold-white-18px">
-                          {mission.title}
+                      <div className="inner-mission-container-layout">
+                        <div className="showing-time">
+                          {}
                         </div>
-                        <div className="mission-time-bodyPart-container">
-                          <div className="mission-time-container">
-                            <img src="/" alt="" />
-                            <p>{mission.duration}</p>
+                        <div 
+                          className="inner-mission-container" 
+                          // style={isInTimeSlot[index] ? {opacity: '1'} : {opacity: '0.4'}}
+                        >
+                          <div className="mission-graph">
+                            <img className='mission-gif' src={mission.missionImgPath} alt="" />
                           </div>
-                          <div className="mission-bodyPart-container">
-                            <img src="" alt="" />
-                            <p>{mission.bodyPart}</p>
-                          </div>
-                        </div>
-                        <div className="mission-level-and-reward">
-                          <div className="mission-level">
-                            LV {mission.nftLevel}
-                          </div>
-                          <div className="mission-reward-container">
-                            <img src="" alt="" className="sigdao-icon" />
-                            <p>{mission.sigdao}</p>
-                          </div>
-                          <div className="mission-arrow-icon-container">
-                            <img src="" alt="" />
+                          <div className="mission-detail">
+                            <div className="mission-topic inter-semi-bold-white-18px">
+                              {mission.title}
+                            </div>
+                            <div className="mission-time-bodyPart-container">
+                              <div className="mission-time-container">
+                                <img
+                                  className="ic_time"
+                                  src="img/missionChallenge/ic-time@1x.png"
+                                  alt="ic_time"
+                                />
+                                <p className='inter-semi-bold-cadet-blue-14px'>{mission.duration}</p>
+                              </div>
+                              <div className="mission-bodyPart-container">
+                                <img
+                                    className="ic_-body"
+                                    src="img/missionChallenge/ic-body@1x.png"
+                                    alt="ic_Body"
+                                  />
+                                <p className='inter-semi-bold-cadet-blue-14px'>{mission.bodyPart}</p>
+                              </div>
+                            </div>
+                            <div className="mission-level-and-reward">
+                              <div className="mission-level inter-semi-bold-keppel-15px">
+                                LV {mission.nftLevel}
+                              </div>
+                              <div className="level-and-sigdao-separate-line"></div>
+                              <div className="mission-reward-container">
+                              <div className="signdao_tokengradient">
+                                <div className="x441"></div>
+                                <div className="x442"></div>
+                                <img
+                                  className="x880"
+                                  src="img/missionChallenge/file---880-1x-png-10@1x.png"
+                                  alt="880"
+                                />
+                              </div>
+                                <p className='inter-semi-bold-keppel-14px'>{mission.sigdao}</p>
+                              </div>
+                              <img className='mission-bar-arrow-right' src="img/missionChallenge/ic-chevron-right-24px-1@1x.png" alt="" />
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </>
+                    }
+
                     {/* <img
                       className="card_bg"
                       src="img/missionChallenge/card-bg-1@1x.png"

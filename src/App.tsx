@@ -1,6 +1,6 @@
 // package
 import React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import {BrowserRouter, Routes, Route, Navigate, useLocation, Outlet} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Provider as ReduxProvider } from "react-redux";
@@ -8,6 +8,7 @@ import  { Fragment } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import { loadState, saveState } from './redux/sessionStorage';
 import { createTheme , ThemeProvider } from "@mui/material"
+
 
 // setting
 import { store } from './redux/reducer';
@@ -44,6 +45,9 @@ import AiCoachDetail from './pages/aiCoachDetail/aiCoachDetail';
 import ErrorGenerateNFT from './pages/errorGenerateNFT/errorGenerateNFT';
 import LoadingMinting from './pages/loadingMinting/loadingMinting';
 import Setting from './pages/setting/setting';
+import IndexMyNftList from './pages/myNftList/indexMyNftList';
+import Leaderboard from './pages/leaderboard/leaderboard';
+import OtherUserProfile from './pages/leaderboard/otherUserProfile';
 
 store.subscribe(() => {
   saveState(store.getState());
@@ -81,7 +85,8 @@ const titleList = {
   '/generateBMINFTImport': 'Generate BMI NFT Import - BetterMi',
   '/aiCoachSelect': 'AI Coach Select - BetterMi',
   '/aiCoachDetail': 'AI Coach Detail - BetterMi',
-  '/error': 'Error Generate NFT - BetterMi',
+  '/errorGenerateNFT': 'Error Generate NFT - BetterMi',
+  '/errorTakeSelfie': 'Error Take Selfie - BetterMi',
   '/loadingMinting': 'Loading Minting - BetterMi',
   '/setting': 'Setting - BetterMi',
   '/NFTTransferCompleted': 'NFT Transfer Completed - BetterMi',
@@ -90,9 +95,15 @@ const titleList = {
 const CheckStore: React.FC = () => {
   const location = useLocation();
   const currentPath: string = location.pathname;
+  const {appName,Wallet,Ledger} = useContext(AppContext);
+
 
   if (currentPath === '/' || currentPath === '/connectWallet' ){
     return <Outlet/>
+  }
+
+  if (Wallet.Extension.connection == null) {
+    return <Navigate to="/" />
   }
 
   return sessionStorage.getItem('state') === null ? <Navigate to="/" /> : <Outlet/>;
@@ -134,7 +145,8 @@ function App() {
                 <Route path=":id" element={<ChallengeCountdown/>} />
               </Route>
               <Route path="/missionChallenge" element={<MissionChallenge/>} />
-              <Route path="/myNftList" element={<MyNftList/>} />
+              {/* <Route path="/myNftList" element={<MyNftList/>} /> */}
+              <Route path = "/indexMyNftList" element = {<IndexMyNftList/>}/>
               <Route path="/reward" element={<Reward/>} />
               <Route path="/rewardDetail">
                 <Route path=":id" element={<RewardDetail/>} />
@@ -150,10 +162,14 @@ function App() {
               <Route path='/aiCoachDetail' >
                 <Route path=':id' element={<AiCoachDetail />} />
               </Route>
-              <Route path='/error' element={<ErrorGenerateNFT />} />
+              <Route path='/errorGenerateNFT' element={<ErrorGenerateNFT />} />
+              <Route path='/errorTakeSelfie' element={<ErrorGenerateNFT />} />
+              <Route path='/errorWalletNotConnected' element={<ErrorGenerateNFT />} />
               <Route path='/loadingMinting' element={<LoadingMinting />} />
               <Route path='/setting' element={<Setting />} />
               <Route path='/NFTTransferCompleted' element={<ChallengeCompleted NFT={true} />} />
+              <Route path='/leaderboard' element={<Leaderboard />} />
+              <Route path='/OtherUserProfile' element={<OtherUserProfile />} />
               <Route path="*" element={<Navigate to="/home" />} />
             </Route>
           </Routes>

@@ -9,6 +9,7 @@ export interface userAccount
     isWatchOnlyMode: boolean,
     token:number,
     level:string,
+    nftContractStorage:string,
 }   
 
 const initialState: userAccount = {
@@ -18,6 +19,7 @@ const initialState: userAccount = {
     isWatchOnlyMode: false,
     token:0,
     level:"1",
+    nftContractStorage:"",
 };
 
 export const accountSlice = createSlice({
@@ -29,14 +31,16 @@ export const accountSlice = createSlice({
             state.accountRS = action.payload.accountRS;
             state.publicKey = action.payload.publicKey;
             state.isWatchOnlyMode = action.payload.isWatchOnlyMode;
-            
         },
         setToken:(state, action: PayloadAction<number>) => {
             state.token = action.payload;
         },
         setLevel:(state,action:PayloadAction<string>) => {
             state.level = action.payload;
-        }
+        },
+        setNftContractStorage:(state,action:PayloadAction<string>) => {
+            state.nftContractStorage = action.payload;
+        },
     }   
 });
 export const { actions } = accountSlice;
@@ -50,4 +54,7 @@ export const accountToken = (state: any) => {
 export const accountLevel = (state:any) => {
 
     return state.account.level;
+}
+export const getNftContractStorage = (state:any) => {
+    return state.account.nftContractStorage?state.account.nftContractStorage:localStorage.getItem("nftContractStorage");
 }

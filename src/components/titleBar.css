@@ -15,6 +15,22 @@
 
 }
 
+.importButton{
+  position:relative;
+  left:250px;
+  height:25px;
+  width:100px;
+  top:54px;
+  background-color:inherit;
+  border:none;
+  color:#FFFFFF;
+}
+
+.importButton:hover{
+  cursor:pointer;
+  opacity:0.6;
+}
+
 .transparent-title-bar-container {
   /* background: linear-gradient(112deg, #221D4B 0%, #171717 100%);
   box-shadow: 0px 3px 30px var(--royal-blue); */
@@ -226,9 +242,9 @@
 
 .ic_settings_24px-container {
   bottom: 12px;
-  height: 20px;
+  height: 22px;
   right: calc(18.62% - 4px);
-  width: 20px;
+  width: 28px;
 }
 
 .ic_settings_24px-img {

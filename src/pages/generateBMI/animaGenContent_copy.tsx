@@ -64,10 +64,10 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
 
 
       setMinted(true);
-      const asset = await ledger.asset.getAssetHolders({assetId:"3862155318820066741"});
+      const asset = await ledger.asset.getAssetHolders({assetId:"13116962758643420722"});
       asset.accountAssets.map((obj)=>{
         if(obj.account == userAccountId){
-          store.dispatch(accountSlice.actions.setToken(Number(obj.quantityQNT)));
+          store.dispatch(accountSlice.actions.setToken(Number(obj.quantityQNT)/1000000));
           localStorage.setItem('token',obj.quantityQNT);
             console.log(obj.quantityQNT);
         }
@@ -89,11 +89,11 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
 
       try {
         if(storeNftContract.ats[0] == null){
-          //console.log("called storeNftContract.ats.length",typeof(process.env.REACT_APP_NFT_CONTRACT_REFERENCED_TRANSACTION_HASH));
+          //console.log("called storeNftContract.ats.length",typeof(process.env.REACT_APP_NFT_CONTRACT_REFERENCED_TRANSACTION_FULL_HASH));
           const initializeNftContract = await ledger.contract.publishContractByReference({
             name: "NFT",
             description:"storage_space_for_your_nft",
-            referencedTransactionHash:process.env.REACT_APP_NFT_CONTRACT_REFERENCED_TRANSACTION_HASH!,
+            referencedTransactionHash:process.env.REACT_APP_NFT_CONTRACT_REFERENCED_TRANSACTION_FULL_HASH!,
             feePlanck:"30000000",
             senderPublicKey:publicKey,
             deadline:1440,}) as UnsignedTransaction;

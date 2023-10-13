@@ -2,14 +2,20 @@ import * as React from 'react';
 import './titleBar.css';
 import { BackButton } from './button';
 import { Link } from 'react-router-dom';
+import { Button } from 'reactstrap';
 
 interface IShortTitleBarProps {
   title: string | undefined;
-  setting?: boolean;
+  aiCoach?: boolean;
   help?: boolean;
   transparent?: boolean | undefined;
   filter?: boolean;
   addSign?:boolean;
+  setting?: boolean;
+  backButton?: boolean;
+  importButton?: boolean;
+  setIsOpenImport?: (isOpenImport: boolean) => void;
+  isOpenImport?: boolean;
 }
 
 
@@ -24,9 +30,7 @@ const settingIcon: JSX.Element = (
 )
 
 export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (props) => {
-  const { title, setting, help, transparent,filter,addSign } = props;
-  console.log(setting);
-  console.log(setting === false);
+  const { title, aiCoach, help, transparent,filter,addSign, setting, backButton,importButton,setIsOpenImport,isOpenImport } = props;
   return (
     <div className="title-bar-layout">
       <div className={transparent ? "transparent-title-bar-container" : "title-bar-container"}
@@ -39,20 +43,23 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
         <div className="title-bar-title inter-semi-bold-white-18px">{title}</div>
         {/* <img className="title-bar-seperat-line seperat-line" src={process.env.PUBLIC_URL + "/img/seperat-line-11@1x.png"} alt="Seperat line" /> */}
         {addSign === true?
-        <Link to='https://test.signumart.io/collection/13061730801426095294'>
-          <div className = "titleBarAddSign">
-            <img className = "titleBarAddSignImg" src = {process.env.PUBLIC_URL + "/img/NftList/ic-add@1x.png"}/>
-          </div>
-        </Link>
-        :
-        <Link to='/setting'>
-        <div className="title-bar-ic_help_24px ic_help_24px">
-          <img className="title-bar-ic_help_24px-img ic_help_24px" src={process.env.PUBLIC_URL + "/img/ic-settings-24px-1@1x.png"} alt="ic_help_24px" />
-        </div>
-
-        </Link>
-}
+          <Link to='https://test.signumart.io/collection/13061730801426095294'>
+            <div className = "titleBarAddSign">
+              <img className = "titleBarAddSignImg" src = {process.env.PUBLIC_URL + "/img/NftList/ic-add@1x.png"}/>
+            </div>
+          </Link>
+          :
+          setting === false?
+            null
+            :
+            <Link to='/setting'>
+              <div className="title-bar-ic_help_24px ic_help_24px">
+                <img className="title-bar-ic_help_24px-img ic_help_24px" src={process.env.PUBLIC_URL + "/img/ic-settings-24px-1@1x.png"} alt="ic_help_24px" />
+              </div>
+            </Link>
+        }
         {/*the filter and the plus sign change this div*/}
+        {backButton === false ? null :
         <a href="javascript:history.back()">
           <div className="icon-arrow-left-container icon-arrow-left">
               <img
@@ -62,12 +69,13 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
                 />
           </div>
         </a>
-        {setting === false ? null :(
+        }
+        {aiCoach === false ? null :(
           <Link to="/aiCoachSelect">
             <div className="ic_settings_24px-container ic_settings_24px">
               <img
                 className="ic_settings_24px-img ic_settings_24px"
-                src={process.env.PUBLIC_URL + "/img/ic-sentiment-very-satisfied-24px-1@1x.png"}
+                src={process.env.PUBLIC_URL + "/img/ic_chat.svg"}
                 alt="ic_settings_24px"
                 />
             </div>
@@ -92,21 +100,28 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
       //     </div>
       //   </button>
       // </div>
-      <div className="dropdown">
-  <button className="dropbtn">
-    <div className = "dropbtnDescription">Free</div>
-        
-      <img className = "dropbtnArrow" src = {process.env.PUBLIC_URL + "img/NftList/ic-arrow-drop-down@1x.png"}/>
+        <div className="dropdown">
+        <button className="dropbtn">
+          <div className = "dropbtnDescription">Free</div>
+              
+            <img className = "dropbtnArrow" src = {process.env.PUBLIC_URL + "img/NftList/ic-arrow-drop-down@1x.png"}/>
 
-  </button>
-  <div className="dropdown-content">
-    <a href="#">Lowest Price</a>
-    <a href="#">Highest Price</a>
-    <a href="#">All</a>
-  </div>
-</div>
+        </button>
+        <div className="dropdown-content">
+          <a href="#">Lowest Price</a>
+          <a href="#">Highest Price</a>
+          <a href="#">All</a>
+        </div>
+      </div>
       
       )}
+      {
+        importButton === false ? null :
+          setIsOpenImport === undefined ? null :
+        (
+          <Button className = "importButton inter-semi-bold-white-12px" onClick = {() => setIsOpenImport(!isOpenImport)}>Import Nft</Button>
+        )
+      }
 
         {/* <img className="bg-MY4xZJ" src={process.env.PUBLIC_URL + "/img/bg-11@1x.png"} alt="BG" /> */}
       </div>

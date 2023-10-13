@@ -1,12 +1,31 @@
 import * as React from 'react';
 import './errorGenerateNFT.css';
 import { CenterLayout } from '../../components/layout';
+import { Link, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 
 
 interface IErrorGenerateNFTProps {
 }
 
 const ErrorGenerateNFT: React.FunctionComponent<IErrorGenerateNFTProps> = (props) => {
+  const location = useLocation();
+  const [errorMsg, setErrorMsg] = React.useState<string>();
+  const [buttonText, setButtonText] = React.useState<string>();
+  const [navigatePath, setNavigatePath] = React.useState<string>();
+
+  useEffect(() => {
+    if (location.pathname === '/errorGenerateNFT') {
+      setErrorMsg('This NFT has been snatched up by someone else. Go ahead and mint another Free NFT now !');
+      setButtonText('Mint again');
+      setNavigatePath('/generateBMINFTImport')
+    } else if (location.pathname === '/errorTakeSelfie') {
+      setErrorMsg('Please make sure that only your face is visible in the frame.');
+      setButtonText('Selfie again');
+      setNavigatePath('/takeSelfie')
+    } 
+  }, [])
+
   const content: JSX.Element = (
     <div className="screen">
       <div className="bettermidapp-generate-free-nft-error">
@@ -14,9 +33,9 @@ const ErrorGenerateNFT: React.FunctionComponent<IErrorGenerateNFTProps> = (props
           <img className="bg-lme0fw" src="img/errorGenerateNFT/bg-10@1x.png" alt="BG" />
           <div className="x16220-lme0fw">
             <p className="this-nft-has-been-sn-RYas9d">
-              This NFT has been snatched up by someone else. Go ahead and mint another Free NFT now !
+              {errorMsg}
             </p>
-            <h1 className="title-RYas9d inter-semi-bold-white-28px">Sumimasen!</h1>
+            <h1 className="title-RYas9d inter-semi-bold-white-28px">すみません!</h1>
             <div className="ic_sentiment_very_dissatisfied_24px-RYas9d ic_sentiment_very_dissatisfied_24px">
               <img
                 className="ic_sentiment_very_dissatisfied_24px-TVetTD ic_sentiment_very_dissatisfied_24px"
@@ -25,7 +44,7 @@ const ErrorGenerateNFT: React.FunctionComponent<IErrorGenerateNFTProps> = (props
                 />
             </div>
           </div>
-          <a href="bettermidapp-settings-1.html">
+          {/* <a href="bettermidapp-settings-1.html">
             <div className="ic_settings_24px-lme0fw ic_settings_24px">
               <img
                 className="ic_settings_24px-1cMOi3 ic_settings_24px"
@@ -33,8 +52,8 @@ const ErrorGenerateNFT: React.FunctionComponent<IErrorGenerateNFTProps> = (props
                 alt="ic_settings_24px"
                 />
             </div>
-          </a>
-          <a href="bettermidapp-ai-coach.html">
+          </a> */}
+          {/* <a href="bettermidapp-ai-coach.html">
             <div className="ic_sentiment_very_satisfied_24px-lme0fw ic_sentiment_very_satisfied_24px">
               <img
                 className="ic_sentiment_very_satisfied_24px-xCJHHT ic_sentiment_very_satisfied_24px"
@@ -42,7 +61,7 @@ const ErrorGenerateNFT: React.FunctionComponent<IErrorGenerateNFTProps> = (props
                 alt="ic_sentiment_very_satisfied_24px"
                 />
             </div>
-          </a>
+          </a> */}
         </div>
         <a href="javascript:history.back()">
           <div className="icon-arrow-left-FumncE icon-arrow-left">
@@ -57,7 +76,7 @@ const ErrorGenerateNFT: React.FunctionComponent<IErrorGenerateNFTProps> = (props
           <div className="frame-QaAc67"></div>
           <div className="status-bar-QaAc67">
             <div className="battery-MTLyAM">
-              <div className="border-MYGhml"></div>
+              <div className="border-MYGhml"></dimintagain-7FeCxkv>
               <img className="cap-MYGhml" src="img/errorGenerateNFT/cap-1@1x.png" alt="Cap" />
               <div className="capacity-MYGhml"></div>
             </div>
@@ -68,14 +87,14 @@ const ErrorGenerateNFT: React.FunctionComponent<IErrorGenerateNFTProps> = (props
             </div>
           </div>
         </div> */}
-        <div className="bottom-controls-FumncE">
-          <a href="bettermidapp-generate-free-nft-minting.html">
+        <Link to={navigatePath} >
+          <div className="bottom-controls-FumncE">
             <div className="button_-mintagain-QHnb0b">
-              <div className="button1-7FeCxk"></div>
-              <div className="mintagain-7FeCxk inter-semi-bold-white-15px">Mint again</div>
+              {/* <div className="button1-7FeCxk"></div> */}
+              <div className="mintagain-7FeCxk inter-semi-bold-white-15px">{buttonText}</div>
             </div>
-          </a>
-        </div>
+          </div>
+        </Link>
       </div>
     </div>
   )

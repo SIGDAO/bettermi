@@ -11,6 +11,7 @@ export interface ProfileState {
   bmi: string;
   gender: string;
   birthday: Date | null;
+  isSelfie: boolean;
 }
 
 export interface BMIState {
@@ -21,12 +22,16 @@ export interface BMIState {
 const initialState: ProfileState = {
   selfiePath: "",
   username: "",
-  discordUsername: "zoeeeee#1234",
-  description: "I'm a positive person. I love to travel and eat.",
-  aboutYourself: "♉️  |  29  |  PERSONAL TRAINER",
+  // discordUsername: "zoeeeee#1234",
+  // description: "I'm a positive person. I love to travel and eat.",
+  // aboutYourself: "♉️  |  29  |  PERSONAL TRAINER",
+  discordUsername: "",
+  description: "",
+  aboutYourself: "",
   bmi: "",
   gender: "",
   birthday: null,
+  isSelfie: false,
 };
 
 
@@ -83,6 +88,12 @@ export const profileSlice = createSlice({
     clearAboutYourself: (state) => {
       state.aboutYourself = "";
     },
+    setIsSelfie: (state, action: PayloadAction<boolean>) => {
+      state.isSelfie = action.payload;
+    },
+    clearIsSelfie: (state) => {
+      state.isSelfie = false;
+    },
     clearAll: (state) => {
       state.selfiePath = "";
       state.username = "";
@@ -111,3 +122,4 @@ export const selectCurrentBirthday = (state: any) => state.profile.birthday;
 export const selectCurrentDiscordUsername = (state: any) => state.profile.discordUsername;
 export const selectCurrentDescription = (state: any) => state.profile.description;
 export const selectCurrentAboutYourself = (state: any) => state.profile.aboutYourself;
+export const selectCurrentIsSelfie = (state: any) => state.profile.isSelfie;

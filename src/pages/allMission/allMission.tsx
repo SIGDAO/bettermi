@@ -221,7 +221,7 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
         </div>
         <div className = "body3">
         </div>
-        {/* <MenuBar/> */}
+        <MenuBar/>
       </div>
 
       </div>

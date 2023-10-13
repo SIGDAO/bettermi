@@ -17,7 +17,7 @@ import { BMI_Day } from '../../redux/userBMI';
 import { SeriesDataItemTypeMap } from 'lightweight-charts';
 import moment from 'moment';
 import { NavigateToTakeSelfieButton } from '../../components/button';
-import { calRewardSigdaoOnSelfie } from '../../components/sigdaoReward';
+import { calRewardSigdaoOnSelfie } from '../../components/selfieToEarnRewardType';
 // import { useFindBMI } from '../../components/findBMI';
 
 
@@ -204,7 +204,7 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
             <div className="x442"></div>
             <img className="x880" src="img/selfieToEarn/file---880-1x-png-10@1x.png" alt="880" />
           </div>
-          <div className="sigdao-reward-text-container inter-semi-bold-keppel-14px">+{calRewardSigdaoOnSelfie(item?.value)}</div>
+          <div className="sigdao-reward-text-container inter-semi-bold-keppel-14px">+{calRewardSigdaoOnSelfie(item?.value)/ (10 ** 6)}</div>
         </div>
       </div>
     )

@@ -25,6 +25,17 @@
   z-index: 1;
 }
 
+.nft_-avatar-2ZgxSS {
+  background-color: transparent;
+  border-radius: 10px;
+  height: calc(100.00% - 8px);
+  left: 0px;
+  object-fit: cover;
+  position: absolute;
+  top: 8px;
+  width: 107px;
+}
+
 .bettermidapp-profile-3 .overlap-group1-profile {
   align-self: center;
   height: 333px;
@@ -89,18 +100,6 @@
   width: 480px;
   overflow-x: scroll;
   padding-left: 100px;
-}
-
-.bettermidapp-profile-3 .overlap-group-profile {
-  background: linear-gradient(90deg, #0d0d0d 0%, #4136f1 102.54%);
-  border: 1px solid;
-  border-color: var(--royal-blue);
-  border-radius: 10px;
-  flex: 0 0 auto;
-  height: 217px;
-  position: relative;
-  width: 152px;
-  cursor: pointer;
 }
 
 .bettermidapp-profile-3 .add {
@@ -684,22 +683,91 @@
 
 .bettermidapp-profile-3 .nft_-avatar {
   border-radius: 6px;
+  height: 125px;
+  left: 52px;
+  object-fit: cover;
+  position: absolute;
+  top: -5;
+  width: 80px;
+  clip: rect(0, 80px, 80px, 0);
+}
+
+.bettermidapp-profile-3 .nft_-avatar_empty {
+  border-radius: 6px;
+  height: 125px;
+  left: 52px;
+  object-fit: cover;
+  position: absolute;
+  top: -5;
+  width: 80px;
+  clip: rect(0, 80px, 80px, 0);
+  background-color: #221D4B;
+ /* background-color: linear-gradient(180deg, #171717 0%, #291a49 41.22%, #171717 100%); */
+}
+.profile_icon_nft_-avatar_empty {
+  border-radius: 6px;
   height: 80px;
   left: 52px;
   object-fit: cover;
   position: absolute;
-  top: 0;
+  top: -5;
   width: 80px;
+  background: linear-gradient(180deg, #8743FF 0%, #4136F1 100%);;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+ /* background-color: linear-gradient(180deg, #171717 0%, #291a49 41.22%, #171717 100%); */
 }
+.profile_icon_ic_add {
+  height: 28px;
+  width:28px;
+  align-self: center;
+}
+
+.profile_icon_ic_loading{
+  height: 80px;
+  width:80px;
+  align-self: center;
+}
+
+.bettermidapp-profile-3 .add {
+  height: 30px;
+  left: 60px;
+  object-fit: cover;
+  position: absolute;
+  top: 93px;
+  width: 30px;
+}
+ .profile_icon_add {
+  height: 30px;
+  align-self: center;
+  width: 30px;
+}
+
+
+.bettermidapp-profile-3 .overlap-group-profile {
+  background: linear-gradient(90deg, #0d0d0d 0%, #4136f1 102.54%);
+  border: 1px solid;
+  border-color: var(--royal-blue);
+  border-radius: 10px;
+  flex: 0 0 auto;
+  height: 217px;
+  position: relative;
+  width: 152px;
+  cursor: pointer;
+  margin-left:10px;
+  margin-right: 12px;
+}
+
 
 .bettermidapp-profile-3 .copy-icon {
   /* background-image: url(.bettermidapp-profile-3 ..bettermidapp-profile-3 ./img/file---11690@1x.bettermidapp-profile-3 .png); */
   background-position: 50% 50%;
   background-size: cover;
   height: 18px;
-  left: 168px;
+  left: 250px;
   position: absolute;
-  top: 230px;
+  top: 228px;
   width: 17px;
   cursor: pointer;
 }
@@ -944,6 +1012,7 @@
   position: absolute;
   top: 112px;
   white-space: nowrap;
+  
 }
 
 .bettermidapp-profile-3 .about-yourself {
@@ -1141,3 +1210,138 @@
   white-space: nowrap;
 }
 
+
+.profileHorizontalScroll{
+  background-color: inherit;
+  margin-top: -10px;
+}
+
+.profileHorizontalScroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.profileHorizontalScroll {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+.copied-alert {
+  width: 200px;
+  z-index: 999;
+  position: absolute;
+  top: 100px;
+  background-color: rgb(13 13 13);
+  color: white;
+
+}
+
+.copied-alert div {
+  color: white;
+}
+
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid #fff;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #fff transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+..lds-heart {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+  transform: rotate(45deg);
+  transform-origin: 40px 40px;
+}
+.lds-heart div {
+  top: 32px;
+  left: 32px;
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  background: #fff;
+  animation: lds-heart 1.2s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+.lds-heart div:after,
+.lds-heart div:before {
+  content: " ";
+  position: absolute;
+  display: block;
+  width: 32px;
+  height: 32px;
+  background: #fff;
+}
+.lds-circle {
+
+  display: inline-block;
+  transform: translateZ(1px);
+}
+.lds-circle > div {
+  display: inline-block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  background: #fff;
+  animation: lds-circle 2.4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+@keyframes lds-circle {
+  0%, 100% {
+    animation-timing-function: cubic-bezier(0.5, 0, 1, 0.5);
+  }
+  0% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(1800deg);
+    animation-timing-function: cubic-bezier(0, 0.5, 0.5, 1);
+  }
+  100% {
+    transform: rotateY(3600deg);
+  }
+}
+
+.profile_icon_for_loading {
+  border-radius: 6px;
+  height: 80px;
+  left: 52px;
+  object-fit: cover;
+  position: absolute;
+  top: -5;
+  width: 80px;
+  background: linear-gradient(180deg, #8743FF 0%, #4136F1 100%);
+  display:flex;
+  align-items: center;
+  justify-content: center;
+ /* background-color: linear-gradient(180deg, #171717 0%, #291a49 41.22%, #171717 100%); */
+}

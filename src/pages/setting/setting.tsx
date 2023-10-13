@@ -1,11 +1,26 @@
 import * as React from 'react';
 import { CenterLayout } from '../../components/layout';
 import './setting.css';
-
+import { Button } from 'reactstrap';
+import { useContext } from 'react';
+import { AppContext } from '../../redux/useContext';
+import { GenericExtensionWallet } from '@signumjs/wallets';
+import { useNavigate } from 'react-router-dom';
+import { store } from '../../redux/reducer';
 interface ISettingProps {
 }
 
 const Setting: React.FunctionComponent<ISettingProps> = (props) => {
+  const {appName,Wallet,Ledger} = useContext(AppContext);
+  const navigate = useNavigate();
+  const logout = () => {
+    console.log(Wallet);
+     store.dispatch({ type: 'USER_LOGOUT' });
+    Wallet.Extension = new GenericExtensionWallet();
+    console.log(Wallet);
+    navigate('/');
+    
+  }
   const content: JSX.Element = (
     <div className="screen">
           <div className="bettermidapp-settings-1">
@@ -159,14 +174,12 @@ const Setting: React.FunctionComponent<ISettingProps> = (props) => {
             />
         </div>
       </a>
-      <a href="bettermidapp-generate-bmidata-import.html">
-        <div className="bottom-controls-7DUKxJ">
+        <Button className="bottom-controls-7DUKxJ" onClick = {() => {logout()}}>
           <div className="button_-logout-ChdhUr">
             <div className="button1-GdXCBJ"></div>
             <div className="mintagain-GdXCBJ inter-semi-bold-white-15px">Logout</div>
           </div>
-        </div>
-      </a>
+        </Button>
       <a href="bettermidapp-ai-coach.html">
         <div className="ic_sentiment_very_satisfied_24px-7DUKxJ ic_sentiment_very_satisfied_24px">
           <img
