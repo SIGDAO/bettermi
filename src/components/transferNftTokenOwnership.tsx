@@ -16,6 +16,7 @@ export const TransferNftTokenOwnership = async (nodeHost:any,accountId:any) => {
   const nftStorageAccounts = process.env.REACT_APP_NFT_STORAGE?.split(",");
 const nftStorageAccount = nftStorageAccounts![Math.floor(Math.random() * nftStorageAccounts!.length)]; //Pick a random account from the storage
 console.log(nftStorageAccount, "nftStorageAccount");
+const nftDistributorPrivateKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PRIVATE_KEY!;
 const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR;
     const ledger2 =LedgerClientFactory.createClient({nodeHost:walletNodeHost });
     console.log(typeof(nftStorageAccount));
@@ -62,7 +63,7 @@ const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR;
     //       assetId:assetId,
     //       quantity:"10",
     //       recipientId:accountId,
-    //       senderPrivateKey:"83a4a4e95bc8da68a9c00b7b86523d576b967236ac67a7c0bfb98b3c5d19df0e",
+    //       senderPrivateKey:nftDistributorPrivateKey,
     //       skipAdditionalSecurityCheck:true,
     //       feePlanck:"1000000",
     //       senderPublicKey:"041f3b333d93ba9b24eaf324d1090f763f7c78ed0b7922d2d3eaeecaf440501c",

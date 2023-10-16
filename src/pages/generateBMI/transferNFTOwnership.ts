@@ -14,7 +14,7 @@ export const TransferNFTOwnership = async (ledger:Api, userAccountId:string,Wall
     const NFT_address = "9209749234109330048";
     const contract_Owner = "041f3b333d93ba9b24eaf324d1090f763f7c78ed0b7922d2d3eaeecaf440501c";
     const NEXT_PUBLIC_NFT_CONTRACT_METHOD_TRANSFER="-8011735560658290665";
-    
+    const nftDistributorPrivateKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PRIVATE_KEY!;
 
     if(ledger != null){
         if (userAccountId !== "0") {
@@ -28,7 +28,7 @@ export const TransferNFTOwnership = async (ledger:Api, userAccountId:string,Wall
         
         (await ledger.contract.callContractMethod({
             senderPublicKey: contract_Owner,
-            senderPrivateKey:"83a4a4e95bc8da68a9c00b7b86523d576b967236ac67a7c0bfb98b3c5d19df0e",
+            senderPrivateKey:nftDistributorPrivateKey,
             skipAdditionalSecurityCheck:true,
             feePlanck: "2000000",
             amountPlanck: "30000000",
