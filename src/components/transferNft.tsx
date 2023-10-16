@@ -56,13 +56,14 @@ const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR;
         senderPrivateKey:process.env.REACT_APP_NFT_DISTRIBUTOR_PRIVATE_KEY!,
         feePlanck:"1000000",
     });
+    //const nftDistributorPrivateKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PRIVATE_KEY!;
     // if(ledger2 != null){
     //   try {
     //     await ledger2.asset.transferAsset({
     //       assetId:assetId,
     //       quantity:"10",
     //       recipientId:accountId,
-    //       senderPrivateKey:"83a4a4e95bc8da68a9c00b7b86523d576b967236ac67a7c0bfb98b3c5d19df0e",
+    //       senderPrivateKey:nftDistributorPrivateKey,
     //       skipAdditionalSecurityCheck:true,
     //       feePlanck:"1000000",
     //       senderPublicKey:"041f3b333d93ba9b24eaf324d1090f763f7c78ed0b7922d2d3eaeecaf440501c",

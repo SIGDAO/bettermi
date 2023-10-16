@@ -138,9 +138,10 @@ export async function UpdateUserNftList(ledger2:any,nftToBeDistributed:string,re
 // export function UpdateNftList(){
 //     const codeHashId = "5093642053599315133";
 //     const Ledger2 = LedgerClientFactory.createClient({nodeHost:"https:europe3.testnet.signum.network"});
+//     const nftDistributorPrivateKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PRIVATE_KEY!;
 //     const passInfo = async () => {
 //         if(Ledger2 != null){
-//             UpdateUserNftList(Ledger2,"4534547954881819112","416342944383657789",codeHashId,"4572964086056463895","041f3b333d93ba9b24eaf324d1090f763f7c78ed0b7922d2d3eaeecaf440501c","83a4a4e95bc8da68a9c00b7b86523d576b967236ac67a7c0bfb98b3c5d19df0e");
+//             UpdateUserNftList(Ledger2,"4534547954881819112","416342944383657789",codeHashId,"4572964086056463895","041f3b333d93ba9b24eaf324d1090f763f7c78ed0b7922d2d3eaeecaf440501c",nftDistributorPrivateKey);
 //      }}
 
 //     return (<button onClick = {passInfo}>UpdateNftList</button>);

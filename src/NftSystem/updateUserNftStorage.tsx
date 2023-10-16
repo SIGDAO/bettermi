@@ -647,8 +647,8 @@ export async function GetEquippedNftId(ledger2:any,userAccountId:string){
 //     const recipientId = "9998305876488457803";
 //     const nftDistributor = "4572964086056463895";
 //     const nftToBeDistributed = "10668973197928562219";
+//     const nftDistributorPrivateKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PRIVATE_KEY!;
 //     const nftDistributorPublicKey = "041f3b333d93ba9b24eaf324d1090f763f7c78ed0b7922d2d3eaeecaf440501c";
-//     const nftDistributorPrivateKey = "83a4a4e95bc8da68a9c00b7b86523d576b967236ac67a7c0bfb98b3c5d19df0e";
 //     const passInfo = async () => {
 //         if(Ledger2 != null){
 //             UpdateUserStorage(Ledger2,senderId,recipientId,codeHashId,nftToBeDistributed,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey);
