@@ -58,7 +58,7 @@ video {
   /* margin-top: 30px; */
   position: absolute;
   text-align: center;
-  width: 450px;
+  width: 475px;
   left: calc((100% - 450px) / 2);
   top: calc(676px - 50px) ;
 }

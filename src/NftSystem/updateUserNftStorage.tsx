@@ -362,6 +362,7 @@ export async function IsUserUpdatingDescription(ledger2:any,userAccountId:string
 }
 
 export async function IsUserUpdatingIcon(ledger2:any,userAccountId:string){
+    console.log("called is user updating icon");
     const messages = await ledger2.account.getUnconfirmedAccountTransactions(userAccountId);
     const originalDescription = await ledger2.account.getAccount({accountId: userAccountId});
     //console.log(messages);

@@ -154,7 +154,6 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
       console.log(userAccountId);
       userNftList = await GetUserNftList(ledger2, userAccountId, nftDistributor, codeHashIdForNft);
       setMyNfts(userNftList);
-      console.log(myNfts);
       setLoadingNft(false);
       console.log(userNftList);
       console.log(userNftList[0]);
@@ -175,13 +174,11 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   const handleScroll = (event: any) => {
     console.log(event);
     const container = document.querySelector("div.profileHorizontalScroll")!;
-    console.log(container);
     const scrollAmount = event.deltaY;
 
     // window.onscroll = function() {
     //   window.scrollTo({left:0, top:-scrollAmount});
     // };
-    console.log(container.scrollLeft);
     container.scrollTo({
       top: 0,
       left: container.scrollLeft + scrollAmount,
@@ -207,7 +204,6 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
       setIsEmptyProfile(true);
     } else {
       const description = JSON.parse(account.description);
-      console.log(description);
       setFetchName(description.nm);
       setFetchAboutYourself(description.hp);
       setFetchDiscordUsername(description.sc[0]);
@@ -221,9 +217,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   const handleScroll2 = (event: any) => {
     console.log(event);
     const container = event.target!;
-    console.log(container);
     const scrollAmount = event.deltaY;
-    console.log(scrollAmount);
     container.scrollTo({
       top: 0,
       left: container.scrollLeft + scrollAmount,
@@ -287,7 +281,6 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
       console.log("called newDes.hp else here");
       setFetchAboutYourself(newDes.hp);
     }
-    console.log("isSetting");
     setIsSettingLoading(false);
   };
 

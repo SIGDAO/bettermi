@@ -79,9 +79,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
   const nftTokenIssuer:string = process.env.REACT_APP_NFT_TOKEN_ISSUER!;
   const userAccountpublicKey:string = useSelector(accountPublicKey);
   const mimiNftStorageAccounts = process.env.REACT_APP_NFT_STORAGE_MIMI!.split(",");
-  console.log(mimiNftStorageAccounts, "miminftstorage is");
   const ioNftStorageAccounts = process.env.REACT_APP_NFT_STORAGE_IO!.split(",");
-  console.log(ioNftStorageAccounts, "ionftstorage is");
   var nft: myNftList;
   const nodeHost = useSelector(selectWalletNodeHost);
   const ledger2 = LedgerClientFactory.createClient({ nodeHost });
@@ -97,7 +95,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
   const nftDistributorPrivateKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PRIVATE_KEY!;
   const nftContractStorage = useSelector(getNftContractStorage);
   useEffect(() => {
-    if (nftContractChecked.current) { console.log("called"); return; }
+    if (nftContractChecked.current) {  return; }
     nftContractChecked.current = true;
     ledger2.contract.getContractsByAccount({
           accountId: userAccountId,
@@ -105,11 +103,9 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
       }).then((senderNftStorage)=>{
         store.dispatch(accountSlice.actions.setNftContractStorage(senderNftStorage.ats[0].at));
         if(gender === "Female"){
-          console.log("you are female");
         TransferNftToNewUser(ledger2,userAccountId,mimiNftStorageAccounts,codeHashIdForNft,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey);
         }
         if(gender === "Male"){
-          console.log("you are male");
           TransferNftToNewUser(ledger2,userAccountId,ioNftStorageAccounts,codeHashIdForNft,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey);
           }
       }).catch((error)=>{
@@ -125,7 +121,6 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
       const getEquippedNftNumber = async() => {
         const equippedNftId = await GetEquippedNftId(ledger2,userAccountId);
         const equippedNftIDDescription = await ledger2.contract.getContract(equippedNftId);
-        console.log("equippedNftDescription",equippedNftIDDescription);
         const equippedNftDescription = JSON.parse(equippedNftIDDescription.description);
         const image = equippedNftDescription.descriptor;
         fetch(`https://ipfs.io/ipfs/${image}`).then((res)=>{
@@ -145,14 +140,9 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
     dataFetchedRef.current = true;
     ledger2.account.getAccount({ accountId: userAccountId }).then((account) => {
       const description = account.description == null?{}:JSON.parse(account.description);
-      console.log(description);
       if(description.av !== null){
 
-      console.log(Object.keys(description.av));
-      console.log(typeof(Object.keys(description.av)[0]));
       setOnDuty(Object.keys(description.av)[0]);
-      console.log(onDuty);
-      console.log(myNfts);
       // fetch(`https://ipfs.io/ipfs/${Object.keys(description.av)[0]}`).then((res)=>{
       //   res.text().then((text)=>{
       //       //console.log(text); 
@@ -296,7 +286,6 @@ const nftId = accountDes.account;
   }
   );
   const displayNftToken = userNftTokenList.map((nft) => {//Contract Id
-    console.log("userNftTokenList is  ",nft);
     return(
       <MyNft 
       image={nft.image} 
@@ -317,14 +306,11 @@ const nftId = accountDes.account;
     try{
       const contractInfo = await ledger2.contract.getContract(selectedNftId);
       const trial = JSON.parse(contractInfo.description);
-      console.log("on duty is ",onDuty);
-      console.log("trial descriptor is ",trial.descriptor);
       /*  Get the NFT image of ths selected asset and check if its same to the onDuty one      */
       const res = await fetch(`https://ipfs.io/ipfs/${trial.descriptor}`);
       const text = await res.text();
       var nftInfo = JSON.parse(text);
       const nftImage = nftInfo.media[0].social;
-      console.log(nftImage);
 
       /**/
       
@@ -333,7 +319,6 @@ const nftId = accountDes.account;
         return;
       }
       const nftOwner = await CheckNftOwnerId(ledger2,selectedNftId);
-      console.log("nftOwner is",nftOwner);
       if(nftOwner === userAccountId){
         //TransferNft(ledger2,selectedNftId,userAccountId,codeHashIdForNft,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey);
         const latestTransactionNumber:string = await FindLatestTransactionNumber(ledger2,nftContractStorage,nftDistributor);
@@ -347,10 +332,6 @@ const nftId = accountDes.account;
         });
         await Wallet.Extension.confirm(userCoverTheirTransactionCost.unsignedTransactionBytes);
         const recipientInfo  = await ledger2.account.getAccount({accountId:inputAddress});
-        console.log(recipientInfo.account);
-        console.log(selectedNftId);
-        console.log(userAccountpublicKey);
-        console.log(Wallet);
         //await p2pTransferNft(ledger2,Wallet,selectedNftId,userAccountpublicKey,recipientInfo.account);
         const transaction = await ledger2.contract.callContractMethod({
           senderPublicKey: userAccountpublicKey,
@@ -382,7 +363,6 @@ const nftId = accountDes.account;
     const unequipNft = async() => {
       const waitingToBeChangedDescription = await ledger2.account.getAccount({accountId: userAccountId});
       let newDes =waitingToBeChangedDescription.description===undefined?{}:JSON.parse(waitingToBeChangedDescription.description);
-      console.log(newDes);
 
     }
 

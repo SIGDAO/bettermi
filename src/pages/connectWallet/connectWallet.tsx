@@ -20,7 +20,8 @@ import { Link } from "react-router-dom";
 
 export interface IConnectWalletProps {}
 
-export default function ConnectWallet(props: IConnectWalletProps) {
+export default function ConnectWallet (props: IConnectWalletProps) {
+  localStorage.clear();//Guess we need to clear out all local storage after connecting account
   const navigate = useNavigate();
   const { appName, Wallet, Ledger } = useContext(AppContext);
   const codeHashId = "7457358473503628676";
@@ -56,7 +57,12 @@ export default function ConnectWallet(props: IConnectWalletProps) {
         const openedNftContract = await CheckUnconfirmedNewNFTContract(ledger, import_account.getNumericId());
         const openedBmiContract = await CheckUnconfirmedNewBMIContract(ledger, import_account.getNumericId());
 
-        localStorage.clear(); //Guess we need to clear out all local storage after connecting account
+     
+
+    
+    
+
+
 
         let ourContract = await ledger.contract.getContractsByAccount({
           accountId: accountinfo.accountId,

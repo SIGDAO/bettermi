@@ -31,8 +31,6 @@ const settingIcon: JSX.Element = (
 
 export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (props) => {
   const { title, aiCoach, help, transparent,filter,addSign, setting, backButton,importButton,setIsOpenImport,isOpenImport } = props;
-  console.log(aiCoach);
-  console.log(aiCoach === false);
   return (
     <div className="title-bar-layout">
       <div className={transparent ? "transparent-title-bar-container" : "title-bar-container"}

@@ -94,7 +94,6 @@ const loadNftList = async() => {
       else{
           if(isOtherUser ===false){
             const equippedNft = await GetEquippedNftId(ledger2,Id);
-            console.log("equipped nft is ",equippedNft);
             if(equippedNft != ""){
               const index = nftAddressList.indexOf(equippedNft);
               if(index > -1){
@@ -102,20 +101,15 @@ const loadNftList = async() => {
               }
             }
           }
-            console.log("nftAddress is ",nftAddressList);
             const promiseArray = nftAddressList.map((addressList) => 
                ledger2.contract.getContract(addressList)
             )
-            console.log("promise array is ",promiseArray);
             const contractInfoArray = await Promise.all(promiseArray);
-            console.log("contractInfo Array is ",contractInfoArray);
             for (var i = 0;i < contractInfoArray.length;i++){
-                console.log(i);
                 const trial = JSON.parse(contractInfoArray[i].description);
                 nft = {level:trial.version,image:trial.descriptor,nftId:nftAddressList[i]};
                 userNftList.push(nft);
                 if(i === contractInfoArray.length-1){
-                  console.log(userNftList);
                   setCount(100);   
                   setTimeout(() => {
                     setMyNfts(userNftList);

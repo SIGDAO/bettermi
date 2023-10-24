@@ -38,7 +38,7 @@ const takeSelfieButton : CSS.Properties = {
   'outline': 'none',
   'cursor': 'pointer',
   // 'top': 'calc(529px - 50px)',
-  'top': '529px',
+  'top': '575px',
 }
 
 const convertBase64toJpg = (base64String: string): File => {
@@ -196,7 +196,12 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
         </div>
         :
         <div className="disclaimer inter-normal-white-15px">
-          We care about your privacy, your selfie will not be stored
+          <h3>
+            We care about your privacy, your selfie will not be stored
+          </h3>
+            <h4>
+              Join our discord link to grab free tokens!
+            </h4>
         </div>
       }
       {/* <div className="disclaimer inter-normal-white-15px">
