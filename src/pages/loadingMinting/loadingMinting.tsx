@@ -3,7 +3,7 @@ import "./loadingMinting.css";
 import { CenterLayout } from "../../components/layout";
 import { useLedger } from "../../redux/useLedger";
 import { useSelector } from "react-redux";
-import { accountId } from "../../redux/account";
+import { accountId, accountSlice } from "../../redux/account";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { TransferNftToNewUser } from "../../NftSystem/transferNft";
@@ -12,6 +12,7 @@ import { FindLatestTransactionNumber } from "../../NftSystem/updateUserNftStorag
 import { useLocation } from "react-router-dom";
 import { useRef } from "react";
 import { isTodayHaveSelfieRecord } from "../../components/bmiCalculate";
+import { store } from "../../redux/reducer";
 
 interface ILoadingMintingProps {
   pathname: string;
@@ -110,6 +111,9 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
     const latestTransactionList = await FindLatestTransactionArray(ledger, nftContract.ats[0].at, nftDistributor, latestTransactionNumber);
     console.log(latestTransactionList);
     console.log(latestTransactionList[0]);
+    if (nftContract.ats[0] != null) {
+      store.dispatch(accountSlice.actions.setNftContractStorage(nftContract.ats[0].at));
+    }
     if (latestTransactionList.length === 0) {
       console.log("The latestTransactionList is empty, returned error", latestTransactionList);
       setCount(100);

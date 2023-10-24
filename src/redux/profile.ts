@@ -111,9 +111,6 @@ export const { actions } = profileSlice;
 
 export const selectCurrentImg = (state: any) => state.profile.selfiePath;
 export const selectCurrentUsername = (state: any) => {
-  if (state.profile.username === "") {
-    return localStorage.getItem("name") ? localStorage.getItem("name") : ''
-  }
   return state.profile.username;
 };
 export const selectCurrentBMI = (state: any) => state.profile.bmi;

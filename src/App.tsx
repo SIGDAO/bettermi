@@ -140,7 +140,6 @@ function App() {
                 <Route path="/generateBMINFTImport" element={<GenerateBMINFTImport />} />
                 <Route path="/loadingMinting" element={<LoadingMinting pathname="/loadingMinting" />} />
                 <Route path="/generateFreeNFT" element={<GenerateFreeNFT />} />
-
                 {/* the login for this page should be if no name then can access, if have name cannot access */}
                 <Route path="/customizeYourProfile" element={<CustomizeYourProfile />} />
               {/* </Route> */}
@@ -177,8 +176,8 @@ function App() {
                 <Route path="/NFTTransferCompleted" element={<ChallengeCompleted NFT={true} />} />
                 <Route path="/leaderboard" element={<Leaderboard />} />
                 <Route path="/OtherUserProfile" element={<OtherUserProfile />} />
-              {/* </Route> */}
-            </Route>
+              </Route>
+            {/* </Route> */}
           </Routes>
         </ReduxProvider>
       </AppContext.Provider>
