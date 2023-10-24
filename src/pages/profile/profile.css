@@ -1230,13 +1230,13 @@
   z-index: 999;
   position: absolute;
   top: 100px;
-  background-color: rgb(13 13 13);
-  color: white;
+  background-color: rgb(13 13 13) !important;
+  color: white !important;
 
 }
 
 .copied-alert div {
-  color: white;
+  color: white !important;
 }
 
 .lds-ring {

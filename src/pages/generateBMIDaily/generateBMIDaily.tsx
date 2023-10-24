@@ -36,10 +36,8 @@ const GenerateBMIDaily: React.FunctionComponent<IGenerateBMIDailyProps> = (props
   const ledger = useLedger();
   const dispatch = useDispatch();
   const codeHashId = "7457358473503628676"; // the code hash of the BMI contract 
-  
-  
 
-  const handleImport = async () => {
+  const handleImportNFT = async () => {
     if (!ledger) return;
     // const startTime: number = Date.now(); // get the current time in milliseconds
 
@@ -51,8 +49,8 @@ const GenerateBMIDaily: React.FunctionComponent<IGenerateBMIDailyProps> = (props
     try{        
       if(storeNftContract.ats[0] == null){
         console.log(storeNftContract.ats[0]);
-      console.log("called storeNftContract.ats.length",typeof(process.env.REACT_APP_NFT_CONTRACT_REFERENCED_TRANSACTION_HASH));
-      const initializeNftContract = await ledger.contract.publishContractByReference({
+        console.log("called storeNftContract.ats.length",typeof(process.env.REACT_APP_NFT_CONTRACT_REFERENCED_TRANSACTION_HASH));
+        const initializeNftContract = await ledger.contract.publishContractByReference({
         name: "NFT",
         description:"storage_space_for_your_nft",
         referencedTransactionHash:process.env.REACT_APP_NFT_CONTRACT_REFERENCED_TRANSACTION_FULL_HASH!,
@@ -91,13 +89,9 @@ const GenerateBMIDaily: React.FunctionComponent<IGenerateBMIDailyProps> = (props
 
 
     dispatch(profileSlice.actions.setIsSelfie(true));
-    // try {
-    //   await Wallet.Extension.confirm(sendBMI.unsignedTransactionBytes);
-    // } catch (error) {
-    //   navigate('/errorWalletNotConnected');
-    // }
 
-    navigate('/selfieToEarn');
+    // navigate('/selfieToEarn');
+    navigate('/loadingBMIDaily');
 }
 
   const content: JSX.Element = (
@@ -105,8 +99,8 @@ const GenerateBMIDaily: React.FunctionComponent<IGenerateBMIDailyProps> = (props
       <div className="bettermidapp-generate-bmi-daily">
         {/* <div className="bg_2-Fd1por"><img className="bg-8YXhC4" src={`${process.env.PUBLIC_URL}/img/generateBMIDaily/bg-11@1x.png`} alt="BG" /></div> */}
         <BackButton />
-        <img className="photo-Fd1por" src={selfie ? selfie : `${process.env.PUBLIC_URL}/img/generateBMIDaily/photo-1@1x.png`} alt="Photo" />
-        <div className="bottom-controls-Fd1por" onClick={handleImport}>
+        <img className="photo-Fd1por" src={selfie || `${process.env.PUBLIC_URL}/img/generateBMIDaily/photo-1@1x.png`} alt="Photo" />
+        <div className="bottom-controls-Fd1por" onClick={handleImportNFT}>
           <div className="button_-mint-FZh05Y">
             <div className="button1-WZiHbv"></div>
             <div className="mint-WZiHbv inter-semi-bold-white-15px">Import</div>

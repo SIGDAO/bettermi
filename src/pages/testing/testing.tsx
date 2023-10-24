@@ -259,3 +259,128 @@ export default function Testing() {
 
 // export default CustomTradingViewChart;
 
+
+
+// import React from "react";
+// import "./loadingMinting.css";
+// import { CenterLayout } from "../../components/layout";
+// import { useLedger } from "../../redux/useLedger";
+// import { useSelector } from "react-redux";
+// import { accountId } from "../../redux/account";
+// import { useNavigate } from "react-router-dom";
+// import { useEffect, useState } from "react";
+
+// interface ILoadingMintingProps {
+//   pathname: string;
+// }
+
+// const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) => {
+//   const navigate = useNavigate();
+//   const ledger = useLedger();
+//   const userAccountId = useSelector(accountId);
+//   const { pathname } = props;
+//   const codeHashId = "7457358473503628676"; // the code hash of the BMI contract
+//   const [count, setCount] = useState(1);
+//   const [isLoading, setIsLoading] = useState<boolean>(true);
+//   const [isMinting, setIsMinting] = useState<boolean>(true);
+
+//   const checkIfTransactionOnChain = async () => {
+//     if (!ledger) return;
+//     // const startTime: number = Date.now(); // get the current time in milliseconds
+
+//     console.log("sdfidjifj");
+
+//     let ourContract = await ledger.contract.getContractsByAccount({
+//       accountId: userAccountId,
+//       machineCodeHash: codeHashId,
+//     });
+
+//     while (ourContract.ats[0] == null) {
+//       ourContract = await ledger.contract.getContractsByAccount({
+//         accountId: userAccountId,
+//         machineCodeHash: codeHashId,
+//       });
+//       console.log(ourContract);
+//       if (pathname === "/loadingMinting") setIsMinting(false); 
+//     }
+
+//     while (isMinting === true) {
+//       if (pathname === "/loadingBMIDaily") {
+//         let transaction = await ledger.account.getAccountTransactions({
+//           accountId: ourContract.ats[0].at,
+//         });
+//         let last_transaction = transaction.transactions[transaction.transactions.length - 1];
+//         let content = JSON.parse(last_transaction.attachment.message);
+//         console.log(content.time);
+//         // compare upload time is today
+//         let selfieTime = new Date(content.time);
+//         let today = new Date();
+//         console.log(selfieTime.getDate(), today);
+//         if (selfieTime.getDate() === today.getDate()) {
+//           setIsMinting(false);
+//         }
+//       }
+      
+//     }
+
+//     setCount(100);
+
+//     pathname === "/loadingMinting" ? navigate("/generateFreeNFT") : navigate("/selfieToEarn");
+//   };
+
+//   useEffect(() => {
+//     checkIfTransactionOnChain().catch((err) => {
+//       console.error(err);
+//     });
+//   }, []);
+
+//   useEffect(() => {
+//     const incrementInterval = 240000 / 96; // Time divided by the number of increments
+//     // const incrementInterval = 5000 / 100;
+//     const timer = setInterval(() => {
+//       setCount((prevCount) => prevCount + 1);
+
+//       // if (count => 100 ) {
+//       // } else {
+//       //   setIsLoading(false);
+//       //   navigate('/generateFreeNFT');
+//       //   clearInterval(timer);
+//       // }
+//     }, incrementInterval);
+
+//     return () => {
+//       // setIsLoading(false);
+//       // navigate('/generateFreeNFT');
+//       clearInterval(timer);
+//     };
+//   }, []);
+
+//   useEffect(() => {
+//     if (count >= 100) {
+//       setIsLoading(false);
+//     }
+//   }, [count]);
+
+//   const content: JSX.Element = (
+//     <div className="screen">
+//       <div className="bettermidapp-generate-free-nft-minting">
+//         <div className="bg_2-JdJl2l">
+//           <div className="mimi-loading">
+//             <img className="mimi-loading-image" src="/img/loadingMinting/mimi-dancing-for-loadin-page.gif" alt="" />
+//           </div>
+//           <div className="x50-7ckAMs">{count}%</div>
+//         </div>
+//         <div className="minting-JdJl2l inter-normal-white-15px">{pathname === "/loadingBMIDaily" ? "Loading…" : "Minting…"}</div>
+//         <div className="reminder-text-1 inter-normal-white-15px">
+//           Please wait patiently
+//           <br />
+//           and do not refresh the page
+//         </div>
+//       </div>
+//     </div>
+//   );
+
+//   return <CenterLayout content={content} bgImg={false} />;
+// };
+
+// export default LoadingMinting;
