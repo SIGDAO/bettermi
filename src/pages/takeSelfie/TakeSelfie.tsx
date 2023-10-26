@@ -116,6 +116,7 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   , [data])
 
 
+
   //Anderson's code ends here
 
 
