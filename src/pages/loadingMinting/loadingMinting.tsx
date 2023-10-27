@@ -50,23 +50,6 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
     setCount(100);
     setIsLoading(false);
     navigate("/selfToEarn");
-
-
-    // while (isBMIOnChain === true) {
-    //     let transaction = await ledger.account.getAccountTransactions({
-    //       accountId: bmiContract.ats[0]?.at,
-    //     });
-    //     let last_transaction = transaction.transactions[transaction.transactions.length - 1];
-    //     let content = JSON.parse(last_transaction.attachment.message);
-    //     console.log(content.time);
-    //     // compare upload time is today
-    //     let selfieTime = new Date(content.time);
-    //     let today = new Date();
-    //     console.log(selfieTime.getDate(), today);
-    //     if (selfieTime.getDate() === today.getDate()) {
-    //       setIsBMIOnChain(false);
-    //     }
-    // }
   }
 
 

@@ -73,14 +73,24 @@
   width: 100%;
 }
 
-.bettermidapp-profile-3 .card-number {
+.discord-card-container {
   left: 52px;
   letter-spacing: 0;
   line-height: 22px;
   position: absolute;
   top: 224px;
+  display: flex;
+  gap: 10px;
+}
+
+.bettermidapp-profile-3 .card-number {
+  /* left: 52px; */
+  letter-spacing: 0;
+  line-height: 22px;
+  /* position: absolute; */
+  /* top: 224px; */
   white-space: nowrap;
-  width: 108px;
+  /* width: 108px; */
 }
 
 .bettermidapp-profile-3 .discord {
@@ -762,11 +772,11 @@
 
 .bettermidapp-profile-3 .copy-icon {
   /* background-image: url(.bettermidapp-profile-3 ..bettermidapp-profile-3 ./img/file---11690@1x.bettermidapp-profile-3 .png); */
-  background-position: 50% 50%;
+  /* background-position: 50% 50%; */
   background-size: cover;
   height: 18px;
-  left: 250px;
-  position: absolute;
+  /* left: 250px; */
+  /* position: absolute; */
   top: 228px;
   width: 17px;
   cursor: pointer;

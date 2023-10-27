@@ -379,10 +379,11 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
             <div></div>
           ) : (
             <>
-              <div className="card-number inter-normal-white-15px">{fetchDiscordUsername ? fetchDiscordUsername : discordUsernameText || "zoeeeee#1234"}</div>
-
-              <div className="copy-icon" onClick={() => handleCopyDiscordUsername(discordUsername)}>
-                <img src="img/profile/file---11690@1x.png" alt="" />
+              <div className="discord-card-container">
+                <div className="card-number inter-normal-white-15px">{fetchDiscordUsername ? fetchDiscordUsername : discordUsernameText || "zoeeeee#1234"}</div>
+                <div className="copy-icon" onClick={() => handleCopyDiscordUsername(discordUsername)}>
+                  <img src="img/profile/file---11690@1x.png" alt="" />
+                </div>
               </div>
               <div className="x16227">
                 <div className="discord-icon">

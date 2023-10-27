@@ -30,12 +30,13 @@ const findBMIblockchainContract = async (tempAccountId: string, Ledger2: any) =>
   if (!contract.hasOwnProperty('ats')) return false;
 
 
-  console.log(contract, 'contract');
   contractAddress = contract.ats[0]?.at;
+
+
 
   if (!contractAddress) return false
 
-  description = JSON.parse(contract?.description);
+  description = JSON.parse(contract.ats[0]?.description);
 
   const message = await Ledger2.account.getAccountTransactions({accountId:contractAddress}); //Contract Id
   console.log(message, 'message');
