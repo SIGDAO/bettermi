@@ -19,30 +19,32 @@ const RoleRoute: React.FunctionComponent<IRoleRouteProps> = (props) => {
   const { role } = props;
   const location = useLocation();
 
-  console.log("fdiousofdii")
-  console.log(nftContractStorage)
-  console.log(username)
+  console.log('why this happen')
 
-  if (!username && role === "registeredUser") {
+  if (!nftContractStorage && role === "registeredUser") {
     console.log('confirm 1')
     return <Navigate to="/connectWallet" />;
   }
 
+  if (location?.pathname === "/customizeYourProfile") return <Outlet />;
+
+  if (!username && role === "registeredUser") return <Navigate to="/customizeYourProfile" />
+
+
   if (nftContractStorage && role === "unregisteredUser") {
     console.log('confirm 2')
-
-    if (!username) return <Navigate to="/customizeYourProfile" />
 
     return <Navigate to="/home" />;
   }
 
   // for the user who has not registered, and 
   if (username && role === "unregisteredUser") {
-    console.log('confirm 3')
     if (location.pathname === "/customizeYourProfile") return <Outlet />
 
     return <Navigate to="/home" />;
   }
+
+  console.log('confirm 4')
 
   // also check the name of the user, if have name
   return <Outlet />;

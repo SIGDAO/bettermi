@@ -6,9 +6,9 @@ import Webcam from "react-webcam";
 import './TakeSelfie.css';
 import { BackButton } from '../../components/button';
 import CSS from 'csstype';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { profileSlice } from '../../redux/profile';
+import { profileSlice, selectCurrentIsSelfie } from '../../redux/profile';
 import { store } from '../../redux/reducer';
 import { userBMISlice } from '../../redux/userBMI';
 import { useGetBMIMutation } from '../../redux/userBMIApi';
@@ -91,6 +91,7 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   const Ledger2 = useLedger();
   const [count, setCount] = useState(0);
   var [imageSrc, setImageSrc] = useState<string | null | undefined>();
+  const isSelefie = useSelector(selectCurrentIsSelfie);
 
   const [ getBMI, {isLoading, data} ] = useGetBMIMutation()
 
@@ -245,10 +246,13 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   )
 
   return (
-    <CenterLayout
-      content={content}
-      bgImg={false}
-    />
+      {isSelefie} ?
+      <Navigate to='/home' />
+      :
+      <CenterLayout
+        content={content}
+        bgImg={false}
+      />
   );
 };
 

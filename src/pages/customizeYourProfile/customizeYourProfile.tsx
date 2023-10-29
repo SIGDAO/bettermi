@@ -33,6 +33,9 @@ const CustomizeYourProfile: React.FunctionComponent<ICustomizeYourProfileProps> 
   const nftId = location.state?.nftId;
   const userAccountId = useSelector(accountId);
   const userAccountpublicKey = useSelector(accountPublicKey);
+  const [minted, setMinted] = useState<boolean>(false);
+
+
 
   const getNftContractStorage = async () => {
     let senderNftStorage = await ledger?.contract.getContractsByAccount({
@@ -55,21 +58,29 @@ const CustomizeYourProfile: React.FunctionComponent<ICustomizeYourProfileProps> 
   const [name, setName] = useState<string>("");
 
   const handleSave = async () => {
-    await UpdateUserIcon(ledger, nftImage, nftId, userAccountId, userAccountpublicKey, Wallet, name);
-    if (!name) {
-      localStorage.setItem("name", defaultName);
-      store.dispatch(profileSlice.actions.setUsername(defaultName));
-    } else {
-      localStorage.setItem("name", name);
-      store.dispatch(profileSlice.actions.setUsername(name));
+    try {
+      if (!minted) 
+        await UpdateUserIcon(ledger, nftImage, nftId, userAccountId, userAccountpublicKey, Wallet, name);
+      if (!name) {
+        localStorage.setItem("name", defaultName);
+        store.dispatch(profileSlice.actions.setUsername(defaultName));
+      } else {
+        localStorage.setItem("name", name);
+        store.dispatch(profileSlice.actions.setUsername(name));
+      }
+      navigate("/profile", { state: { previousPath: pathname } });  
+    } catch (error) {
+      console.log(error);
+      if (error.name !== "ExtensionWalletError") {
+        navigate("/errorGenerateNFT");
+      }
+      setMinted(false);
     }
-
-    navigate("/profile", { state: { previousPath: pathname } });
   };
 
   const content: JSX.Element = (
     <div>
-      <BackButton />
+      {/* <BackButton /> */}
       <div className="title-Gzrq3v-container">
         <h1 className="title-Gzrq3v">Customize your profile</h1>
       </div>

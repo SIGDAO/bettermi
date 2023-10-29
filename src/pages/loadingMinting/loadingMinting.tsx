@@ -119,6 +119,7 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
           .catch((err) => {
             console.error(err);
           })
+        return;
       }
       checkIfNFTMinted().catch((err) => {
         console.error(err);

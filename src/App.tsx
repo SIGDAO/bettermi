@@ -134,17 +134,17 @@ function App() {
               <Route path="/connectWallet" element={<ConnectWallet />} />
               {/* need to have its own logined setting */}
               <Route path="/takeSelfie" element={<TakeSelfie />} />
+              <Route path="/loadingMinting" element={<LoadingMinting pathname="/loadingMinting" />} />
               {/* user that not yet created acct */}
-              {/* <Route element={<RoleRoute role="unregisteredUser" />}> */}
+              <Route element={<RoleRoute role="unregisteredUser" />}>
                 <Route path="/connectSucceed" element={<ConnectSucceed />} />
                 <Route path="/generateBMINFTImport" element={<GenerateBMINFTImport />} />
-                <Route path="/loadingMinting" element={<LoadingMinting pathname="/loadingMinting" />} />
                 <Route path="/generateFreeNFT" element={<GenerateFreeNFT />} />
                 {/* the login for this page should be if no name then can access, if have name cannot access */}
                 <Route path="/customizeYourProfile" element={<CustomizeYourProfile />} />
-              {/* </Route> */}
+              </Route>
               {/* user that created acct */}
-              {/* <Route element={<RoleRoute role="registeredUser" />}> */}
+              <Route element={<RoleRoute role="registeredUser" />}>
                 <Route path="/home" element={<Home />} />
                 <Route path="/featureMissions" element={<AllMission />} />
                 <Route path="/challengeCompleted" element={<ChallengeCompleted />} />
@@ -153,7 +153,7 @@ function App() {
                 </Route>
                 <Route path="/missionChallenge" element={<MissionChallenge />} />
                 {/* account that can only access in certain time */}
-                {/* <Route path="/myNftList" element={<MyNftList/>} /> */}
+                <Route path="/myNftList" element={<MyNftList/>} />
                 <Route path="/indexMyNftList" element={<IndexMyNftList />} />
                 <Route path="/reward" element={<Reward />} />
                 <Route path="/rewardDetail">
@@ -177,7 +177,7 @@ function App() {
                 <Route path="/leaderboard" element={<Leaderboard />} />
                 <Route path="/OtherUserProfile" element={<OtherUserProfile />} />
               </Route>
-            {/* </Route> */}
+            </Route>
           </Routes>
         </ReduxProvider>
       </AppContext.Provider>
