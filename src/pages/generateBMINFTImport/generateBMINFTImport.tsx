@@ -5,9 +5,9 @@ import "./generateBMINFTImport.css";
 import { CenterLayout } from "../../components/layout";
 import { BackButton, DisabledButton } from "../../components/button";
 import { BirthSelect, GenderSelect } from "../../components/select";
-import { selectCurrentGender, selectCurrentImg, selectCurrentBMI, selectCurrentBirthday } from "../../redux/profile";
+import { selectCurrentGender, selectCurrentImg, selectCurrentBMI, selectCurrentBirthday, profileSlice, selectCurrentIsSelfie } from "../../redux/profile";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { selectWalletNodeHost } from "../../redux/useLedger";
 import { TransferNftTokenOwnershipFinale } from "../../components/transferNftTokenFinale";
 
@@ -54,6 +54,7 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
   const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR;
   const NEXT_PUBLIC_NFT_CONTRACT_METHOD_TRANSFER: string = "-8011735560658290665";
   console.log(nftStorageAccount);
+  const isSelfie = useSelector(selectCurrentIsSelfie);
   var nftsWaitedToBeDistributed: string[] = [];
   var nftsToBeDistributed: string;
 
@@ -146,6 +147,7 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
             setIsTransferToken(true);
           });
         }
+        store.dispatch(profileSlice.actions.setIsSelfie);
         navigate("/loadingMinting");
       } catch (error) {
         console.log(error);
@@ -208,7 +210,12 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
     </div>
   );
 
-  return <CenterLayout content={content} bgImg={false} />;
+  return (
+    {isSelfie} ? 
+      <Navigate to="/home" />
+       :   
+      <CenterLayout content={content} bgImg={false} />
+  )
 };
 
 export default GenerateBMINFTImport;

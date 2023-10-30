@@ -13,6 +13,7 @@ import { useLocation } from "react-router-dom";
 import { useRef } from "react";
 import { isTodayHaveSelfieRecord } from "../../components/bmiCalculate";
 import { store } from "../../redux/reducer";
+import { profileSlice } from "../../redux/profile";
 
 interface ILoadingMintingProps {
   pathname: string;

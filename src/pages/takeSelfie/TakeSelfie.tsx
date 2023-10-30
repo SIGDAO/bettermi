@@ -245,15 +245,16 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
     </div>
   )
 
-  return (
-      {isSelefie} ?
-      <Navigate to='/home' />
-      :
-      <CenterLayout
-        content={content}
-        bgImg={false}
-      />
-  );
+  const checkifIsSelfie = () => {
+    if (isSelefie) return <Navigate to='/home' />
+
+    return <CenterLayout
+              content={content}
+              bgImg={false}
+            />
+  }
+
+  return checkifIsSelfie()
 };
 
 export default TakeSelfie;
