@@ -210,11 +210,11 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
         <div className="leaderboard_button-RoXPLo">
           <div className="button_bg-IgToMG"></div>
           <div className="ic_leaderboard-IgToMG ic_leaderboard">
-            <img className="ic_leaderboard-6DxnCN ic_leaderboard" src={`${process.env.PUBLIC_URL}/img/ic-leaderboard@1x.png`} alt="ic_leaderboard" />
+            <img className="ic_leaderboard-6DxnCN ic_leaderboard" src={`${process.env.PUBLIC_URL}/img/home/ic_leaderboard.png`} alt="ic_leaderboard" />
           </div>
-          <div className="ic_locked-IgToMG ic_locked">
+          {/* <div className="ic_locked-IgToMG ic_locked">
             <img className="ic_locked-Itp9oo ic_locked" src={`${process.env.PUBLIC_URL}/img/ic-locked-1@1x.png`} alt="ic_locked" />
-          </div>
+          </div> */}
         </div>
         {/* <ImageSlider slides={slides} /> */}
         <div className="special-card-RoXPLo">

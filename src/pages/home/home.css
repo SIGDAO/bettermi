@@ -445,6 +445,9 @@
   position: absolute;
   top: 434px;
   width: 58px;
+  border:1px solid;
+  border-radius: 28px;
+  border-color: var(--royal-blue);
 }
 
 .bettermidapp-home-1 .button_bg-IgToMG {
@@ -526,6 +529,9 @@
   height: 185px;
   width: 250px;
   object-fit:cover;
+  border:1px solid;
+  border-radius: 28px;
+  border-color: var(--royal-blue);
 }
 
 .home-scroller-element {
