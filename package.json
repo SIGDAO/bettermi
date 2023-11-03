@@ -29,6 +29,7 @@
     "node_characterai": "^1.1.9",
     "react": "^18.2.0",
     "react-calendar": "^4.3.0",
+    "react-device-detect": "^2.2.3",
     "react-dom": "^18.2.0",
     "react-html5-camera-photo": "^1.5.11",
     "react-redux": "^8.1.0",

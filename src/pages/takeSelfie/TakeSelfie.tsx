@@ -17,6 +17,7 @@ import { isSelfieRecord, isTodayHaveSelfieRecord } from '../../components/bmiCal
 import { accountId } from '../../redux/account';
 import { useLedger } from '../../redux/useLedger';
 import BorderLinearProgress from './borderLinearProgress';
+import {isMobile} from 'react-device-detect';
 
 interface ITakeSelfieProps {
 }
@@ -92,6 +93,7 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   const [count, setCount] = useState(0);
   var [imageSrc, setImageSrc] = useState<string | null | undefined>();
   const isSelefie = useSelector(selectCurrentIsSelfie);
+  const [mobileWidth, setMobileWidth] = useState<number>(0);
 
   const [ getBMI, {isLoading, data} ] = useGetBMIMutation()
 
@@ -148,6 +150,16 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
     'position': 'absolute',
     'top': 'calc(190px - 50px)',   
   }
+
+  const handleResize = () => {
+    setMobileWidth(window.innerWidth)
+  }
+  
+  // create an event listener
+  useEffect(() => {
+    window.addEventListener("resize", handleResize)
+  })
+  
 
   const mobile = process.env.REACT_APP_MOBILE === 'true'
   // const width = process.env.REACT_APP_MOBILE === 'true' ? '390' : '819'
@@ -220,7 +232,7 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
             // height={720}
             screenshotFormat="image/jpeg"
             // width={1280}
-            width={width}
+            width={isMobile? mobileWidth :  width}
             ref={webcamRef}
             videoConstraints={videoConstraints}
           />
