@@ -33,13 +33,13 @@ const takeSelfieButton : CSS.Properties = {
   'backgroundSize': 'cover',
   'width': '100px',
   'height': '100px',
-  'position': 'absolute',
-  'left': 'calc((100% - 100px) / 2)',
+  // 'position': 'absolute',
+  // 'left': 'calc((100% - 100px) / 2)',
   'border': 'none',
   'outline': 'none',
   'cursor': 'pointer',
   // 'top': 'calc(529px - 50px)',
-  'top': '575px',
+  // 'top': '575px',
 }
 
 const convertBase64toJpg = (base64String: string): File => {
@@ -147,8 +147,10 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   const webcamContainerStyle : CSS.Properties = {
     'zIndex': '1',
     'display': 'inline-block',
-    'position': 'absolute',
-    'top': 'calc(190px - 50px)',   
+    'position': 'relative',
+    // 'top': 'calc(190px - 50px)',   
+    'height': 'fit-content',
+
   }
 
   const handleResize = () => {
@@ -166,15 +168,12 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   const width = 819
 
   if (mobile) {
-    webcamContainerStyle.position = 'absolute'
     webcamContainerStyle.width = '390px'
     webcamContainerStyle.left = 'calc((100% - 390px) / 2)'
     webcamContainerStyle.height = 'calc(844px - 230px)'
     webcamContainerStyle.overflow = 'hidden'
   } else {
-    webcamContainerStyle.position = 'absolute'
     webcamContainerStyle.width = '819px'
-    webcamContainerStyle.left = 'calc((100% - 819px) / 2)'
   }
 
   
@@ -203,20 +202,6 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   const content : JSX.Element = (
     <div className='selfie-content-container'>
       <BackButton/>
-      {isLoading ?
-        <div className="disclaimer inter-normal-white-15px">
-          Scaning...
-        </div>
-        :
-        <div className="disclaimer inter-normal-white-15px">
-          <h3>
-            We care about your privacy, your selfie will not be stored
-          </h3>
-            <h4>
-              Join our discord link to grab free tokens!
-            </h4>
-        </div>
-      }
       {/* <div className="disclaimer inter-normal-white-15px">
       We super care your privacy, your selfie will not be stored
       </div> */}
@@ -238,22 +223,37 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
           />
 
         }
-        <div className="selfie-shadow"></div>
-        {isLoading ? 
-        <div className="animation-containter">
-          <div className="percentage-display inter-normal-cape-cod-12px">
-            {count}%
+        <div className="selfie-shadow"></div>      
+      </div>
+      {isLoading ?
+        <>
+          <div className="disclaimer inter-normal-white-15px">
+            Scaning...
           </div>
-          <BorderLinearProgress variant='determinate' value={count} />
-        </div>
-        : 
+          <div className="animation-containter">
+            <div className="percentage-display inter-normal-cape-cod-12px">
+              {count}%
+            </div>
+            <BorderLinearProgress variant='determinate' value={count} />
+          </div>
+        </>
+        :
+        <>
+          <div className="disclaimer inter-normal-white-15px">
+            <h3>
+              We care about your privacy, your selfie will not be stored
+            </h3>
+              <h4>
+                Join our discord link to grab free tokens!
+              </h4>
+          </div>
           <button 
             style={takeSelfieButton}
             onClick={capture}
           />
-        }
-      
-      </div>
+        </>
+      }
+
     </div>
   )
 
