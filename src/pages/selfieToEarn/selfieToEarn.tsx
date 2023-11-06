@@ -18,6 +18,8 @@ import { SeriesDataItemTypeMap } from 'lightweight-charts';
 import moment from 'moment';
 import { NavigateToTakeSelfieButton } from '../../components/button';
 import { calRewardSigdaoOnSelfie } from '../../components/selfieToEarnRewardType';
+import { CheckTakenSelfie } from '../../NftSystem/BMISelfieSystem';
+import { LedgerClientFactory } from '@signumjs/core';
 // import { useFindBMI } from '../../components/findBMI';
 
 
@@ -38,14 +40,18 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
   const [fiveYearOption, setFiveYearOption] = useState(false);
 
   const tempAccountId = useSelector(accountId);
-  const Ledger2 = useLedger();
   
   const navigate = useNavigate();
   const dispatch = useDispatch();
   // demo data
   const bmi_fetchedData = useSelector(selectBMI);
 
+  const Ledger2 = useLedger();
+  const userAccountId = useSelector(accountId);
+  const BMIContractHashId = process.env.REACT_APP_BMI_CONTRACT_HASH_ID!;
+  useEffect(() => {
 
+  },[]);
   // var data: BMI_Day[];
 
   const optionList = [

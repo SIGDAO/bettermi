@@ -17,6 +17,7 @@ import { isSelfieRecord, isTodayHaveSelfieRecord } from '../../components/bmiCal
 import { accountId } from '../../redux/account';
 import { useLedger } from '../../redux/useLedger';
 import BorderLinearProgress from './borderLinearProgress';
+import { CheckTakenSelfie } from '../../NftSystem/BMISelfieSystem';
 
 interface ITakeSelfieProps {
 }
@@ -75,7 +76,7 @@ const counttime = (setCount) => {
     clearInterval(timer);
   };
 };
-
+// 
 
 
 // main function
@@ -93,6 +94,33 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   var [imageSrc, setImageSrc] = useState<string | null | undefined>();
 
   const [ getBMI, {isLoading, data} ] = useGetBMIMutation()
+
+  //Anderson's code starts here
+  const [isTakenSelfie, setIsTakenSelfie] = useState(true);
+  const BMIContractId = process.env.REACT_APP_BMI_MACHINE_CODE_HASH!;
+  const NftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
+  const BMIChecked = useRef(false);
+  const checkIsTakenSelfie = async () => {
+    const result = await CheckTakenSelfie(tempAccountId, Ledger2,BMIContractId,NftDistributor);
+    if(result === true){
+      alert("seems like you have taken your selfie today");
+      navigate('/home');
+    }
+    setIsTakenSelfie(result);
+  }
+  useEffect(() => {
+    if(BMIChecked.current){return;}
+    BMIChecked.current = true;
+    checkIsTakenSelfie();
+  }
+  , [data])
+
+
+
+  //Anderson's code ends here
+
+
+
 
   useEffect(() => {
     if (data && "bmi" in data) {
@@ -188,6 +216,8 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   );
 
   const content : JSX.Element = (
+<>
+{isTakenSelfie ?(<div></div>):(
     <div className='selfie-content-container'>
       <BackButton/>
       {isLoading ?
@@ -242,6 +272,10 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
       
       </div>
     </div>
+)
+}
+</>
+
   )
 
   return (

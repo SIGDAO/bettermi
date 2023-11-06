@@ -14,7 +14,8 @@ import { UnsignedTransaction } from "@signumjs/core";
 import { TransferNft } from '../../NftSystem/transferNft';
 import { walletNodeHost } from '../../redux/wallet';
 import { LedgerClientFactory } from '@signumjs/core';
-
+import { TransferToken } from '../../components/transferToken';
+import { calRewardSigdaoOnSelfie} from '../../components/selfieToEarnRewardType';
 
 
 
@@ -30,7 +31,8 @@ const GenerateBMIDaily: React.FunctionComponent<IGenerateBMIDailyProps> = (props
   const {appName, Wallet, Ledger} = useContext(AppContext);
   const nftStorageAccounts = process.env.REACT_APP_NFT_STORAGE?.split(",");
   const codeHashIdForNft = "5093642053599315133";
-
+  const nodeHost = useSelector(walletNodeHost);
+  const BMI = useSelector(selectCurrentBMI);
 
   const navigate = useNavigate();
   const ledger = useLedger();
@@ -42,6 +44,8 @@ const GenerateBMIDaily: React.FunctionComponent<IGenerateBMIDailyProps> = (props
   const handleImport = async () => {
     if (!ledger) return;
     // const startTime: number = Date.now(); // get the current time in milliseconds
+
+
 
     let storeNftContract = await ledger.contract.getContractsByAccount({
       accountId: userAccountId,
@@ -89,6 +93,10 @@ const GenerateBMIDaily: React.FunctionComponent<IGenerateBMIDailyProps> = (props
 
     await Wallet.Extension.confirm(sendBMI.unsignedTransactionBytes);
 
+    //Code inserted by Anderson, to transfer the token to the user
+      await TransferToken(nodeHost, userAccountId, calRewardSigdaoOnSelfie(BMI).toString());
+    
+    //Ends here
 
     dispatch(profileSlice.actions.setIsSelfie(true));
     // try {
