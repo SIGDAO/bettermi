@@ -24,7 +24,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   position: absolute;
-  width: 819px;
+  /* width: 819px; */
   height: 461px;
   box-shadow: 
     inset 0px 30px 8px -30px var(--royal-blue),

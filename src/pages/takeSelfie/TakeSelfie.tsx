@@ -146,12 +146,14 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   // for mobile
   const webcamContainerStyle : CSS.Properties = {
     'zIndex': '1',
-    'display': 'inline-block',
+    'display': 'flex',
     'position': 'relative',
     // 'top': 'calc(190px - 50px)',   
     'height': 'fit-content',
-
+    'justifyContent': 'center',
+    'alignItems': 'center',
   }
+
 
   const handleResize = () => {
     setMobileWidth(window.innerWidth)
@@ -199,6 +201,12 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
     [webcamRef]
   );
 
+
+  const selfieShadowStyle : CSS.Properties = {
+    'width': `${isMobile? mobileWidth :  width}px`,
+  }
+
+
   const content : JSX.Element = (
     <div className='selfie-content-container'>
       <BackButton/>
@@ -221,9 +229,8 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
             ref={webcamRef}
             videoConstraints={videoConstraints}
           />
-
         }
-        <div className="selfie-shadow"></div>      
+        <div className="selfie-shadow" style={selfieShadowStyle}></div>      
       </div>
       {isLoading ?
         <>
