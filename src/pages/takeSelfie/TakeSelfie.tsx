@@ -17,7 +17,7 @@ import { isSelfieRecord, isTodayHaveSelfieRecord } from '../../components/bmiCal
 import { accountId } from '../../redux/account';
 import { useLedger } from '../../redux/useLedger';
 import BorderLinearProgress from './borderLinearProgress';
-import {isMobile} from 'react-device-detect';
+// import {isMobile} from 'react-device-detect';
 
 interface ITakeSelfieProps {
 }
@@ -94,7 +94,7 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   var [imageSrc, setImageSrc] = useState<string | null | undefined>();
   const isSelefie = useSelector(selectCurrentIsSelfie);
   const [mobileWidth, setMobileWidth] = useState<number>(0);
-
+  const [isMobile, setIsMobile] = useState<boolean>(false);
   const [ getBMI, {isLoading, data} ] = useGetBMIMutation()
 
   useEffect(() => {
@@ -157,6 +157,7 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
 
   const handleResize = () => {
     setMobileWidth(window.innerWidth)
+    setIsMobile(window.innerWidth < 800)
   }
   
   // create an event listener
