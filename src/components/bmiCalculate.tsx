@@ -11,41 +11,32 @@ export interface UserBMIState {
   userBMI: BMI_Day[] | undefined;
 }
 
-
+// find BMI contract content
+// output: false || { message: message, description: description }
 const findBMIblockchainContract = async (tempAccountId: string, Ledger2: any) => {
   var contractAddress:string = '';
   var description: any;
   var bmiArray: SeriesDataItemTypeMap['Area'][]= [];
-  var contractData: any;
+  // var contractData: any;
 
-  const contractId = await Ledger2.contract.getContractsByAccount({ accountId :tempAccountId});
+  const contract = await Ledger2.contract.getContractsByAccount({ 
+    accountId :tempAccountId,
+    machineCodeHash: "7457358473503628676",
+  });
 
-  console.log(contractId, 'contractID');
+  console.log(contract, 'contract');
 
-  if (!contractId.hasOwnProperty('ats')) return false;
+  if (!contract) return false;
+  if (!contract.hasOwnProperty('ats')) return false;
 
-  for(let i = 0;i < contractId.ats.length;i++){
-    if(contractId.ats[i].machineCodeHashId == "7457358473503628676"){
-        console.log('hi')
-        contractData = contractId.ats[i];
-        break;
-    }
-  }
 
-  if (!contractData) return false;
-  console.log(contractData, 'contractData');
-  contractAddress = contractData.at;
+  contractAddress = contract.ats[0]?.at;
 
-  // todo: make it better
-  try {
-    
-    description = JSON.parse(contractData?.description);
-  } catch (error) {
-    description = null;
-  }
 
 
   if (!contractAddress) return false
+
+  description = JSON.parse(contract.ats[0]?.description);
 
   const message = await Ledger2.account.getAccountTransactions({accountId:contractAddress}); //Contract Id
   console.log(message, 'message');
@@ -57,7 +48,8 @@ const findBMIblockchainContract = async (tempAccountId: string, Ledger2: any) =>
   }
 }
 
-
+// find all the BMI record
+// output: [] || [ {time: time, value: value} ]
 export const findBMI = async (tempAccountId: string, Ledger2: any, today?: boolean | undefined) => {
   let BMI: SeriesDataItemTypeMap['Area'][]= [];
 
@@ -83,7 +75,11 @@ export const findBMI = async (tempAccountId: string, Ledger2: any, today?: boole
     if (typeof content === 'number') continue;
     let tempDate = new Date(content.time)
     let dateFormat: UTCTimestamp  = Math.floor((tempDate.getTime() / 1000)) as UTCTimestamp;
+
     BMI.push({time: dateFormat, value: Number(content.bmi)});
+    // sort the BMI value by time asc
+    BMI.sort((a,b) => (a.time > b.time) ? 1 : ((b.time > a.time) ? -1 : 0))
+
     // return_Date(Number(obj.timestamp));
   }
 

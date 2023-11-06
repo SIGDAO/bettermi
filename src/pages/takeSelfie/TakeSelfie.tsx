@@ -6,9 +6,9 @@ import Webcam from "react-webcam";
 import './TakeSelfie.css';
 import { BackButton } from '../../components/button';
 import CSS from 'csstype';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { profileSlice } from '../../redux/profile';
+import { profileSlice, selectCurrentIsSelfie } from '../../redux/profile';
 import { store } from '../../redux/reducer';
 import { userBMISlice } from '../../redux/userBMI';
 import { useGetBMIMutation } from '../../redux/userBMIApi';
@@ -33,13 +33,13 @@ const takeSelfieButton : CSS.Properties = {
   'backgroundSize': 'cover',
   'width': '100px',
   'height': '100px',
-  'position': 'absolute',
-  'left': 'calc((100% - 100px) / 2)',
+  // 'position': 'absolute',
+  // 'left': 'calc((100% - 100px) / 2)',
   'border': 'none',
   'outline': 'none',
   'cursor': 'pointer',
   // 'top': 'calc(529px - 50px)',
-  'top': '575px',
+  // 'top': '575px',
 }
 
 const convertBase64toJpg = (base64String: string): File => {
@@ -76,7 +76,6 @@ const counttime = (setCount) => {
     clearInterval(timer);
   };
 };
-// 
 
 
 // main function
@@ -120,6 +119,11 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   //Anderson's code ends here
 
 
+
+
+  const isSelefie = useSelector(selectCurrentIsSelfie);
+  const [mobileWidth, setMobileWidth] = useState<number>(0);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
 
 
   useEffect(() => {
@@ -171,25 +175,37 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   // for mobile
   const webcamContainerStyle : CSS.Properties = {
     'zIndex': '1',
-    'display': 'inline-block',
-    'position': 'absolute',
-    'top': 'calc(190px - 50px)',   
+    'display': 'flex',
+    'position': 'relative',
+    // 'top': 'calc(190px - 50px)',   
+    'height': 'fit-content',
+    'justifyContent': 'center',
+    'alignItems': 'center',
   }
+
+
+  const handleResize = () => {
+    setMobileWidth(window.innerWidth)
+    setIsMobile(window.innerWidth < 800)
+  }
+  
+  // create an event listener
+  useEffect(() => {
+    window.addEventListener("resize", handleResize)
+  })
+  
 
   const mobile = process.env.REACT_APP_MOBILE === 'true'
   // const width = process.env.REACT_APP_MOBILE === 'true' ? '390' : '819'
   const width = 819
 
   if (mobile) {
-    webcamContainerStyle.position = 'absolute'
     webcamContainerStyle.width = '390px'
     webcamContainerStyle.left = 'calc((100% - 390px) / 2)'
     webcamContainerStyle.height = 'calc(844px - 230px)'
     webcamContainerStyle.overflow = 'hidden'
   } else {
-    webcamContainerStyle.position = 'absolute'
     webcamContainerStyle.width = '819px'
-    webcamContainerStyle.left = 'calc((100% - 819px) / 2)'
   }
 
   
@@ -215,25 +231,17 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
     [webcamRef]
   );
 
+
+  const selfieShadowStyle : CSS.Properties = {
+    'width': `${isMobile? mobileWidth :  width}px`,
+  }
+
+
   const content : JSX.Element = (
-<>
-{isTakenSelfie ?(<div></div>):(
+    <>
+    {isTakenSelfie ?(<div></div>):(
     <div className='selfie-content-container'>
       <BackButton/>
-      {isLoading ?
-        <div className="disclaimer inter-normal-white-15px">
-          Scaning...
-        </div>
-        :
-        <div className="disclaimer inter-normal-white-15px">
-          <h3>
-            We care about your privacy, your selfie will not be stored
-          </h3>
-            <h4>
-              Join our discord link to grab free tokens!
-            </h4>
-        </div>
-      }
       {/* <div className="disclaimer inter-normal-white-15px">
       We super care your privacy, your selfie will not be stored
       </div> */}
@@ -249,41 +257,57 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
             // height={720}
             screenshotFormat="image/jpeg"
             // width={1280}
-            width={width}
+            width={isMobile? mobileWidth :  width}
             ref={webcamRef}
             videoConstraints={videoConstraints}
           />
-
         }
-        <div className="selfie-shadow"></div>
-        {isLoading ? 
-        <div className="animation-containter">
-          <div className="percentage-display inter-normal-cape-cod-12px">
-            {count}%
+        <div className="selfie-shadow" style={selfieShadowStyle}></div>      
+      </div>
+      {isLoading ?
+        <>
+          <div className="disclaimer inter-normal-white-15px">
+            Scaning...
           </div>
-          <BorderLinearProgress variant='determinate' value={count} />
-        </div>
-        : 
+          <div className="animation-containter">
+            <div className="percentage-display inter-normal-cape-cod-12px">
+              {count}%
+            </div>
+            <BorderLinearProgress variant='determinate' value={count} />
+          </div>
+        </>
+        :
+        <>
+          <div className="disclaimer inter-normal-white-15px">
+            <h3>
+              We care about your privacy, your selfie will not be stored
+            </h3>
+              <h4>
+                Join our discord link to grab free tokens!
+              </h4>
+          </div>
           <button 
             style={takeSelfieButton}
             onClick={capture}
           />
-        }
-      
-      </div>
-    </div>
-)
-}
-</>
+        </>
+      }
 
+    </div>
+    )}
+    </>
   )
 
-  return (
-    <CenterLayout
-      content={content}
-      bgImg={false}
-    />
-  );
+  const checkifIsSelfie = () => {
+    if (isSelefie) return <Navigate to='/home' />
+
+    return <CenterLayout
+              content={content}
+              bgImg={false}
+            />
+  }
+
+  return checkifIsSelfie()
 };
 
 export default TakeSelfie;
