@@ -18,6 +18,7 @@ import { accountId } from '../../redux/account';
 import { useLedger } from '../../redux/useLedger';
 import BorderLinearProgress from './borderLinearProgress';
 import { CheckTakenSelfie } from '../../NftSystem/BMISelfieSystem';
+import { CheckIsUserANewUser } from '../../NftSystem/BMISelfieSystem';
 
 interface ITakeSelfieProps {
 }
@@ -93,30 +94,38 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   var [imageSrc, setImageSrc] = useState<string | null | undefined>();
 
   const [ getBMI, {isLoading, data} ] = useGetBMIMutation()
+  const [isTakenSelfie, setIsTakenSelfie] = useState(false);
+  // //Anderson's code starts here
+  // const BMIContractId = process.env.REACT_APP_BMI_MACHINE_CODE_HASH!;
+  // const NftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
+  // const BMIDistributor = process.env.REACT_APP_BMI_MACHINE_CODE_HASH!;
+  // const BMIChecked = useRef(false);
+  // const checkIsTakenSelfie = async () => {
+  //   const isUserANewUser = await CheckIsUserANewUser(Ledger2,tempAccountId,BMIContractId,NftDistributor);
+  //   console.log(isUserANewUser);
+  //   if(isUserANewUser === false){     
+  //     console.log(isUserANewUser);
+  //     const result = await CheckTakenSelfie(tempAccountId, Ledger2,BMIContractId,NftDistributor);
+  //     if(result === true){
+  //       alert("seems like you have taken your selfie today");
+  //       navigate('/home');
+  //     }
+  //     setIsTakenSelfie(result);
+  //   }
+  // }
+  // useEffect(() => {
+  //   if(BMIChecked.current){return;}
 
-  //Anderson's code starts here
-  const [isTakenSelfie, setIsTakenSelfie] = useState(true);
-  const BMIContractId = process.env.REACT_APP_BMI_MACHINE_CODE_HASH!;
-  const NftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
-  const BMIChecked = useRef(false);
-  const checkIsTakenSelfie = async () => {
-    const result = await CheckTakenSelfie(tempAccountId, Ledger2,BMIContractId,NftDistributor);
-    if(result === true){
-      alert("seems like you have taken your selfie today");
-      navigate('/home');
-    }
-    setIsTakenSelfie(result);
-  }
-  useEffect(() => {
-    if(BMIChecked.current){return;}
-    BMIChecked.current = true;
-    checkIsTakenSelfie();
-  }
-  , [data])
+  
+
+  //   BMIChecked.current = true; 
+  //     checkIsTakenSelfie();
+  // }
+  // , [data])
 
 
 
-  //Anderson's code ends here
+  // //Anderson's code ends here
 
 
 

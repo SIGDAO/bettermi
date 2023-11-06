@@ -88,3 +88,14 @@ export async function CheckTakenSelfie(userAccountId:string,ledger2:any,BMIContr
     }
     return false;
 }
+export async function CheckIsUserANewUser(ledger2:any,userId:String,codeHashIdForContract:string,nftDistributor:string){
+  let senderNftStorage = await ledger2.contract.getContractsByAccount({
+      accountId: userId,
+      machineCodeHash: codeHashIdForContract,
+  });
+  if(senderNftStorage.ats.length === 0){
+return true;
+  }
+  else{return false}
+  //console.log(senderNftStorage.ats);
+};

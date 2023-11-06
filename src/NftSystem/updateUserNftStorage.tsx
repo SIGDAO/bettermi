@@ -656,3 +656,5 @@ export async function GetEquippedNftId(ledger2:any,userAccountId:string){
 
 //     return (<button onClick = {passInfo}>UpdateUserStorage</button>);
 // }
+
+
