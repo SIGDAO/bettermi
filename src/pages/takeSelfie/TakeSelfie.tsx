@@ -20,6 +20,9 @@ import BorderLinearProgress from './borderLinearProgress';
 import { CheckTakenSelfie } from '../../NftSystem/BMISelfieSystem';
 import { CheckIsUserANewUser } from '../../NftSystem/BMISelfieSystem';
 
+import { set } from 'immer/dist/internal';
+import {isMobile} from 'react-device-detect';
+
 interface ITakeSelfieProps {
 }
 
@@ -28,6 +31,7 @@ const videoConstraints = {
   height: 720,
   facingMode: "user"
 };
+
 
 const takeSelfieButton : CSS.Properties = {
   'background': `url(${process.env.PUBLIC_URL}/img/takeSelfie/icon--take-photo-1@1x.png)`,
@@ -79,6 +83,7 @@ const counttime = (setCount) => {
 };
 
 
+
 // main function
 const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   const webcamRef = useRef<Webcam>(null);
@@ -92,7 +97,9 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   const Ledger2 = useLedger();
   const [count, setCount] = useState(0);
   var [imageSrc, setImageSrc] = useState<string | null | undefined>();
-
+  const isSelefie = useSelector(selectCurrentIsSelfie);
+  const [mobileWidth, setMobileWidth] = useState<number>(0);
+  // const [isMobile, setIsMobile] = useState<boolean>(false)
   const [ getBMI, {isLoading, data} ] = useGetBMIMutation()
   const [isTakenSelfie, setIsTakenSelfie] = useState(false);
   // //Anderson's code starts here
@@ -129,10 +136,6 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
 
 
 
-
-  const isSelefie = useSelector(selectCurrentIsSelfie);
-  const [mobileWidth, setMobileWidth] = useState<number>(0);
-  const [isMobile, setIsMobile] = useState<boolean>(false);
 
 
   useEffect(() => {
@@ -187,21 +190,23 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
     'display': 'flex',
     'position': 'relative',
     // 'top': 'calc(190px - 50px)',   
-    'height': 'fit-content',
+    'maxHeight': '500px',
     'justifyContent': 'center',
-    'alignItems': 'center',
+    'overflow': 'hidden',
+    'width': isMobile ? `${mobileWidth - 50}px`:  '819px',
   }
-
 
   const handleResize = () => {
     setMobileWidth(window.innerWidth)
-    setIsMobile(window.innerWidth < 800)
+    // console.log('window.innerWidth', window.innerWidth)
+    // if (window.innerWidth < 800) return setIsMobile(true)
+    // setIsMobile(false)
   }
   
   // create an event listener
   useEffect(() => {
     window.addEventListener("resize", handleResize)
-  })
+  }, [])
   
 
   const mobile = process.env.REACT_APP_MOBILE === 'true'
@@ -213,9 +218,14 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
     webcamContainerStyle.left = 'calc((100% - 390px) / 2)'
     webcamContainerStyle.height = 'calc(844px - 230px)'
     webcamContainerStyle.overflow = 'hidden'
-  } else {
-    webcamContainerStyle.width = '819px'
+  } 
+
+  const selfieShadow : CSS.Properties = {
+    'width': isMobile ? `${mobileWidth}px` : '819px',
+    // 'width': '819px',
+    'height': isMobile ? `${mobileWidth * 461/819}px` : '461px',
   }
+  
 
   
   useEffect(() => {
@@ -240,15 +250,7 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
     [webcamRef]
   );
 
-
-  const selfieShadowStyle : CSS.Properties = {
-    'width': `${isMobile? mobileWidth :  width}px`,
-  }
-
-
   const content : JSX.Element = (
-    <>
-    {isTakenSelfie ?(<div></div>):(
     <div className='selfie-content-container'>
       <BackButton/>
       {/* <div className="disclaimer inter-normal-white-15px">
@@ -266,12 +268,13 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
             // height={720}
             screenshotFormat="image/jpeg"
             // width={1280}
-            width={isMobile? mobileWidth :  width}
+            width={isMobile? mobileWidth-50 :  width}
             ref={webcamRef}
             videoConstraints={videoConstraints}
           />
+
         }
-        <div className="selfie-shadow" style={selfieShadowStyle}></div>      
+        <div className="selfie-shadow" style={selfieShadow}></div>      
       </div>
       {isLoading ?
         <>
@@ -303,8 +306,6 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
       }
 
     </div>
-    )}
-    </>
   )
 
   const checkifIsSelfie = () => {
