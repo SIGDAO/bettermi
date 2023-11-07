@@ -6,7 +6,7 @@
   background-color: rgba(255,255,255,1.0);
   display: flex;
   justify-content: center;
-  overflow: hidden;
+  overflow: hidden auto;
   width: 390px;
 }
 
@@ -23,7 +23,15 @@
   padding: 155.5px 23px;
   width: 480px;
   z-index: 1;
+  overflow-y:auto;
+  overflow-x: hidden;
 }
+.bettermidapp-profile-3::-webkit-scrollbar {
+  display: none;
+  width: 0;
+}
+
+
 
 .nft_-avatar-2ZgxSS {
   background-color: transparent;

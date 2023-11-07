@@ -401,7 +401,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
           style={{
             backgroundColor: "inherit",
             width: "400px",
-            height: "400px",
+            height: "45%",
             overflowY: "scroll",
           }}
           onWheel={handleScroll}
