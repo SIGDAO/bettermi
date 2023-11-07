@@ -153,7 +153,7 @@ function App() {
                 </Route>
                 <Route path="/missionChallenge" element={<MissionChallenge />} />
                 {/* account that can only access in certain time */}
-                {/* <Route path="/myNftList" element={<MyNftList/>} /> */}
+                <Route path="/myNftList" element={<MyNftList/>} />
                 <Route path="/indexMyNftList" element={<IndexMyNftList />} />
                 <Route path="/reward" element={<Reward />} />
                 <Route path="/rewardDetail">
