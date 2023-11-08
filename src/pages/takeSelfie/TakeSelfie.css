@@ -20,12 +20,21 @@
 } */
 
 .selfie-shadow {
+  object-fit: contain;
+}
+
+.selfie-shadow-container {
   background: url("../../../public/img/takeSelfie/Scanning_layer.png");
   background-repeat: no-repeat;
   background-size: cover;
   position: absolute;
+  background-position: center;
+
+
   /* width: 819px; */
-  height: 461px;
+  /* height: 461px; */
+
+  
   box-shadow: 
     inset 0px 30px 8px -30px var(--royal-blue),
     inset 0px -30px 8px -30px var(--royal-blue); 

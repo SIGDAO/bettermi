@@ -17,11 +17,8 @@ import { isSelfieRecord, isTodayHaveSelfieRecord } from '../../components/bmiCal
 import { accountId } from '../../redux/account';
 import { useLedger } from '../../redux/useLedger';
 import BorderLinearProgress from './borderLinearProgress';
-import { CheckTakenSelfie } from '../../NftSystem/BMISelfieSystem';
-import { CheckIsUserANewUser } from '../../NftSystem/BMISelfieSystem';
-
 import { set } from 'immer/dist/internal';
-import {isMobile} from 'react-device-detect';
+// import {isMobile} from 'react-device-detect';
 
 interface ITakeSelfieProps {
 }
@@ -32,6 +29,12 @@ const videoConstraints = {
   facingMode: "user"
 };
 
+const mobileConstraints = {
+  // width: 360,
+  // height: 480,
+  aspectRatio: 1,
+  facingMode: "user"
+}
 
 const takeSelfieButton : CSS.Properties = {
   'background': `url(${process.env.PUBLIC_URL}/img/takeSelfie/icon--take-photo-1@1x.png)`,
@@ -99,44 +102,8 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   var [imageSrc, setImageSrc] = useState<string | null | undefined>();
   const isSelefie = useSelector(selectCurrentIsSelfie);
   const [mobileWidth, setMobileWidth] = useState<number>(0);
-  // const [isMobile, setIsMobile] = useState<boolean>(false)
+  const [isMobile, setIsMobile] = useState<boolean>(false)
   const [ getBMI, {isLoading, data} ] = useGetBMIMutation()
-  const [isTakenSelfie, setIsTakenSelfie] = useState(false);
-  // //Anderson's code starts here
-  // const BMIContractId = process.env.REACT_APP_BMI_MACHINE_CODE_HASH!;
-  // const NftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
-  // const BMIDistributor = process.env.REACT_APP_BMI_MACHINE_CODE_HASH!;
-  // const BMIChecked = useRef(false);
-  // const checkIsTakenSelfie = async () => {
-  //   const isUserANewUser = await CheckIsUserANewUser(Ledger2,tempAccountId,BMIContractId,NftDistributor);
-  //   console.log(isUserANewUser);
-  //   if(isUserANewUser === false){     
-  //     console.log(isUserANewUser);
-  //     const result = await CheckTakenSelfie(tempAccountId, Ledger2,BMIContractId,NftDistributor);
-  //     if(result === true){
-  //       alert("seems like you have taken your selfie today");
-  //       navigate('/home');
-  //     }
-  //     setIsTakenSelfie(result);
-  //   }
-  // }
-  // useEffect(() => {
-  //   if(BMIChecked.current){return;}
-
-  
-
-  //   BMIChecked.current = true; 
-  //     checkIsTakenSelfie();
-  // }
-  // , [data])
-
-
-
-  // //Anderson's code ends here
-
-
-
-
 
   useEffect(() => {
     if (data && "bmi" in data) {
@@ -150,6 +117,35 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
     }
   }
   , [data])
+
+  // useEffect(() => {
+  //   const getCameraSize = async () => {
+  //     try {
+  //       const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+  //       const videoElement = webcamRef.current;
+
+  //       if (videoElement) {
+  //         videoElement.srcObject = stream;
+  //         await videoElement.play();
+
+  //         const { videoWidth, videoHeight } = videoElement;
+  //         console.log('Camera Size:', videoWidth, 'x', videoHeight);
+  //       }
+  //     } catch (error) {
+  //       console.error('Error accessing camera:', error);
+  //     }
+  //   };
+
+  //   getCameraSize();
+
+  //   return () => {
+  //     const videoElement = webcamRef.current;
+  //     if (videoElement) {
+  //       videoElement.srcObject = null;
+  //     }
+  //   };
+  // }, []);
+
 
   // change the navigate path when the user has already create bmi contract
   useEffect(() => {
@@ -190,22 +186,28 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
     'display': 'flex',
     'position': 'relative',
     // 'top': 'calc(190px - 50px)',   
-    'maxHeight': '500px',
+    'maxHeight': `${mobileWidth}px`,
     'justifyContent': 'center',
     'overflow': 'hidden',
-    'width': isMobile ? `${mobileWidth - 50}px`:  '819px',
+    'width': isMobile ? `${mobileWidth}px`:  '819px',
+
   }
 
-  const handleResize = () => {
-    setMobileWidth(window.innerWidth)
-    // console.log('window.innerWidth', window.innerWidth)
-    // if (window.innerWidth < 800) return setIsMobile(true)
-    // setIsMobile(false)
-  }
   
   // create an event listener
   useEffect(() => {
+    const handleResize = () => {
+      setMobileWidth(window.innerWidth)
+      console.log('window.innerWidth', window.innerWidth)
+      // console.log('window.innerWidth', window.innerWidth)
+      if (window.innerWidth < 819) return setIsMobile(true)
+      setIsMobile(false)
+    }
+  
     window.addEventListener("resize", handleResize)
+    handleResize();
+    return () => window.removeEventListener('resize', handleResize);
+
   }, [])
   
 
@@ -223,7 +225,8 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   const selfieShadow : CSS.Properties = {
     'width': isMobile ? `${mobileWidth}px` : '819px',
     // 'width': '819px',
-    'height': isMobile ? `${mobileWidth * 461/819}px` : '461px',
+    'height': isMobile ? `${mobileWidth}px` : '461px',
+    'aspectRatio': 'inherit',
   }
   
 
@@ -268,13 +271,16 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
             // height={720}
             screenshotFormat="image/jpeg"
             // width={1280}
-            width={isMobile? mobileWidth-50 :  width}
+            width={isMobile? mobileWidth :  width}
+
             ref={webcamRef}
-            videoConstraints={videoConstraints}
-          />
+            videoConstraints={isMobile? mobileConstraints :videoConstraints}
+            />
 
         }
-        <div className="selfie-shadow" style={selfieShadow}></div>      
+        <div className="selfie-shadow-container" style={selfieShadow}>
+          {/* <img src={process.env.PUBLIC_URL+"/img/takeSelfie/Scanning_layer.png"} alt="" className="selfie-shadow" />   */}
+        </div>      
       </div>
       {isLoading ?
         <>
