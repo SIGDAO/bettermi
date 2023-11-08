@@ -4,6 +4,10 @@ import { Link, useLocation } from 'react-router-dom';
 import { CenterLayout } from '../../components/layout';
 import { ShortTitleBar } from '../../components/titleBar';
 import { missionList } from '../../data/featureMissionList';
+import { TransferToken } from '../../components/transferToken';
+import { useSelector } from 'react-redux';
+import { selectWalletNodeHost } from '../../redux/useLedger';
+import { accountId } from '../../redux/account';
 
 interface IChallengeCompletedProps {
   NFT?: boolean;
@@ -25,7 +29,23 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
   const { NFT } = props;
   const location = useLocation();
   const [pathname, setPathname] = React.useState<string>('');
+  const nodeHost = useSelector(selectWalletNodeHost);
+  const userAccountId = useSelector(accountId)
 
+  const TransferTokenToUser = async (nodeHost: string, userAccountId: string, reward: string) => {
+    const rewardString = displayReawrd(location.state?.reward);
+
+    if(rewardString === undefined) { return; }
+    else{
+      await TransferToken(nodeHost, userAccountId, rewardString);
+      return;
+    }
+  };
+  React.useEffect(() => {
+    if (!NFT) {
+      TransferTokenToUser(nodeHost, userAccountId, location.state?.reward);
+    }
+  });
   React.useEffect(() => {
     setPathname(() => {
       if (location.pathname === '/NFTTransferCompleted') {
