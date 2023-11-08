@@ -9,8 +9,11 @@ import { TransferToken } from '../../components/transferToken';
 import { Button } from '@mui/material';
 import { walletNodeHost } from '../../redux/wallet';
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState,useRef } from 'react';
 import { missionList } from '../../data/featureMissionList';
+import { CheckIsUserFirstDayOfRegistration } from '../../NftSystem/BMISelfieSystem';
+import { selectWalletNodeHost } from '../../redux/useLedger';
+import { LedgerClientFactory } from '@signumjs/core';
 
 interface IMissionChallengeProps {
 }
@@ -19,13 +22,51 @@ interface IMissionChallengeProps {
 const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props) => {
   const title = 'Challenges X 9 Hacks'
   const userAccountId = useSelector(accountId);
-  const userWalletNodeHost = useSelector(walletNodeHost);
+  const nodeHost = useSelector(selectWalletNodeHost);
+  const ledger2 = LedgerClientFactory.createClient({nodeHost});
   const navigate = useNavigate();
   const [isInTimeSlot, setIsInTimeSlot] = useState<boolean[]>([]);
   const [Timedifference, setTimedifference] = useState<string[]>([]);
+  const BMIMachineCodeHashId = process.env.REACT_APP_BMI_MACHINE_CODE_HASH!;
+  const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
+  const nftDistributorPrivateKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PRIVATE_KEY!;
+  const nftDistributorPublicKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PUBLIC_KEY!;
+  const updated = useRef(false);
+  let isNew = false;
+  const NewUserCheck = async () => {
+      const isUpdated = await CheckIsUserFirstDayOfRegistration(ledger2,userAccountId,BMIMachineCodeHashId);
+      console.log("isUpdated",isUpdated);
+      if(isUpdated === true){
+        return true;
+      }
+      else{
+        return false;
+      }
+    
+  }
+
+  // useEffect(() => {
+
+  //   NewUserCheck();
+  // })
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      updated.current = false; // Reset the value before navigating away
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, []);
 
   useEffect(() => {
-    const checkTimeSlot = () => {
+    const checkTimeSlot = async() => {
+      if(updated.current === false){
+        updated.current = true
+      isNew = await NewUserCheck();//Run a check on whether there is a new user. Also, the handleBeforeUnload function ensures the check only run once
+      }
       const now = new Date();
       const currentTime = now.getHours() * 60 + now.getMinutes();
       const currentTimeInSecond = now.getHours() * 60 * 60 + now.getMinutes() * 60 + now.getSeconds();
@@ -33,10 +74,15 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
 
       setIsInTimeSlot(
         missionList.map((mission) => {
+          if(mission.title === "1. Hello Bae !" && isNew === true){
+            console.log("special case for Hello Bae",isNew)
+            return true;
+          }
           const { timeslot } = mission;
           const isInSlot = timeslot.some(
             (slot) => currentTime >= getTimeInMinutes(slot.startingTime) && currentTime <= getTimeInMinutes(slot.endTime)
           );
+          console.log("is In slot for",mission.title, "is",isInSlot)
           return isInSlot;
         })
       );
