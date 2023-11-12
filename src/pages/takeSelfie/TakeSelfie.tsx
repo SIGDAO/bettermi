@@ -100,7 +100,7 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   const Ledger2 = useLedger();
   const [count, setCount] = useState(0);
   var [imageSrc, setImageSrc] = useState<string | null | undefined>();
-  const isSelefie = useSelector(selectCurrentIsSelfie);
+  const isSelfie = useSelector(selectCurrentIsSelfie);
   const [mobileWidth, setMobileWidth] = useState<number>(0);
   const [isMobile, setIsMobile] = useState<boolean>(false)
   const [ getBMI, {isLoading, data} ] = useGetBMIMutation()
@@ -193,6 +193,13 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
 
   }
 
+    
+  useEffect(() => {
+    if (isLoading && count === 0) {
+      counttime(setCount);
+    }
+  }, [isLoading]);
+
   
   // create an event listener
   useEffect(() => {
@@ -230,12 +237,6 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   }
   
 
-  
-  useEffect(() => {
-    if (isLoading && count === 0) {
-      counttime(setCount);
-    }
-  }, [isLoading]);
 
   
 
@@ -283,7 +284,7 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
         </div>      
       </div>
       {isLoading ?
-        <>
+        <div className='loading-progress-container'>
           <div className="disclaimer inter-normal-white-15px">
             Scaning...
           </div>
@@ -293,7 +294,7 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
             </div>
             <BorderLinearProgress variant='determinate' value={count} />
           </div>
-        </>
+        </div>
         :
         <>
           <div className="disclaimer inter-normal-white-15px">
@@ -315,7 +316,7 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   )
 
   const checkifIsSelfie = () => {
-    if (isSelefie) return <Navigate to='/home' />
+    if (isSelfie) return <Navigate to='/home' />
 
     return <CenterLayout
               content={content}

@@ -84,10 +84,10 @@ video {
   width: 819px;
   display: flex;
   flex-direction: column;
-  top: 529px;
+  /* top: 529px; */
   justify-items: center;
   align-items: center;
-  position: absolute;
+  /* position: absolute; */
   gap: 10px;
 }
 
@@ -117,4 +117,13 @@ video {
 
 .selfie-content-container .icon-arrow-left {
   position: absolute !important;
+}
+
+.loading-progress-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
 }

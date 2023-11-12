@@ -211,7 +211,7 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
   );
 
   return (
-    {isSelfie} ? 
+    isSelfie ? 
       <Navigate to="/home" />
        :   
       <CenterLayout content={content} bgImg={false} />
