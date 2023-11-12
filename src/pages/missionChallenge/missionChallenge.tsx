@@ -14,6 +14,7 @@ import { missionList } from '../../data/featureMissionList';
 import { CheckIsUserFirstDayOfRegistration } from '../../NftSystem/BMISelfieSystem';
 import { selectWalletNodeHost } from '../../redux/useLedger';
 import { LedgerClientFactory } from '@signumjs/core';
+import { CountChallenges } from '../../NftSystem/Token/countChallenges';
 
 interface IMissionChallengeProps {
 }
@@ -33,6 +34,8 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
   const nftDistributorPublicKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PUBLIC_KEY!;
   const updated = useRef(false);
   let isNew = false;
+
+  //Anderson's code starts here
   const NewUserCheck = async () => {
       const isUpdated = await CheckIsUserFirstDayOfRegistration(ledger2,userAccountId,BMIMachineCodeHashId);
       console.log("isUpdated",isUpdated);
@@ -61,32 +64,50 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
     };
   }, []);
 
+  //Anderson's code ends here
+
   useEffect(() => {
     const checkTimeSlot = async() => {
+      //Anderson's code starts here
       if(updated.current === false){
         updated.current = true
       isNew = await NewUserCheck();//Run a check on whether there is a new user. Also, the handleBeforeUnload function ensures the check only run once
       }
+      const userChallengeTimes = await CountChallenges(userAccountId,ledger2);    
+      console.log(userChallengeTimes);
+      setIsInTimeSlot(
+        userChallengeTimes.map((numChallengesPlayed) => {
+          if(numChallengesPlayed >= 3){
+            return false;
+          }
+          else{
+            return true;
+          }
+        })
+        );
+        console.log("isInTimeSlot is ",isInTimeSlot);
+      //Anderson's code ends here
       const now = new Date();
       const currentTime = now.getHours() * 60 + now.getMinutes();
       const currentTimeInSecond = now.getHours() * 60 * 60 + now.getMinutes() * 60 + now.getSeconds();
 
+      //Anderson disabled this 2023/11/12
+      // setIsInTimeSlot(
+      //   missionList.map((mission) => {
+      //     if(mission.title === "1. Hello Bae !" /*&& isNew === true*/){
+      //       console.log("special case for Hello Bae",isNew)
+      //       return true;
+      //     }
+      //     const { timeslot } = mission;
+      //     const isInSlot = timeslot.some(
+      //       (slot) => currentTime >= getTimeInMinutes(slot.startingTime) && currentTime <= getTimeInMinutes(slot.endTime)
+      //     );
+      //     console.log("is In slot for",mission.title, "is",isInSlot)
+      //     return isInSlot;
+      //   })
+      // );
 
-      setIsInTimeSlot(
-        missionList.map((mission) => {
-          if(mission.title === "1. Hello Bae !" && isNew === true){
-            console.log("special case for Hello Bae",isNew)
-            return true;
-          }
-          const { timeslot } = mission;
-          const isInSlot = timeslot.some(
-            (slot) => currentTime >= getTimeInMinutes(slot.startingTime) && currentTime <= getTimeInMinutes(slot.endTime)
-          );
-          console.log("is In slot for",mission.title, "is",isInSlot)
-          return isInSlot;
-        })
-      );
-
+      //Anderson disabled till here
       setTimedifference(
         missionList.map((mission) => {
           const { timeslot } = mission;

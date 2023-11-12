@@ -81,7 +81,8 @@ const CircularWithValueLabel: React.FunctionComponent<ICircularWithValueLabelPro
   const { pathname } = useLocation();
 
   const handleTransfer = () => {
-    TransferToken(userWalletNodeHost,userAccountId, rewardInSigdao.toString( ))
+    //TransferToken(userWalletNodeHost,userAccountId, rewardInSigdao.toString( )) 
+    //Anderson disabled this and transfer token is migrated to next page
     navigate('/challengeCompleted', { state: { reward: pathname } })
   }
 

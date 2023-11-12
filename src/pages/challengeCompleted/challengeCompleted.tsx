@@ -8,6 +8,8 @@ import { TransferToken } from '../../components/transferToken';
 import { useSelector } from 'react-redux';
 import { selectWalletNodeHost } from '../../redux/useLedger';
 import { accountId } from '../../redux/account';
+import { TransferTokenWithMessage } from '../../NftSystem/TokenTransfers';
+import { useRef,useEffect } from 'react';
 
 interface IChallengeCompletedProps {
   NFT?: boolean;
@@ -16,6 +18,7 @@ interface IChallengeCompletedProps {
 const displayReawrd = ( pathname: string ): string | undefined => {
   if (pathname) {
     const pathList = pathname.split('/');
+    console.log("pathList", pathList);
     const reward = pathList[pathList.length - 1];
     
     return missionList.find((mission, index) => index === parseInt(reward) - 1)?.sigdao || undefined
@@ -30,20 +33,49 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
   const location = useLocation();
   const [pathname, setPathname] = React.useState<string>('');
   const nodeHost = useSelector(selectWalletNodeHost);
-  const userAccountId = useSelector(accountId)
+  const userAccountId = useSelector(accountId);
+  const distributed = useRef(false);
+
+  ///Anderson's code starts here
+
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      distributed.current = false; // Reset the value before navigating away
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, []);
+
+//Anderson's code ends here
+
+//Anderson's code starts here
 
   const TransferTokenToUser = async (nodeHost: string, userAccountId: string, reward: string) => {
-    const rewardString = displayReawrd(location.state?.reward);
-
-    if(rewardString === undefined) { return; }
+    var rewardString:string|undefined = displayReawrd(location.state?.reward);
+    const challengeNumber:string[]|null = location.state?.reward.split('/');
+    console.log(challengeNumber);
+    console.log();
+    if(rewardString == undefined || !challengeNumber) { return; }
     else{
-      await TransferToken(nodeHost, userAccountId, rewardString);
+      //await TransferToken(nodeHost, userAccountId, rewardString);
+      const reward:string = String(parseInt(rewardString!,10));
+      await TransferTokenWithMessage(nodeHost, userAccountId, reward, parseInt(challengeNumber![challengeNumber!.length-1]));
       return;
     }
   };
+
+//Anderson's code ends here
+
   React.useEffect(() => {
-    if (!NFT) {
-      TransferTokenToUser(nodeHost, userAccountId, location.state?.reward);
+
+
+    if (!NFT && distributed.current === false) {
+      TransferTokenToUser(nodeHost, userAccountId, location.state?.reward); //Anderson's code
+      distributed.current = true;//Anderson's code
     }
   });
   React.useEffect(() => {
