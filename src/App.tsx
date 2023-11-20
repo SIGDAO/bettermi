@@ -96,16 +96,18 @@ const CheckStore: React.FC = () => {
   const location = useLocation();
   const currentPath: string = location.pathname;
   const { appName, Wallet, Ledger } = useContext(AppContext);
+  return <Outlet />;
+
 
   if (currentPath === "/" || currentPath === "/connectWallet") {
     return <Outlet />;
   }
 
-  if (Wallet.Extension.connection == null) {
-    return <Navigate to="/" />
-  }
+  // if (Wallet.Extension.connection == null) {
+  //   return <Navigate to="/" />
+  // }
 
-  return sessionStorage.getItem("state") === null ? <Navigate to="/" /> : <Outlet />;
+  // return sessionStorage.getItem("state") === null ? <Navigate to="/" /> : <Outlet />;
 };
 
 function App() {

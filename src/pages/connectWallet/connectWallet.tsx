@@ -184,5 +184,6 @@ export default function ConnectWallet (props: IConnectWalletProps) {
     </div>
   );
 
-  return <CenterLayout bgImg={false} content={content} />;
+  return content;
+  // return <CenterLayout bgImg={false} content={content} />;
 }
