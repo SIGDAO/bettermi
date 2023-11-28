@@ -1,12 +1,11 @@
-import * as React from 'react';
-import './reward.css'
-import { Link } from 'react-router-dom';
-import MenuBar from '../../components/menuBar';
-import { CenterLayout } from '../../components/layout';
-import { ShortTitleBar } from '../../components/titleBar';
+import * as React from "react";
+import "./reward.css";
+import { Link } from "react-router-dom";
+import MenuBar from "../../components/menuBar";
+import { CenterLayout } from "../../components/layout";
+import { ShortTitleBar } from "../../components/titleBar";
 
-interface IRewardProps {
-}
+interface IRewardProps {}
 
 const Reward: React.FunctionComponent<IRewardProps> = (props) => {
   const content: JSX.Element = (
@@ -20,9 +19,7 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
             <img className="card_bg" src={`${process.env.PUBLIC_URL}/img/reward/card-bg-1@1x.png`} alt="Card_bg" />
             <div className="master-collector-5RWzHs inter-semi-bold-white-18px">Master Collector</div>
             <img className="nft_-avatar" src={`${process.env.PUBLIC_URL}/img/reward/nft-avatar-4@1x.png`} alt="NFT_Avatar" />
-            <p className="acquire-3-nf-ts-from-our-collection-5RWzHs inter-normal-cadet-blue-12px">
-              Acquire 3 NFTs from our collection.
-            </p>
+            <p className="acquire-3-nf-ts-from-our-collection-5RWzHs inter-normal-cadet-blue-12px">Acquire 3 NFTs from our collection.</p>
             <div className="ic_next">
               <img className="ic_chevron_right_24px" src={`${process.env.PUBLIC_URL}/img/reward/ic-chevron-right-24px-1@1x.png`} alt="ic_chevron_right_24px" />
             </div>
@@ -40,9 +37,7 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
             <img className="card_bg" src={`${process.env.PUBLIC_URL}/img/reward/card-bg-1@1x.png`} alt="Card_bg" />
             <div className="selfie-champion-O07kH5 inter-semi-bold-white-18px">Selfie Champion</div>
             <img className="nft_-avatar" src={`${process.env.PUBLIC_URL}/img/reward/nft-avatar-5@1x.png`} alt="NFT_Avatar" />
-            <p className="selfies-for-60-consecutive-days-O07kH5 inter-normal-cadet-blue-12px">
-              Selfies for 60 consecutive days
-            </p>
+            <p className="selfies-for-60-consecutive-days-O07kH5 inter-normal-cadet-blue-12px">Selfies for 60 consecutive days</p>
             <div className="ic_next">
               <img className="ic_chevron_right_24px" src={`${process.env.PUBLIC_URL}/img/reward/ic-chevron-right-24px-1@1x.png`} alt="ic_chevron_right_24px" />
             </div>
@@ -60,9 +55,7 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
             <img className="card_bg" src={`${process.env.PUBLIC_URL}/img/reward/card-bg-1@1x.png`} alt="Card_bg" />
             <div className="social-butterfly-nGgOF5 inter-semi-bold-white-18px">Elite Challenger</div>
             <img className="nft_-avatar" src={`${process.env.PUBLIC_URL}/img/reward/nft-avatar-7@1x.png`} alt="NFT_Avatar" />
-            <p className="build-a-thriving-network-of-75-friends-nGgOF5 inter-normal-cadet-blue-12px">
-              Complete 50 challenges
-            </p>
+            <p className="build-a-thriving-network-of-75-friends-nGgOF5 inter-normal-cadet-blue-12px">Complete 50 challenges</p>
             <div className="ic_next">
               <img className="ic_chevron_right_24px" src={`${process.env.PUBLIC_URL}/img/reward/ic-chevron-right-24px-1@1x.png`} alt="ic_chevron_right_24px" />
             </div>
@@ -98,13 +91,8 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
         </Link> */}
       </div>
     </div>
-  )
-  return (
-    <CenterLayout
-      content={content}
-      bgImg={false}
-    />
   );
+  return <CenterLayout content={content} bgImg={false} />;
 };
 
 export default Reward;

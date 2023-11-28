@@ -140,10 +140,11 @@ export const BackButton: React.FunctionComponent<IBackButtonProps> = (props) => 
     'left': '16px',
     'minWidth': '44px',
     'paddingLeft': '14px',
-    'position': 'relative',
+    'position': 'absolute',
     'top': top || '44px',
+    'zIndex': 9999,
   }
-
+// isdofidjsoaf, difisdf  
 
   return (
     <a href="javascript:history.back()">
