@@ -180,7 +180,7 @@ const Setting: React.FunctionComponent<ISettingProps> = (props) => {
             <div className="mintagain-GdXCBJ inter-semi-bold-white-15px">Logout</div>
           </div>
         </Button>
-      <a href="bettermidapp-ai-coach.html">
+      {/* <a href="bettermidapp-ai-coach.html">
         <div className="ic_sentiment_very_satisfied_24px-7DUKxJ ic_sentiment_very_satisfied_24px">
           <img
             className="ic_sentiment_very_satisfied_24px-FSbIhl ic_sentiment_very_satisfied_24px"
@@ -188,7 +188,7 @@ const Setting: React.FunctionComponent<ISettingProps> = (props) => {
             alt="ic_sentiment_very_satisfied_24px"
             />
         </div>
-      </a>
+      </a> */}
     </div>
 
     </div>

@@ -104,6 +104,7 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   const [mobileWidth, setMobileWidth] = useState<number>(0);
   const [isMobile, setIsMobile] = useState<boolean>(false)
   const [ getBMI, {isLoading, data} ] = useGetBMIMutation()
+  
 
   useEffect(() => {
     if (data && "bmi" in data) {
@@ -190,7 +191,7 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
     'justifyContent': 'center',
     'overflow': 'hidden',
     'width': isMobile ? `${mobileWidth}px`:  '819px',
-
+    'marginTop': '50px',
   }
 
     

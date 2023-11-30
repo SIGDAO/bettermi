@@ -94,7 +94,7 @@ video {
 .selfie-content-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   position: absolute;
   left: 0;

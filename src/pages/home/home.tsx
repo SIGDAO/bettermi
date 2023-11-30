@@ -66,9 +66,9 @@ const HorizontalScrollContainer = (props: any) => {
 
 const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const slides = [
-    {'src': `${process.env.PUBLIC_URL}/img/home/1@1x.png`, 'link': 'https://www.bettermi.io/'},
-    {'src': `${process.env.PUBLIC_URL}/img/leaderboard/photo@1x.png`, 'link': '/leaderboard'},
-    {'src': `${process.env.PUBLIC_URL}/img/home/1@1x.png`, 'link': 'https://www.bettermi.io/'},
+    {'src': `${process.env.PUBLIC_URL}/img/home/News-Banner.png`, 'link': 'https://www.bettermi.io/'},
+    {'src': `${process.env.PUBLIC_URL}/img/home/Leader-Board-Banner.png`, 'link': '/leaderboard'},
+    {'src': `${process.env.PUBLIC_URL}/img/home/News-Banner.png`, 'link': 'https://www.bettermi.io/'},
   ]
 
   // info
@@ -207,15 +207,17 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
             <img className="ic_locked-OiAYIf ic_locked" src={`${process.env.PUBLIC_URL}/img/ic-locked-1@1x.png`} alt="ic_locked" />
           </div>
         </div>
-        <div className="leaderboard_button-RoXPLo">
-          <div className="button_bg-IgToMG"></div>
-          <div className="ic_leaderboard-IgToMG ic_leaderboard">
-            <img className="ic_leaderboard-6DxnCN ic_leaderboard" src={`${process.env.PUBLIC_URL}/img/home/ic_leaderboard.png`} alt="ic_leaderboard" />
+        <Link to="/leaderboard">
+          <div className="leaderboard_button-RoXPLo">
+            <div className="button_bg-IgToMG"></div>
+            <div className="ic_leaderboard-IgToMG ic_leaderboard">
+              <img className="ic_leaderboard-6DxnCN ic_leaderboard" src={`${process.env.PUBLIC_URL}/img/home/ic_leaderboard.png`} alt="ic_leaderboard" />
+            </div>
+            {/* <div className="ic_locked-IgToMG ic_locked">
+              <img className="ic_locked-Itp9oo ic_locked" src={`${process.env.PUBLIC_URL}/img/ic-locked-1@1x.png`} alt="ic_locked" />
+            </div> */}
           </div>
-          {/* <div className="ic_locked-IgToMG ic_locked">
-            <img className="ic_locked-Itp9oo ic_locked" src={`${process.env.PUBLIC_URL}/img/ic-locked-1@1x.png`} alt="ic_locked" />
-          </div> */}
-        </div>
+        </Link>
         {/* <ImageSlider slides={slides} /> */}
         <div className="special-card-RoXPLo">
           {/* <div className="special-scroll-hH9Cww">
