@@ -16,6 +16,7 @@
   background-position: 50% 50%;
   background-size: cover;
   display: flex;
+  align-items: center;
   flex-direction: column;
   gap: 40px;
   margin-top: -47.48px;
@@ -26,6 +27,15 @@
   overflow-y:auto;
   overflow-x: hidden;
 }
+
+.overlap-design-layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 40px;
+  min-height: 674px;
+}
+
 .bettermidapp-profile-3::-webkit-scrollbar {
   display: none;
   width: 0;

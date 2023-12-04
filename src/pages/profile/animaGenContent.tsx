@@ -304,6 +304,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
       )}
 
       <div className="overlap-group5">
+        <div className="overlap-design-layout">
         <div className="overlap-group1-profile">
           <img className="layer" src="img/profile/layer-1@1x.png" alt="Layer" />
           <Link to="/indexMyNftList">
@@ -449,6 +450,8 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
             )}
           </div>
         </div>
+        </div>
+
 
         {/* This is the old horizontal scroll */}
 

@@ -212,33 +212,25 @@
 align-self: flex-start;
   z-index: 999;
 }
-.body{
+.mission-body-container{
     height:calc(100% - 159px);
     display:flex;
     flex-direction: row;
+    justify-content: center;
 }
 
-.body1{
-    width:calc(50% - 196px);
-    background-color: inherit;
-    height:calc(100% - 159px);
-}
-.body2{
+.mission-body{
     display:flex;
     flex-direction:column;
     width:392px;
+    min-height: 663px;
     /* height:calc(100% - 159px); */
     background:  linear-gradient(112deg, #221D4B 0%, #171717 100%);
     overflow: auto;
     /* margin-top: 20px; */
 }
-.body2::-webkit-scrollbar {
+.mission-body::-webkit-scrollbar {
   display: none;
-}
-.body3{
-    width:calc(50% - 196px);
-    background-color: inherit;
-    height:calc(100% - 159px);
 }
 
 .challengeCompletedLink{
