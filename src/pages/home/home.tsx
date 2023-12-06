@@ -66,10 +66,10 @@ const HorizontalScrollContainer = (props: any) => {
 
 const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const slides = [
-    {'src': `${process.env.PUBLIC_URL}/img/home/News-Banner.png`, 'link': 'https://www.bettermi.io/'},
-    {'src': `${process.env.PUBLIC_URL}/img/home/Leader-Board-Banner.png`, 'link': '/leaderboard'},
-    {'src': `${process.env.PUBLIC_URL}/img/home/Secret-Coach-io-Banner.png`, 'link': ''},
-    {'src': `${process.env.PUBLIC_URL}/img/home/Secret-Coach-mimi-Banner.png`, 'link': ''},
+    {'src': `${process.env.PUBLIC_URL}/img/home/News-Banner.png`, 'link': 'https://www.bettermi.io/', 'icon': `${process.env.PUBLIC_URL}/img/home/ic-reservation@1x.png`},
+    {'src': `${process.env.PUBLIC_URL}/img/home/Leader-Board-Banner.png`, 'link': '/leaderboard', 'icon': `${process.env.PUBLIC_URL}/img/home/ic_leaderboard.png`},
+    // {'src': `${process.env.PUBLIC_URL}/img/home/Secret-Coach-io-Banner.png`, 'link': ''},
+    // {'src': `${process.env.PUBLIC_URL}/img/home/Secret-Coach-mimi-Banner.png`, 'link': ''},
   ]
 
   // info
@@ -199,70 +199,12 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
           <div className="view-all-RoXPLo inter-medium-royal-blue-14px">See all</div>
         </Link>
         <div className="feature-missions-RoXPLo inter-semi-bold-white-21px">Feature Missions</div>
-        <div className="reservation_button-RoXPLo">
-          <img className="button_bg-nXPAX5" src={`${process.env.PUBLIC_URL}/img/home/button-bg-1@1x.png`} alt="Button_bg" />
-          <div className="ic_reservation-nXPAX5 ic_reservation">
-            <img className="ic_reservation-p9BhAR ic_reservation" src={`${process.env.PUBLIC_URL}/img/home/ic-reservation@1x.png`} alt="ic_reservation" />
-          </div>
-          <div className="ic_locked-nXPAX5 ic_locked">
-            <img className="ic_locked-OiAYIf ic_locked" src={`${process.env.PUBLIC_URL}/img/ic-locked-1@1x.png`} alt="ic_locked" />
-          </div>
-        </div>
+
         <Link to="/leaderboard">
-          <div className="leaderboard_button-RoXPLo">
-            <div className="button_bg-IgToMG"></div>
-            <div className="ic_leaderboard-IgToMG ic_leaderboard">
-              <img className="ic_leaderboard-6DxnCN ic_leaderboard" src={`${process.env.PUBLIC_URL}/img/home/ic_leaderboard.png`} alt="ic_leaderboard" />
-            </div>
-            {/* <div className="ic_locked-IgToMG ic_locked">
-              <img className="ic_locked-Itp9oo ic_locked" src={`${process.env.PUBLIC_URL}/img/ic-locked-1@1x.png`} alt="ic_locked" />
-            </div> */}
-          </div>
+
         </Link>
-        {/* <ImageSlider slides={slides} /> */}
-        <div className="special-card-RoXPLo">
-          {/* <div className="special-scroll-hH9Cww">
-            <div className="x25-hK4LUV">
-              <Carousel>
-                {slides.map((slide, index) => {
-                  return (
-                    <CarouselItem key={index}>
-                      <Link to={slide.link}>
-                        <img className='home-scroller-element-image' src={slide.src} alt="" />
-                      </Link>
-                    </CarouselItem>
-                  )
-                })}
-              </Carousel>
-              <Link to='https://www.bettermi.io/'>
-                <div className="x01-78JfKY"><img className="x1" src={`${process.env.PUBLIC_URL}/img/home/1@1x.png`} alt="1" /></div>
-              </Link>
-              <Link to=''>
-                <div className="x11-78JfKY"><img className="x1" src={`${process.env.PUBLIC_URL}/img/home/1@1x.png`} alt="1" /></div>
-              </Link>
-              <Link to=''>
-                <div className="x21-78JfKY"><img className="x1" src={`${process.env.PUBLIC_URL}/img/home/1@1x.png`} alt="1" /></div>
-              </Link>
-            </div>
-          </div>
-          <div className="slide-dots-hH9Cww">
-            <div className="x444-3SAlGE"></div>
-            <div className="x445-3SAlGE"></div>
-            <div className="x446-3SAlGE"></div>
-          </div> */}
-          <ImageSlider slides={slides} />
-          <div className="special_button-hH9Cww">
-            <div className="button_bg-9uK1Tx"></div>
-            <div className="ic_notifications-9uK1Tx ic_notifications">
-              <img
-                className="ic_notifications-6bhCAa ic_notifications"
-                src={`${process.env.PUBLIC_URL}/img/home/ic-notifications@1x.png`}
-                alt="ic_notifications"
-                />
-            </div>
-          </div>
-        </div>
-        <Link to="https://discord.com/invite/BF8NjfEd4Y)">
+        <ImageSlider slides={slides} />
+        <Link to="https://discord.gg/bU2wghzS">
           <div className="discord-RoXPLo inter-medium-royal-blue-14px" >Discord</div>
         </Link>
         <div className="our-community-RoXPLo inter-semi-bold-white-21px">Our Community</div>

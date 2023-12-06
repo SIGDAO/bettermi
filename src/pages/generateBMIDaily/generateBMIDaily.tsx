@@ -15,7 +15,7 @@ import { TransferNft } from '../../NftSystem/transferNft';
 import { walletNodeHost } from '../../redux/wallet';
 import { LedgerClientFactory } from '@signumjs/core';
 import { TransferToken } from '../../components/transferToken';
-import { calRewardSigdaoOnSelfie} from '../../components/selfieToEarnRewardType';
+import { calBMIType, calRewardSigdaoOnSelfie} from '../../components/selfieToEarnRewardType';
 
 
 
@@ -126,11 +126,18 @@ const GenerateBMIDaily: React.FunctionComponent<IGenerateBMIDailyProps> = (props
           </div>
         </div>
         <div className="bmi-bar-Fd1por">
-          <div className="x42-W9pEKc"></div>
-          <div className="x43-W9pEKc"></div>
-          <div className="x44-W9pEKc"></div>
-          <div className="x45-W9pEKc"></div>
-          <div className="x48-W9pEKc"></div>
+          <div className="x43-W9pEKc" style={{
+                backgroundColor: calBMIType(bmi).color,
+              }}></div>
+          <div className="x44-W9pEKc" style={{
+                backgroundColor: calBMIType(bmi).color,
+              }}></div>
+          <div className="x45-W9pEKc" style={{
+                backgroundColor: calBMIType(bmi).color,
+              }}></div>
+          <div className="x48-W9pEKc" style={{
+                backgroundColor: calBMIType(bmi).color,
+              }}></div>
           <img className="x546-W9pEKc" src={`${process.env.PUBLIC_URL}/img/generateBMIDaily/file---546@1x.png`} alt="546" />
           <img className="x612-W9pEKc" src={`${process.env.PUBLIC_URL}/img/generateBMIDaily/file---546@1x.png`} alt="612" />
           <img className="x547-W9pEKc" src={`${process.env.PUBLIC_URL}/img/generateBMIDaily/file---546@1x.png`} alt="547" />
@@ -155,7 +162,9 @@ const GenerateBMIDaily: React.FunctionComponent<IGenerateBMIDailyProps> = (props
           <img className="x606-W9pEKc" src={`${process.env.PUBLIC_URL}/img/generateBMIDaily/file---555@1x.png`} alt="606" />
           <img className="x568-W9pEKc" src={`${process.env.PUBLIC_URL}/img/generateBMIDaily/file---555@1x.png`} alt="568" />
           <img className="x605-W9pEKc" src={`${process.env.PUBLIC_URL}/img/generateBMIDaily/file---555@1x.png`} alt="605" />
-          <img className="x569-W9pEKc" src={`${process.env.PUBLIC_URL}/img/generateBMIDaily/file---569@1x.png`} alt="569" />
+          <div className="x569-W9pEKc" style={{
+                backgroundColor: calBMIType(bmi).color,
+              }}  />
           <img className="x570-W9pEKc" src={`${process.env.PUBLIC_URL}/img/generateBMIDaily/file---555@1x.png`} alt="570" />
           <img className="x571-W9pEKc" src={`${process.env.PUBLIC_URL}/img/generateBMIDaily/file---555@1x.png`} alt="571" />
           <img className="x572-W9pEKc" src={`${process.env.PUBLIC_URL}/img/generateBMIDaily/file---555@1x.png`} alt="572" />
@@ -220,7 +229,9 @@ const GenerateBMIDaily: React.FunctionComponent<IGenerateBMIDailyProps> = (props
             <img className="seperate-line-yGZJUM seperate-line" src={`${process.env.PUBLIC_URL}/img/generateBMIDaily/seperat-line-1@1x.png`} alt="seperate line" />
           </div>
           <div className="bmi-result-xzTWC0">
-            <div className="bg-jtY5eq"></div>
+            <div className="bg-jtY5eq" style={{
+                backgroundColor: calBMIType(bmi).color,
+              }}></div>
             <div className="x255-jtY5eq">{bmi || '25.5'}</div>
             <div className="kgm2-jtY5eq">
               <span className="span0-JRVpal inter-normal-royal-blue-14px">kg/m</span><span className="span1-JRVpal inter-normal-royal-blue-14px">2</span>

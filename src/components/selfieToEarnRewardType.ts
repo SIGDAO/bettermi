@@ -38,7 +38,7 @@ export const calBMIType = (bmi: number) => {
   } else {
     return {
       type: "Obese",
-      color: "#F51EE2"
+      color: "var(--hot-magenta)"
     }
   }
 }

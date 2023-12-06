@@ -392,28 +392,27 @@
 }
 
 .bettermidapp-home-1 .reservation_button-RoXPLo {
-  background-color: transparent;
+  background-color: var(--woodsmoke);
+  border-radius: 28px;
   height: 56px;
-  left: 30px;
+  /* left: 30px;
   position: absolute;
-  top: 498px;
+  top: 498px; */
   width: 58px;
 }
 
 .bettermidapp-home-1 .button_bg-nXPAX5 {
   background-color: transparent;
-  height: calc(100.00% + 89px);
-  left: -45px;
+  height: 56px;
+  left: 0px;
   object-fit: cover;
   position: absolute;
-  top: -29px;
-  width: calc(100.00% + 87px);
+  top: 0px;
+  width: 58px;
 }
 
 .bettermidapp-home-1 .ic_reservation-nXPAX5 {
-  bottom: calc(48.02% - 10px);
   height: 20px;
-  left: calc(47.50% - 9px);
   width: 18px;
 }
 
@@ -428,6 +427,7 @@
 .bettermidapp-home-1 .ic_locked-nXPAX5 {
   height: 20px;
   right: 0px;
+  position: absolute;
   width: 15px;
 }
 
@@ -439,14 +439,14 @@
 }
 
 .bettermidapp-home-1 .leaderboard_button-RoXPLo {
-  background-color: transparent;
+  background-color: #0D0D0D;
+  border-radius: 28px;
   height: 56px;
-  left: 30px;
-  position: absolute;
-  top: 434px;
+  /* left: 30px; */
+  /* position: absolute; */
+  /* top: 434px; */
   width: 58px;
   border:1px solid;
-  border-radius: 28px;
   border-color: var(--royal-blue);
 }
 
@@ -454,17 +454,15 @@
   background-color: var(--woodsmoke);
   border-radius: 28px;
   box-shadow: 0px 15px 30px #00000008;
-  height: calc(100.00% - 1px);
+  height: 56px;
   left: 0px;
   position: absolute;
   top: 1px;
-  width: calc(100.00% - 3px);
+  width: 58px;
 }
 
 .bettermidapp-home-1 .ic_leaderboard-IgToMG {
-  bottom: calc(49.22% - 10px);
   height: 21px;
-  left: calc(45.87% - 7px);
   width: 16px;
 }
 
@@ -612,13 +610,41 @@
   cursor: pointer;
 }
 
-.bettermidapp-home-1 .special_button-hH9Cww {
-  background-color: transparent;
+.special_button-hH9Cww-active {
+  background-color: #0D0D0D;
+  border-radius: 28px;
   height: 55px;
-  left: 0px;
-  position: absolute;
-  top: 0px;
+  border: 1px solid;
+  border-color: var(--royal-blue);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 55px;
+
+}
+
+.bettermidapp-home-1 .special_button-hH9Cww {
+  background-color: #0D0D0D;
+  border-radius: 28px;
+  height: 55px;
+  border: none;
+  position: relative;
+  /* left: 0px;
+  position: absolute;
+  top: 0px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 55px;
+}
+
+.buttons-slider-container {
+  display: flex;
+  flex-direction: column;
+  height: 185px;
+  width: 55px;
+  gap: 10px;
 }
 
 .bettermidapp-home-1 .button_bg-9uK1Tx {
@@ -627,17 +653,15 @@
   border-color: var(--royal-blue);
   border-radius: 28px;
   box-shadow: 0px 15px 30px #00000008;
-  height: 100%;
+  height: 55px;
   left: 0px;
   position: absolute;
   top: 0px;
-  width: 100%;
+  width: 55px;
 }
 
 .bettermidapp-home-1 .ic_notifications-9uK1Tx {
   height: 20px;
-  right: calc(48.66% - 10px);
-  top: calc(50.00% - 10px);
   width: 20px;
 }
 

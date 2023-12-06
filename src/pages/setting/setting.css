@@ -558,6 +558,10 @@
   width: 100%;
 }
 
+.brightness-0-5 {
+  filter: brightness(0.5);
+}
+
 .bettermidapp-settings-1 .icon-ionic-ios-arrow-forward {
   background-color: transparent;
   height: 33.52%;
@@ -567,6 +571,18 @@
   top: 10.67%;
   width: 2.55%;
 }
+
+.bettermidapp-settings-1 .icon-ionic-ios-arrow-forward-inactive {
+  background-color: transparent;
+  height: 33.52%;
+  left: 97.29%;
+  object-fit: cover;
+  position: absolute;
+  top: 10.67%;
+  width: 2.55%;
+  filter: brightness(0.5);
+}
+
 
 .bettermidapp-settings-1 .settings {
   background-color: transparent;
