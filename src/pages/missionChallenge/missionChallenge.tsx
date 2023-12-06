@@ -1,20 +1,21 @@
-import * as React from "react";
-import "./missionChallenge.css";
-import { CenterLayout } from "../../components/layout";
-import { ShortTitleBar } from "../../components/titleBar";
-import { Link } from "react-router-dom";
-import { accountId } from "../../redux/account";
-import { useSelector } from "react-redux";
-import { TransferToken } from "../../components/transferToken";
-import { Button } from "@mui/material";
-import { walletNodeHost } from "../../redux/wallet";
-import { useNavigate } from "react-router-dom";
-import { useEffect, useState, useRef } from "react";
-import { missionList } from "../../data/featureMissionList";
-import { CheckIsUserFirstDayOfRegistration } from "../../NftSystem/BMISelfieSystem";
-import { selectWalletNodeHost } from "../../redux/useLedger";
-import { LedgerClientFactory } from "@signumjs/core";
-import { CountChallenges } from "../../NftSystem/Token/countChallenges";
+import * as React from 'react';
+import './missionChallenge.css'
+import { CenterLayout } from '../../components/layout';
+import { ShortTitleBar } from '../../components/titleBar';
+import { Link } from 'react-router-dom';
+import { accountId } from '../../redux/account';
+import { useSelector } from 'react-redux';
+import { TransferToken } from '../../components/transferToken';
+import { Button } from '@mui/material';
+import { walletNodeHost } from '../../redux/wallet';
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useState,useRef } from 'react';
+import { missionList } from '../../data/featureMissionList';
+import { CheckIsUserFirstDayOfRegistration } from '../../NftSystem/BMISelfieSystem';
+import { selectWalletNodeHost } from '../../redux/useLedger';
+import { LedgerClientFactory } from '@signumjs/core';
+import { CountChallenges } from '../../NftSystem/Token/countChallenges';
+import { findNFTLevel } from '../../NftSystem/FindNFTLevel';
 
 interface IMissionChallengeProps {}
 
@@ -65,15 +66,21 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
   useEffect(() => {
     const checkTimeSlot = async () => {
       //Anderson's code starts here
-      if (updated.current === false) {
-        updated.current = true;
-        isNew = await NewUserCheck(); //Run a check on whether there is a new user. Also, the handleBeforeUnload function ensures the check only run once
+      //findNFTLevel(ledger2,userAccountId);
+      if(updated.current === false){
+        updated.current = true
+      isNew = await NewUserCheck();//Run a check on whether there is a new user. Also, the handleBeforeUnload function ensures the check only run once
       }
-      const userChallengeTimes = await CountChallenges(userAccountId, ledger2);
+      const userChallengeTimes = await CountChallenges(userAccountId,ledger2);
+
+      for (var i = 3;i<9;i++){
+        userChallengeTimes[i] = 3;
+      }    //Temporarily disable the remaining six challenges
+      
       console.log(userChallengeTimes);
       setIsInTimeSlot(
         userChallengeTimes.map((numChallengesPlayed) => {
-          if (numChallengesPlayed >= 3) {
+          if(numChallengesPlayed >= 2){
             return false;
           } else {
             return true;

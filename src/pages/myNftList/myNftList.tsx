@@ -56,7 +56,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
   const {isUpdatingDescription,myNfts,setIsUpdatingDescription,isOtherUser,equippedNftIpfsAddress} = props;
   const userAccountId: string = useSelector(accountId);
   const mobile = process.env.REACT_APP_MOBILE === 'true';
-  let height: string | number
+  let height: string | number;
   let width: string | number;
   const [loading, setLoading] = useState(true);
   //const [myNfts, setMyNfts] = useState<myNftList[]>([]);

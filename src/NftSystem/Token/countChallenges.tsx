@@ -157,3 +157,4 @@ for(var i = 0;i < challengeNum.length;i++){
     }
     return countTimes;
 }
+

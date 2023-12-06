@@ -1,0 +1,51 @@
+.edit-profile-layer{
+    overflow: hidden;
+}
+
+.nftPrice {
+    color: var(--cadet-blue);
+    font-family: var(--font-family-inter);
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 22px;
+    /* min-height: 87px; */
+    width: 262px;
+    margin: 0;
+  }
+  
+  .nftBar-1 {
+    align-items: flex-end;
+    display: flex;
+    height: 56px;
+    min-width: 300px;
+    padding: 16.5px 15px;
+    top: 250px;
+    color: #FFFFFF;
+  }
+  .nftSearchBar-4{
+    background-color: #FFFFFF08;
+    border-radius: 10px;
+    left: 61px;
+    position: absolute;
+  }
+
+  .nftActiveCard{
+    color: var(--white);
+    font-family: var(--font-family-inter);
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 22px;
+    width: 262px;
+    margin: 0;
+  }
+
+.allNftListModel{
+    background-color: #FFFFFF08;
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    padding: 10px;
+}

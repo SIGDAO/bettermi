@@ -48,6 +48,8 @@ import IndexMyNftList from "./pages/myNftList/indexMyNftList";
 import Leaderboard from "./pages/leaderboard/leaderboard";
 import OtherUserProfile from "./pages/leaderboard/otherUserProfile";
 import RoleRoute from "./route/roleRoute";
+import AllNftList from "./pages/allNftList/allNftList";
+import { IndexAllNftList } from "./pages/allNftList/indexAllNftList";
 
 store.subscribe(() => {
   saveState(store.getState());
@@ -156,6 +158,7 @@ function App() {
                 <Route path="/missionChallenge" element={<MissionChallenge />} />
                 {/* account that can only access in certain time */}
                 <Route path="/myNftList" element={<MyNftList/>} />
+                <Route path = "/allNftList" element={<IndexAllNftList/>} />
                 <Route path="/indexMyNftList" element={<IndexMyNftList />} />
                 <Route path="/reward" element={<Reward />} />
                 <Route path="/rewardDetail">

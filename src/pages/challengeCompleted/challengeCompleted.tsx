@@ -63,6 +63,7 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
     else{
       //await TransferToken(nodeHost, userAccountId, rewardString);
       const reward:string = String(parseInt(rewardString!,10));
+      console.log(reward);
       await TransferTokenWithMessage(nodeHost, userAccountId, reward, parseInt(challengeNumber![challengeNumber!.length-1]));
       return;
     }
