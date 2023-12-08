@@ -98,7 +98,7 @@ const CheckStore: React.FC = () => {
   const location = useLocation();
   const currentPath: string = location.pathname;
   const { appName, Wallet, Ledger } = useContext(AppContext);
-  return <Outlet />;
+  // return <Outlet />;
 
 
   if (currentPath === "/" || currentPath === "/connectWallet") {
