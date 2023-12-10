@@ -57,13 +57,6 @@ export default function ConnectWallet (props: IConnectWalletProps) {
         const openedNftContract = await CheckUnconfirmedNewNFTContract(ledger, import_account.getNumericId());
         const openedBmiContract = await CheckUnconfirmedNewBMIContract(ledger, import_account.getNumericId());
 
-     
-
-    
-    
-
-
-
         let ourContract = await ledger.contract.getContractsByAccount({
           accountId: accountinfo.accountId,
           machineCodeHash: codeHashId,

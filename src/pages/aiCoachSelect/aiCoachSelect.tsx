@@ -85,7 +85,7 @@ const AiCoachSelect: React.FunctionComponent<IAiCoachSelectProps> = (props) => {
     return (
       <>
         <div
-          className="answer-box inter-normal-white-15px"
+          className="question-box inter-normal-white-15px"
           onClick={(e) => handleExportAns(index)}
         >
           {question.question}

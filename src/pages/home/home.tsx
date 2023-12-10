@@ -205,9 +205,10 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
         </Link>
         <ImageSlider slides={slides} />
         <Link to="https://discord.gg/bU2wghzS">
-          <div className="discord-RoXPLo inter-medium-royal-blue-14px" >Discord</div>
+          <img src={`${process.env.PUBLIC_URL}/img/home/bxl-discord-alt.svg`} alt="" className="discord-RoXPLo" />
+          {/* <div className="discord-RoXPLo inter-medium-royal-blue-14px" >Discord</div> */}
         </Link>
-        <div className="our-community-RoXPLo inter-semi-bold-white-21px">Our Community</div>
+        <div className="our-community-RoXPLo inter-semi-bold-white-21px">Social Events</div>
         {/* <Link to="/selfieToEarn"> */}
         {/* <div className="button_-selfie-to-earn-RoXPLo" onClick={() => handleTakeASelfie()}>
           <p className="take-a-selfie-to-earn-TRrnim inter-semi-bold-white-15px">Take a Selfie to Earn!</p>
@@ -265,7 +266,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
             </div>
           </Link>
           <Link to='/aiCoachSelect'>
-            <img className='home-ai-select-icon' src={`${process.env.PUBLIC_URL}/img/ic_chat.png`}/>
+            <img className='home-ai-select-icon' src={`${process.env.PUBLIC_URL}/img/home/bxs-Aicoach.svg`}/>
           </Link>
           <Link to='/setting'>
             <img className='home-setting-icon' src={`${process.env.PUBLIC_URL}/img/ic-settings-24px-1@1x.png`} alt="" />

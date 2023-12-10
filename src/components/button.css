@@ -154,8 +154,8 @@
   justify-content: center;
 }
 
-.selfie-time-countdown {
 
+.selfie-time-countdown {
 }
 
 .lock-icon-NavigateToTakeSelfieButton {
@@ -163,4 +163,10 @@
   height: 20px;
   position: absolute;
   right: 31.5px;
+}
+
+.selfie-time-countdown-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
 }

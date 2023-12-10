@@ -29,7 +29,15 @@ export default function Testing() {
 
   return (
     // <button onClick={() => handleSendMsg()}>
-    <p>{booleanStates}</p>
+    <div className="dark-bg">
+      <img src={process.env.PUBLIC_URL + "/img/home/bxs-News.svg"} alt="" />
+      <img src={process.env.PUBLIC_URL + "/img/home/bxl-discord-alt.svg"} alt="" />
+      <img src={process.env.PUBLIC_URL + "/img/home/home/bxs-Aicoach.svg"} alt="" />
+      <img src={process.env.PUBLIC_URL + "/img/home/bxs-forum.svg"} alt="" />
+      <img src={process.env.PUBLIC_URL + "/img/home/bxs-Leaderboard.svg"} alt="" />
+
+      <p>{booleanStates}</p>
+    </div>
     // <button>
     //   {booleanStates}
     // </button>

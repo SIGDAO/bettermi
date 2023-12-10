@@ -88,7 +88,7 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
                 <div>Feature Missions</div>
               </div>
               <div className = "iconBar">
-                <img style = {{height:"20px", width: "20px", alignSelf:"center"}} src={`${process.env.PUBLIC_URL}/img/ic_chat.png`} alt="" />
+                <img style = {{height:"20px", width: "20px", alignSelf:"center"}} src={`${process.env.PUBLIC_URL}/img/home/bxs-Aicoach.svg`} alt="" />
                 <img style = {{height:"20px", alignSelf:"center"}} src = {`${process.env.PUBLIC_URL}/img/ic-settings-24px-1@1x.png`}></img>
               </div>
           </div>
