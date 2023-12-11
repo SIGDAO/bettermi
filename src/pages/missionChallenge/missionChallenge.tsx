@@ -27,6 +27,7 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
   const navigate = useNavigate();
   const [isOverDailyPlayTimesLimit, setisOverDailyPlayTimesLimit] = useState<boolean[]>([]);
   const [userChallengeTimes, setUserChallengeTimes] = useState<number[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   // const [Timedifference, setTimedifference] = useState<string[]>([]);
   const BMIMachineCodeHashId = process.env.REACT_APP_BMI_MACHINE_CODE_HASH!;
   const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
@@ -70,33 +71,34 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
       if (updated.current === false) {
         updated.current = true;
         isNew = await NewUserCheck(); //Run a check on whether there is a new user. Also, the handleBeforeUnload function ensures the check only run once
-      }
+      
 
-      const hihi = await CountChallenges(userAccountId, ledger2);
-
-      setUserChallengeTimes(hihi);
-
-      console.log("userChallengeTimes is ", userChallengeTimes);
+      const playedChallenge = await CountChallenges(userAccountId, ledger2);
 
       for (var i = 3; i < 9; i++) {
-        userChallengeTimes[i] = 3;
+        playedChallenge[i] = 3;
       } //Temporarily disable the remaining six challenges
+
+      setUserChallengeTimes(playedChallenge);
+      console.log(playedChallenge);
+      console.log("userChallengeTimes is ", userChallengeTimes);
 
       console.log(userChallengeTimes);
       setisOverDailyPlayTimesLimit(
-        userChallengeTimes.map((numChallengesPlayed) => {
-          if (numChallengesPlayed >= 2) {
+        playedChallenge.map((numChallengesPlayed) => {
+          if (numChallengesPlayed > 2) {
             return false;
           }
           return true;
         })
       );
+      setIsLoading(false);
       console.log("isOverDailyPlayTimesLimit is ", isOverDailyPlayTimesLimit);
       //Anderson's code ends here
       const now = new Date();
       const currentTime = now.getHours() * 60 + now.getMinutes();
       const currentTimeInSecond = now.getHours() * 60 * 60 + now.getMinutes() * 60 + now.getSeconds();
-
+      
       //Anderson disabled this 2023/11/12
       // setisOverDailyPlayTimesLimit(
       //   missionList.map((mission) => {
@@ -156,9 +158,10 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
       // );
       // console.log(Timedifference, "Timedifference");
       console.log(isOverDailyPlayTimesLimit, "isOverDailyPlayTimesLimit");
+      }
     };
 
-    const interval = setInterval(checkTimeSlot, 1000);
+    const interval = setInterval(checkTimeSlot, 2000);
 
     return () => clearInterval(interval);
 
@@ -209,11 +212,13 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
           <img className="layer-nLfc9z" src="img/missionChallenge/layer-1@1x.png" alt="Layer" />
           <div className="scroll-group-nLfc9z">
             <div className="challenge-cards-QuyfDF">
-              {missionList.map((mission, index) => {
+              {isLoading?<div></div>:missionList.map((mission, index) => {
                 return (
                   <Button
-                    onClick={() => {
-                      if (isOverDailyPlayTimesLimit[index]) {
+                    onClick={async() => {
+                      const playedChallenge = await CountChallenges(userAccountId, ledger2);
+                  
+                      if (isOverDailyPlayTimesLimit[index] && playedChallenge[index] < 3) {
                         navigate(`/challengeCountdown/${index + 1}`);
                       }
                     }}

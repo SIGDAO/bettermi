@@ -18,6 +18,7 @@ import { accountId } from '../../redux/account';
 import { useLedger } from '../../redux/useLedger';
 import BorderLinearProgress from './borderLinearProgress';
 import { set } from 'immer/dist/internal';
+import { BMI } from '../../redux/userBMIApi';
 // import {isMobile} from 'react-device-detect';
 
 interface ITakeSelfieProps {
@@ -103,10 +104,11 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   const isSelfie = useSelector(selectCurrentIsSelfie);
   const [mobileWidth, setMobileWidth] = useState<number>(0);
   const [isMobile, setIsMobile] = useState<boolean>(false)
-  const [ getBMI, {isLoading, data} ] = useGetBMIMutation()
+  var [ getBMI, {isLoading, data} ] = useGetBMIMutation()
   
 
   useEffect(() => {
+
     if (data && "bmi" in data) {
       const { bmi } = data
       console.log('bmi', bmi)

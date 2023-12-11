@@ -41,22 +41,49 @@ function extractDateFromString(message: string) {
   return null;
 }
 
-function extractDateInfoAndCheckToday(dateString: string) {
-  const date = new Date(dateString);
+async function getWorldTime() {
+  try {
+    const response = await fetch("http://worldtimeapi.org/api/ip");
+    const data = await response.json();
+    const dateTime = new Date(data.datetime);
+    var dateString = dateTime.toLocaleString();
+    console.log("Current world time:", dateTime.toLocaleString());
 
+    const [datePart, timePart] = dateString.split(", ");
+
+// Split the date part into day, month, and year
+
+    const [day, month, year] = datePart.split("/");
+    console.log(day);
+    console.log(month);
+    console.log(year);
+    return [day, month, year ]
+  } catch (error) {
+    console.log("Error:", error);
+  }
+}
+
+
+ function extractDateInfoAndCheckToday(dateString: string,today:string[]) {
+  //const date = new Date("Mon Jan 11 2023 12:04:46 GMT+0800 (Hong Kong Standard Time)");
+  const date = new Date(dateString);
   // Extract day, month, and year from the date object
   const day = date.getDate();
-  const month = date.getMonth();
+  const month = date.getMonth()+1;
   const year = date.getFullYear();
-
+  console.log("day is",day);
+  console.log("month is",month+1);
+  console.log("year is",year);
   // Get today's date
-  const today = new Date();
-  const todayDay = today.getDate();
-  const todayMonth = today.getMonth();
-  const todayYear = today.getFullYear();
 
+  const todayDay = parseInt(today[0]);
+  const todayMonth = parseInt(today[1]);
+  const todayYear = parseInt(today[2]);
+  console.log(todayDay);
+  console.log(todayMonth);
+  console.log(todayYear);
   // Check if the extracted date matches today's date
-  const isToday = day === todayDay && month === todayMonth && year === todayYear;
+  const isToday = (day === todayDay && month === todayMonth && year === todayYear);
 
   return { day, month, year, isToday };
 }
@@ -78,6 +105,12 @@ export async function CountChallenges(accountId: string, Ledger2: any): Promise<
   if (Ledger2 != null) {
     const unconfirmedTransaction = await Ledger2.account.getUnconfirmedAccountTransactions(accountId);
     console.log(unconfirmedTransaction);
+    const today = await getWorldTime();
+    console.log(today);
+    if(today == null){
+      return [3,3,3,3,3,3,3,3,3];
+    }
+    
     for (var i = 0; i < unconfirmedTransaction.unconfirmedTransactions.length; i++) {
       if (unconfirmedTransaction.unconfirmedTransactions[i] != undefined) {
         const message = unconfirmedTransaction.unconfirmedTransactions[i].attachment.message;
@@ -86,8 +119,9 @@ export async function CountChallenges(accountId: string, Ledger2: any): Promise<
         }
         console.log("unconfirmed transactions", message);
         var gametime: string | null = extractDateFromString(message);
+        console.log("game time is",gametime)
         if (gametime != null) {
-          const dateInfo: DateInfo = extractDateInfoAndCheckToday(gametime);
+          const dateInfo: DateInfo =  extractDateInfoAndCheckToday(gametime,today);
           console.log("Day:", dateInfo.day);
           console.log("Month:", dateInfo.month);
           console.log("Year:", dateInfo.year);
@@ -118,8 +152,9 @@ export async function CountChallenges(accountId: string, Ledger2: any): Promise<
         }
         console.log("checking is skipped", message);
         var gametime: string | null = extractDateFromString(message);
+        console.log("game time is",gametime);
         if (gametime != null) {
-          const dateInfo: DateInfo = extractDateInfoAndCheckToday(gametime);
+          const dateInfo: DateInfo =  extractDateInfoAndCheckToday(gametime,today);
           console.log("Day:", dateInfo.day);
           console.log("Month:", dateInfo.month);
           console.log("Year:", dateInfo.year);

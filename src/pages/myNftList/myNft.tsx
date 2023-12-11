@@ -151,6 +151,7 @@ import { selectCurrentUsername } from '../../redux/profile';
                           onClick={() => {
                             setIsOpenPopup((prev) => !prev);
                             setSelectedAssetId(nftId);
+                            console.log("nftID is ",nftId);
                             setLevel(nftLevel);
   
                           }} 
@@ -164,6 +165,7 @@ import { selectCurrentUsername } from '../../redux/profile';
                           <img 
                             onClick={() => {
                               setIsOpenPopup((prev) => !prev);
+                              console.log("nftID is ",nftId);
                               setSelectedAssetId(nftId);
                               setLevel(nftLevel);
 

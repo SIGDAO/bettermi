@@ -24,6 +24,7 @@ export interface nftObject {
   contractId: string;
   contractPrice: string;
   contractOwner: string;
+  contractStatus:string;
 }
 
 export interface nftInfo {
@@ -32,6 +33,7 @@ export interface nftInfo {
   contractOwner: string;
   imageUrl: string;
   nftLevel: string;
+  nftStatus:string;
 }
 
 export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
@@ -41,9 +43,10 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
   //const newNftCodeHashId = "15155055045342098571";
   const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
   const [allNftList, setAllNftList] = useState<number[]>([]);
+  const [selectedNftId, setSelectedNftId] = useState<string>("");
   const [nftInfo, setNftInfo] = useState<nftInfo[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [openModel, setOpenModel] = useState<boolean>(false);
+  //const [openModel, setOpenModel] = useState<boolean>(false);
   const hasRendered = useRef(false);
   const sleep = (delay: number) => {
     return new Promise<void>((resolve) => {
@@ -127,10 +130,30 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
         requests.push(
           ledger2.contract.getContract(nftStorage.at).then((res) => {
             var nftContract = new ContractDataView(res);
+            var nftStatus = nftContract.getVariableAsDecimal(11) ;
+            if(nftStatus === "15"){
+              nftStatus = "Not For Sell";
+            }
+            if(nftStatus === "16"){
+              nftStatus = "For Sell in Signa";
+            }
+            if(nftStatus === "17"){
+              nftStatus = "For Sell";
+            }
+            if(nftStatus === "18"){
+              nftStatus = "For Sell in Sigdao and Signa";
+            }
+            if(nftStatus === "19"){
+              nftStatus = "For Auction in Signa";
+            }
+            if(nftStatus === "20"){
+              nftStatus = "For Auction";
+            }
             nftInfo.push({
               contractId: nftStorage.at,
               contractPrice: nftContract.getVariableAsDecimal(10),
               contractOwner: nftContract.getVariableAsDecimal(6),
+              contractStatus:nftStatus,
             });
           })
         );
@@ -159,6 +182,7 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
           contractOwner: nftInfo[i].contractOwner,
           imageUrl: imageUrl[i].imageUrl,
           nftLevel: imageUrl[i].nftLevel,
+          nftStatus:nftInfo[i].contractStatus,
         });
       }
       //console.log("results:",results);
@@ -189,16 +213,18 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
     <>
       {loading ? (
         <AllNftLoading></AllNftLoading>
-      ) : openModel ? (
+      ) : 
+      // openModel ? (
+      //   <>
+      //     <CustomModel level={"1"} setOpenModel={setOpenModel} openModel={openModel}></CustomModel>
+      //     {/* <PopupModal level = {"1"} isOpen={openModel} setIsOpen={setOpenModel}></PopupModal> */}
+      //   </>
+      // ) : (
         <>
-          <CustomModel level={"1"} setOpenModel={setOpenModel} openModel={openModel}></CustomModel>
-          {/* <PopupModal level = {"1"} isOpen={openModel} setIsOpen={setOpenModel}></PopupModal> */}
+          <AllNftList nftInfoArray={nftInfo} CustomModel={PopupModal} ></AllNftList>
         </>
-      ) : (
-        <>
-          <AllNftList nftInfoArray={nftInfo} CustomModel={PopupModal} setOpenModel={setOpenModel} openModel={openModel}></AllNftList>
-        </>
-      )}
+      //)
+      }
       {/* {openModel?(
         <>
             {console.log(openModel)}

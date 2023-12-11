@@ -196,8 +196,8 @@ export async function CheckNftOwnerId(ledger2:any,contractId:string){
     const contract = await ledger2.contract.getContract(contractId);
     console.log(contract);
     const view = new ContractDataView(contract);
-    console.log(view.getVariableAsDecimal(0));
-    return view.getVariableAsDecimal(0);
+    console.log(view.getVariableAsDecimal(6));
+    return view.getVariableAsDecimal(6);
 
 };
 

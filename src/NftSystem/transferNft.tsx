@@ -134,7 +134,7 @@ async function TransferNftToUser(ledger2: any, nftToBeDistributed: string, recip
     amountPlanck: "32000000",
     contractId: nftToBeDistributed,
     methodHash: "3",
-    methodArgs: [recipientId, "", ""],
+    methodArgs: [recipientId, "0", "0"],
   });
 }
 async function UpdateNftUser(ledger2: any, nftToBeDistributed: string, recipient: string, codeHashId: string, nftDistributor: string) {
@@ -216,10 +216,10 @@ export const TransferNft = async (
   var newNftList = "empty";
   var feePlanck = "1000000";
   if (nftList != "") {
-    console.log(newNftList.length, "newNftList.length");
     var newNftListLength = newNftList.length;
-    feePlanck = ((Math.floor(newNftList.length / 8) + 1) * 1000000).toString();
+    feePlanck = ((Math.floor(nftList.length / 8) + 1) * 1000000).toString();
     newNftList = nftList.join(",");
+    console.log(newNftList);
     console.log(newNftList.length, "newNftList.length");
     console.log("fee planck is", feePlanck);
     //console.log(newNftList, "newNftList is ");

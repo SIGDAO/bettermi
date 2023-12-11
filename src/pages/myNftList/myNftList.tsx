@@ -302,14 +302,24 @@ const nftId = accountDes.account;
     );
   }
   );
+  const setSell = async(selectedNftId:string) => {
+    console.log("selectedNftID",selectedNftId)
+  };
   const transferNft = async(assetId:string) => {
     try{
+      console.log("testing")
+      console.log(assetId)
       const contractInfo = await ledger2.contract.getContract(selectedNftId);
+      console.log("testing")
       const trial = JSON.parse(contractInfo.description);
+      console.log("testing")
       /*  Get the NFT image of ths selected asset and check if its same to the onDuty one      */
       const res = await fetch(`https://ipfs.io/ipfs/${trial.descriptor}`);
+      console.log("testing")
       const text = await res.text();
+      console.log("testing")
       var nftInfo = JSON.parse(text);
+      console.log("testing")
       const nftImage = nftInfo.media[0].social;
 
       /**/
@@ -322,8 +332,11 @@ const nftId = accountDes.account;
       if(nftOwner === userAccountId){
         //TransferNft(ledger2,selectedNftId,userAccountId,codeHashIdForNft,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey);
         const latestTransactionNumber:string = await FindLatestTransactionNumber(ledger2,nftContractStorage,nftDistributor);
+        console.log("testing");
         const latestArray:string[] = await FindLatestTransactionArray(ledger2,nftContractStorage,nftDistributor,latestTransactionNumber);
+        console.log("testing");
         const transactionCost = (Math.floor((latestArray.length)/8+1)*1000000).toString();
+        console.log("testing");
        const userCoverTheirTransactionCost = await ledger2.transaction.sendAmountToSingleRecipient({
           recipientId: nftDistributor,
           amountPlanck: transactionCost,
@@ -332,14 +345,15 @@ const nftId = accountDes.account;
         });
         await Wallet.Extension.confirm(userCoverTheirTransactionCost.unsignedTransactionBytes);
         const recipientInfo  = await ledger2.account.getAccount({accountId:inputAddress});
+        console.log("testing");
         //await p2pTransferNft(ledger2,Wallet,selectedNftId,userAccountpublicKey,recipientInfo.account);
         const transaction = await ledger2.contract.callContractMethod({
           senderPublicKey: userAccountpublicKey,
-          feePlanck: "2000000",
-          amountPlanck: "30000000",
+          feePlanck: "1000000",
+          amountPlanck: "32000000",
           contractId: selectedNftId,
-          methodHash: "-8011735560658290665",
-          methodArgs: [recipientInfo.account],
+          methodHash: "3",
+          methodArgs: [recipientInfo.account,"0","0"],
           });
           await Wallet.Extension.confirm(transaction.unsignedTransactionBytes);
         await UpdateUserStorage(ledger2,userAccountId,inputAddress,codeHashIdForNft,selectedNftId,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey);
@@ -462,7 +476,7 @@ return(
                   </div>
                   <div className = "myNftBottom">
                   <button className = "myNftButtonOnDuty" style = {{backgroundColor:"#39B3AF!important"}}>ON DATE</button>
-                  <img className = "myNftButtomArrow" src  = {`${process.env.PUBLIC_URL}/img/NftList/ic-send@1x.png`} onClick={() => setIsOpenPopup((prev) => !prev)}></img>
+                  {/* <img className = "myNftButtomArrow" src  = {`${process.env.PUBLIC_URL}/img/NftList/ic-send@1x.png`} onClick={() => setIsOpenPopup((prev) => !prev)}></img> */}
                   </div>
                 </div>
                     )
@@ -522,7 +536,7 @@ return(
                       /> */}
                       {/* <div className="search_bar-1 search_bar-4"><p className="card-number">e.g. TS-9DJR-MGA2-VH44-5GMXY or Anderson</p></div> */}
                       <div className="search_bar-2 search_bar-4"></div>
-                      <div className="button_save" onClick={() => transferNft(selectedNftId)}>
+                      <div className="button_save" onClick={() => setSell(selectedNftId)}>
                         <div className="continue inter-semi-bold-white-15px">Confirm</div>
                       </div>
                       <p className="address-id-to-send-nft-to">Address, ID to send NFT to.</p>

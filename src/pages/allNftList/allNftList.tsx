@@ -11,6 +11,7 @@ export interface IAllNftListProps{
     openModel?:boolean;
     setOpenModel?:(openModel:boolean) => void;
     nftInfoArray:nftInfo[];
+
 }
 
 const AllNftList:React.FC <IAllNftListProps>= (props) => {
@@ -60,7 +61,7 @@ const AllNftList:React.FC <IAllNftListProps>= (props) => {
   const allNftList:number[] = [1,2,3,4];
   const displayMyNft = nftInfoArray.map((nft) => {
     return (
-        <AllNft nftNumber = {nft.contractId} nftLevel = {nft.nftLevel} nftOwner = {nft.contractOwner} nftPrice = {nft.contractPrice} imageAddress={nft.imageUrl} openModel = {openModel} setOpenModel={setOpenModel}/>
+        <AllNft nftId = {nft.contractId}nftStatus = {nft.nftStatus} nftNumber = {nft.contractId} nftLevel = {nft.nftLevel} nftOwner = {nft.contractOwner} nftPrice = {nft.contractPrice} imageAddress={nft.imageUrl} openModel = {openModel} setOpenModel={setOpenModel}/>
     )
     });
     return (
