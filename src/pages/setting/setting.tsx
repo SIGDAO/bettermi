@@ -7,11 +7,14 @@ import { AppContext } from '../../redux/useContext';
 import { GenericExtensionWallet } from '@signumjs/wallets';
 import { Link, useNavigate } from 'react-router-dom';
 import { store } from '../../redux/reducer';
+import { accountId } from '../../redux/account';
+import { useSelector } from 'react-redux';
 interface ISettingProps {
 }
 
 const Setting: React.FunctionComponent<ISettingProps> = (props) => {
   const {appName,Wallet,Ledger} = useContext(AppContext);
+  const userAccountId = useSelector(accountId);
   const navigate = useNavigate();
   const logout = () => {
     console.log(Wallet);
@@ -45,7 +48,7 @@ const Setting: React.FunctionComponent<ISettingProps> = (props) => {
         <div className="cards-azNBHQ">
           <div className="x16185-VD8XDI">
             <div className="x31">
-              <div className="membership-nkDCBT inter-normal-cadet-blue-15px">Membership</div>
+              <div className="membership-nkDCBT inter-normal-white-15px">Community</div>
             </div>
             <div className="x16184-RJpkbo x16184">
               <div className="discord-sDy3yd inter-normal-white-15px brightness-0-5">Discord</div>
@@ -59,11 +62,13 @@ const Setting: React.FunctionComponent<ISettingProps> = (props) => {
           </div>
           <div className="x16186-VD8XDI">
             <div className="x31">
-              <div className="invite-friends-MxX0D6 inter-normal-cadet-blue-15px">Invite Friends</div>
+              <div className="invite-friends-MxX0D6 inter-normal-white-15px">Account Id</div>
             </div>
-            <div className="x16184-QxO6IE x16184">
-              <div className="x12345678-lPJi7x inter-normal-white-15px brightness-0-5">#12345678</div>
-            </div>
+            <Link to = {`https://testnet.explorer.signum.network/`}>
+                <div className="x16184-QxO6IE x16184">
+                  <div className="x12345678-lPJi7x inter-normal-white-15px ">{userAccountId}</div>
+                </div>
+                </Link>
             <img
               className="icon-ionic-ios-arrow-forward-inactive"
               src="img/setting/icon-ionic-ios-arrow-forward-1@1x.png"
@@ -73,7 +78,7 @@ const Setting: React.FunctionComponent<ISettingProps> = (props) => {
           </div>
           <div className="x16187-VD8XDI">
             <div className="x31">
-              <div className="wallet-HTBhsQ inter-normal-cadet-blue-15px">Wallet</div>
+              <div className="wallet-HTBhsQ inter-normal-white-15px">Wallet</div>
             </div>
             <div className="x16184-a64QJA x16184">
               <div className="xt-wallet-u2WLwG inter-normal-white-15px brightness-0-5">XT wallet</div>
@@ -87,34 +92,34 @@ const Setting: React.FunctionComponent<ISettingProps> = (props) => {
           </div>
           <div className="x16189-VD8XDI">
             <div className="x31">
-              <div className="multi-chain-switch-tbbzDm inter-normal-cadet-blue-15px">Multi-chain Switch</div>
+              <div className="multi-chain-switch-tbbzDm inter-normal-white-15px">Nodes</div>
             </div>
             <div className="x16184-6XzBK0 x16184">
-              <div className="signum-qeaPIP inter-normal-white-15px brightness-0-5">Signum</div>
+              <div className="signum-qeaPIP inter-normal-white-15px brightness-0-5">Selection</div>
             </div>
-            <img
-              className="icon-ionic-ios-arrow-forward-inactive"
-              src="img/setting/icon-ionic-ios-arrow-forward-1@1x.png"
-              alt="Icon ionic-ios-arrow-forward"
-              />
-            <img className="x15" src="img/setting/file---15@1x.png" alt="15" />
+            <Link to="https://www.signumswap.com/tokens/5453974739826751020">
+              <img
+                className="icon-ionic-ios-arrow-forward-inactive"
+                src="img/setting/icon-ionic-ios-arrow-forward-1@1x.png"
+                alt="Icon ionic-ios-arrow-forward"
+                />
+              <img className="x15" src="img/setting/file---15@1x.png" alt="15" />
+              </Link>
           </div>
-          <Link to='https://test.signumart.io/'>
           <div className="x16190-VD8XDI">
             <div className="x31">
-              <div className="nf-ts-marketplace-aBwqob inter-normal-cadet-blue-15px">NFTs Marketplace</div>
+              <div className="nf-ts-marketplace-aBwqob inter-normal-white-15px ">NFTs Marketplace</div>
             </div>
             <img
-              className="icon-ionic-ios-arrow-forward"
+              className="icon-ionic-ios-arrow-forward brightness-0-5"
               src="img/setting/icon-ionic-ios-arrow-forward-1@1x.png"
               alt="Icon ionic-ios-arrow-forward"
               />
             <img className="x15" src="img/setting/file---15@1x.png" alt="15" />
           </div>
-          </Link>
           <div className="x16199-VD8XDI">
             <div className="x31">
-              <div className="get-sig-dao-token-R3QCCH inter-normal-cadet-blue-15px ">Get SigDAO Token</div>
+              <div className="get-sig-dao-token-R3QCCH inter-normal-white-15px ">Get SigDAO Token</div>
             </div>
             <img
               className="icon-ionic-ios-arrow-forward brightness-0-5"
@@ -126,7 +131,7 @@ const Setting: React.FunctionComponent<ISettingProps> = (props) => {
           <Link to="https://www.bettermi.io/Termsofservice.html">
           <div className="x16192-VD8XDI">
             <div className="x31">
-              <div className="terms-of-use-vMQ5ls inter-normal-cadet-blue-15px">Terms of Use</div>
+              <div className="terms-of-use-vMQ5ls inter-normal-white-15px">Terms of Service</div>
             </div>
             <img
               className="icon-ionic-ios-arrow-forward"
@@ -139,7 +144,7 @@ const Setting: React.FunctionComponent<ISettingProps> = (props) => {
           <Link to="https://www.bettermi.io/privacypolicy.html">
           <div className="x16193-VD8XDI">
             <div className="x31">
-              <div className="privacy-policy-Am8TnD inter-normal-cadet-blue-15px">Privacy Policy</div>
+              <div className="privacy-policy-Am8TnD inter-normal-white-15px">Privacy Policy</div>
             </div>
             <img
               className="icon-ionic-ios-arrow-forward"
@@ -149,24 +154,25 @@ const Setting: React.FunctionComponent<ISettingProps> = (props) => {
             <img className="x15" src="img/setting/file---15@1x.png" alt="15" />
           </div>
           </Link>
-
-          <div className="x16223-VD8XDI">
-            <div className="x31">
-              <div className="help-YkYlbF inter-normal-cadet-blue-15px">Help</div>
+            <div className="x16223-VD8XDI">
+              <div className="x31">
+                <div className="help-YkYlbF inter-normal-white-15px">Help</div>
+              </div>
+              <Link to = "https://www.bettermi.io/index.html">
+              <img
+                className="icon-ionic-ios-arrow-forward "
+                src="img/setting/icon-ionic-ios-arrow-forward-1@1x.png"
+                alt="Icon ionic-ios-arrow-forward"
+                />
+              <img className="x15" src="img/setting/file---15@1x.png" alt="15" />
+              </Link>
             </div>
-            <img
-              className="icon-ionic-ios-arrow-forward brightness-0-5"
-              src="img/setting/icon-ionic-ios-arrow-forward-1@1x.png"
-              alt="Icon ionic-ios-arrow-forward"
-              />
-            <img className="x15" src="img/setting/file---15@1x.png" alt="15" />
-          </div>
           <div className="x16222-VD8XDI">
             <div className="x16184-OCPXoe x16184">
               <div className="x0004-pzNHOH inter-normal-white-15px">0.0.04</div>
             </div>
             <div className="x31">
-              <div className="version-xPcu6a inter-normal-cadet-blue-15px">Version</div>
+              <div className="version-xPcu6a inter-normal-white-15px">Version</div>
             </div>
           </div>
         </div>

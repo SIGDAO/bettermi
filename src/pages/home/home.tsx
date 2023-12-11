@@ -86,6 +86,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const tempAccountId = useSelector(accountId);
   const Ledger2 = useLedger();
   const gender = useSelector(selectCurrentGender);
+  const userName = useSelector(selectCurrentUsername);
   const [level,setLevel] = useState<string>("");
   const codeHashIdForNft = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!;
   console.log(Token);
@@ -204,9 +205,8 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
 
         </Link>
         <ImageSlider slides={slides} />
-        <Link to="https://discord.gg/bU2wghzS">
-          <img src={`${process.env.PUBLIC_URL}/img/home/bxl-discord-alt.svg`} alt="" className="discord-RoXPLo" />
-          {/* <div className="discord-RoXPLo inter-medium-royal-blue-14px" >Discord</div> */}
+        <Link to="https://discord.gg/MATW3Dcdcw">
+        <img src={`${process.env.PUBLIC_URL}/img/home/bxl-discord-alt.svg`} alt="" className="discord-RoXPLo" />
         </Link>
         <div className="our-community-RoXPLo inter-semi-bold-white-21px">Social Events</div>
         {/* <Link to="/selfieToEarn"> */}
@@ -219,13 +219,13 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
           <NavigateToTakeSelfieButton/>
         </div>
         {/* </Link> */}
-        <div className="quick-actions-RoXPLo inter-semi-bold-white-21px">Quick Actions</div>
+        <div className="quick-actions-RoXPLo inter-semi-bold-white-21px">Selfie To Earn</div>
         <div className="greetings-RoXPLo">
           {/* <h1 className="title-2ZgxSS">Hi ! </h1> */}
           <h1 className="title-2ZgxSS">Hello ! </h1>
           <div className="lv_-reward-2ZgxSS">
             <div className="lv-1-b5x63m inter-semi-bold-keppel-15px">LV {level}</div>
-            <div className="nft-reward-10-b5x63m inter-semi-bold-white-15px">NFT REWARD +10%</div>
+            <div className="nft-reward-10-b5x63m inter-semi-bold-white-15px">REWARD +10%</div>
             <img className="seperate-line-b5x63m" src={`${process.env.PUBLIC_URL}/img/seperate-line-1@1x.png`} alt="seperate line" />
           </div>
           <UserIcon home = {true} userAccountId = {userAccountId}></UserIcon>

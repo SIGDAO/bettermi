@@ -92,7 +92,7 @@ const CustomizeYourProfile: React.FunctionComponent<ICustomizeYourProfileProps> 
       </div>
       <div className="button_-save-Gzrq3v" onClick={handleSave}>
         <div className="button1-S5Obts"></div>
-        <div className="continue-S5Obts">Save</div>
+        <div className="continue-S5Obts">Done!</div>
       </div>
     </div>
   );

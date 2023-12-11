@@ -287,7 +287,7 @@ const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props)
             <img className="layer" src="img/profile/layer-1@1x.png" alt="Layer" />
               <div className="button_nft-collections" onClick= {() => toUserNftList()}>
                 <div className="continue-profile inter-semi-bold-white-15px">
-                  My NFTs Collections
+                  My NFT Collections
                 </div>
               </div>
           {(isSettingLoading ===true || isUpdatingUserSetting === true)?(

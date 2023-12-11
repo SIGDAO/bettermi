@@ -10,20 +10,20 @@ interface IAiCoachSelectProps {
 
 const questionList = [
   {
-    question: 'What is Bettermi.io?',
-    ans: "Bettermi.io is a web application designed to enhance users' lifestyles by integrating fitness, wellness, and social elements."
+    question: 'Q:  What is Bettermi.io?',
+    ans: "A:  Bettermi.io is a web application designed to enhance users' lifestyles by integrating fitness, wellness, and social elements."
   },
   {
-    question: 'How does Bettermi.io work?',
-    ans: "Bettermi.io combines Game-Fi and Social-Fi aspects, motivating users to lead healthier lives while connecting with a community of like-minded individuals."
+    question: 'Q:  How does Bettermi.io work?',
+    ans: "A:  Bettermi.io combines Game-Fi and Social-Fi aspects, motivating users to lead healthier lives while connecting with a community of like-minded individuals."
   },
   {
-    question: 'What are the key features of Bettermi.io?',
-    ans: "The key features include fitness tracking, personalized workouts, NFT rewards, social interaction, AI coaching, and goal-setting capabilities."
+    question: 'Q:  What are the key features of Bettermi.io?',
+    ans: "A:  The key features include fitness tracking, personalized workouts, NFT rewards, social interaction, AI coaching, and goal-setting capabilities."
   },
   {
-    question: 'How can I earn rewards on Bettermi.io?',
-    ans: "Yes, the NFTs on Bettermi.io hold value as they can be used within the app to unlock features, earn additional rewards, and showcase achievements."
+    question: 'Q:   How can I earn rewards on Bettermi.io?',
+    ans: "A:  Yes, the NFTs on Bettermi.io hold value as they can be used within the app to unlock features, earn additional rewards, and showcase achievements."
   },
   {
     question: "Can I connect with other users?",

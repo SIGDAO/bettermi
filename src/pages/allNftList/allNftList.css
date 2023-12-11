@@ -49,3 +49,24 @@
     overflow: auto;
     padding: 10px;
 }
+.allNftButton{
+  width:100px;
+  height:31px;
+  background:  linear-gradient(90deg, #4136F1 0%, #8643FF 100%);
+  border-radius: 3px;
+  border: 0px;
+  color:#FFFFFF;
+  font-family: var(--font-family-inter);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+}
+.allNftButton:hover{
+  background:  linear-gradient(90deg, #8643FF 0%, #4136F1 100%);
+}
+.allNftBottom{
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  width:100%;
+}

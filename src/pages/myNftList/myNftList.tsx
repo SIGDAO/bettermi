@@ -502,7 +502,7 @@ return(
                         <div className="ic_send-1">
                           <img className="ic_send-1-content" src="img/myNftList/ic-send-1@1x.png" alt="" />
                         </div>
-                        <div className="place inter-semi-bold-white-18px">Send</div>
+                        <div className="place inter-semi-bold-white-18px">Sell</div>
                       </div>
                       <div className="search_bar"></div>
                       <CustomTextArea 
@@ -523,7 +523,7 @@ return(
                       {/* <div className="search_bar-1 search_bar-4"><p className="card-number">e.g. TS-9DJR-MGA2-VH44-5GMXY or Anderson</p></div> */}
                       <div className="search_bar-2 search_bar-4"></div>
                       <div className="button_save" onClick={() => transferNft(selectedNftId)}>
-                        <div className="continue inter-semi-bold-white-15px">Transfer</div>
+                        <div className="continue inter-semi-bold-white-15px">Confirm</div>
                       </div>
                       <p className="address-id-to-send-nft-to">Address, ID to send NFT to.</p>
                       <h1 className="text-7">#00000001</h1>

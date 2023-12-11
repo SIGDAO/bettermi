@@ -39,7 +39,8 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
   const { appName, Wallet, Ledger } = useContext(AppContext);
   const publicKey = useSelector(accountPublicKey);
   const userAccountId = useSelector(accountId);
-  const codeHashId = "7457358473503628676";
+  const codeHashId = process.env.REACT_APP_BMI_MACHINE_CODE_HASH!;
+  const tokenDigit = process.env.REACT_APP_TOKEN_DECIMAL_PLACE!;
   const storeNftCodeHashId = "4589039375104983465";
   const [isTransferToken, setIsTransferToken] = React.useState(false);
 

@@ -309,7 +309,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
           <img className="layer" src="img/profile/layer-1@1x.png" alt="Layer" />
           <Link to="/indexMyNftList">
             <div className="button_nft-collections">
-              <div className="continue-profile inter-semi-bold-white-15px">My NFTs Collections</div>
+              <div className="continue-profile inter-semi-bold-white-15px">My NFT Collection</div>
             </div>
           </Link>
           <div className="ic_edit" onClick={() => setIsOpen((prev) => !prev)}>
