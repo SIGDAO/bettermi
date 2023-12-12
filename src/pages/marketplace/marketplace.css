@@ -3,7 +3,7 @@
 .bettermidapp-marketplace-1 {
   background: linear-gradient(180deg, #171717 0%, #291a49 41.22%, #171717 100%);
   background-color: rgba(255,255,255,1.0);
-  height: 990px;
+  min-height: 880px;
   overflow: hidden;
   overflow-x: hidden;
   position: relative;
@@ -405,7 +405,7 @@
 }
 
 .bettermidapp-marketplace-1 .partner-company-Rea9Nd {
-  height: 470px;
+  height: 400px;
   left: 0px;
   top: 520px;
   width: 390px;

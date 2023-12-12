@@ -30,7 +30,7 @@ interface leaderBoardBannerProps {
     return(
         <div className="rewards_card" onClick = {() => {toUserProfile()}}>
         <div className="number inter-semi-bold-white-18px">{userRanking}</div>
-        {accountImage || accountImage === "undefined" ? (
+        {accountImage || accountImage == "undefined" || accountImage === undefined ? (
                 <img className="nft_-avatar-1 nft_-avatar-3" 
                 src={`https://ipfs.io/ipfs/${accountImage}`} 
                 alt="NFT_Avatar" />  
