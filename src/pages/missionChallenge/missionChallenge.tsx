@@ -40,11 +40,11 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
   // display as 0/3 as text
 
   //Anderson's code starts here
-  const NewUserCheck = async () => {
-    const isUpdated = await CheckIsUserFirstDayOfRegistration(ledger2, userAccountId, BMIMachineCodeHashId);
-    console.log("isUpdated", isUpdated);
-    return isUpdated === true
-  };
+  // const NewUserCheck = async () => {
+  //   const isUpdated = await CheckIsUserFirstDayOfRegistration(ledger2, userAccountId, BMIMachineCodeHashId);
+  //   console.log("isUpdated", isUpdated);
+  //   return isUpdated === true
+  // };
 
   // useEffect(() => {
 
@@ -70,7 +70,7 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
       //findNFTLevel(ledger2,userAccountId);
       if (updated.current === false) {
         updated.current = true;
-        isNew = await NewUserCheck(); //Run a check on whether there is a new user. Also, the handleBeforeUnload function ensures the check only run once
+        //isNew = await NewUserCheck(); //Run a check on whether there is a new user. Also, the handleBeforeUnload function ensures the check only run once
       
 
       const playedChallenge = await CountChallenges(userAccountId, ledger2);
