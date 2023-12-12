@@ -16,6 +16,7 @@ import { selectWalletNodeHost } from "../../redux/useLedger";
 import { LedgerClientFactory } from "@signumjs/core";
 import { CountChallenges } from "../../NftSystem/Token/countChallenges";
 import { findNFTLevel } from "../../NftSystem/FindNFTLevel";
+import { checkUserLevel } from "../../NftSystem/UserLevel/checkUserLevel";
 
 interface IMissionChallengeProps {}
 
@@ -27,6 +28,7 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
   const navigate = useNavigate();
   const [isOverDailyPlayTimesLimit, setisOverDailyPlayTimesLimit] = useState<boolean[]>([]);
   const [userChallengeTimes, setUserChallengeTimes] = useState<number[]>([]);
+  const [allowedChallengeList, setAllowedChallengeList] = useState<boolean[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   // const [Timedifference, setTimedifference] = useState<string[]>([]);
   const BMIMachineCodeHashId = process.env.REACT_APP_BMI_MACHINE_CODE_HASH!;
@@ -71,93 +73,97 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
       if (updated.current === false) {
         updated.current = true;
         //isNew = await NewUserCheck(); //Run a check on whether there is a new user. Also, the handleBeforeUnload function ensures the check only run once
-      
+        const userLevel = await checkUserLevel(ledger2, userAccountId);
 
-      const playedChallenge = await CountChallenges(userAccountId, ledger2);
-
-      for (var i = 3; i < 9; i++) {
-        playedChallenge[i] = 3;
-      } //Temporarily disable the remaining six challenges
-
-      setUserChallengeTimes(playedChallenge);
-      console.log(playedChallenge);
-      console.log("userChallengeTimes is ", userChallengeTimes);
-
-      console.log(userChallengeTimes);
-      setisOverDailyPlayTimesLimit(
-        playedChallenge.map((numChallengesPlayed) => {
-          if (numChallengesPlayed > 2) {
-            return false;
+        const playedChallenge = await CountChallenges(userAccountId, ledger2);
+        const allowedChallenge: boolean[] = [];
+        for (var i = 0; i < 9; i++) {
+          if (i >= userLevel * 3) {
+            allowedChallenge.push(false);
+            //playedChallenge[i] = 3;
+          } else {
+            allowedChallenge.push(true);
           }
-          return true;
-        })
-      );
-      setIsLoading(false);
-      console.log("isOverDailyPlayTimesLimit is ", isOverDailyPlayTimesLimit);
-      //Anderson's code ends here
-      const now = new Date();
-      const currentTime = now.getHours() * 60 + now.getMinutes();
-      const currentTimeInSecond = now.getHours() * 60 * 60 + now.getMinutes() * 60 + now.getSeconds();
-      
-      //Anderson disabled this 2023/11/12
-      // setisOverDailyPlayTimesLimit(
-      //   missionList.map((mission) => {
-      //     if(mission.title === "1. Hello Bae !" /*&& isNew === true*/){
-      //       console.log("special case for Hello Bae",isNew)
-      //       return true;
-      //     }
-      //     const { timeslot } = mission;
-      //     const isInSlot = timeslot.some(
-      //       (slot) => currentTime >= getTimeInMinutes(slot.startingTime) && currentTime <= getTimeInMinutes(slot.endTime)
-      //     );
-      //     console.log("is In slot for",mission.title, "is",isInSlot)
-      //     return isInSlot;
-      //   })
-      // );
+        } //Temporarily disable the remaining six challenges
+        console.log("allowedChallenge",allowedChallenge);
+        setAllowedChallengeList(allowedChallenge);
 
-      //Anderson disabled till here
-      // setTimedifference(
-      //   missionList.map((mission) => {
-      //     const { timeslot } = mission;
-      //     const timedifferentInFormat = timeslot.map((slot) => {
-      //       const time = slot.startingTime.split(":").map((ele) => parseInt(ele));
-      //       const formatTime = time[0] * 60 * 60 + time[1] * 60;
-      //       const timeDiff = formatTime - currentTimeInSecond;
+        setUserChallengeTimes(playedChallenge);
+        console.log(playedChallenge);
+        console.log("userChallengeTimes is ", userChallengeTimes);
 
-      //       if (timeDiff < 0) {
-      //         return timeDiff + 24 * 60 * 60;
-      //       }
+        console.log(userChallengeTimes);
+        setisOverDailyPlayTimesLimit(
+          playedChallenge.map((numChallengesPlayed) => {
+            if (numChallengesPlayed > 2) {
+              return false;
+            }
+            return true;
+          })
+        );
+        setIsLoading(false);
+        console.log("isOverDailyPlayTimesLimit is ", isOverDailyPlayTimesLimit);
+        //Anderson's code ends here
 
-      //       return timeDiff;
-      //     });
-      //     let filteredtimedifferentInFormat = timedifferentInFormat.filter((date) => {
-      //       console.log(date > 0, "timedifferentInFormat date");
-      //       return date > 0;
-      //     });
-      //     console.log(filteredtimedifferentInFormat, "filteredtimedifferentInFormat");
+        //Anderson disabled this 2023/11/12
+        // setisOverDailyPlayTimesLimit(
+        //   missionList.map((mission) => {
+        //     if(mission.title === "1. Hello Bae !" /*&& isNew === true*/){
+        //       console.log("special case for Hello Bae",isNew)
+        //       return true;
+        //     }
+        //     const { timeslot } = mission;
+        //     const isInSlot = timeslot.some(
+        //       (slot) => currentTime >= getTimeInMinutes(slot.startingTime) && currentTime <= getTimeInMinutes(slot.endTime)
+        //     );
+        //     console.log("is In slot for",mission.title, "is",isInSlot)
+        //     return isInSlot;
+        //   })
+        // );
 
-      //     filteredtimedifferentInFormat.sort((a, b) => a - b);
-      //     console.log(filteredtimedifferentInFormat, "timedifferentInFormat");
-      //     const hours = Math.floor(filteredtimedifferentInFormat[0] / 3600)
-      //       .toString()
-      //       .padStart(2, "0");
-      //     const minutes = Math.floor((filteredtimedifferentInFormat[0] % 3600) / 60)
-      //       .toString()
-      //       .padStart(2, "0");
-      //     const seconds = (filteredtimedifferentInFormat[0] % 60).toString().padStart(2, "0");
+        //Anderson disabled till here
+        // setTimedifference(
+        //   missionList.map((mission) => {
+        //     const { timeslot } = mission;
+        //     const timedifferentInFormat = timeslot.map((slot) => {
+        //       const time = slot.startingTime.split(":").map((ele) => parseInt(ele));
+        //       const formatTime = time[0] * 60 * 60 + time[1] * 60;
+        //       const timeDiff = formatTime - currentTimeInSecond;
 
-      //     console.log(hours, minutes, seconds, "hours, minutes, seconds");
-      //     // const hours = Math.floor(timedifferentInFormat[0] / (1000 * 60 * 60));
-      //     // const minutes = Math.floor((timedifferentInFormat[0] / (1000 * 60)) % 60);
-      //     // const seconds = Math.floor((timedifferentInFormat[0] / 1000) % 60);
+        //       if (timeDiff < 0) {
+        //         return timeDiff + 24 * 60 * 60;
+        //       }
 
-      //     return `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-      //     // return timedifferentInFormat;
-      //     // return '';
-      //   })
-      // );
-      // console.log(Timedifference, "Timedifference");
-      console.log(isOverDailyPlayTimesLimit, "isOverDailyPlayTimesLimit");
+        //       return timeDiff;
+        //     });
+        //     let filteredtimedifferentInFormat = timedifferentInFormat.filter((date) => {
+        //       console.log(date > 0, "timedifferentInFormat date");
+        //       return date > 0;
+        //     });
+        //     console.log(filteredtimedifferentInFormat, "filteredtimedifferentInFormat");
+
+        //     filteredtimedifferentInFormat.sort((a, b) => a - b);
+        //     console.log(filteredtimedifferentInFormat, "timedifferentInFormat");
+        //     const hours = Math.floor(filteredtimedifferentInFormat[0] / 3600)
+        //       .toString()
+        //       .padStart(2, "0");
+        //     const minutes = Math.floor((filteredtimedifferentInFormat[0] % 3600) / 60)
+        //       .toString()
+        //       .padStart(2, "0");
+        //     const seconds = (filteredtimedifferentInFormat[0] % 60).toString().padStart(2, "0");
+
+        //     console.log(hours, minutes, seconds, "hours, minutes, seconds");
+        //     // const hours = Math.floor(timedifferentInFormat[0] / (1000 * 60 * 60));
+        //     // const minutes = Math.floor((timedifferentInFormat[0] / (1000 * 60)) % 60);
+        //     // const seconds = Math.floor((timedifferentInFormat[0] / 1000) % 60);
+
+        //     return `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+        //     // return timedifferentInFormat;
+        //     // return '';
+        //   })
+        // );
+        // console.log(Timedifference, "Timedifference");
+        //console.log(isOverDailyPlayTimesLimit, "isOverDailyPlayTimesLimit");
       }
     };
 
@@ -212,68 +218,80 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
           <img className="layer-nLfc9z" src="img/missionChallenge/layer-1@1x.png" alt="Layer" />
           <div className="scroll-group-nLfc9z">
             <div className="challenge-cards-QuyfDF">
-              {isLoading?<div></div>:missionList.map((mission, index) => {
-                return (
-                  <Button
-                    onClick={async() => {
-                      const playedChallenge = await CountChallenges(userAccountId, ledger2);
-                  
-                      if (isOverDailyPlayTimesLimit[index] && playedChallenge[index] < 3) {
-                        navigate(`/challengeCountdown/${index + 1}`);
+              {isLoading ? (
+                <div></div>
+              ) : (
+                missionList.map((mission, index) => {
+                  return (
+                    <Button
+                      onClick={async () => {
+                        
+
+                        if (isOverDailyPlayTimesLimit[index]  && allowedChallengeList[index] === true) {
+                          navigate(`/challengeCountdown/${index + 1}`);
+                        }
+                      }}
+                      className="challenge-cards-Ic1qil"
+                    >
+                      <>
+                        {allowedChallengeList[index] === false? (
+                          <div className="score-bar_2-inactive inter-semi-bold-white-15px">
+                            {/* {mission.timeslot[0].startingTime} */}
+                            Locked
+                            {/* {Timedifference[index]} */}
+                          </div>
+                        ) : (isOverDailyPlayTimesLimit[index] ? (
+                          <div className="score-bar_2">
+                            <div className="starting inter-semi-bold-white-15px">{`${userChallengeTimes[index]}/3`}</div>
+                          </div>
+                        ) : (
+                          <div className="score-bar_2-inactive inter-semi-bold-white-15px">
+                            {/* {mission.timeslot[0].startingTime} */}
+                            Completed
+                            {/* {Timedifference[index]} */}
+                          </div>
+                        )
+                        )
                       }
-                    }}
-                    className="challenge-cards-Ic1qil"
-                  >
-                    <>
-                      {isOverDailyPlayTimesLimit[index] ? (
-                        <div className="score-bar_2">
-                          <div className="starting inter-semi-bold-white-15px">{`${userChallengeTimes[index]}/3`}</div>
-                        </div>
-                      ) : (
-                        <div className="score-bar_2-inactive inter-semi-bold-white-15px">
-                          {/* {mission.timeslot[0].startingTime} */}
-                          Completed
-                          {/* {Timedifference[index]} */}
-                        </div>
-                      )}
-                      <div
-                        className="inner-mission-container"
-                        // style={isOverDailyPlayTimesLimit[index] ? {opacity: '1'} : {opacity: '0.4'}}
-                      >
-                        <div className="mission-graph">
-                          <img className="mission-gif" src={mission.missionImgPath} alt="" />
-                        </div>
-                        <div className="mission-detail">
-                          <div className="mission-topic inter-semi-bold-white-18px">{mission.title}</div>
-                          <div className="mission-time-bodyPart-container">
-                            <div className="mission-time-container">
-                              <img className="ic_time" src="img/missionChallenge/ic-time@1x.png" alt="ic_time" />
-                              <p className="inter-semi-bold-cadet-blue-14px">{mission.duration}</p>
-                            </div>
-                            <div className="mission-bodyPart-container">
-                              <img className="ic_-body" src="img/missionChallenge/ic-body@1x.png" alt="ic_Body" />
-                              <p className="inter-semi-bold-cadet-blue-14px">{mission.bodyPart}</p>
-                            </div>
+                        <div
+                          className="inner-mission-container"
+                          // style={isOverDailyPlayTimesLimit[index] ? {opacity: '1'} : {opacity: '0.4'}}
+                        >
+                          <div className="mission-graph">
+                            <img className="mission-gif" src={mission.missionImgPath} alt="" />
                           </div>
-                          <div className="mission-level-and-reward">
-                            <div className="mission-level inter-semi-bold-keppel-15px">LV {mission.nftLevel}</div>
-                            <div className="level-and-sigdao-separate-line"></div>
-                            <div className="mission-reward-container">
-                              <div className="signdao_tokengradient">
-                                <div className="x441"></div>
-                                <div className="x442"></div>
-                                <img className="x880" src="img/missionChallenge/file---880-1x-png-10@1x.png" alt="880" />
+                          <div className="mission-detail">
+                            <div className="mission-topic inter-semi-bold-white-18px">{mission.title}</div>
+                            <div className="mission-time-bodyPart-container">
+                              <div className="mission-time-container">
+                                <img className="ic_time" src="img/missionChallenge/ic-time@1x.png" alt="ic_time" />
+                                <p className="inter-semi-bold-cadet-blue-14px">{mission.duration}</p>
                               </div>
-                              <p className="inter-semi-bold-keppel-14px">{mission.sigdao}</p>
+                              <div className="mission-bodyPart-container">
+                                <img className="ic_-body" src="img/missionChallenge/ic-body@1x.png" alt="ic_Body" />
+                                <p className="inter-semi-bold-cadet-blue-14px">{mission.bodyPart}</p>
+                              </div>
                             </div>
-                            <img className="mission-bar-arrow-right" src="img/missionChallenge/ic-chevron-right-24px-1@1x.png" alt="" />
+                            <div className="mission-level-and-reward">
+                              <div className="mission-level inter-semi-bold-keppel-15px">LV {mission.nftLevel}</div>
+                              <div className="level-and-sigdao-separate-line"></div>
+                              <div className="mission-reward-container">
+                                <div className="signdao_tokengradient">
+                                  <div className="x441"></div>
+                                  <div className="x442"></div>
+                                  <img className="x880" src="img/missionChallenge/file---880-1x-png-10@1x.png" alt="880" />
+                                </div>
+                                <p className="inter-semi-bold-keppel-14px">{mission.sigdao}</p>
+                              </div>
+                              <img className="mission-bar-arrow-right" src="img/missionChallenge/ic-chevron-right-24px-1@1x.png" alt="" />
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </>
-                  </Button>
-                );
-              })}
+                      </>
+                    </Button>
+                  );
+                })
+              )}
             </div>
           </div>
         </div>

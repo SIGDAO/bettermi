@@ -90,6 +90,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const userName = useSelector(selectCurrentUsername);
   const [level,setLevel] = useState<string>("");
   const codeHashIdForNft = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!;
+  const tokenId = process.env.REACT_APP_TOKEN_ID!;
   console.log(Token);
   console.log(store.getState());
   console.log("Token is  ",Token);
@@ -106,7 +107,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
     ledger2.account.getAccount({accountId:userAccountId})
       .then(async(account)=>{
         for (var i = 0;i<account.assetBalances.length;i++){
-          if(account.assetBalances[i].asset === "13116962758643420722"){
+          if(account.assetBalances[i].asset === tokenId){
             store.dispatch(accountSlice.actions.setToken(Number(account.assetBalances[i].balanceQNT)/1000000));
             localStorage.setItem('token',account.assetBalances[i].balanceQNT);
             console.log(account.assetBalances[i].balanceQNT);
