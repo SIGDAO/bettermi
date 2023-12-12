@@ -72,7 +72,7 @@ const CustomizeYourProfile: React.FunctionComponent<ICustomizeYourProfileProps> 
     } catch (error) {
       console.log(error);
       if (error.name !== "ExtensionWalletError") {
-        navigate("/errorGenerateNFT");
+        navigate("/errorCustomizeYourProfile");
       }
       setMinted(false);
     }

@@ -89,6 +89,7 @@ const titleList = {
   "/aiCoachDetail": "AI Coach Detail - BetterMi",
   "/errorGenerateNFT": "Error Generate NFT - BetterMi",
   "/errorTakeSelfie": "Error Take Selfie - BetterMi",
+  "/errorCustomizeYourProfile": "Error Customize Your Profile - BetterMi",
   "/loadingMinting": "Loading Minting - BetterMi",
   "/setting": "Setting - BetterMi",
   "/NFTTransferCompleted": "NFT Transfer Completed - BetterMi",
@@ -177,6 +178,7 @@ function App() {
                 </Route>
                 <Route path="/errorGenerateNFT" element={<ErrorGenerateNFT />} />
                 <Route path="/errorTakeSelfie" element={<ErrorGenerateNFT />} />
+                <Route path="/errorCustomizeYourProfile" element={<ErrorGenerateNFT />} />
                 <Route path="/errorWalletNotConnected" element={<ErrorGenerateNFT />} />
                 <Route path="/loadingBMIDaily" element={<LoadingMinting pathname="/loadingBMIDaily" />} />
                 <Route path="/setting" element={<Setting />} />

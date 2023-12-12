@@ -23,7 +23,11 @@ const ErrorGenerateNFT: React.FunctionComponent<IErrorGenerateNFTProps> = (props
       setErrorMsg('Please make sure that only your face is visible in the frame.');
       setButtonText('Selfie again');
       setNavigatePath('/takeSelfie')
-    } 
+    } else if (location.pathname === '/errorCustomizeYourProfile') {
+      setErrorMsg('The Customize Profile Progress has something wrong. Please try again.');
+      setButtonText('Try again');
+      setNavigatePath('/customizeYourProfile')
+    }
   }, [])
 
   const content: JSX.Element = (
