@@ -418,7 +418,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
             <Link to="/allNftList/">
               <div className="overlap-group-profile">
                 <img className="ic_add" src="img/profile/ic-add-2@1x.png" alt="ic_add" />
-                <p className="inter-semi-bold-white-12px ">Import NFT</p>
+                <p className="inter-semi-bold-white-12px ">Buy NFT</p>
               </div>
             </Link>
             {loadingNft === true ? (
