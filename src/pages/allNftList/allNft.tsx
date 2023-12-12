@@ -8,6 +8,7 @@ import { AppContext } from "../../redux/useContext";
 import { useSelector } from "react-redux";
 import { selectWalletNodeHost } from "../../redux/useLedger";
 import { LedgerClientFactory } from "@signumjs/core";
+import { BuyNft } from "../../NftSystem/BuyNft/buyNft";
 
 interface AllNftProps {
   imageAddress: string;
@@ -26,32 +27,9 @@ const AllNft: React.FunctionComponent<AllNftProps> = (props) => {
   const { appName, Wallet, Ledger } = useContext(AppContext);
   const nodeHost = useSelector(selectWalletNodeHost);
   const ledger2 = LedgerClientFactory.createClient({ nodeHost });
-  const Buy = async() => {
-    const hash = "2";
-    const rest = [230000000, 26,1000000]
-    const hexMessage = generateMethodCall({
-        methodHash: hash.toString(),
-        methodArgs: rest
-});
-const hi:AttachmentMessage =new AttachmentMessage({
-  messageIsText:false,
-  message:hexMessage,
-
-});
-if(hi != null && nftId != null){
-const transaction = await ledger2.asset.transferAsset({
-  assetId:"13116962758643420722",
-  quantity:nftPrice!,
-  attachment:hi,
-  amountPlanck:"32000000",
-  feePlanck:"1000000",
-  recipientId:nftId!,
-  deadline:1440,
-  senderPublicKey:"b3b1134600c4939e2d34a5ee442ca7f602e8d9ff013c3ebf6cf2dfbc4120dd6a",
-});
-await Wallet.Extension.confirm(transaction.unsignedTransactionBytes);
-}
-  };
+  const Buy = async () => {
+    BuyNft(Wallet, ledger2, nftId!, nftPrice!);
+  }
   return (
     <>
       {/* {loading?(<div>loading</div>):(

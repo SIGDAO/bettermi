@@ -138,7 +138,7 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
               nftStatus = "For Sell in Signa";
             }
             if(nftStatus === "17"){
-              nftStatus = "For Sell";
+              nftStatus = "Buy";
             }
             if(nftStatus === "18"){
               nftStatus = "For Sell in Sigdao and Signa";
@@ -147,7 +147,7 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
               nftStatus = "For Auction in Signa";
             }
             if(nftStatus === "20"){
-              nftStatus = "For Auction";
+              nftStatus = "Auction";
             }
             nftInfo.push({
               contractId: nftStorage.at,

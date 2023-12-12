@@ -307,19 +307,19 @@ const nftId = accountDes.account;
   };
   const transferNft = async(assetId:string) => {
     try{
-      console.log("testing")
+
       console.log(assetId)
       const contractInfo = await ledger2.contract.getContract(selectedNftId);
-      console.log("testing")
+
       const trial = JSON.parse(contractInfo.description);
-      console.log("testing")
+
       /*  Get the NFT image of ths selected asset and check if its same to the onDuty one      */
       const res = await fetch(`https://ipfs.io/ipfs/${trial.descriptor}`);
-      console.log("testing")
+
       const text = await res.text();
-      console.log("testing")
+
       var nftInfo = JSON.parse(text);
-      console.log("testing")
+
       const nftImage = nftInfo.media[0].social;
 
       /**/
@@ -332,11 +332,8 @@ const nftId = accountDes.account;
       if(nftOwner === userAccountId){
         //TransferNft(ledger2,selectedNftId,userAccountId,codeHashIdForNft,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey);
         const latestTransactionNumber:string = await FindLatestTransactionNumber(ledger2,nftContractStorage,nftDistributor);
-        console.log("testing");
         const latestArray:string[] = await FindLatestTransactionArray(ledger2,nftContractStorage,nftDistributor,latestTransactionNumber);
-        console.log("testing");
         const transactionCost = (Math.floor((latestArray.length)/8+1)*1000000).toString();
-        console.log("testing");
        const userCoverTheirTransactionCost = await ledger2.transaction.sendAmountToSingleRecipient({
           recipientId: nftDistributor,
           amountPlanck: transactionCost,
@@ -345,7 +342,6 @@ const nftId = accountDes.account;
         });
         await Wallet.Extension.confirm(userCoverTheirTransactionCost.unsignedTransactionBytes);
         const recipientInfo  = await ledger2.account.getAccount({accountId:inputAddress});
-        console.log("testing");
         //await p2pTransferNft(ledger2,Wallet,selectedNftId,userAccountpublicKey,recipientInfo.account);
         const transaction = await ledger2.contract.callContractMethod({
           senderPublicKey: userAccountpublicKey,
