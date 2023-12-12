@@ -27,6 +27,24 @@ const Leaderboard = (props: Props) => {
   const navigate = useNavigate();
   console.log(userRankingListFromRedux);
 
+  const imageLoadForTop3 = (index) => {
+  
+    return (<>
+      {userRankingList[0].accountImage ? (
+      <img className="nft_-avatar-2 nft_-avatar-3" 
+      src={`https://ipfs.io/ipfs/${userRankingList[index].accountImage}`} 
+      alt="NFT_Avatar" 
+      onClick={() => {navigate('/OtherUserProfile',{state:{userId:userRankingList[0].accountId}})}}
+      />
+    ) : (
+      <div className="leaderboard_nft_-avatar">
+        <img className="home_icon_ic_add" src="img/profile/ic-add-2@1x.png" alt="ic_add"/>
+      </div>
+      )
+    }
+  </>
+  )}
+
   const fetchUserRankingList = () => {
     GetTokenRanking(ledger2).then((userRankingList) => {
       setUserRankingList(userRankingList);
@@ -97,12 +115,19 @@ const Leaderboard = (props: Props) => {
                 <div className="leadboard_1st">
                   <div className="overlap-group-leader2">
                     <div className="overlap-group-leader1">
-
-                      <img className="nft_-avatar-2 nft_-avatar-3" 
-                            src={`https://ipfs.io/ipfs/${userRankingList[0].accountImage}`} 
-                            alt="NFT_Avatar" 
-                            onClick={() => {navigate('/OtherUserProfile',{state:{userId:userRankingList[0].accountId}})}}
-                            />
+                      {/* {imageLoadForTop3(0)} */}
+                      {userRankingList[0].accountImage ? (
+                        <img className="nft_-avatar-2 nft_-avatar-3" 
+                        src={`https://ipfs.io/ipfs/${userRankingList[0].accountImage}`} 
+                        alt="NFT_Avatar" 
+                        onClick={() => {navigate('/OtherUserProfile',{state:{userId:userRankingList[0].accountId}})}}
+                        />
+                      ) : (
+                        <img className="nft_-avatar-2 nft_-avatar-3" 
+                        src={`${process.env.PUBLIC_URL}/img/mimi.png`}
+                        alt="NFT_Avatar"
+                        />)
+                      }
                       
                     
                       <div className="crown-with-red-stone">
@@ -166,7 +191,8 @@ const Leaderboard = (props: Props) => {
                   <div className="x2nd inter-semi-bold-white-18px-2">
                     <span className="inter-semi-bold-white-18px">2</span><span className="inter-semi-bold-white-18px">nd</span>
                   </div>
-                  <img className="nft_-avatar"      src={`https://ipfs.io/ipfs/${userRankingList[1].accountImage}`}  alt="NFT_Avatar" />
+                  {imageLoadForTop3(1)}
+                  {/* <img className="nft_-avatar"      src={`https://ipfs.io/ipfs/${userRankingList[1].accountImage}`}  alt="NFT_Avatar" /> */}
                   <div className="son inter-medium-white-12px">{userRankingList[1].displayAccountId}</div>
                   <div className="sigdao-score-2 sigdao-score-4">
                     <div className="signdao_tokengradient">
@@ -180,7 +206,8 @@ const Leaderboard = (props: Props) => {
                 <div className="x3rd inter-semi-bold-white-18px-2">
                   <span className="inter-semi-bold-white-18px">3</span><span className="inter-semi-bold-white-18px">rd</span>
                 </div>
-                <img className="nft_-avatar"    src={`https://ipfs.io/ipfs/${userRankingList[2].accountImage}`} alt="NFT_Avatar" />
+                {imageLoadForTop3(2)}
+                {/* <img className="nft_-avatar"    src={`https://ipfs.io/ipfs/${userRankingList[2].accountImage}`} alt="NFT_Avatar" /> */}
                 <div className="son inter-medium-white-12px">alison_888</div>
                 <div className="sigdao-score-3 sigdao-score-4">
                   <div className="signdao_tokengradient">

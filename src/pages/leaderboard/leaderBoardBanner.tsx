@@ -30,9 +30,15 @@ interface leaderBoardBannerProps {
     return(
         <div className="rewards_card" onClick = {() => {toUserProfile()}}>
         <div className="number inter-semi-bold-white-18px">{userRanking}</div>
-        <img className="nft_-avatar-1 nft_-avatar-3" 
-              src={`https://ipfs.io/ipfs/${accountImage}`} 
-              alt="NFT_Avatar" />
+        {accountImage || accountImage === "undefined" ? (
+                <img className="nft_-avatar-1 nft_-avatar-3" 
+                src={`https://ipfs.io/ipfs/${accountImage}`} 
+                alt="NFT_Avatar" />  
+        ): (
+          <div className="leaderboard_body_nft_-avatar">
+          <img className="home_body_icon_ic_add" src="img/profile/ic-add-2@1x.png" alt="ic_add"/>
+        </div>
+          )}
         <div className="x300 inter-medium-white-12px">{displayAccountId}</div>
         <div className="sigdao-score">
           <div className="signdao_tokengradient">
