@@ -232,7 +232,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
           <UserIcon home = {true} userAccountId = {userAccountId}></UserIcon>
           {/* {imgAddress === ""?gender === "Female"?
           // <img className="nft_-avatar-2ZgxSS" src={`${process.env.PUBLIC_URL}/img/home/nft-avatar-13@1x.png`} alt="NFT_Avatar" />
-          <Link to="/indexMyNftList/">
+          <Link to="/allNftList/">
               <div className="home_nft_-avatar">
                   <img
                     className="home_icon_ic_add"
@@ -242,7 +242,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
               </div>
             </Link>
           :(
-            <Link to="/indexMyNftList/">
+            <Link to="/allNftList/">
               <div className="home_nft_-avatar">
                 <img
                   className="home_icon_ic_add"

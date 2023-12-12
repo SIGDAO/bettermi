@@ -403,7 +403,7 @@ return(
               <div className = "myNftList">
                 {gender === "Female"?
                   (
-                  <Link to="/indexMyNftList/">
+                  <Link to="/allNftList/">
                   <div className="myNftListEmptyNft">
                     <img className="myNftListAdd" src="img/profile/add-2@1x.png" alt="Add" />
                     <img
@@ -415,7 +415,7 @@ return(
                 </Link>
                   ):
                   (
-                    <Link to="/indexMyNftList/">
+                    <Link to="/allNftList/">
                     <div className="myNftListEmptyNft">
                       <img className="myNftListAdd" src="img/profile/add-2@1x.png" alt="Add" />
                       <img

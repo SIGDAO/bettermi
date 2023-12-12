@@ -74,7 +74,7 @@ const UserIcon: React.FC<IUserIconProps> = (props) => {
           <img className={finalClassNames.forLoadingSign} src="/img/loadingMinting/mimi-dancing-for-loadin-page.gif" alt="ic_add" />
         </div>
       ) : isUpdating === true ? (
-        <Link to="/indexMyNftList/">
+        <Link to="/allNftList/">
           <div className={finalClassNames.forEmptyIcon}>
             <img className={finalClassNames.forLoadingSign} src="/img/loadingMinting/mimi-dancing-for-loadin-page.gif" alt="ic_add" />
           </div>
@@ -85,7 +85,7 @@ const UserIcon: React.FC<IUserIconProps> = (props) => {
       haveNft === true ? (
         <img className={finalClassNames.forNftDisplay} src={`https://ipfs.io/ipfs/${imgAddress}`} alt="NFT_Avatar" />
       ) : (
-        <Link to="/indexMyNftList/">
+        <Link to="/allNftList/">
           <div className={finalClassNames.forEmptyIcon}>
             <img className={finalClassNames.forAddSign} src="img/profile/ic-add-2@1x.png" alt="ic_add" />
           </div>

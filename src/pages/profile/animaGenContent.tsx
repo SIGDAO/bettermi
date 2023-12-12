@@ -415,7 +415,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
             }}
             onWheel={handleScroll}
           >
-            <Link to="/indexMyNftList/">
+            <Link to="/allNftList/">
               <div className="overlap-group-profile">
                 <img className="ic_add" src="img/profile/ic-add-2@1x.png" alt="ic_add" />
                 <p className="inter-semi-bold-white-12px ">Import NFT</p>
@@ -456,7 +456,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
         {/* This is the old horizontal scroll */}
 
         {/* <div className="x3">
-          <Link to="/indexMyNftList/">
+          <Link to="/allNftList/">
             <div className="overlap-group-profile">
               <img className="add" src="img/profile/add-2@1x.png" alt="Add" />
               <img
