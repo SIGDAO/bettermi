@@ -996,7 +996,7 @@ opacity: 0.5;
   display: flex;
   height: 21px;
   justify-content: center;
-  gap: 20px;
+  gap: 10px;
   left: 168px;
   position: absolute;
   top: 52px;
@@ -1062,14 +1062,14 @@ opacity: 0.5;
 }
 
 .bettermidapp-mimi-nfts-send-address-1 .button_save {
-  align-items: flex-end;
+  align-items: center;
   background: linear-gradient(-90deg, #8743ff 0%, #4136f1 100%);
   border-radius: 10px;
   box-shadow: 0px 15px 30px #1466cc29;
   cursor: pointer;
   display: flex;
   height: 56px;
-  justify-content: flex-end;
+  justify-content: center;
   left: 87px;
   min-width: 248px;
   padding: 13.5px 91px;
@@ -1114,13 +1114,39 @@ opacity: 0.5;
   white-space: nowrap;
   margin: 0;
 }
+.x0-signa-1-level {
+  color: var(--keppel);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-l);
+  font-weight: 500;
+}
 
-.bettermidapp-mimi-nfts-send-address-1 .x0-signa-1 {
+.x0-signa-1-reward {
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-l);
+  font-weight: 500;
+}
+
+.x0-signa-1-block {
+  height: 17px;
+  width: 1px;
+  background-color: #A6B3BB33;
+}
+
+.bettermidapp-mimi-nfts-send-address-1 .x16228 {
   color: var(--cadet-blue);
   font-family: var(--font-family-inter);
   font-size: var(--font-size-xxl);
-  font-weight: 500;
-  left: 287px;
+  font-weight: 400;
+}
+
+.bettermidapp-mimi-nfts-send-address-1 .x0-signa-1 {
+
+  display: flex;
+  gap: 10px;
+  /* left: 287px; */
+  right: 15.75px;
   letter-spacing: 0;
   line-height: 16px;
   position: absolute;

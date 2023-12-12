@@ -34,7 +34,7 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
               <div className="zoe-fitness-ppgU72 zoe-fitness"></div>
             </div>
           </div>
-          <div className="redeem-rewards-oobbG1">REDEEM REWARDS</div>
+          <div className="redeem-rewards-oobbG1">REWARD REDEEM</div>
           <Link to="/reward">
             <div className="see-all-oobbG1 see-all inter-medium-royal-blue-14px">See all</div>
           </Link>
@@ -143,9 +143,9 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
           </Link> */}
           <div className="special-scroll-AStx0d">
             <div className="x25-Wx9nPx">
-              <div className="x0-Y63lEW x0"><img className="x1-z2FCJz x1" src={`${process.env.PUBLIC_URL}/img/marketplace/2.png`} alt="1" /></div>
-              <div className="x1-Y63lEW x1"><img className="x1-0pT4eI x1" src={`${process.env.PUBLIC_URL}/img/marketplace/2.png`} alt="1" /></div>
-              <div className="x2-Y63lEW"><img className="x1-EMGmsF x1" src={`${process.env.PUBLIC_URL}/img/marketplace/2.png`} alt="1" /></div>
+              <div className="x0-Y63lEW x0"><img className="x1-z2FCJz x1" src={`${process.env.PUBLIC_URL}/img/marketplace/Hot-Deals-Free-Consultation-Sample.png`} alt="1" /></div>
+              <div className="x1-Y63lEW x1"><img className="x1-0pT4eI x1" src={`${process.env.PUBLIC_URL}/img/marketplace/Hot-Deals-Product-Discount-Sample.png`} alt="1" /></div>
+              <div className="x2-Y63lEW"><img className="x1-EMGmsF x1" src={`${process.env.PUBLIC_URL}/img/marketplace/Hot-Deals-Service-Sample.png`} alt="1" /></div>
             </div>
           </div>
         </div>

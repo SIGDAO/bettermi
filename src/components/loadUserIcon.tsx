@@ -83,7 +83,7 @@ return(
         ):
             isUpdating === true?
             (
-                <Link to="/marketplace/">
+                <Link to="/indexMyNftList/">
                 <div className={finalClassNames.forEmptyIcon}>
                 <img
                     className={finalClassNames.forLoadingSign}
@@ -103,7 +103,7 @@ return(
                     alt="NFT_Avatar"
                 />
                 ):(
-                <Link to="/marketplace/">
+                <Link to="/indexMyNftList/">
                 <div className={finalClassNames.forEmptyIcon}>
                     <img
                     className={finalClassNames.forAddSign}

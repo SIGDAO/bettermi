@@ -403,7 +403,7 @@ return(
               <div className = "myNftList">
                 {gender === "Female"?
                   (
-                  <Link to="/marketplace/">
+                  <Link to="/indexMyNftList/">
                   <div className="myNftListEmptyNft">
                     <img className="myNftListAdd" src="img/profile/add-2@1x.png" alt="Add" />
                     <img
@@ -415,7 +415,7 @@ return(
                 </Link>
                   ):
                   (
-                    <Link to="/marketplace/">
+                    <Link to="/indexMyNftList/">
                     <div className="myNftListEmptyNft">
                       <img className="myNftListAdd" src="img/profile/add-2@1x.png" alt="Add" />
                       <img
@@ -537,15 +537,20 @@ return(
                       {/* <div className="search_bar-1 search_bar-4"><p className="card-number">e.g. TS-9DJR-MGA2-VH44-5GMXY or Anderson</p></div> */}
                       <div className="search_bar-2 search_bar-4"></div>
                       <div className="button_save" onClick={() => setSell(selectedNftId)}>
-                        <div className="continue inter-semi-bold-white-15px">Confirm</div>
+                        <div className="continue inter-semi-bold-white-15px">Transfer</div>
                       </div>
                       <p className="address-id-to-send-nft-to">Address, ID to send NFT to.</p>
                       <h1 className="text-7">#00000001</h1>
-                      <div className="x0-signa-1">$0 SIGNA</div>
+                      <div className="x0-signa-1">
+                        <div className="x0-signa-1-level">LV 1</div>
+                        <div className="x0-signa-1-block"></div>
+                        <div className="x0-signa-1-reward">REWARD +10%</div>
+                      </div>
                       <div className="x16228">
-                        <div className="lv-1-1">LV {level || 1}</div>
+                        $0 SIGNA
+                        {/* <div className="lv-1-1">LV {level || 1}</div>
                         <img className="x6" src="img/myNftList/file---6@1x.png" alt="6" />
-                        <div className="reward-10-1">REWARD +10%</div>
+                        <div className="reward-10-1">REWARD +10%</div> */}
                       </div>
                       <CustomTextArea 
                         text= {inputValue} 
