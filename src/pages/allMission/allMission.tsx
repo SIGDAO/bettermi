@@ -4,6 +4,7 @@ import CSS from 'csstype';
 import { BackButton } from '../../components/button';
 import { useNavigate } from 'react-router-dom';
 import MenuBar from '../../components/menuBar';
+import { ShortTitleBar } from '../../components/titleBar';
 
 interface IChallengeCompletedProps {
 }
@@ -65,40 +66,7 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
   return (
     <div style={bgStyle}>
       <div style={centerLayoutStyle}>
-      <div className = "navbarChallengeComplete">
-        <div className = "container2">
-        {/* <a href="javascript:history.back()">
-          <div className="icon-arrow-left" style={customStyle} >
-            <img className="icon-arrow-left-1" src={`${process.env.PUBLIC_URL}/img/connectSucceed/icon-arrow-left-8@1x.png`} alt="icon-arrow-left" />
-          </div>
-        </a> */}
-        <div></div>
-          <div className = "banner">
-          {/* <a href="javascript:history.back()">
-          <div className="iconChallengeCompleted" >
-            <img className="icon-arrow-left-1" src={`${process.env.PUBLIC_URL}/img/connectSucceed/icon-arrow-left-8@1x.png`} alt="icon-arrow-left" />
-          </div>
-        </a> */}
-              <div className = "title">
-              <a style = {{marginRight:"31px"}} href="javascript:history.back()">
-                    <div className="iconChallengeCompleted" >
-                      <img className="icon-arrow-left-1" src={`${process.env.PUBLIC_URL}/img/connectSucceed/icon-arrow-left-8@1x.png`} alt="icon-arrow-left" />
-                    </div>
-                  </a>
-                <div>Feature Missions</div>
-              </div>
-              <div className = "iconBar">
-                <img style = {{height:"20px", width: "20px", alignSelf:"center"}} src={`${process.env.PUBLIC_URL}/img/home/bxs-Aicoach.svg`} alt="" />
-                <img style = {{height:"20px", alignSelf:"center"}} src = {`${process.env.PUBLIC_URL}/img/ic-settings-24px-1@1x.png`}></img>
-              </div>
-          </div>
-          <div className = "titleBar">
-            <button className = "button1">All</button>
-            <button className = "button2">Ongoing</button>
-            <button className = "button3">History</button>
-          </div>
-        </div>
-      </div>
+      <ShortTitleBar title='Feature Missions' backPath='/home'/>
 {/* The body part, which are the buttons */}
     <div className  = "mission-body-container">
         <div className = "mission-body">

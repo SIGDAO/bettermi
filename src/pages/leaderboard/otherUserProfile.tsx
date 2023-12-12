@@ -362,7 +362,7 @@ const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props)
           <div className = "profileHorizontalScroll"
             style={{
               backgroundColor: 'inherit',
-              width: '400px',
+              width: '390px',
               height: '400px',
               overflowY: 'scroll',
             }}

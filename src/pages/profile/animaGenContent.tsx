@@ -401,7 +401,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
           className="profileHorizontalScroll"
           style={{
             backgroundColor: "inherit",
-            width: "400px",
+            width: "390px",
             height: "45%",
             overflowY: "scroll",
           }}
@@ -553,7 +553,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
                 {/* <div className="card-number-5 inter-normal-white-15px">zoeeeee#1234</div> */}
               </div>
               <div className="button_save" onClick={() => handleSave()}>
-                <div className="continue-1 inter-semi-bold-white-15px">Save</div>
+                <div className="continue-1 inter-semi-bold-white-15px">Done!</div>
               </div>
               <div className="x16227-1">
                 <div className="discord-icon">

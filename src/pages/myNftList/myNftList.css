@@ -995,7 +995,8 @@ opacity: 0.5;
 .bettermidapp-mimi-nfts-send-address-1 .rewards {
   display: flex;
   height: 21px;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 20px;
   left: 168px;
   position: absolute;
   top: 52px;
@@ -1014,12 +1015,12 @@ opacity: 0.5;
 .bettermidapp-mimi-nfts-send-address-1 .place {
   letter-spacing: 0;
   line-height: 20px;
-  margin-bottom: -2.5px;
+  /* margin-bottom: -2.5px;
   margin-right: -2px;
-  margin-top: 0.5px;
+  margin-top: 0.5px; */
   text-align: center;
   white-space: nowrap;
-  width: 46px;
+  /* width: 46px; */
 }
 
 .bettermidapp-mimi-nfts-send-address-1 .search_bar {

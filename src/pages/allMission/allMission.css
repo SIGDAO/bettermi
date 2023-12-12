@@ -227,7 +227,7 @@ align-self: flex-start;
     /* height:calc(100% - 159px); */
     background:  linear-gradient(112deg, #221D4B 0%, #171717 100%);
     overflow: auto;
-    /* margin-top: 20px; */
+    margin-top: 88px;
 }
 .mission-body::-webkit-scrollbar {
   display: none;

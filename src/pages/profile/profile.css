@@ -20,8 +20,9 @@
   flex-direction: column;
   gap: 40px;
   margin-top: -47.48px;
-  min-height: 934px;
-  padding: 155.5px 23px;
+  /* : 810px; */
+  padding: 0px 23px;
+  padding-top: 155.5px;
   width: 480px;
   z-index: 1;
   overflow-y:auto;
@@ -31,9 +32,10 @@
 .overlap-design-layout {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   gap: 40px;
   min-height: 674px;
+  align-items: center;
 }
 
 .bettermidapp-profile-3::-webkit-scrollbar {
@@ -783,7 +785,7 @@
   position: relative;
   width: 152px;
   cursor: pointer;
-  margin-left:10px;
+  margin-left: 38px;
   margin-right: 12px;
 }
 
@@ -823,10 +825,14 @@
   margin-left: 0;
   /* margin-top: 2px; */
   width: 19px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .bettermidapp-profile-3 .discord-icon-content {
   width: 19px;
+  height: 15px;
 }
 
 

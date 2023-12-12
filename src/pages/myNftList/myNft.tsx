@@ -146,7 +146,7 @@ import { selectCurrentUsername } from '../../redux/profile';
                     <div className = "myNftBottom">
                     {isOtherUser === true?(
                       <>
-                        <button className = "myNftButtonDisabled" onClick = {equipNft}>AVALIBLE</button>
+                        <button className = "myNftButtonDisabled" onClick = {equipNft}>BUY</button>
                         <img 
                           onClick={() => {
                             setIsOpenPopup((prev) => !prev);
@@ -161,7 +161,7 @@ import { selectCurrentUsername } from '../../redux/profile';
                         </>
                     ):(
                       <>
-                          <button className = "myNftButton" onClick = {equipNft}>AVALIBLE</button>
+                          <button className = "myNftButton" onClick = {equipNft}>BUY</button>
                           <img 
                             onClick={() => {
                               setIsOpenPopup((prev) => !prev);

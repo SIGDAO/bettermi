@@ -67,6 +67,7 @@ const HorizontalScrollContainer = (props: any) => {
 const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const slides = [
     {'src': `${process.env.PUBLIC_URL}/img/home/News-Banner.png`, 'link': 'https://www.bettermi.io/', 'icon': `${process.env.PUBLIC_URL}/img/home/ic-reservation@1x.png`},
+    {'src': `${process.env.PUBLIC_URL}/img/home/Blockchain-Forum-Banner.png`, 'link': '', 'icon': `${process.env.PUBLIC_URL}/img/home/bxs-forum.svg`},
     {'src': `${process.env.PUBLIC_URL}/img/home/Leader-Board-Banner.png`, 'link': '/leaderboard', 'icon': `${process.env.PUBLIC_URL}/img/home/ic_leaderboard.png`},
     // {'src': `${process.env.PUBLIC_URL}/img/home/Secret-Coach-io-Banner.png`, 'link': ''},
     // {'src': `${process.env.PUBLIC_URL}/img/home/Secret-Coach-mimi-Banner.png`, 'link': ''},
