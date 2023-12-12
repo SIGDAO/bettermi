@@ -141,12 +141,14 @@
   width: 30px;
 }
 
+
+
 .bettermidapp-profile-3 .ic_add {
   height: 28px;
-  left: 61px;
+  /* left: 61px; */
   object-fit: cover;
-  position: absolute;
-  top: 94px;
+  /* position: absolute;
+  top: 94px; */
   width: 28px;
 }
 
@@ -774,10 +776,21 @@
   width: 30px;
 }
 
+.bettermidapp-profile-3 .overlap-group-profile p{
+  color: #FFFFFF80;
+  margin: 0;
+  text-decoration: none;
+}
+
 
 .bettermidapp-profile-3 .overlap-group-profile {
   background: linear-gradient(90deg, #0d0d0d 0%, #4136f1 102.54%);
   border: 1px solid;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
   border-color: var(--royal-blue);
   border-radius: 10px;
   flex: 0 0 auto;

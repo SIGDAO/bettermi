@@ -376,7 +376,7 @@ const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props)
               }}
               onWheel = {handleScroll}
             >
-              <Link to="https://test.signumart.io/">
+              <Link to="/marketplace/">
               <div className="overlap-group-profile">
                 <img className="add" src="img/profile/add-2@1x.png" alt="Add" />
                 <img

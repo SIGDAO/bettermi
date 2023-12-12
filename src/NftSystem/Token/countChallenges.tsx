@@ -43,7 +43,7 @@ function extractDateFromString(message: string) {
 
 async function getWorldTime() {
   try {
-    const response = await fetch("http://worldtimeapi.org/api/ip");
+    const response = await fetch("https://worldtimeapi.org/api/ip");
     const data = await response.json();
     const dateTime = new Date(data.datetime);
     var dateString = dateTime.toLocaleString();

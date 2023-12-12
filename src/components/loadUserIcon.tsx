@@ -83,7 +83,7 @@ return(
         ):
             isUpdating === true?
             (
-                <Link to="https://test.signumart.io/">
+                <Link to="/marketplace/">
                 <div className={finalClassNames.forEmptyIcon}>
                 <img
                     className={finalClassNames.forLoadingSign}
@@ -103,7 +103,7 @@ return(
                     alt="NFT_Avatar"
                 />
                 ):(
-                <Link to="https://test.signumart.io/">
+                <Link to="/marketplace/">
                 <div className={finalClassNames.forEmptyIcon}>
                     <img
                     className={finalClassNames.forAddSign}
