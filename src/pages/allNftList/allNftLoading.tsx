@@ -31,7 +31,7 @@ const AllNftLoading:React.FC<AllNftLoadingProps> = () => {
 
 const content: JSX.Element = (
     <>
-    <ShortTitleBar title='My NFTs' setting = {false}addSign = {false} aiCoach = {false} filter = {false} importButton = {false} />
+    <ShortTitleBar title='NFT Marketplace' setting = {false}addSign = {false} aiCoach = {false} filter = {false} importButton = {false} />
     <div className="screen">
     <div className="bettermidapp-generate-free-nft-minting">
       <div className="bg_2-JdJl2l">
