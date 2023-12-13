@@ -61,8 +61,9 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
     console.log();
     if(rewardString == undefined || !challengeNumber) { return; }
     else{
+      console.log("reward string is",rewardString)
       //await TransferToken(nodeHost, userAccountId, rewardString);
-      const reward:string = String(parseInt(rewardString!,10));
+      const reward:string = String(parseFloat(rewardString!));
       console.log(reward);
       await TransferTokenWithMessage(nodeHost, userAccountId, reward, parseInt(challengeNumber![challengeNumber!.length-1]));
       return;
@@ -82,9 +83,10 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
   React.useEffect(() => {
     setPathname(() => {
       if (location.pathname === '/NFTTransferCompleted') {
-        return '/myNftList';
+        // return '/NftList';
+        return '/missionChallenge';
       } else {
-        return '/allMission';
+        return '/missionChallenge';
       }
     });
   }, [location]);
@@ -95,7 +97,7 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
   const content: JSX.Element = (
     <div className="screen">
       <div className="bettermidapp-challenge-finished-1">
-        <ShortTitleBar title='' setting={false} aiCoach={false} transparent={true} />
+        {/* <ShortTitleBar title='' setting={false} aiCoach={false} transparent={true} /> */}
         <div className="x16219-iwUDzs">
           <div className="you-have-earned-75VOY2">{SmallTitle}</div>
           <h1 className="title-75VOY2">Congratulations !</h1>

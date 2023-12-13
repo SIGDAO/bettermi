@@ -16,6 +16,8 @@ interface IShortTitleBarProps {
   importButton?: boolean;
   setIsOpenImport?: (isOpenImport: boolean) => void;
   isOpenImport?: boolean;
+  customiseBackButton?:boolean;
+  customiseBackButtonLink?:string;
 }
 
 
@@ -30,7 +32,8 @@ const settingIcon: JSX.Element = (
 )
 
 export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (props) => {
-  const { title, aiCoach, help, transparent,filter,addSign, setting, backButton,importButton,setIsOpenImport,isOpenImport } = props;
+  const { title, aiCoach, help, transparent,filter,addSign, setting, backButton,importButton,setIsOpenImport,isOpenImport,customiseBackButton,customiseBackButtonLink
+   } = props;
   return (
     <div className="title-bar-layout">
       <div className={transparent ? "transparent-title-bar-container" : "title-bar-container"}
@@ -70,6 +73,17 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
           </div>
         </a>
         }
+        {customiseBackButton === false && customiseBackButtonLink == null ? null :
+          <Link to={customiseBackButtonLink!}>
+                <div className="icon-arrow-left-container icon-arrow-left">
+                    <img
+                      className="icon-arrow-left-img icon-arrow-left"
+                      src={process.env.PUBLIC_URL + "/img/icon-arrow-left-12@1x.png"}
+                      alt="icon-arrow-left"
+                      />
+                </div>
+              </Link>
+              }
         {aiCoach === false ? null :(
           <Link to="/aiCoachSelect">
             <div className="ic_settings_24px-container ic_settings_24px">

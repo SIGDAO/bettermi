@@ -212,7 +212,7 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
   const content: JSX.Element = (
     <div className="screen">
       <div className="bettermidapp-challenges-1">
-        <ShortTitleBar title={title} />
+        <ShortTitleBar title={title} backButton = {false} customiseBackButton = {true} customiseBackButtonLink="/home"/>
         <img className="photo-7K5ObS" src="img/missionChallenge/photo@1x.png" alt="Photo" />
         <div className="challenges-card-7K5ObS">
           <img className="layer-nLfc9z" src="img/missionChallenge/layer-1@1x.png" alt="Layer" />

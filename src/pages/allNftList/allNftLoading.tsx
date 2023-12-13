@@ -2,9 +2,33 @@ import React from 'react';
 import '../loadingMinting/loadingMinting.css'
 import { CenterLayout } from '../../components/layout';
 import { ShortTitleBar } from '../../components/titleBar';
+import { useEffect } from 'react';
 interface AllNftLoadingProps {
 }
 const AllNftLoading:React.FC<AllNftLoadingProps> = () => {
+  const [count, setCount] = React.useState(1);
+  useEffect(() => {
+    const incrementInterval = 240000 / 96; // Time divided by the number of increments
+    // const incrementInterval = 5000 / 100;
+    const timer = setInterval(() => {
+      if (count < 100) {
+        setCount((prevCount) => prevCount + 1);
+      }
+      // if (count => 100 ) {
+      // } else {
+      //   setIsLoading(false);
+      //   navigate('/generateFreeNFT');
+      //   clearInterval(timer);
+      // }
+    }, incrementInterval);
+
+    return () => {
+      // setIsLoading(false);
+      // navigate('/generateFreeNFT');
+      clearInterval(timer);
+    };
+  }, []);
+
 const content: JSX.Element = (
     <>
     <ShortTitleBar title='My NFTs' setting = {false}addSign = {false} aiCoach = {false} filter = {false} importButton = {false} />
@@ -29,6 +53,7 @@ const content: JSX.Element = (
           <div className="mimi-loading">
             <img className='mimi-loading-image' src="/img/loadingMinting/mimi-dancing-for-loadin-page.gif" alt="" />
           </div>
+          <div className="x50-7ckAMs">{count}%</div>
           {/* <a href="bettermidapp-settings-1.html">
             <div className="ic_settings_24px-7ckAMs ic_settings_24px">
                 <img

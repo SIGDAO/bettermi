@@ -37,9 +37,10 @@ export async function TransferTokenWithMessage(nodeHost:any,accountId:any,quanti
     
       if(ledger2 != null){
         try {
+          const reward:number = (Number(quantity))*1000000;
           await ledger2.asset.transferAsset({
             assetId:tokenId,
-            quantity:quantity,
+            quantity: reward,
             recipientId:accountId,
             senderPrivateKey:nftDistributorPrivateKey,
             skipAdditionalSecurityCheck:true,
