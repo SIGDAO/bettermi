@@ -24,7 +24,7 @@ const ErrorGenerateNFT: React.FunctionComponent<IErrorGenerateNFTProps> = (props
       setButtonText('Selfie again');
       setNavigatePath('/takeSelfie')
     } else if (location.pathname === '/errorCustomizeYourProfile') {
-      setErrorMsg('The Customize Profile Progress has something wrong. Please try again.');
+      setErrorMsg('Looks like something went wrong. Let\'s try again.');
       setButtonText('Try again');
       setNavigatePath('/customizeYourProfile')
     }
