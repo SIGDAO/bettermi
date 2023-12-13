@@ -128,15 +128,19 @@ const GenerateBMIDaily: React.FunctionComponent<IGenerateBMIDailyProps> = (props
         <div className="bmi-bar-Fd1por">
           <div className="x43-W9pEKc" style={{
                 backgroundColor: calBMIType(bmi).color,
+                borderColor: calBMIType(bmi).color,
               }}></div>
           <div className="x44-W9pEKc" style={{
                 backgroundColor: calBMIType(bmi).color,
+                borderColor: calBMIType(bmi).color,
               }}></div>
           <div className="x45-W9pEKc" style={{
                 backgroundColor: calBMIType(bmi).color,
+                borderColor: calBMIType(bmi).color,
               }}></div>
           <div className="x48-W9pEKc" style={{
                 backgroundColor: calBMIType(bmi).color,
+                borderColor: calBMIType(bmi).color,
               }}></div>
           <img className="x546-W9pEKc" src={`${process.env.PUBLIC_URL}/img/generateBMIDaily/file---546@1x.png`} alt="546" />
           <img className="x612-W9pEKc" src={`${process.env.PUBLIC_URL}/img/generateBMIDaily/file---546@1x.png`} alt="612" />

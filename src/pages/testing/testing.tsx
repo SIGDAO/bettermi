@@ -29,15 +29,27 @@ export default function Testing() {
 
   return (
     // <button onClick={() => handleSendMsg()}>
-    <div className="dark-bg">
-      <img src={process.env.PUBLIC_URL + "/img/home/bxs-News.svg"} alt="" />
-      <img src={process.env.PUBLIC_URL + "/img/home/bxl-discord-alt.svg"} alt="" />
-      <img src={process.env.PUBLIC_URL + "/img/home/home/bxs-Aicoach.svg"} alt="" />
-      <img src={process.env.PUBLIC_URL + "/img/home/bxs-forum.svg"} alt="" />
-      <img src={process.env.PUBLIC_URL + "/img/home/bxs-Leaderboard.svg"} alt="" />
-
-      <p>{booleanStates}</p>
-    </div>
+    <>
+      <img className="photo" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/photo-1@1x.png`} alt="Photo" />
+      {/* <BackButton /> */}
+      {isLoading === true ? (
+        <div className="x0"></div>
+      ) : (
+        <>
+          <img className="x0" src={`https://ipfs.io/ipfs/${nftIpfsAddress}`} alt="0" />
+          <h1 className="text-1">#{nftNumber}</h1>
+        </>
+      )}
+      <div className="x16206">
+        <div className="lv-1">LV 1</div>
+        <img className="x6" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/file---6@1x.png`} alt="6" />
+        <div className="reward-10">REWARD +10%</div>
+      </div>
+      <div className="x0-signa">$0 SIGNA</div>
+      <div className="button_-import" onClick={() => navigate("/customizeYourProfile", { state: { nftImageAddress: nftIpfsAddress, nftId: nftId } })}>
+        <div className="continue inter-semi-bold-white-15px">Next</div>
+      </div>
+    </>
     // <button>
     //   {booleanStates}
     // </button>

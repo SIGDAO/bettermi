@@ -164,8 +164,8 @@ export const NavigateToTakeSelfieButton: React.FunctionComponent = () => {
   const Ledger2 = useLedger();
   const [isActive, setIsActive] = React.useState<boolean>(false);
   const [timeDifference, setTimeDifference] = useState('');
-  // const isSelfie = useSelector(selectCurrentIsSelfie);
-  const isSelfie = useState<boolean>(true);
+  const isSelfie = useSelector(selectCurrentIsSelfie);
+  // const isSelfie = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState(true);
   // const [isMidnight, setIsMidnight] = useState(false);
   
