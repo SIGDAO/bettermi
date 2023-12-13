@@ -73,7 +73,7 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
           </div>
         </a>
         }
-        {customiseBackButton === false && customiseBackButtonLink == null ? null :
+        {/* {customiseBackButton === false && customiseBackButtonLink == null ? null :
           <Link to={customiseBackButtonLink!}>
                 <div className="icon-arrow-left-container icon-arrow-left">
                     <img
@@ -83,7 +83,7 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
                       />
                 </div>
               </Link>
-              }
+              } */}
         {aiCoach === false ? null :(
           <Link to="/aiCoachSelect">
             <div className="ic_settings_24px-container ic_settings_24px">
@@ -133,7 +133,7 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
         importButton === false ? null :
           setIsOpenImport === undefined ? null :
         (
-          <Button className = "importButton inter-semi-bold-white-12px" onClick = {() => setIsOpenImport(!isOpenImport)}>Import Nft</Button>
+          <Button className = "importButton inter-semi-bold-white-12px" onClick = {() => setIsOpenImport(!isOpenImport)}>Import NFT</Button>
         )
       }
 

@@ -119,7 +119,7 @@ const Setting: React.FunctionComponent<ISettingProps> = (props) => {
           </div>
           <div className="x16199-VD8XDI">
             <div className="x31">
-              <div className="get-sig-dao-token-R3QCCH inter-normal-white-15px ">Get SigDAO Token</div>
+              <div className="get-sig-dao-token-R3QCCH inter-normal-white-15px ">Get SIGDAO Token</div>
             </div>
             <img
               className="icon-ionic-ios-arrow-forward brightness-0-5"
