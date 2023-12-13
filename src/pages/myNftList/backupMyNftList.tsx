@@ -450,7 +450,7 @@ return(
               className = "myNftButtonOnDuty" 
               style = {{backgroundColor:"#39B3AF!important"}}
             >ON DATE</button>
-             <img  className = "myNftButtomArrow" src  = {`${process.env.PUBLIC_URL}/img/NftList/ic-send@1x.png`} onClick={() => setIsOpenPopup((prev) => !prev)}></img>
+             {/* <img  className = "myNftButtomArrow" src  = {`${process.env.PUBLIC_URL}/img/NftList/ic-send@1x.png`} onClick={() => setIsOpenPopup((prev) => !prev)}></img> */}
              </div>
            </div>
            ):(
