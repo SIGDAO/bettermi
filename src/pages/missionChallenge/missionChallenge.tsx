@@ -212,7 +212,7 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
   const content: JSX.Element = (
     <div className="screen">
       <div className="bettermidapp-challenges-1">
-        <ShortTitleBar title={title} backButton = {false} customiseBackButton = {true} customiseBackButtonLink="/home"/>
+        <ShortTitleBar title={title} backButton = {true} customiseBackButton = {true} customiseBackButtonLink="/home"/>
         <img className="photo-7K5ObS" src="img/missionChallenge/photo@1x.png" alt="Photo" />
         <div className="challenges-card-7K5ObS">
           <img className="layer-nLfc9z" src="img/missionChallenge/layer-1@1x.png" alt="Layer" />
@@ -226,8 +226,9 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
                     <Button
                       onClick={async () => {
                         
-
-                        if (isOverDailyPlayTimesLimit[index]  && allowedChallengeList[index] === true) {
+                        const numChallengesPlayed = await CountChallenges(userAccountId, ledger2);
+                        console.log(numChallengesPlayed);
+                        if (isOverDailyPlayTimesLimit[index]  && allowedChallengeList[index] === true && numChallengesPlayed[index] < 3) {
                           navigate(`/challengeCountdown/${index + 1}`);
                         }
                       }}

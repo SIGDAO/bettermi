@@ -51,6 +51,9 @@ export interface myNftList {
   image: string;
   nftId: string;
 }
+function isNumber(inputString) {
+  return !isNaN(parseFloat(inputString)) && isFinite(inputString);
+}
 
 const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
   const { isUpdatingDescription, myNfts, setIsUpdatingDescription, isOtherUser, equippedNftIpfsAddress } = props;
@@ -66,12 +69,14 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
   const [isOpenPopup, setIsOpenPopup] = useState<boolean>(false);
   const [userNftTokenList, setNftTokenList] = useState<myNftList[]>([]);
   const [inputValue, setInputValue] = useState("");
+  const [inputPrice, setInputPrice] = useState("");
   const [inputAddress, setInputAddress] = useState("");
   const [level, setLevel] = useState("1");
   const [hasImportError, setHasImportError] = useState<boolean>(false);
   const [importSuccess, setImportSuccess] = useState<boolean>(false);
   const [isOpenImport, setIsOpenImport] = useState<boolean>(false);
   const [nftNumber, setNftNumber] = useState<number>();
+  const [message, setMessage] = useState<string>("");
   const gender = useSelector(selectCurrentGender);
   const dataFetchedRef = useRef(false);
   const nftContractChecked = useRef(false);
@@ -316,7 +321,41 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
     );
   });
   const setSell = async (selectedNftId: string) => {
-    console.log("selectedNftID", selectedNftId);
+    try {
+      if (isNumber(inputPrice) === false) {
+        setMessage("invalid value");
+      } else {
+        if (inputValue === "sell") {
+          console.log("selectedNftID", selectedNftId);
+          console.log(inputValue);
+          var price = (Number(inputPrice) * 1000000).toString();
+          const transaction = await ledger2.contract.callContractMethod({
+            contractId: selectedNftId,
+            amountPlanck: "32000000",
+            senderPublicKey: userAccountpublicKey,
+            feePlanck: "1000000",
+            methodHash: "1", /// your method code
+            methodArgs: [price, 26, 1], /// arguments up to 3 arguments numeric
+          });
+          await Wallet.Extension.confirm(transaction.unsignedTransactionBytes);
+        }
+        if (inputValue === "cancel") {
+          const transaction = await ledger2.contract.callContractMethod({
+            contractId: selectedNftId,
+            amountPlanck: "32000000",
+            senderPublicKey: userAccountpublicKey,
+            feePlanck: "1000000",
+            methodHash: "5", /// your method code
+            methodArgs: ["123", 26, 1], /// arguments up to 3 arguments numeric
+          });
+          await Wallet.Extension.confirm(transaction.unsignedTransactionBytes);
+        }
+      }
+      setIsOpenPopup(!isOpenPopup);
+    } catch (e) {
+      setMessage("error occur");
+      console.log(e);
+    }
   };
   const transferNft = async (assetId: string) => {
     try {
@@ -377,7 +416,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
     setInputValue(event.target.value);
   };
   const handleAddressChange = (event: any) => {
-    setInputAddress(event.target.value);
+    setInputPrice(event.target.value);
   };
   const unequipNft = async () => {
     const waitingToBeChangedDescription = await ledger2.account.getAccount({ accountId: userAccountId });
@@ -485,24 +524,33 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
                     <img className="seperate-line-1" src="img/myNftList/seperate-line-1@1x.png" alt="Seperate line" />
                     <img className="bg" src="img/myNftList/bg-2@1x.png" alt="BG" />
                     <img className="seperat-line-1 seperat-line-3" src="img/myNftList/seperat-line-3@1x.png" alt="Seperat line" />
-                    <div className="transfer-n-ft inter-bold-royal-blue-15px">TRANSFER NFT</div>
-                    <div className="recipient inter-bold-royal-blue-15px">RECIPIENT</div>
+                    <div className="transfer-n-ft inter-bold-royal-blue-15px">SELL YOUR NFT</div>
+                    <div className="recipient inter-bold-royal-blue-15px">ENTER YOUR PRICE</div>
                     <div className="nft-details inter-bold-royal-blue-15px">NFT DETAILS</div>
                     <div className="rewards">
                       <div className="ic_send-1">
                         <img className="ic_send-1-content" src="img/myNftList/ic-send-1@1x.png" alt="" />
                       </div>
-                      <div className="place inter-semi-bold-white-18px">Sell</div>
-                    </div>
-                    <div className="search_bar"></div>
-                    <CustomTextArea
+                      {/* <CustomTextArea
                       text={inputAddress}
                       setText={setInputAddress}
                       width={300}
                       height={56}
+                      importClassName="nftPriceInputBoxImport"
+                      activeClassName="nftPriceInputBoxActive"
+                      placeholder="Enter your price here"
+                    /> */}
+                      <div className="place inter-semi-bold-white-18px">Sell</div>
+                    </div>
+                    <div className="search_bar"></div>
+                    <CustomTextArea
+                      text={inputPrice}
+                      setText={setInputPrice}
+                      width={300}
+                      height={56}
                       importClassName="card-number-1 search_bar-1 search_bar-4"
                       activeClassName="active-card-number-1 search_bar-1 search_bar-4"
-                      placeholder="e.g. TS-9DJR-MGA2-VH44-5GMXY"
+                      placeholder="Your Nft Price in Sigdao"
                     />
                     {/* <textarea
                         className="search_bar-1 search_bar-4"
@@ -515,7 +563,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
                     <div className="button_save" onClick={() => setSell(selectedNftId)}>
                       <div className="continue inter-semi-bold-white-15px">Transfer</div>
                     </div>
-                    <p className="address-id-to-send-nft-to">Address, ID to send NFT to.</p>
+                    <p className="address-id-to-send-nft-to">{message}</p>
                     <h1 className="text-7">#00000001</h1>
                     <div className="x0-signa-1">
                       <div className="x0-signa-1-level">LV 1</div>
@@ -523,7 +571,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
                       <div className="x0-signa-1-reward">REWARD +10%</div>
                     </div>
                     <div className="x16228">
-                      $0 SIGNA
+                      YOU ARE SELLING YOUR NFT
                       {/* <div className="lv-1-1">LV {level || 1}</div>
                         <img className="x6" src="img/myNftList/file---6@1x.png" alt="6" />
                         <div className="reward-10-1">REWARD +10%</div> */}
@@ -535,7 +583,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
                       height={121}
                       importClassName="card-number-1 search_bar-4 search_bar-3"
                       activeClassName="active-card-number-1 search_bar-4 search_bar-3"
-                      placeholder="You may attach some text or binary data to this transaction. Here you also enter the memo required by many exchanges"
+                      placeholder="Enter sell for set sell and cancel for cancel sell"
                     />
                     {/* <textarea
                         className="search_bar-3 search_bar-4"
@@ -550,7 +598,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
                           by many exchanges
                         </p>
                       </div> */}
-                    <div className="additional-text inter-bold-royal-blue-15px">ADDITIONAL TEXT</div>
+                    <div className="additional-text inter-bold-royal-blue-15px">YOUR CHOICE</div>
                   </div>
                 </div>
               </div>

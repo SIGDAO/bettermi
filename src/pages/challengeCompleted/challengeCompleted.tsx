@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './challengeCompleted.css'
-import { Link, useLocation } from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { CenterLayout } from '../../components/layout';
 import { ShortTitleBar } from '../../components/titleBar';
 import { missionList } from '../../data/featureMissionList';
@@ -10,6 +10,8 @@ import { selectWalletNodeHost } from '../../redux/useLedger';
 import { accountId } from '../../redux/account';
 import { TransferTokenWithMessage } from '../../NftSystem/TokenTransfers';
 import { useRef,useEffect } from 'react';
+import { CountChallenges } from '../../NftSystem/Token/countChallenges';
+import { LedgerClientFactory } from '@signumjs/core';
 
 interface IChallengeCompletedProps {
   NFT?: boolean;
@@ -31,11 +33,12 @@ const displayReawrd = ( pathname: string ): string | undefined => {
 const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (props) => {
   const { NFT } = props;
   const location = useLocation();
+  const navigate = useNavigate();
   const [pathname, setPathname] = React.useState<string>('');
   const nodeHost = useSelector(selectWalletNodeHost);
   const userAccountId = useSelector(accountId);
   const distributed = useRef(false);
-
+  const ledger2 = LedgerClientFactory.createClient({ nodeHost });
   ///Anderson's code starts here
 
   useEffect(() => {
@@ -54,18 +57,30 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
 
 //Anderson's code starts here
 
-  const TransferTokenToUser = async (nodeHost: string, userAccountId: string, reward: string) => {
+  const TransferTokenToUser = async (nodeHost: string, userAccountId: string, reward: string,ledger2:any) => {
     var rewardString:string|undefined = displayReawrd(location.state?.reward);
     const challengeNumber:string[]|null = location.state?.reward.split('/');
     console.log(challengeNumber);
     console.log();
     if(rewardString == undefined || !challengeNumber) { return; }
     else{
+      const index:number = Number(challengeNumber[2]);
+      const numChallengesPlayed = await CountChallenges(userAccountId, ledger2);
+      console.log("number of challenges played", numChallengesPlayed);
       console.log("reward string is",rewardString)
+      console.log("index is ", index);
       //await TransferToken(nodeHost, userAccountId, rewardString);
       const reward:string = String(parseFloat(rewardString!));
       console.log(reward);
+      if(numChallengesPlayed[index-1] < 3){
+        console.log("called this argument")
+        console.log(numChallengesPlayed[index])
       await TransferTokenWithMessage(nodeHost, userAccountId, reward, parseInt(challengeNumber![challengeNumber!.length-1]));
+      }
+      else{
+        alert("you have already played three times")
+        navigate("/missionChallenge");
+      }
       return;
     }
   };
@@ -76,7 +91,7 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
 
 
     if (!NFT && distributed.current === false) {
-      TransferTokenToUser(nodeHost, userAccountId, location.state?.reward); //Anderson's code
+      TransferTokenToUser(nodeHost, userAccountId, location.state?.reward,ledger2); //Anderson's code
       distributed.current = true;//Anderson's code
     }
   });

@@ -9,6 +9,8 @@ import { useSelector } from "react-redux";
 import { selectWalletNodeHost } from "../../redux/useLedger";
 import { LedgerClientFactory } from "@signumjs/core";
 import { BuyNft } from "../../NftSystem/BuyNft/buyNft";
+import { accountId } from "../../redux/account";
+import { accountPublicKey } from "../../redux/account";
 
 interface AllNftProps {
   imageAddress: string;
@@ -27,8 +29,16 @@ const AllNft: React.FunctionComponent<AllNftProps> = (props) => {
   const { appName, Wallet, Ledger } = useContext(AppContext);
   const nodeHost = useSelector(selectWalletNodeHost);
   const ledger2 = LedgerClientFactory.createClient({ nodeHost });
+  const userAccountId = useSelector(accountId);
+  const codeHashIdForNft = process.env.REACT_APP_NFT_CONTRACT_MACHINE_CODE_HASH!;
+  const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
+  const nftDistributorPublicKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PUBLIC_KEY!;
+  const nftDistributorPrivateKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PRIVATE_KEY!;
+  const userAccountPublicKey = useSelector(accountPublicKey);
   const Buy = async () => {
-    BuyNft(Wallet, ledger2, nftId!, nftPrice!);
+    if(nftStatus === "Buy"){
+    BuyNft(Wallet, ledger2, nftId!, nftPrice!,userAccountId,codeHashIdForNft,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey,userAccountPublicKey);
+    }
   }
   return (
     <>

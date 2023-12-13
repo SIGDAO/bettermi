@@ -1326,6 +1326,57 @@ opacity: 0.5;
   width: 28px;
 }
 
+.nftPriceInputBoxImport{
+  color: var(--cadet-blue);
+  font-family: var(--font-family-inter);
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 22px;
+  /* min-height: 87px; */
+  width: 262px;
+  margin: 0;
+  align-items: flex-end;
+  display: flex;
+  height: 56px;
+  min-width: 300px;
+  padding: 16.5px 15px;
+  top: 205px;
+  color: #FFFFFF;
+  background-color: #FFFFFF08;
+  border-radius: 10px;
+  position: absolute;
+  cursor:text;
+}
+.nftPriceInputBoxImport:hover{
+  cursor:text;
+}
+.nftPriceInputBoxActive{
+  cursor:text;
+}
+
+.nftPriceInputBoxActive{
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 22px;
+  width: 262px;
+  margin: 0;
+  align-items: flex-end;
+  display: flex;
+  height: 56px;
+  min-width: 300px;
+  padding: 16.5px 15px;
+  top: 205px;
+  color: #FFFFFF;
+  background-color: #FFFFFF08;
+  border-radius: 10px;
+  position: absolute;
+  cursor:text
+}
+
 
 /* nft import screen css */
 

@@ -18,6 +18,7 @@ const AllNftList:React.FC <IAllNftListProps>= (props) => {
     const {CustomModel,openModel,setOpenModel,nftInfoArray} = props;
     //const{myNfts} = props;
     const mobile = process.env.REACT_APP_MOBILE === 'true';
+    const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
     let height: string | number;
     let width: string | number;
     const bgStyle: CSS.Properties = mobile ?
@@ -60,8 +61,13 @@ const AllNftList:React.FC <IAllNftListProps>= (props) => {
   }
   const allNftList:number[] = [1,2,3,4];
   const displayMyNft = nftInfoArray.map((nft) => {
-    return (
-        <AllNft nftId = {nft.contractId}nftStatus = {nft.nftStatus} nftNumber = {nft.contractId} nftLevel = {nft.nftLevel} nftOwner = {nft.contractOwner} nftPrice = {nft.contractPrice} imageAddress={nft.imageUrl} openModel = {openModel} setOpenModel={setOpenModel}/>
+    // if(nft.contractOwner === nftDistributor || nft.nftStatus === "Not For Sale"){
+    // return (
+    //    <></>
+    // )
+    // }
+    return(
+      <AllNft nftId = {nft.contractId}nftStatus = {nft.nftStatus} nftNumber = {nft.contractId} nftLevel = {nft.nftLevel} nftOwner = {nft.contractOwner} nftPrice = {nft.contractPrice} imageAddress={nft.imageUrl} openModel = {openModel} setOpenModel={setOpenModel}/>
     )
     });
     return (

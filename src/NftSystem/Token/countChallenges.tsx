@@ -113,7 +113,8 @@ export async function CountChallenges(accountId: string, Ledger2: any): Promise<
     }
     
     for (var i = 0; i < unconfirmedTransaction.unconfirmedTransactions.length; i++) {
-      if (unconfirmedTransaction.unconfirmedTransactions[i] != undefined) {
+      if (unconfirmedTransaction.unconfirmedTransactions[i] != undefined && unconfirmedTransaction.unconfirmedTransactions[i].attachment != undefined) {
+        try{
         const message = unconfirmedTransaction.unconfirmedTransactions[i].attachment.message;
         if (!message) {
           continue;
@@ -136,6 +137,12 @@ export async function CountChallenges(accountId: string, Ledger2: any): Promise<
             }
           }
         }
+      }
+      catch(error){
+        console.log("error is",error);
+
+        continue;
+      }
       }
     }
     //Check string from unconfirmedList
