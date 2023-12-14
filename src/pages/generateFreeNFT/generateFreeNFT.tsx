@@ -7,12 +7,15 @@ import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { FindNftIpfsAddressWithConractId, IsUserUpdatingIcon } from "../../NftSystem/updateUserNftStorage";
 import { useLedger } from "../../redux/useLedger";
+import { useDispatch } from "react-redux";
+import { profileSlice } from "../../redux/profile";
 
 interface GenerateFreeNFTProps {}
 
 const GenerateFreeNFT: React.FunctionComponent<GenerateFreeNFTProps> = (props) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
   const Ledger = useLedger();
   console.log("location.state is ", location.state);
   const nftId = location.state.nftId;
@@ -23,6 +26,7 @@ const GenerateFreeNFT: React.FunctionComponent<GenerateFreeNFTProps> = (props) =
     FindNftIpfsAddressWithConractId(Ledger, nftId)
       .then((result) => {
         console.log("reslt is ", result);
+        dispatch(profileSlice.actions.setNFTImageAddress(result.nftImage));
         setNftIpfsAddress(result.nftImage);
         setNftNumber(result.nftNumber);
         setIsLoading(false);

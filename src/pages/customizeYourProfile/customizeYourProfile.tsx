@@ -4,7 +4,7 @@ import { CenterLayout } from "../../components/layout";
 import { BackButton } from "../../components/button";
 import "./customizeYourProfile.css";
 import generateName from "../../components/generateName";
-import { profileSlice } from "../../redux/profile";
+import { profileSlice, selectCurrentNFTImageAddress } from "../../redux/profile";
 import { store } from "../../redux/reducer";
 import { RandomGenNameInput } from "../../components/input";
 import path from "path";
@@ -29,7 +29,7 @@ const CustomizeYourProfile: React.FunctionComponent<ICustomizeYourProfileProps> 
   const location = useLocation();
   console.log("pathname is ", pathname);
   console.log("pathname state is", location.state);
-  const nftImage = location.state?.nftImageAddress;
+  const nftImage = location.state?.nftImageAddress || useSelector(selectCurrentNFTImageAddress);
   const nftId = location.state?.nftId;
   const userAccountId = useSelector(accountId);
   const userAccountpublicKey = useSelector(accountPublicKey);

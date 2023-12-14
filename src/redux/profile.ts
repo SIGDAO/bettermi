@@ -12,6 +12,7 @@ export interface ProfileState {
   gender: string;
   birthday: Date | null;
   isSelfie: boolean;
+  NFTimageAddress: string;
 }
 
 export interface BMIState {
@@ -94,6 +95,12 @@ export const profileSlice = createSlice({
     clearIsSelfie: (state) => {
       state.isSelfie = false;
     },
+    setNFTImageAddress: (state, action: PayloadAction<string>) => {
+      state.NFTimageAddress = action.payload;
+    },
+    clearNFTImageAddress: (state) => {
+      state.NFTimageAddress = "";
+    },
     clearAll: (state) => {
       state.selfiePath = "";
       state.username = "";
@@ -120,3 +127,4 @@ export const selectCurrentDiscordUsername = (state: any) => state.profile.discor
 export const selectCurrentDescription = (state: any) => state.profile.description;
 export const selectCurrentAboutYourself = (state: any) => state.profile.aboutYourself;
 export const selectCurrentIsSelfie = (state: any) => state.profile.isSelfie;
+export const selectCurrentNFTImageAddress = (state: any) => state.profile.NFTimageAddress;
