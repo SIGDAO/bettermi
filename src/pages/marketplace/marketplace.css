@@ -396,6 +396,7 @@
   line-height: 14px;
   text-align: left;
   top: 2px;
+  position: absolute;
   white-space: nowrap;
   width: 11px;
 }
@@ -563,6 +564,18 @@
   width: 107px;
 }
 
+.bettermidapp-marketplace-1 .nft_-avatar-new {
+  background-color: transparent;
+  border-radius: 10px;
+  height: calc(100.00% - 43px);
+  left: 20px;
+  object-fit: cover;
+  position: absolute;
+  top: 22px;
+  width: 107px;
+  border: solid 1px #4136F1;
+}
+
 .bettermidapp-marketplace-1 .partner-company {
   background-color: transparent;
   position: absolute;
@@ -589,7 +602,7 @@
 }
 
 
-.bettermidapp-marketplace-1 .x0 {
+.bettermidapp-marketplace-1 .x0-marketplace {
   background-color: transparent;
   left: 0px;
   position: absolute;

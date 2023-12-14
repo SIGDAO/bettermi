@@ -12,7 +12,7 @@ export const rewardDetailList: rewardDetailListProps[] = [
     id: 1,
     title: 'Master Collector',
     reward: 20,
-    description: `Unlocked by users who acquire 3 NFTs from our collection. As a reward, users are granted 20 Sigdao, empowering them with valuable resources to enhance their overall experience.`,
+    description: `Unlocked by users who acquire 3 NFTs from our collection. As a reward, users are granted 20 SIGDAO, empowering them with valuable resources to enhance their overall experience.`,
     bgImagePath: 'photo-1@1x.png',
     requireTimes: 3,
   },{
@@ -25,13 +25,11 @@ export const rewardDetailList: rewardDetailListProps[] = [
     requireTimes: 60,
   },{
     id: 3,
-    title: 'Social Butterfly',
-    description: `Awarded to users who build a thriving network of 75 friends. As a gesture of appreciation, 
-                  users receive a complimentary healthy product, fostering meaningful connections 
-                  and encouraging a supportive environment.`,
-    bgImagePath: 'photo-2@1x.png',
+    title: 'Wellness Milestone',
+    description: `As users hit the first healthy BMI range, they achieve a significant accomplishment. This achievement marks the commitment to wellness and is celebrated with a special reward`,
+    bgImagePath: 'Wellness-Milestone-Cover.png',
     reward: 'Get a Free Health related Product',
-    requireTimes: 75,
+    requireTimes: 1,
   },
   {
     id: 4,

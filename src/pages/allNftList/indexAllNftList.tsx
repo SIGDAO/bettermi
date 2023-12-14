@@ -247,7 +247,7 @@ if(mergedArray[InfoJson.index].contractOwner !== nftDistributor){
     //           nftStatus = "Buy";
     //         }
     //         if(nftStatus === "18"){
-    //           nftStatus = "For Sell in Sigdao and Signa";
+    //           nftStatus = "For Sell in SIGDAO and Signa";
     //         }
     //         if(nftStatus === "19"){
     //           nftStatus = "For Auction in Signa";

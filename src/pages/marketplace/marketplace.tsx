@@ -58,7 +58,7 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
                 <div className="goal-data">
                   <div className="x893"></div>
                   <div className="goal-xzndZB goal">
-                    <div className="x0-1Jks0w x0 inter-semi-bold-keppel-14px">0</div>
+                    <div className="x0-1Jks0w x0-marketplace inter-semi-bold-keppel-14px">0</div>
                     <div className="x3-1Jks0w x3 inter-semi-bold-white-14px">/ 3</div>
                   </div>
                 </div>
@@ -82,7 +82,7 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
                 <div className="goal-data">
                   <div className="x893"></div>
                   <div className="goal-unXPox goal">
-                    <div className="x0-KUFXm3 x0 inter-semi-bold-keppel-14px">0</div>
+                    <div className="x0-KUFXm3 x0-marketplace inter-semi-bold-keppel-14px">0</div>
                     <div className="x3-KUFXm3 x3 inter-semi-bold-white-14px">/ 60</div>
                   </div>
                 </div>
@@ -106,18 +106,18 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
                 <div className="goal-data">
                   <div className="x893"></div>
                   <div className="goal-4xB4wg goal">
-                    <div className="x0-mOFaDT x0 inter-semi-bold-keppel-14px">0</div>
+                    <div className="x0-mOFaDT x0-marketplace inter-semi-bold-keppel-14px">0</div>
                     <div className="x3-mOFaDT x3 inter-semi-bold-white-14px">/ 50</div>
                   </div>
                 </div>
               </div>
             </Link>
-            {/* <Link to="/rewardDetail/4" >
+            <Link to="/rewardDetail/4" >
               <div className="rewards-cards-DNKKjx rewards-cards">
                 <img className="card_bg" src={`${process.env.PUBLIC_URL}/img/marketplace/card-bg-1@1x.png`} alt="Card_bg" />
-                <div className="elite-challenger-VtU7WE inter-semi-bold-white-18px">Elite Challenger</div>
-                <img className="nft_-avatar" src={`${process.env.PUBLIC_URL}/img/marketplace/nft-avatar-7@1x.png`} alt="NFT_Avatar" />
-                <div className="complete-50-challenges-VtU7WE inter-normal-cadet-blue-12px">Complete 50 challenges</div>
+                <div className="elite-challenger-VtU7WE inter-semi-bold-white-18px">Wellness Milestone</div>
+                <img className="nft_-avatar-new" src={`${process.env.PUBLIC_URL}/img/reward/Wellness_Milestone_Square.png`} alt="NFT_Avatar" />
+                <div className="complete-50-challenges-VtU7WE inter-normal-cadet-blue-12px">Hit the first healthy BMI range</div>
                 <div className="ic_next">
                   <img
                     className="ic_chevron_right_24px"
@@ -129,11 +129,11 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
                   <div className="x893"></div>
                   <div className="goal-0yTxuU goal">
                     <div className="x0-T9m1oI x0 inter-semi-bold-keppel-14px">0</div>
-                    <div className="x3-T9m1oI x3 inter-semi-bold-white-14px">/ 50</div>
+                    <div className="x3-T9m1oI x3 inter-semi-bold-white-14px">/ 1</div>
                   </div>
                 </div>
               </div>
-            </Link> */}
+            </Link>
           </HorizontalScrollContainer>
         </div>
         <div className="partner-company-Rea9Nd partner-company">
@@ -144,7 +144,7 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
           </Link> */}
           <HorizontalScrollContainer inputClassName="special-scroll-AStx0d">
             <div className="x25-Wx9nPx">
-              <div className="x0-Y63lEW x0"><img className="x1-z2FCJz x1" src={`${process.env.PUBLIC_URL}/img/marketplace/Hot_Deals_Free_Consultation_Sample.png`} alt="1" /></div>
+              <div className="x0-Y63lEW x0-marketplace"><img className="x1-z2FCJz x1" src={`${process.env.PUBLIC_URL}/img/marketplace/Hot_Deals_Free_Consultation_Sample.png`} alt="1" /></div>
               <div className="x1-Y63lEW x1-no-border"><img className="x1-0pT4eI x1" src={`${process.env.PUBLIC_URL}/img/marketplace/Hot_Deals_Product_Discount_Sample.png`} alt="1" /></div>
               <div className="x2-Y63lEW"><img className="x1-EMGmsF x1" src={`${process.env.PUBLIC_URL}/img/marketplace/Hot_Deals_Service_Sample.png`} alt="1" /></div>
             </div>

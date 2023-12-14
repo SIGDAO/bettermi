@@ -22,44 +22,44 @@ const questionList = [
     ans: "A:  The key features include fitness tracking, personalized workouts, NFT rewards, social interaction, AI coaching, and goal-setting capabilities."
   },
   {
-    question: 'Q:   How can I earn rewards on Bettermi.io?',
-    ans: "A:  Yes, the NFTs on Bettermi.io hold value as they can be used within the app to unlock features, earn additional rewards, and showcase achievements."
+    question: 'Q:  How can I earn rewards on Bettermi.io?',
+    ans: "A:  Bettermi.io takes privacy and data security seriously, we do not store any picture from users. We also implemented measures to protect users' personal information in accordance with relevant privacy laws."
   },
   {
-    question: "Can I connect with other users?",
-    ans: "Yes, the NFTs on Bettermi.io hold value as they can be used within the app to unlock features, earn additional rewards, and showcase achievements."
+    question: "Q:  Can I connect with other users?",
+    ans: "A:  Yes. User could connect to other users through Discord, leaderboards, transfer NFT etc."
   },
   {
-    question: "Is my personal information safe?",
-    ans: "Bettermi.io takes privacy and data security seriously, implementing measures to protect users' personal information in accordance with relevant privacy laws."
+    question: "Q:  Is my personal information safe?",
+    ans: "A:  Bettermi.io takes privacy and data security seriously, implementing measures to protect users' personal information in accordance with relevant privacy laws."
   },
   {
-    question: "How can I get started?",
-    ans: "To get started, simply visit the Bettermi.io website and create an account. From there, you can explore the app's features, set goals, and embark on your wellness journey."
+    question: "Q:  How can I get started?",
+    ans: "A:  To get started, simply visit the Bettermi.io website and create an account. From there, you can explore the app's features, set goals, and embark on your wellness journey."
   },
   {
-    question: "What is blockchain technology and how is it used in Bettermi.io?",
-    ans: "Blockchain technology is a decentralized and transparent digital ledger that securely records and verifies transactions. In Bettermi.io, blockchain is utilized to power the NFT ecosystem, ensuring authenticity, traceability, and ownership of the NFT rewards and assets."
+    question: "Q:  What is blockchain technology and how is it used in Bettermi.io?",
+    ans: "A:  Blockchain technology is a decentralized and transparent digital ledger that securely records and verifies transactions. In Bettermi.io, blockchain is utilized to power the NFT ecosystem, ensuring authenticity, traceability, and ownership of the NFT rewards and assets."
   },
   {
-    question: "What are NFTs and how do they work in Bettermi.io?",
-    ans: "NFTs, or non-fungible tokens, are unique digital assets that represent ownership or proof of authenticity of a specific item or piece of content. In Bettermi.io, NFTs are used as rewards, collectibles, and in-game assets that users can earn and trade within the platform. They would also work as passes to gain access to different events or services in Bettermi.io."
+    question: "Q:  What are NFTs and how do they work in Bettermi.io?",
+    ans: "A:  NFTs, or non-fungible tokens, are unique digital assets that represent ownership or proof of authenticity of a specific item or piece of content. In Bettermi.io, NFTs are used as rewards, collectibles, and in-game assets that users can earn and trade within the platform. They would also work as passes to gain access to different events or services in Bettermi.io."
   },
   {
-    question: "What is Signum and how is it integrated into Bettermi.io?",
-    ans: "Signum is a blockchain platform that provides the underlying infrastructure for Bettermi.io. It facilitates secure transactions, data storage, and smart contract functionality within the app, enabling seamless interactions and rewards distribution."
+    question: "Q:  What is Signum and how is it integrated into Bettermi.io?",
+    ans: "A:  Signum is a blockchain platform that provides the underlying infrastructure for Bettermi.io. It facilitates secure transactions, data storage, and smart contract functionality within the app, enabling seamless interactions and rewards distribution."
   },
   {
-    question: "What is Sigdao?",
-    ans: "Sigdao is the native cryptocurrency of the Bettermi.io platform. It is a digital token built on the Signum blockchain, specifically designed to fuel the in-app economy and reward system. Sigdao can be earned by users through various activities such as completing challenges, achieving fitness goals, and participating in the Bettermi.io community."
+    question: "Q:  What is SIGDAO?",
+    ans: "A:  SIGDAO is the native cryptocurrency of the Bettermi.io platform. It is a digital token built on the Signum blockchain, specifically designed to fuel the in-app economy and reward system. SIGDAO can be earned by users through various activities such as completing challenges, achieving fitness goals, and participating in the Bettermi.io community."
   },
   {
-    question: "How is Sigdao connected to the Signum blockchain?",
-    ans: "Sigdao is built on the Signum blockchain, which serves as the underlying infrastructure for the Bettermi.io platform. The Signum blockchain provides the secure and efficient network for Sigdao transactions, ensuring transparency, immutability, and decentralization. By leveraging Signum's technology, Sigdao inherits the benefits of a robust blockchain network, enabling seamless transactions and interactions within the Bettermi.io ecosystem."
+    question: "Q:  How is SIGDAO connected to the Signum blockchain?",
+    ans: "A:  SIGDAO is built on the Signum blockchain, which serves as the underlying infrastructure for the Bettermi.io platform. The Signum blockchain provides the secure and efficient network for SIGDAO transactions, ensuring transparency, immutability, and decentralization. By leveraging Signum's technology, SIGDAO inherits the benefits of a robust blockchain network, enabling seamless transactions and interactions within the Bettermi.io ecosystem."
   },
   {
-    question: "Can you provide more information about the partner collaborations in Bettermi.io?",
-    ans: "Bettermi.io has partnered with leading fitness and wellness brands to provide users with a diverse range of products, services, and experiences. These partnerships enhance the user experience by offering access to exclusive discounts, premium content, and unique opportunities."
+    question: "Q:  Can you provide more information about the partner collaborations in Bettermi.io?",
+    ans: "A:  Bettermi.io has partnered with leading fitness and wellness brands to provide users with a diverse range of products, services, and experiences. These partnerships enhance the user experience by offering access to exclusive discounts, premium content, and unique opportunities."
   }
 ]
 

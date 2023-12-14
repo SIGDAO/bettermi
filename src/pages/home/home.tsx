@@ -61,6 +61,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const tokenId = process.env.REACT_APP_TOKEN_ID!;
   const [isPopUpIcon, setIsPopUpIcon] = useState<boolean>(false);
   const [ipfsAddress, setIpfsAddress] = useState<string>("");
+  // const [isLoading, setisLoading] = 
 
   console.log(Token);
   console.log(store.getState());
@@ -73,8 +74,34 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   //   testing();
   // }, []);
 
+  const fetchUserIcon = async () => {
+    const isUserSettingUpdating = await IsUserUpdatingIcon(ledger2, userAccountId);
+    if (isUserSettingUpdating === true) {
+      setIsLoading(false);
+    } else {
+      ledger2.account
+        .getAccount({ accountId: userAccountId })
+        .then((account) => {
+          console.log(account);
+          const description = JSON.parse(account.description);
+          console.log(description);
+          console.log(Object.keys(description.av));
+          console.log(typeof Object.keys(description.av)[0]);
+          setImgAddress(Object.keys(description.av)[0]);
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setIsLoading(false);
+          console.log("need to equip nft");
+        });
+    }
+  };
+
+
   useEffect(() => {
     // Function to fetch data from the APIc
+
+    
     ledger2.account
       .getAccount({ accountId: userAccountId })
       .then(async (account) => {
@@ -112,6 +139,8 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
           setLevel("1");
           store.dispatch(accountSlice.actions.setLevel(description.ds));
         }
+
+
 
         console.log("description", description);
         console.log(Object.keys(description.av));
@@ -322,7 +351,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
                   <img className="step_count_banner-45Wblr" src={`${process.env.PUBLIC_URL}/img/allMission/Talk-to-mi-Square-Cover.png`} alt="Step_count_banner" />
                 </div>
                 <div className="walking-mission-7hGHU0 inter-medium-white-15px">Talk to mi</div>
-                <div className="step-count-7hGHU0 inter-normal-cadet-blue-12px">Step Count</div>
+                <div className="step-count-7hGHU0 inter-normal-cadet-blue-12px">Talk to mi</div>
                 <div className="sigdao-score-7hGHU0 sigdao-score">
                   <div className="x10-SMcg87 x10 inter-semi-bold-keppel-14px">+20</div>
                   <div className="signdao_tokengradient-SMcg87 signdao_tokengradient">
