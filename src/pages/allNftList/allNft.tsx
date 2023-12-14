@@ -76,7 +76,7 @@ const AllNft: React.FunctionComponent<AllNftProps> = (props) => {
             <button className="allNftButton" onClick={Buy}>
               {nftStatus}
             </button>
-            {/* <img
+            <img
               onClick={() => {
                 //   setIsOpenPopup((prev) => !prev);
                 //   setSelectedAssetId(nftId);
@@ -88,7 +88,7 @@ const AllNft: React.FunctionComponent<AllNftProps> = (props) => {
               }}
               className="myNftButtomArrow"
               src={`${process.env.PUBLIC_URL}/img/NftList/ic-send@1x.png`}
-            /> */}
+            />
           </>
           {/* )
                     } */}

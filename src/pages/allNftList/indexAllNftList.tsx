@@ -51,7 +51,7 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
   const [selectedNftId, setSelectedNftId] = useState<string>("");
   const [nftInfo, setNftInfo] = useState<nftInfo[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  //const [openModel, setOpenModel] = useState<boolean>(false);
+  const [openModel, setOpenModel] = useState<boolean>(false);
   const hasRendered = useRef(false);
   const sleep = (delay: number) => {
     return new Promise<void>((resolve) => {
@@ -306,16 +306,16 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
       {loading ? (
         <AllNftLoading></AllNftLoading>
       ) : 
-      // openModel ? (
-      //   <>
-      //     <CustomModel level={"1"} setOpenModel={setOpenModel} openModel={openModel}></CustomModel>
-      //     {/* <PopupModal level = {"1"} isOpen={openModel} setIsOpen={setOpenModel}></PopupModal> */}
-      //   </>
-      // ) : (
+      openModel ? (
         <>
-          <AllNftList nftInfoArray={nftInfo} CustomModel={PopupModal} ></AllNftList>
+          <CustomModel level={"1"} setOpenModel={setOpenModel} openModel={openModel}></CustomModel>
+          {/* <PopupModal level = {"1"} isOpen={openModel} setIsOpen={setOpenModel}></PopupModal> */}
         </>
-      //)
+      ) : (
+        <>
+          <AllNftList nftInfoArray={nftInfo} CustomModel={PopupModal}  setOpenModel={setOpenModel} openModel={openModel} ></AllNftList>
+        </>
+      )
       }
       {/* {openModel?(
         <>

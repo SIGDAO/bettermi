@@ -11,6 +11,7 @@ export interface IAllNftListProps{
     openModel?:boolean;
     setOpenModel?:(openModel:boolean) => void;
     nftInfoArray:nftInfo[];
+    setSelectedNftId?:(nftId:string) => void;
 
 }
 
