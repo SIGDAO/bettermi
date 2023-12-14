@@ -1,34 +1,83 @@
-import React, { useEffect, useState } from "react";
+import * as React from "react";
+import { CenterLayout } from "../../components/layout";
+import { BackButton } from "../../components/button";
 import "./testing.css";
-import { CarouselItem, Carousel } from "./Carousel";
-import { Link } from "react-router-dom";
-import { useSendMsgMutation } from "../../redux/characteraiAPI";
+import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { FindLatestTransactionArray, FindLatestTransactionNumber, FindNftIpfsAddressWithConractId, IsUserUpdatingIcon } from "../../NftSystem/updateUserNftStorage";
+import { selectWalletNodeHost, useLedger } from "../../redux/useLedger";
+import { useDispatch, useSelector } from "react-redux";
+import { profileSlice } from "../../redux/profile";
+import { accountId, getNftContractStorage } from "../../redux/account";
+import { LedgerClientFactory } from "@signumjs/core";
 
+interface TestingProps {}
 
-export default function Testing() {
-  const initialArray: any[] = Array.from({ length: 10 }); // Example array with length 10
-  const [booleanStates, setBooleanStates] = useState<boolean[]>(Array(initialArray.length).fill(false));
+const Testing: React.FunctionComponent<TestingProps> = (props) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const Ledger = useLedger();
+  const userAccountId = useSelector(accountId);
+  const nodeHost = useSelector(selectWalletNodeHost);
+  const ledger2 = LedgerClientFactory.createClient({ nodeHost });
+  const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
+  const NftContractStorage = useSelector(getNftContractStorage);
 
-
-  const slides = [
-    {'src': `${process.env.PUBLIC_URL}/img/home/1@1x.png`, 'link': 'https://www.bettermi.io/'},
-    {'src': `${process.env.PUBLIC_URL}/img/home/1@1x.png`, 'link': 'https://www.bettermi.io/'},
-    {'src': `${process.env.PUBLIC_URL}/img/home/1@1x.png`, 'link': 'https://www.bettermi.io/'},
-  ]
-
-  const [ sendMsg, {isLoading, data} ] = useSendMsgMutation()
-
-  useEffect(() => {
-    console.log("testing")
-    console.log(booleanStates)
-  }, []);
-
-  const handleSendMsg = async () => {
-    await sendMsg({msg: "testing sendMsg"})
+  const [nftId, setNftId] = React.useState<string>("");
+  const [isLoading, setIsLoading] = React.useState<boolean>(true);
+  const [nftIpfsAddress, setNftIpfsAddress] = React.useState<string>("");
+  const [nftNumber, setNftNumber] = React.useState<string>("");
+  const fetchUserIcon = async () => {
+    const isUserSettingUpdating = await IsUserUpdatingIcon(ledger2, userAccountId);
+    if (isUserSettingUpdating === true) {
+      setIsLoading(false);
+    } else {
+      ledger2.account
+        .getAccount({ accountId: userAccountId })
+        .then((account) => {
+          console.log(account);
+          const description = JSON.parse(account.description);
+          console.log(description);
+          console.log(Object.keys(description.av));
+          console.log(typeof Object.keys(description.av)[0]);
+          setNftIpfsAddress(Object.keys(description.av)[0]);
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setIsLoading(false);
+          console.log("need to equip nft");
+        });
+      const latestTransactionNumber = await FindLatestTransactionNumber(Ledger, NftContractStorage, nftDistributor);
+      const latestTransactionList = await FindLatestTransactionArray(Ledger, NftContractStorage, nftDistributor, latestTransactionNumber);
+      setNftId(latestTransactionList[0])
+    }
   }
 
-  return (
-    // <button onClick={() => handleSendMsg()}>
+  useEffect(() => {
+    fetchUserIcon()
+  }, []);
+
+  useEffect(() => {
+    if (!nftId) return;
+    FindNftIpfsAddressWithConractId(Ledger, nftId)
+    .then((result) => {
+      console.log("reslt is ", result);
+      dispatch(profileSlice.actions.setNFTImageAddress(result.nftImage));
+      setNftIpfsAddress(result.nftImage);
+      setNftNumber(result.nftNumber);
+      setIsLoading(false);
+    })
+    .catch((e: any) => {
+      alert("We apologize that some error has occured. You can still get your free NFT in myNft Collection if you haven't get one");
+      console.log(e);
+    });
+  }, [nftId]);
+
+
+
+  const content: JSX.Element = (
     <>
       <img className="photo" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/photo-1@1x.png`} alt="Photo" />
       {/* <BackButton /> */}
@@ -46,26 +95,86 @@ export default function Testing() {
         <div className="reward-10">REWARD +10%</div>
       </div>
       <div className="x0-signa">$0 SIGNA</div>
-      <div className="button_-import" onClick={() => navigate("/customizeYourProfile", { state: { nftImageAddress: nftIpfsAddress, nftId: nftId } })}>
-        <div className="continue inter-semi-bold-white-15px">Next</div>
+      <div className="button_-import" onClick={() => navigate(-1)}>
+        <div className="continue inter-semi-bold-white-15px">Return</div>
       </div>
     </>
-    // <button>
-    //   {booleanStates}
-    // </button>
-    // <Carousel>
-    //   {slides.map((slide, index) => {
-    //     return (
-    //       <CarouselItem key={index}>
-    //         <Link to={slide.link}>
-    //           <img className='home-scroller-element-image' src={slide.src} alt="" />
-    //         </Link>
-    //       </CarouselItem>
-    //     )
-    //   })}
-    // </Carousel>
   );
-}
+
+  return <CenterLayout bgImg={false} content={content} />;
+};
+
+export default Testing;
+
+
+// import React, { useEffect, useState } from "react";
+// import "./testing.css";
+// import { CarouselItem, Carousel } from "./Carousel";
+// import { Link } from "react-router-dom";
+// import { useSendMsgMutation } from "../../redux/characteraiAPI";
+
+
+// export default function Testing() {
+//   const initialArray: any[] = Array.from({ length: 10 }); // Example array with length 10
+//   const [booleanStates, setBooleanStates] = useState<boolean[]>(Array(initialArray.length).fill(false));
+
+
+//   const slides = [
+//     {'src': `${process.env.PUBLIC_URL}/img/home/1@1x.png`, 'link': 'https://www.bettermi.io/'},
+//     {'src': `${process.env.PUBLIC_URL}/img/home/1@1x.png`, 'link': 'https://www.bettermi.io/'},
+//     {'src': `${process.env.PUBLIC_URL}/img/home/1@1x.png`, 'link': 'https://www.bettermi.io/'},
+//   ]
+
+//   const [ sendMsg, {isLoading, data} ] = useSendMsgMutation()
+
+//   useEffect(() => {
+//     console.log("testing")
+//     console.log(booleanStates)
+//   }, []);
+
+//   const handleSendMsg = async () => {
+//     await sendMsg({msg: "testing sendMsg"})
+//   }
+
+//   return (
+//     // <button onClick={() => handleSendMsg()}>
+//     <>
+//       <img className="photo" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/photo-1@1x.png`} alt="Photo" />
+//       {/* <BackButton /> */}
+//       {isLoading === true ? (
+//         <div className="x0"></div>
+//       ) : (
+//         <>
+//           <img className="x0" src={`https://ipfs.io/ipfs/${nftIpfsAddress}`} alt="0" />
+//           <h1 className="text-1">#{nftNumber}</h1>
+//         </>
+//       )}
+//       <div className="x16206">
+//         <div className="lv-1">LV 1</div>
+//         <img className="x6" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/file---6@1x.png`} alt="6" />
+//         <div className="reward-10">REWARD +10%</div>
+//       </div>
+//       <div className="x0-signa">$0 SIGNA</div>
+//       <div className="button_-import" onClick={() => navigate("/customizeYourProfile", { state: { nftImageAddress: nftIpfsAddress, nftId: nftId } })}>
+//         <div className="continue inter-semi-bold-white-15px">Next</div>
+//       </div>
+//     </>
+//     // <button>
+//     //   {booleanStates}
+//     // </button>
+//     // <Carousel>
+//     //   {slides.map((slide, index) => {
+//     //     return (
+//     //       <CarouselItem key={index}>
+//     //         <Link to={slide.link}>
+//     //           <img className='home-scroller-element-image' src={slide.src} alt="" />
+//     //         </Link>
+//     //       </CarouselItem>
+//     //     )
+//     //   })}
+//     // </Carousel>
+//   );
+// }
 
 
 

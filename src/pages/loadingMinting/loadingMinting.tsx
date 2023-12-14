@@ -106,6 +106,7 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
     } else {
       setCount(100);
       setIsLoading(false);
+      store.dispatch(profileSlice.actions.setNFTImageAddress(latestTransactionList[0]));
       navigate("/generateFreeNFT", { state: { nftId: latestTransactionList[0] } });
     }
   };

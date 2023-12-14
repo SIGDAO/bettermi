@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { selectWalletNodeHost } from "../redux/useLedger";
 import { accountId } from "../redux/account";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../pages/home/home.css";
 import "../pages/profile/profile.css";
 
@@ -38,6 +38,7 @@ const UserIcon: React.FC<IUserIconProps> = (props) => {
   const nodeHost = useSelector(selectWalletNodeHost);
   const ledger2 = LedgerClientFactory.createClient({ nodeHost });
   const [imgAddress, setImgAddress] = useState<string>("");
+  const navigate = useNavigate();
   const fetchUserIcon = async () => {
     //const isUserSettingUpdating = await IsUserSettingUpdating(ledger2,userAccountId);
     const isUserSettingUpdating = await IsUserUpdatingIcon(ledger2, userAccountId);
@@ -83,7 +84,7 @@ const UserIcon: React.FC<IUserIconProps> = (props) => {
       //   className="nft_-avatar_empty"
       // />
       haveNft === true ? (
-        <img className={finalClassNames.forNftDisplay} src={`https://ipfs.io/ipfs/${imgAddress}`} alt="NFT_Avatar" />
+        <img onClick={() => navigate('/testing')} className={finalClassNames.forNftDisplay} src={`https://ipfs.io/ipfs/${imgAddress}`} alt="NFT_Avatar" />
       ) : (
         <Link to="/allNftList/">
           <div className={finalClassNames.forEmptyIcon}>

@@ -13,6 +13,7 @@ export interface ProfileState {
   birthday: Date | null;
   isSelfie: boolean;
   NFTimageAddress: string;
+  nftId: string;
 }
 
 export interface BMIState {
@@ -33,6 +34,8 @@ const initialState: ProfileState = {
   gender: "",
   birthday: null,
   isSelfie: false,
+  NFTimageAddress: "",
+  nftId: "",
 };
 
 
@@ -100,6 +103,12 @@ export const profileSlice = createSlice({
     },
     clearNFTImageAddress: (state) => {
       state.NFTimageAddress = "";
+    },
+    setNFTId: (state, action: PayloadAction<string>) => {
+      state.nftId = action.payload;
+    },
+    clearNFTId: (state) => {
+      state.nftId = "";
     },
     clearAll: (state) => {
       state.selfiePath = "";
