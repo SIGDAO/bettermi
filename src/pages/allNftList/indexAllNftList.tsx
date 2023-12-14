@@ -182,7 +182,7 @@ if(mergedArray[InfoJson.index].contractOwner !== nftDistributor){
               const match = string.match(regex);
               var number = -1;
             if (match) {
-               number = parseInt(match[1]);
+               number = parseInt(match[1]); // this is the nft number
             }
               console.log(levelNumber);
               mergedArray[InfoJson.index] = {...mergedArray[InfoJson.index],imageUrl: text.media[0].social, nftLevel: levelNumber, nftNumber:number };

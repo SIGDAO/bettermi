@@ -18,6 +18,11 @@
   z-index: 201;
 }
 
+.click-the-area-to-make-it-hidden-again {
+  width: 100%;
+  height: 100%;
+}
+
 .text-1 {
   color: var(--royal-blue);
   font-family: var(--font-family-inter);
