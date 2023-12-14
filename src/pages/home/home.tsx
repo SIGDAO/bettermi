@@ -26,7 +26,7 @@ import { TransferToken } from "../../components/transferToken";
 import { useContext } from "react";
 import { AppContext } from "../../redux/useContext";
 import HorizontalScrollContainerMission from "./horzontalScrollContainer";
-import { CheckNftOwnerId } from "../../NftSystem/updateUserNftStorage";
+import { CheckNftOwnerId, IsUserUpdatingIcon } from "../../NftSystem/updateUserNftStorage";
 import UserIcon from "../../components/loadUserIcon";
 import HorizontalScrollContainer from "../../components/horizontalScrollContainer";
 
@@ -61,7 +61,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const tokenId = process.env.REACT_APP_TOKEN_ID!;
   const [isPopUpIcon, setIsPopUpIcon] = useState<boolean>(false);
   const [ipfsAddress, setIpfsAddress] = useState<string>("");
-  // const [isLoading, setisLoading] = 
+  const [isNFTiconLoading, setIsNFTiconLoading] = useState<boolean>(true);
 
   console.log(Token);
   console.log(store.getState());
@@ -77,7 +77,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const fetchUserIcon = async () => {
     const isUserSettingUpdating = await IsUserUpdatingIcon(ledger2, userAccountId);
     if (isUserSettingUpdating === true) {
-      setIsLoading(false);
+      setIsNFTiconLoading(false);
     } else {
       ledger2.account
         .getAccount({ accountId: userAccountId })
@@ -86,12 +86,12 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
           const description = JSON.parse(account.description);
           console.log(description);
           console.log(Object.keys(description.av));
-          console.log(typeof Object.keys(description.av)[0]);
+          console.log("imageaddress", Object.keys(description.av)[0]);
           setImgAddress(Object.keys(description.av)[0]);
-          setIsLoading(false);
+          setIsNFTiconLoading(false);
         })
         .catch((error) => {
-          setIsLoading(false);
+          setIsNFTiconLoading(false);
           console.log("need to equip nft");
         });
     }
@@ -145,7 +145,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
         console.log("description", description);
         console.log(Object.keys(description.av));
         console.log(typeof Object.keys(description.av)[0]);
-        setImgAddress(Object.keys(description.av)[0]);
+        // setImgAddress(Object.keys(description.av)[0]);
         setLoading(false);
         console.log("imgAddress", imgAddress);
         console.log(typeof imgAddress);
@@ -157,7 +157,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
         console.log(typeof imgAddress);
         setLoading(false);
       });
-
+    fetchUserIcon()
     // TransferToken(nodeHost,userId,"10");
 
     // console.log(calRewardSigdaoOnSelfie(22.9), "calRewardSigdaoOnSelfie(22.9)");
@@ -202,11 +202,11 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
     <>
       {isPopUpIcon && (
         <div className="hidden-content">
-          {imgAddress ? (
+          {isNFTiconLoading ? (
             <div className="x0"></div>
           ) : (
             <>
-              <img className="x0" src={`https://ipfs.io/ipfs/${imgAddress}`} alt="0" />
+              <img className="x0-generateFreeNFT" src={`https://ipfs.io/ipfs/${imgAddress}`} alt="0" />
               {/* <h1 className="text-1">#{nftNumber}</h1> */}
             </>
           )}

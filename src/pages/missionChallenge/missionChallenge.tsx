@@ -212,7 +212,7 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
   const content: JSX.Element = (
     <div className="screen">
       <div className="bettermidapp-challenges-1">
-        <ShortTitleBar title={title} backButton = {true} customiseBackButton = {true} customiseBackButtonLink="/home"/>
+        <ShortTitleBar title={title} backButton = {true} customiseBackButton = {true} customiseBackButtonLink="/featureMissions"/>
         <img className="photo-7K5ObS" src="img/missionChallenge/photo@1x.png" alt="Photo" />
         <div className="challenges-card-7K5ObS">
           <img className="layer-nLfc9z" src="img/missionChallenge/layer-1@1x.png" alt="Layer" />
@@ -238,7 +238,7 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
                         {allowedChallengeList[index] === false? (
                           <div className="score-bar_2-inactive inter-semi-bold-white-15px">
                             {/* {mission.timeslot[0].startingTime} */}
-                            Locked
+                            LOCKED
                             {/* {Timedifference[index]} */}
                           </div>
                         ) : (isOverDailyPlayTimesLimit[index] ? (
@@ -246,9 +246,9 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
                             <div className="starting inter-semi-bold-white-15px">{`${userChallengeTimes[index]}/3`}</div>
                           </div>
                         ) : (
-                          <div className="score-bar_2-inactive inter-semi-bold-white-15px">
+                          <div className="score-bar_2-completed inter-semi-bold-white-15px">
                             {/* {mission.timeslot[0].startingTime} */}
-                            Completed
+                            COMPLETED
                             {/* {Timedifference[index]} */}
                           </div>
                         )

@@ -453,6 +453,26 @@
   letter-spacing: 3px;
 }
 
+.bettermidapp-challenges-1 .score-bar_2-completed {
+  background: linear-gradient(106.32deg, #f51ee2 0.28%, #4136f1 99.6%);
+  /* background: #221D4B; */
+
+
+  border: 1px solid;
+  border-color: var(--royal-blue);
+  border-radius: 5px;
+  height: 35px;
+  left: 230px;
+  position: absolute;
+  top: 0px;
+  width: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+
 .bettermidapp-challenges-1 .score-bar_2-inactive {
   /* background: linear-gradient(106.32deg, #f51ee2 0.28%, #4136f1 99.6%); */
   background: #221D4B;

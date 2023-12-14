@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './titleBar.css';
 import { BackButton } from './button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from 'reactstrap';
 
 interface IShortTitleBarProps {
@@ -34,6 +34,8 @@ const settingIcon: JSX.Element = (
 export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (props) => {
   const { title, aiCoach, help, transparent,filter,addSign, setting, backButton,importButton,setIsOpenImport,isOpenImport,customiseBackButton,customiseBackButtonLink
    } = props;
+  const navigate = useNavigate();
+
   return (
     <div className="title-bar-layout">
       <div className={transparent ? "transparent-title-bar-container" : "title-bar-container"}
@@ -63,7 +65,13 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
         }
         {/*the filter and the plus sign change this div*/}
         {backButton === false ? null :
-        <a href="javascript:history.back()">
+        <div onClick={() => {
+          if (customiseBackButtonLink) {
+            navigate(customiseBackButtonLink);
+            return;
+          };
+          navigate(-1);
+        }} >
           <div className="icon-arrow-left-container icon-arrow-left">
               <img
                 className="icon-arrow-left-img icon-arrow-left"
@@ -71,7 +79,7 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
                 alt="icon-arrow-left"
                 />
           </div>
-        </a>
+        </div>
         }
         {/* {customiseBackButton === false && customiseBackButtonLink == null ? null :
           <Link to={customiseBackButtonLink!}>
