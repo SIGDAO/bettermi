@@ -50,12 +50,12 @@ const questionList = [
     ans: "A:  Signum is a blockchain platform that provides the underlying infrastructure for Bettermi.io. It facilitates secure transactions, data storage, and smart contract functionality within the app, enabling seamless interactions and rewards distribution."
   },
   {
-    question: "Q:  What is Sigdao?",
-    ans: "A:  Sigdao is the native cryptocurrency of the Bettermi.io platform. It is a digital token built on the Signum blockchain, specifically designed to fuel the in-app economy and reward system. Sigdao can be earned by users through various activities such as completing challenges, achieving fitness goals, and participating in the Bettermi.io community."
+    question: "Q:  What is SIGDAO?",
+    ans: "A:  SIGDAO is the native cryptocurrency of the Bettermi.io platform. It is a digital token built on the Signum blockchain, specifically designed to fuel the in-app economy and reward system. SIGDAO can be earned by users through various activities such as completing challenges, achieving fitness goals, and participating in the Bettermi.io community."
   },
   {
-    question: "Q:  How is Sigdao connected to the Signum blockchain?",
-    ans: "A:  Sigdao is built on the Signum blockchain, which serves as the underlying infrastructure for the Bettermi.io platform. The Signum blockchain provides the secure and efficient network for Sigdao transactions, ensuring transparency, immutability, and decentralization. By leveraging Signum's technology, Sigdao inherits the benefits of a robust blockchain network, enabling seamless transactions and interactions within the Bettermi.io ecosystem."
+    question: "Q:  How is SIGDAO connected to the Signum blockchain?",
+    ans: "A:  SIGDAO is built on the Signum blockchain, which serves as the underlying infrastructure for the Bettermi.io platform. The Signum blockchain provides the secure and efficient network for SIGDAO transactions, ensuring transparency, immutability, and decentralization. By leveraging Signum's technology, SIGDAO inherits the benefits of a robust blockchain network, enabling seamless transactions and interactions within the Bettermi.io ecosystem."
   },
   {
     question: "Q:  Can you provide more information about the partner collaborations in Bettermi.io?",

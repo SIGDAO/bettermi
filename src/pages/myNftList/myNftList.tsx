@@ -76,7 +76,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
   const [importSuccess, setImportSuccess] = useState<boolean>(false);
   const [isOpenImport, setIsOpenImport] = useState<boolean>(false);
   const [nftNumber, setNftNumber] = useState<number>();
-  const [message, setMessage] = useState<string>("Your NFT Price in Sigdao");
+  const [message, setMessage] = useState<string>("Your NFT Price in SIGDAO");
   const [isError,setError] = useState<boolean>(false);
   const gender = useSelector(selectCurrentGender);
   const dataFetchedRef = useRef(false);
@@ -555,7 +555,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
                       height={56}
                       importClassName="card-number-1 search_bar-1 search_bar-4"
                       activeClassName="active-card-number-1 search_bar-1 search_bar-4"
-                      placeholder="Sigdao"
+                      placeholder="SIGDAO"
                     />
                     {/* <textarea
                         className="search_bar-1 search_bar-4"

@@ -12,7 +12,7 @@ export const rewardDetailList: rewardDetailListProps[] = [
     id: 1,
     title: 'Master Collector',
     reward: 20,
-    description: `Unlocked by users who acquire 3 NFTs from our collection. As a reward, users are granted 20 Sigdao, empowering them with valuable resources to enhance their overall experience.`,
+    description: `Unlocked by users who acquire 3 NFTs from our collection. As a reward, users are granted 20 SIGDAO, empowering them with valuable resources to enhance their overall experience.`,
     bgImagePath: 'photo-1@1x.png',
     requireTimes: 3,
   },{

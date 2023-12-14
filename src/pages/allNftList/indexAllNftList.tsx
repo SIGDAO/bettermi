@@ -144,7 +144,7 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
               nftStatus = "Buy";
             }
             if(nftStatus === "18"){
-              nftStatus = "For Sell in Sigdao and Signa";
+              nftStatus = "For Sell in SIGDAO and Signa";
             }
             if(nftStatus === "19"){
               nftStatus = "For Auction in Signa";
@@ -225,7 +225,7 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
     //           nftStatus = "Buy";
     //         }
     //         if(nftStatus === "18"){
-    //           nftStatus = "For Sell in Sigdao and Signa";
+    //           nftStatus = "For Sell in SIGDAO and Signa";
     //         }
     //         if(nftStatus === "19"){
     //           nftStatus = "For Auction in Signa";
