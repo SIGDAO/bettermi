@@ -22,10 +22,11 @@ interface AllNftProps {
   nftPrice?: string;
   nftStatus?:string;
   nftId?:string;
+  nftIndex:number;
 }
 
 const AllNft: React.FunctionComponent<AllNftProps> = (props) => {
-  const { imageAddress, openModel, setOpenModel, nftOwner, nftNumber, nftLevel, nftPrice,nftStatus,nftId } = props;
+  const { imageAddress, openModel, setOpenModel, nftOwner, nftNumber, nftLevel, nftPrice,nftStatus,nftId,nftIndex } = props;
   const { appName, Wallet, Ledger } = useContext(AppContext);
   const nodeHost = useSelector(selectWalletNodeHost);
   const ledger2 = LedgerClientFactory.createClient({ nodeHost });
@@ -48,7 +49,7 @@ const AllNft: React.FunctionComponent<AllNftProps> = (props) => {
       <div className="myNftList">
         <img className="myNftImage" src={`https://ipfs.io/ipfs/${imageAddress}`}></img>
         <div className="myNftDescription">
-          <div className="myNftNumber">#{nftNumber}</div>
+          <div className="myNftNumber">#{nftIndex}</div>
           <div className="myNftBar">
             <div className="myNftLevel">Lv{nftLevel}</div>
             <div className="myNftVerticalLine"></div>

@@ -34,6 +34,7 @@ export interface nftInfo {
   imageUrl: string;
   nftLevel: string;
   nftStatus:string;
+  nftNumber:number;
 }
 export interface urlObject{
   url:string;
@@ -156,6 +157,7 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
               contractPrice: nftContract.getVariableAsDecimal(10),
               contractOwner: nftContract.getVariableAsDecimal(6),
               nftStatus:nftStatus,
+              nftNumber:nftStorage.index,
             };
             // nftInfo.push({
             //   contractId: nftStorage.nftId,
