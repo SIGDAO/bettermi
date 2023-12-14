@@ -1088,6 +1088,19 @@ opacity: 0.5;
 }
 
 .bettermidapp-mimi-nfts-send-address-1 .address-id-to-send-nft-to {
+  color: var(--hot-magenta);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-l);
+  font-weight: 400;
+  left: 61px;
+  letter-spacing: 0;
+  line-height: 20px;
+  position: absolute;
+  top: 357px;
+  white-space: nowrap;
+  margin: 0;
+}
+.normalMessage{
   color: var(--cadet-blue);
   font-family: var(--font-family-inter);
   font-size: var(--font-size-l);
@@ -1099,6 +1112,7 @@ opacity: 0.5;
   top: 357px;
   white-space: nowrap;
   margin: 0;
+
 }
 
 .bettermidapp-mimi-nfts-send-address-1 .text-7 {

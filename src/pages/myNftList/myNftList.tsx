@@ -76,7 +76,8 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
   const [importSuccess, setImportSuccess] = useState<boolean>(false);
   const [isOpenImport, setIsOpenImport] = useState<boolean>(false);
   const [nftNumber, setNftNumber] = useState<number>();
-  const [message, setMessage] = useState<string>("");
+  const [message, setMessage] = useState<string>("Your NFT Price in Sigdao");
+  const [isError,setError] = useState<boolean>(false);
   const gender = useSelector(selectCurrentGender);
   const dataFetchedRef = useRef(false);
   const nftContractChecked = useRef(false);
@@ -326,6 +327,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
     try {
       if (isNumber(inputPrice) === false) {
         setMessage("invalid value");
+        setError(true);
       } else {
         if (inputValue === "sell") {
           console.log("selectedNftID", selectedNftId);
@@ -340,6 +342,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
             methodArgs: [price, 26, 1], /// arguments up to 3 arguments numeric
           });
           await Wallet.Extension.confirm(transaction.unsignedTransactionBytes);
+          setIsOpenPopup(!isOpenPopup);
         }
         if (inputValue === "cancel") {
           const transaction = await ledger2.contract.callContractMethod({
@@ -351,9 +354,9 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
             methodArgs: ["123", 26, 1], /// arguments up to 3 arguments numeric
           });
           await Wallet.Extension.confirm(transaction.unsignedTransactionBytes);
+          setIsOpenPopup(!isOpenPopup);
         }
       }
-      setIsOpenPopup(!isOpenPopup);
     } catch (e) {
       setMessage("error occur");
       console.log(e);
@@ -552,7 +555,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
                       height={56}
                       importClassName="card-number-1 search_bar-1 search_bar-4"
                       activeClassName="active-card-number-1 search_bar-1 search_bar-4"
-                      placeholder="Your Nft Price in Sigdao"
+                      placeholder="Sigdao"
                     />
                     {/* <textarea
                         className="search_bar-1 search_bar-4"
@@ -564,8 +567,11 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
                     <div className="search_bar-2 search_bar-4"></div>
                     <div className="button_save" onClick={() => setSell(selectedNftId)}>
                       <div className="continue inter-semi-bold-white-15px">Transfer</div>
-                    </div>
-                    <p className="address-id-to-send-nft-to">{message}</p>
+                    </div>address
+                    {isError?      <p className="address-id-to-send-nft-to">{message}</p>:
+
+                    <p className="normalMessage">{message}</p>
+}
                     <h1 className="text-7">#00000001</h1>
                     <div className="x0-signa-1">
                       <div className="x0-signa-1-level">LV 1</div>

@@ -68,13 +68,13 @@ const AllNftList:React.FC <IAllNftListProps>= (props) => {
     )
     }
     return(
-      <AllNft nftId = {nft.contractId}nftStatus = {nft.nftStatus} nftNumber = {nft.contractId} nftLevel = {nft.nftLevel} nftOwner = {nft.contractOwner} nftPrice = {nft.contractPrice} imageAddress={nft.imageUrl} openModel = {openModel} setOpenModel={setOpenModel}/>
+      <AllNft nftId = {nft.contractId} nftIndex = {nft.nftNumber} nftStatus = {nft.nftStatus} nftNumber = {nft.contractId} nftLevel = {nft.nftLevel} nftOwner = {nft.contractOwner} nftPrice = {nft.contractPrice} imageAddress={nft.imageUrl} openModel = {openModel} setOpenModel={setOpenModel}/>
     )
     });
     return (
         <div style={bgStyle}>
             <div style={centerLayoutStyle} className='bettermidapp-mimi-nfts-send-address-1'>
-            <ShortTitleBar title='NFT Marketplace' addSign = {false} aiCoach = {false} filter = {false} />
+            <ShortTitleBar title='NFT Marketplace' addSign = {false} aiCoach = {false} filter = {false} backButton = {true} />
               <div className = "containerMyNftList">
                 <div className = "containerMyNftList2">
                     {displayMyNft}     
