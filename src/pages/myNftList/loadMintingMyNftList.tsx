@@ -106,6 +106,7 @@ const loadNftList = async() => {
             )
             const contractInfoArray = await Promise.all(promiseArray);
             for (var i = 0;i < contractInfoArray.length;i++){
+              console.log(contractInfoArray[i].description);
                 const trial = JSON.parse(contractInfoArray[i].description);
                 nft = {level:trial.version,image:trial.descriptor,nftId:nftAddressList[i]};
                 userNftList.push(nft);

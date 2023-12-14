@@ -27,7 +27,7 @@ const transaction = await ledger2.asset.transferAsset({
   deadline:1440,
   senderPublicKey:userAccountPublicKey,
 });
-//await Wallet.Extension.confirm(transaction.unsignedTransactionBytes);
+await Wallet.Extension.confirm(transaction.unsignedTransactionBytes);
 }
 const nftContractStorage = await ledger2.contract.getContractsByAccount({
   accountId: userAccountId,
