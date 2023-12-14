@@ -60,6 +60,9 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const [level,setLevel] = useState<string>("");
   const codeHashIdForNft = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!;
   const tokenId = process.env.REACT_APP_TOKEN_ID!;
+  const [isPopUpIcon, setIsPopUpIcon] = useState<boolean>(false);
+
+
   console.log(Token);
   console.log(store.getState());
   console.log("Token is  ",Token);
@@ -199,7 +202,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
             <div className="nft-reward-10-b5x63m inter-semi-bold-white-15px">REWARD +10%</div>
             <img className="seperate-line-b5x63m" src={`${process.env.PUBLIC_URL}/img/seperate-line-1@1x.png`} alt="seperate line" />
           </div>
-          <UserIcon home = {true} userAccountId = {userAccountId}></UserIcon>
+          <UserIcon setIsPopUpIcon={setIsPopUpIcon} home = {true} userAccountId = {userAccountId}></UserIcon>
           {/* {imgAddress === ""?gender === "Female"?
           // <img className="nft_-avatar-2ZgxSS" src={`${process.env.PUBLIC_URL}/img/home/nft-avatar-13@1x.png`} alt="NFT_Avatar" />
           <Link to="/allNftList/">
@@ -298,7 +301,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
               <div className="small-image">
                 <img className="step_count_banner-45Wblr" src={`${process.env.PUBLIC_URL}/img/allMission/Talk-to-mi-Square-Cover.png`} alt="Step_count_banner" />
               </div>
-              <div className="walking-mission-7hGHU0 inter-medium-white-15px">Walking Mission</div>
+              <div className="walking-mission-7hGHU0 inter-medium-white-15px">Talk to mi</div>
               <div className="step-count-7hGHU0 inter-normal-cadet-blue-12px">Step Count</div>
               <div className="sigdao-score-7hGHU0 sigdao-score">
                 <div className="x10-SMcg87 x10 inter-semi-bold-keppel-14px">+20</div>

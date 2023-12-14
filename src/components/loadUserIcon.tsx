@@ -14,6 +14,7 @@ export interface IUserIconProps {
   home?: boolean;
   profile?: boolean;
   userAccountId: string;
+  setIsPopUpIcon?: Function;
 }
 export interface ClassNames {
   forEmptyIcon: string;
@@ -83,7 +84,7 @@ const UserIcon: React.FC<IUserIconProps> = (props) => {
       //   className="nft_-avatar_empty"
       // />
       haveNft === true ? (
-        <img onClick={() => navigate("/previewNFTImg")} className={finalClassNames.forNftDisplay} src={`https://ipfs.io/ipfs/${imgAddress}`} alt="NFT_Avatar" />
+        <img onClick={() => setIsPopUpIcon(true)} className={finalClassNames.forNftDisplay} src={`https://ipfs.io/ipfs/${imgAddress}`} alt="NFT_Avatar" />
       ) : (
         <Link to="/allNftList/">
           <div className={finalClassNames.forEmptyIcon}>
