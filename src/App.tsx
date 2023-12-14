@@ -82,7 +82,7 @@ const titleList = {
   "/selfieToEarn": "Selfie To Earn - BetterMi",
   "/profile": "Profile - BetterMi",
   "/marketplace": "Marketplace - BetterMi",
-  "/testing": "Testing - BetterMi",
+  "/previewNFTImg": "NFT detail - BetterMi",
   "/generateBMIDaily": "Generate BMI Daily - BetterMi",
   "/generateBMINFTImport": "Generate BMI NFT Import - BetterMi",
   "/aiCoachSelect": "AI Coach Select - BetterMi",
@@ -170,7 +170,7 @@ function App() {
                 <Route path="/selfieToEarn" element={<SelfieToEarn />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/marketplace" element={<Marketplace />} />
-                <Route path="/testing" element={<Testing />} />
+                <Route path="/previewNFTImg" element={<Testing />} />
                 <Route path="/generateBMIDaily" element={<GenerateBMIDaily />} />
                 <Route path="/aiCoachSelect" element={<AiCoachSelect />} />
                 <Route path="/aiCoachDetail">

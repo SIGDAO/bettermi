@@ -478,7 +478,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
                     {isUpdatingDescription === true ? (
                       <img className="myNftImage" src="/img/loadingMinting/mimi-dancing-for-loadin-page.gif"></img>
                     ) : (
-                      <img onClick={() => navigate('/testing')} className="myNftImage" src={`https://ipfs.io/ipfs/${onDuty}`}></img>
+                      <img onClick={() => navigate('/previewNFTImg')} className="myNftImage" src={`https://ipfs.io/ipfs/${onDuty}`}></img>
                     )}
                     <div className="myNftDescription">
                       <div className="myNftNumber">#{nftNumber}</div>
