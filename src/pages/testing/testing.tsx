@@ -29,6 +29,7 @@ const Testing: React.FunctionComponent<TestingProps> = (props) => {
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
   const [nftIpfsAddress, setNftIpfsAddress] = React.useState<string>("");
   const [nftNumber, setNftNumber] = React.useState<string>("");
+  const [imgAddress, setImgAddress] = React.useState<string>("");
   const fetchUserIcon = async () => {
     const isUserSettingUpdating = await IsUserUpdatingIcon(ledger2, userAccountId);
     if (isUserSettingUpdating === true) {
@@ -42,7 +43,7 @@ const Testing: React.FunctionComponent<TestingProps> = (props) => {
           console.log(description);
           console.log(Object.keys(description.av));
           console.log(typeof Object.keys(description.av)[0]);
-          setNftIpfsAddress(Object.keys(description.av)[0]);
+          setImgAddress(Object.keys(description.av)[0]);
           setIsLoading(false);
         })
         .catch((error) => {
@@ -83,7 +84,7 @@ const Testing: React.FunctionComponent<TestingProps> = (props) => {
         <div className="x0"></div>
       ) : (
         <>
-          <img className="x0" src={`https://ipfs.io/ipfs/${nftIpfsAddress}`} alt="0" />
+          <img className="x0" src={`https://ipfs.io/ipfs/${imgAddress}`} alt="0" />
           <h1 className="text-1">#{nftNumber}</h1>
         </>
       )}

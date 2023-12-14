@@ -58,7 +58,7 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
                 <div className="goal-data">
                   <div className="x893"></div>
                   <div className="goal-xzndZB goal">
-                    <div className="x0-1Jks0w x0 inter-semi-bold-keppel-14px">0</div>
+                    <div className="x0-1Jks0w x0-marketplace inter-semi-bold-keppel-14px">0</div>
                     <div className="x3-1Jks0w x3 inter-semi-bold-white-14px">/ 3</div>
                   </div>
                 </div>
@@ -82,7 +82,7 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
                 <div className="goal-data">
                   <div className="x893"></div>
                   <div className="goal-unXPox goal">
-                    <div className="x0-KUFXm3 x0 inter-semi-bold-keppel-14px">0</div>
+                    <div className="x0-KUFXm3 x0-marketplace inter-semi-bold-keppel-14px">0</div>
                     <div className="x3-KUFXm3 x3 inter-semi-bold-white-14px">/ 60</div>
                   </div>
                 </div>
@@ -106,7 +106,7 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
                 <div className="goal-data">
                   <div className="x893"></div>
                   <div className="goal-4xB4wg goal">
-                    <div className="x0-mOFaDT x0 inter-semi-bold-keppel-14px">0</div>
+                    <div className="x0-mOFaDT x0-marketplace inter-semi-bold-keppel-14px">0</div>
                     <div className="x3-mOFaDT x3 inter-semi-bold-white-14px">/ 50</div>
                   </div>
                 </div>
@@ -144,7 +144,7 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
           </Link> */}
           <HorizontalScrollContainer inputClassName="special-scroll-AStx0d">
             <div className="x25-Wx9nPx">
-              <div className="x0-Y63lEW x0"><img className="x1-z2FCJz x1" src={`${process.env.PUBLIC_URL}/img/marketplace/Hot_Deals_Free_Consultation_Sample.png`} alt="1" /></div>
+              <div className="x0-Y63lEW x0-marketplace"><img className="x1-z2FCJz x1" src={`${process.env.PUBLIC_URL}/img/marketplace/Hot_Deals_Free_Consultation_Sample.png`} alt="1" /></div>
               <div className="x1-Y63lEW x1-no-border"><img className="x1-0pT4eI x1" src={`${process.env.PUBLIC_URL}/img/marketplace/Hot_Deals_Product_Discount_Sample.png`} alt="1" /></div>
               <div className="x2-Y63lEW"><img className="x1-EMGmsF x1" src={`${process.env.PUBLIC_URL}/img/marketplace/Hot_Deals_Service_Sample.png`} alt="1" /></div>
             </div>
