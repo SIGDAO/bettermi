@@ -61,7 +61,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const tokenId = process.env.REACT_APP_TOKEN_ID!;
   const [isPopUpIcon, setIsPopUpIcon] = useState<boolean>(false);
   const [ipfsAddress, setIpfsAddress] = useState<string>("");
-  cosnt [isLoading, setisLoading] = 
+  // const [isLoading, setisLoading] = 
 
   console.log(Token);
   console.log(store.getState());
