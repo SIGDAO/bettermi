@@ -49,7 +49,7 @@ const AllNft: React.FunctionComponent<AllNftProps> = (props) => {
       <div className="myNftList">
         <img className="myNftImage" src={`https://ipfs.io/ipfs/${imageAddress}`}></img>
         <div className="myNftDescription">
-          <div className="myNftNumber">#{nftIndex}</div>
+          <div className="myNftNumber">#0000{nftIndex}</div>
           <div className="myNftBar">
             <div className="myNftLevel">Lv{nftLevel}</div>
             <div className="myNftVerticalLine"></div>
