@@ -111,73 +111,95 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
     var urls: string[] = [];
     var nftInfo: nftObject[] = [];
     var mergedArray: nftInfo[] = new Array(nftStorages.length).fill({}) as nftInfo[];
-      const requests = InfoJson.map((InfoJson) =>
+    const requests: Promise<void>[] = [];
+InfoJson.map((nftStorage) => {
+  console.log(nftStorage);
+  if(nftStorage.nftId !== "123"){
+  requests.push(
+        ledger2.contract.getContract(nftStorage.nftId).then((res) => {
+          var nftContract = new ContractDataView(res);
+          var nftStatus = nftContract.getVariableAsDecimal(11) ;
+          if(nftStatus === "15"){
+            nftStatus = "Not For Sale";
+          }
+          if(nftStatus === "16"){
+            nftStatus = "For Sale in Signa";
+          }
+          if(nftStatus === "17"){
+            nftStatus = "Buy";
+          }
+          if(nftStatus === "18"){
+            nftStatus = "For Sale in Sigdao and Signa";
+          }
+          if(nftStatus === "19"){
+            nftStatus = "For Auction in Signa";
+          }
+          if(nftStatus === "20"){
+            nftStatus = "Auction";
+          }
+          mergedArray[nftStorage.index] = {...mergedArray[nftStorage.index],
+            contractId: nftStorage.nftId,
+            contractPrice: nftContract.getVariableAsDecimal(10),
+            contractOwner: nftContract.getVariableAsDecimal(6),
+            nftStatus:nftStatus,
+            nftNumber:nftStorage.index,
+          };
+          // nftInfo.push({
+          //   contractId: nftStorage.nftId,
+          //   contractPrice: nftContract.getVariableAsDecimal(10),
+          //   contractOwner: nftContract.getVariableAsDecimal(6),
+          //   contractStatus:nftStatus,
+          // });
+        })
+        .catch((err) => {
+          mergedArray[nftStorage.index] = {...mergedArray[nftStorage.index],
+            contractId: nftStorage.nftId,
+            contractPrice: "0",
+            contractOwner: "0",
+            nftStatus:"15",
+          };
+        }
+        )
+      );
+  }
+    });
+    await Promise.all(requests);
+    const requests2:Promise<void>[] = [];
+    console.log(mergedArray);
+InfoJson.map((InfoJson) =>{
+if(mergedArray[InfoJson.index].contractOwner !== nftDistributor){
+
+  requests2.push(
         fetch(InfoJson.url)
           .then((res) => res.text())
           .then((res) => {
             try {
               const text = JSON.parse(res);
+              console.log(text)
               const levelNumber = text.description.match(/Level (\d+)/)?.[1];
+              const string = text.name;
+              const regex = /#(\d+)/;
+              const match = string.match(regex);
+              var number = -1;
+            if (match) {
+               number = parseInt(match[1]);
+            }
               console.log(levelNumber);
-              mergedArray[InfoJson.index] = {...mergedArray[InfoJson.index],imageUrl: text.media[0].social, nftLevel: levelNumber };
+              mergedArray[InfoJson.index] = {...mergedArray[InfoJson.index],imageUrl: text.media[0].social, nftLevel: levelNumber, nftNumber:number };
             } catch (e) {
               console.log(res);
-              mergedArray[InfoJson.index] = {...mergedArray[InfoJson.index],imageUrl: "", nftLevel:"1" };
+              mergedArray[InfoJson.index] = {...mergedArray[InfoJson.index],imageUrl: "", nftLevel:"1",nftNumber:-1 };
             }
           }).catch((err) => {
             console.log(err);
-            mergedArray[InfoJson.index] = {...mergedArray[InfoJson.index],imageUrl: "", nftLevel:"1" };
+            mergedArray[InfoJson.index] = {...mergedArray[InfoJson.index],imageUrl: "", nftLevel:"1",nftNumber:-1 };
           })
+  );
+        }
+      }
       );
-            InfoJson.forEach((nftStorage) => {
-        requests.push(
-          ledger2.contract.getContract(nftStorage.nftId).then((res) => {
-            var nftContract = new ContractDataView(res);
-            var nftStatus = nftContract.getVariableAsDecimal(11) ;
-            if(nftStatus === "15"){
-              nftStatus = "Not For Sell";
-            }
-            if(nftStatus === "16"){
-              nftStatus = "For Sell in Signa";
-            }
-            if(nftStatus === "17"){
-              nftStatus = "Buy";
-            }
-            if(nftStatus === "18"){
-              nftStatus = "For Sell in Sigdao and Signa";
-            }
-            if(nftStatus === "19"){
-              nftStatus = "For Auction in Signa";
-            }
-            if(nftStatus === "20"){
-              nftStatus = "Auction";
-            }
-            mergedArray[nftStorage.index] = {...mergedArray[nftStorage.index],
-              contractId: nftStorage.nftId,
-              contractPrice: nftContract.getVariableAsDecimal(10),
-              contractOwner: nftContract.getVariableAsDecimal(6),
-              nftStatus:nftStatus,
-              nftNumber:nftStorage.index,
-            };
-            // nftInfo.push({
-            //   contractId: nftStorage.nftId,
-            //   contractPrice: nftContract.getVariableAsDecimal(10),
-            //   contractOwner: nftContract.getVariableAsDecimal(6),
-            //   contractStatus:nftStatus,
-            // });
-          })
-          .catch((err) => {
-            mergedArray[nftStorage.index] = {...mergedArray[nftStorage.index],
-              contractId: nftStorage.nftId,
-              contractPrice: "0",
-              contractOwner: "0",
-              nftStatus:"15",
-            };
-          }
-          )
-        );
-      });
-      await Promise.all(requests);
+
+      await Promise.all(requests2);
       console.log(mergedArray);
       setNftInfo(mergedArray);
       setLoading(false);
