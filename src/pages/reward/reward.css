@@ -399,6 +399,24 @@
   width: 100%;
 }
 
+.nft_-avatar-new {
+  background-color: transparent;
+  border-radius: 10px;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.Wellness-Milestone-reward-list-container {
+  height: 107px;
+  width: 107px;
+  border-radius: 10px;
+  border: solid 1px #4136f1;
+  left: 20px;
+  position: absolute;
+  top: 22px;
+}
+
 .bettermidapp-rewards-2 .ic_next {
   background-color: transparent;
   bottom: 17px;
