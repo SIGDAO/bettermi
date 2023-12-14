@@ -30,9 +30,9 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
               <img className="zoe-fitness-eRgkx7 zoe-fitness" src = {`${process.env.PUBLIC_URL}/img/marketplace/Era.png`}/>
               <img className="zoe-fitness-u91zz4 zoe-fitness" src = {`${process.env.PUBLIC_URL}/img/marketplace/ALC.png`}/>
               <img className="zoe-fitness-aEJ33D zoe-fitness" src = {`${process.env.PUBLIC_URL}/img/marketplace/FlavourHouse.png`}/>
-              <div className="zoe-fitness-Jc5OoT zoe-fitness"></div>
-              <div className="zoe-fitness-SxtrzH zoe-fitness"></div>
-              <div className="zoe-fitness-ppgU72 zoe-fitness"></div>
+              <img className="zoe-fitness-Jc5OoT zoe-fitness" src = {`${process.env.PUBLIC_URL}/img/marketplace/BPSAA-Logo-NFT.png`}/>
+              <img className="zoe-fitness-SxtrzH zoe-fitness" src = {`${process.env.PUBLIC_URL}/img/marketplace/Chuen-Yik-Logo-NFT.png`}/>
+              <img className="zoe-fitness-ppgU72 zoe-fitness" src = {`${process.env.PUBLIC_URL}/img/marketplace/Fourcheer-Logo-NFT.png`}/>
             </HorizontalScrollContainer>
           </div>
           <div className="redeem-rewards-oobbG1">REWARD REDEEM</div>

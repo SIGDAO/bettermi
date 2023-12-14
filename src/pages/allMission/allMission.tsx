@@ -117,7 +117,7 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
           <button disabled = {true} style = {{}} className = "challengeCompletedLinkDisabled">
             <img src={`${process.env.PUBLIC_URL}/img/ic-locked-1@1x.png`} className='lock-image' alt="" /> 
             <div className="mission-button-content" >
-              <img className = "buttonIconChallengeCompleted" src={`${process.env.PUBLIC_URL}/img/allMission/nft-avatar-3@1x.png`} alt="Card_bg"></img>
+              <img className = "buttonIconChallengeCompleted" src={`${process.env.PUBLIC_URL}/img/allMission/Talk-to-mi-Square-Cover.png`} alt="Card_bg"></img>
               <div className = "descriptionChallengeCompleted">
                 <div style = {{display:"flex", flexDirection:"row"}} className = "descriptionTitleChallengeCompleted">
                   <div>Daily Walking Mission</div>
