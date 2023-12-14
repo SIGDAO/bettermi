@@ -23,6 +23,8 @@ const GenerateFreeNFT: React.FunctionComponent<GenerateFreeNFTProps> = (props) =
   const [nftIpfsAddress, setNftIpfsAddress] = React.useState<string>("");
   const [nftNumber, setNftNumber] = React.useState<number>(0);
   useEffect(() => {
+
+
     FindNftIpfsAddressWithConractId(Ledger, nftId)
       .then((result) => {
         console.log("reslt is ", result);
@@ -45,10 +47,10 @@ const GenerateFreeNFT: React.FunctionComponent<GenerateFreeNFTProps> = (props) =
       <img className="photo" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/photo-1@1x.png`} alt="Photo" />
       {/* <BackButton /> */}
       {isLoading === true ? (
-        <div className="x0"></div>
+        <div className="x0-generateFreeNFT"></div>
       ) : (
         <>
-          <img className="x0" src={`https://ipfs.io/ipfs/${nftIpfsAddress}`} alt="0" />
+          <img className="x0-generateFreeNFT" src={`https://ipfs.io/ipfs/${nftIpfsAddress}`} alt="0" />
           <h1 className="text-1">#{nftNumber}</h1>
         </>
       )}

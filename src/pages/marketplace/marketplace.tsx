@@ -129,7 +129,7 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
                   <div className="x893"></div>
                   <div className="goal-0yTxuU goal">
                     <div className="x0-T9m1oI x0 inter-semi-bold-keppel-14px">0</div>
-                    <div className="x3-T9m1oI x3 inter-semi-bold-white-14px">/ 50</div>
+                    <div className="x3-T9m1oI x3 inter-semi-bold-white-14px">/ 1</div>
                   </div>
                 </div>
               </div>
