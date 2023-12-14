@@ -396,6 +396,7 @@
   line-height: 14px;
   text-align: left;
   top: 2px;
+  position: absolute;
   white-space: nowrap;
   width: 11px;
 }
