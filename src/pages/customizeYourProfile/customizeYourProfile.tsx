@@ -29,7 +29,8 @@ const CustomizeYourProfile: React.FunctionComponent<ICustomizeYourProfileProps> 
   const location = useLocation();
   console.log("pathname is ", pathname);
   console.log("pathname state is", location.state);
-  const nftImage = location.state?.nftImageAddress || useSelector(selectCurrentNFTImageAddress);
+  const nftImage = location.state?.nftImageAddress;
+  const nftImageAddressFormRedux = useSelector(selectCurrentNFTImageAddress);
   const nftId = location.state?.nftId;
   const userAccountId = useSelector(accountId);
   const userAccountpublicKey = useSelector(accountPublicKey);
@@ -86,7 +87,7 @@ const CustomizeYourProfile: React.FunctionComponent<ICustomizeYourProfileProps> 
       </div>
       <div className="pick-a-username-Gzrq3v">PICK A USERNAME</div>
       <p className="reserve-your-name-before-its-taken-Gzrq3v">Reserve your @name before it's taken.</p>
-      <img className="photo-Gzrq3v" src={`https://ipfs.io/ipfs/${nftImage}` || `${process.env.PUBLIC_URL}/img/mimi.png`} alt="Photo" />
+      <img className="photo-Gzrq3v" src={`https://ipfs.io/ipfs/${nftImage|| nftImageAddressFormRedux}` || `${process.env.PUBLIC_URL}/img/mimi.png`} alt="Photo" />
       <div className="search-bar-container-customizeYourProfile">
         <RandomGenNameInput name={name} setName={setName} />
       </div>

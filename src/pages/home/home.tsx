@@ -34,7 +34,7 @@ interface IHomeProps {
 
 function handleScrollHorizontally(event: any) {
   console.log(event);   
-  const container = document.querySelector("div.missions-scroll-RoXPLo.x-")!;
+  const container = document.querySelector("div.missions-scroll-RoXPLo-x-")!;
   //const container = event.target;
   const largeContainer = document.querySelector("div");
   const delta = Math.max(-1, Math.min(1, (event.deltaY || -event.detail)));
@@ -54,7 +54,7 @@ const HorizontalScrollContainer = (props: any) => {
 
   return (
     <div
-      className='missions-scroll-RoXPLo x-'
+      className='missions-scroll-RoXPLo-x-'
       ref={containerRef}
       style={{ overflowX: 'auto' }}
       onWheel={handleScrollHorizontally}
