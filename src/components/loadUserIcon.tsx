@@ -14,7 +14,7 @@ export interface IUserIconProps {
   home?: boolean;
   profile?: boolean;
   userAccountId: string;
-  setIsPopUpIcon?: Function;
+  setIsPopUpIcon: Function;
 }
 export interface ClassNames {
   forEmptyIcon: string;
@@ -30,7 +30,7 @@ const UserIcon: React.FC<IUserIconProps> = (props) => {
     forNftDisplay: "nft_-avatar-2ZgxSS",
   };
   const profileClassNames = { forEmptyIcon: "profile_icon_nft_-avatar_empty", forAddSign: "profile_icon_ic_add", forLoadingSign: "profile_icon_ic_loading", forNftDisplay: "nft_-avatar_empty" };
-  const { home, profile, userAccountId } = props;
+  const { home, profile, userAccountId, setIsPopUpIcon } = props;
   let finalClassNames: ClassNames = home === true ? homeClassNames : profileClassNames;
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);

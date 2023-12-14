@@ -65,6 +65,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   const [alert, setAlert] = useState<boolean>(false);
   // const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const [count, setCount] = useState(0);
+  const [isPopUpIcon, setIsPopUpIcon] = useState<boolean>(false);
 
   useEffect(() => {
     const countdown = () => {
@@ -321,7 +322,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
               <img className="profile_icon_ic_loading" src="/img/loadingMinting/mimi-dancing-for-loadin-page.gif" alt="ic_add" />
             </div>
           ) : (
-            <UserIcon profile={true} userAccountId={userAccountId}></UserIcon>
+            <UserIcon setIsPopUpIcon={setIsPopUpIcon} profile={true} userAccountId={userAccountId}></UserIcon>
           )}
           {isUpdatingUserSetting === true || isSettingLoading === true ? (
             <div className="profile-content">

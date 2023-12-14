@@ -51,31 +51,29 @@ const Testing: React.FunctionComponent<TestingProps> = (props) => {
         });
       const latestTransactionNumber = await FindLatestTransactionNumber(Ledger, NftContractStorage, nftDistributor);
       const latestTransactionList = await FindLatestTransactionArray(Ledger, NftContractStorage, nftDistributor, latestTransactionNumber);
-      setNftId(latestTransactionList[0])
+      setNftId(latestTransactionList[0]);
     }
-  }
+  };
 
   useEffect(() => {
-    fetchUserIcon()
+    fetchUserIcon();
   }, []);
 
   useEffect(() => {
     if (!nftId) return;
     FindNftIpfsAddressWithConractId(Ledger, nftId)
-    .then((result) => {
-      console.log("reslt is ", result);
-      dispatch(profileSlice.actions.setNFTImageAddress(result.nftImage));
-      setNftIpfsAddress(result.nftImage);
-      setNftNumber(result.nftNumber);
-      setIsLoading(false);
-    })
-    .catch((e: any) => {
-      alert("We apologize that some error has occured. You can still get your free NFT in myNft Collection if you haven't get one");
-      console.log(e);
-    });
+      .then((result) => {
+        console.log("reslt is ", result);
+        dispatch(profileSlice.actions.setNFTImageAddress(result.nftImage));
+        setNftIpfsAddress(result.nftImage);
+        setNftNumber(result.nftNumber);
+        setIsLoading(false);
+      })
+      .catch((e: any) => {
+        alert("We apologize that some error has occured. You can still get your free NFT in myNft Collection if you haven't get one");
+        console.log(e);
+      });
   }, [nftId]);
-
-
 
   const content: JSX.Element = (
     <>
@@ -95,9 +93,9 @@ const Testing: React.FunctionComponent<TestingProps> = (props) => {
         <div className="reward-10">REWARD +10%</div>
       </div>
       <div className="x0-signa">$0 SIGNA</div>
-      <div className="button_-import" onClick={() => navigate(-1)}>
+      {/* <div className="button_-import" onClick={() => navigate(-1)}>
         <div className="continue inter-semi-bold-white-15px">Return</div>
-      </div>
+      </div> */}
     </>
   );
 
@@ -106,18 +104,15 @@ const Testing: React.FunctionComponent<TestingProps> = (props) => {
 
 export default Testing;
 
-
 // import React, { useEffect, useState } from "react";
 // import "./testing.css";
 // import { CarouselItem, Carousel } from "./Carousel";
 // import { Link } from "react-router-dom";
 // import { useSendMsgMutation } from "../../redux/characteraiAPI";
 
-
 // export default function Testing() {
 //   const initialArray: any[] = Array.from({ length: 10 }); // Example array with length 10
 //   const [booleanStates, setBooleanStates] = useState<boolean[]>(Array(initialArray.length).fill(false));
-
 
 //   const slides = [
 //     {'src': `${process.env.PUBLIC_URL}/img/home/1@1x.png`, 'link': 'https://www.bettermi.io/'},
@@ -176,20 +171,13 @@ export default Testing;
 //   );
 // }
 
-
-
-
-
-
-
 // // test trading view
-
 
 // // import { createChart, ColorType } from 'lightweight-charts';
 
 // import { Chart, AreaSeries, PriceLine, PriceScale } from "lightweight-charts-react-wrapper";
 // import { IChartApi, LineStyle, ColorType, LineWidth, PriceScaleMode, AreaData, SeriesDataItemTypeMap, UTCTimestamp } from "lightweight-charts";
-// // PriceScaleModem, 
+// // PriceScaleModem,
 // import React, { useEffect, useRef, useCallback, useState } from 'react';
 // import { findBMI } from "../../components/bmiCalculate";
 // import { useSelector, useDispatch } from "react-redux";
@@ -211,7 +199,6 @@ export default Testing;
 //   areaTopColor: '#2962FF',
 //   areaBottomColor: 'rgba(41, 98, 255, 0.28)',
 // }
-
 
 // const testing:LineWidth = 1
 
@@ -258,7 +245,6 @@ export default Testing;
 
 // }
 
-
 // const areaSeriesInitialOptions = {
 //   // lineColor: initialColors.lineColor!,
 //   lineColor: 'transparent',
@@ -302,15 +288,11 @@ export default Testing;
 
 //   }, []);
 
-//   // const genBMIlist 
+//   // const genBMIlist
 
 //   // useEffect(() => {
 //   //   console.log('data', data)
 //   // }, [data])
-
-
-  
-
 
 //   const options = {
 //     layout: {
@@ -347,13 +329,12 @@ export default Testing;
 //     width: width || 1000,
 //     height: height || 300,
 //   }
-  
 
 //   // return (
 //   //   <Chart {...options}>
 //   //     {data && (
-//   //       <AreaSeries 
-//   //         {...areaSeriesInitialOptions} 
+//   //       <AreaSeries
+//   //         {...areaSeriesInitialOptions}
 //   //         data={data}
 //   //         // markers={data.map((item: any, index: any) => {
 //   //         //   return {
@@ -368,11 +349,11 @@ export default Testing;
 //   //         //   }})
 //   //         // }
 //   //       >
-//   //         <PriceLine 
-//   //           price={26.5} 
-//   //           color={'#39b3af'} 
-//   //           lineWidth={2} 
-//   //           lineStyle={LineStyle.LargeDashed} 
+//   //         <PriceLine
+//   //           price={26.5}
+//   //           color={'#39b3af'}
+//   //           lineWidth={2}
+//   //           lineStyle={LineStyle.LargeDashed}
 //   //         />
 //   //       </AreaSeries>
 //   //     )}
@@ -387,8 +368,6 @@ export default Testing;
 // }
 
 // export default CustomTradingViewChart;
-
-
 
 // import React from "react";
 // import "./loadingMinting.css";
@@ -430,7 +409,7 @@ export default Testing;
 //         machineCodeHash: codeHashId,
 //       });
 //       console.log(ourContract);
-//       if (pathname === "/loadingMinting") setIsMinting(false); 
+//       if (pathname === "/loadingMinting") setIsMinting(false);
 //     }
 
 //     while (isMinting === true) {
@@ -449,7 +428,7 @@ export default Testing;
 //           setIsMinting(false);
 //         }
 //       }
-      
+
 //     }
 
 //     setCount(100);

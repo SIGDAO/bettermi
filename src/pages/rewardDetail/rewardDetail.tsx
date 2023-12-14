@@ -3,54 +3,11 @@ import { useParams, Navigate } from 'react-router-dom';
 import './rewardDetail.css'
 import { CenterLayout } from '../../components/layout';
 import { ShortTitleBar } from '../../components/titleBar';
+import { rewardDetailList } from '../../data/rewardList';
 
 interface IRewardDetailProps {
 }
 
-interface rewardDetailListProps {
-  id: number,
-  title: string,
-  reward?: string | number,
-  description: string,
-  bgImagePath?: string,
-  requireTimes?: number,
-}
-
-const rewardDetailList: rewardDetailListProps[] = [
-  {
-    id: 1,
-    title: 'Master Collector',
-    reward: 20,
-    description: `Unlocked by users who acquire 3 NFTs from our collection. As a reward, users are granted 20 Sigdao, empowering them with valuable resources to enhance their overall experience.`,
-    bgImagePath: 'photo-1@1x.png',
-    requireTimes: 3,
-  },{
-    id: 2,
-    title: 'Selfie Champion',
-    reward: 'Get a Random NFT.',
-    description: `Earned by users who maintain a consistent practice of capturing their progress through selfies for 60 consecutive days. This remarkable commitment is acknowledged with the unlocking of a rare and coveted NFT, symbolizing their dedication and perseverance.`,
-    bgImagePath: 'photo-3@1x.png',
-    // sigdao: 20,
-    requireTimes: 60,
-  },{
-    id: 3,
-    title: 'Social Butterfly',
-    description: `Awarded to users who build a thriving network of 75 friends. As a gesture of appreciation, 
-                  users receive a complimentary healthy product, fostering meaningful connections 
-                  and encouraging a supportive environment.`,
-    bgImagePath: 'photo-2@1x.png',
-    reward: 'Get a Free Health related Product',
-    requireTimes: 75,
-  },
-  {
-    id: 4,
-    title: 'Elite Challenger',
-    reward: 'Receive our exclusive healthy product',
-    description: `Users who complete 50 challenges, whether accumulated over time or in one continuous effort, unlock this achievement. As a result, users receive a complimentary healthy product to our exclusive partner lifestyle service, celebrating your progress and elevating your fitness journey even further. `,
-    bgImagePath: 'photo-1-1x-png@1x.png',
-    requireTimes: 50,
-  }
-]
 
 const determinePageClass = (id: string) => {
   let classNameList = []

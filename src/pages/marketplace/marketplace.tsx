@@ -145,7 +145,7 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
           <HorizontalScrollContainer inputClassName="special-scroll-AStx0d">
             <div className="x25-Wx9nPx">
               <div className="x0-Y63lEW x0"><img className="x1-z2FCJz x1" src={`${process.env.PUBLIC_URL}/img/marketplace/Hot_Deals_Free_Consultation_Sample.png`} alt="1" /></div>
-              <div className="x1-Y63lEW x1"><img className="x1-0pT4eI x1" src={`${process.env.PUBLIC_URL}/img/marketplace/Hot_Deals_Product_Discount_Sample.png`} alt="1" /></div>
+              <div className="x1-Y63lEW x1-no-border"><img className="x1-0pT4eI x1" src={`${process.env.PUBLIC_URL}/img/marketplace/Hot_Deals_Product_Discount_Sample.png`} alt="1" /></div>
               <div className="x2-Y63lEW"><img className="x1-EMGmsF x1" src={`${process.env.PUBLIC_URL}/img/marketplace/Hot_Deals_Service_Sample.png`} alt="1" /></div>
             </div>
           </HorizontalScrollContainer>

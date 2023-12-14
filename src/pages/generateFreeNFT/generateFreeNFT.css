@@ -15,6 +15,7 @@
   position: absolute;
   top: 135px;
   width: 351px;
+  z-index: 201;
 }
 
 .text-1 {
@@ -69,6 +70,7 @@
   width: 150px;
   position: absolute;
   top: 658px;
+  z-index: 201;
 }
 
 .lv-1 {
@@ -121,4 +123,5 @@
   text-align: center;
   top: 697px;
   white-space: nowrap;
+  z-index: 200;
 }

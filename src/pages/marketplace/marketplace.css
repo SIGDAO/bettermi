@@ -595,12 +595,21 @@
   position: absolute;
 }
 
+.bettermidapp-marketplace-1 .x1-no-border {
+  background-color: transparent;
+  height: 185px;
+  position: absolute;
+  top: 0px;
+  width: 250px;
+}
+
 .bettermidapp-marketplace-1 .x1 {
   background-color: transparent;
   height: 185px;
   position: absolute;
   top: 0px;
   width: 250px;
+  border:  solid 1px #4136F1;
 }
 
 .bettermidapp-marketplace-1 .x3 {

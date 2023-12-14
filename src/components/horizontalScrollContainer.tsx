@@ -42,7 +42,7 @@ const HorizontalScrollContainer: React.FunctionComponent<IHorizontalScrollContai
       <div
         className={inputClassName}
         ref={containerRef}
-        style={{ overflowX: 'auto' , ...props.style}}
+        style={{ overflowX: 'auto', overflowY: 'hidden' , ...props.style}}
         onWheel={handleScrollHorizontally}
       >
         {props.children}

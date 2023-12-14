@@ -93,6 +93,8 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
   var userNftList: myNftList[] = [];
   var userNftToken: myNftList[] = [];
   const navigate = useNavigate();
+  const [isPopUpIconList, setIsPopUpIconList] = useState<boolean[]>(Array(myNfts.length).fill(false));
+  const [isOnDutyIconPopup, setIsOnDutyIconPopup] = useState<boolean>(false);
 
   const codeHashIdForNft = "5093642053599315133";
   const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
@@ -478,7 +480,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
                     {isUpdatingDescription === true ? (
                       <img className="myNftImage" src="/img/loadingMinting/mimi-dancing-for-loadin-page.gif"></img>
                     ) : (
-                      <img onClick={() => navigate('/previewNFTImg')} className="myNftImage" src={`https://ipfs.io/ipfs/${onDuty}`}></img>
+                      <img onClick={() => setIsOnDutyIconPopup(false)} className="myNftImage" src={`https://ipfs.io/ipfs/${onDuty}`}></img>
                     )}
                     <div className="myNftDescription">
                       <div className="myNftNumber">#{nftNumber}</div>
