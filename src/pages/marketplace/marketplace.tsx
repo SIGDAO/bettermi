@@ -4,6 +4,7 @@ import './marketplace.css';
 import { CenterLayout } from '../../components/layout';
 import MenuBar from '../../components/menuBar';
 import { ShortTitleBar } from '../../components/titleBar';
+import HorizontalScrollContainer from '../../components/horizontalScrollContainer';
 
 interface IMarketplaceProps {
 }
@@ -22,7 +23,7 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
               <div className="see-all-vbUx2m see-all inter-medium-royal-blue-14px">Partner</div>
             </Link>
             <p className="discover-thousands-o-vbUx2m">Discover thousands of products that accept SIGDAO!</p>
-            <div className="x7-vbUx2m">
+            <HorizontalScrollContainer inputClassName="x7-vbUx2m">
               <img className="zoe-fitness-8cjGPE zoe-fitness" src={`${process.env.PUBLIC_URL}/img/marketplace/Toget.png`} alt="Zoe Fitness" />
               <img className="vitev-8cjGPE" src={`${process.env.PUBLIC_URL}/img/marketplace/Flower.png`} alt="Vitev" />
               <img className="zoe-fitness-HI0Hnc zoe-fitness" src = {`${process.env.PUBLIC_URL}/img/marketplace/Ruto.png`}/>
@@ -32,13 +33,13 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
               <div className="zoe-fitness-Jc5OoT zoe-fitness"></div>
               <div className="zoe-fitness-SxtrzH zoe-fitness"></div>
               <div className="zoe-fitness-ppgU72 zoe-fitness"></div>
-            </div>
+            </HorizontalScrollContainer>
           </div>
           <div className="redeem-rewards-oobbG1">REWARD REDEEM</div>
           <Link to="/reward">
             <div className="see-all-oobbG1 see-all inter-medium-royal-blue-14px">See all</div>
           </Link>
-          <div className="x8-oobbG1">
+          <HorizontalScrollContainer inputClassName="x8-oobbG1">
             <Link to='/rewardDetail/1'>
               <div className="rewards-cards-PbMWvx rewards-cards">
                 <img className="card_bg" src={`${process.env.PUBLIC_URL}/img/marketplace/card-bg-1@1x.png`} alt="Card_bg" />
@@ -133,7 +134,7 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
                 </div>
               </div>
             </Link> */}
-          </div>
+          </HorizontalScrollContainer>
         </div>
         <div className="partner-company-Rea9Nd partner-company">
           <div className="bg-AStx0d"></div>
@@ -141,13 +142,13 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
           {/* <Link to="https://www.bettermi.io/" >
             <div className="see-all-AStx0d see-all inter-medium-royal-blue-14px">See all</div>
           </Link> */}
-          <div className="special-scroll-AStx0d">
+          <HorizontalScrollContainer inputClassName="special-scroll-AStx0d">
             <div className="x25-Wx9nPx">
               <div className="x0-Y63lEW x0"><img className="x1-z2FCJz x1" src={`${process.env.PUBLIC_URL}/img/marketplace/Hot_Deals_Free_Consultation_Sample.png`} alt="1" /></div>
               <div className="x1-Y63lEW x1"><img className="x1-0pT4eI x1" src={`${process.env.PUBLIC_URL}/img/marketplace/Hot_Deals_Product_Discount_Sample.png`} alt="1" /></div>
               <div className="x2-Y63lEW"><img className="x1-EMGmsF x1" src={`${process.env.PUBLIC_URL}/img/marketplace/Hot_Deals_Service_Sample.png`} alt="1" /></div>
             </div>
-          </div>
+          </HorizontalScrollContainer>
         </div>
         <MenuBar/>
       </div>

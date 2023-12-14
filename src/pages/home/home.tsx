@@ -28,40 +28,9 @@ import { AppContext } from '../../redux/useContext';
 import HorizontalScrollContainerMission from './horzontalScrollContainer';
 import { CheckNftOwnerId } from '../../NftSystem/updateUserNftStorage';
 import UserIcon from '../../components/loadUserIcon';
+import HorizontalScrollContainer from '../../components/horizontalScrollContainer';
 
 interface IHomeProps {
-}
-
-function handleScrollHorizontally(event: any) {
-  console.log(event);   
-  const container = document.querySelector("div.missions-scroll-RoXPLo-x-")!;
-  //const container = event.target;
-  const largeContainer = document.querySelector("div");
-  const delta = Math.max(-1, Math.min(1, (event.deltaY || -event.detail)));
-  largeContainer?.classList.add("no-scroll");
-  console.log(container);
-  const scrollTop = event.pageYOffset || document.documentElement.scrollTop;
-  window.onscroll = function() {
-    window.scrollTo(-scrollTop,0 );
-  };
-  container.scrollLeft -= (delta * 40); // Adjust scrolling speed here
-  event.preventDefault();
-
-}
-
-const HorizontalScrollContainer = (props: any) => {
-  const containerRef = useRef(null);
-
-  return (
-    <div
-      className='missions-scroll-RoXPLo-x-'
-      ref={containerRef}
-      style={{ overflowX: 'auto' }}
-      onWheel={handleScrollHorizontally}
-    >
-      {props.children}
-    </div>
-  );
 }
 
 const Home: React.FunctionComponent<IHomeProps> = (props) => {
@@ -286,7 +255,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
           <div className="sigdao-2ZgxSS inter-semi-bold-white-15px">SIGDAO:</div>
         </div>
         {/* <HorizontalScrollContainerMission></HorizontalScrollContainerMission> */}
-        <HorizontalScrollContainer>
+        <HorizontalScrollContainer inputClassName='missions-scroll-RoXPLo x-'>
           <Link to="/missionChallenge">
             <div className="challenges-x9-hacks-GEWAL1">
               <div className="small-image">

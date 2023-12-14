@@ -24,6 +24,7 @@ import { GetUserNftList } from "../../NftSystem/updateUserNftStorage";
 import { IsUserUpdatingDescription } from "../../NftSystem/updateUserNftStorage";
 import { IsUserUpdatingIcon } from "../../NftSystem/updateUserNftStorage";
 import { UpdateUserDescription } from "../../NftSystem/updateUserNftStorage";
+import HorizontalScrollContainer from "../../components/horizontalScrollContainer";
 
 interface IAnimaGenContentProps {
   isOpen: boolean;
@@ -397,15 +398,15 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
         </div>
 
         {/* This is the new horizontal scroll */}
-        <div
-          className="profileHorizontalScroll"
+        <HorizontalScrollContainer
+          inputClassName="profileHorizontalScroll"
           style={{
             backgroundColor: "inherit",
             width: "390px",
             height: "45%",
             overflowY: "scroll",
           }}
-          onWheel={handleScroll}
+          // onWheel={handleScroll}
         >
           <div
             style={{
@@ -413,7 +414,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
               height: "217px",
               display: "flex",
             }}
-            onWheel={handleScroll}
+            // onWheel={handleScroll}
           >
             <Link to="/allNftList/">
               <div className="overlap-group-profile">
@@ -449,7 +450,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
               ))
             )}
           </div>
-        </div>
+        </HorizontalScrollContainer>
         </div>
 
 
