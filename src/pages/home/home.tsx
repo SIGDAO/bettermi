@@ -296,7 +296,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
           <div className="step-counts-GEWAL1">
             <div className="home-meditation-content">
               <div className="small-image">
-                <img className="step_count_banner-45Wblr" src={`${process.env.PUBLIC_URL}/img/home/step-count-banner@1x.png`} alt="Step_count_banner" />
+                <img className="step_count_banner-45Wblr" src={`${process.env.PUBLIC_URL}/img/allMission/Talk-to-mi-Square-Cover.png`} alt="Step_count_banner" />
               </div>
               <div className="walking-mission-7hGHU0 inter-medium-white-15px">Walking Mission</div>
               <div className="step-count-7hGHU0 inter-normal-cadet-blue-12px">Step Count</div>
