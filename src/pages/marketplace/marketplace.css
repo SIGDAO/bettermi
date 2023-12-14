@@ -563,6 +563,18 @@
   width: 107px;
 }
 
+.bettermidapp-marketplace-1 .nft_-avatar-new {
+  background-color: transparent;
+  border-radius: 10px;
+  height: calc(100.00% - 43px);
+  left: 20px;
+  object-fit: cover;
+  position: absolute;
+  top: 22px;
+  width: 107px;
+  border: solid 1px #4136F1;
+}
+
 .bettermidapp-marketplace-1 .partner-company {
   background-color: transparent;
   position: absolute;

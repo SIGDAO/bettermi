@@ -23,7 +23,7 @@ const questionList = [
   },
   {
     question: 'Q:   How can I earn rewards on Bettermi.io?',
-    ans: "A:  Yes, the NFTs on Bettermi.io hold value as they can be used within the app to unlock features, earn additional rewards, and showcase achievements."
+    ans: "A:  A: The key features include fitness tracking, fun missions, NFT rewards, social interaction, AI coaching, and goal-setting capabilities."
   },
   {
     question: "Can I connect with other users?",
