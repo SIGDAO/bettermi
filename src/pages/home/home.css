@@ -855,6 +855,7 @@ color
   left: 0px;
   object-fit: cover;
   position: absolute;
+  cursor: pointer;
   top: 8px;
   width: 107px;
   clip: rect(0, 110px, 100px, 0);

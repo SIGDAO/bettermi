@@ -776,6 +776,7 @@
   width: 137px;
   border-radius: 5px;
   margin-top: 15px;
+  cursor: pointer;
 }
 .myNftEmptyImage{
   height:217px;
