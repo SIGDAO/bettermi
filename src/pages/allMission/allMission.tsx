@@ -120,11 +120,11 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
               <img className = "buttonIconChallengeCompleted" src={`${process.env.PUBLIC_URL}/img/allMission/Talk-to-mi-Square-Cover.png`} alt="Card_bg"></img>
               <div className = "descriptionChallengeCompleted">
                 <div style = {{display:"flex", flexDirection:"row"}} className = "descriptionTitleChallengeCompleted">
-                  <div>Daily Walking Mission</div>
-                  <img  style = {{width:"15px", height:"20px",paddingLeft:"10px"}} src={`${process.env.PUBLIC_URL}/img/allMission/ic-locked-1@1x.png`}></img>
+                  <div>Talk to mi</div>
+                  {/* <img  style = {{width:"15px", height:"20px",paddingLeft:"10px"}} src={`${process.env.PUBLIC_URL}/img/allMission/ic-locked-1@1x.png`}></img> */}
                   </div>
                   <div className = "descriptionBodyChallengeCompleted">
-                    Step Count
+                    Talk to mi
                   </div>
                   <div className = "descriptionBottomBodyChallengeCompleted">
                     <div className = "sigdaoIconChallengeCompleted">
