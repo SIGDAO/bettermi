@@ -11,6 +11,7 @@ import { LedgerClientFactory } from "@signumjs/core";
 import { BuyNft } from "../../NftSystem/BuyNft/buyNft";
 import { accountId } from "../../redux/account";
 import { accountPublicKey } from "../../redux/account";
+import { selectedNftInfo } from "./indexAllNftList";
 
 interface AllNftProps {
   imageAddress: string;
@@ -20,13 +21,15 @@ interface AllNftProps {
   nftNumber?: string;
   nftLevel?: string;
   nftPrice?: string;
-  nftStatus?:string;
-  nftId?:string;
-  nftIndex:number;
+  nftStatus?: string;
+  nftId?: string;
+  nftIndex: number;
+  setNftSelectedImage?: (nftSelectedImage: selectedNftInfo) => void;
+  nftReward?:string;
 }
 
 const AllNft: React.FunctionComponent<AllNftProps> = (props) => {
-  const { imageAddress, openModel, setOpenModel, nftOwner, nftNumber, nftLevel, nftPrice,nftStatus,nftId,nftIndex } = props;
+  const { imageAddress, openModel, setOpenModel, nftOwner, nftNumber, nftLevel, nftPrice, nftStatus, nftId, nftIndex, setNftSelectedImage,nftReward } = props;
   const { appName, Wallet, Ledger } = useContext(AppContext);
   const nodeHost = useSelector(selectWalletNodeHost);
   const ledger2 = LedgerClientFactory.createClient({ nodeHost });
@@ -37,17 +40,38 @@ const AllNft: React.FunctionComponent<AllNftProps> = (props) => {
   const nftDistributorPrivateKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PRIVATE_KEY!;
   const userAccountPublicKey = useSelector(accountPublicKey);
   const Buy = async () => {
-    if(nftStatus === "Buy"){
-    BuyNft(Wallet, ledger2, nftId!, nftPrice!,userAccountId,codeHashIdForNft,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey,userAccountPublicKey);
+    if (nftStatus === "Buy") {
+      BuyNft(Wallet, ledger2, nftId!, nftPrice!, userAccountId, codeHashIdForNft, nftDistributor, nftDistributorPublicKey, nftDistributorPrivateKey, userAccountPublicKey);
     }
-  }
+  };
   return (
     <>
       {/* {loading?(<div>loading</div>):(
           imgAddress === ""?(<div>loading</div>):( */}
 
       <div className="myNftList">
-        <img className="myNftImage" src={`https://ipfs.io/ipfs/${imageAddress}`}></img>
+        <img
+          onClick={() => {
+            //   setIsOpenPopup((prev) => !prev);
+            //   setSelectedAssetId(nftId);
+            //   setLevel(nftLevel);
+            console.log("testing");
+            if (setOpenModel) {
+              setOpenModel(!openModel);
+            }
+            if (setNftSelectedImage && nftLevel && nftPrice && nftIndex && nftReward) {
+              const selectedNftInfo: selectedNftInfo = {
+                imageUrl: imageAddress,
+                nftLevel: nftLevel,
+                nftPrice: nftPrice,
+                nftReward: nftReward,
+              };
+              setNftSelectedImage(selectedNftInfo);
+            }
+          }}
+          className="myNftImage"
+          src={`https://ipfs.io/ipfs/${imageAddress}`}
+        ></img>
         <div className="myNftDescription">
           <div className="myNftNumber">#0000{nftIndex}</div>
           <div className="myNftBar">
@@ -77,7 +101,7 @@ const AllNft: React.FunctionComponent<AllNftProps> = (props) => {
             <button className="allNftButton" onClick={Buy}>
               {nftStatus}
             </button>
-            <img
+            {/* <img
               onClick={() => {
                 //   setIsOpenPopup((prev) => !prev);
                 //   setSelectedAssetId(nftId);
@@ -86,10 +110,19 @@ const AllNft: React.FunctionComponent<AllNftProps> = (props) => {
                 if (setOpenModel) {
                   setOpenModel(!openModel);
                 }
+                if(setNftSelectedImage && nftLevel && nftPrice && nftIndex){
+                  const selectedNftInfo:selectedNftInfo = {
+                    imageUrl:imageAddress,
+                    nftLevel:nftLevel,
+                    nftPrice:nftPrice,
+                    nftReward:nftIndex.toString(),
+                  }
+                  setNftSelectedImage(selectedNftInfo);
+                }
               }}
               className="myNftButtomArrow"
               src={`${process.env.PUBLIC_URL}/img/NftList/ic-send@1x.png`}
-            />
+            /> */}
           </>
           {/* )
                     } */}

@@ -6,17 +6,20 @@ import { ShortTitleBar } from "../../components/titleBar";
 import AllNft from "./allNft";
 import { all } from "axios";
 import { nftInfo } from "./indexAllNftList";
+import { selectedNftInfo } from "./indexAllNftList";
 export interface IAllNftListProps{
     CustomModel?:React.FC<any>;
     openModel?:boolean;
     setOpenModel?:(openModel:boolean) => void;
     nftInfoArray:nftInfo[];
     setSelectedNftId?:(nftId:string) => void;
-
+    isPopUpIcon?:boolean;
+    setIsPopUpIcon:(isPopUpIcon:boolean) => void;
+  setSelectedImageAddress?:(selectedImageAddress:selectedNftInfo) => void;
 }
 
 const AllNftList:React.FC <IAllNftListProps>= (props) => {
-    const {CustomModel,openModel,setOpenModel,nftInfoArray} = props;
+    const {CustomModel,openModel,setOpenModel,nftInfoArray,isPopUpIcon,setIsPopUpIcon,setSelectedImageAddress} = props;
     //const{myNfts} = props;
     const mobile = process.env.REACT_APP_MOBILE === 'true';
     const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
@@ -68,7 +71,7 @@ const AllNftList:React.FC <IAllNftListProps>= (props) => {
     )
     }
     return(
-      <AllNft nftId = {nft.contractId} nftIndex = {nft.nftNumber} nftStatus = {nft.nftStatus} nftNumber = {nft.contractId} nftLevel = {nft.nftLevel} nftOwner = {nft.contractOwner} nftPrice = {nft.contractPrice} imageAddress={nft.imageUrl} openModel = {openModel} setOpenModel={setOpenModel}/>
+      <AllNft nftReward={nft.nftReward} setNftSelectedImage={setSelectedImageAddress} nftId = {nft.contractId} nftIndex = {nft.nftNumber} nftStatus = {nft.nftStatus} nftNumber = {nft.contractId} nftLevel = {nft.nftLevel} nftOwner = {nft.contractOwner} nftPrice = {nft.contractPrice} imageAddress={nft.imageUrl} openModel = {openModel} setOpenModel={setOpenModel}/>
     )
     });
     return (
