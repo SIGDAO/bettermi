@@ -33,6 +33,11 @@ interface IAnimaGenContentProps {
   setIsBackButton: (isBackButton: boolean) => void;
   isUpdating?: boolean;
   isUpdatingUserSetting?: boolean;
+  setIsPopUpIcon: Function;
+  isPopUpIcon?: boolean;
+  setIsNFTiconLoading: Function;
+  isNFTiconLoading?: boolean;
+  setImgAddress: Function;
 }
 interface myNftList {
   level: string;
@@ -54,8 +59,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   const dispatch = useDispatch();
   const gender = useSelector(selectCurrentGender);
   const userAccountId = useSelector(accountId);
-  const { isOpen, setIsOpen, isBackButton, setIsBackButton } = props;
-  const [imgAddress, setImgAddress] = useState<string>("");
+  const { isOpen, setIsOpen, isBackButton, setIsBackButton, isPopUpIcon, setIsPopUpIcon, isNFTiconLoading, setIsNFTiconLoading, setImgAddress } = props;
   const [name, setName] = useState<string>(username);
   const [haveNft, setHaveNft] = useState<boolean>(false);
   const [aboutYourselfText, setAboutYourselfText] = useState<string>(aboutYourself);
@@ -65,7 +69,6 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   const [alert, setAlert] = useState<boolean>(false);
   // const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const [count, setCount] = useState(0);
-  const [isPopUpIcon, setIsPopUpIcon] = useState<boolean>(false);
 
   useEffect(() => {
     const countdown = () => {
@@ -194,7 +197,6 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   const [fetchDiscordUsername, setFetchDiscordUsername] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isEmptyProfile, setIsEmptyProfile] = useState<boolean>(false);
-  const [isNFTiconLoading, setIsNFTiconLoading] = useState<boolean>(true);
 
   const fetchUserIcon = async () => {
     const isUserSettingUpdating = await IsUserUpdatingIcon(ledger2, userAccountId);
@@ -325,27 +327,6 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
       }}
       onWheel={handleScroll2}
     >
-      {isNFTiconLoading && (
-        <div className="hidden-content">
-          {isUserIconLoading ? (
-            <div className="x0"></div>
-          ) : (
-            <>
-              <img className="x0-generateFreeNFT" src={`https://ipfs.io/ipfs/${imgAddress}`} alt="0" />
-              {/* <h1 className="text-1">#{nftNumber}</h1> */}
-            </>
-          )}
-          <div className="x16206">
-            <div className="lv-1">LV 1</div>
-            <img className="x6" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/file---6@1x.png`} alt="6" />
-            <div className="reward-10">REWARD +10%</div>
-          </div>
-          <div className="x0-signa">$0 SIGNA</div>
-          <img className="photo" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/photo-1@1x.png`} alt="Photo" />
-          <div onClick={() => setIsPopUpIcon(false)} className="click-the-area-to-make-it-hidden-again"></div>
-        </div>
-      )}
-
       <ShortTitleBar title="Profile" />
       {alert && (
         <Alert className="copied-alert" icon={<CheckIcon fontSize="inherit" />} severity="success">
@@ -488,6 +469,10 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
               ) : (
                 myNfts.map((MyNft) => (
                   <img
+                    onClick={() => {
+                      setIsPopUpIcon(true);
+                      setImgAddress(MyNft);
+                    }}
                     src={`https://ipfs.io/ipfs/${MyNft}`}
                     style={{
                       width: "152px",
