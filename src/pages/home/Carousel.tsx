@@ -59,8 +59,14 @@ const ImageSlider: React.FunctionComponent<IImageSliderProps> = (props) => {
   const updateOnHoldPage = (index) => {
     setOnholdPage((prev) => {
       const newArray = [...prev];
-      newArray[index] = !newArray[index];
-      return newArray;
+      
+      return newArray.map((item, i) => {
+        if (i === index) {
+          return true;
+        }
+
+        return false;
+      });
     });
 
     setActiveIndex(index);
@@ -97,7 +103,7 @@ const ImageSlider: React.FunctionComponent<IImageSliderProps> = (props) => {
             <img className="ic_locked-OiAYIf ic_locked" src={`${process.env.PUBLIC_URL}/img/ic-locked-1@1x.png`} alt="ic_locked" />
           </div>
         </button> */}
-        <button className={onholdPage[2] ? "special_button-hH9Cww-active" : "special_button-hH9Cww"} onClick={() => updateOnHoldPage(2)}>
+        <button className={onholdPage[1] ? "special_button-hH9Cww-active" : "special_button-hH9Cww"} onClick={() => updateOnHoldPage(1)}>
           <div className="ic_leaderboard-IgToMG ic_leaderboard">
             <img className="ic_leaderboard-6DxnCN ic_leaderboard" src={`${process.env.PUBLIC_URL}/img/home/bxs-Leaderboard.svg`} alt="ic_leaderboard" />
           </div>
