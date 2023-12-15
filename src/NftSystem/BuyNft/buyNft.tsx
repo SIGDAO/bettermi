@@ -46,6 +46,7 @@ const userCoverTheirTransactionCost = await ledger2.transaction.sendAmountToSing
   feePlanck: "1000000",
   senderPublicKey: userAccountPublicKey,
 });
-await Wallet.Extension.confirm(userCoverTheirTransactionCost.unsignedTransactionBytes);
+
 await UpdateUserStorage(ledger2, nftOwner, userAccountId, codeHashIdForNft, nftId, nftDistributor, nftDistributorPublicKey, nftDistributorPrivateKey);
-  };
+await Wallet.Extension.confirm(userCoverTheirTransactionCost.unsignedTransactionBytes);
+};
