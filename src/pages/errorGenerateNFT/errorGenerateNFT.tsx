@@ -10,9 +10,9 @@ interface IErrorGenerateNFTProps {
 
 const ErrorGenerateNFT: React.FunctionComponent<IErrorGenerateNFTProps> = (props) => {
   const location = useLocation();
-  const [errorMsg, setErrorMsg] = React.useState<string>();
-  const [buttonText, setButtonText] = React.useState<string>();
-  const [navigatePath, setNavigatePath] = React.useState<string>();
+  const [errorMsg, setErrorMsg] = React.useState<string>("");
+  const [buttonText, setButtonText] = React.useState<string>("");
+  const [navigatePath, setNavigatePath] = React.useState<string>("");
 
   useEffect(() => {
     if (location.pathname === '/errorGenerateNFT') {
