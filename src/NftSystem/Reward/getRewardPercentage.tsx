@@ -2,6 +2,7 @@ export async function GetRewardPercentage(ledger2:any,userAccountId:string){
     // ledger2.account
     // .getAccount({ accountId: userAccountId })
     // .then(async (account) => {
+        try{
         const account = await ledger2.account.getAccount({accountId:userAccountId});
         console.log(account);
         const description = JSON.parse(account.description);
@@ -39,5 +40,7 @@ export async function GetRewardPercentage(ledger2:any,userAccountId:string){
     //     return "0";
     // })
     ;
+        }
+        catch(e){return "0";}
         
   };

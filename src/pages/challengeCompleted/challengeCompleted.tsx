@@ -36,6 +36,8 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
   const location = useLocation();
   const navigate = useNavigate();
   const [pathname, setPathname] = React.useState<string>('');
+  const [loading,setLoading] = React.useState<Boolean>(true);
+  const [reward,setReward] = React.useState<string>("");
   const nodeHost = useSelector(selectWalletNodeHost);
   const userAccountId = useSelector(accountId);
   const distributed = useRef(false);
@@ -84,12 +86,15 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
       if(numChallengesPlayed[index-1] < 3 && rewardPercentage!= null){
         console.log("called this argument")
         console.log(numChallengesPlayed[index])
+
       await TransferTokenWithMessage(nodeHost, userAccountId, reward, parseInt(challengeNumber![challengeNumber!.length-1]));
+      setReward(reward);
       }
       else{
         alert("you have already played three times")
         navigate("/missionChallenge");
       }
+      setLoading(true);
       return;
     }
   };
@@ -133,14 +138,17 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
             <img className="icon-awesome-check-3oZEl3" src={`${process.env.PUBLIC_URL}/img/challengeSuccess/icon-awesome-check@1x.png`} alt="Icon awesome-check" /> */}
           </div>
           {NFT ? null :
+          loading?<div></div>:
+          (
             <div className="sigdao-score-75VOY2">
-              <div className="x10-VOfFBB inter-semi-bold-keppel-14px">{ displayReawrd(location.state?.reward) || ""}</div>
+              <div className="x10-VOfFBB inter-semi-bold-keppel-14px">{ reward || ""}</div>
               <div className="signdao_tokengradient-VOfFBB">
                 <div className="x441-gxWo6F"></div>
                 <div className="x442-gxWo6F"></div>
                 <img className="x880-gxWo6F" src={`${process.env.PUBLIC_URL}/img/challengeSuccess/file---880-1x-png-10@1x.png`} alt="880" />
               </div>
             </div>
+          )
           }
         </div>
         <Link to={pathname} >
