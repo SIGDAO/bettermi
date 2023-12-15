@@ -22,6 +22,7 @@ import * as React from 'react';
  import { CheckNftOwnerId } from '../../NftSystem/updateUserNftStorage';
  import { UpdateUserIcon } from '../../NftSystem/updateUserNftStorage';
 import { selectCurrentUsername } from '../../redux/profile';
+import { selectedNftInfo } from '../allNftList/indexAllNftList';
 
  interface MyNftProps {
     image:string;
@@ -34,11 +35,13 @@ import { selectCurrentUsername } from '../../redux/profile';
     isUpdatingDescription:boolean;
     setIsUpdatingDescription:(isUpdatingDescription:boolean) => void;
     isOtherUser:boolean;
+    setOpenModel:(openModel:boolean) => void;
+    setSelectedNft:(selectedNft:selectedNftInfo) => void;
  }
 
 
  const MyNft: React.FunctionComponent<MyNftProps> =  (props) => {
-     const {image, level, isOpenPopup, setIsOpenPopup,nftId,setSelectedAssetId,setLevel,isUpdatingDescription,setIsUpdatingDescription,isOtherUser} = props;
+     const {image, level, isOpenPopup, setIsOpenPopup,nftId,setSelectedAssetId,setLevel,isUpdatingDescription,setIsUpdatingDescription,isOtherUser,setOpenModel,setSelectedNft} = props;
      const [loading, setLoading] = useState<boolean>(true);
      const [imgAddress, setImgAddress] = useState<string>("");
      const nodeHost = useSelector(selectWalletNodeHost);
@@ -127,7 +130,18 @@ import { selectCurrentUsername } from '../../redux/profile';
           imgAddress === ""?(<div>loading</div>):(
 
                   <div className = "myNftList">
-                    <img className = "myNftImage" src = {`https://ipfs.io/ipfs/${imgAddress}`}></img>
+                    <img onClick = {
+                      () =>{
+                        setOpenModel(true);const nftInfo:selectedNftInfo={
+                          imageUrl:imgAddress,
+                          nftLevel:nftLevel,
+                          nftPrice:"Sell it",
+                          nftReward:"5",
+                        }
+                        console.log(nftInfo);
+                        setSelectedNft(nftInfo);
+                      }
+                      } className = "myNftImage" src = {`https://ipfs.io/ipfs/${imgAddress}`}></img>
                     <div className = "myNftDescription">
                     <div className = "myNftNumber">#{nftNumber}</div>
                       <div className = "myNftBar">

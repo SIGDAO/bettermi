@@ -32,6 +32,7 @@ import ImportSuccessScreen from "../../components/importAccountSuccessScreen";
 import { TransferNftToNewUser } from "../../NftSystem/transferNft";
 import { selectCurrentGender } from "../../redux/profile";
 import { GetEquippedNftId } from "../../NftSystem/updateUserNftStorage";
+import { selectedNftInfo } from "../allNftList/indexAllNftList";
 
 interface IMyNftListProps {
   isUpdatingDescription: boolean;
@@ -39,6 +40,8 @@ interface IMyNftListProps {
   setIsUpdatingDescription: (isUpdatingDescription: boolean) => void;
   isOtherUser: boolean;
   equippedNftIpfsAddress?: string;
+  setOpenModel:(openModel:boolean) => void;
+  setSelectedNft:(selectedNft:selectedNftInfo) => void;
 }
 
 // interface myNftList{
@@ -56,7 +59,7 @@ function isNumber(inputString) {
 }
 
 const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
-  const { isUpdatingDescription, myNfts, setIsUpdatingDescription, isOtherUser, equippedNftIpfsAddress } = props;
+  const { isUpdatingDescription, myNfts, setIsUpdatingDescription, isOtherUser, equippedNftIpfsAddress ,setOpenModel,setSelectedNft} = props;
   const userAccountId: string = useSelector(accountId);
   const mobile = process.env.REACT_APP_MOBILE === "true";
   let height: string | number;
@@ -293,6 +296,8 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
     //console.log("userNftList is  ", myNfts);
     return (
       <MyNft
+      setOpenModel={setOpenModel}
+      setSelectedNft={setSelectedNft}
         image={nft.image}
         level={level}
         isOpenPopup={isOpenPopup}
@@ -310,6 +315,8 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
     //Contract Id
     return (
       <MyNft
+      setOpenModel={setOpenModel}
+      setSelectedNft={setSelectedNft}
         image={nft.image}
         level={level}
         isOpenPopup={isOpenPopup}
