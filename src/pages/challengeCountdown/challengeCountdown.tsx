@@ -26,7 +26,7 @@ const ChallengeCountdown: React.FunctionComponent<IChallengeCountdownProps> = (p
 
   const displayTime = (function () {
     const minutes: number = parseInt(displayMission.duration.split(' ')[0]);
-    return minutes * 60;
+    return minutes * 3;
   })()
 
   const [timeBeforeStart, setTimeBeforeStart] = React.useState(3);

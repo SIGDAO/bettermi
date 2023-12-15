@@ -62,7 +62,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const [isPopUpIcon, setIsPopUpIcon] = useState<boolean>(false);
   const [ipfsAddress, setIpfsAddress] = useState<string>("");
   const [isNFTiconLoading, setIsNFTiconLoading] = useState<boolean>(true);
-
+  const [reward,setReward] = useState<string>();
   console.log(Token);
   console.log(store.getState());
   console.log("Token is  ", Token);
@@ -119,7 +119,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
           console.log(accountInfo);
           setIpfsAddress(JSON.parse(accountInfo.description).descriptor);
           console.log(ipfsAddress);
-          const ipfsJson = await fetch(`https://ipfs.io/ipfs/${ipfsAddress}`);
+          const ipfsJson = await fetch(`https://ipfs.io/ipfs/${JSON.parse(accountInfo.description).descriptor}`);
           console.log(ipfsJson);
           const text = await ipfsJson.text();
           console.log(text);
@@ -127,16 +127,20 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
           console.log(nftInfo);
           if (nftInfo.description.includes("1") === true) {
             setLevel("1");
+            setReward("5");
           }
           if (nftInfo.description.includes("2") === true) {
             setLevel("2");
+            setReward("10");
           }
           if (nftInfo.description.includes("3") === true) {
             setLevel("3");
+            setReward("15");
           }
           store.dispatch(accountSlice.actions.setLevel(description.ds));
         } else {
           setLevel("1");
+          setReward("5");
           store.dispatch(accountSlice.actions.setLevel(description.ds));
         }
 
@@ -211,10 +215,11 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
             </>
           )}
           <div className="x16206">
-            <div className="lv-1">LV 1</div>
+            <div className="lv-1">LV {level}</div>
             <img className="x6" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/file---6@1x.png`} alt="6" />
-            <div className="reward-10">REWARD +10%</div>
+            <div className="reward-10">REWARD +{reward}%</div>
           </div>
+      
           <div className="x0-signa">$0 SIGNA</div>
           <img className="photo" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/photo-1@1x.png`} alt="Photo" />
         </div>
@@ -249,7 +254,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
             <h1 className="title-2ZgxSS">Hello ! </h1>
             <div className="lv_-reward-2ZgxSS">
               <div className="lv-1-b5x63m inter-semi-bold-keppel-15px">LV {level}</div>
-              <div className="nft-reward-10-b5x63m inter-semi-bold-white-15px">REWARD +10%</div>
+              <div className="nft-reward-10-b5x63m inter-semi-bold-white-15px">REWARD +{reward}%</div>
               <img className="seperate-line-b5x63m" src={`${process.env.PUBLIC_URL}/img/seperate-line-1@1x.png`} alt="seperate line" />
             </div>
             <UserIcon setIsPopUpIcon={setIsPopUpIcon} home={true} userAccountId={userAccountId}></UserIcon>

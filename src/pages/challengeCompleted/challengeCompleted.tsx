@@ -12,6 +12,7 @@ import { TransferTokenWithMessage } from '../../NftSystem/TokenTransfers';
 import { useRef,useEffect } from 'react';
 import { CountChallenges } from '../../NftSystem/Token/countChallenges';
 import { LedgerClientFactory } from '@signumjs/core';
+import { GetRewardPercentage } from '../../NftSystem/Reward/getRewardPercentage';
 
 interface IChallengeCompletedProps {
   NFT?: boolean;
@@ -70,9 +71,17 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
       console.log("reward string is",rewardString)
       console.log("index is ", index);
       //await TransferToken(nodeHost, userAccountId, rewardString);
-      const reward:string = String(parseFloat(rewardString!));
+      const rewardPercentage = await GetRewardPercentage(ledger2,userAccountId);
+      console.log("rewardPercentage is",rewardPercentage);
+      var reward:string;
+      if(rewardPercentage!=null){
+       reward = String(parseFloat(rewardString!)*(100+parseInt(rewardPercentage))/100);
+      }
+      else{
+        reward = String(parseFloat(rewardString!))
+      }
       console.log(reward);
-      if(numChallengesPlayed[index-1] < 3){
+      if(numChallengesPlayed[index-1] < 3 && rewardPercentage!= null){
         console.log("called this argument")
         console.log(numChallengesPlayed[index])
       await TransferTokenWithMessage(nodeHost, userAccountId, reward, parseInt(challengeNumber![challengeNumber!.length-1]));
