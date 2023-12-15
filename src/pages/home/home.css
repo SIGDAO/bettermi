@@ -848,15 +848,6 @@ color
   width: 1px;
 }
 
-.hidden-content {
-  width: 100vw;
-  height: 100vh;
-  background: #0D0D0D;
-  z-index: 200;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
 
 .bettermidapp-home-1 .nft_-avatar-2ZgxSS {
   background-color: transparent;

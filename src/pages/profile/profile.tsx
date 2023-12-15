@@ -16,6 +16,9 @@ const Profile: React.FunctionComponent<IProfileProps> = (props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isBackButton, setIsBackButton] = useState<boolean>(true);
   const { state } = useLocation();
+  const [isPopUpIcon, setIsPopUpIcon] = useState<boolean>(false);
+  const [isNFTiconLoading, setIsNFTiconLoading] = useState<boolean>(true);
+  const [imgAddress, setImgAddress] = useState<string>("");
 
   useEffect(() => {
     if (state?.previousPath === "/customizeYourProfile") {
@@ -57,9 +60,42 @@ const Profile: React.FunctionComponent<IProfileProps> = (props) => {
     <CenterLayout
       noScroll={true}
       content={
-        <div className="screen">
-          <AnimaGenContent isOpen={isOpen} setIsOpen={setIsOpen} isBackButton={isBackButton} setIsBackButton={setIsBackButton} isUpdatingUserSetting={isUpdatingUserSetting} />
-        </div>
+        <>
+          {isPopUpIcon && (
+            <div className="hidden-content">
+              {isNFTiconLoading ? (
+                <div className="x0"></div>
+              ) : (
+                <>
+                  <img className="x0-generateFreeNFT" src={`https://ipfs.io/ipfs/${imgAddress}`} alt="0" />
+                  {/* <h1 className="text-1">#{nftNumber}</h1> */}
+                </>
+              )}
+              <div className="x16206">
+                <div className="lv-1">LV 1</div>
+                <img className="x6" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/file---6@1x.png`} alt="6" />
+                <div className="reward-10">REWARD +10%</div>
+              </div>
+              <div className="x0-signa">$0 SIGNA</div>
+              <img className="photo" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/photo-1@1x.png`} alt="Photo" />
+              <div onClick={() => setIsPopUpIcon(false)} className="click-the-area-to-make-it-hidden-again"></div>
+            </div>
+          )}
+          <div className="screen">
+            <AnimaGenContent
+              isNFTiconLoading={isNFTiconLoading}
+              setIsNFTiconLoading={setIsNFTiconLoading}
+              setIsPopUpIcon={setIsPopUpIcon}
+              isPopUpIcon={isPopUpIcon}
+              isOpen={isOpen}
+              setIsOpen={setIsOpen}
+              isBackButton={isBackButton}
+              setIsBackButton={setIsBackButton}
+              isUpdatingUserSetting={isUpdatingUserSetting}
+              setImgAddress={setImgAddress}
+            />
+          </div>
+        </>
       }
       bgImg={false}
       // noScroll={isOpen}
