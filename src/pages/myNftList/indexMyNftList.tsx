@@ -17,6 +17,8 @@ import LoadingMintingMyNftList from "./loadMintingMyNftList";
 import { ShortTitleBar } from "../../components/titleBar";
 import { IsUserUpdatingIcon } from "../../NftSystem/updateUserNftStorage";
 import { GetEquippedNftId } from "../../NftSystem/updateUserNftStorage";
+import { selectedNftInfo } from "../allNftList/indexAllNftList";
+import NftDetails from "../../components/nftDetails";
 
 interface MyNftProps {
   userId?: string;
@@ -42,6 +44,8 @@ const IndexMyNftList: React.FunctionComponent<MyNftProps> = (props) => {
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [loadingNft, setLoadingNft] = useState<boolean>(true);
+  const [selectedNft, setSelectedNft] = useState<selectedNftInfo>();
+  const [openModel,setOpenModel] = useState<boolean>(false);
   const nftLoaded = useRef(false);
   const dataFetchedRef = useRef(false);
   const [myNfts, setMyNfts] = useState<myNftList[]>([]);
@@ -93,11 +97,19 @@ const IndexMyNftList: React.FunctionComponent<MyNftProps> = (props) => {
           <ShortTitleBar title="My NFTs" setting={false} addSign={false} aiCoach={false} filter={false} importButton={false} />
           <LoadingMintingMyNftList loadingNft={loadingNft} userId={userId} setLoadingNft={setLoadingNft} myNfts={myNfts} setMyNfts={setMyNfts} isOtherUser={isOtherUser}></LoadingMintingMyNftList>
         </>
-      ) : isOtherUser === true ? (
-        <MyNftList setIsUpdatingDescription={setIsUpdating} isUpdatingDescription={isUpdating} myNfts={myNfts} isOtherUser={true}></MyNftList>
-      ) : (
-        <MyNftList setIsUpdatingDescription={setIsUpdating} isUpdatingDescription={isUpdating} myNfts={myNfts} isOtherUser={false} equippedNftIpfsAddress={equippedNftIpfsAddress}></MyNftList>
-      )}
+      ) : 
+        openModel?
+        (
+          <NftDetails imgAddress={selectedNft} setPopUpIcon={setOpenModel} popUpIcon = {openModel}></NftDetails>
+        )
+        :(
+          isOtherUser === true ? (
+            <MyNftList setSelectedNft={setSelectedNft} setOpenModel={setOpenModel} setIsUpdatingDescription={setIsUpdating} isUpdatingDescription={isUpdating} myNfts={myNfts} isOtherUser={true}></MyNftList>
+          ) : (
+            <MyNftList setSelectedNft={setSelectedNft} setOpenModel={setOpenModel}  setIsUpdatingDescription={setIsUpdating} isUpdatingDescription={isUpdating} myNfts={myNfts} isOtherUser={false} equippedNftIpfsAddress={equippedNftIpfsAddress}></MyNftList>
+          )
+      )
+      }
     </>
   );
 
