@@ -81,14 +81,17 @@ interface IBirthSelectProps {
   date?: string;
   setData?: (date: string) => void;
   onSelect?: (option: any) => void;
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
 }
 
 export const BirthSelect: React.FunctionComponent<IBirthSelectProps> = (props) => {
   // todo: reduce the code duplication
   const dispatch = useDispatch();
+  const { isOpen, setIsOpen } = props;
 
   const [value, setValue] = useState(new Date('2023-07-26')); // selected day on calendar
-  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [isFirstClick, setIsFirstClick] = useState(true);
 

@@ -43,6 +43,8 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
   const tokenDigit = process.env.REACT_APP_TOKEN_DECIMAL_PLACE!;
   const storeNftCodeHashId = "4589039375104983465";
   const [isTransferToken, setIsTransferToken] = React.useState(false);
+  const [isOpen, setIsOpen] = React.useState(false);
+
 
   // add a validation function to see if the user has already minted the NFT
   // check the
@@ -178,7 +180,7 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
           newPage={true}
           onSelect={(e) => console.log(e)}
         />
-        <BirthSelect />
+        <BirthSelect isOpen={isOpen} setIsOpen={setIsOpen} />
         <div className="bmi-pqhvJT">
           <div className="bmi-result-bg-bL0gm3">
             <img className="seperate-line-IJAMVx seperate-line" src="img/generateBMINFTImport/seperat-line-1@1x.png" alt="seperate line" />
@@ -207,6 +209,7 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
         </div>
 
         <img className="photo-pqhvJT" src={selfie ? selfie : "img/generateBMINFTImport/photo-1@1x.png"} alt="Photo" />
+        <div className="disable-isOpen-container" onClick={() => setIsOpen(false)}></div>
       </div>
     </div>
   );
