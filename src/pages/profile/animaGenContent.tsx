@@ -194,6 +194,32 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   const [fetchDiscordUsername, setFetchDiscordUsername] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isEmptyProfile, setIsEmptyProfile] = useState<boolean>(false);
+  const [isNFTiconLoading, setIsNFTiconLoading] = useState<boolean>(true);
+
+  const fetchUserIcon = async () => {
+    const isUserSettingUpdating = await IsUserUpdatingIcon(ledger2, userAccountId);
+    if (isUserSettingUpdating === true) {
+      setIsNFTiconLoading(false);
+    } else {
+      ledger2.account
+        .getAccount({ accountId: userAccountId })
+        .then((account) => {
+          console.log(account);
+          const description = JSON.parse(account.description);
+          console.log(description);
+          console.log(Object.keys(description.av));
+          console.log("imageaddress", Object.keys(description.av)[0]);
+          setImgAddress(Object.keys(description.av)[0]);
+          setIsNFTiconLoading(false);
+        })
+        .catch((error) => {
+          setIsNFTiconLoading(false);
+          console.log("need to equip nft");
+        });
+    }
+  };
+
+
 
   const fetchProfile = async () => {
     const account = await ledger2.account.getAccount({
@@ -288,6 +314,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
 
   useEffect(() => {
     fetchSetting();
+    fetchUserIcon();
   }, []);
 
   return (
@@ -298,6 +325,27 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
       }}
       onWheel={handleScroll2}
     >
+      {isNFTiconLoading && (
+        <div className="hidden-content">
+          {isUserIconLoading ? (
+            <div className="x0"></div>
+          ) : (
+            <>
+              <img className="x0-generateFreeNFT" src={`https://ipfs.io/ipfs/${imgAddress}`} alt="0" />
+              {/* <h1 className="text-1">#{nftNumber}</h1> */}
+            </>
+          )}
+          <div className="x16206">
+            <div className="lv-1">LV 1</div>
+            <img className="x6" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/file---6@1x.png`} alt="6" />
+            <div className="reward-10">REWARD +10%</div>
+          </div>
+          <div className="x0-signa">$0 SIGNA</div>
+          <img className="photo" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/photo-1@1x.png`} alt="Photo" />
+          <div onClick={() => setIsPopUpIcon(false)} className="click-the-area-to-make-it-hidden-again"></div>
+        </div>
+      )}
+
       <ShortTitleBar title="Profile" />
       {alert && (
         <Alert className="copied-alert" icon={<CheckIcon fontSize="inherit" />} severity="success">
@@ -307,44 +355,44 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
 
       <div className="overlap-group5">
         <div className="overlap-design-layout">
-        <div className="overlap-group1-profile">
-          <img className="layer" src="img/profile/layer-1@1x.png" alt="Layer" />
-          <Link to="/indexMyNftList">
-            <div className="button_nft-collections">
-              <div className="continue-profile inter-semi-bold-white-15px">My NFT Collection</div>
-            </div>
-          </Link>
-          <div className="ic_edit" onClick={() => setIsOpen((prev) => !prev)}>
-            <img className="ic_edit-content" src="img/profile/ic-edit-1@1x.png" alt="" />
-          </div>
-          {isUpdatingUserIcon === true || isUserIconLoading === true ? (
-            <div className="profile_icon_nft_-avatar_empty">
-              <img className="profile_icon_ic_loading" src="/img/loadingMinting/mimi-dancing-for-loadin-page.gif" alt="ic_add" />
-            </div>
-          ) : (
-            <UserIcon setIsPopUpIcon={setIsPopUpIcon} profile={true} userAccountId={userAccountId}></UserIcon>
-          )}
-          {isUpdatingUserSetting === true || isSettingLoading === true ? (
-            <div className="profile-content">
-              <div className="lds-ring">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
+          <div className="overlap-group1-profile">
+            <img className="layer" src="img/profile/layer-1@1x.png" alt="Layer" />
+            <Link to="/indexMyNftList">
+              <div className="button_nft-collections">
+                <div className="continue-profile inter-semi-bold-white-15px">My NFT Collection</div>
               </div>
+            </Link>
+            <div className="ic_edit" onClick={() => setIsOpen((prev) => !prev)}>
+              <img className="ic_edit-content" src="img/profile/ic-edit-1@1x.png" alt="" />
             </div>
-          ) : (
-            <div className="profile-content">
-              <div className="zoe_li">{fetchName ? fetchName : name || "zoe_li"}</div>
-              <div className="perso-container">
-                <p className="im-a-positive-perso" style={description ? {} : { color: "#8e8e8e" }}>
-                  {fetchDescription ? fetchDescription : descriptionText || "Please enter DESCRIPTION TO FRIENDS"}
-                </p>
-                <p className="x29-personal-trainer inter-semi-bold-keppel-15px">{fetchAboutYourself ? fetchAboutYourself : aboutYourselfText || `♉️  |  29  |  PERSONAL TRAINER`}</p>
+            {isUpdatingUserIcon === true || isUserIconLoading === true ? (
+              <div className="profile_icon_nft_-avatar_empty">
+                <img className="profile_icon_ic_loading" src="/img/loadingMinting/mimi-dancing-for-loadin-page.gif" alt="ic_add" />
               </div>
-            </div>
-          )}
-          {/* {(isSettingLoading ===true || isUpdatingUserSetting === true)?(
+            ) : (
+              <UserIcon setIsPopUpIcon={setIsPopUpIcon} profile={true} userAccountId={userAccountId}></UserIcon>
+            )}
+            {isUpdatingUserSetting === true || isSettingLoading === true ? (
+              <div className="profile-content">
+                <div className="lds-ring">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+              </div>
+            ) : (
+              <div className="profile-content">
+                <div className="zoe_li">{fetchName ? fetchName : name || "zoe_li"}</div>
+                <div className="perso-container">
+                  <p className="im-a-positive-perso" style={description ? {} : { color: "#8e8e8e" }}>
+                    {fetchDescription ? fetchDescription : descriptionText || "Please enter DESCRIPTION TO FRIENDS"}
+                  </p>
+                  <p className="x29-personal-trainer inter-semi-bold-keppel-15px">{fetchAboutYourself ? fetchAboutYourself : aboutYourselfText || `♉️  |  29  |  PERSONAL TRAINER`}</p>
+                </div>
+              </div>
+            )}
+            {/* {(isSettingLoading ===true || isUpdatingUserSetting === true)?(
           <>
               <div className="profile_icon_nft_-avatar_empty">
                 <img
@@ -378,82 +426,81 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
               )
             } 
               <UserIcon profile = {true} userAccountId = {userAccountId}></UserIcon> */}
-          {isUpdatingUserSetting === true || isSettingLoading === true ? (
-            <div></div>
-          ) : (
-            <>
-              <div className="discord-card-container">
-                <div className="card-number inter-normal-white-15px">{fetchDiscordUsername ? fetchDiscordUsername : discordUsernameText || "zoeeeee#1234"}</div>
-                <div className="copy-icon" onClick={() => handleCopyDiscordUsername(discordUsername)}>
-                  <img src="img/profile/file---11690@1x.png" alt="" />
+            {isUpdatingUserSetting === true || isSettingLoading === true ? (
+              <div></div>
+            ) : (
+              <>
+                <div className="discord-card-container">
+                  <div className="card-number inter-normal-white-15px">{fetchDiscordUsername ? fetchDiscordUsername : discordUsernameText || "zoeeeee#1234"}</div>
+                  <div className="copy-icon" onClick={() => handleCopyDiscordUsername(discordUsername)}>
+                    <img src="img/profile/file---11690@1x.png" alt="" />
+                  </div>
                 </div>
-              </div>
-              <div className="x16227">
-                <div className="discord-icon">
-                  <img className="discord-icon-content" src="img/profile/file---11691@1x.png" />
+                <div className="x16227">
+                  <div className="discord-icon">
+                    <img className="discord-icon-content" src="img/profile/file---11691@1x.png" />
+                  </div>
+                  <div className="discord inter-bold-royal-blue-15px">DISCORD</div>
                 </div>
-                <div className="discord inter-bold-royal-blue-15px">DISCORD</div>
-              </div>
-            </>
-          )}
-        </div>
+              </>
+            )}
+          </div>
 
-        {/* This is the new horizontal scroll */}
-        <HorizontalScrollContainer
-          inputClassName="profileHorizontalScroll"
-          style={{
-            backgroundColor: "inherit",
-            width: "390px",
-            height: "45%",
-            overflowY: "scroll",
-          }}
-          // onWheel={handleScroll}
-        >
-          <div
+          {/* This is the new horizontal scroll */}
+          <HorizontalScrollContainer
+            inputClassName="profileHorizontalScroll"
             style={{
-              width: "152px",
-              height: "217px",
-              display: "flex",
+              backgroundColor: "inherit",
+              width: "390px",
+              height: "45%",
+              overflowY: "scroll",
             }}
             // onWheel={handleScroll}
           >
-            <Link to="/allNftList/">
-              <div className="overlap-group-profile">
-                <img className="ic_add" src="img/profile/ic-add-2@1x.png" alt="ic_add" />
-                <p className="inter-semi-bold-white-12px ">Buy NFT</p>
-              </div>
-            </Link>
-            {loadingNft === true ? (
-              <>
-                <img
-                  src={"/img/loadingMinting/mimi-dancing-for-loadin-page.gif"}
-                  style={{
-                    width: "152px",
-                    height: "217px",
-                    objectFit: "cover",
-                    marginRight: "10px",
-                  }}
-                />
-                {/* <div className="minting-JdJl2l inter-normal-white-15px">loading your NFTs</div>
+            <div
+              style={{
+                width: "152px",
+                height: "217px",
+                display: "flex",
+              }}
+              // onWheel={handleScroll}
+            >
+              <Link to="/allNftList/">
+                <div className="overlap-group-profile">
+                  <img className="ic_add" src="img/profile/ic-add-2@1x.png" alt="ic_add" />
+                  <p className="inter-semi-bold-white-12px ">Buy NFT</p>
+                </div>
+              </Link>
+              {loadingNft === true ? (
+                <>
+                  <img
+                    src={"/img/loadingMinting/mimi-dancing-for-loadin-page.gif"}
+                    style={{
+                      width: "152px",
+                      height: "217px",
+                      objectFit: "cover",
+                      marginRight: "10px",
+                    }}
+                  />
+                  {/* <div className="minting-JdJl2l inter-normal-white-15px">loading your NFTs</div>
               <div className="reminder-text-1 inter-normal-white-15px">Please wait patiently<br/>and do not refresh the page</div> */}
-              </>
-            ) : (
-              myNfts.map((MyNft) => (
-                <img
-                  src={`https://ipfs.io/ipfs/${MyNft}`}
-                  style={{
-                    width: "152px",
-                    height: "217px",
-                    objectFit: "cover",
-                    marginRight: "10px",
-                  }}
-                />
-              ))
-            )}
-          </div>
-        </HorizontalScrollContainer>
+                </>
+              ) : (
+                myNfts.map((MyNft) => (
+                  <img
+                    src={`https://ipfs.io/ipfs/${MyNft}`}
+                    style={{
+                      width: "152px",
+                      height: "217px",
+                      objectFit: "cover",
+                      marginRight: "10px",
+                    }}
+                  />
+                ))
+              )}
+            </div>
+          </HorizontalScrollContainer>
         </div>
-
 
         {/* This is the old horizontal scroll */}
 
