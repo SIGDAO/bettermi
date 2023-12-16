@@ -98,7 +98,7 @@ const GenerateBMIDaily: React.FunctionComponent<IGenerateBMIDailyProps> = (props
     
     //Ends here
 
-    dispatch(profileSlice.actions.setIsSelfie(true));
+    // dispatch(profileSlice.actions.setIsSelfie(true));
     // try {
     //   await Wallet.Extension.confirm(sendBMI.unsignedTransactionBytes);
     // } catch (error) {

@@ -34,7 +34,6 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
   const mimiNftStorageAccounts = process.env.REACT_APP_NFT_STORAGE_MIMI!.split(",");
   const ioNftStorageAccounts = process.env.REACT_APP_NFT_STORAGE_IO!.split(",");
   const pathname: string = props.pathname;
-  const [isBMIOnChain, setIsBMIOnChain] = useState<boolean>(false);
 
   const checkIfBMIcreated = async () => {
     if (!ledger) return;
@@ -44,8 +43,10 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
       machineCodeHash: bmiCodeHashId,
     });
 
-    while (isBMIOnChain === true) {
-      setIsBMIOnChain(await isTodayHaveSelfieRecord(userAccountId, ledger))
+    let isTodayRecord = false
+
+    while (true) {
+      if (await isTodayHaveSelfieRecord(userAccountId, ledger)) break;
     }
 
     setCount(100);

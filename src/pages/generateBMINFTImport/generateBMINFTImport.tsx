@@ -149,7 +149,7 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
             setIsTransferToken(true);
           });
         }
-        store.dispatch(profileSlice.actions.setIsSelfie);
+        // store.dispatch(profileSlice.actions.setIsSelfie);
         navigate("/loadingMinting");
       } catch (error) {
         console.log(error);

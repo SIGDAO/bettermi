@@ -30,7 +30,7 @@ export type ISelfieToEarnProps = {
 
 
 const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
-  const [value, setValue] = useState(); // selected day on calendar
+  const [value, setValue] = useState<Date>(); // selected day on calendar
   const [data, setData] = useState<SeriesDataItemTypeMap['Area'][]>()
   // const [data, setData] = useState<any>()
   const [daySelectedData, setDaySelectedData] = useState<any>()
@@ -135,6 +135,8 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
       .then((res) => {
         setData(res)
       })
+    
+    setValue(new Date())
   }, []);
 
   useEffect(() => {
@@ -163,7 +165,7 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
 
   useEffect(() => {
     console.log('value', typeof value)
-    if (value && typeof value === 'object') {
+    if (value && data && typeof value === 'object') {
       console.log('daySelectedData', value)
       console.log('data', data)
       let todayTimestamp = Math.floor((value.getTime() / 1000))
@@ -176,9 +178,8 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
         // console.log('yesterday', new Date(yesterdayTimestamp * 1000 ))
         return item.time >= todayTimestamp && item.time < tmrTimestamp
       }))
-      console.log('daySelectedData', daySelectedData)
       }
-  }, [value])
+  }, [value, data])
 
   // const Custom..
 
