@@ -166,12 +166,12 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
   useEffect(() => {
     console.log('value', typeof value)
     if (value && data && typeof value === 'object') {
-      console.log('daySelectedData', value)
+      console.log('daySelectedData', daySelectedData)
       console.log('data', data)
       let todayTimestamp = Math.floor((value.getTime() / 1000))
       let tmrTimestamp = todayTimestamp + 86400
       setDaySelectedData(data?.filter((item: any) => {
-        // console.log('item', item)
+        // console.log('item', item.time)
         // console.log('todayTimestamp', todayTimestamp)
         // console.log('yesterdayTimestamp', yesterdayTimestamp)
         // console.log('today', new Date(todayTimestamp * 1000 ))
@@ -179,7 +179,12 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
         return item.time >= todayTimestamp && item.time < tmrTimestamp
       }))
       }
+      console.log('daySelectedData', daySelectedData)
   }, [value, data])
+
+  useEffect(() => {
+    console.log('daySelectedData', daySelectedData);
+  }, [daySelectedData])
 
   // const Custom..
 

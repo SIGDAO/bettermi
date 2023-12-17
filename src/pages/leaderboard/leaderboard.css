@@ -145,14 +145,14 @@
 }
 
 .bettermidapp-leaderboad-the-best-100 .nft_-avatar-2 {
-  height: 107px;
+  height: 110px;
   left: 13px;
   position: absolute;
   top: 19px;
   width: 107px;
-  clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 0% 70%);
-    position: relative;
-    top: 10px;
+  /* clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 0% 70%); */
+    /* position: relative;
+    top: 10px; */
 }
 
 .bettermidapp-leaderboad-the-best-100 .crown-with-red-stone {
