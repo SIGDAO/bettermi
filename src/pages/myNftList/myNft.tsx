@@ -150,7 +150,7 @@ import { selectedNftInfo } from '../allNftList/indexAllNftList';
                           </div>
                           <div className = "myNftVerticalLine"></div>  
                           <div  className = "inter-normal-white-12px">
-                            Reward + 10%
+                            Reward + 5%
                             </div>
                       </div>
                       <div className = "myNftPrice">

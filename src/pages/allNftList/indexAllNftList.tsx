@@ -130,6 +130,7 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
     InfoJson.map((nftStorage) => {
       console.log(nftStorage);
       if (nftStorage.nftId !== "123") {
+        console.log(nftStorage);
         requests.push(
           ledger2.contract
             .getContract(nftStorage.nftId)

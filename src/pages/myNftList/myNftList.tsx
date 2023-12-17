@@ -33,6 +33,7 @@ import { TransferNftToNewUser } from "../../NftSystem/transferNft";
 import { selectCurrentGender } from "../../redux/profile";
 import { GetEquippedNftId } from "../../NftSystem/updateUserNftStorage";
 import { selectedNftInfo } from "../allNftList/indexAllNftList";
+import { ContractDataView } from "@signumjs/contracts";
 
 interface IMyNftListProps {
   isUpdatingDescription: boolean;
@@ -40,8 +41,8 @@ interface IMyNftListProps {
   setIsUpdatingDescription: (isUpdatingDescription: boolean) => void;
   isOtherUser: boolean;
   equippedNftIpfsAddress?: string;
-  setOpenModel:(openModel:boolean) => void;
-  setSelectedNft:(selectedNft:selectedNftInfo) => void;
+  setOpenModel: (openModel: boolean) => void;
+  setSelectedNft: (selectedNft: selectedNftInfo) => void;
 }
 
 // interface myNftList{
@@ -59,7 +60,7 @@ function isNumber(inputString) {
 }
 
 const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
-  const { isUpdatingDescription, myNfts, setIsUpdatingDescription, isOtherUser, equippedNftIpfsAddress ,setOpenModel,setSelectedNft} = props;
+  const { isUpdatingDescription, myNfts, setIsUpdatingDescription, isOtherUser, equippedNftIpfsAddress, setOpenModel, setSelectedNft } = props;
   const userAccountId: string = useSelector(accountId);
   const mobile = process.env.REACT_APP_MOBILE === "true";
   let height: string | number;
@@ -67,6 +68,9 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
   const [loading, setLoading] = useState(true);
   //const [myNfts, setMyNfts] = useState<myNftList[]>([]);
   const [onDuty, setOnDuty] = useState<string>("");
+  const [onDutyNftId, setOnDutyNftId] = useState<string>("");
+  const [onDutyNftPrice, setOnDutyNftPrice] = useState<string>("");
+  const [onDutyNftLevel,setOnDutyLevel] = useState<string>("0");
   const [array, setArray] = useState<string[]>([]);
   const [selectedNftId, setSelectedNftId] = useState<string>("");
   const [isOpenPopup, setIsOpenPopup] = useState<boolean>(false);
@@ -80,7 +84,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
   const [isOpenImport, setIsOpenImport] = useState<boolean>(false);
   const [nftNumber, setNftNumber] = useState<number>();
   const [message, setMessage] = useState<string>("Your NFT Price in SIGDAO");
-  const [isError,setError] = useState<boolean>(false);
+  const [isError, setError] = useState<boolean>(false);
   const gender = useSelector(selectCurrentGender);
   const dataFetchedRef = useRef(false);
   const nftContractChecked = useRef(false);
@@ -127,7 +131,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
       .catch((error) => {
         console.log(error);
         alert(
-          `something is wrong. Its very likely that your storage account isn' ready. 
+          `something is wrong. Its very likely that your storage account isn't ready. 
           Please wait an few minutes and try again.
           `
         );
@@ -143,12 +147,20 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
     fetch(`https://ipfs.io/ipfs/${image}`)
       .then((res) => {
         res.text().then((text) => {
-          //console.log(text);
           var nftInfo = JSON.parse(text);
+          console.log("nftInfo", nftInfo);
           let matches = nftInfo.name.match(/(\d+)/);
-          //console.log(matches[0]);
           const nftNumber = matches[0].toString().padStart(8, "0");
           setNftNumber(nftNumber);
+          if (nftInfo.description.includes("1") === true) {
+            setOnDutyLevel("1");
+          }
+          if (nftInfo.description.includes("2") === true) {
+            setOnDutyLevel("2");
+          }
+          if (nftInfo.description.includes("3") === true) {
+            setOnDutyLevel("3");
+          }
         });
       })
       .catch((e) => {
@@ -164,10 +176,14 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
     dataFetchedRef.current = true;
     ledger2.account
       .getAccount({ accountId: userAccountId })
-      .then((account) => {
+      .then(async(account) => {
         const description = account.description == null ? {} : JSON.parse(account.description);
         if (description.av !== null) {
-          setOnDuty(Object.keys(description.av)[0]);
+          setOnDutyNftId(description.id);
+          console.log(description);
+          const contract = await ledger2.contract.getContract(description.id);
+          const nftContract = new ContractDataView(contract);
+          setOnDutyNftPrice(nftContract.getVariableAsDecimal(10));
           // fetch(`https://ipfs.io/ipfs/${Object.keys(description.av)[0]}`).then((res)=>{
           //   res.text().then((text)=>{
           //       //console.log(text);
@@ -177,7 +193,8 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
           //       setNftNumber(matches[0]);
           //   }).catch((error)=>{console.log(error)});
           // }).catch((error)=>{console.log(error)});
-          getEquippedNftNumber();
+          await getEquippedNftNumber();
+          setOnDuty(Object.keys(description.av)[0]);
         }
       })
       .catch((error) => {
@@ -274,30 +291,30 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
     left: "16px",
     minWidth: "44px",
     paddingLeft: "14px",
-    position: "relative",
+    position: "relative", 
     top: "44px",
   };
-  const importNft = async (ledger2: any, nftAddress: string, userAccountId: string) => {
-    try {
-      let accountDes = await ledger2.account.getAccount({ accountId: nftAddress });
-      const nftId = accountDes.account;
-      const nftOwnerId = await CheckNftOwnerId(ledger2, nftId);
-      if (nftOwnerId === userAccountId) {
-        //console.log("updating receiver account");
-        //console.log(userAccountId);
-        updateReceiverAccount(ledger2, userAccountId, codeHashIdForNft, nftId, nftDistributor, nftDistributorPublicKey, nftDistributorPrivateKey);
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  // const importNft = async (ledger2: any, nftAddress: string, userAccountId: string) => {
+  //   try {
+  //     let accountDes = await ledger2.account.getAccount({ accountId: nftAddress });
+  //     const nftId = accountDes.account;
+  //     const nftOwnerId = await CheckNftOwnerId(ledger2, nftId);
+  //     if (nftOwnerId === userAccountId) {
+  //       //console.log("updating receiver account");
+  //       //console.log(userAccountId);
+  //       updateReceiverAccount(ledger2, userAccountId, codeHashIdForNft, nftId, nftDistributor, nftDistributorPublicKey, nftDistributorPrivateKey);
+  //     }
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
   const displayMyNft = myNfts.map((nft) => {
     //Contract Id
     //console.log("userNftList is  ", myNfts);
     return (
       <MyNft
-      setOpenModel={setOpenModel}
-      setSelectedNft={setSelectedNft}
+        setOpenModel={setOpenModel}
+        setSelectedNft={setSelectedNft}
         image={nft.image}
         level={level}
         isOpenPopup={isOpenPopup}
@@ -315,8 +332,8 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
     //Contract Id
     return (
       <MyNft
-      setOpenModel={setOpenModel}
-      setSelectedNft={setSelectedNft}
+        setOpenModel={setOpenModel}
+        setSelectedNft={setSelectedNft}
         image={nft.image}
         level={level}
         isOpenPopup={isOpenPopup}
@@ -369,60 +386,60 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
       console.log(e);
     }
   };
-  const transferNft = async (assetId: string) => {
-    try {
-      console.log(assetId);
-      const contractInfo = await ledger2.contract.getContract(selectedNftId);
+  // const transferNft = async (assetId: string) => {
+  //   try {
+  //     console.log(assetId);
+  //     const contractInfo = await ledger2.contract.getContract(selectedNftId);
 
-      const trial = JSON.parse(contractInfo.description);
+  //     const trial = JSON.parse(contractInfo.description);
 
-      /*  Get the NFT image of ths selected asset and check if its same to the onDuty one      */
-      const res = await fetch(`https://ipfs.io/ipfs/${trial.descriptor}`);
+  //     /*  Get the NFT image of ths selected asset and check if its same to the onDuty one      */
+  //     const res = await fetch(`https://ipfs.io/ipfs/${trial.descriptor}`);
 
-      const text = await res.text();
+  //     const text = await res.text();
 
-      var nftInfo = JSON.parse(text);
+  //     var nftInfo = JSON.parse(text);
 
-      const nftImage = nftInfo.media[0].social;
+  //     const nftImage = nftInfo.media[0].social;
 
-      /**/
+  //     /**/
 
-      if (onDuty === nftImage) {
-        alert("You can't transfer the NFT you are using");
-        return;
-      }
-      const nftOwner = await CheckNftOwnerId(ledger2, selectedNftId);
-      if (nftOwner === userAccountId) {
-        //TransferNft(ledger2,selectedNftId,userAccountId,codeHashIdForNft,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey);
-        const latestTransactionNumber: string = await FindLatestTransactionNumber(ledger2, nftContractStorage, nftDistributor);
-        const latestArray: string[] = await FindLatestTransactionArray(ledger2, nftContractStorage, nftDistributor, latestTransactionNumber);
-        const transactionCost = (Math.floor(latestArray.length / 8 + 1) * 1000000).toString();
-        const userCoverTheirTransactionCost = await ledger2.transaction.sendAmountToSingleRecipient({
-          recipientId: nftDistributor,
-          amountPlanck: transactionCost,
-          feePlanck: "1000000",
-          senderPublicKey: userAccountpublicKey,
-        });
-        await Wallet.Extension.confirm(userCoverTheirTransactionCost.unsignedTransactionBytes);
-        const recipientInfo = await ledger2.account.getAccount({ accountId: inputAddress });
-        //await p2pTransferNft(ledger2,Wallet,selectedNftId,userAccountpublicKey,recipientInfo.account);
-        const transaction = await ledger2.contract.callContractMethod({
-          senderPublicKey: userAccountpublicKey,
-          feePlanck: "1000000",
-          amountPlanck: "32000000",
-          contractId: selectedNftId,
-          methodHash: "3",
-          methodArgs: [recipientInfo.account, "0", "0"],
-        });
-        await Wallet.Extension.confirm(transaction.unsignedTransactionBytes);
-        await UpdateUserStorage(ledger2, userAccountId, inputAddress, codeHashIdForNft, selectedNftId, nftDistributor, nftDistributorPublicKey, nftDistributorPrivateKey);
-      } else {
-        alert("We are sorry, it seems like you still don't own this NFT, maybe wait for a few more minutes if you just received it revcently");
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  //     if (onDuty === nftImage) {
+  //       alert("You can't transfer the NFT you are using");
+  //       return;
+  //     }
+  //     const nftOwner = await CheckNftOwnerId(ledger2, selectedNftId);
+  //     if (nftOwner === userAccountId) {
+  //       //TransferNft(ledger2,selectedNftId,userAccountId,codeHashIdForNft,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey);
+  //       const latestTransactionNumber: string = await FindLatestTransactionNumber(ledger2, nftContractStorage, nftDistributor);
+  //       const latestArray: string[] = await FindLatestTransactionArray(ledger2, nftContractStorage, nftDistributor, latestTransactionNumber);
+  //       const transactionCost = (Math.floor(latestArray.length / 8 + 1) * 1000000).toString();
+  //       const userCoverTheirTransactionCost = await ledger2.transaction.sendAmountToSingleRecipient({
+  //         recipientId: nftDistributor,
+  //         amountPlanck: transactionCost,
+  //         feePlanck: "1000000",
+  //         senderPublicKey: userAccountpublicKey,
+  //       });
+  //       await Wallet.Extension.confirm(userCoverTheirTransactionCost.unsignedTransactionBytes);
+  //       const recipientInfo = await ledger2.account.getAccount({ accountId: inputAddress });
+  //       //await p2pTransferNft(ledger2,Wallet,selectedNftId,userAccountpublicKey,recipientInfo.account);
+  //       const transaction = await ledger2.contract.callContractMethod({
+  //         senderPublicKey: userAccountpublicKey,
+  //         feePlanck: "1000000",
+  //         amountPlanck: "32000000",
+  //         contractId: selectedNftId,
+  //         methodHash: "3",
+  //         methodArgs: [recipientInfo.account, "0", "0"],
+  //       });
+  //       await Wallet.Extension.confirm(transaction.unsignedTransactionBytes);
+  //       await UpdateUserStorage(ledger2, userAccountId, inputAddress, codeHashIdForNft, selectedNftId, nftDistributor, nftDistributorPublicKey, nftDistributorPrivateKey);
+  //     } else {
+  //       alert("We are sorry, it seems like you still don't own this NFT, maybe wait for a few more minutes if you just received it revcently");
+  //     }
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
 
   const handleInputChange = (event: any) => {
     setInputValue(event.target.value);
@@ -452,7 +469,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
             <ShortTitleBar title="My NFTs" addSign={true} aiCoach={false} filter={false} importButton={true} isOpenImport={isOpenImport} setIsOpenImport={setIsOpenImport} />
             <div className="containerMyNftList">
               <div className="containerMyNftList2">
-                {onDuty === "" ? (
+                {onDuty === ""  ? (
                   <div className="myNftList">
                     {gender === "Female" ? (
                       <Link to="/allNftList/">
@@ -474,7 +491,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
                       <div className="myNftBar">
                         <div className="myNftLevel">Lv{level}</div>
                         <div className="myNftVerticalLine"></div>
-                        <div className="inter-normal-white-12px">Reward + 10%</div>
+                        <div className="inter-normal-white-12px">Reward + 5%</div>
                       </div>
                       <div className="myNftPrice">$0 SIGNA</div>
                     </div>
@@ -490,14 +507,24 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
                     {isUpdatingDescription === true ? (
                       <img className="myNftImage" src="/img/loadingMinting/mimi-dancing-for-loadin-page.gif"></img>
                     ) : (
-                      <img onClick={() => setIsOnDutyIconPopup(false)} className="myNftImage" src={`https://ipfs.io/ipfs/${onDuty}`}></img>
+                      <img onClick={() => {
+                        setOpenModel(true);
+                        setIsOnDutyIconPopup(false);
+                        const nftInfo:selectedNftInfo = {
+                          imageUrl:onDuty,
+                          nftLevel:onDutyNftLevel,
+                          nftPrice:onDutyNftPrice,
+                          nftReward:"5",
+                        }
+                        setSelectedNft(nftInfo);
+                      }} className="myNftImage" src={`https://ipfs.io/ipfs/${onDuty}`}></img>
                     )}
                     <div className="myNftDescription">
                       <div className="myNftNumber">#{nftNumber}</div>
                       <div className="myNftBar">
                         <div className="myNftLevel">Lv{level}</div>
                         <div className="myNftVerticalLine"></div>
-                        <div className="inter-normal-white-12px">Reward + 10%</div>
+                        <div className="inter-normal-white-12px">Reward + 5%</div>
                       </div>
                       <div className="myNftPrice">$0 SIGNA</div>
                     </div>
@@ -574,16 +601,14 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
                     <div className="search_bar-2 search_bar-4"></div>
                     <div className="button_save" onClick={() => setSell(selectedNftId)}>
                       <div className="continue inter-semi-bold-white-15px">Transfer</div>
-                    </div>address
-                    {isError?      <p className="address-id-to-send-nft-to">{message}</p>:
-
-                    <p className="normalMessage">{message}</p>
-}
+                    </div>
+                    address
+                    {isError ? <p className="address-id-to-send-nft-to">{message}</p> : <p className="normalMessage">{message}</p>}
                     <h1 className="text-7">#00000001</h1>
                     <div className="x0-signa-1">
                       <div className="x0-signa-1-level">LV 1</div>
                       <div className="x0-signa-1-block"></div>
-                      <div className="x0-signa-1-reward">REWARD +10%</div>
+                      <div className="x0-signa-1-reward">REWARD +5%</div>
                     </div>
                     <div className="x16228">
                       YOU ARE SELLING YOUR NFT
