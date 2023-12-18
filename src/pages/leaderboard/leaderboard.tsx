@@ -27,10 +27,10 @@ const Leaderboard = (props: Props) => {
   const navigate = useNavigate();
   console.log(userRankingListFromRedux);
 
-  const imageLoadForTop3 = (index) => {
+  const imageLoadForTop3 = (index:number) => {
   
     return (<>
-      {userRankingList[0].accountImage ? (
+      {userRankingList[index].accountImage ? (
       <img className="nft_-avatar-2 nft_-avatar-3" 
       src={`https://ipfs.io/ipfs/${userRankingList[index].accountImage}`} 
       alt="NFT_Avatar" 
@@ -208,7 +208,7 @@ const Leaderboard = (props: Props) => {
                 </div>
                 {imageLoadForTop3(2)}
                 {/* <img className="nft_-avatar"    src={`https://ipfs.io/ipfs/${userRankingList[2].accountImage}`} alt="NFT_Avatar" /> */}
-                <div className="son inter-medium-white-12px">alison_888</div>
+                <div className="son inter-medium-white-12px">{userRankingList[2].displayAccountId}</div>
                 <div className="sigdao-score-3 sigdao-score-4">
                   <div className="signdao_tokengradient">
                     <div className="overlap-group-leader"><img className="x880" src="img/leaderboard/file---880@1x.png" alt="880" /></div>
