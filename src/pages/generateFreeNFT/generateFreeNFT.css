@@ -48,6 +48,7 @@
   top: 105px;
   white-space: nowrap;
   margin: 0;
+  z-index: 200;
 }
 
 .continue {
@@ -133,7 +134,6 @@
   font-family: var(--font-family-inter);
   font-size: var(--font-size-l);
   font-weight: 500;
-  left: calc((100% - 75px)/ 2);
   letter-spacing: 0;
   line-height: 16px;
   position: absolute;

@@ -137,6 +137,7 @@ import { selectedNftInfo } from '../allNftList/indexAllNftList';
                           nftLevel:nftLevel,
                           nftPrice:"Sell it",
                           nftReward:"5",
+                          nftNumber:nftNumber?nftNumber:-1,
                         }
                         console.log(nftInfo);
                         setSelectedNft(nftInfo);
@@ -160,7 +161,7 @@ import { selectedNftInfo } from '../allNftList/indexAllNftList';
                     <div className = "myNftBottom">
                     {isOtherUser === true?(
                       <>
-                        <button className = "myNftButtonDisabled" onClick = {equipNft}>Available</button>
+                        <button className = "myNftButtonDisabled" onClick = {equipNft}>AVAILABLE</button>
                         <img 
                           onClick={() => {
                             setIsOpenPopup((prev) => !prev);
@@ -175,7 +176,7 @@ import { selectedNftInfo } from '../allNftList/indexAllNftList';
                         </>
                     ):(
                       <>
-                          <button className = "myNftButton" onClick = {equipNft}>Available</button>
+                          <button className = "myNftButton" onClick = {equipNft}>AVALIBLE</button>
                           <img 
                             onClick={() => {
                               setIsOpenPopup((prev) => !prev);

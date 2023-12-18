@@ -40,7 +40,7 @@ const AllNft: React.FunctionComponent<AllNftProps> = (props) => {
   const nftDistributorPrivateKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PRIVATE_KEY!;
   const userAccountPublicKey = useSelector(accountPublicKey);
   const Buy = async () => {
-    if (nftStatus === "Buy") {
+    if (nftStatus === "BUY") {
       BuyNft(Wallet, ledger2, nftId!, nftPrice!, userAccountId, codeHashIdForNft, nftDistributor, nftDistributorPublicKey, nftDistributorPrivateKey, userAccountPublicKey);
     }
   };
@@ -65,6 +65,7 @@ const AllNft: React.FunctionComponent<AllNftProps> = (props) => {
                 nftLevel: nftLevel,
                 nftPrice: nftPrice,
                 nftReward: nftReward,
+                nftNumber:nftIndex,
               };
               setNftSelectedImage(selectedNftInfo);
             }

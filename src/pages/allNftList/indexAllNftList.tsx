@@ -50,6 +50,7 @@ export interface selectedNftInfo{
   nftLevel:string,
   nftPrice:string,
   nftReward:string,
+  nftNumber:number,
 }
 
 export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
@@ -144,7 +145,7 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
                 nftStatus = "For Sale in Signa";
               }
               if (nftStatus === "17") {
-                nftStatus = "Buy";
+                nftStatus = "BUY";
               }
               if (nftStatus === "18") {
                 nftStatus = "For Sale in Sigdao and Signa";

@@ -31,7 +31,7 @@ const Leaderboard = (props: Props) => {
   
     return (<>
       {userRankingList[index].accountImage ? (
-      <img className="nft_-avatar-2 nft_-avatar-3" 
+      <img className="leaderboard_nft_-avatar" 
       src={`https://ipfs.io/ipfs/${userRankingList[index].accountImage}`} 
       alt="NFT_Avatar" 
       onClick={() => {navigate('/OtherUserProfile',{state:{userId:userRankingList[0].accountId}})}}
@@ -178,7 +178,7 @@ const Leaderboard = (props: Props) => {
                       <span className="inter-semi-bold-white-18px">1</span><span className="inter-semi-bold-white-18px">st</span>
                     </div>
                   </div>
-                  <div className="fung_fung00 inter-medium-white-12px">{userRankingList[0].displayAccountId}</div>
+                  <div className="fung_fung00 inter-medium-white-12px">{userRankingList[0].displayAccountId.substring(0, 11)}</div>
                   <div className="sigdao-score-1 sigdao-score-4">
                     <div className="signdao_tokengradient">
                       <div className="overlap-group-leader"><img className="x880" src="img/leaderboard/file---880@1x.png" alt="880" /></div>
@@ -193,7 +193,7 @@ const Leaderboard = (props: Props) => {
                   </div>
                   {imageLoadForTop3(1)}
                   {/* <img className="nft_-avatar"      src={`https://ipfs.io/ipfs/${userRankingList[1].accountImage}`}  alt="NFT_Avatar" /> */}
-                  <div className="son inter-medium-white-12px">{userRankingList[1].displayAccountId}</div>
+                  <div className="son inter-medium-white-12px">{userRankingList[1].displayAccountId.substring(0, 11)}</div>
                   <div className="sigdao-score-2 sigdao-score-4">
                     <div className="signdao_tokengradient">
                       <div className="overlap-group-leader"><img className="x880" src="img/leaderboard/file---880@1x.png" alt="880" /></div>
@@ -202,13 +202,13 @@ const Leaderboard = (props: Props) => {
                   </div>
                 </div>
               </div>
-              <div className="leadboard_1st-2 leadboard_1st-3"                          onClick={() => {navigate('/OtherUserProfile',{state:{userId:userRankingList[2].accountId}})}}>
+              <div className="leadboard_1st-2 leadboard_1st-3 numberThree"                          onClick={() => {navigate('/OtherUserProfile',{state:{userId:userRankingList[2].accountId}})}}>
                 <div className="x3rd inter-semi-bold-white-18px-2">
                   <span className="inter-semi-bold-white-18px">3</span><span className="inter-semi-bold-white-18px">rd</span>
                 </div>
                 {imageLoadForTop3(2)}
                 {/* <img className="nft_-avatar"    src={`https://ipfs.io/ipfs/${userRankingList[2].accountImage}`} alt="NFT_Avatar" /> */}
-                <div className="son inter-medium-white-12px">{userRankingList[2].displayAccountId}</div>
+                <div className="son inter-medium-white-12px">{userRankingList[2].displayAccountId.substring(0, 11)}</div>
                 <div className="sigdao-score-3 sigdao-score-4">
                   <div className="signdao_tokengradient">
                     <div className="overlap-group-leader"><img className="x880" src="img/leaderboard/file---880@1x.png" alt="880" /></div>
