@@ -15,7 +15,7 @@ export interface IAllNftListProps{
     setSelectedNftId?:(nftId:string) => void;
     isPopUpIcon?:boolean;
     setIsPopUpIcon:(isPopUpIcon:boolean) => void;
-  setSelectedImageAddress?:(selectedImageAddress:selectedNftInfo) => void;
+    setSelectedImageAddress?:(selectedImageAddress:selectedNftInfo) => void;
 }
 
 const AllNftList:React.FC <IAllNftListProps>= (props) => {

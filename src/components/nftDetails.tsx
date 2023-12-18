@@ -43,7 +43,7 @@ const NftDetails: React.FunctionComponent<AllNftProps> = (props) => {
               <img className="x6" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/file---6@1x.png`} alt="6" />
               <div className="reward-10">REWARD +{}%</div>
             </div>
-            <div className="x0-signa">${} SIGDAO</div>
+            {/* <div className="x0-signa">${} SIGDAO</div> */}
             <img className="photo" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/photo-1@1x.png`} alt="Photo" />
             <div onClick={() => setPopUpIcon(false)} className="click-the-area-to-make-it-hidden-again"></div>
             </>
@@ -57,7 +57,7 @@ const NftDetails: React.FunctionComponent<AllNftProps> = (props) => {
             <img className="x6" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/file---6@1x.png`} alt="6" />
             <div className="reward-10">REWARD +{imgAddress.nftReward}%</div>
           </div>
-          <div className="x0-signa">${imgAddress.nftPrice} SIGDAO</div>
+          {/* <div className="x0-signa">${imgAddress.nftPrice} SIGDAO</div> */}
           <img className="photo" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/photo-1@1x.png`} alt="Photo" />
           <div onClick={() => setPopUpIcon(false)} className="click-the-area-to-make-it-hidden-again"></div>
           </>

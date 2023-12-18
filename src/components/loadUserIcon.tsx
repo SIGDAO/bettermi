@@ -15,6 +15,7 @@ export interface IUserIconProps {
   profile?: boolean;
   userAccountId: string;
   setIsPopUpIcon: Function;
+  setSelectedNft?:Function;
 }
 export interface ClassNames {
   forEmptyIcon: string;
@@ -30,7 +31,7 @@ const UserIcon: React.FC<IUserIconProps> = (props) => {
     forNftDisplay: "nft_-avatar-2ZgxSS",
   };
   const profileClassNames = { forEmptyIcon: "profile_icon_nft_-avatar_empty", forAddSign: "profile_icon_ic_add", forLoadingSign: "profile_icon_ic_loading", forNftDisplay: "nft_-avatar_empty" };
-  const { home, profile, userAccountId, setIsPopUpIcon } = props;
+  const { home, profile, userAccountId, setIsPopUpIcon,setSelectedNft } = props;
   let finalClassNames: ClassNames = home === true ? homeClassNames : profileClassNames;
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -84,7 +85,12 @@ const UserIcon: React.FC<IUserIconProps> = (props) => {
       //   className="nft_-avatar_empty"
       // />
       haveNft === true ? (
-        <img onClick={() => setIsPopUpIcon(true)} className={finalClassNames.forNftDisplay} src={`https://ipfs.io/ipfs/${imgAddress}`} alt="NFT_Avatar" />
+        <img onClick={() => {
+          setIsPopUpIcon(true);
+          if(setSelectedNft != null){
+            setSelectedNft(imgAddress);
+          }
+        }} className={finalClassNames.forNftDisplay} src={`https://ipfs.io/ipfs/${imgAddress}`} alt="NFT_Avatar" />
       ) : (
         <Link to="/allNftList/">
           <div className={finalClassNames.forEmptyIcon}>

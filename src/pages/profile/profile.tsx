@@ -76,7 +76,7 @@ const Profile: React.FunctionComponent<IProfileProps> = (props) => {
                 <img className="x6" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/file---6@1x.png`} alt="6" />
                 <div className="reward-10">REWARD +5%</div>
               </div>
-              <div className="x0-signa">$0 SIGNA</div>
+              {/* <div className="x0-signa">$0 SIGNA</div> */}
               <img className="photo" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/photo-1@1x.png`} alt="Photo" />
               <div onClick={() => setIsPopUpIcon(false)} className="click-the-area-to-make-it-hidden-again"></div>
             </div>

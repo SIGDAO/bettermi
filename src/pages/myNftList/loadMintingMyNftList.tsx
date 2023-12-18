@@ -85,69 +85,54 @@ var nft: myNftList;
 var userNftList:myNftList[] = [];
 
 const loadNftList = async() => {
-  const nftContractStorage = await FindNftContractStorage(ledger2,Id,codeHashIdForNft);
-  FindLatestTransactionNumber(ledger2,nftContractStorage,nftDistributor).then((number)=>{
-    FindLatestTransactionArray(ledger2,nftContractStorage,nftDistributor,number).then(async(nftAddressList)=>{
-            if(nftAddressList[0] === "empty"){
-              setLoadingNft(false);
-            }
-            else{
-                if(isOtherUser ===false){
-                  const equippedNft = await GetEquippedNftId(ledger2,Id);
-                  if(equippedNft != ""){
-                    const index = nftAddressList.indexOf(equippedNft);
-                    if(index > -1){
-                      nftAddressList.splice(index,1);
-                    }
-                  }
-                }
-                  const promiseArray = nftAddressList.map((addressList) => 
-                    ledger2.contract.getContract(addressList)
-                  )
-                  const contractInfoArray = await Promise.all(promiseArray);
-                  for (var i = 0;i < contractInfoArray.length;i++){
-                    try{
-                    console.log(contractInfoArray[i].description);
-                      const trial = JSON.parse(contractInfoArray[i].description);
-                      nft = {level:trial.version,image:trial.descriptor,nftId:nftAddressList[i]};
-                      userNftList.push(nft);
-                    }
-                    catch(e){
-                      console.log(e);
-                    }
-                      if(i === contractInfoArray.length-1){
-                        setCount(100);   
-                        setTimeout(() => {
-                          setMyNfts(userNftList);
-                          setLoadingNft(false);
-                        },1000);
-                      }
-                    }
-                    if(contractInfoArray.length === 0){
-                      setCount(100);   
-                      setTimeout(() => {
-                        setMyNfts(userNftList);
-                        setLoadingNft(false);
-                      },1000);
-                  }
-                // for (var i = 0;i < nftAddressList.length;i++){
-                //   const contractInfo = await ledger2.contract.getContract(nftAddressList[i]);
-                //   const trial = JSON.parse(contractInfo.description);
-                //   nft = {level:trial.version,image:trial.descriptor,nftId:nftAddressList[i]};
-                //   userNftList.push(nft);
-                //   if(i === nftAddressList.length-1){
-                //     console.log(userNftList);
-                //     setCount(100);   
-                //     setTimeout(() => {
-                //       setMyNfts(userNftList);
-                //       setLoadingNft(false);
-                //     },1000);
-                //   }
-                // }
-              }
 
-    });
-  }).catch((error)=>{console.log(error);navigate("/home")});
+  const nftContractStorage = await FindNftContractStorage(ledger2,Id,codeHashIdForNft);
+  const latestTransactionNumber = await FindLatestTransactionNumber(ledger2,nftContractStorage,nftDistributor);
+  const nftAddressList = await FindLatestTransactionArray(ledger2,nftContractStorage,nftDistributor,latestTransactionNumber);
+  if(nftAddressList[0] === "empty"){
+    setLoadingNft(false);
+  }
+  if(isOtherUser ===false){
+    const equippedNft = await GetEquippedNftId(ledger2,Id);
+    if(equippedNft != ""){
+      const index = nftAddressList.indexOf(equippedNft);
+      if(index > -1){
+        nftAddressList.splice(index,1);
+      }
+    }
+  }
+    const promiseArray = nftAddressList.map((addressList) => {
+      return ledger2.contract.getContract(addressList)
+}
+    )
+    const contractInfoArray = await Promise.all(promiseArray);
+    for (var i = 0;i < contractInfoArray.length;i++){
+      try{
+      console.log(contractInfoArray[i].description);
+        const trial = JSON.parse(contractInfoArray[i].description);
+        nft = {level:trial.version,image:trial.descriptor,nftId:nftAddressList[i]};
+        userNftList.push(nft);
+      }
+      catch(e){
+        console.log(e);
+      }
+        if(i === contractInfoArray.length-1){
+          setCount(100);   
+          setTimeout(() => {
+            setMyNfts(userNftList);
+            setLoadingNft(false);
+          },1000);
+        }
+      }
+      if(contractInfoArray.length === 0){
+        setCount(100);   
+        setTimeout(() => {
+          setMyNfts(userNftList);
+          setLoadingNft(false);
+        },1000);
+    }
+
+
 
 };
 
@@ -160,7 +145,13 @@ useEffect(() => {
   }
   else{
     nftLoaded.current = true;
+    try{
       loadNftList();
+    }
+    catch(e){
+      alert("It seems like some error has occured. We would be grateful if you could report it to us");
+      navigate("/home");
+    }
   }
 }, []);
 
