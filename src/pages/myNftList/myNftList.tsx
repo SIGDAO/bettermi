@@ -515,6 +515,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
                           nftLevel:onDutyNftLevel,
                           nftPrice:onDutyNftPrice,
                           nftReward:"5",
+                          nftNumber:nftNumber!,
                         }
                         setSelectedNft(nftInfo);
                       }} className="myNftImage" src={`https://ipfs.io/ipfs/${onDuty}`}></img>
