@@ -105,11 +105,11 @@
 }
 
 .bettermidapp-profile-3 .card-number {
-  /* left: 52px; */
+  left: 52px;
   letter-spacing: 0;
   line-height: 22px;
   /* position: absolute; */
-  /* top: 224px; */
+  top: 224px;
   white-space: nowrap;
   /* width: 108px; */
 }
@@ -809,7 +809,7 @@
   /* background-position: 50% 50%; */
   background-size: cover;
   height: 18px;
-  /* left: 250px; */
+  left: 250px;
   /* position: absolute; */
   top: 228px;
   width: 17px;
