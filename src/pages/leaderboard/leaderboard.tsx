@@ -41,7 +41,7 @@ const Leaderboard = (props: Props) => {
           />
         ) : (
           <div className="leaderboard_nft_-avatar">
-            <img className="home_icon_ic_add" src="img/profile/ic-add-2@1x.png" alt="ic_add" />
+            <img className="home_icon_ic_add" src="https://ipfs.io/ipfs/QmPs1xzhieR4RjC9k1VMHauyqhALrK1tJyvk9Wtn8hHpY7" alt="ic_add" />
           </div>
         )}
       </>
@@ -132,7 +132,7 @@ const Leaderboard = (props: Props) => {
                             }}
                           />
                         ) : (
-                          <img className="nft_-avatar-2 nft_-avatar-3" src={`${process.env.PUBLIC_URL}/img/mimi.png`} alt="NFT_Avatar" />
+                          <img className="nft_-avatar-2 nft_-avatar-3" src={`https://ipfs.io/ipfs/QmPs1xzhieR4RjC9k1VMHauyqhALrK1tJyvk9Wtn8hHpY7`} alt="NFT_Avatar" />
                         )}
 
                         <div className="crown-with-red-stone">

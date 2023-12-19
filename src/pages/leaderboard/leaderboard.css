@@ -151,7 +151,7 @@
   position: absolute;
   top: 19px;
   width: 107px;
-  /* clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 0% 70%); */
+  clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 0% 70%);
     /* position: relative;
     top: 10px; */
 }
@@ -653,7 +653,7 @@
   margin-bottom: 5.0px;
 }
 .numberThree{
-  margin-top: 33px;
+  margin-top: 23px;
 }
 
 .bettermidapp-leaderboad-the-best-100 .x3rd {
