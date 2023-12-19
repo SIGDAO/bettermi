@@ -82,7 +82,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
   const [hasImportError, setHasImportError] = useState<boolean>(false);
   const [importSuccess, setImportSuccess] = useState<boolean>(false);
   const [isOpenImport, setIsOpenImport] = useState<boolean>(false);
-  const [nftNumber, setNftNumber] = useState<number>();
+  const [nftNumber, setNftNumber] = useState<string>("");
   const [message, setMessage] = useState<string>("Your NFT Price in SIGDAO");
   const [isError, setError] = useState<boolean>(false);
   const gender = useSelector(selectCurrentGender);
@@ -150,7 +150,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
           var nftInfo = JSON.parse(text);
           console.log("nftInfo", nftInfo);
           let matches = nftInfo.name.match(/(\d+)/);
-          const nftNumber = matches[0].toString().padStart(8, "0");
+          const nftNumber:string = matches[0].toString().padStart(8, "0");
           setNftNumber(nftNumber);
           if (nftInfo.description.includes("1") === true) {
             setOnDutyLevel("1");

@@ -339,6 +339,7 @@ align-self: flex-start;
 .descriptionBodyChallengeCompleted{
     text-align: left;
     color: #A6B3BB98;
+    margin-right: 10px;
 }
 .descriptionBottomBodyChallengeCompleted{
     display:flex;

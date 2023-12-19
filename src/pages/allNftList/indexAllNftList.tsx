@@ -50,7 +50,7 @@ export interface selectedNftInfo{
   nftLevel:string,
   nftPrice:string,
   nftReward:string,
-  nftNumber:number,
+  nftNumber:string,
 }
 
 export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {

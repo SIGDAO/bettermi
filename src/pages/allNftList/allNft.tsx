@@ -60,12 +60,13 @@ const AllNft: React.FunctionComponent<AllNftProps> = (props) => {
               setOpenModel(!openModel);
             }
             if (setNftSelectedImage && nftLevel && nftPrice && nftIndex && nftReward) {
+              console.log(parseInt(String(nftIndex).padStart(8, "0")));
               const selectedNftInfo: selectedNftInfo = {
                 imageUrl: imageAddress,
                 nftLevel: nftLevel,
-                nftPrice: nftPrice,
+                nftPrice: (parseInt(nftPrice)/1000000).toString(),
                 nftReward: nftReward,
-                nftNumber:nftIndex,
+                nftNumber:String(nftIndex).padStart(8, "0"),
               };
               setNftSelectedImage(selectedNftInfo);
             }
@@ -80,7 +81,7 @@ const AllNft: React.FunctionComponent<AllNftProps> = (props) => {
             <div className="myNftVerticalLine"></div>
             <div className="inter-normal-white-12px">Reward + 10%</div>
           </div>
-          <div className="myNftPrice">${nftPrice} SIGDAO</div>
+          <div className="myNftPrice">${nftPrice?(parseInt(nftPrice)/1000000).toString():""} SIGDAO</div>
         </div>
         <div className="allNftBottom">
           {/* {isOtherUser === true?(

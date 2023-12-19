@@ -356,8 +356,8 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
                 <div className="small-image">
                   <img className="step_count_banner-45Wblr" src={`${process.env.PUBLIC_URL}/img/allMission/Talk-to-mi-Square-Cover.png`} alt="Step_count_banner" />
                 </div>
-                <div className="walking-mission-7hGHU0 inter-medium-white-15px">Talk to mi</div>
-                <div className="step-count-7hGHU0 inter-normal-cadet-blue-12px">Talk to mi</div>
+                <div className="walking-mission-7hGHU0 inter-medium-white-15px">Secret Coach - Talk To mi</div>
+                <div className="step-count-7hGHU0 inter-normal-cadet-blue-12px">Secret Coach - Talk To mi</div>
                 <div className="sigdao-score-7hGHU0 sigdao-score">
                   <div className="x10-SMcg87 x10 inter-semi-bold-keppel-14px">+20</div>
                   <div className="signdao_tokengradient-SMcg87 signdao_tokengradient">

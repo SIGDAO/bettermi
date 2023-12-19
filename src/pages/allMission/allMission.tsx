@@ -124,11 +124,11 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
               <img className = "buttonIconChallengeCompleted" src={`${process.env.PUBLIC_URL}/img/allMission/Talk-to-mi-Square-Cover.png`} alt="Card_bg"></img>
               <div className = "descriptionChallengeCompleted">
                 <div style = {{display:"flex", flexDirection:"row"}} className = "descriptionTitleChallengeCompleted">
-                  <div>Talk to mi</div>
+                  <div>Secret Coach - Talk To mi </div>
                   {/* <img  style = {{width:"15px", height:"20px",paddingLeft:"10px"}} src={`${process.env.PUBLIC_URL}/img/allMission/ic-locked-1@1x.png`}></img> */}
                   </div>
                   <div className = "descriptionBodyChallengeCompleted">
-                    Talk to mi
+                  Secret Coach - Talk To mi 
                   </div>
                   <div className = "descriptionBottomBodyChallengeCompleted">
                   <div className="sigdao_tokengradient">

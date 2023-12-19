@@ -50,7 +50,7 @@ import { selectedNftInfo } from '../allNftList/indexAllNftList';
      const userAccountId:string = useSelector(accountId);
      const {appName,Wallet,Ledger} = useContext(AppContext);
      const [nftLevel,setNftLevel] = useState<string>("");
-     const [nftNumber,setNftNumber] = useState<number>();
+     const [nftNumber,setNftNumber] = useState<string>("");
      const [reward,setReward] = useState<string>("");
      const name = useAppSelector(selectCurrentUsername);
      const navigate = useNavigate();
@@ -66,7 +66,7 @@ import { selectedNftInfo } from '../allNftList/indexAllNftList';
                  var nftInfo = JSON.parse(text);
                  let matches = nftInfo.name.match(/(\d+)/);
                  //console.log(matches[0]);
-                 const nftNumber = matches[0].toString().padStart(8, '0');
+                 const nftNumber:string = matches[0].toString().padStart(8, '0');
                  setNftNumber(nftNumber);
                 //  setNftLevel(nftInfo.attributes[0].level);
                 //  console.log(nftInfo.attributes.description);
@@ -135,9 +135,9 @@ import { selectedNftInfo } from '../allNftList/indexAllNftList';
                         setOpenModel(true);const nftInfo:selectedNftInfo={
                           imageUrl:imgAddress,
                           nftLevel:nftLevel,
-                          nftPrice:"Sell it",
+                          nftPrice:"0",
                           nftReward:"5",
-                          nftNumber:nftNumber?nftNumber:-1,
+                          nftNumber:nftNumber?nftNumber:"-1",
                         }
                         console.log(nftInfo);
                         setSelectedNft(nftInfo);
