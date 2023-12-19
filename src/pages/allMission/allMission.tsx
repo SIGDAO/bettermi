@@ -81,9 +81,11 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
                   1-3 Mins Each
                 </div>
                 <div className = "descriptionBottomBodyChallengeCompleted">
-                  <div className = "sigdaoIconChallengeCompleted">
-                    <img src = {`${process.env.PUBLIC_URL}/img/allMission/file---880-1x-png-10@1x.png`}></img>
-                    </div>
+                <div className="sigdao_tokengradient">
+                                  <div className="x441"></div>
+                                  <div className="x442"></div>
+                                  <img className="x880" src="img/missionChallenge/file---880-1x-png-10@1x.png" alt="880" />
+                                </div>
                     <div className = "sigdaoChallengeCompleted">
                     +5.25 ~ 15.75
                   </div>
@@ -103,9 +105,11 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
                     Saturday Only
                   </div>
                   <div className = "descriptionBottomBodyChallengeCompleted">
-                    <div className = "sigdaoIconChallengeCompleted">
-                      <img src = {`${process.env.PUBLIC_URL}/img/allMission/file---880-1x-png-10@1x.png`}></img>
-                      </div>
+                  <div className="sigdao_tokengradient">
+                                  <div className="x441"></div>
+                                  <div className="x442"></div>
+                                  <img className="x880" src="img/missionChallenge/file---880-1x-png-10@1x.png" alt="880" />
+                                </div>
                       <div className = "sigdaoChallengeCompleted">
                         +5.25 ~ 5.00
                     </div>
@@ -127,9 +131,11 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
                     Talk to mi
                   </div>
                   <div className = "descriptionBottomBodyChallengeCompleted">
-                    <div className = "sigdaoIconChallengeCompleted">
-                      <img src = {`${process.env.PUBLIC_URL}/img/allMission/file---880-1x-png-10@1x.png`}></img>
-                      </div>
+                  <div className="sigdao_tokengradient">
+                                  <div className="x441"></div>
+                                  <div className="x442"></div>
+                                  <img className="x880" src="img/missionChallenge/file---880-1x-png-10@1x.png" alt="880" />
+                                </div>
                       <div className = "sigdaoChallengeCompleted">
                       +5.25 ~ 15.75
                     </div>
