@@ -44,6 +44,7 @@ const GenerateFreeNFT: React.FunctionComponent<GenerateFreeNFTProps> = (props) =
 
   const content: JSX.Element = (
     <>
+    <div style = {{display:"flex",justifyContent:"center"}}>
       <img className="photo" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/photo-1@1x.png`} alt="Photo" />
       {/* <BackButton /> */}
       {isLoading === true ? (
@@ -62,6 +63,7 @@ const GenerateFreeNFT: React.FunctionComponent<GenerateFreeNFTProps> = (props) =
       <div className="x0-signa">$0 SIGNA</div>
       <div className="button_-import" onClick={() => navigate("/customizeYourProfile", { state: { nftImageAddress: nftIpfsAddress, nftId: nftId } })}>
         <div className="continue inter-semi-bold-white-15px">Next</div>
+      </div>
       </div>
     </>
   );
