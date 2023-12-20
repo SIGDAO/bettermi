@@ -30,6 +30,8 @@ export function CenterLayout (props: ICenterLayoutProps) {
   const bgStyle : CSS.Properties = mobile ? 
   {
     'background': `transparent`,
+    'display': 'flex',
+    'justifyContent': 'center',
   }
   :
   {
@@ -41,13 +43,17 @@ export function CenterLayout (props: ICenterLayoutProps) {
     'overflowY': `${noScroll ? 'hidden' : 'auto'}`,
     'zIndex': '1',
     'overflowX': 'hidden',
+        'display': 'flex',
+    'justifyContent': 'center',
   }
 
   const centerLayoutStyle : CSS.Properties = {
     // 'backgroundPosition': 'center',
-    'minHeight': `${height}`, // ipad size
+    // 'minHeight': `${height}`, // ipad size
+    'minHeight': '730px',
     'width': `${width}`, // ipad size
     'height': '100%',
+
     'margin': 'auto',
     // 'display': 'flex',
     // 'justifyContent': 'center',

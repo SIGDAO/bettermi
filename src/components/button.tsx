@@ -140,10 +140,11 @@ export const BackButton: React.FunctionComponent<IBackButtonProps> = (props) => 
     'left': '16px',
     'minWidth': '44px',
     'paddingLeft': '14px',
-    'position': 'relative',
+    'position': 'absolute',
     'top': top || '44px',
+    'zIndex': 9999,
   }
-
+// isdofidjsoaf, difisdf  
 
   return (
     <a href="javascript:history.back()">
@@ -164,6 +165,7 @@ export const NavigateToTakeSelfieButton: React.FunctionComponent = () => {
   const [isActive, setIsActive] = React.useState<boolean>(false);
   const [timeDifference, setTimeDifference] = useState('');
   const isSelfie = useSelector(selectCurrentIsSelfie);
+  // const isSelfie = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState(true);
   // const [isMidnight, setIsMidnight] = useState(false);
   
@@ -218,9 +220,11 @@ export const NavigateToTakeSelfieButton: React.FunctionComponent = () => {
     return (
       <div className="lock-button-cover">
         <div className="lock-button">
-          <p className="selfie-time-countdown inter-semi-bold-white-15px">
-            {timeDifference}
-          </p>
+          <div className="selfie-time-countdown-container">
+            <p className="selfie-time-countdown inter-semi-bold-white-15px">
+              {timeDifference}
+            </p>
+          </div>
           <img className='lock-icon-NavigateToTakeSelfieButton' src="/img/ic-locked-1@1x.png" alt="" />
         </div>
         <div className="button_-selfie-to-earn-MUU5YC" onClick={() => handleTakeASelfie()}>
@@ -230,7 +234,6 @@ export const NavigateToTakeSelfieButton: React.FunctionComponent = () => {
         </div>
       </div>
     )
-
   } else {
     return isLoading ? null : (
       <div className="button_-selfie-to-earn-MUU5YC" onClick={() => handleTakeASelfie()}>

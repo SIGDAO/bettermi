@@ -10,9 +10,9 @@ interface IErrorGenerateNFTProps {
 
 const ErrorGenerateNFT: React.FunctionComponent<IErrorGenerateNFTProps> = (props) => {
   const location = useLocation();
-  const [errorMsg, setErrorMsg] = React.useState<string>();
-  const [buttonText, setButtonText] = React.useState<string>();
-  const [navigatePath, setNavigatePath] = React.useState<string>();
+  const [errorMsg, setErrorMsg] = React.useState<string>("");
+  const [buttonText, setButtonText] = React.useState<string>("");
+  const [navigatePath, setNavigatePath] = React.useState<string>("");
 
   useEffect(() => {
     if (location.pathname === '/errorGenerateNFT') {
@@ -23,7 +23,11 @@ const ErrorGenerateNFT: React.FunctionComponent<IErrorGenerateNFTProps> = (props
       setErrorMsg('Please make sure that only your face is visible in the frame.');
       setButtonText('Selfie again');
       setNavigatePath('/takeSelfie')
-    } 
+    } else if (location.pathname === '/errorCustomizeYourProfile') {
+      setErrorMsg('Looks like something went wrong.\n Let\'s try again!');
+      setButtonText('Try again');
+      setNavigatePath('/customizeYourProfile')
+    }
   }, [])
 
   const content: JSX.Element = (
@@ -44,24 +48,6 @@ const ErrorGenerateNFT: React.FunctionComponent<IErrorGenerateNFTProps> = (props
                 />
             </div>
           </div>
-          {/* <a href="bettermidapp-settings-1.html">
-            <div className="ic_settings_24px-lme0fw ic_settings_24px">
-              <img
-                className="ic_settings_24px-1cMOi3 ic_settings_24px"
-                src="img/errorGenerateNFT/ic-settings-24px-1@1x.png"
-                alt="ic_settings_24px"
-                />
-            </div>
-          </a> */}
-          {/* <a href="bettermidapp-ai-coach.html">
-            <div className="ic_sentiment_very_satisfied_24px-lme0fw ic_sentiment_very_satisfied_24px">
-              <img
-                className="ic_sentiment_very_satisfied_24px-xCJHHT ic_sentiment_very_satisfied_24px"
-                src="img/errorGenerateNFT/ic-sentiment-very-satisfied-24px-1@1x.png"
-                alt="ic_sentiment_very_satisfied_24px"
-                />
-            </div>
-          </a> */}
         </div>
         <a href="javascript:history.back()">
           <div className="icon-arrow-left-FumncE icon-arrow-left">
@@ -72,21 +58,6 @@ const ErrorGenerateNFT: React.FunctionComponent<IErrorGenerateNFTProps> = (props
               />
           </div>
         </a>
-        {/* <div className="bars-status-bar-i-phone-light-FumncE">
-          <div className="frame-QaAc67"></div>
-          <div className="status-bar-QaAc67">
-            <div className="battery-MTLyAM">
-              <div className="border-MYGhml"></dimintagain-7FeCxkv>
-              <img className="cap-MYGhml" src="img/errorGenerateNFT/cap-1@1x.png" alt="Cap" />
-              <div className="capacity-MYGhml"></div>
-            </div>
-            <img className="wifi-MTLyAM" src="img/errorGenerateNFT/wifi-1@1x.png" alt="Wifi" />
-            <img className="cellular-connection-MTLyAM" src="img/errorGenerateNFT/cellular-connection-1@1x.png" alt="Cellular Connection" />
-            <div className="time-style-MTLyAM">
-              <div className="time-eJQK27 sfprotext-semi-bold-white-15px">9:41</div>
-            </div>
-          </div>
-        </div> */}
         <Link to={navigatePath} >
           <div className="bottom-controls-FumncE">
             <div className="button_-mintagain-QHnb0b">

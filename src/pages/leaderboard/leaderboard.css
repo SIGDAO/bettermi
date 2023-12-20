@@ -16,6 +16,25 @@
   display: none;
 }
 
+.leaderboard_nft_-avatar{
+  background: linear-gradient(180deg, #8743FF 0%, #4136F1 100%);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  height: 110px;
+  /* left: 0px; */
+  object-fit: cover;
+  /* position: absolute;
+  top: 8px; */
+  width: 107px;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 0% 70%);
+}
+
+
 /* Hide scrollbar for IE, Edge and Firefox */
 .bettermidapp-leaderboad-the-best-100 {
   -ms-overflow-style: none;  /* IE and Edge */
@@ -127,14 +146,14 @@
 }
 
 .bettermidapp-leaderboad-the-best-100 .nft_-avatar-2 {
-  height: 107px;
+  height: 110px;
   left: 13px;
   position: absolute;
   top: 19px;
   width: 107px;
   clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 0% 70%);
-    position: relative;
-    top: 10px;
+    /* position: relative;
+    top: 10px; */
 }
 
 .bettermidapp-leaderboad-the-best-100 .crown-with-red-stone {
@@ -578,7 +597,6 @@
   margin-right: -2px;
   margin-top: 1.5px;
   white-space: nowrap;
-  width: 62px;
 }
 
 .bettermidapp-leaderboad-the-best-100 .leadboard_1st-1 {
@@ -595,6 +613,7 @@
   min-width: 26px;
   text-align: center;
   white-space: nowrap;
+  z-index: 100;
 }
 
 .bettermidapp-leaderboad-the-best-100 .nft_-avatar {
@@ -618,6 +637,7 @@
   text-align: center;
   white-space: nowrap;
   width: 97px;
+  overflow: hidden;
 }
 
 .bettermidapp-leaderboad-the-best-100 .sigdao-score-2 {
@@ -631,6 +651,9 @@
 
 .bettermidapp-leaderboad-the-best-100 .leadboard_1st-2 {
   margin-bottom: 5.0px;
+}
+.numberThree{
+  margin-top: 23px;
 }
 
 .bettermidapp-leaderboad-the-best-100 .x3rd {
@@ -681,6 +704,22 @@
   white-space: nowrap;
 }
 
+.home_body_icon_ic_add {
+  height: 20px;
+  width: 20px;
+}
+
+.leaderboard_body_nft_-avatar {
+  height: 60px;
+  width: 60px;
+  background: linear-gradient(180deg, #8743FF 0%, #4136F1 100%);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+}
+
 .bettermidapp-leaderboad-the-best-100 .nft_-avatar-1 {
   margin-top: 20px;
   height: 60px;
@@ -694,7 +733,7 @@
   margin-left: 10px;
   margin-top: 4.0px;
   min-height: 17px;
-  min-width: 34px;
+  width: 120px;
   white-space: nowrap;
 }
 
@@ -929,4 +968,8 @@
   margin-right: -2px;
   margin-top: 1.5px;
   white-space: nowrap;
+  text-overflow: clip;
+  overflow: hidden;
+  width: 35px;
 }
+

@@ -12,6 +12,8 @@ export interface ProfileState {
   gender: string;
   birthday: Date | null;
   isSelfie: boolean;
+  NFTimageAddress: string;
+  nftId: string;
 }
 
 export interface BMIState {
@@ -32,6 +34,8 @@ const initialState: ProfileState = {
   gender: "",
   birthday: null,
   isSelfie: false,
+  NFTimageAddress: "",
+  nftId: "",
 };
 
 
@@ -94,6 +98,18 @@ export const profileSlice = createSlice({
     clearIsSelfie: (state) => {
       state.isSelfie = false;
     },
+    setNFTImageAddress: (state, action: PayloadAction<string>) => {
+      state.NFTimageAddress = action.payload;
+    },
+    clearNFTImageAddress: (state) => {
+      state.NFTimageAddress = "";
+    },
+    setNFTId: (state, action: PayloadAction<string>) => {
+      state.nftId = action.payload;
+    },
+    clearNFTId: (state) => {
+      state.nftId = "";
+    },
     clearAll: (state) => {
       state.selfiePath = "";
       state.username = "";
@@ -111,9 +127,6 @@ export const { actions } = profileSlice;
 
 export const selectCurrentImg = (state: any) => state.profile.selfiePath;
 export const selectCurrentUsername = (state: any) => {
-  if (state.profile.username === "") {
-    return localStorage.getItem("name") ? localStorage.getItem("name") : ''
-  }
   return state.profile.username;
 };
 export const selectCurrentBMI = (state: any) => state.profile.bmi;
@@ -123,3 +136,4 @@ export const selectCurrentDiscordUsername = (state: any) => state.profile.discor
 export const selectCurrentDescription = (state: any) => state.profile.description;
 export const selectCurrentAboutYourself = (state: any) => state.profile.aboutYourself;
 export const selectCurrentIsSelfie = (state: any) => state.profile.isSelfie;
+export const selectCurrentNFTImageAddress = (state: any) => state.profile.NFTimageAddress;

@@ -4,6 +4,7 @@ import CSS from 'csstype';
 import { BackButton } from '../../components/button';
 import { useNavigate } from 'react-router-dom';
 import MenuBar from '../../components/menuBar';
+import { ShortTitleBar } from '../../components/titleBar';
 
 interface IChallengeCompletedProps {
 }
@@ -65,51 +66,10 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
   return (
     <div style={bgStyle}>
       <div style={centerLayoutStyle}>
-      <div className = "navbarChallengeComplete">
-        <div className = "container1">
-          
-        </div>
-        <div className = "container2">
-        {/* <a href="javascript:history.back()">
-          <div className="icon-arrow-left" style={customStyle} >
-            <img className="icon-arrow-left-1" src={`${process.env.PUBLIC_URL}/img/connectSucceed/icon-arrow-left-8@1x.png`} alt="icon-arrow-left" />
-          </div>
-        </a> */}
-        <div></div>
-          <div className = "banner">
-          {/* <a href="javascript:history.back()">
-          <div className="iconChallengeCompleted" >
-            <img className="icon-arrow-left-1" src={`${process.env.PUBLIC_URL}/img/connectSucceed/icon-arrow-left-8@1x.png`} alt="icon-arrow-left" />
-          </div>
-        </a> */}
-              <div className = "title">
-              <a style = {{marginRight:"31px"}} href="javascript:history.back()">
-                    <div className="iconChallengeCompleted" >
-                      <img className="icon-arrow-left-1" src={`${process.env.PUBLIC_URL}/img/connectSucceed/icon-arrow-left-8@1x.png`} alt="icon-arrow-left" />
-                    </div>
-                  </a>
-                <div>Feature Missions</div>
-              </div>
-              <div className = "iconBar">
-                <img style = {{height:"20px", width: "20px", alignSelf:"center"}} src={`${process.env.PUBLIC_URL}/img/ic-sentiment-very-satisfied-24px-1@1x.png`} alt="" />
-                <img style = {{height:"20px", alignSelf:"center"}} src = {`${process.env.PUBLIC_URL}/img/ic-settings-24px-1@1x.png`}></img>
-              </div>
-          </div>
-          <div className = "titleBar">
-            <button className = "button1">All</button>
-            <button className = "button2">Ongoing</button>
-            <button className = "button3">History</button>
-          </div>
-        </div>
-        <div className = "container3" >
-
-        </div>
-      </div>
+      <ShortTitleBar title='Feature Missions' backPath='/home'/>
 {/* The body part, which are the buttons */}
-    <div className  = "body">
-        <div className = "body1">
-        </div>
-        <div className = "body2">
+    <div className  = "mission-body-container">
+        <div className = "mission-body">
           <div className = "rewardTitle inter-semi-bold-royal-blue-15px">EARNING REWARDS</div>
           <button className = "challengeCompletedLink" onClick = {() => navigate("/missionChallenge")}>
             <img className = "buttonIconChallengeCompleted" src={`${process.env.PUBLIC_URL}/img/allMission/nft-avatar-1@1x.png`} alt="Card_bg"></img>
@@ -121,9 +81,11 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
                   1-3 Mins Each
                 </div>
                 <div className = "descriptionBottomBodyChallengeCompleted">
-                  <div className = "sigdaoIconChallengeCompleted">
-                    <img src = {`${process.env.PUBLIC_URL}/img/allMission/file---880-1x-png-10@1x.png`}></img>
-                    </div>
+                <div className="sigdao_tokengradient">
+                                  <div className="x441"></div>
+                                  <div className="x442"></div>
+                                  <img className="x880" src="img/missionChallenge/file---880-1x-png-10@1x.png" alt="880" />
+                                </div>
                     <div className = "sigdaoChallengeCompleted">
                     +5.25 ~ 15.75
                   </div>
@@ -143,9 +105,11 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
                     Saturday Only
                   </div>
                   <div className = "descriptionBottomBodyChallengeCompleted">
-                    <div className = "sigdaoIconChallengeCompleted">
-                      <img src = {`${process.env.PUBLIC_URL}/img/allMission/file---880-1x-png-10@1x.png`}></img>
-                      </div>
+                  <div className="sigdao_tokengradient">
+                                  <div className="x441"></div>
+                                  <div className="x442"></div>
+                                  <img className="x880" src="img/missionChallenge/file---880-1x-png-10@1x.png" alt="880" />
+                                </div>
                       <div className = "sigdaoChallengeCompleted">
                         +5.25 ~ 5.00
                     </div>
@@ -157,19 +121,21 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
           <button disabled = {true} style = {{}} className = "challengeCompletedLinkDisabled">
             <img src={`${process.env.PUBLIC_URL}/img/ic-locked-1@1x.png`} className='lock-image' alt="" /> 
             <div className="mission-button-content" >
-              <img className = "buttonIconChallengeCompleted" src={`${process.env.PUBLIC_URL}/img/allMission/nft-avatar-3@1x.png`} alt="Card_bg"></img>
+              <img className = "buttonIconChallengeCompleted" src={`${process.env.PUBLIC_URL}/img/allMission/Talk-to-mi-Square-Cover.png`} alt="Card_bg"></img>
               <div className = "descriptionChallengeCompleted">
                 <div style = {{display:"flex", flexDirection:"row"}} className = "descriptionTitleChallengeCompleted">
-                  <div>Daily Walking Mission</div>
-                  <img  style = {{width:"15px", height:"20px",paddingLeft:"10px"}} src={`${process.env.PUBLIC_URL}/img/allMission/ic-locked-1@1x.png`}></img>
+                  <div>Secret Coach - Talk To mi </div>
+                  {/* <img  style = {{width:"15px", height:"20px",paddingLeft:"10px"}} src={`${process.env.PUBLIC_URL}/img/allMission/ic-locked-1@1x.png`}></img> */}
                   </div>
                   <div className = "descriptionBodyChallengeCompleted">
-                    Step Count
+                  Secret Coach - Talk To mi 
                   </div>
                   <div className = "descriptionBottomBodyChallengeCompleted">
-                    <div className = "sigdaoIconChallengeCompleted">
-                      <img src = {`${process.env.PUBLIC_URL}/img/allMission/file---880-1x-png-10@1x.png`}></img>
-                      </div>
+                  <div className="sigdao_tokengradient">
+                                  <div className="x441"></div>
+                                  <div className="x442"></div>
+                                  <img className="x880" src="img/missionChallenge/file---880-1x-png-10@1x.png" alt="880" />
+                                </div>
                       <div className = "sigdaoChallengeCompleted">
                       +5.25 ~ 15.75
                     </div>
@@ -178,6 +144,7 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
               </div>
             </div>
           </button>
+        
           {/* <button className = "challengeCompletedLink">
             <img className = "buttonIconChallengeCompleted" src={`${process.env.PUBLIC_URL}/img/allMission/nft-avatar-1@1x.png`} alt="Card_bg"></img>
             <div className = "descriptionChallengeCompleted">
@@ -219,9 +186,8 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
             </div>
           </button> */}
         </div>
-        <div className = "body3">
-        </div>
         <MenuBar/>
+
       </div>
 
       </div>

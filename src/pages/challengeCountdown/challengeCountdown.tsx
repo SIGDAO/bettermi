@@ -29,22 +29,63 @@ const ChallengeCountdown: React.FunctionComponent<IChallengeCountdownProps> = (p
     return minutes * 60;
   })()
 
+  const [timeBeforeStart, setTimeBeforeStart] = React.useState(3);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeBeforeStart((prevCount) => prevCount - 1);
+    }, 1000);
+
+    // Stop the countdown after 3 seconds
+    setTimeout(() => {
+      // setTimeBeforeStart("Start!");
+      clearInterval(timer);
+      console.log("Countdown stopped.");
+    }, 4000);
+
+    // Clean up the timer on component unmount
+    return () => clearInterval(timer);
+  }, []);
+
+  const timerStyles: React.CSSProperties = {
+    fontFamily: "var(--font-family-inter)",
+    width: 390,
+    height: 200,
+    lineHeight: "200px",
+    fontSize: 100,
+    border: "none",
+    textAlign: "center",
+    margin: "100px auto",
+    position: "absolute",
+    zIndex: 99,
+    top: "116px", 
+    color: "#cdcdcd",
+  };
+  
+  const showTimeBeforeStart = () => {
+    if (timeBeforeStart === 0) return "Start!"
+    if (timeBeforeStart < 0) return ""
+    return timeBeforeStart
+  }
+
 
   const content: JSX.Element = (
     <div className="screen">
       <div className="bettermidapp-challenges-countdown-1">
         <ShortTitleBar title={displayMission.title} backButton={true} aiCoach={false} />
         {/* <img className="bg-oEaurv" src={`${process.env.PUBLIC_URL}/img/challengeCountdown/bg-10@1x.png`} alt="BG" /> */}
+        <div style={timerStyles}>{showTimeBeforeStart()}</div>
         <img
-        className="x1-hello-bae-gradient-bg-oEaurv"
-        // src={`${process.env.PUBLIC_URL}/img/challengeCountdown/1hellobae-gradientbg@1x.png`}
-        src={displayMission.missionImgPath}
-        alt="1HelloBae-GradientBg"
+          style={timeBeforeStart >= 0? {opacity: 0.2} : {opacity: 1}}
+          className="x1-hello-bae-gradient-bg-oEaurv"
+          // src={`${process.env.PUBLIC_URL}/img/challengeCountdown/1hellobae-gradientbg@1x.png`}
+          src={displayMission.missionImgPath}
+          alt="1HelloBae-GradientBg"
         />
         <div className="challenge-content-oEaurv">
           <img className="layer-D6xMU2" src={`${process.env.PUBLIC_URL}/img/challengeCountdown/layer@1x.png`} alt="Layer" />
           <div className="countdown-D6xMU2">
-            <CircularWithValueLabel time={displayTime} reward={parseFloat(displayMission.sigdao)} />
+            <CircularWithValueLabel timeBeforeStart={timeBeforeStart} time={displayTime} reward={parseFloat(displayMission.sigdao)} />
             {/* <div className="t-countdown-YGwjuf">
               <div className="bg-C3TEa1"></div>
               <img className="process-circle-C3TEa1" src={`${process.env.PUBLIC_URL}/img/challengeCountdown/process-circle@1x.png`} alt="Process circle" />

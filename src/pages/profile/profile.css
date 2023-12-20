@@ -6,7 +6,7 @@
   background-color: rgba(255,255,255,1.0);
   display: flex;
   justify-content: center;
-  overflow: hidden;
+  overflow: hidden auto;
   width: 390px;
 }
 
@@ -16,14 +16,34 @@
   background-position: 50% 50%;
   background-size: cover;
   display: flex;
+  align-items: center;
   flex-direction: column;
   gap: 40px;
   margin-top: -47.48px;
-  min-height: 934px;
-  padding: 155.5px 23px;
+  /* : 810px; */
+  padding: 0px 23px;
+  padding-top: 155.5px;
   width: 480px;
   z-index: 1;
+  overflow-y:auto;
+  overflow-x: hidden;
 }
+
+.overlap-design-layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: 40px;
+  min-height: 674px;
+  align-items: center;
+}
+
+.bettermidapp-profile-3::-webkit-scrollbar {
+  display: none;
+  width: 0;
+}
+
+
 
 .nft_-avatar-2ZgxSS {
   background-color: transparent;
@@ -33,6 +53,7 @@
   object-fit: cover;
   position: absolute;
   top: 8px;
+  cursor: pointer;
   width: 107px;
 }
 
@@ -73,14 +94,24 @@
   width: 100%;
 }
 
-.bettermidapp-profile-3 .card-number {
+.discord-card-container {
   left: 52px;
   letter-spacing: 0;
   line-height: 22px;
   position: absolute;
   top: 224px;
+  display: flex;
+  gap: 10px;
+}
+
+.bettermidapp-profile-3 .card-number {
+  left: 52px;
+  letter-spacing: 0;
+  line-height: 22px;
+  /* position: absolute; */
+  top: 224px;
   white-space: nowrap;
-  width: 108px;
+  /* width: 108px; */
 }
 
 .bettermidapp-profile-3 .discord {
@@ -111,12 +142,14 @@
   width: 30px;
 }
 
+
+
 .bettermidapp-profile-3 .ic_add {
   height: 28px;
-  left: 61px;
+  /* left: 61px; */
   object-fit: cover;
-  position: absolute;
-  top: 94px;
+  /* position: absolute;
+  top: 94px; */
   width: 28px;
 }
 
@@ -744,10 +777,21 @@
   width: 30px;
 }
 
+.bettermidapp-profile-3 .overlap-group-profile p{
+  color: #FFFFFF80;
+  margin: 0;
+  text-decoration: none;
+}
+
 
 .bettermidapp-profile-3 .overlap-group-profile {
   background: linear-gradient(90deg, #0d0d0d 0%, #4136f1 102.54%);
   border: 1px solid;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
   border-color: var(--royal-blue);
   border-radius: 10px;
   flex: 0 0 auto;
@@ -755,18 +799,18 @@
   position: relative;
   width: 152px;
   cursor: pointer;
-  margin-left:10px;
+  margin-left: 38px;
   margin-right: 12px;
 }
 
 
 .bettermidapp-profile-3 .copy-icon {
   /* background-image: url(.bettermidapp-profile-3 ..bettermidapp-profile-3 ./img/file---11690@1x.bettermidapp-profile-3 .png); */
-  background-position: 50% 50%;
+  /* background-position: 50% 50%; */
   background-size: cover;
   height: 18px;
   left: 250px;
-  position: absolute;
+  /* position: absolute; */
   top: 228px;
   width: 17px;
   cursor: pointer;
@@ -795,10 +839,14 @@
   margin-left: 0;
   /* margin-top: 2px; */
   width: 19px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .bettermidapp-profile-3 .discord-icon-content {
   width: 19px;
+  height: 15px;
 }
 
 
@@ -1230,13 +1278,13 @@
   z-index: 999;
   position: absolute;
   top: 100px;
-  background-color: rgb(13 13 13);
-  color: white;
+  background-color: rgb(13 13 13) !important;
+  color: white !important;
 
 }
 
 .copied-alert div {
-  color: white;
+  color: white !important;
 }
 
 .lds-ring {

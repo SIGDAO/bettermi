@@ -776,6 +776,7 @@
   width: 137px;
   border-radius: 5px;
   margin-top: 15px;
+  cursor: pointer;
 }
 .myNftEmptyImage{
   height:217px;
@@ -863,7 +864,7 @@ opacity: 0.5;
   align-self: center;
   width:21px;
   height:18px;
-  margin-right: 20px;
+  margin-right: 18px;
   cursor: pointer;
 }
 .myNftButtomArrowDisabled{
@@ -995,7 +996,8 @@ opacity: 0.5;
 .bettermidapp-mimi-nfts-send-address-1 .rewards {
   display: flex;
   height: 21px;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 10px;
   left: 168px;
   position: absolute;
   top: 52px;
@@ -1014,12 +1016,12 @@ opacity: 0.5;
 .bettermidapp-mimi-nfts-send-address-1 .place {
   letter-spacing: 0;
   line-height: 20px;
-  margin-bottom: -2.5px;
+  /* margin-bottom: -2.5px;
   margin-right: -2px;
-  margin-top: 0.5px;
+  margin-top: 0.5px; */
   text-align: center;
   white-space: nowrap;
-  width: 46px;
+  /* width: 46px; */
 }
 
 .bettermidapp-mimi-nfts-send-address-1 .search_bar {
@@ -1061,14 +1063,14 @@ opacity: 0.5;
 }
 
 .bettermidapp-mimi-nfts-send-address-1 .button_save {
-  align-items: flex-end;
+  align-items: center;
   background: linear-gradient(-90deg, #8743ff 0%, #4136f1 100%);
   border-radius: 10px;
   box-shadow: 0px 15px 30px #1466cc29;
   cursor: pointer;
   display: flex;
   height: 56px;
-  justify-content: flex-end;
+  justify-content: center;
   left: 87px;
   min-width: 248px;
   padding: 13.5px 91px;
@@ -1086,6 +1088,19 @@ opacity: 0.5;
 }
 
 .bettermidapp-mimi-nfts-send-address-1 .address-id-to-send-nft-to {
+  color: var(--hot-magenta);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-l);
+  font-weight: 400;
+  left: 61px;
+  letter-spacing: 0;
+  line-height: 20px;
+  position: absolute;
+  top: 357px;
+  white-space: nowrap;
+  margin: 0;
+}
+.normalMessage{
   color: var(--cadet-blue);
   font-family: var(--font-family-inter);
   font-size: var(--font-size-l);
@@ -1097,6 +1112,7 @@ opacity: 0.5;
   top: 357px;
   white-space: nowrap;
   margin: 0;
+
 }
 
 .bettermidapp-mimi-nfts-send-address-1 .text-7 {
@@ -1113,13 +1129,39 @@ opacity: 0.5;
   white-space: nowrap;
   margin: 0;
 }
+.x0-signa-1-level {
+  color: var(--keppel);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-l);
+  font-weight: 500;
+}
 
-.bettermidapp-mimi-nfts-send-address-1 .x0-signa-1 {
+.x0-signa-1-reward {
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-l);
+  font-weight: 500;
+}
+
+.x0-signa-1-block {
+  height: 17px;
+  width: 1px;
+  background-color: #A6B3BB33;
+}
+
+.bettermidapp-mimi-nfts-send-address-1 .x16228 {
   color: var(--cadet-blue);
   font-family: var(--font-family-inter);
   font-size: var(--font-size-xxl);
-  font-weight: 500;
-  left: 287px;
+  font-weight: 400;
+}
+
+.bettermidapp-mimi-nfts-send-address-1 .x0-signa-1 {
+
+  display: flex;
+  gap: 10px;
+  /* left: 287px; */
+  right: 15.75px;
   letter-spacing: 0;
   line-height: 16px;
   position: absolute;
@@ -1297,6 +1339,57 @@ opacity: 0.5;
   position: absolute;
   top: 94px;
   width: 28px;
+}
+
+.nftPriceInputBoxImport{
+  color: var(--cadet-blue);
+  font-family: var(--font-family-inter);
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 22px;
+  /* min-height: 87px; */
+  width: 262px;
+  margin: 0;
+  align-items: flex-end;
+  display: flex;
+  height: 56px;
+  min-width: 300px;
+  padding: 16.5px 15px;
+  top: 205px;
+  color: #FFFFFF;
+  background-color: #FFFFFF08;
+  border-radius: 10px;
+  position: absolute;
+  cursor:text;
+}
+.nftPriceInputBoxImport:hover{
+  cursor:text;
+}
+.nftPriceInputBoxActive{
+  cursor:text;
+}
+
+.nftPriceInputBoxActive{
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 22px;
+  width: 262px;
+  margin: 0;
+  align-items: flex-end;
+  display: flex;
+  height: 56px;
+  min-width: 300px;
+  padding: 16.5px 15px;
+  top: 205px;
+  color: #FFFFFF;
+  background-color: #FFFFFF08;
+  border-radius: 10px;
+  position: absolute;
+  cursor:text
 }
 
 

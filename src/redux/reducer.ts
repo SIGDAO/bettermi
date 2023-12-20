@@ -7,6 +7,7 @@ import { userBMIApi } from "./userBMIApi";
 import { userBMISlice } from "./userBMI";
 import { loadState } from "./sessionStorage";
 import { userRankingSlice } from "./userRanking";
+import { selectedNftSlice } from "./selectedNft";
 
 const appReducer = combineReducers({
   wallet: walletSlice.reducer,
@@ -14,6 +15,7 @@ const appReducer = combineReducers({
   profile: profileSlice.reducer,
   userBMI: userBMISlice.reducer,
   userRanking: userRankingSlice.reducer,
+  selectedNft: selectedNftSlice.reducer,
   [userBMIApi.reducerPath]: userBMIApi.reducer
 });
 const rootReducer = (state:any, action:any) => {

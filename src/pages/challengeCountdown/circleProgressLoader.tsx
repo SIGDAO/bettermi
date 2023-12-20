@@ -12,6 +12,7 @@ import { walletNodeHost } from '../../redux/wallet';
 
 
 interface ICircularWithValueLabelProps {
+  timeBeforeStart: number;
   time: number;
   reward: number;
 }
@@ -72,7 +73,7 @@ function CircularProgressWithLabel(
 }
 
 const CircularWithValueLabel: React.FunctionComponent<ICircularWithValueLabelProps> = (props) => {
-  const { time, reward } = props;
+  const { time, reward, timeBeforeStart } = props;
   const [progress, setProgress] = React.useState(time);
   const navigate = useNavigate();
   const userAccountId = useSelector(accountId);
@@ -81,13 +82,14 @@ const CircularWithValueLabel: React.FunctionComponent<ICircularWithValueLabelPro
   const { pathname } = useLocation();
 
   const handleTransfer = () => {
-    TransferToken(userWalletNodeHost,userAccountId, rewardInSigdao.toString( ))
+    //TransferToken(userWalletNodeHost,userAccountId, rewardInSigdao.toString( )) 
+    //Anderson disabled this and transfer token is migrated to next page
     navigate('/challengeCompleted', { state: { reward: pathname } })
   }
 
   React.useEffect(() => {
     let timer: any = null;
-    if (progress > 0) {
+    if (progress > 0 && timeBeforeStart < 0) {
       timer = setInterval(() => {
         setProgress((prevProgress) => (prevProgress - 1));
       }, 1000);
@@ -97,7 +99,7 @@ const CircularWithValueLabel: React.FunctionComponent<ICircularWithValueLabelPro
     return () => {
       clearInterval(timer);
     };
-  }, [progress]);
+  }, [progress, timeBeforeStart]);
   
   // React.useEffect(() => {
   //   console.log((progress / time) * 100);

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './titleBar.css';
 import { BackButton } from './button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from 'reactstrap';
 
 interface IShortTitleBarProps {
@@ -16,6 +16,8 @@ interface IShortTitleBarProps {
   importButton?: boolean;
   setIsOpenImport?: (isOpenImport: boolean) => void;
   isOpenImport?: boolean;
+  customiseBackButton?:boolean;
+  customiseBackButtonLink?:string;
 }
 
 
@@ -30,7 +32,10 @@ const settingIcon: JSX.Element = (
 )
 
 export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (props) => {
-  const { title, aiCoach, help, transparent,filter,addSign, setting, backButton,importButton,setIsOpenImport,isOpenImport } = props;
+  const { title, aiCoach, help, transparent,filter,addSign, setting, backButton,importButton,setIsOpenImport,isOpenImport,customiseBackButton,customiseBackButtonLink
+   } = props;
+  const navigate = useNavigate();
+
   return (
     <div className="title-bar-layout">
       <div className={transparent ? "transparent-title-bar-container" : "title-bar-container"}
@@ -43,7 +48,7 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
         <div className="title-bar-title inter-semi-bold-white-18px">{title}</div>
         {/* <img className="title-bar-seperat-line seperat-line" src={process.env.PUBLIC_URL + "/img/seperat-line-11@1x.png"} alt="Seperat line" /> */}
         {addSign === true?
-          <Link to='https://test.signumart.io/collection/13061730801426095294'>
+          <Link to='/allNftList'>
             <div className = "titleBarAddSign">
               <img className = "titleBarAddSignImg" src = {process.env.PUBLIC_URL + "/img/NftList/ic-add@1x.png"}/>
             </div>
@@ -60,7 +65,13 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
         }
         {/*the filter and the plus sign change this div*/}
         {backButton === false ? null :
-        <a href="javascript:history.back()">
+        <div onClick={() => {
+          if (customiseBackButtonLink) {
+            navigate(customiseBackButtonLink);
+            return;
+          };
+          navigate(-1);
+        }} >
           <div className="icon-arrow-left-container icon-arrow-left">
               <img
                 className="icon-arrow-left-img icon-arrow-left"
@@ -68,14 +79,25 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
                 alt="icon-arrow-left"
                 />
           </div>
-        </a>
+        </div>
         }
+        {/* {customiseBackButton === false && customiseBackButtonLink == null ? null :
+          <Link to={customiseBackButtonLink!}>
+                <div className="icon-arrow-left-container icon-arrow-left">
+                    <img
+                      className="icon-arrow-left-img icon-arrow-left"
+                      src={process.env.PUBLIC_URL + "/img/icon-arrow-left-12@1x.png"}
+                      alt="icon-arrow-left"
+                      />
+                </div>
+              </Link>
+              } */}
         {aiCoach === false ? null :(
           <Link to="/aiCoachSelect">
             <div className="ic_settings_24px-container ic_settings_24px">
               <img
                 className="ic_settings_24px-img ic_settings_24px"
-                src={process.env.PUBLIC_URL + "/img/ic_chat.svg"}
+                src={process.env.PUBLIC_URL + "/img/home/bxs-Aicoach.svg"}
                 alt="ic_settings_24px"
                 />
             </div>
@@ -119,7 +141,7 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
         importButton === false ? null :
           setIsOpenImport === undefined ? null :
         (
-          <Button className = "importButton inter-semi-bold-white-12px" onClick = {() => setIsOpenImport(!isOpenImport)}>Import Nft</Button>
+          <Button className = "importButton inter-semi-bold-white-12px" onClick = {() => setIsOpenImport(!isOpenImport)}>Import NFT</Button>
         )
       }
 

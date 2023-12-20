@@ -711,8 +711,24 @@
   top: 0px;
 } */
 
-.answer-box {
+.question-box {
   background-color: var(--eerie-black);
+  border: 1px solid;
+  border-color: var(--royal-blue);
+  border-radius: 10px;
+  /* height: 48px; */
+  /* left: 0px;
+  position: relative;
+  top: 0px; */
+  padding: 15px;
+  width: max-content;
+  max-width: calc(320px - 30px);
+  display: inline-block;
+  cursor: pointer;
+}
+
+.answer-box {
+  background-color: var(--royal-blue);
   border: 1px solid;
   border-color: var(--royal-blue);
   border-radius: 10px;

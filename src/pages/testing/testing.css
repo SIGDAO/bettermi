@@ -27,6 +27,12 @@
   overflow: hidden; */
 }
 
+.dark-bg {
+  background-color: black;
+  height: 100vh;
+  width: 100%;
+}
+
 .carousel {
   /* height: 185px; */
   /* background-color: salmon; */

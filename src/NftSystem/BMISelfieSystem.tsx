@@ -88,3 +88,55 @@ export async function CheckTakenSelfie(userAccountId:string,ledger2:any,BMIContr
     }
     return false;
 }
+export async function CheckIsUserANewUser(ledger2:any,userId:String,codeHashIdForContract:string){
+  let senderNftStorage = await ledger2.contract.getContractsByAccount({
+      accountId: userId,
+      machineCodeHash: codeHashIdForContract,
+  });
+  if(senderNftStorage.ats.length === 0){
+    return true;
+  }
+  else{
+    return false
+  }
+  //console.log(senderNftStorage.ats);
+  
+  // Example usage:
+  // const dateString = "2023-09-30T08:25:09.851Z";
+  // console.log(isSameDayAsToday(dateString)); // Output: false or true (depending on current date)
+};
+
+
+function isSameDayAsToday(dateString:string) {
+  const inputDate = new Date(dateString);
+  const today = new Date();
+  return (
+    inputDate.getFullYear() === today.getFullYear() &&
+    inputDate.getMonth() === today.getMonth() &&
+    inputDate.getDate() === today.getDate()
+  );
+}
+
+
+export async function CheckIsUserFirstDayOfRegistration(ledger2:any,userId:String,codeHashIdForContract:string,){
+  console.log("userId is",userId);
+  console.log(codeHashIdForContract);
+  let senderNftStorage = await ledger2.contract.getContractsByAccount({
+      accountId: userId,
+      machineCodeHash: codeHashIdForContract,
+  });
+  console.log("senderNftStorage is",senderNftStorage); 
+  if(senderNftStorage.ats.length === 0){
+    return true;
+  }
+  else{
+    const contractInfo = await ledger2.contract.getContract(
+     senderNftStorage.ats[0].at,
+    );
+    console.log("contractInfo",contractInfo);
+    const description = JSON.parse(contractInfo.description);
+    console.log("description",description);
+    return isSameDayAsToday(description.time);
+  }
+  //console.log(senderNftStorage.ats);
+};

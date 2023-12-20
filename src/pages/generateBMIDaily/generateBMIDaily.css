@@ -278,7 +278,7 @@
 .bettermidapp-generate-bmi-daily .x45-W9pEKc {
   background-color: var(--keppel);
   border: 1px solid;
-  border-color: var(--keppel);
+  /* border-color: var(--keppel); */
   height: 19px;
   left: calc(24.14% - 32px);
   position: absolute;
@@ -289,7 +289,7 @@
 .bettermidapp-generate-bmi-daily .x48-W9pEKc {
   background-color: var(--royal-blue);
   border: 1px solid;
-  border-color: var(--royal-blue);
+  /* border-color: var(--royal-blue); */
   border-radius: 50px 50px 0px 0px;
   bottom: -7.48%;
   height: 43px;

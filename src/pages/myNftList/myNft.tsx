@@ -22,6 +22,7 @@ import * as React from 'react';
  import { CheckNftOwnerId } from '../../NftSystem/updateUserNftStorage';
  import { UpdateUserIcon } from '../../NftSystem/updateUserNftStorage';
 import { selectCurrentUsername } from '../../redux/profile';
+import { selectedNftInfo } from '../allNftList/indexAllNftList';
 
  interface MyNftProps {
     image:string;
@@ -34,11 +35,13 @@ import { selectCurrentUsername } from '../../redux/profile';
     isUpdatingDescription:boolean;
     setIsUpdatingDescription:(isUpdatingDescription:boolean) => void;
     isOtherUser:boolean;
+    setOpenModel:(openModel:boolean) => void;
+    setSelectedNft:(selectedNft:selectedNftInfo) => void;
  }
 
 
  const MyNft: React.FunctionComponent<MyNftProps> =  (props) => {
-     const {image, level, isOpenPopup, setIsOpenPopup,nftId,setSelectedAssetId,setLevel,isUpdatingDescription,setIsUpdatingDescription,isOtherUser} = props;
+     const {image, level, isOpenPopup, setIsOpenPopup,nftId,setSelectedAssetId,setLevel,isUpdatingDescription,setIsUpdatingDescription,isOtherUser,setOpenModel,setSelectedNft} = props;
      const [loading, setLoading] = useState<boolean>(true);
      const [imgAddress, setImgAddress] = useState<string>("");
      const nodeHost = useSelector(selectWalletNodeHost);
@@ -47,7 +50,7 @@ import { selectCurrentUsername } from '../../redux/profile';
      const userAccountId:string = useSelector(accountId);
      const {appName,Wallet,Ledger} = useContext(AppContext);
      const [nftLevel,setNftLevel] = useState<string>("");
-     const [nftNumber,setNftNumber] = useState<number>();
+     const [nftNumber,setNftNumber] = useState<string>("");
      const [reward,setReward] = useState<string>("");
      const name = useAppSelector(selectCurrentUsername);
      const navigate = useNavigate();
@@ -63,7 +66,7 @@ import { selectCurrentUsername } from '../../redux/profile';
                  var nftInfo = JSON.parse(text);
                  let matches = nftInfo.name.match(/(\d+)/);
                  //console.log(matches[0]);
-                 const nftNumber = matches[0].toString().padStart(8, '0');
+                 const nftNumber:string = matches[0].toString().padStart(8, '0');
                  setNftNumber(nftNumber);
                 //  setNftLevel(nftInfo.attributes[0].level);
                 //  console.log(nftInfo.attributes.description);
@@ -127,7 +130,19 @@ import { selectCurrentUsername } from '../../redux/profile';
           imgAddress === ""?(<div>loading</div>):(
 
                   <div className = "myNftList">
-                    <img className = "myNftImage" src = {`https://ipfs.io/ipfs/${imgAddress}`}></img>
+                    <img onClick = {
+                      () =>{
+                        setOpenModel(true);const nftInfo:selectedNftInfo={
+                          imageUrl:imgAddress,
+                          nftLevel:nftLevel,
+                          nftPrice:"0",
+                          nftReward:"5",
+                          nftNumber:nftNumber?nftNumber:"-1",
+                        }
+                        console.log(nftInfo);
+                        setSelectedNft(nftInfo);
+                      }
+                      } className = "myNftImage" src = {`https://ipfs.io/ipfs/${imgAddress}`}></img>
                     <div className = "myNftDescription">
                     <div className = "myNftNumber">#{nftNumber}</div>
                       <div className = "myNftBar">
@@ -136,7 +151,7 @@ import { selectCurrentUsername } from '../../redux/profile';
                           </div>
                           <div className = "myNftVerticalLine"></div>  
                           <div  className = "inter-normal-white-12px">
-                            Reward + 10%
+                            Reward + 5%
                             </div>
                       </div>
                       <div className = "myNftPrice">
@@ -146,11 +161,12 @@ import { selectCurrentUsername } from '../../redux/profile';
                     <div className = "myNftBottom">
                     {isOtherUser === true?(
                       <>
-                        <button className = "myNftButtonDisabled" onClick = {equipNft}>AVALIBLE</button>
+                        <button className = "myNftButtonDisabled" onClick = {equipNft}>AVAILABLE</button>
                         <img 
                           onClick={() => {
                             setIsOpenPopup((prev) => !prev);
                             setSelectedAssetId(nftId);
+                            console.log("nftID is ",nftId);
                             setLevel(nftLevel);
   
                           }} 
@@ -164,6 +180,7 @@ import { selectCurrentUsername } from '../../redux/profile';
                           <img 
                             onClick={() => {
                               setIsOpenPopup((prev) => !prev);
+                              console.log("nftID is ",nftId);
                               setSelectedAssetId(nftId);
                               setLevel(nftLevel);
 
