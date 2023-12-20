@@ -15,10 +15,11 @@ interface AllNftProps {
   imgAddress?: selectedNftInfo;
   setPopUpIcon: (popUpIcon: boolean) => void;
   popUpIcon: boolean;
+  disabled?:boolean;
 }
 
 const NftDetails: React.FunctionComponent<AllNftProps> = (props) => {
-  const { imgAddress, setPopUpIcon, popUpIcon } = props;
+  const { imgAddress, setPopUpIcon, popUpIcon,disabled } = props;
   const { appName, Wallet, Ledger } = useContext(AppContext);
   const nodeHost = useSelector(selectWalletNodeHost);
   const ledger2 = LedgerClientFactory.createClient({ nodeHost });
@@ -35,7 +36,7 @@ const NftDetails: React.FunctionComponent<AllNftProps> = (props) => {
       content={
         <>{imgAddress == null?
             <>
-            <img className="x0-generateFreeNFT" src={`https://ipfs.io/ipfs/${imgAddress.imageUrl}`} alt="0" />
+            <img className="x0-generateFreeNFT" src={`https://ipfs.io/ipfs/bafkreigun2emdg5ndaavw2mmvocqwpdct2qcpb6kud7x76awln2cstodda`} alt="0" />
             {/* <h1 className="text-1">#{nftNumber}</h1> */}
   
             <div className="x16206">
@@ -43,7 +44,11 @@ const NftDetails: React.FunctionComponent<AllNftProps> = (props) => {
               <img className="x6" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/file---6@1x.png`} alt="6" />
               <div className="reward-10">REWARD +{}%</div>
             </div>
-            <div className="x0-signa">${} SIGDAO</div>
+            {disabled ===true?
+            <></>
+            
+            :<div className="x0-signa">${} SIGDAO</div>
+      }
             <img className="photo" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/photo-1@1x.png`} alt="Photo" />
             <div onClick={() => setPopUpIcon(false)} className="click-the-area-to-make-it-hidden-again"></div>
             </>
@@ -58,7 +63,11 @@ const NftDetails: React.FunctionComponent<AllNftProps> = (props) => {
             <img className="x6" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/file---6@1x.png`} alt="6" />
             <div className="reward-10">REWARD +{imgAddress.nftReward}%</div>
           </div>
+          {disabled?
+          <></>
+          :
           <div className="x0-signa">${imgAddress.nftPrice} SIGDAO</div>
+      }
           <img className="photo" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/photo-1@1x.png`} alt="Photo" />
           <div onClick={() => setPopUpIcon(false)} className="click-the-area-to-make-it-hidden-again"></div>
           </div>
