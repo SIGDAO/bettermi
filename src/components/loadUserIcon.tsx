@@ -56,6 +56,7 @@ const UserIcon: React.FC<IUserIconProps> = (props) => {
           console.log(Object.keys(description.av));
           console.log(typeof Object.keys(description.av)[0]);
           setImgAddress(Object.keys(description.av)[0]);
+          console.log(Object.keys(description.av)[0]);
           setHaveNft(true);
           setIsLoading(false);
         })

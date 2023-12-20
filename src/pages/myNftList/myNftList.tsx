@@ -513,7 +513,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
                         const nftInfo:selectedNftInfo = {
                           imageUrl:onDuty,
                           nftLevel:onDutyNftLevel,
-                          nftPrice:onDutyNftPrice,
+                          nftPrice:(parseInt(onDutyNftPrice)/1000000).toString(),
                           nftReward:"5",
                           nftNumber:nftNumber!,
                         }
