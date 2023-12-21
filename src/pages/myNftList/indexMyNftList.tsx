@@ -100,7 +100,7 @@ const IndexMyNftList: React.FunctionComponent<MyNftProps> = (props) => {
       ) : 
         openModel?
         (
-          <NftDetails imgAddress={selectedNft} setPopUpIcon={setOpenModel} popUpIcon = {openModel}></NftDetails>
+          <NftDetails disabled = {true}imgAddress={selectedNft} setPopUpIcon={setOpenModel} popUpIcon = {openModel}></NftDetails>
         )
         :(
           isOtherUser === true ? (
