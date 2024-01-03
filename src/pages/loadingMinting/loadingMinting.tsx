@@ -170,6 +170,33 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
   //   }
   // }, [count]);
 
+  //Trying disabling refresh
+  useEffect(() => {
+    const disableRefresh = (e:any) => {
+      e.preventDefault();
+      e.returnValue = '';
+    };
+
+    const handleBeforeUnload = (e:any) => {
+      disableRefresh(e);
+    };
+
+    const handleUnload = (e:any) => {
+      disableRefresh(e);
+    };
+
+    // Add event listeners to disable refreshing
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    window.addEventListener('unload', handleUnload);
+
+    return () => {
+      // Remove event listeners when component unmounts
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+      window.removeEventListener('unload', handleUnload);
+    };
+  }, []);
+  //ends here
+
   const content: JSX.Element = (
     <div className="screen">
       <div className="bettermidapp-generate-free-nft-minting">
